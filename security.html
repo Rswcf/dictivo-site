@@ -15,9 +15,15 @@
       content="How Dictivo protects your voice, your installs, and your license."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dictivo.app/security.html" />
-    <link rel="canonical" href="https://dictivo.app/security.html" />
+    <meta property="og:url" content="https://dictivo.app/security" />
+    <link rel="canonical" href="https://dictivo.app/security" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
     <link rel="stylesheet" href="/assets/site.css" />
   </head>
   <body>
@@ -26,7 +32,7 @@
     <header class="site-header" aria-label="Primary navigation">
       <a class="brand" href="/" aria-label="Dictivo home">
         <span class="brand-mark" aria-hidden="true">D</span>
-        <span>Dictivo</span>
+        <span class="brand-name">Dictivo</span>
       </a>
       <nav class="nav-links" aria-label="Site navigation">
         <a href="/#product">Product</a>
@@ -38,8 +44,11 @@
     </header>
 
     <main class="doc-page" id="security">
-      <p class="doc-eyebrow">Trust &amp; disclosure</p>
-      <h1>Security &amp; Privacy</h1>
+      <span class="doc-eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Trust &amp; disclosure
+      </span>
+      <h1>Security &amp; <em>privacy</em>.</h1>
       <p class="doc-lede">
         Dictivo is a paid desktop product. Trust is part of what you're paying for, so this page lists exactly what
         runs locally, what crosses the network, and how installs and updates are protected.
@@ -117,12 +126,13 @@
     </main>
 
     <footer class="site-footer">
-      <div>
+      <div class="footer-meta">
         <a class="brand footer-brand" href="/" aria-label="Dictivo home">
           <span class="brand-mark" aria-hidden="true">D</span>
-          <span>Dictivo</span>
+          <span class="brand-name">Dictivo</span>
         </a>
-        <p>Official desktop downloads for macOS and Windows.</p>
+        <p class="footer-tagline">Private desktop dictation · macOS &amp; Windows</p>
+        <p>v0.2.0 · public beta · 2026</p>
       </div>
       <div class="footer-links">
         <a href="/#pricing">Pricing</a>

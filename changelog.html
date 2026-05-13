@@ -15,9 +15,15 @@
       content="Release notes for Dictivo, the private desktop dictation app for macOS and Windows."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dictivo.app/changelog.html" />
-    <link rel="canonical" href="https://dictivo.app/changelog.html" />
+    <meta property="og:url" content="https://dictivo.app/changelog" />
+    <link rel="canonical" href="https://dictivo.app/changelog" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
     <link rel="stylesheet" href="/assets/site.css" />
   </head>
   <body>
@@ -26,7 +32,7 @@
     <header class="site-header" aria-label="Primary navigation">
       <a class="brand" href="/" aria-label="Dictivo home">
         <span class="brand-mark" aria-hidden="true">D</span>
-        <span>Dictivo</span>
+        <span class="brand-name">Dictivo</span>
       </a>
       <nav class="nav-links" aria-label="Site navigation">
         <a href="/#product">Product</a>
@@ -38,7 +44,10 @@
     </header>
 
     <main class="doc-page" id="changelog">
-      <p class="doc-eyebrow">Release notes</p>
+      <span class="doc-eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Release notes
+      </span>
       <h1>Changelog</h1>
       <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
 
@@ -48,7 +57,7 @@
           <span class="release-status">Public beta</span>
           <time class="release-date" datetime="2026-05-13">May&nbsp;13,&nbsp;2026</time>
         </p>
-        <h2 id="release-0-2-0">Onboarding tiers and history</h2>
+        <h2 id="release-0-2-0">Onboarding tiers &amp; <em>history</em>.</h2>
         <ul>
           <li>Onboarding matches the local engine tier to detected hardware on first launch.</li>
           <li>History view keeps recent dictations reachable for review and reuse.</li>
@@ -62,9 +71,9 @@
       <section class="doc-section" aria-labelledby="release-0-1-0">
         <p class="release-line">
           <span class="release-tag">v0.1.0</span>
-          <span class="release-status">Private alpha</span>
+          <span class="release-status" data-status="alpha">Private alpha</span>
         </p>
-        <h2 id="release-0-1-0">Initial dictation surface</h2>
+        <h2 id="release-0-1-0">Initial dictation surface.</h2>
         <ul>
           <li>Local-first dictation engine running the on-device speech pipeline.</li>
           <li>Active transcript surface with a visible recording state.</li>
@@ -75,12 +84,13 @@
     </main>
 
     <footer class="site-footer">
-      <div>
+      <div class="footer-meta">
         <a class="brand footer-brand" href="/" aria-label="Dictivo home">
           <span class="brand-mark" aria-hidden="true">D</span>
-          <span>Dictivo</span>
+          <span class="brand-name">Dictivo</span>
         </a>
-        <p>Official desktop downloads for macOS and Windows.</p>
+        <p class="footer-tagline">Private desktop dictation · macOS &amp; Windows</p>
+        <p>v0.2.0 · public beta · 2026</p>
       </div>
       <div class="footer-links">
         <a href="/#pricing">Pricing</a>
