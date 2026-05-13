@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Security & Privacy · Dictivo</title>
+    <meta
+      name="description"
+      content="How Dictivo protects your voice, your installs, and your license — written for paying customers who want the receipts."
+    />
+    <meta name="theme-color" content="#11100f" />
+    <meta property="og:title" content="Dictivo · Security & Privacy" />
+    <meta
+      property="og:description"
+      content="How Dictivo protects your voice, your installs, and your license."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dictivo.app/security.html" />
+    <link rel="canonical" href="https://dictivo.app/security.html" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/site.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#security">Skip to security</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="Dictivo home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>Dictivo</span>
+      </a>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="/#product">Product</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#downloads">Downloads</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a class="header-download" href="/#downloads">Start trial</a>
+    </header>
+
+    <main class="doc-page" id="security">
+      <h1>Security &amp; Privacy</h1>
+      <p>
+        Dictivo is a paid desktop product. Trust is part of what you're paying for, so this page lists exactly what
+        runs locally, what crosses the network, and how installs and updates are protected.
+      </p>
+
+      <section class="doc-section">
+        <p class="doc-meta">Voice data</p>
+        <h2>Your voice stays on your device.</h2>
+        <p>
+          Dictation runs against an on-device speech engine. Audio captured by the microphone is processed locally,
+          transcribed to text on the same machine, and never uploaded to a Dictivo server or any third-party
+          transcription service.
+        </p>
+        <ul>
+          <li>No audio leaves the device during normal dictation.</li>
+          <li>No transcript is uploaded for storage, analytics, or model training.</li>
+          <li>Local history and dictionary files live in the user's profile directory and can be deleted at any time.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <p class="doc-meta">Network traffic</p>
+        <h2>What actually crosses the network.</h2>
+        <p>
+          A desktop product does need a small amount of network access. Dictivo limits that to the minimum a paid
+          install requires.
+        </p>
+        <ul>
+          <li><strong>Update checks</strong> — periodic requests to <code>downloads.dictivo.app</code> for the current release manifest.</li>
+          <li><strong>License activation</strong> — a one-time request to bind your license to the device, then signed entitlement renewal on a long interval.</li>
+          <li><strong>Crash reports</strong> — only if you opt in. Off by default and reportable from settings.</li>
+        </ul>
+        <p>
+          That is the complete list. Dictivo does not call third-party analytics, ad networks, or remote logging
+          services from inside the app.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <p class="doc-meta">Installer integrity</p>
+        <h2>Signed builds, single canonical host.</h2>
+        <p>
+          Every release is signed before it leaves the build pipeline and is served from a single canonical host so
+          that you can verify the installer you got is the installer we shipped.
+        </p>
+        <ul>
+          <li>macOS DMG — signed with a Developer ID certificate and notarized by Apple.</li>
+          <li>Windows EXE and MSI — Authenticode-signed installers.</li>
+          <li>Canonical download host — <code>downloads.dictivo.app</code> (Cloudflare R2).</li>
+          <li>Machine-readable manifest — <a href="/downloads.json"><code>/downloads.json</code></a> on dictivo.app.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <p class="doc-meta">Updates</p>
+        <h2>Updates verify themselves before they install.</h2>
+        <p>
+          Dictivo's updater pulls release metadata from the canonical host and verifies the installer signature before
+          replacing the running build. A tampered or unsigned package is rejected.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <p class="doc-meta">Reporting a vulnerability</p>
+        <h2>Tell us before you tell the internet.</h2>
+        <p>
+          If you think you've found a security issue in Dictivo, the desktop installers, or anything on dictivo.app,
+          please email <a href="mailto:security@dictivo.app">security@dictivo.app</a> with reproduction steps. We aim
+          to acknowledge within two business days and to ship a fix or mitigation as quickly as the severity warrants.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand footer-brand" href="/" aria-label="Dictivo home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>Dictivo</span>
+        </a>
+        <p>Official desktop downloads for macOS and Windows.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/#pricing">Pricing</a>
+        <a href="/#downloads">Downloads</a>
+        <a href="/changelog.html">Changelog</a>
+        <a href="/security.html">Security</a>
+        <a href="/downloads.json">Release manifest</a>
+        <a href="mailto:support@dictivo.app">support@dictivo.app</a>
+      </div>
+    </footer>
+  </body>
+</html>

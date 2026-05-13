@@ -8,7 +8,7 @@ repository. It is designed for Cloudflare Pages with a separate Cloudflare R2 do
 From the repository root:
 
 ```sh
-python3 -m http.server 4173 --directory apps/site
+python3 -m http.server 4173
 ```
 
 Then open `http://127.0.0.1:4173/`.
@@ -68,7 +68,7 @@ installer objects with long-lived cache headers.
 3. Sign the Windows EXE and MSI installers.
 4. Upload the three artifacts to the R2 bucket.
 5. Verify the public URLs under `https://downloads.dictivo.app/`.
-6. Deploy `apps/site` to Cloudflare Pages and attach `dictivo.app`.
+6. Deploy the repository root to Cloudflare Pages and attach `dictivo.app`.
 
 ## References
 

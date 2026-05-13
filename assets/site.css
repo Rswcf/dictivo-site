@@ -225,6 +225,22 @@ a {
   margin-top: 28px;
 }
 
+.hero-fineprint {
+  margin: 14px 0 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .button {
   display: inline-flex;
   min-height: 46px;
@@ -299,8 +315,224 @@ a {
 .download-band,
 .product-section,
 .channel-section,
-.privacy-section {
+.privacy-section,
+.pricing-section,
+.faq-section {
   padding: clamp(64px, 9vw, 118px) max(20px, calc((100% - 1180px) / 2));
+}
+
+.pricing-section {
+  background: var(--paper-deep);
+}
+
+.pricing-card {
+  display: grid;
+  max-width: 680px;
+  margin: 0 auto;
+  gap: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: clamp(32px, 5vw, 56px);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.pricing-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pricing-amount {
+  font-size: clamp(56px, 9vw, 88px);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.pricing-period {
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pricing-points {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.pricing-points li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.pricing-points li::before {
+  content: "✓";
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.pricing-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pricing-cta .button {
+  min-width: 200px;
+}
+
+.pricing-footnote {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.pricing-footnote a {
+  color: var(--blue);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.faq-section {
+  background: var(--paper);
+}
+
+.faq-grid {
+  display: grid;
+  gap: 12px;
+  max-width: 880px;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  color: var(--blue);
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 24px 22px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.faq-item a {
+  color: var(--blue);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.doc-page {
+  padding: clamp(132px, 18svh, 200px) max(20px, calc((100% - 880px) / 2)) clamp(64px, 9vw, 118px);
+  background: var(--paper);
+  min-height: calc(100svh - 200px);
+}
+
+.doc-page h1 {
+  margin: 0 0 14px;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.doc-page > p:first-of-type {
+  margin: 0 0 40px;
+  color: var(--ink-muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.doc-section {
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+}
+
+.doc-section:first-of-type {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.doc-section h2 {
+  margin: 0 0 6px;
+  font-size: clamp(22px, 3vw, 30px);
+  letter-spacing: 0;
+}
+
+.doc-meta {
+  margin: 0 0 18px;
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.doc-section p,
+.doc-section li {
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.doc-section ul {
+  margin: 12px 0 0;
+  padding-left: 22px;
+}
+
+.doc-section li + li {
+  margin-top: 6px;
+}
+
+.doc-section a {
+  color: var(--blue);
+  font-weight: 800;
+  text-decoration: none;
 }
 
 .download-band {
@@ -702,8 +934,31 @@ a {
   .download-band,
   .product-section,
   .channel-section,
-  .privacy-section {
+  .privacy-section,
+  .pricing-section,
+  .faq-section {
     padding-block: 56px;
+  }
+
+  .pricing-cta {
+    flex-direction: column;
+  }
+
+  .pricing-cta .button {
+    width: 100%;
+  }
+
+  .faq-item summary {
+    padding: 18px 18px;
+    font-size: 16px;
+  }
+
+  .faq-item p {
+    padding: 0 18px 18px;
+  }
+
+  .doc-page {
+    padding-top: 112px;
   }
 
   .section-heading h2,
