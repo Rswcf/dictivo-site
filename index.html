@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dictivo - private dictation for Mac and Windows</title>
+    <meta
+      name="description"
+      content="Dictivo is a private desktop dictation app for macOS and Windows. Download the official Mac and Windows releases from dictivo.app."
+    />
+    <meta name="theme-color" content="#11100f" />
+    <meta property="og:title" content="Dictivo" />
+    <meta
+      property="og:description"
+      content="Private desktop dictation for macOS and Windows, distributed directly from dictivo.app."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dictivo.app/" />
+    <meta property="og:image" content="https://dictivo.app/assets/ui/04-dictation-transcript.png" />
+    <link rel="canonical" href="https://dictivo.app/" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/assets/ui/04-dictation-transcript.png" />
+    <link rel="stylesheet" href="/assets/site.css" />
+    <script src="/assets/site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#downloads">Skip to downloads</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="Dictivo home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>Dictivo</span>
+      </a>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="#product">Product</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#channel">Channel</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+      <a class="header-download" href="#downloads">Download</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true">
+          <img src="/assets/ui/04-dictation-transcript.png" alt="" fetchpriority="high" />
+        </div>
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="eyebrow">dictivo.app / official direct download</p>
+          <h1 id="hero-title">Dictivo</h1>
+          <p class="hero-lede">
+            Private desktop dictation for people who write, code, and operate across long days. Download the Mac or
+            Windows release from the official channel.
+          </p>
+          <div class="hero-actions" aria-label="Primary downloads">
+            <a class="button button-light download-link" href="/download/mac" data-platform="macos">
+              Download for Mac
+            </a>
+            <a class="button button-outline download-link" href="/download/windows" data-platform="windows">
+              Download for Windows
+            </a>
+          </div>
+          <dl class="release-strip" aria-label="Release facts">
+            <div>
+              <dt>Current release</dt>
+              <dd>0.2.0</dd>
+            </div>
+            <div>
+              <dt>Platforms</dt>
+              <dd>macOS + Windows</dd>
+            </div>
+            <div>
+              <dt>Distribution</dt>
+              <dd>Official direct</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="download-band" id="downloads" aria-labelledby="downloads-title">
+        <div class="section-heading">
+          <p class="section-kicker">Download Dictivo</p>
+          <h2 id="downloads-title">One canonical site for every desktop installer.</h2>
+          <p>
+            The website is the user-facing channel. Cloudflare Pages serves the site, and Cloudflare R2 serves the
+            installer files from <strong>downloads.dictivo.app</strong>.
+          </p>
+        </div>
+
+        <div class="download-grid" aria-label="Available installers">
+          <article class="download-card" data-platform-card="macos">
+            <div class="card-topline">
+              <span>macOS</span>
+              <span class="recommendation" data-recommendation="macos">Recommended</span>
+            </div>
+            <h3>Universal DMG</h3>
+            <p>For Apple Silicon and Intel Macs. This is the default Mac download for direct distribution.</p>
+            <a class="button button-dark download-link" href="/download/mac" data-platform="macos">
+              Download .dmg
+            </a>
+            <p class="download-note">Release target: signed and notarized macOS package.</p>
+          </article>
+
+          <article class="download-card" data-platform-card="windows">
+            <div class="card-topline">
+              <span>Windows</span>
+              <span class="recommendation" data-recommendation="windows">Recommended</span>
+            </div>
+            <h3>Current-user EXE</h3>
+            <p>Best for most Windows users because it installs without admin deployment steps.</p>
+            <a class="button button-dark download-link" href="/download/windows" data-platform="windows">
+              Download .exe
+            </a>
+            <p class="download-note">Release target: signed Windows installer.</p>
+          </article>
+
+          <article class="download-card">
+            <div class="card-topline">
+              <span>Windows IT</span>
+              <span>Managed</span>
+            </div>
+            <h3>MSI package</h3>
+            <p>For teams, device management, and future enterprise deployments.</p>
+            <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">
+              Download .msi
+            </a>
+            <p class="download-note">Release target: managed Windows installer.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="product-section" id="product" aria-labelledby="product-title">
+        <div class="section-heading section-heading-left">
+          <p class="section-kicker">Embedded Product</p>
+          <h2 id="product-title">The homepage carries the product experience, not just a download button.</h2>
+          <p>
+            Users can inspect the core Dictivo flow before installing: dictation, onboarding, history, and local privacy
+            settings.
+          </p>
+        </div>
+
+        <div class="product-shell">
+          <div class="product-controls">
+            <div class="tab-list" role="tablist" aria-label="Product preview">
+              <button class="tab-button is-active" type="button" role="tab" aria-selected="true" data-demo-target="dictation">
+                Dictation
+              </button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="tiers">
+                Setup
+              </button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="history">
+                History
+              </button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="privacy">
+                Privacy
+              </button>
+            </div>
+            <div class="demo-copy" aria-live="polite">
+              <p class="demo-label" id="demoLabel">Live dictation surface</p>
+              <h3 id="demoTitle">Capture speech into clean text.</h3>
+              <p id="demoDescription">
+                Dictivo keeps the active transcript close to the work surface and makes the recording state visible at a
+                glance.
+              </p>
+            </div>
+          </div>
+
+          <figure class="screen-frame">
+            <img
+              id="demoScreen"
+              src="/assets/ui/04-dictation-transcript.png"
+              alt="Dictivo dictation screen with an active transcript"
+              loading="lazy"
+            />
+            <figcaption id="demoCaption">Dictation view, transcript visible.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="channel-section" id="channel" aria-labelledby="channel-title">
+        <div class="section-heading">
+          <p class="section-kicker">Commercial Channel</p>
+          <h2 id="channel-title">Start with official direct distribution, then add stores as acquisition layers.</h2>
+          <p>
+            Dictivo needs one place where users can download, verify, buy, update, and ask for support. Store listings
+            can come later without replacing the direct relationship.
+          </p>
+        </div>
+
+        <div class="channel-grid">
+          <article>
+            <span class="channel-number">01</span>
+            <h3>Official website first</h3>
+            <p>
+              The website controls positioning, pricing, release notes, support, and downloadable installers for both
+              desktop platforms.
+            </p>
+          </article>
+          <article>
+            <span class="channel-number">02</span>
+            <h3>R2-backed downloads</h3>
+            <p>
+              Installer binaries are large release assets, so they belong on R2 behind <strong>downloads.dictivo.app</strong>,
+              not inside the Pages project.
+            </p>
+          </article>
+          <article>
+            <span class="channel-number">03</span>
+            <h3>Secondary discovery</h3>
+            <p>
+              Homebrew Cask, winget, Microsoft Store, and a possible Mac App Store edition can point users back to the
+              same official product story.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div class="privacy-copy">
+          <p class="section-kicker">Privacy Position</p>
+          <h2 id="privacy-title">A paid product should make trust obvious before the first install.</h2>
+          <p>
+            The channel should state what runs locally, what leaves the device, how updates are signed, and where the
+            user can get an authentic installer. That trust story belongs on dictivo.app.
+          </p>
+        </div>
+        <div class="privacy-proof" aria-label="Trust checklist">
+          <div>
+            <span>Local-first speech engine path</span>
+            <strong>Visible</strong>
+          </div>
+          <div>
+            <span>Signed release packages</span>
+            <strong>Required</strong>
+          </div>
+          <div>
+            <span>Canonical download host</span>
+            <strong>downloads.dictivo.app</strong>
+          </div>
+          <div>
+            <span>Future paid activation</span>
+            <strong>License-ready</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand footer-brand" href="/" aria-label="Dictivo home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>Dictivo</span>
+        </a>
+        <p>Official desktop downloads for macOS and Windows.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/downloads.json">Release manifest</a>
+        <a href="#downloads">Downloads</a>
+        <a href="mailto:support@dictivo.app">support@dictivo.app</a>
+      </div>
+    </footer>
+  </body>
+</html>

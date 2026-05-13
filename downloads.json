@@ -1,0 +1,34 @@
+{
+  "product": "Dictivo",
+  "domain": "https://dictivo.app",
+  "downloadHost": "https://downloads.dictivo.app",
+  "version": "0.2.0",
+  "channel": "stable",
+  "updatedAt": "2026-05-13",
+  "artifacts": [
+    {
+      "platform": "macos",
+      "label": "macOS Universal DMG",
+      "fileName": "Dictivo-macOS-universal.dmg",
+      "architecture": "Apple Silicon + Intel",
+      "url": "https://downloads.dictivo.app/Dictivo-macOS-universal.dmg",
+      "redirect": "https://dictivo.app/download/mac"
+    },
+    {
+      "platform": "windows",
+      "label": "Windows x64 EXE",
+      "fileName": "Dictivo-Windows-x64.exe",
+      "architecture": "x64",
+      "url": "https://downloads.dictivo.app/Dictivo-Windows-x64.exe",
+      "redirect": "https://dictivo.app/download/windows"
+    },
+    {
+      "platform": "windows",
+      "label": "Windows x64 MSI",
+      "fileName": "Dictivo-Windows-x64.msi",
+      "architecture": "x64",
+      "url": "https://downloads.dictivo.app/Dictivo-Windows-x64.msi",
+      "redirect": "https://dictivo.app/download/windows-msi"
+    }
+  ]
+}
