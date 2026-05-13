@@ -52,6 +52,15 @@ Expected objects:
 The public download buttons use `/download/*` routes in `_redirects`, which forward to the matching R2 objects. The
 machine-readable release manifest lives at `/downloads.json`.
 
+After R2 is enabled in the Cloudflare dashboard, uploads can be run with:
+
+```sh
+SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
+```
+
+The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads the three
+installer objects with long-lived cache headers.
+
 ## Manual release checklist
 
 1. Build the release artifacts from the desktop workflow.
