@@ -47,6 +47,16 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+main section[id] {
+  scroll-margin-top: 96px;
+}
+
 .skip-link {
   position: absolute;
   overflow: hidden;
@@ -141,6 +151,15 @@ a {
   text-decoration: none;
   font-size: 14px;
   font-weight: 900;
+  touch-action: manipulation;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.header-download:hover {
+  background: var(--acid);
+  color: var(--ink);
 }
 
 .hero {
@@ -207,7 +226,8 @@ a {
   max-width: 10ch;
   font-size: clamp(64px, 13vw, 164px);
   line-height: 0.86;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .hero-lede {
@@ -253,14 +273,39 @@ a {
   font-size: 15px;
   font-weight: 900;
   line-height: 1.1;
+  touch-action: manipulation;
   transition:
     transform 160ms ease,
     border-color 160ms ease,
-    background-color 160ms ease;
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .button:hover {
   transform: translateY(-1px);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.button-light:hover {
+  background: color-mix(in srgb, var(--acid) 86%, var(--ink));
+}
+
+.button-outline:hover {
+  border-color: var(--white);
+  background: rgb(255 255 255 / 14%);
+}
+
+.button-dark:hover {
+  background: color-mix(in srgb, var(--ink) 84%, var(--blue));
+}
+
+.button-secondary:hover {
+  background: var(--ink);
+  color: var(--white);
 }
 
 .button-light {
@@ -310,6 +355,7 @@ a {
   color: var(--white);
   font-size: 14px;
   font-weight: 900;
+  font-variant-numeric: tabular-nums;
 }
 
 .download-band,
@@ -326,15 +372,16 @@ a {
 }
 
 .pricing-card {
+  position: relative;
   display: grid;
   max-width: 680px;
   margin: 0 auto;
   gap: 28px;
   border: 1px solid var(--line);
+  border-top: 4px solid var(--acid);
   border-radius: var(--radius);
   background: var(--white);
-  padding: clamp(32px, 5vw, 56px);
-  box-shadow: var(--shadow);
+  padding: clamp(36px, 5vw, 60px) clamp(28px, 5vw, 56px);
   text-align: center;
 }
 
@@ -346,24 +393,28 @@ a {
 }
 
 .pricing-amount {
-  font-size: clamp(56px, 9vw, 88px);
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0;
+  font-size: clamp(64px, 10vw, 104px);
+  line-height: 0.92;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .pricing-period {
   color: var(--ink-muted);
-  font-size: 13px;
-  font-weight: 900;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .pricing-points {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   margin: 0;
-  padding: 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   list-style: none;
   text-align: left;
 }
@@ -381,7 +432,8 @@ a {
 .pricing-points li::before {
   content: "✓";
   color: var(--blue);
-  font-weight: 900;
+  font-weight: 950;
+  line-height: 1;
 }
 
 .pricing-cta {
@@ -392,7 +444,7 @@ a {
 }
 
 .pricing-cta .button {
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .pricing-footnote {
@@ -405,6 +457,10 @@ a {
   color: var(--blue);
   font-weight: 800;
   text-decoration: none;
+}
+
+.pricing-footnote a:hover {
+  text-decoration: underline;
 }
 
 .faq-section {
@@ -420,9 +476,30 @@ a {
 }
 
 .faq-item {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
+  transition: border-color 160ms ease;
+}
+
+.faq-item::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--blue);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.faq-item[open]::before {
+  opacity: 1;
+}
+
+.faq-item:hover {
+  border-color: var(--ink);
 }
 
 .faq-item summary {
@@ -435,6 +512,19 @@ a {
   font-weight: 900;
   cursor: pointer;
   list-style: none;
+  touch-action: manipulation;
+  text-wrap: balance;
+  transition: color 160ms ease;
+}
+
+.faq-item summary:hover {
+  color: var(--ink);
+}
+
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .faq-item summary::-webkit-details-marker {
@@ -444,18 +534,20 @@ a {
 .faq-item summary::after {
   content: "+";
   color: var(--blue);
-  font-size: 24px;
+  font-size: 26px;
   line-height: 1;
-  font-weight: 900;
+  font-weight: 950;
+  transition: transform 200ms ease;
+  transform-origin: center;
 }
 
 .faq-item[open] summary::after {
-  content: "−";
+  transform: rotate(45deg);
 }
 
 .faq-item p {
   margin: 0;
-  padding: 0 24px 22px;
+  padding: 4px 24px 22px;
   color: var(--ink-muted);
   font-size: 15px;
   line-height: 1.6;
@@ -467,30 +559,47 @@ a {
   text-decoration: none;
 }
 
+.faq-item a:hover {
+  text-decoration: underline;
+}
+
 .doc-page {
   padding: clamp(132px, 18svh, 200px) max(20px, calc((100% - 880px) / 2)) clamp(64px, 9vw, 118px);
   background: var(--paper);
   min-height: calc(100svh - 200px);
 }
 
+.doc-eyebrow {
+  margin: 0 0 14px;
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .doc-page h1 {
   margin: 0 0 14px;
   font-size: clamp(40px, 6vw, 72px);
-  line-height: 0.98;
-  letter-spacing: 0;
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
-.doc-page > p:first-of-type {
+.doc-page > p:first-of-type,
+.doc-lede {
   margin: 0 0 40px;
   color: var(--ink-muted);
   font-size: 18px;
   line-height: 1.55;
+  max-width: 60ch;
+  text-wrap: pretty;
 }
 
 .doc-section {
-  margin-top: 40px;
+  margin-top: 48px;
   border-top: 1px solid var(--line);
-  padding-top: 32px;
+  padding-top: 36px;
 }
 
 .doc-section:first-of-type {
@@ -500,9 +609,12 @@ a {
 }
 
 .doc-section h2 {
-  margin: 0 0 6px;
-  font-size: clamp(22px, 3vw, 30px);
-  letter-spacing: 0;
+  margin: 0 0 8px;
+  font-size: clamp(24px, 3.2vw, 32px);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  scroll-margin-top: 96px;
 }
 
 .doc-meta {
@@ -510,6 +622,7 @@ a {
   color: var(--coral);
   font-size: 12px;
   font-weight: 950;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -521,7 +634,7 @@ a {
 }
 
 .doc-section ul {
-  margin: 12px 0 0;
+  margin: 14px 0 0;
   padding-left: 22px;
 }
 
@@ -533,6 +646,55 @@ a {
   color: var(--blue);
   font-weight: 800;
   text-decoration: none;
+}
+
+.doc-section a:hover {
+  text-decoration: underline;
+}
+
+.doc-section code {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper-deep);
+  padding: 1px 6px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+.release-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 14px;
+}
+
+.release-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.release-status {
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.release-date {
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 
 .download-band {
@@ -555,7 +717,8 @@ a {
   margin: 0;
   font-size: clamp(34px, 5vw, 64px);
   line-height: 0.98;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .section-heading p:not(.section-kicker),
@@ -565,6 +728,7 @@ a {
   color: var(--ink-muted);
   font-size: clamp(16px, 2vw, 20px);
   line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .download-grid,
@@ -687,11 +851,26 @@ a {
   cursor: pointer;
   font: inherit;
   font-weight: 900;
+  touch-action: manipulation;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.tab-button:hover {
+  border-color: rgb(255 255 255 / 38%);
+  color: var(--white);
 }
 
 .tab-button.is-active {
   border-color: var(--acid);
   background: var(--acid);
+  color: var(--ink);
+}
+
+.tab-button.is-active:hover {
+  border-color: var(--acid);
   color: var(--ink);
 }
 

@@ -38,28 +38,36 @@
     </header>
 
     <main class="doc-page" id="changelog">
+      <p class="doc-eyebrow">Release notes</p>
       <h1>Changelog</h1>
-      <p>What shipped, when, and what changed for the people using Dictivo every day.</p>
+      <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
 
-      <section class="doc-section">
-        <p class="doc-meta">v0.2.0 · Public beta · 2026-05-13</p>
-        <h2>Onboarding tiers and history</h2>
+      <section class="doc-section" aria-labelledby="release-0-2-0">
+        <p class="release-line">
+          <span class="release-tag">v0.2.0</span>
+          <span class="release-status">Public beta</span>
+          <time class="release-date" datetime="2026-05-13">May&nbsp;13,&nbsp;2026</time>
+        </p>
+        <h2 id="release-0-2-0">Onboarding tiers and history</h2>
         <ul>
-          <li>Onboarding now matches the local engine tier to detected hardware on first launch.</li>
+          <li>Onboarding matches the local engine tier to detected hardware on first launch.</li>
           <li>History view keeps recent dictations reachable for review and reuse.</li>
-          <li>Dedicated privacy and local-engine settings panes.</li>
-          <li>Companion overlay during dictation for hands-on transcript visibility.</li>
+          <li>Dedicated panes for privacy controls and local engine settings.</li>
+          <li>Companion overlay during dictation keeps the transcript visible while you work.</li>
           <li>Signed and notarized macOS DMG; signed Windows EXE and MSI.</li>
-          <li>Installers served from <code>downloads.dictivo.app</code> via Cloudflare R2.</li>
+          <li>Installers serve from <code>downloads.dictivo.app</code> via Cloudflare R2.</li>
         </ul>
       </section>
 
-      <section class="doc-section">
-        <p class="doc-meta">v0.1.0 · Private alpha</p>
-        <h2>Initial dictation surface</h2>
+      <section class="doc-section" aria-labelledby="release-0-1-0">
+        <p class="release-line">
+          <span class="release-tag">v0.1.0</span>
+          <span class="release-status">Private alpha</span>
+        </p>
+        <h2 id="release-0-1-0">Initial dictation surface</h2>
         <ul>
-          <li>Local-first dictation engine with the on-device speech pipeline.</li>
-          <li>Active transcript surface with visible recording state.</li>
+          <li>Local-first dictation engine running the on-device speech pipeline.</li>
+          <li>Active transcript surface with a visible recording state.</li>
           <li>Hotkey scaffolding and a local user dictionary.</li>
           <li>macOS and Windows builds from the same workspace.</li>
         </ul>
@@ -77,8 +85,8 @@
       <div class="footer-links">
         <a href="/#pricing">Pricing</a>
         <a href="/#downloads">Downloads</a>
-        <a href="/changelog.html">Changelog</a>
-        <a href="/security.html">Security</a>
+        <a href="/changelog">Changelog</a>
+        <a href="/security">Security</a>
         <a href="/downloads.json">Release manifest</a>
         <a href="mailto:support@dictivo.app">support@dictivo.app</a>
       </div>

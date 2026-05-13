@@ -38,51 +38,52 @@
     </header>
 
     <main class="doc-page" id="security">
+      <p class="doc-eyebrow">Trust &amp; disclosure</p>
       <h1>Security &amp; Privacy</h1>
-      <p>
+      <p class="doc-lede">
         Dictivo is a paid desktop product. Trust is part of what you're paying for, so this page lists exactly what
         runs locally, what crosses the network, and how installs and updates are protected.
       </p>
 
-      <section class="doc-section">
+      <section class="doc-section" aria-labelledby="voice-data">
         <p class="doc-meta">Voice data</p>
-        <h2>Your voice stays on your device.</h2>
+        <h2 id="voice-data">Your voice stays on your device.</h2>
         <p>
-          Dictation runs against an on-device speech engine. Audio captured by the microphone is processed locally,
-          transcribed to text on the same machine, and never uploaded to a Dictivo server or any third-party
-          transcription service.
+          Dictation runs against an on-device speech engine. Dictivo processes the microphone audio locally,
+          transcribes it on the same machine, and never uploads it to a Dictivo server or a third-party transcription
+          service.
         </p>
         <ul>
           <li>No audio leaves the device during normal dictation.</li>
-          <li>No transcript is uploaded for storage, analytics, or model training.</li>
-          <li>Local history and dictionary files live in the user's profile directory and can be deleted at any time.</li>
+          <li>Transcripts never upload for storage, analytics, or model training.</li>
+          <li>Local history and dictionary files live in your profile directory; you can delete them at any time.</li>
         </ul>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" aria-labelledby="network-traffic">
         <p class="doc-meta">Network traffic</p>
-        <h2>What actually crosses the network.</h2>
+        <h2 id="network-traffic">What actually crosses the network.</h2>
         <p>
           A desktop product does need a small amount of network access. Dictivo limits that to the minimum a paid
           install requires.
         </p>
         <ul>
           <li><strong>Update checks</strong> — periodic requests to <code>downloads.dictivo.app</code> for the current release manifest.</li>
-          <li><strong>License activation</strong> — a one-time request to bind your license to the device, then signed entitlement renewal on a long interval.</li>
-          <li><strong>Crash reports</strong> — only if you opt in. Off by default and reportable from settings.</li>
+          <li><strong>License activation</strong> — a one-time request binds your license to the device, then a signed entitlement renews on a long interval.</li>
+          <li><strong>Crash reports</strong> — only when you opt in. Off by default; toggleable from settings.</li>
         </ul>
         <p>
-          That is the complete list. Dictivo does not call third-party analytics, ad networks, or remote logging
+          That is the complete list. Dictivo never calls third-party analytics, ad networks, or remote logging
           services from inside the app.
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" aria-labelledby="installer-integrity">
         <p class="doc-meta">Installer integrity</p>
-        <h2>Signed builds, single canonical host.</h2>
+        <h2 id="installer-integrity">Signed builds, single canonical host.</h2>
         <p>
-          Every release is signed before it leaves the build pipeline and is served from a single canonical host so
-          that you can verify the installer you got is the installer we shipped.
+          Every release is signed before it leaves the build pipeline and serves from a single canonical host, so you
+          can verify the installer you got is the installer we shipped.
         </p>
         <ul>
           <li>macOS DMG — signed with a Developer ID certificate and notarized by Apple.</li>
@@ -92,22 +93,25 @@
         </ul>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" aria-labelledby="updates">
         <p class="doc-meta">Updates</p>
-        <h2>Updates verify themselves before they install.</h2>
+        <h2 id="updates">Updates verify themselves before they install.</h2>
         <p>
           Dictivo's updater pulls release metadata from the canonical host and verifies the installer signature before
-          replacing the running build. A tampered or unsigned package is rejected.
+          replacing the running build. It rejects any tampered or unsigned package.
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" aria-labelledby="vulnerability">
         <p class="doc-meta">Reporting a vulnerability</p>
-        <h2>Tell us before you tell the internet.</h2>
+        <h2 id="vulnerability">Tell us before you tell the internet.</h2>
         <p>
           If you think you've found a security issue in Dictivo, the desktop installers, or anything on dictivo.app,
           please email <a href="mailto:security@dictivo.app">security@dictivo.app</a> with reproduction steps. We aim
           to acknowledge within two business days and to ship a fix or mitigation as quickly as the severity warrants.
+        </p>
+        <p>
+          Last reviewed <time datetime="2026-05-14">May&nbsp;14,&nbsp;2026</time>.
         </p>
       </section>
     </main>
@@ -123,8 +127,8 @@
       <div class="footer-links">
         <a href="/#pricing">Pricing</a>
         <a href="/#downloads">Downloads</a>
-        <a href="/changelog.html">Changelog</a>
-        <a href="/security.html">Security</a>
+        <a href="/changelog">Changelog</a>
+        <a href="/security">Security</a>
         <a href="/downloads.json">Release manifest</a>
         <a href="mailto:support@dictivo.app">support@dictivo.app</a>
       </div>
