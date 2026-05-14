@@ -6,9 +6,10 @@
   --canvas-deep: #f0ece2;
   --surface: #ffffff;
 
-  /* Ink */
-  --ink: #11100f;
-  --ink-soft: #2a2a28;
+  /* Ink — cool dark to match the product canvas */
+  --ink: #0e0d12;
+  --ink-soft: #1a1820;
+  --ink-card: #16141c;
   --muted: #5e5a54;
 
   /* Lines (refined hairline) */
@@ -16,7 +17,8 @@
 
   /* Disciplined accents */
   --accent: #315cff; /* blue — links + primary marks */
-  --acid: #c9ff3a; /* trust signal — brand mark + on-device + Stays-local */
+  --acid: #c9ff3a; /* brand + on-device + Stays-local trust signal */
+  --violet: #a37cff; /* product accent — active states, mic, interactive cue */
 
   /* Status dots */
   --dot-live: #35c9a7;
@@ -252,8 +254,9 @@ main section[id] {
   min-height: 640px;
   padding-block: clamp(132px, 19svh, 196px) clamp(56px, 8vw, 96px);
   background:
-    radial-gradient(ellipse 90% 60% at 78% 26%, rgb(201 255 58 / 5%) 0%, transparent 70%),
-    radial-gradient(ellipse 70% 70% at 14% 70%, rgb(49 92 255 / 6%) 0%, transparent 65%),
+    radial-gradient(ellipse 90% 60% at 82% 28%, rgb(163 124 255 / 8%) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 70% at 14% 70%, rgb(201 255 58 / 4%) 0%, transparent 65%),
+    radial-gradient(circle at center, rgb(255 255 255 / 4%) 1.1px, transparent 1.6px) 0 0 / 28px 28px,
     var(--ink);
   color: var(--surface);
   overflow: hidden;
@@ -319,15 +322,17 @@ main section[id] {
 .hero .eyebrow,
 .trust-section .section-kicker,
 .product-section .section-kicker {
-  background: rgb(255 255 255 / 8%);
-  border-color: rgb(255 255 255 / 22%);
-  color: rgb(255 255 255 / 78%);
+  background: rgb(255 255 255 / 6%);
+  border-color: rgb(255 255 255 / 20%);
+  color: rgb(255 255 255 / 80%);
 }
 
-.hero .eyebrow .eyebrow-dot,
-.trust-section .section-kicker .eyebrow-dot,
-.product-section .section-kicker .eyebrow-dot {
+.hero .eyebrow .eyebrow-dot {
   background: var(--dot-beta);
+}
+
+.trust-section .section-kicker .eyebrow-dot {
+  background: var(--violet);
 }
 
 .hero h1 {
@@ -343,7 +348,7 @@ main section[id] {
 
 .hero h1 em {
   font-style: italic;
-  color: var(--acid);
+  color: var(--violet);
 }
 
 .hero-lede {
@@ -415,11 +420,11 @@ main section[id] {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 1px solid rgb(201 255 58 / 38%);
+  border: 1px solid rgb(163 124 255 / 42%);
   border-radius: var(--radius-pill);
-  background: rgb(201 255 58 / 10%);
+  background: rgb(163 124 255 / 12%);
   padding: 4px 10px;
-  color: var(--acid);
+  color: var(--violet);
   font-family: var(--mono);
   font-size: 10.5px;
   font-weight: 500;
@@ -432,8 +437,8 @@ main section[id] {
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: var(--acid);
-  box-shadow: 0 0 8px rgb(201 255 58 / 80%);
+  background: var(--violet);
+  box-shadow: 0 0 8px rgb(163 124 255 / 80%);
 }
 
 .hero-frame img {
@@ -504,6 +509,7 @@ main section[id] {
 .button-light:hover {
   background: #b5ed24;
   border-color: #b5ed24;
+  box-shadow: 0 6px 28px rgb(163 124 255 / 22%);
 }
 
 .button-outline {
@@ -630,7 +636,9 @@ main section[id] {
 
 .trust-section,
 .product-section {
-  background: var(--ink);
+  background:
+    radial-gradient(circle at center, rgb(255 255 255 / 3.5%) 1.1px, transparent 1.6px) 0 0 / 28px 28px,
+    var(--ink);
   color: var(--surface);
   padding-block: clamp(72px, 10vw, 128px);
 }
@@ -749,9 +757,9 @@ main section[id] {
 
 .trust-column--local {
   background:
-    linear-gradient(180deg, rgb(201 255 58 / 8%) 0%, rgb(201 255 58 / 0%) 60%),
+    linear-gradient(180deg, rgb(163 124 255 / 10%) 0%, rgb(163 124 255 / 0%) 60%),
     rgb(255 255 255 / 2%);
-  border-color: rgb(201 255 58 / 26%);
+  border-color: rgb(163 124 255 / 28%);
 }
 
 .trust-column-head {
@@ -781,9 +789,9 @@ main section[id] {
 }
 
 .trust-tag--local {
-  border-color: rgb(201 255 58 / 38%);
-  background: rgb(201 255 58 / 10%);
-  color: var(--acid);
+  border-color: rgb(163 124 255 / 42%);
+  background: rgb(163 124 255 / 12%);
+  color: var(--violet);
 }
 
 .trust-dot {
@@ -795,8 +803,8 @@ main section[id] {
 }
 
 .trust-dot--local {
-  background: var(--acid);
-  box-shadow: 0 0 8px rgb(201 255 58 / 70%);
+  background: var(--violet);
+  box-shadow: 0 0 8px rgb(163 124 255 / 72%);
 }
 
 .trust-column-lede {
@@ -836,7 +844,7 @@ main section[id] {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: var(--acid);
+  background: var(--violet);
 }
 
 .trust-list--network li::before {
@@ -879,7 +887,7 @@ main section[id] {
 }
 
 .trust-footnote a:hover {
-  color: var(--acid);
+  color: var(--violet);
 }
 
 /* ---------------------------------------------------------- *
@@ -890,13 +898,14 @@ main section[id] {
   display: grid;
   gap: clamp(24px, 4vw, 56px);
   grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1.38fr);
-  align-items: stretch;
+  align-items: start;
 }
 
 .product-controls {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  align-self: stretch;
 }
 
 .tab-list {
@@ -922,14 +931,21 @@ main section[id] {
 }
 
 .tab-button:hover {
-  border-color: rgb(255 255 255 / 38%);
+  border-color: rgb(163 124 255 / 48%);
+  background: rgb(163 124 255 / 6%);
   color: var(--white);
 }
 
 .tab-button.is-active {
-  border-color: var(--surface);
-  background: var(--surface);
-  color: var(--ink);
+  border-color: var(--violet);
+  background: rgb(163 124 255 / 16%);
+  color: var(--surface);
+  box-shadow: 0 0 0 1px rgb(163 124 255 / 32%) inset;
+}
+
+.tab-button.is-active:hover {
+  border-color: var(--violet);
+  color: var(--surface);
 }
 
 .demo-copy {
@@ -947,11 +963,11 @@ main section[id] {
 
 .demo-copy h3 {
   margin: 8px 0 0;
-  font-family: var(--display);
-  font-size: clamp(24px, 2.6vw, 32px);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.018em;
+  font-family: var(--sans);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
   color: var(--surface);
   text-wrap: balance;
 }
@@ -990,8 +1006,8 @@ main section[id] {
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: var(--acid);
-  box-shadow: 0 0 6px rgb(201 255 58 / 60%);
+  background: var(--violet);
+  box-shadow: 0 0 6px rgb(163 124 255 / 64%);
 }
 
 .demo-mode-caption {
@@ -1034,47 +1050,61 @@ main section[id] {
   display: flex;
   flex-direction: column;
   margin: 0;
+  align-self: stretch;
 }
 
 .screen-chrome {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  padding: 12px 16px;
-  border: 1px solid rgb(255 255 255 / 14%);
+  padding: 10px 14px;
+  border: 1px solid rgb(255 255 255 / 12%);
   border-bottom: 0;
   border-radius: 12px 12px 0 0;
-  background: rgb(255 255 255 / 4%);
-}
-
-.screen-chrome-dots {
-  display: inline-block;
-  width: 40px;
-  height: 10px;
-  background-image:
-    radial-gradient(circle 4px at 5px 5px, rgb(255 255 255 / 28%) 50%, transparent 51%),
-    radial-gradient(circle 4px at 19px 5px, rgb(255 255 255 / 28%) 50%, transparent 51%),
-    radial-gradient(circle 4px at 33px 5px, rgb(255 255 255 / 28%) 50%, transparent 51%);
-  background-repeat: no-repeat;
+  background: rgb(255 255 255 / 3%);
 }
 
 .screen-chrome-title {
-  color: rgb(255 255 255 / 56%);
+  color: rgb(255 255 255 / 60%);
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.screen-chrome-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgb(255 255 255 / 60%);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.screen-chrome-state::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--violet);
+  box-shadow: 0 0 8px rgb(163 124 255 / 70%);
 }
 
 .screen-frame img {
   width: 100%;
   aspect-ratio: 16 / 10;
-  border: 1px solid rgb(255 255 255 / 14%);
+  border: 1px solid rgb(255 255 255 / 12%);
   border-top: 0;
   border-radius: 0 0 12px 12px;
-  background: #1f1f1f;
+  background: var(--ink-card);
   box-shadow: var(--shadow);
   object-fit: cover;
+  object-position: 50% 45%;
 }
 
 .screen-frame figcaption {
