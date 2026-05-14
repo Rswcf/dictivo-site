@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dictivo — private desktop dictation · $59 once · Mac & Windows</title>
+    <title>Dictivo — private on-device dictation · $59 once · Mac &amp; Windows</title>
     <meta
       name="description"
-      content="Dictivo is a private desktop dictation app for macOS and Windows. 14-day free trial, then $59 once — no subscription. Transcription runs locally on your device."
+      content="Dictivo is a private desktop dictation app that runs the speech engine on your Mac or Windows PC. No cloud transcription, no audio uploads. 14-day free trial, then $59 once."
     />
     <meta name="theme-color" content="#11100f" />
-    <meta property="og:title" content="Dictivo — private desktop dictation, $59 once" />
+    <meta property="og:title" content="Dictivo — private on-device dictation, $59 once" />
     <meta
       property="og:description"
-      content="Private desktop dictation for macOS and Windows. 14-day free trial, then $59 once — no subscription."
+      content="Private on-device dictation for macOS and Windows. No cloud transcription, no audio uploads. 14-day free trial, then $59 once."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dictivo.app/" />
@@ -38,6 +38,7 @@
         <span class="brand-name">Dictivo</span>
       </a>
       <nav class="nav-links" aria-label="Site navigation">
+        <a href="#trust">Trust</a>
         <a href="#product">Product</a>
         <a href="#pricing">Pricing</a>
         <a href="#downloads">Downloads</a>
@@ -47,382 +48,488 @@
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true">
-          <img
-            src="/assets/ui/04-dictation-transcript.png"
-            alt=""
-            width="3840"
-            height="2400"
-            fetchpriority="high"
-          />
-        </div>
-        <div class="hero-scrim" aria-hidden="true"></div>
+      <section class="hero hero--split" aria-labelledby="hero-title">
         <div class="hero-inner">
-          <span class="eyebrow">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            Public beta · v0.2.0
-          </span>
-          <h1 id="hero-title">Dictate as fast as you <em>think</em>.</h1>
-          <p class="hero-lede">
-            Private desktop dictation for the people who write, code, and operate across long days — your voice never
-            leaves the device. Start the 14-day free trial on macOS or Windows.
-          </p>
-          <div class="hero-actions" aria-label="Start trial">
-            <a class="button button-light download-link" href="/download/mac" data-platform="macos">
-              Start trial — Mac
-            </a>
-            <a class="button button-outline download-link" href="/download/windows" data-platform="windows">
-              Start trial — Windows
-            </a>
-            <span class="keystroke" aria-hidden="true">⌘&nbsp;Shift&nbsp;D</span>
-          </div>
-          <p class="hero-fineprint">Free for 14&nbsp;days. $59&nbsp;once after — no subscription. 30-day refund.</p>
-          <dl class="release-strip" aria-label="Release facts">
-            <div>
-              <dt>Price</dt>
-              <dd>$59&nbsp;once</dd>
+          <div class="hero-copy">
+            <span class="eyebrow">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Public beta · v0.2.0
+            </span>
+            <h1 id="hero-title">Dictation that <em>never</em> leaves your device.</h1>
+            <p class="hero-lede">
+              Dictivo runs the speech engine on your Mac or Windows PC. No cloud transcription, no audio uploads,
+              no account required. Start the 14-day free trial.
+            </p>
+            <div class="hero-actions" aria-label="Start trial">
+              <a class="button button-light download-link" href="/download/mac" data-platform="macos">
+                Start trial — Mac
+              </a>
+              <a class="button button-outline download-link" href="/download/windows" data-platform="windows">
+                Start trial — Windows
+              </a>
+              <span class="keystroke" aria-hidden="true">⌘&nbsp;Shift&nbsp;D</span>
             </div>
-            <div>
-              <dt>Platforms</dt>
-              <dd>macOS + Windows</dd>
-            </div>
-            <div>
-              <dt>Trial</dt>
-              <dd>14&nbsp;days, no card</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
-      <section class="pricing-section reveal" id="pricing" aria-labelledby="pricing-title">
-        <div class="pricing-head">
-          <h2 id="pricing-title">One plan when you're ready. <em>One free trial</em> while you're not.</h2>
-          <p>
-            Pay once, own the build. We don't ask for a card up front and we don't email you afterwards unless you
-            write back first.
-          </p>
-        </div>
-
-        <div class="pricing-band" role="list">
-          <article class="tier" role="listitem" data-od-id="tier-trial">
-            <h3 class="tier-name">Trial</h3>
-            <p class="tier-sub">For testing whether Dictivo earns a spot in your daily flow.</p>
-            <p class="tier-price">Free<small>· 14&nbsp;days</small></p>
-            <ul class="tier-features">
-              <li>Full local dictation</li>
-              <li>All on-device engines</li>
-              <li>History &amp; user dictionary</li>
-              <li>No credit card required</li>
-            </ul>
-            <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">Start the trial</a>
-          </article>
-          <article class="tier tier--highlight" role="listitem" data-od-id="tier-personal">
-            <h3 class="tier-name">Personal</h3>
-            <p class="tier-sub">For one writer who picks Dictivo and never looks back.</p>
-            <p class="tier-price">$59<small>· one-time</small></p>
-            <ul class="tier-features">
-              <li>Everything in Trial</li>
-              <li>Up to 3&nbsp;personal devices</li>
-              <li>All v1.x updates included</li>
-              <li>v2.0 upgrade at 50%&nbsp;off</li>
-              <li>30-day refund, no questions</li>
-            </ul>
-            <a class="button button-dark download-link" href="/download/mac" data-platform="macos">Start the trial</a>
-          </article>
-          <article class="tier" role="listitem" data-od-id="tier-team">
-            <h3 class="tier-name">Team</h3>
-            <p class="tier-sub">For docs teams, classrooms, and small studios from five seats.</p>
-            <p class="tier-price">Talk<small>· to us</small></p>
-            <ul class="tier-features">
-              <li>Volume pricing from 5&nbsp;seats</li>
-              <li>Education &amp; non-profit pricing</li>
-              <li>Named support contact</li>
-              <li>SSO when it ships</li>
-            </ul>
-            <a class="button button-secondary" href="mailto:support@dictivo.app">Open a thread</a>
-          </article>
-        </div>
-
-        <p class="pricing-footnote">
-          Need to deactivate a device or ask about volume pricing? Write to
-          <a href="mailto:support@dictivo.app">support@dictivo.app</a>.
-        </p>
-      </section>
-
-      <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
-        <div class="section-heading">
-          <span class="section-kicker">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            Direct installers
-          </span>
-          <h2 id="downloads-title">Signed installers, from the <em>official host</em>.</h2>
-          <p>
-            Every trial starts here. Cloudflare Pages serves the page; Cloudflare R2 serves the installers from
-            <strong>downloads.dictivo.app</strong>.
-          </p>
-        </div>
-
-        <div class="download-grid" aria-label="Available installers">
-          <article class="download-card" data-platform-card="macos">
-            <div class="card-topline">
-              <span>macOS</span>
-              <span class="recommendation" data-recommendation="macos">Recommended</span>
-            </div>
-            <h3>Universal DMG</h3>
-            <p>For Apple Silicon and Intel Macs. This is the default Mac download for direct distribution.</p>
-            <a class="button button-dark download-link" href="/download/mac" data-platform="macos">
-              Download .dmg
-            </a>
-            <p class="download-note">Release target: signed and notarized macOS package.</p>
-          </article>
-
-          <article class="download-card" data-platform-card="windows">
-            <div class="card-topline">
-              <span>Windows</span>
-              <span class="recommendation" data-recommendation="windows">Recommended</span>
-            </div>
-            <h3>Current-user EXE</h3>
-            <p>Best for most Windows users because it installs without admin deployment steps.</p>
-            <a class="button button-dark download-link" href="/download/windows" data-platform="windows">
-              Download .exe
-            </a>
-            <p class="download-note">Release target: signed Windows installer.</p>
-          </article>
-
-          <article class="download-card">
-            <div class="card-topline">
-              <span>Windows IT</span>
-              <span>Managed</span>
-            </div>
-            <h3>MSI package</h3>
-            <p>For teams, device management, and future enterprise deployments.</p>
-            <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">
-              Download .msi
-            </a>
-            <p class="download-note">Release target: managed Windows installer.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="product-section reveal" id="product" aria-labelledby="product-title">
-        <div class="section-heading section-heading-left">
-          <span class="section-kicker">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            Embedded product
-          </span>
-          <h2 id="product-title">Inspect the surfaces <em>before</em> you install.</h2>
-          <p>
-            Dictation, onboarding, history, and the privacy panes — paged through right here, on the same canvas as
-            the trial download.
-          </p>
-        </div>
-
-        <div class="product-shell">
-          <div class="product-controls">
-            <div class="tab-list" role="tablist" aria-label="Product preview">
-              <button class="tab-button is-active" type="button" role="tab" aria-selected="true" data-demo-target="dictation">
-                Dictation
-              </button>
-              <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="tiers">
-                Setup
-              </button>
-              <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="history">
-                History
-              </button>
-              <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="privacy">
-                Privacy
-              </button>
-            </div>
-            <div class="demo-copy" aria-live="polite">
-              <p class="demo-label" id="demoLabel">Live dictation surface</p>
-              <h3 id="demoTitle">Capture speech into clean text.</h3>
-              <p id="demoDescription">
-                Dictivo keeps the active transcript close to the work surface and makes the recording state visible at a
-                glance.
-              </p>
-            </div>
+            <p class="hero-fineprint">Free for 14&nbsp;days. $59&nbsp;once after — no subscription. 30-day refund.</p>
+            <dl class="release-strip" aria-label="Release facts">
+              <div>
+                <dt>On-device</dt>
+                <dd>100%</dd>
+              </div>
+              <div>
+                <dt>Audio uploads</dt>
+                <dd>None</dd>
+              </div>
+              <div>
+                <dt>Trial</dt>
+                <dd>14&nbsp;days, no card</dd>
+              </div>
+            </dl>
           </div>
 
-          <figure class="screen-frame">
-            <img
-              id="demoScreen"
-              src="/assets/ui/04-dictation-transcript.png"
-              alt="Dictivo dictation screen with an active transcript"
-              width="3840"
-              height="2400"
-              loading="lazy"
-            />
-            <figcaption id="demoCaption">Dictation view, transcript visible.</figcaption>
+          <figure class="hero-figure" aria-hidden="true">
+            <div class="hero-frame">
+              <div class="hero-frame-bar">
+                <span class="hero-frame-dots" aria-hidden="true"></span>
+                <span class="hero-frame-badge">
+                  <span class="hero-frame-badge-dot" aria-hidden="true"></span>
+                  on-device
+                </span>
+              </div>
+              <img
+                src="/assets/ui/04-dictation-transcript.png"
+                alt=""
+                width="3840"
+                height="2400"
+                fetchpriority="high"
+              />
+            </div>
+            <figcaption>UI v1.0 · captured locally</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="channel-section reveal" id="channel" aria-labelledby="channel-title">
-        <div class="section-heading">
-          <span class="section-kicker">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            Distribution
-          </span>
-          <h2 id="channel-title">Direct distribution first. Stores <em>second</em>.</h2>
-          <p>
-            Dictivo needs one place where you can download, verify, buy, update, and ask for support. Store listings
-            can come later without replacing the direct relationship.
-          </p>
-        </div>
+      <section class="trust-section reveal" id="trust" aria-labelledby="trust-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left trust-heading">
+            <span class="section-kicker">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Trust position
+            </span>
+            <h2 id="trust-title">What runs locally — and what <em>doesn't</em>.</h2>
+            <p>
+              A paid product should make trust obvious before the first install. Here is the entire network
+              surface, with no marketing words in front of it.
+            </p>
+          </div>
 
-        <div class="channel-grid">
-          <article>
-            <span class="channel-number">01</span>
-            <h3>Official website first</h3>
-            <p>
-              The website controls positioning, pricing, release notes, support, and downloadable installers for both
-              desktop platforms.
-            </p>
-          </article>
-          <article>
-            <span class="channel-number">02</span>
-            <h3>R2-backed downloads</h3>
-            <p>
-              Installer binaries are large release assets, so they belong on R2 behind <strong>downloads.dictivo.app</strong>,
-              not inside the Pages project.
-            </p>
-          </article>
-          <article>
-            <span class="channel-number">03</span>
-            <h3>Secondary discovery</h3>
-            <p>
-              Homebrew Cask, winget, Microsoft Store, and a possible Mac App Store edition can point users back to the
-              same official product story.
-            </p>
-          </article>
-        </div>
-      </section>
+          <div class="trust-grid">
+            <article class="trust-column trust-column--local">
+              <header class="trust-column-head">
+                <span class="trust-tag trust-tag--local">
+                  <span class="trust-dot trust-dot--local" aria-hidden="true"></span>
+                  Stays on device
+                </span>
+                <p class="trust-column-lede">Generated, processed, and stored on the machine you installed it on.</p>
+              </header>
+              <ul class="trust-list">
+                <li>The speech engine itself</li>
+                <li>Raw microphone audio</li>
+                <li>Every transcript Dictivo produces</li>
+                <li>Session history and user dictionary</li>
+                <li>Settings and the local license cache</li>
+              </ul>
+            </article>
 
-      <section class="privacy-section reveal" id="privacy" aria-labelledby="privacy-title">
-        <div class="privacy-copy">
-          <span class="section-kicker">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            Privacy position
-          </span>
-          <h2 id="privacy-title">A paid product should make trust obvious <em>before</em> the first install.</h2>
-          <p>
-            The channel should state what runs locally, what leaves the device, how updates are signed, and where you
-            can get an authentic installer. That trust story belongs on dictivo.app — and on the
+            <article class="trust-column trust-column--network">
+              <header class="trust-column-head">
+                <span class="trust-tag trust-tag--network">
+                  <span class="trust-dot trust-dot--network" aria-hidden="true"></span>
+                  Leaves the device
+                </span>
+                <p class="trust-column-lede">The only outbound traffic Dictivo makes while you use it.</p>
+              </header>
+              <ul class="trust-list trust-list--network">
+                <li>License activation check on first start</li>
+                <li>Update manifest fetch from <code>downloads.dictivo.app</code></li>
+                <li class="trust-list-closer">That is the entire list.</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="trust-footnote">
+            Full breakdown of files, ports, and signing keys on the
             <a href="/security">security page</a>.
           </p>
         </div>
-        <div class="privacy-proof" aria-label="Trust checklist">
-          <div>
-            <span>Local-first speech engine path</span>
-            <strong>Visible</strong>
+      </section>
+
+      <section class="product-section reveal" id="product" aria-labelledby="product-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Embedded product
+            </span>
+            <h2 id="product-title">Inspect the surfaces <em>before</em> you install.</h2>
+            <p>
+              Dictation, onboarding, history, and the privacy panes — paged through right here, on the same
+              canvas as the trial download.
+            </p>
           </div>
-          <div>
-            <span>Signed release packages</span>
-            <strong>Required</strong>
-          </div>
-          <div>
-            <span>Canonical download host</span>
-            <strong>downloads.dictivo.app</strong>
-          </div>
-          <div>
-            <span>Refund window</span>
-            <strong>30&nbsp;days, no questions</strong>
+
+          <div class="product-shell">
+            <div class="product-controls">
+              <div class="tab-list" role="tablist" aria-label="Product preview">
+                <button class="tab-button is-active" type="button" role="tab" aria-selected="true" data-demo-target="dictation">
+                  Dictation
+                </button>
+                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="tiers">
+                  Setup
+                </button>
+                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="history">
+                  History
+                </button>
+                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="privacy">
+                  Privacy
+                </button>
+              </div>
+              <div class="demo-copy" aria-live="polite">
+                <p class="demo-label" id="demoLabel">Live dictation surface</p>
+                <h3 id="demoTitle">Capture speech into clean text.</h3>
+                <p id="demoDescription">
+                  Dictivo keeps the active transcript close to the work surface and makes the recording state
+                  visible at a glance.
+                </p>
+                <ul class="demo-points" id="demoPoints">
+                  <li>Live transcript pinned to your work surface</li>
+                  <li>Visible recording state with audio meter</li>
+                  <li>Switch Standard ↔ Accurate without losing audio</li>
+                </ul>
+              </div>
+              <p class="demo-mode-caption">
+                <span class="demo-mode-pill">Standard</span>
+                <span class="demo-mode-pill demo-mode-pill--filled">Accurate</span>
+                Both modes run on-device. Pick latency vs. accuracy — never privacy.
+              </p>
+            </div>
+
+            <figure class="screen-frame">
+              <div class="screen-chrome" aria-hidden="true">
+                <span class="screen-chrome-dots"></span>
+                <span class="screen-chrome-title">Dictivo · v0.2.0</span>
+              </div>
+              <img
+                id="demoScreen"
+                src="/assets/ui/04-dictation-transcript.png"
+                alt="Dictivo dictation screen with an active transcript"
+                width="3840"
+                height="2400"
+                loading="lazy"
+              />
+              <figcaption id="demoCaption">Dictation view, transcript visible.</figcaption>
+            </figure>
           </div>
         </div>
       </section>
-      <section class="faq-section reveal" id="faq" aria-labelledby="faq-title">
-        <div class="section-heading section-heading-left">
-          <span class="section-kicker">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            FAQ
-          </span>
-          <h2 id="faq-title">Answers <em>before</em> you install.</h2>
-          <p>The small print for a paid desktop product — privacy, devices, refunds, updates.</p>
-        </div>
 
-        <div class="faq-grid">
-          <details class="faq-item">
-            <summary>
-              <span class="faq-index">01</span>
-              <span class="faq-question">Is the $59 a one-time payment?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <p class="faq-answer-body">
-                Yes. Pay $59 once and Dictivo is yours. All v1.x point releases are included. v2.0 will be a paid
-                upgrade at 50% off the then-current price for existing license holders.
-              </p>
+      <section class="pricing-section reveal" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-shell">
+          <div class="pricing-head">
+            <h2 id="pricing-title">One plan when you're ready. <em>One free trial</em> while you're not.</h2>
+            <p>
+              Pay once, own the build. We don't ask for a card up front and we don't email you afterwards unless
+              you write back first.
+            </p>
+          </div>
+
+          <div class="pricing-band" role="list">
+            <article class="tier" role="listitem" data-od-id="tier-trial">
+              <h3 class="tier-name">Trial</h3>
+              <p class="tier-sub">For testing whether Dictivo earns a spot in your daily flow.</p>
+              <p class="tier-price">Free<small>· 14&nbsp;days</small></p>
+              <ul class="tier-features">
+                <li>Full local dictation</li>
+                <li>Standard and Accurate engines</li>
+                <li>History &amp; user dictionary</li>
+                <li>No credit card required</li>
+              </ul>
+              <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">Start the trial</a>
+            </article>
+            <article class="tier tier--highlight" role="listitem" data-od-id="tier-personal">
+              <h3 class="tier-name">Personal</h3>
+              <p class="tier-sub">For one writer who wants Dictivo on every machine they own.</p>
+              <p class="tier-price">$59<small>· one-time</small></p>
+              <ul class="tier-features">
+                <li>Everything in Trial</li>
+                <li>Up to 3&nbsp;personal devices</li>
+                <li>All v1.x updates included</li>
+                <li>v2.0 upgrade at 50%&nbsp;off</li>
+                <li>30-day refund, no questions</li>
+              </ul>
+              <a class="button button-dark download-link" href="/download/mac" data-platform="macos">Start the trial</a>
+            </article>
+            <article class="tier" role="listitem" data-od-id="tier-team">
+              <h3 class="tier-name">Team</h3>
+              <p class="tier-sub">For docs teams, classrooms, and small studios from five seats.</p>
+              <p class="tier-price">Talk<small>· to us</small></p>
+              <ul class="tier-features">
+                <li>Volume pricing from 5&nbsp;seats</li>
+                <li>Education &amp; non-profit pricing</li>
+                <li>Named support contact</li>
+                <li>SSO when it ships</li>
+              </ul>
+              <a class="button button-secondary" href="mailto:support@dictivo.app">Open a thread</a>
+            </article>
+          </div>
+
+          <p class="pricing-footnote">
+            Need to deactivate a device or ask about volume pricing? Write to
+            <a href="mailto:support@dictivo.app">support@dictivo.app</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <span class="section-kicker">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Direct installers
+            </span>
+            <h2 id="downloads-title">Signed installers, from the <em>official host</em>.</h2>
+            <p>
+              Every trial starts here. Cloudflare Pages serves the page; Cloudflare R2 serves the installers
+              from <strong>downloads.dictivo.app</strong>.
+            </p>
+          </div>
+
+          <div class="download-grid" aria-label="Available installers">
+            <article class="download-card" data-platform-card="macos">
+              <div class="card-topline">
+                <span>macOS</span>
+                <span class="recommendation" data-recommendation="macos">Recommended</span>
+              </div>
+              <h3>Universal DMG</h3>
+              <p>For Apple Silicon and Intel Macs. This is the default Mac download for direct distribution.</p>
+              <a class="button button-dark download-link" href="/download/mac" data-platform="macos">
+                Download .dmg
+              </a>
+              <p class="download-note">Release target: signed and notarized macOS package.</p>
+            </article>
+
+            <article class="download-card" data-platform-card="windows">
+              <div class="card-topline">
+                <span>Windows</span>
+                <span class="recommendation" data-recommendation="windows">Recommended</span>
+              </div>
+              <h3>Current-user EXE</h3>
+              <p>Best for most Windows users because it installs without admin deployment steps.</p>
+              <a class="button button-dark download-link" href="/download/windows" data-platform="windows">
+                Download .exe
+              </a>
+              <p class="download-note">Release target: signed Windows installer.</p>
+            </article>
+
+            <article class="download-card">
+              <div class="card-topline">
+                <span>Windows IT</span>
+                <span>Managed</span>
+              </div>
+              <h3>MSI package</h3>
+              <p>For teams, device management, and future enterprise deployments.</p>
+              <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">
+                Download .msi
+              </a>
+              <p class="download-note">Release target: managed Windows installer.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="signed-strip reveal" id="signed" aria-labelledby="signed-title">
+        <div class="section-shell">
+          <div class="signed-head">
+            <span class="section-kicker">
+              <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
+              Supply chain
+            </span>
+            <h2 id="signed-title">Every installer is signed before it leaves us.</h2>
+          </div>
+          <div class="signed-grid">
+            <div class="signed-cell">
+              <p class="signed-cell-label">macOS</p>
+              <p class="signed-cell-value">Notarized DMG, Apple Developer&nbsp;ID signed.</p>
             </div>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <span class="faq-index">02</span>
-              <span class="faq-question">What happens when the 14-day trial ends?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <p class="faq-answer-body">
-                Dictivo keeps launching, but it pauses dictation until you enter a license. Your settings, history,
-                and local dictionary stay intact — drop in a key and you pick up exactly where you left off.
-              </p>
+            <div class="signed-cell">
+              <p class="signed-cell-label">Windows</p>
+              <p class="signed-cell-value">Authenticode-signed EXE and MSI.</p>
             </div>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <span class="faq-index">03</span>
-              <span class="faq-question">How many devices can I use one license on?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <p class="faq-answer-body">
-                Up to 3&nbsp;personal devices — for example, a work Mac, a home Mac, and a Windows laptop. Need to
-                move a license between machines? Deactivate the old device from settings and the slot frees up
-                immediately.
-              </p>
+            <div class="signed-cell">
+              <p class="signed-cell-label">Canonical host</p>
+              <p class="signed-cell-value">Served from <code>downloads.dictivo.app</code> (Cloudflare R2).</p>
             </div>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <span class="faq-index">04</span>
-              <span class="faq-question">Can I get a refund?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <p class="faq-answer-body">
-                Yes — within 30&nbsp;days of purchase, no questions asked. Email
-                <a href="mailto:support@dictivo.app">support@dictivo.app</a> and we'll process it.
+          </div>
+          <p class="signed-footnote">
+            Verify hashes, certificates, and update flow on the
+            <a href="/security">security page</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="channel-section reveal" id="channel" aria-labelledby="channel-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <span class="section-kicker">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Distribution
+            </span>
+            <h2 id="channel-title">Direct distribution first. Stores <em>second</em>.</h2>
+            <p>
+              Dictivo needs one place where you can download, verify, buy, update, and ask for support. Store
+              listings can come later without replacing the direct relationship.
+            </p>
+          </div>
+
+          <div class="channel-grid">
+            <article>
+              <span class="channel-number">01</span>
+              <h3>Official website first</h3>
+              <p>
+                The website controls positioning, pricing, release notes, support, and downloadable installers
+                for both desktop platforms.
               </p>
-            </div>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <span class="faq-index">05</span>
-              <span class="faq-question">Does my voice ever leave my computer?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <p class="faq-answer-body">
-                No. Transcription runs locally on your device using the on-device engine. Dictivo only makes network
-                requests for update checks and license activation. See the
-                <a href="/security">security page</a> for the full breakdown.
+            </article>
+            <article>
+              <span class="channel-number">02</span>
+              <h3>R2-backed downloads</h3>
+              <p>
+                Installer binaries are large release assets, so they belong on R2 behind
+                <strong>downloads.dictivo.app</strong>, not inside the Pages project.
               </p>
-            </div>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <span class="faq-index">06</span>
-              <span class="faq-question">Do you sell team or education licenses?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-answer">
-              <p class="faq-answer-body">
-                Yes. Volume pricing starts at 5&nbsp;seats; education and non-profit pricing is available on request.
-                Email <a href="mailto:support@dictivo.app">support@dictivo.app</a> with the number of seats and we'll
-                send a quote.
+            </article>
+            <article>
+              <span class="channel-number">03</span>
+              <h3>Secondary discovery</h3>
+              <p>
+                Homebrew Cask, winget, Microsoft Store, and a possible Mac App Store edition can point users
+                back to the same official product story.
               </p>
-            </div>
-          </details>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section reveal" id="faq" aria-labelledby="faq-title">
+        <div class="section-shell faq-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              FAQ
+            </span>
+            <h2 id="faq-title">Answers <em>before</em> you install.</h2>
+            <p>The small print for a paid desktop product — privacy, devices, refunds, updates, speed.</p>
+          </div>
+
+          <div class="faq-grid">
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">01</span>
+                <span class="faq-question">Does my voice ever leave my computer?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  No. Transcription runs locally on your device using the on-device engine. The only network
+                  traffic Dictivo makes is a license activation check and a periodic update manifest fetch — no
+                  audio, no transcripts, no metadata about what you said. See the
+                  <a href="/security">security page</a> for the full breakdown.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">02</span>
+                <span class="faq-question">Why isn't it faster than a cloud transcription service?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  Because the speech model runs on your device, not on a GPU farm. That trade is the whole
+                  point of Dictivo — you give up a small amount of latency in exchange for never sending your
+                  voice off the machine. Standard mode is fast enough for drafting in real time; Accurate mode
+                  takes a little longer and is meant for clean exports.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">03</span>
+                <span class="faq-question">Is the $59 a one-time payment?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  Yes. Pay $59 once and Dictivo is yours. All v1.x point releases are included. v2.0 will be a
+                  paid upgrade at 50% off the then-current price for existing license holders.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">04</span>
+                <span class="faq-question">What happens when the 14-day trial ends?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  Dictivo keeps launching, but it pauses dictation until you enter a license. Your settings,
+                  history, and local dictionary stay intact — drop in a key and you pick up exactly where you
+                  left off.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">05</span>
+                <span class="faq-question">How many devices can I use one license on?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  Up to 3&nbsp;personal devices — for example, a work Mac, a home Mac, and a Windows laptop.
+                  Need to move a license between machines? Deactivate the old device from settings and the slot
+                  frees up immediately.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">06</span>
+                <span class="faq-question">Can I get a refund?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  Yes — within 30&nbsp;days of purchase, no questions asked. Email
+                  <a href="mailto:support@dictivo.app">support@dictivo.app</a> and we'll process it.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">07</span>
+                <span class="faq-question">Do you sell team or education licenses?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">
+                  Yes. Volume pricing starts at 5&nbsp;seats; education and non-profit pricing is available on
+                  request. Email <a href="mailto:support@dictivo.app">support@dictivo.app</a> with the number
+                  of seats and we'll send a quote.
+                </p>
+              </div>
+            </details>
+          </div>
         </div>
       </section>
     </main>
@@ -433,10 +540,11 @@
           <span class="brand-mark" aria-hidden="true">D</span>
           <span class="brand-name">Dictivo</span>
         </a>
-        <p class="footer-tagline">Private desktop dictation · macOS &amp; Windows</p>
+        <p class="footer-tagline">Private on-device dictation · macOS &amp; Windows</p>
         <p>v0.2.0 · public beta · 2026</p>
       </div>
       <div class="footer-links">
+        <a href="#trust">Trust</a>
         <a href="#pricing">Pricing</a>
         <a href="#downloads">Downloads</a>
         <a href="/changelog">Changelog</a>
