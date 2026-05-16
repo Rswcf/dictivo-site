@@ -61,6 +61,39 @@ SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
 The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads the three
 installer objects with long-lived cache headers.
 
+## Cloud Fast checkout
+
+The Cloud Fast upgrade page lives at `/cloud-fast`. Its primary CTA points to `/checkout/cloud-fast`, so the Lemon
+Squeezy checkout URL can be swapped without changing page markup.
+
+While Lemon Squeezy KYC is pending, `_redirects` sends `/checkout/cloud-fast` to the Lemon Squeezy Test mode
+checkout URL. When KYC clears and the product is live, replace it with the live checkout URL.
+
+Check the current route before deploy. The script accepts either the local pending placeholder or a valid Lemon
+Squeezy checkout URL:
+
+```sh
+node scripts/check-cloud-fast-checkout.mjs
+```
+
+After replacing the redirect with a Lemon Squeezy URL, verify the exact target:
+
+```sh
+EXPECT_CLOUD_FAST_CHECKOUT_URL=https://dictivo.lemonsqueezy.com/checkout/buy/... node scripts/check-cloud-fast-checkout.mjs
+```
+
+To replace the route safely:
+
+```sh
+node scripts/set-cloud-fast-checkout.mjs https://dictivo.lemonsqueezy.com/checkout/buy/...
+```
+
+To return to the KYC-pending placeholder:
+
+```sh
+node scripts/set-cloud-fast-checkout.mjs --pending
+```
+
 ## Manual release checklist
 
 1. Build the release artifacts from the desktop workflow.

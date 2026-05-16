@@ -1909,6 +1909,221 @@ main section[id] {
 }
 
 /* ---------------------------------------------------------- *
+ * Cloud Fast upgrade page                                    *
+ * ---------------------------------------------------------- */
+
+.cloud-hero {
+  min-height: 88vh;
+  padding-block: 124px 72px;
+}
+
+.cloud-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(420px, 0.95fr) minmax(420px, 1.05fr);
+  gap: clamp(36px, 5vw, 80px);
+  align-items: center;
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.cloud-hero-copy h1 {
+  max-width: 650px;
+  margin: 18px 0 0;
+  font-family: var(--display);
+  font-size: clamp(44px, 6vw, 76px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.cloud-eyebrow {
+  border-color: rgb(217 173 99 / 34%);
+  background: rgb(217 173 99 / 12%);
+  color: #f0c77e;
+}
+
+.cloud-screen-stack {
+  position: relative;
+  padding-top: 72px;
+}
+
+.cloud-mode-rail {
+  position: absolute;
+  top: 0;
+  left: clamp(12px, 5vw, 64px);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto 64px auto;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: var(--radius-pill);
+  background: rgb(8 14 13 / 82%);
+  padding: 9px 12px;
+  box-shadow: 0 18px 54px rgb(0 0 0 / 34%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cloud-mode-chip {
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cloud-mode-chip--local {
+  background: rgb(125 211 199 / 14%);
+  color: var(--accent);
+}
+
+.cloud-mode-chip--cloud {
+  background: rgb(217 173 99 / 18%);
+  color: #f0c77e;
+}
+
+.cloud-mode-switch {
+  position: relative;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 10%);
+}
+
+.cloud-mode-switch::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f0c77e;
+  box-shadow: 0 0 24px rgb(240 199 126 / 42%);
+}
+
+.cloud-product-frame {
+  transform: rotate(-1.2deg);
+  transform-origin: 50% 60%;
+}
+
+.cloud-brief,
+.cloud-comparison,
+.cloud-flow,
+.cloud-checkout {
+  padding-block: 86px;
+}
+
+.cloud-brief {
+  background: linear-gradient(180deg, rgb(255 255 255 / 4%), transparent);
+}
+
+.cloud-brief-grid,
+.cloud-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cloud-principle,
+.cloud-mode-card {
+  min-height: 330px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background: rgb(20 28 27 / 74%);
+  padding: clamp(28px, 4vw, 42px);
+}
+
+.cloud-principle h2,
+.cloud-mode-card h3,
+.cloud-checkout-panel h2 {
+  margin: 14px 0 0;
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.cloud-principle p,
+.cloud-checkout-panel p {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(17px, 2vw, 21px);
+}
+
+.cloud-principle--cloud,
+.cloud-mode-card--highlight {
+  border-color: rgb(217 173 99 / 34%);
+  background:
+    linear-gradient(135deg, rgb(217 173 99 / 14%), transparent 42%),
+    rgb(20 28 27 / 76%);
+}
+
+.cloud-mode-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cloud-mode-card .tier-features {
+  margin-top: 24px;
+}
+
+.cloud-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 38px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cloud-steps li {
+  min-height: 260px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background: rgb(10 17 16 / 66%);
+  padding: 26px;
+}
+
+.cloud-steps span {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 14px;
+  color: #f0c77e;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cloud-steps strong {
+  display: block;
+  margin-top: 26px;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.cloud-steps p {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.cloud-checkout-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(22px, 4vw, 48px);
+  align-items: center;
+  border: 1px solid rgb(217 173 99 / 34%);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgb(217 173 99 / 13%), transparent 52%),
+    rgb(20 28 27 / 86%);
+  padding: clamp(28px, 5vw, 54px);
+}
+
+/* ---------------------------------------------------------- *
  * Responsive                                                  *
  * ---------------------------------------------------------- */
 
@@ -1919,6 +2134,14 @@ main section[id] {
   }
 
   .hero-figure {
+    order: 2;
+  }
+
+  .cloud-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cloud-hero-figure {
     order: 2;
   }
 }
@@ -1964,7 +2187,11 @@ main section[id] {
   .channel-grid,
   .product-shell,
   .pricing-head,
-  .pricing-band {
+  .pricing-band,
+  .cloud-brief-grid,
+  .cloud-mode-grid,
+  .cloud-steps,
+  .cloud-checkout-panel {
     grid-template-columns: 1fr;
   }
 
@@ -1980,6 +2207,24 @@ main section[id] {
 
   .download-card {
     min-height: 290px;
+  }
+
+  .cloud-hero {
+    min-height: 0;
+    padding-block: 120px 60px;
+  }
+
+  .cloud-hero-copy h1 {
+    font-size: clamp(42px, 10vw, 58px);
+  }
+
+  .cloud-mode-rail {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .cloud-checkout-panel .button {
+    width: 100%;
   }
 }
 
@@ -2026,7 +2271,11 @@ main section[id] {
   .channel-section,
   .faq-section,
   .trust-section,
-  .product-section {
+  .product-section,
+  .cloud-brief,
+  .cloud-comparison,
+  .cloud-flow,
+  .cloud-checkout {
     padding-block: 56px;
   }
 
@@ -2071,8 +2320,27 @@ main section[id] {
   }
 
   .download-card,
-  .channel-grid article {
+  .channel-grid article,
+  .cloud-principle,
+  .cloud-mode-card,
+  .cloud-steps li {
     padding: 18px;
+  }
+
+  .cloud-mode-rail {
+    position: relative;
+    left: auto;
+    grid-template-columns: 1fr 52px 1fr;
+    width: 100%;
+    transform: none;
+  }
+
+  .cloud-screen-stack {
+    padding-top: 16px;
+  }
+
+  .cloud-product-frame {
+    transform: none;
   }
 
   .tab-list {

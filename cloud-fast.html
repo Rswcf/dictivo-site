@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dictivo Cloud Fast — fast cloud transcription when local latency gets in the way</title>
+    <meta
+      name="description"
+      content="Cloud Fast is Dictivo's optional $6.99/month cloud transcription mode. Local remains private by default; Cloud Fast uploads only the current recording when you explicitly choose speed."
+    />
+    <meta name="theme-color" content="#0a1110" />
+    <meta property="og:title" content="Dictivo Cloud Fast — optional fast cloud transcription" />
+    <meta
+      property="og:description"
+      content="Use Local when privacy matters most. Switch to Cloud Fast when you need faster transcription and accept that audio is uploaded to cloud providers."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dictivo.app/cloud-fast" />
+    <meta property="og:image" content="https://dictivo.app/assets/ui/04-dictation-transcript.png" />
+    <link rel="canonical" href="https://dictivo.app/cloud-fast" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/assets/ui/04-dictation-transcript.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="/assets/site.css" />
+    <script src="/assets/site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#checkout-pending">Skip to checkout status</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="Dictivo home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span class="brand-name">Dictivo</span>
+      </a>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="/">Local</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#activation">Activation</a>
+        <a href="/security">Security</a>
+      </nav>
+      <a class="header-download" href="#checkout-pending">Cloud Fast</a>
+    </header>
+
+    <main>
+      <section class="cloud-hero" aria-labelledby="cloud-fast-title">
+        <div class="cloud-hero-inner">
+          <div class="cloud-hero-copy">
+            <span class="eyebrow cloud-eyebrow">
+              <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
+              Optional mode · $6.99/month
+            </span>
+            <h1 id="cloud-fast-title">Cloud Fast when speed matters. Local when privacy matters most.</h1>
+            <p class="hero-lede">
+              Dictivo stays local by default. Cloud Fast is a separate subscription for the moments when local
+              hardware latency gets in the way and you explicitly choose faster cloud transcription.
+            </p>
+            <div class="hero-actions" aria-label="Cloud Fast upgrade actions">
+              <a class="button button-light" href="/checkout/cloud-fast" data-cloud-fast-checkout>
+                Upgrade to Cloud Fast
+              </a>
+              <a class="button button-outline" href="/#downloads">Download Dictivo</a>
+            </div>
+            <p class="hero-fineprint">
+              Cloud Fast uploads the current recording to Dictivo's cloud transcription route. Local mode does not.
+            </p>
+          </div>
+
+          <figure class="cloud-hero-figure" aria-label="Dictivo app showing transcription">
+            <div class="cloud-screen-stack">
+              <div class="cloud-mode-rail" aria-hidden="true">
+                <span class="cloud-mode-chip cloud-mode-chip--local">Local</span>
+                <span class="cloud-mode-switch"></span>
+                <span class="cloud-mode-chip cloud-mode-chip--cloud">Cloud Fast</span>
+              </div>
+              <div class="hero-frame cloud-product-frame">
+                <div class="hero-frame-bar">
+                  <span class="hero-frame-dots" aria-hidden="true"></span>
+                  <span class="hero-frame-badge">
+                    <span class="hero-frame-badge-dot" aria-hidden="true"></span>
+                    explicit upload
+                  </span>
+                </div>
+                <img
+                  src="/assets/ui/04-dictation-transcript.png"
+                  alt="Dictivo transcription screen with text visible"
+                  width="3840"
+                  height="2400"
+                  fetchpriority="high"
+                />
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cloud-brief reveal" id="privacy" aria-labelledby="privacy-title">
+        <div class="section-shell">
+          <div class="cloud-brief-grid">
+            <article class="cloud-principle cloud-principle--local">
+              <span class="section-kicker">
+                <span class="eyebrow-dot" aria-hidden="true"></span>
+                Default
+              </span>
+              <h2 id="privacy-title">Local still means local.</h2>
+              <p>
+                Local mode keeps audio, transcripts, history, dictionary entries, and snippets on this device.
+                It remains the primary Dictivo product and the default recommendation for sensitive work.
+              </p>
+            </article>
+            <article class="cloud-principle cloud-principle--cloud">
+              <span class="section-kicker">
+                <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
+                Optional
+              </span>
+              <h2>Cloud Fast is a deliberate switch.</h2>
+              <p>
+                Cloud Fast uploads only the recording you choose to transcribe in cloud mode. Dictivo routes it
+                through a Dictivo-owned Cloudflare proxy, then applies your local polish after text returns.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cloud-comparison reveal" aria-labelledby="compare-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Mode boundary
+            </span>
+            <h2 id="compare-title">Two modes, one obvious decision.</h2>
+            <p>
+              No provider picker, no model menu, no hidden automatic upload. Pick the privacy posture first.
+            </p>
+          </div>
+
+          <div class="cloud-mode-grid">
+            <article class="cloud-mode-card">
+              <div class="card-topline">
+                <span>Local</span>
+                <span>Default</span>
+              </div>
+              <h3>Best for private work</h3>
+              <ul class="tier-features">
+                <li>Audio stays on this device</li>
+                <li>Works without a Dictivo account</li>
+                <li>Speed depends on local hardware</li>
+                <li>$59 one-time for the full local product</li>
+              </ul>
+            </article>
+
+            <article class="cloud-mode-card cloud-mode-card--highlight" id="pricing">
+              <div class="card-topline">
+                <span>Cloud Fast</span>
+                <span>$6.99/mo</span>
+              </div>
+              <h3>Best when latency blocks flow</h3>
+              <ul class="tier-features">
+                <li>1,500 transcription minutes per month</li>
+                <li>Fast provider route selected automatically</li>
+                <li>Backup route if the primary provider fails</li>
+                <li>Can be purchased without the Local license</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cloud-flow reveal" id="activation" aria-labelledby="activation-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <span class="section-kicker">
+              <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
+              Activation flow
+            </span>
+            <h2 id="activation-title">Checkout stays in the browser. Activation lands back in Dictivo.</h2>
+          </div>
+
+          <ol class="cloud-steps">
+            <li>
+              <span>01</span>
+              <strong>Buy Cloud Fast</strong>
+              <p>Lemon Squeezy handles checkout, tax, receipt, subscription, and license email.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>Open Dictivo</strong>
+              <p>Paste the Cloud Fast license key in Settings, or use the activation link from the email.</p>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>Choose Cloud Fast</strong>
+              <p>Switch from Local to Cloud Fast only when you accept cloud upload for that recording.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="cloud-checkout reveal" id="checkout-pending" aria-labelledby="checkout-title">
+        <div class="section-shell">
+          <div class="cloud-checkout-panel">
+            <div>
+              <span class="section-kicker">
+                <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
+                Lemon Squeezy Test mode
+              </span>
+              <h2 id="checkout-title">Cloud Fast Test checkout is connected.</h2>
+              <p>
+                Seller verification is still pending, so Cloud Fast purchases are routed through Lemon Squeezy
+                Test mode for now. Switch this route to the live checkout URL after KYC clears.
+              </p>
+            </div>
+            <a
+              class="button button-light"
+              href="/checkout/cloud-fast"
+              data-cloud-fast-checkout-pending
+            >
+              Open Test checkout
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-meta">
+        <a class="brand footer-brand" href="/" aria-label="Dictivo home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span class="brand-name">Dictivo</span>
+        </a>
+        <p class="footer-tagline">Private local dictation · optional Cloud Fast</p>
+        <p>v0.2.0 · public beta · 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Local</a>
+        <a href="/cloud-fast">Cloud Fast</a>
+        <a href="/security">Security</a>
+        <a href="/changelog">Changelog</a>
+        <a href="mailto:support@dictivo.app">support@dictivo.app</a>
+      </div>
+    </footer>
+  </body>
+</html>
