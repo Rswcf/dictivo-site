@@ -6,13 +6,13 @@
     <title>Changelog · Dictivo</title>
     <meta
       name="description"
-      content="Release notes for Dictivo, the private on-device dictation app for macOS and Windows."
+      content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast."
     />
     <meta name="theme-color" content="#0a1110" />
     <meta property="og:title" content="Dictivo · Changelog" />
     <meta
       property="og:description"
-      content="Release notes for Dictivo, the private on-device dictation app for macOS and Windows."
+      content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dictivo.app/changelog" />
@@ -35,13 +35,13 @@
         <span class="brand-name">Dictivo</span>
       </a>
       <nav class="nav-links" aria-label="Site navigation">
-        <a href="/#trust">Trust</a>
+        <a href="/#privacy">Privacy</a>
         <a href="/#product">Product</a>
         <a href="/#pricing">Pricing</a>
+        <a href="/cloud-fast">Cloud Fast</a>
         <a href="/#downloads">Downloads</a>
-        <a href="/#faq">FAQ</a>
       </nav>
-      <a class="header-download" href="/#downloads">Start trial</a>
+      <a class="header-download" href="/#downloads">Download</a>
     </header>
 
     <main class="doc-page" id="changelog">
@@ -51,6 +51,23 @@
       </span>
       <h1>Changelog</h1>
       <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
+
+      <section class="doc-section" aria-labelledby="release-0-2-8">
+        <p class="release-line">
+          <span class="release-tag">v0.2.8</span>
+          <span class="release-status">Public beta</span>
+          <time class="release-date" datetime="2026-05-17">May&nbsp;17,&nbsp;2026</time>
+        </p>
+        <h2 id="release-0-2-8">Local first, <em>Cloud Fast</em> optional.</h2>
+        <ul>
+          <li>Added the Local / Cloud Fast mode switch to the desktop dictation surface.</li>
+          <li>Cloud Fast runs as a separate optional subscription and keeps provider routing hidden from users.</li>
+          <li>Settings now shows Local model controls only when Local mode is selected.</li>
+          <li>Text cleanup is shared across Local and Cloud Fast.</li>
+          <li>Floating companion behavior was updated for hotkey-driven recording and completion states.</li>
+          <li>Native desktop recording keeps hotkey dictation working when the main window is minimized.</li>
+        </ul>
+      </section>
 
       <section class="doc-section" aria-labelledby="release-0-2-0">
         <p class="release-line">
@@ -90,12 +107,13 @@
           <span class="brand-mark" aria-hidden="true">D</span>
           <span class="brand-name">Dictivo</span>
         </a>
-        <p class="footer-tagline">Private on-device dictation · macOS &amp; Windows</p>
-        <p>v0.2.0 · public beta · 2026</p>
+        <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
+        <p>v0.2.8 · public beta · 2026</p>
       </div>
       <div class="footer-links">
-        <a href="/#trust">Trust</a>
+        <a href="/#privacy">Privacy</a>
         <a href="/#pricing">Pricing</a>
+        <a href="/cloud-fast">Cloud Fast</a>
         <a href="/#downloads">Downloads</a>
         <a href="/changelog">Changelog</a>
         <a href="/security">Security</a>

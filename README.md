@@ -1,7 +1,13 @@
 # Dictivo site
 
 This repository is the static website for `dictivo.app`. It is intentionally separate from the Dictivo desktop app
-repository. It is designed for Cloudflare Pages with a separate Cloudflare R2 download host for installer binaries.
+repository. The current positioning is **private dictation first**: Local mode is the default product, while Cloud
+Fast is an optional speed mode for users who accept cloud transcription upload.
+
+Current public pricing copy:
+
+- Dictivo Local: `$49` one-time, 12 months of updates, optional `$24/year` renewal for future updates.
+- Dictivo Cloud Fast: `$6.99/month`, 1,500 minutes/month, standalone or alongside Local.
 
 ## Local preview
 
@@ -66,8 +72,7 @@ installer objects with long-lived cache headers.
 The Cloud Fast upgrade page lives at `/cloud-fast`. Its primary CTA points to `/checkout/cloud-fast`, so the Lemon
 Squeezy checkout URL can be swapped without changing page markup.
 
-While Lemon Squeezy KYC is pending, `_redirects` sends `/checkout/cloud-fast` to the Lemon Squeezy Test mode
-checkout URL. When KYC clears and the product is live, replace it with the live checkout URL.
+`_redirects` sends `/checkout/cloud-fast` to the configured Lemon Squeezy checkout URL.
 
 Check the current route before deploy. The script accepts either the local pending placeholder or a valid Lemon
 Squeezy checkout URL:
@@ -88,7 +93,7 @@ To replace the route safely:
 node scripts/set-cloud-fast-checkout.mjs https://dictivo.lemonsqueezy.com/checkout/buy/...
 ```
 
-To return to the KYC-pending placeholder:
+To return to the KYC-pending placeholder if needed:
 
 ```sh
 node scripts/set-cloud-fast-checkout.mjs --pending

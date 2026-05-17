@@ -1,13 +1,13 @@
 const demos = {
   scan: {
     label: "Hardware scan",
-    title: "Detect the right local engine.",
+    title: "Choose the right local model.",
     description:
-      "The first-run scan keeps setup grounded in the machine in front of you instead of pushing users into an account flow.",
+      "The first-run scan keeps Local mode grounded in the machine in front of you instead of pushing users into an account flow.",
     points: [
       "Hardware-aware local engine recommendation",
       "No sign-up gate before setup",
-      "Progress lives on the same dark product canvas",
+      "Fast, Medium, and Quality are calibrated to your hardware",
     ],
     image: "/assets/ui/01-onboarding-scan.png",
     alt: "Dictivo onboarding screen scanning local hardware",
@@ -15,13 +15,13 @@ const demos = {
   },
   tiers: {
     label: "Setup flow",
-    title: "Onboard without a sign-up.",
+    title: "Set up private dictation first.",
     description:
-      "Pick the right local engine and test your microphone before the first dictation — no account creation required.",
+      "Pick the right local model and test your microphone before the first dictation. Cloud Fast can be added later.",
     points: [
-      "Pick your engine size during onboarding",
+      "Start from Local mode by default",
       "Test the microphone before the first dictation",
-      "No account creation, no email collection",
+      "No cloud transcription requirement for setup",
     ],
     image: "/assets/ui/02-onboarding-tiers.png",
     alt: "Dictivo onboarding screen showing local engine tiers",
@@ -29,12 +29,12 @@ const demos = {
   },
   idle: {
     label: "Idle dictation surface",
-    title: "Start from a calm recording state.",
+    title: "Start from a calm Local state.",
     description:
-      "The main surface exposes shortcuts, language state, and engine status before a recording starts.",
+      "The main surface exposes shortcuts, language state, engine status, and the Local / Cloud Fast switch before recording starts.",
     points: [
       "Primary command and shortcuts are visible immediately",
-      "Language selector stays in the top-right control cluster",
+      "Local and Cloud Fast are explicit mode choices",
       "Engine readiness is shown in the lower status rail",
     ],
     image: "/assets/ui/03-dictation-idle.png",
@@ -42,14 +42,14 @@ const demos = {
     caption: "Dictation idle view, shortcuts and status visible.",
   },
   dictation: {
-    label: "Live dictation surface",
-    title: "Capture speech into clean text.",
+    label: "Dictation surface",
+    title: "Capture speech without leaving your work.",
     description:
-      "Dictivo keeps the active transcript close to the work surface and makes the recording state visible at a glance.",
+      "Local and Cloud Fast sit in one switch. Users choose the privacy posture before each recording.",
     points: [
-      "Live transcript pinned to your work surface",
-      "Visible recording state with audio meter",
-      "Switch Standard ↔ Accurate without losing audio",
+      "Global start / stop hotkey",
+      "Local mode keeps audio on this device",
+      "Cloud Fast is available only when the user chooses it",
     ],
     image: "/assets/ui/04-dictation-transcript.png",
     alt: "Dictivo dictation screen with an active transcript",
@@ -57,12 +57,12 @@ const demos = {
   },
   history: {
     label: "Session history",
-    title: "Every transcript stays searchable.",
+    title: "Transcripts stay searchable on your machine.",
     description:
-      "The history view keeps previous dictations reachable for review, reuse, and cleanup without leaving the desktop app.",
+      "The history view keeps previous dictations reachable for review, reuse, and cleanup without turning the site into a cloud archive.",
     points: [
       "Searchable archive of every transcript",
-      "Tagged with date, duration, engine used",
+      "Tagged with date, duration, and privacy mode",
       "Delete one entry or wipe everything in one click",
     ],
     image: "/assets/ui/05-history.png",
@@ -71,41 +71,41 @@ const demos = {
   },
   dictionary: {
     label: "Local dictionary",
-    title: "Keep reusable terms close.",
+    title: "Keep reusable terms local.",
     description:
-      "The dictionary pane makes product names, snippets, and corrections part of the local workflow.",
+      "Dictionary terms and snippets stay in the desktop app. Cloud Fast receives audio only; text cleanup happens after the transcript returns.",
     points: [
       "Personal terms stay on the same device",
-      "Entries sit beside history and settings in the product nav",
-      "Dense rows keep the surface scannable",
+      "Snippets are applied after transcription",
+      "No provider-facing custom vocabulary upload",
     ],
     image: "/assets/ui/06-dictionary.png",
     alt: "Dictivo dictionary screen with local terms",
     caption: "Dictionary view, local terms visible.",
   },
   engine: {
-    label: "Local engine settings",
-    title: "Inspect the model on disk.",
+    label: "Engine settings",
+    title: "Separate Local setup from Cloud Fast.",
     description:
-      "The engine settings make storage, model status, and download controls visible instead of hiding the local dependency.",
+      "Local model controls appear only when Local is selected. Cloud Fast shows subscription and privacy status instead.",
     points: [
-      "Local model path and version are surfaced",
-      "Download state is handled inside the app UI",
-      "Storage details sit next to privacy controls",
+      "Local model tiers are hidden in Cloud Fast mode",
+      "Text cleanup is shared across both modes",
+      "Cloud provider details stay out of the UI",
     ],
     image: "/assets/ui/07-settings-local-engine.png",
     alt: "Dictivo settings screen for the local speech engine",
     caption: "Settings view, local engine controls visible.",
   },
   privacy: {
-    label: "Local privacy controls",
-    title: "See exactly what's on disk.",
+    label: "Privacy controls",
+    title: "Make the upload boundary visible.",
     description:
-      "The settings surface exposes the local engine path, every file Dictivo writes, and every outbound request it makes.",
+      "Privacy copy distinguishes Local from Cloud Fast instead of claiming the whole product is always local.",
     points: [
-      "Inspect every file Dictivo writes to disk",
-      "One-click reveal of every outbound request",
-      "Export or destroy local data anytime",
+      "Local keeps audio on this device",
+      "Cloud Fast uploads selected recordings",
+      "Permissions remain inspectable inside settings",
     ],
     image: "/assets/ui/08-settings-privacy.png",
     alt: "Dictivo privacy settings screen",
@@ -113,13 +113,13 @@ const demos = {
   },
   companionSettings: {
     label: "Companion settings",
-    title: "Tune the floating companion.",
+    title: "Choose the companion style.",
     description:
-      "Companion settings expose the small overlay behavior without changing the core dictation surface.",
+      "The floating companion can stay a quiet status card or become an animated desktop pet.",
     points: [
-      "Overlay behavior is configured in settings",
-      "Controls reuse the same purple active state",
-      "Every setting remains on the product canvas",
+      "Normal status card for work-focused use",
+      "Animated pet mode for a more visible companion",
+      "Custom avatar support stays in settings",
     ],
     image: "/assets/ui/09-settings-companion.png",
     alt: "Dictivo companion settings screen",
@@ -133,7 +133,7 @@ const demos = {
     points: [
       "Global shortcut rows are grouped by task",
       "Keyboard tokens match the main dictation surface",
-      "Secondary copy explains permission boundaries",
+      "Start/stop and paste-last remain separate controls",
     ],
     image: "/assets/ui/10-settings-hotkeys.png",
     alt: "Dictivo hotkey settings screen",
@@ -141,13 +141,13 @@ const demos = {
   },
   companionLive: {
     label: "Floating companion",
-    title: "Keep status visible while you work.",
+    title: "Show status outside the main window.",
     description:
-      "The companion overlay keeps recording state and the current shortcut available outside the main window.",
+      "The companion appears during recording, processing, and completion so hotkey-driven dictation still feels visible.",
     points: [
-      "Small overlay mirrors the active dictation state",
+      "Small overlay mirrors recording and processing state",
       "Shortcut guidance remains visible during capture",
-      "Main transcript and companion render together",
+      "Completion state keeps the last transcript result visible",
     ],
     image: "/assets/ui/11-dictation-with-companion.png",
     alt: "Dictivo dictation screen with the companion overlay visible",

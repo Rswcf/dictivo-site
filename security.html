@@ -6,13 +6,13 @@
     <title>Security &amp; Privacy · Dictivo</title>
     <meta
       name="description"
-      content="How Dictivo keeps your voice on-device, what little crosses the network, and how installers and updates are signed — written for paying customers who want the receipts."
+      content="How Dictivo separates Local mode from optional Cloud Fast, what crosses the network, and how installers and updates are protected."
     />
     <meta name="theme-color" content="#0a1110" />
     <meta property="og:title" content="Dictivo · Security &amp; Privacy" />
     <meta
       property="og:description"
-      content="How Dictivo keeps your voice on-device, what crosses the network, and how installers and updates are signed."
+      content="How Dictivo separates Local privacy from optional Cloud Fast uploads, and how installers and updates are signed."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dictivo.app/security" />
@@ -35,13 +35,13 @@
         <span class="brand-name">Dictivo</span>
       </a>
       <nav class="nav-links" aria-label="Site navigation">
-        <a href="/#trust">Trust</a>
+        <a href="/#privacy">Privacy</a>
         <a href="/#product">Product</a>
         <a href="/#pricing">Pricing</a>
+        <a href="/cloud-fast">Cloud Fast</a>
         <a href="/#downloads">Downloads</a>
-        <a href="/#faq">FAQ</a>
       </nav>
-      <a class="header-download" href="/#downloads">Start trial</a>
+      <a class="header-download" href="/#downloads">Download</a>
     </header>
 
     <main class="doc-page" id="security">
@@ -51,22 +51,37 @@
       </span>
       <h1>Security &amp; <em>privacy</em>.</h1>
       <p class="doc-lede">
-        Dictivo is a paid desktop product. Trust is part of what you're paying for, so this page lists exactly what
-        runs locally, what crosses the network, and how installs and updates are protected.
+        Dictivo is local-first, not cloud-only. This page lists the boundary: what Local keeps on the device, what
+        Cloud Fast uploads when you choose it, and how installs and updates are protected.
       </p>
 
       <section class="doc-section" aria-labelledby="voice-data">
         <p class="doc-meta">Voice data</p>
-        <h2 id="voice-data">Your voice stays on your device.</h2>
+        <h2 id="voice-data">Local mode keeps voice data on your device.</h2>
         <p>
-          Dictation runs against an on-device speech engine. Dictivo processes the microphone audio locally,
-          transcribes it on the same machine, and never uploads it to a Dictivo server or a third-party transcription
-          service.
+          Local dictation runs against an on-device speech engine. Dictivo processes microphone audio locally,
+          transcribes it on the same machine, and keeps the transcript, history, dictionary, snippets, and local
+          model state in your profile directory.
         </p>
         <ul>
-          <li>No audio leaves the device during normal dictation.</li>
-          <li>Transcripts never upload for storage, analytics, or model training.</li>
+          <li>No audio leaves the device while you use Local mode.</li>
+          <li>Local transcripts never upload for storage, analytics, or model training.</li>
           <li>Local history and dictionary files live in your profile directory; you can delete them at any time.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" aria-labelledby="cloud-fast-boundary">
+        <p class="doc-meta">Cloud Fast boundary</p>
+        <h2 id="cloud-fast-boundary">Cloud Fast uploads only when you choose Cloud Fast.</h2>
+        <p>
+          Cloud Fast is an optional speed path. If you switch to Cloud Fast, Dictivo uploads the current recording to
+          cloud transcription providers for faster results. The app does not expose provider choice and does not
+          silently switch Local recordings into cloud transcription.
+        </p>
+        <ul>
+          <li><strong>Uploaded in Cloud Fast</strong> — the selected recording audio and request metadata needed to transcribe and meter the request.</li>
+          <li><strong>Kept local</strong> — dictionary terms, snippets, local history, and local settings.</li>
+          <li><strong>Returned to the app</strong> — transcript text, then local cleanup runs on the desktop.</li>
         </ul>
       </section>
 
@@ -74,17 +89,17 @@
         <p class="doc-meta">Network traffic</p>
         <h2 id="network-traffic">What actually crosses the network.</h2>
         <p>
-          A desktop product does need a small amount of network access. Dictivo limits that to the minimum a paid
-          install requires.
+          A desktop product does need network access for licensing, updates, downloads, and optional Cloud Fast.
+          Local mode does not need a dictation upload path.
         </p>
         <ul>
           <li><strong>Update checks</strong> — periodic requests to <code>downloads.dictivo.app</code> for the current release manifest.</li>
-          <li><strong>License activation</strong> — a one-time request binds your license to the device, then a signed entitlement renews on a long interval.</li>
-          <li><strong>Crash reports</strong> — only when you opt in. Off by default; toggleable from settings.</li>
+          <li><strong>License activation</strong> — Local and Cloud Fast licenses are activated and cached separately.</li>
+          <li><strong>Model downloads</strong> — Local model files download when you choose or re-run local setup.</li>
+          <li><strong>Cloud Fast transcription</strong> — only after you select Cloud Fast and record audio.</li>
         </ul>
         <p>
-          That is the complete list. Dictivo never calls third-party analytics, ad networks, or remote logging
-          services from inside the app.
+          Dictivo does not use third-party ads or client-side analytics in the desktop app.
         </p>
       </section>
 
@@ -121,7 +136,7 @@
           to acknowledge within two business days and to ship a fix or mitigation as quickly as the severity warrants.
         </p>
         <p>
-          Last reviewed <time datetime="2026-05-14">May&nbsp;14,&nbsp;2026</time>.
+          Last reviewed <time datetime="2026-05-17">May&nbsp;17,&nbsp;2026</time>.
         </p>
       </section>
     </main>
@@ -132,12 +147,13 @@
           <span class="brand-mark" aria-hidden="true">D</span>
           <span class="brand-name">Dictivo</span>
         </a>
-        <p class="footer-tagline">Private on-device dictation · macOS &amp; Windows</p>
-        <p>v0.2.0 · public beta · 2026</p>
+        <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
+        <p>v0.2.8 · public beta · 2026</p>
       </div>
       <div class="footer-links">
-        <a href="/#trust">Trust</a>
+        <a href="/#privacy">Privacy</a>
         <a href="/#pricing">Pricing</a>
+        <a href="/cloud-fast">Cloud Fast</a>
         <a href="/#downloads">Downloads</a>
         <a href="/changelog">Changelog</a>
         <a href="/security">Security</a>

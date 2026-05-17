@@ -3,9 +3,9 @@
   "domain": "https://dictivo.app",
   "downloadHost": "https://downloads.dictivo.app",
   "temporaryDownloadHost": "https://pub-38b998869ca848848aea7e4792b94a93.r2.dev",
-  "version": "0.2.0",
+  "version": "0.2.8",
   "channel": "stable",
-  "updatedAt": "2026-05-13",
+  "updatedAt": "2026-05-17",
   "artifacts": [
     {
       "platform": "macos",
