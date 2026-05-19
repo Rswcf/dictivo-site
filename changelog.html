@@ -52,6 +52,34 @@
       <h1>Changelog</h1>
       <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
 
+      <section class="doc-section" aria-labelledby="release-0-3-11">
+        <p class="release-line">
+          <span class="release-tag">v0.3.11</span>
+          <span class="release-status">Public beta</span>
+          <time class="release-date" datetime="2026-05-20">May&nbsp;20,&nbsp;2026</time>
+        </p>
+        <h2 id="release-0-3-11">Cloud Fast recovery for upgraded installs.</h2>
+        <ul>
+          <li>Fixed upgraded Windows installs that could stay stuck on Local setup after Cloud Fast was activated.</li>
+          <li>Manual Cloud Fast activation and cached Cloud Fast licenses now switch the desktop app into Cloud Fast when Local is not ready.</li>
+          <li>The floating companion now distinguishes Local setup blocks from Cloud Fast subscription blocks.</li>
+          <li>The macOS universal DMG is signed, notarized, and available through the latest release.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="windows-validation-pending" aria-labelledby="windows-validation-title">
+        <p class="release-line">
+          <span class="release-tag">Windows</span>
+          <span class="release-status" data-status="alpha">Validation pending</span>
+        </p>
+        <h2 id="windows-validation-title">Windows public downloads wait for signing and real-machine QA.</h2>
+        <ul>
+          <li>Windows x64 builds pass CI, installer smoke, and feature-parity contract tests.</li>
+          <li>Public EXE/MSI downloads are held until Authenticode signing and the deferred dirty-install pass are complete.</li>
+          <li>The current public download is the signed and notarized macOS universal DMG.</li>
+        </ul>
+      </section>
+
       <section class="doc-section" aria-labelledby="release-0-2-8">
         <p class="release-line">
           <span class="release-tag">v0.2.8</span>
@@ -108,7 +136,7 @@
           <span class="brand-name">Dictivo</span>
         </a>
         <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
-        <p>v0.2.8 · public beta · 2026</p>
+        <p>v0.3.11 · public beta · 2026</p>
       </div>
       <div class="footer-links">
         <a href="/#privacy">Privacy</a>

@@ -93,7 +93,7 @@
           Local mode does not need a dictation upload path.
         </p>
         <ul>
-          <li><strong>Update checks</strong> — periodic requests to <code>downloads.dictivo.app</code> for the current release manifest.</li>
+          <li><strong>Update checks</strong> — periodic requests to the GitHub Release updater manifest; update payloads are signature-verified.</li>
           <li><strong>License activation</strong> — Local and Cloud Fast licenses are activated and cached separately.</li>
           <li><strong>Model downloads</strong> — Local model files download when you choose or re-run local setup.</li>
           <li><strong>Cloud Fast transcription</strong> — only after you select Cloud Fast and record audio.</li>
@@ -105,15 +105,15 @@
 
       <section class="doc-section" aria-labelledby="installer-integrity">
         <p class="doc-meta">Installer integrity</p>
-        <h2 id="installer-integrity">Signed builds, single canonical host.</h2>
+        <h2 id="installer-integrity">Signed builds, verifiable downloads.</h2>
         <p>
-          Every release is signed before it leaves the build pipeline and serves from a single canonical host, so you
-          can verify the installer you got is the installer we shipped.
+          Every public macOS release is signed and notarized before it leaves the build pipeline, so you can verify
+          the installer you got is the installer we shipped.
         </p>
         <ul>
           <li>macOS DMG — signed with a Developer ID certificate and notarized by Apple.</li>
-          <li>Windows EXE and MSI — Authenticode-signed installers.</li>
-          <li>Canonical download host — <code>downloads.dictivo.app</code> (Cloudflare R2).</li>
+          <li>Windows EXE and MSI — validation builds are green; public download waits for signing and real-machine QA.</li>
+          <li>Canonical macOS download — GitHub Releases while R2 mirroring is prepared.</li>
           <li>Machine-readable manifest — <a href="/downloads.json"><code>/downloads.json</code></a> on dictivo.app.</li>
         </ul>
       </section>

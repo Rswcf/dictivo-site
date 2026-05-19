@@ -3,24 +3,26 @@
   "domain": "https://dictivo.app",
   "downloadHost": "https://downloads.dictivo.app",
   "temporaryDownloadHost": "https://pub-38b998869ca848848aea7e4792b94a93.r2.dev",
-  "version": "0.2.8",
+  "version": "0.3.11",
   "channel": "stable",
-  "updatedAt": "2026-05-17",
+  "updatedAt": "2026-05-20",
   "artifacts": [
     {
       "platform": "macos",
       "label": "macOS Universal DMG",
-      "fileName": "Dictivo-macOS-universal.dmg",
+      "fileName": "Dictivo_0.3.11_universal.dmg",
       "architecture": "Apple Silicon + Intel",
-      "url": "https://pub-38b998869ca848848aea7e4792b94a93.r2.dev/Dictivo-macOS-universal.dmg",
-      "redirect": "https://dictivo.app/download/mac"
+      "url": "https://github.com/Rswcf/Dictivo/releases/download/v0.3.11/Dictivo_0.3.11_universal.dmg",
+      "redirect": "https://dictivo.app/download/mac",
+      "sha256": "e99dd34291f0fcd3a49e26bc484a888f8462e758ce4de06ffdbf1b8f41c387af"
     },
     {
       "platform": "windows",
       "label": "Windows x64 EXE",
       "fileName": "Dictivo-Windows-x64.exe",
       "architecture": "x64",
-      "url": "https://pub-38b998869ca848848aea7e4792b94a93.r2.dev/Dictivo-Windows-x64.exe",
+      "status": "validation-pending",
+      "url": "https://dictivo.app/changelog#windows-validation-pending",
       "redirect": "https://dictivo.app/download/windows"
     },
     {
@@ -28,7 +30,8 @@
       "label": "Windows x64 MSI",
       "fileName": "Dictivo-Windows-x64.msi",
       "architecture": "x64",
-      "url": "https://pub-38b998869ca848848aea7e4792b94a93.r2.dev/Dictivo-Windows-x64.msi",
+      "status": "validation-pending",
+      "url": "https://dictivo.app/changelog#windows-validation-pending",
       "redirect": "https://dictivo.app/download/windows-msi"
     }
   ]

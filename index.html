@@ -54,7 +54,7 @@
           <div class="hero-copy">
             <span class="eyebrow">
               <span class="eyebrow-dot" aria-hidden="true"></span>
-              Local-first desktop dictation · v0.2.8
+              Local-first desktop dictation · v0.3.11
             </span>
             <h1 id="hero-title">Private dictation first. <em>Speed</em> when you choose it.</h1>
             <p class="hero-lede">
@@ -66,8 +66,8 @@
               <a class="button button-light download-link" href="/download/mac" data-platform="macos">
                 Download for Mac
               </a>
-              <a class="button button-outline download-link" href="/download/windows" data-platform="windows">
-                Download for Windows
+              <a class="button button-outline" href="/changelog#windows-validation-pending">
+                Windows validation pending
               </a>
               <a class="button button-outline" href="/cloud-fast">Cloud Fast details</a>
             </div>
@@ -242,7 +242,7 @@
 
             <figure class="screen-frame">
               <div class="screen-chrome" aria-hidden="true">
-                <span class="screen-chrome-title">Dictivo · v0.2.8</span>
+                <span class="screen-chrome-title">Dictivo · v0.3.11</span>
                 <span class="screen-chrome-state">Preview</span>
               </div>
               <img
@@ -406,10 +406,10 @@
               </div>
               <h3>Current-user EXE</h3>
               <p>Best for most Windows users because it installs without admin deployment steps.</p>
-              <a class="button button-dark download-link" href="/download/windows" data-platform="windows">
-                Download .exe
-              </a>
-              <p class="download-note">Release target: signed Windows installer.</p>
+              <span class="button button-secondary" aria-disabled="true">
+                Validation pending
+              </span>
+              <p class="download-note">Windows builds pass CI, but public download waits for signing and real-machine QA.</p>
             </article>
 
             <article class="download-card">
@@ -419,10 +419,10 @@
               </div>
               <h3>MSI package</h3>
               <p>For managed Windows deployment when current-user installers are not the right fit.</p>
-              <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">
-                Download .msi
-              </a>
-              <p class="download-note">Release target: managed Windows installer.</p>
+              <span class="button button-secondary" aria-disabled="true">
+                Validation pending
+              </span>
+              <p class="download-note">Managed installer download opens after Windows signing and parity pass.</p>
             </article>
           </div>
         </div>
@@ -444,11 +444,11 @@
             </div>
             <div class="signed-cell">
               <p class="signed-cell-label">Windows</p>
-              <p class="signed-cell-value">EXE for individuals, MSI for managed deployment.</p>
+              <p class="signed-cell-value">EXE and MSI validation builds are green; public Windows release waits for signing and real-machine QA.</p>
             </div>
             <div class="signed-cell">
               <p class="signed-cell-label">Download host</p>
-              <p class="signed-cell-value">Served from <code>downloads.dictivo.app</code>.</p>
+              <p class="signed-cell-value">macOS serves from GitHub Releases while R2 mirroring is prepared.</p>
             </div>
           </div>
           <p class="signed-footnote">
@@ -597,7 +597,7 @@
           <span class="brand-name">Dictivo</span>
         </a>
         <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
-        <p>v0.2.8 · public beta · 2026</p>
+        <p>v0.3.11 · public beta · 2026</p>
       </div>
       <div class="footer-links">
         <a href="#privacy">Privacy</a>

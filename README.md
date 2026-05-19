@@ -55,8 +55,9 @@ Expected objects:
 - `Dictivo-Windows-x64.exe`
 - `Dictivo-Windows-x64.msi`
 
-The public download buttons use `/download/*` routes in `_redirects`, which forward to the matching R2 objects. The
-machine-readable release manifest lives at `/downloads.json`.
+The public download buttons use `/download/*` routes in `_redirects`. The macOS route may point directly at the latest
+GitHub Release DMG while R2 mirroring is being prepared; Windows routes should stay validation-only until signing and
+real-machine QA are complete. The machine-readable release manifest lives at `/downloads.json`.
 
 After R2 is enabled in the Cloudflare dashboard, uploads can be run with:
 
@@ -135,10 +136,11 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 
 1. Build the release artifacts from the desktop workflow.
 2. Sign and notarize the macOS DMG.
-3. Sign the Windows EXE and MSI installers.
-4. Upload the three artifacts to the R2 bucket.
-5. Verify the public URLs under `https://downloads.dictivo.app/`.
-6. Deploy the repository root to Cloudflare Pages and attach `dictivo.app`.
+3. Update `changelog.html` with the tag that the app's `latest.json` links to.
+4. Point `/download/mac` at the signed/notarized DMG or upload the DMG to R2.
+5. Sign the Windows EXE and MSI installers before making Windows public.
+6. Verify the public URLs under `https://dictivo.app/download/*`.
+7. Deploy the repository root to Cloudflare Pages and attach `dictivo.app`.
 
 ## References
 
