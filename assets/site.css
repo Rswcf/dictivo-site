@@ -1279,6 +1279,39 @@ main section[id] {
   color: var(--accent);
 }
 
+.checkout-pending {
+  display: none;
+  margin-top: 18px;
+  padding: 18px 20px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 6%);
+}
+
+.checkout-pending:target {
+  display: block;
+}
+
+.checkout-pending strong {
+  display: block;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.checkout-pending p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.checkout-pending a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ---------------------------------------------------------- *
  * Downloads                                                   *
  * ---------------------------------------------------------- */

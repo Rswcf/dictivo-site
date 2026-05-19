@@ -67,6 +67,38 @@ SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
 The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads the three
 installer objects with long-lived cache headers.
 
+## Local checkout
+
+The Dictivo Local pricing CTA points to `/checkout/local`, so the Lemon Squeezy one-time checkout URL can be swapped
+without changing page markup.
+
+`_redirects` currently sends `/checkout/local` to a local pending anchor until the Lemon Squeezy Local checkout URL is
+ready.
+
+Check the current route before deploy:
+
+```sh
+node scripts/check-local-checkout.mjs
+```
+
+After replacing the redirect with a Lemon Squeezy URL, verify the exact target:
+
+```sh
+EXPECT_LOCAL_CHECKOUT_URL=https://dictivo.lemonsqueezy.com/checkout/buy/... node scripts/check-local-checkout.mjs
+```
+
+To replace the route safely:
+
+```sh
+node scripts/set-local-checkout.mjs https://dictivo.lemonsqueezy.com/checkout/buy/...
+```
+
+To return to the pending placeholder if needed:
+
+```sh
+node scripts/set-local-checkout.mjs --pending
+```
+
 ## Cloud Fast checkout
 
 The Cloud Fast upgrade page lives at `/cloud-fast`. Its primary CTA points to `/checkout/cloud-fast`, so the Lemon
