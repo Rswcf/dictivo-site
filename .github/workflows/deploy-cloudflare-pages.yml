@@ -39,6 +39,12 @@ jobs:
       - name: Check Local checkout route
         run: node scripts/check-local-checkout.mjs
 
+      - name: Check asset versioning
+        run: node scripts/check-asset-version.mjs
+
+      - name: Inject commit SHA into asset URLs
+        run: node scripts/inject-asset-version.mjs
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
