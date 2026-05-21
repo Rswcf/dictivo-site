@@ -21,8 +21,8 @@
       "label": "Windows x64 EXE",
       "fileName": "Dictivo-Windows-x64.exe",
       "architecture": "x64",
-      "status": "validation-pending",
-      "url": "https://dictivo.app/changelog#windows-validation-pending",
+      "status": "coming-later",
+      "url": "https://dictivo.app/#downloads",
       "redirect": "https://dictivo.app/download/windows"
     },
     {
@@ -30,8 +30,8 @@
       "label": "Windows x64 MSI",
       "fileName": "Dictivo-Windows-x64.msi",
       "architecture": "x64",
-      "status": "validation-pending",
-      "url": "https://dictivo.app/changelog#windows-validation-pending",
+      "status": "coming-later",
+      "url": "https://dictivo.app/#downloads",
       "redirect": "https://dictivo.app/download/windows-msi"
     }
   ]

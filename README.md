@@ -60,24 +60,25 @@ The public download buttons use `/download/*` routes in `_redirects`. The macOS 
 GitHub Release DMG while R2 mirroring is being prepared; Windows routes should stay validation-only until signing and
 real-machine QA are complete. The machine-readable release manifest lives at `/downloads.json`.
 
-After R2 is enabled in the Cloudflare dashboard, uploads can be run with:
+After R2 is enabled in the Cloudflare dashboard and selected as the public mirror, macOS uploads can be run with:
 
 ```sh
 SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
 ```
 
-The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads the three
-installer objects with long-lived cache headers.
+The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads installer
+objects with long-lived cache headers. Do not publish Windows objects until the Windows signing and real-machine QA
+gates are complete.
 
 ## Local checkout
 
 The Dictivo Local pricing CTA points to `/checkout/local`, so the Lemon Squeezy one-time checkout URL can be swapped
 without changing page markup.
 
-`_redirects` currently sends `/checkout/local` to a local pending anchor until the Lemon Squeezy Local checkout URL is
-ready.
+`_redirects` sends `/checkout/local` to the configured Lemon Squeezy Local checkout URL.
 
-Check the current route before deploy:
+Check the current route before deploy. The script accepts either the local pending placeholder or a valid Lemon
+Squeezy checkout URL:
 
 ```sh
 node scripts/check-local-checkout.mjs
@@ -127,7 +128,7 @@ To replace the route safely:
 node scripts/set-cloud-fast-checkout.mjs https://dictivo.lemonsqueezy.com/checkout/buy/...
 ```
 
-To return to the KYC-pending placeholder if needed:
+To return to the pending placeholder if needed:
 
 ```sh
 node scripts/set-cloud-fast-checkout.mjs --pending
