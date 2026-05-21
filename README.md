@@ -47,13 +47,14 @@ Required GitHub Actions secret:
 
 ## Download hosting
 
-Installer files should be uploaded to an R2 bucket with the public custom domain `downloads.dictivo.app`.
+The current public macOS download points at the signed and notarized GitHub Release DMG. R2 mirroring under
+`downloads.dictivo.app` is planned, but should not be treated as the canonical download host until it is enabled and
+verified.
 
 Expected objects:
 
 - `Dictivo-macOS-universal.dmg`
-- `Dictivo-Windows-x64.exe`
-- `Dictivo-Windows-x64.msi`
+- Windows installer objects are held back until the Windows public release is signed and real-machine QA is complete.
 
 The public download buttons use `/download/*` routes in `_redirects`. The macOS route may point directly at the latest
 GitHub Release DMG while R2 mirroring is being prepared; Windows routes should stay validation-only until signing and
@@ -102,8 +103,8 @@ node scripts/set-local-checkout.mjs --pending
 
 ## Cloud Fast checkout
 
-The Cloud Fast upgrade page lives at `/cloud-fast`. Its primary CTA points to `/checkout/cloud-fast`, so the Lemon
-Squeezy checkout URL can be swapped without changing page markup.
+Cloud Fast now lives inside the main homepage at `/#cloud-fast` and in the pricing section. Its CTAs point to
+`/checkout/cloud-fast`, so the Lemon Squeezy checkout URL can be swapped without changing page markup.
 
 `_redirects` sends `/checkout/cloud-fast` to the configured Lemon Squeezy checkout URL.
 

@@ -1,8 +1,10 @@
+/cloud-fast /#cloud-fast 302
+/cloud-fast.html /#cloud-fast 302
 /download/mac https://github.com/Rswcf/Dictivo/releases/download/v0.3.12/Dictivo_0.3.12_universal.dmg 302
-/download/windows https://dictivo.app/changelog#windows-validation-pending 302
-/download/windows-msi https://dictivo.app/changelog#windows-validation-pending 302
+/download/windows /#downloads 302
+/download/windows-msi /#downloads 302
 /downloads/Dictivo-macOS-universal.dmg https://github.com/Rswcf/Dictivo/releases/download/v0.3.12/Dictivo_0.3.12_universal.dmg 302
-/downloads/Dictivo-Windows-x64.exe https://dictivo.app/changelog#windows-validation-pending 302
-/downloads/Dictivo-Windows-x64.msi https://dictivo.app/changelog#windows-validation-pending 302
+/downloads/Dictivo-Windows-x64.exe /#downloads 302
+/downloads/Dictivo-Windows-x64.msi /#downloads 302
 /checkout/local https://dictivo.lemonsqueezy.com/checkout/buy/b5af045a-3fad-4023-8a01-d618dd58644b 302
 /checkout/cloud-fast https://dictivo.lemonsqueezy.com/checkout/buy/36ca20c8-026c-4692-bf42-c95d66b909d2 302

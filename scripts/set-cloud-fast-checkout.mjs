@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const redirectsPath = resolve(root, "_redirects");
 const route = "/checkout/cloud-fast";
-const pendingTarget = "/cloud-fast#checkout-pending";
+const pendingTarget = "/#cloud-fast";
 const lemonSqueezyHostSuffix = ".lemonsqueezy.com";
 
 const rawTarget = process.argv[2]?.trim();

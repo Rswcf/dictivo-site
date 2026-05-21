@@ -3,31 +3,31 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dictivo — private dictation first, Cloud Fast when speed matters</title>
+    <title>Dictivo — private Mac dictation with optional Cloud Fast</title>
     <meta
       name="description"
-      content="Dictivo is a local-first desktop dictation app. Local mode keeps audio on your device; optional Cloud Fast uploads selected recordings only when you choose faster cloud transcription."
+      content="Dictivo is a private-first desktop dictation app for Mac. Dictate locally by default, then switch to optional Cloud Fast when speed matters more than local-only processing."
     />
     <meta name="theme-color" content="#0a1110" />
     <meta property="og:title" content="Dictivo — private dictation first" />
     <meta
       property="og:description"
-      content="Local-first dictation for macOS and Windows, with optional Cloud Fast when speed matters more than local-only privacy."
+      content="Private-first dictation for Mac, with optional Cloud Fast when speed matters more than local-only processing."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dictivo.app/" />
-    <meta property="og:image" content="https://dictivo.app/assets/ui/04-dictation-transcript.png" />
+    <meta property="og:image" content="https://dictivo.app/assets/dictivo-demo-poster.jpg" />
     <link rel="canonical" href="https://dictivo.app/" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="/assets/ui/04-dictation-transcript.png" />
+    <link rel="preload" as="image" href="/assets/dictivo-demo-poster.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
     />
-    <link rel="stylesheet" href="/assets/site.css?v=20260520" />
-    <script src="/assets/site.js?v=20260520" defer></script>
+    <link rel="stylesheet" href="/assets/site.css?v=20260521f" />
+    <script src="/assets/site.js?v=20260521e" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#downloads">Skip to downloads</a>
@@ -39,76 +39,51 @@
       </a>
       <nav class="nav-links" aria-label="Site navigation">
         <a href="#privacy">Privacy</a>
-        <a href="#product">Product</a>
-        <a href="#modes">Modes</a>
+        <a href="#cloud-fast">Cloud Fast</a>
         <a href="#pricing">Pricing</a>
-        <a href="/cloud-fast">Cloud Fast</a>
+        <a href="#faq">FAQ</a>
         <a href="#downloads">Downloads</a>
       </nav>
       <a class="header-download" href="#downloads">Download</a>
     </header>
 
     <main>
-      <section class="hero hero--split" aria-labelledby="hero-title">
+      <section class="hero hero--film" id="demo" aria-labelledby="hero-title">
         <div class="hero-inner">
           <div class="hero-copy">
-            <span class="eyebrow">
-              <span class="eyebrow-dot" aria-hidden="true"></span>
-              Local-first desktop dictation · v0.3.12
-            </span>
-            <h1 id="hero-title">Private dictation first. <em>Speed</em> when you choose it.</h1>
-            <p class="hero-lede">
-              Dictivo starts with Local mode: your audio, transcripts, dictionary, snippets, and history stay on
-              your Mac or PC. When privacy is not the priority and latency is blocking your flow, switch to optional
-              Cloud Fast.
-            </p>
+            <div class="hero-statement">
+              <span class="eyebrow">
+                <span class="eyebrow-dot" aria-hidden="true"></span>
+                Private-first Mac dictation
+              </span>
+              <h1 id="hero-title">Private dictation first. <em>Speed when you choose.</em></h1>
+            </div>
+          </div>
+
+          <figure class="hero-film" id="demo-video">
+            <button class="hero-video-poster" type="button" aria-label="Play the Dictivo product demo">
+              <img src="/assets/dictivo-demo-poster.jpg" alt="" width="1920" height="1080" />
+              <span class="hero-video-play">Play 76-second demo</span>
+            </button>
+            <video
+              controls
+              preload="none"
+              poster="/assets/dictivo-demo-poster.jpg"
+              playsinline
+              hidden
+              data-src="/assets/dictivo-cinematic-demo.mp4"
+            ></video>
+          </figure>
+
+          <div class="hero-support">
             <div class="hero-actions" aria-label="Download Dictivo">
               <a class="button button-light download-link" href="/download/mac" data-platform="macos">
                 Download for Mac
               </a>
-              <a class="button button-outline" href="/changelog#windows-validation-pending">
-                Windows validation pending
-              </a>
-              <a class="button button-outline" href="/cloud-fast">Cloud Fast details</a>
+              <a class="button button-outline" href="#pricing">See pricing</a>
+              <p class="hero-note">Windows version coming later.</p>
             </div>
-            <p class="hero-fineprint">
-              Local is the default. Cloud Fast uploads only the recording you choose to transcribe in cloud mode.
-            </p>
-            <dl class="release-strip" aria-label="Product facts">
-              <div>
-                <dt>Default mode</dt>
-                <dd>Local</dd>
-              </div>
-              <div>
-                <dt>Fast option</dt>
-                <dd>Cloud Fast</dd>
-              </div>
-              <div>
-                <dt>Billing</dt>
-                <dd>$49 Local · $6.99/mo Cloud</dd>
-              </div>
-            </dl>
           </div>
-
-          <figure class="hero-figure" aria-hidden="true">
-            <div class="hero-frame">
-              <div class="hero-frame-bar">
-                <span class="hero-frame-dots" aria-hidden="true"></span>
-                <span class="hero-frame-badge">
-                  <span class="hero-frame-badge-dot" aria-hidden="true"></span>
-                  local by default
-                </span>
-              </div>
-              <img
-                src="/assets/ui/04-dictation-transcript.png"
-                alt=""
-                width="3840"
-                height="2400"
-                fetchpriority="high"
-              />
-            </div>
-            <figcaption>Dictivo desktop · Local / Cloud Fast mode switch</figcaption>
-          </figure>
         </div>
       </section>
 
@@ -117,11 +92,12 @@
           <div class="section-heading section-heading-left trust-heading">
             <span class="section-kicker">
               <span class="eyebrow-dot" aria-hidden="true"></span>
-              Privacy boundary
+              Privacy first
             </span>
-            <h2 id="privacy-title">Local is the product. Cloud Fast is the exception.</h2>
+            <h2 id="privacy-title">Your private words stay on your Mac.</h2>
             <p>
-              Dictivo should never make users guess where their voice went. The mode switch is the privacy boundary.
+              Dictivo starts local because most dictation should feel private by default. Cloud Fast is visible
+              because it changes where audio is processed.
             </p>
           </div>
 
@@ -133,16 +109,15 @@
                   Local mode
                 </span>
                 <p class="trust-column-lede">
-                  The default path for private work, sensitive notes, client calls, and anything you do not want
-                  leaving the machine.
+                  The everyday path for private work, sensitive notes, client conversations, and personal drafting.
                 </p>
               </header>
               <ul class="trust-list">
                 <li>Microphone audio stays on this device</li>
                 <li>Transcripts, history, dictionary, and snippets stay local</li>
-                <li>Local polish runs after transcription without a server round-trip</li>
-                <li>Hardware-aware model setup chooses Fast, Medium, or Quality</li>
-                <li>Works even when you do not want a cloud transcription account</li>
+                <li>Works without a cloud transcription account</li>
+                <li>Free tier includes the tiny local model</li>
+                <li>Larger local models are available when you upgrade</li>
               </ul>
             </article>
 
@@ -153,122 +128,35 @@
                   Cloud Fast mode
                 </span>
                 <p class="trust-column-lede">
-                  A separate speed path for recordings where fast turnaround matters more than keeping the audio
-                  strictly local.
+                  A separate speed path for low-sensitivity recordings where waiting would break your flow.
                 </p>
               </header>
               <ul class="trust-list trust-list--network">
-                <li>Uploads the current recording to cloud transcription providers</li>
-                <li>Requires an active Cloud Fast subscription or license</li>
-                <li>Provider choice stays automatic and hidden in the app</li>
-                <li>Dictionary and snippets remain on the desktop and apply after text returns</li>
+                <li>Only runs when you select Cloud Fast</li>
+                <li>Uploads the selected recording for faster transcription</li>
+                <li>Designed for low-sensitivity recordings</li>
+                <li>Local remains available whenever privacy matters more</li>
                 <li class="trust-list-closer">Use Local whenever the audio is sensitive.</li>
               </ul>
             </article>
           </div>
 
           <p class="trust-footnote">
-            Full network and data boundary on the <a href="/security">security page</a>.
+            Read the full privacy boundary on the <a href="/security">security page</a>.
           </p>
         </div>
       </section>
 
-      <section class="product-section reveal" id="product" aria-labelledby="product-title">
+      <section class="cloud-comparison reveal" id="cloud-fast" aria-labelledby="cloud-fast-title">
         <div class="section-shell">
           <div class="section-heading section-heading-left">
             <span class="section-kicker">
               <span class="eyebrow-dot" aria-hidden="true"></span>
-              Desktop workflow
+              Cloud Fast
             </span>
-            <h2 id="product-title">One hotkey, two transcription paths.</h2>
+            <h2 id="cloud-fast-title">Fast transcription without making cloud the default.</h2>
             <p>
-              The app stays quiet until you need it: press the hotkey, speak, press again, and get text back in
-              the active app. Local is the default; Cloud Fast is a deliberate switch.
-            </p>
-          </div>
-
-          <div class="product-shell">
-            <div class="product-controls">
-              <div class="tab-list" role="tablist" aria-label="Product preview">
-                <button class="tab-button is-active" type="button" role="tab" aria-selected="true" data-demo-target="dictation">
-                  Dictation
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="companionLive">
-                  Companion
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="idle">
-                  Idle
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="tiers">
-                  Setup
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="history">
-                  History
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="dictionary">
-                  Dictionary
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="engine">
-                  Engine
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="privacy">
-                  Privacy
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="hotkeys">
-                  Hotkeys
-                </button>
-                <button class="tab-button" type="button" role="tab" aria-selected="false" data-demo-target="companionSettings">
-                  Settings
-                </button>
-              </div>
-              <div class="demo-copy" aria-live="polite">
-                <p class="demo-label" id="demoLabel">Dictation surface</p>
-                <h3 id="demoTitle">Capture speech without leaving your work.</h3>
-                <p id="demoDescription">
-                  Local and Cloud Fast sit in one switch. Users choose the privacy posture before each recording.
-                </p>
-                <ul class="demo-points" id="demoPoints">
-                  <li>Global start / stop hotkey</li>
-                  <li>Local mode keeps audio on this device</li>
-                  <li>Cloud Fast is available only when the user chooses it</li>
-                </ul>
-              </div>
-              <p class="demo-mode-caption">
-                <span class="demo-mode-pill demo-mode-pill--filled">Local</span>
-                <span class="demo-mode-pill">Cloud Fast</span>
-                One visible mode switch. No provider picker, no hidden automatic upload.
-              </p>
-            </div>
-
-            <figure class="screen-frame">
-              <div class="screen-chrome" aria-hidden="true">
-                <span class="screen-chrome-title">Dictivo · v0.3.12</span>
-                <span class="screen-chrome-state">Preview</span>
-              </div>
-              <img
-                id="demoScreen"
-                src="/assets/ui/04-dictation-transcript.png"
-                alt="Dictivo dictation screen with an active transcript"
-                width="3840"
-                height="2400"
-                loading="lazy"
-              />
-              <figcaption id="demoCaption">Dictation view, transcript visible.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="cloud-comparison reveal" id="modes" aria-labelledby="modes-title">
-        <div class="section-shell">
-          <div class="section-heading section-heading-left">
-            <span class="section-kicker">
-              <span class="eyebrow-dot" aria-hidden="true"></span>
-              Mode decision
-            </span>
-            <h2 id="modes-title">Choose by privacy need, not by settings anxiety.</h2>
-            <p>
-              Dictivo exposes exactly two modes because more choices would make the product harder to trust.
+              Use Local when words are private. Use Cloud Fast for low-sensitivity work when waiting breaks your flow.
             </p>
           </div>
 
@@ -278,14 +166,13 @@
                 <span>Local</span>
                 <span>Default</span>
               </div>
-              <h3>For private work and daily drafting.</h3>
+              <h3>Private by default.</h3>
               <ul class="tier-features">
                 <li>Audio remains on your computer</li>
-                <li>Transcription speed depends on your hardware</li>
-                <li>Fast / Medium / Quality tiers are calibrated locally</li>
-                <li>Works with history, dictionary, snippets, and Text cleanup</li>
-                <li>Best for client work, personal notes, meetings, and offline use</li>
+                <li>Transcripts, history, dictionary, and snippets stay local</li>
+                <li>Best for client work, notes, meetings, and sensitive drafting</li>
               </ul>
+              <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">Download for Mac</a>
             </article>
 
             <article class="cloud-mode-card cloud-mode-card--highlight">
@@ -293,14 +180,13 @@
                 <span>Cloud Fast</span>
                 <span>Optional</span>
               </div>
-              <h3>For speed when the recording is not sensitive.</h3>
+              <h3>Speed when you choose it.</h3>
               <ul class="tier-features">
-                <li>$6.99/month, separate from the Local license</li>
-                <li>1,500 transcription minutes per month</li>
-                <li>Can be purchased standalone or alongside Local</li>
-                <li>Uploads selected recordings to cloud transcription providers</li>
-                <li>Provider routing is automatic and not exposed in the app</li>
+                <li>Uploads only recordings you send through Cloud Fast</li>
+                <li>Best when turnaround matters more than local-only processing</li>
+                <li>Use it for low-sensitivity work when speed matters</li>
               </ul>
+              <a class="button button-light" href="/checkout/cloud-fast" data-cloud-fast-checkout>Add Cloud Fast</a>
             </article>
           </div>
         </div>
@@ -309,63 +195,63 @@
       <section class="pricing-section reveal" id="pricing" aria-labelledby="pricing-title">
         <div class="section-shell">
           <div class="pricing-head">
-            <h2 id="pricing-title">Local is paid like software. Cloud Fast is priced like a service.</h2>
+            <h2 id="pricing-title">Start free. Upgrade only when the limits matter.</h2>
             <p>
-              Local dictation does not need a recurring cloud bill, so Dictivo Local is a one-time purchase. Cloud
-              Fast has real provider cost, so it is a separate optional subscription.
+              Try Dictivo with the tiny local model. Buy Local for stronger private dictation, or add Cloud Fast
+              when speed is worth the upload.
             </p>
           </div>
 
           <div class="pricing-band" role="list">
             <article class="tier" role="listitem" data-od-id="tier-free">
               <h3 class="tier-name">Free Local</h3>
-              <p class="tier-sub">For trying the workflow before buying the full local product.</p>
+              <p class="tier-sub">Try the private-first workflow on your Mac.</p>
               <p class="tier-price">Free<small>· local tier</small></p>
               <ul class="tier-features">
                 <li>Local dictation on your device</li>
-                <li>Basic on-device model path</li>
+                <li>Tiny on-device model included</li>
                 <li>Global hotkey and local history</li>
+                <li>Larger local models require Dictivo Local</li>
                 <li>No cloud upload in Local mode</li>
               </ul>
-              <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">Download Dictivo</a>
+              <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">Download for Mac</a>
             </article>
             <article class="tier tier--highlight" role="listitem" data-od-id="tier-local">
               <h3 class="tier-name">Dictivo Local</h3>
-              <p class="tier-sub">The main product: private dictation on macOS and Windows.</p>
+              <p class="tier-sub">Unlock larger local models and 12 months of updates.</p>
               <p class="tier-price">$49<small>· one-time</small></p>
               <ul class="tier-features">
                 <li>Perpetual license for the version you buy</li>
                 <li>12 months of updates and new local models</li>
-                <li>Use on 2 personal devices</li>
+                <li>Use on up to 5 personal devices</li>
                 <li>$24/year optional renewal for future updates</li>
                 <li>14-day refund, no questions</li>
               </ul>
-              <a class="button button-dark" href="/checkout/local" data-local-checkout>Buy Dictivo Local</a>
+              <a class="button button-dark" href="/checkout/local" data-local-checkout>Buy Local</a>
             </article>
             <article class="tier" role="listitem" data-od-id="tier-cloud-fast">
               <h3 class="tier-name">Cloud Fast</h3>
-              <p class="tier-sub">For users who want speed and accept cloud upload for selected recordings.</p>
+              <p class="tier-sub">Add fast cloud transcription for selected recordings.</p>
               <p class="tier-price">$6.99<small>· per month</small></p>
               <ul class="tier-features">
                 <li>1,500 transcription minutes per month</li>
                 <li>Standalone or alongside Dictivo Local</li>
-                <li>One simple Cloud Fast mode</li>
-                <li>Automatic backup route when needed</li>
-                <li>Local dictionary and cleanup still apply after text returns</li>
+                <li>One simple Cloud Fast switch in the app</li>
+                <li>Uploads only recordings you choose</li>
+                <li>Local dictionary and snippets still apply after text returns</li>
               </ul>
               <a class="button button-secondary" href="/checkout/cloud-fast" data-cloud-fast-checkout>Add Cloud Fast</a>
             </article>
           </div>
 
           <p class="pricing-footnote">
-            Local keeps audio on your device. Cloud Fast uploads selected recordings to cloud transcription providers
-            for faster results.
+            Mac is available now. Windows version coming later.
           </p>
           <div class="checkout-pending" id="checkout-local-pending" tabindex="-1" role="status">
-            <strong>Local checkout is being connected.</strong>
+            <strong>Local checkout opens in Lemon Squeezy.</strong>
             <p>
-              Dictivo Local is sold through Lemon Squeezy. If the checkout is not live yet, email
-              <a href="mailto:support@dictivo.app">support@dictivo.app</a> and we will send the Local license link.
+              Dictivo Local is sold through Lemon Squeezy. If the checkout page does not open, email
+              <a href="mailto:support@dictivo.app">support@dictivo.app</a> and we will help you recover the license path.
             </p>
           </div>
         </div>
@@ -376,12 +262,11 @@
           <div class="section-heading">
             <span class="section-kicker">
               <span class="eyebrow-dot" aria-hidden="true"></span>
-              Direct installers
+              Mac app
             </span>
-            <h2 id="downloads-title">Download the desktop app first.</h2>
+            <h2 id="downloads-title">Download Dictivo for Mac.</h2>
             <p>
-              Local dictation runs inside the Dictivo desktop app. Cloud Fast can be activated from the app after
-              purchase.
+              The Mac app includes Local mode, the free tiny model, Local license activation, and optional Cloud Fast.
             </p>
           </div>
 
@@ -391,102 +276,56 @@
                 <span>macOS</span>
                 <span class="recommendation" data-recommendation="macos">Recommended</span>
               </div>
-              <h3>Universal DMG</h3>
-              <p>For Apple Silicon and Intel Macs. Includes Local mode and Cloud Fast activation support.</p>
+              <h3>Mac installer</h3>
+              <p>For Apple Silicon and Intel Macs. Signed and notarized so macOS can verify the app before it opens.</p>
               <a class="button button-dark download-link" href="/download/mac" data-platform="macos">
-                Download .dmg
+                Download for Mac
               </a>
-              <p class="download-note">Release target: signed and notarized macOS package.</p>
+              <p class="download-note">Version 0.3.12 · public beta.</p>
             </article>
 
             <article class="download-card" data-platform-card="windows">
               <div class="card-topline">
                 <span>Windows</span>
-                <span class="recommendation" data-recommendation="windows">Recommended</span>
+                <span>Later</span>
               </div>
-              <h3>Current-user EXE</h3>
-              <p>Best for most Windows users because it installs without admin deployment steps.</p>
-              <span class="button button-secondary" aria-disabled="true">
-                Validation pending
-              </span>
-              <p class="download-note">Windows builds pass CI, but public download waits for signing and real-machine QA.</p>
-            </article>
-
-            <article class="download-card">
-              <div class="card-topline">
-                <span>Windows IT</span>
-                <span>Managed</span>
-              </div>
-              <h3>MSI package</h3>
-              <p>For managed Windows deployment when current-user installers are not the right fit.</p>
-              <span class="button button-secondary" aria-disabled="true">
-                Validation pending
-              </span>
-              <p class="download-note">Managed installer download opens after Windows signing and parity pass.</p>
+              <h3>Windows version</h3>
+              <p>Dictivo for Windows is planned, but the public launch starts with Mac.</p>
+              <span class="download-status">Coming later</span>
+              <p class="download-note">Join from Mac today; Windows will follow after release testing.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="signed-strip reveal" id="signed" aria-labelledby="signed-title">
-        <div class="section-shell">
-          <div class="signed-head">
-            <span class="section-kicker">
-              <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
-              Supply chain
-            </span>
-            <h2 id="signed-title">Official installers, one canonical host.</h2>
-          </div>
-          <div class="signed-grid">
-            <div class="signed-cell">
-              <p class="signed-cell-label">macOS</p>
-              <p class="signed-cell-value">Developer ID signed and notarized before public release.</p>
-            </div>
-            <div class="signed-cell">
-              <p class="signed-cell-label">Windows</p>
-              <p class="signed-cell-value">EXE and MSI validation builds are green; public Windows release waits for signing and real-machine QA.</p>
-            </div>
-            <div class="signed-cell">
-              <p class="signed-cell-label">Download host</p>
-              <p class="signed-cell-value">macOS serves from GitHub Releases while R2 mirroring is prepared.</p>
-            </div>
-          </div>
-          <p class="signed-footnote">
-            Verify hashes, data boundaries, and update flow on the
-            <a href="/security">security page</a>.
-          </p>
-        </div>
-      </section>
-
-      <section class="cloud-flow reveal" id="activation" aria-labelledby="activation-title">
+      <section class="cloud-flow reveal" id="workflow" aria-labelledby="workflow-title">
         <div class="section-shell">
           <div class="section-heading">
             <span class="section-kicker">
               <span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>
-              Activation
+              Workflow
             </span>
-            <h2 id="activation-title">Cloud Fast activation stays separate from Local.</h2>
+            <h2 id="workflow-title">The workflow is intentionally simple.</h2>
             <p>
-              The app treats the Local license and Cloud Fast license as different entitlements, so buying one
-              does not silently change the privacy behavior of the other.
+              Dictivo is designed for the moment you need words out of your head and into the app in front of you.
             </p>
           </div>
 
           <ol class="cloud-steps">
             <li>
               <span>01</span>
-              <strong>Download Dictivo</strong>
-              <p>Use Local mode by default and set up the model that fits your hardware.</p>
+              <strong>Download for Mac</strong>
+              <p>Start with the free local model. No cloud transcription account is required for Local mode.</p>
             </li>
             <li>
               <span>02</span>
-              <strong>Add Cloud Fast if needed</strong>
-              <p>Buy the optional subscription only if faster cloud transcription is worth the upload tradeoff.</p>
+              <strong>Press the hotkey</strong>
+              <p>Speak from any app, stop recording, and get the transcript back into your workflow.</p>
             </li>
             <li>
               <span>03</span>
-              <strong>Choose per recording</strong>
-              <p>Stay in Local for private audio. Switch to Cloud Fast only when speed matters more.</p>
+              <strong>Switch only when needed</strong>
+              <p>Stay Local for private work. Use Cloud Fast when the recording is not sensitive and speed matters.</p>
             </li>
           </ol>
         </div>
@@ -499,76 +338,72 @@
               <span class="eyebrow-dot" aria-hidden="true"></span>
               FAQ
             </span>
-            <h2 id="faq-title">Answers before you install.</h2>
-            <p>Current product behavior: Local first, Cloud Fast optional, no provider picker.</p>
+            <h2 id="faq-title">Questions before you download.</h2>
+            <p>Short answers about privacy, pricing, Cloud Fast, and availability.</p>
           </div>
 
           <div class="faq-grid">
             <details class="faq-item">
               <summary>
                 <span class="faq-index">01</span>
-                <span class="faq-question">Does my voice ever leave my computer?</span>
+                <span class="faq-question">Does my voice leave my Mac?</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
               <div class="faq-answer">
                 <p class="faq-answer-body">
-                  In Local mode, no. Audio and transcripts stay on your device. In Cloud Fast mode, yes: the current
-                  recording is uploaded to cloud transcription providers for faster results. The app makes this a
-                  visible mode choice.
+                  In Local mode, no. Audio and transcripts stay on your device. In Cloud Fast mode, the recording
+                  you choose is uploaded for faster transcription.
                 </p>
               </div>
             </details>
             <details class="faq-item">
               <summary>
                 <span class="faq-index">02</span>
-                <span class="faq-question">Why add Cloud Fast if Dictivo is privacy-first?</span>
+                <span class="faq-question">What is included for free?</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
               <div class="faq-answer">
                 <p class="faq-answer-body">
-                  Because not every recording has the same privacy requirement. Dictivo Local remains the default
-                  and the main product. Cloud Fast exists for low-sensitivity work where speed matters more than
-                  keeping the audio strictly local.
+                  The free tier includes Local mode with the tiny on-device model, global hotkey dictation, and
+                  local history. Larger local models require Dictivo Local.
                 </p>
               </div>
             </details>
             <details class="faq-item">
               <summary>
                 <span class="faq-index">03</span>
-                <span class="faq-question">Can I buy Cloud Fast without buying Local?</span>
+                <span class="faq-question">When should I buy Dictivo Local?</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
               <div class="faq-answer">
                 <p class="faq-answer-body">
-                  Yes. Cloud Fast is a separate $6.99/month subscription. You can use it standalone, or alongside a
-                  Dictivo Local license.
+                  Buy Local if you want stronger on-device models, 12 months of updates, and private dictation
+                  without relying on cloud transcription.
                 </p>
               </div>
             </details>
             <details class="faq-item">
               <summary>
                 <span class="faq-index">04</span>
-                <span class="faq-question">What does the Local license include?</span>
+                <span class="faq-question">What is Cloud Fast?</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
               <div class="faq-answer">
                 <p class="faq-answer-body">
-                  Dictivo Local is a $49 one-time purchase for the version you buy, plus 12 months of updates and
-                  new local models. After that, the version you have keeps working. Renewing for future updates is
-                  optional.
+                  Cloud Fast is the optional speed mode. It uploads selected recordings for faster transcription
+                  when local-only processing is not the priority.
                 </p>
               </div>
             </details>
             <details class="faq-item">
               <summary>
                 <span class="faq-index">05</span>
-                <span class="faq-question">Do I choose the Cloud Fast provider or model?</span>
+                <span class="faq-question">Is Windows available?</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
               <div class="faq-answer">
                 <p class="faq-answer-body">
-                  No. The app exposes one cloud mode: Cloud Fast. Routing and backup behavior are handled by
-                  Dictivo internally so the user does not need to manage model/provider choices.
+                  Not yet. Dictivo is available for Mac now, and the Windows version is coming later.
                 </p>
               </div>
             </details>
@@ -597,16 +432,15 @@
           <span class="brand-name">Dictivo</span>
         </a>
         <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
-        <p>v0.3.12 · public beta · 2026</p>
+        <p>Mac public beta · 2026</p>
       </div>
       <div class="footer-links">
         <a href="#privacy">Privacy</a>
+        <a href="#cloud-fast">Cloud Fast</a>
         <a href="#pricing">Pricing</a>
-        <a href="/cloud-fast">Cloud Fast</a>
         <a href="#downloads">Downloads</a>
         <a href="/changelog">Changelog</a>
         <a href="/security">Security</a>
-        <a href="/downloads.json">Release manifest</a>
         <a href="mailto:support@dictivo.app">support@dictivo.app</a>
       </div>
     </footer>

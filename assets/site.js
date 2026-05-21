@@ -45,11 +45,11 @@ const demos = {
     label: "Dictation surface",
     title: "Capture speech without leaving your work.",
     description:
-      "Local and Cloud Fast sit in one switch. Users choose the privacy posture before each recording.",
+      "Choose Local for private work or Cloud Fast for speed before you record.",
     points: [
-      "Global start / stop hotkey",
-      "Local mode keeps audio on this device",
-      "Cloud Fast is available only when the user chooses it",
+      "Start and stop from a global hotkey",
+      "Local mode keeps audio on your Mac",
+      "Cloud Fast runs only when you select it",
     ],
     image: "/assets/ui/04-dictation-transcript.png",
     alt: "Dictivo dictation screen with an active transcript",
@@ -59,7 +59,7 @@ const demos = {
     label: "Session history",
     title: "Transcripts stay searchable on your machine.",
     description:
-      "The history view keeps previous dictations reachable for review, reuse, and cleanup without turning the site into a cloud archive.",
+      "The history view keeps previous dictations reachable for review, reuse, and cleanup without turning Dictivo into a cloud archive.",
     points: [
       "Searchable archive of every transcript",
       "Tagged with date, duration, and privacy mode",
@@ -73,7 +73,7 @@ const demos = {
     label: "Local dictionary",
     title: "Keep reusable terms local.",
     description:
-      "Dictionary terms and snippets stay in the desktop app. Cloud Fast receives audio only; text cleanup happens after the transcript returns.",
+      "Names, terms, and snippets stay in the desktop app so your personal vocabulary remains local.",
     points: [
       "Personal terms stay on the same device",
       "Snippets are applied after transcription",
@@ -99,9 +99,9 @@ const demos = {
   },
   privacy: {
     label: "Privacy controls",
-    title: "Make the upload boundary visible.",
+    title: "Know when audio leaves your Mac.",
     description:
-      "Privacy copy distinguishes Local from Cloud Fast instead of claiming the whole product is always local.",
+      "Local and Cloud Fast are separate choices, so you know when a recording stays local and when it is uploaded for speed.",
     points: [
       "Local keeps audio on this device",
       "Cloud Fast uploads selected recordings",
@@ -195,6 +195,32 @@ function setDemo(name) {
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     setDemo(tab.dataset.demoTarget);
+  });
+});
+
+document.querySelectorAll(".hero-film").forEach((film) => {
+  const posterButton = film.querySelector(".hero-video-poster");
+  const video = film.querySelector("video[data-src]");
+
+  if (!posterButton || !video) {
+    return;
+  }
+
+  posterButton.addEventListener("click", () => {
+    if (!video.getAttribute("src")) {
+      video.setAttribute("src", video.dataset.src);
+    }
+
+    posterButton.hidden = true;
+    video.hidden = false;
+    video.focus({ preventScroll: true });
+
+    const playPromise = video.play();
+    if (playPromise?.catch) {
+      playPromise.catch(() => {
+        video.focus({ preventScroll: true });
+      });
+    }
   });
 });
 

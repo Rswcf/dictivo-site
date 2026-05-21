@@ -3,15 +3,15 @@ import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const redirects = readFileSync(resolve(root, "_redirects"), "utf8");
-const page = readFileSync(resolve(root, "cloud-fast.html"), "utf8");
+const page = readFileSync(resolve(root, "index.html"), "utf8");
 
 const route = "/checkout/cloud-fast";
-const pendingTarget = "/cloud-fast#checkout-pending";
+const pendingTarget = "/#cloud-fast";
 const expectedUrl = process.env.EXPECT_CLOUD_FAST_CHECKOUT_URL?.trim();
 const lemonSqueezyHostSuffix = ".lemonsqueezy.com";
 
 if (!page.includes('href="/checkout/cloud-fast" data-cloud-fast-checkout')) {
-  fail("Cloud Fast page CTA must point to /checkout/cloud-fast.");
+  fail("Homepage Cloud Fast CTA must point to /checkout/cloud-fast.");
 }
 
 const redirectLine = redirects

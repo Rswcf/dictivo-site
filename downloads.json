@@ -1,11 +1,11 @@
 {
   "product": "Dictivo",
   "domain": "https://dictivo.app",
-  "downloadHost": "https://downloads.dictivo.app",
-  "temporaryDownloadHost": "https://pub-38b998869ca848848aea7e4792b94a93.r2.dev",
+  "downloadHost": "https://github.com/Rswcf/Dictivo/releases",
+  "plannedMirrorHost": "https://downloads.dictivo.app",
   "version": "0.3.12",
   "channel": "stable",
-  "updatedAt": "2026-05-20",
+  "updatedAt": "2026-05-21",
   "artifacts": [
     {
       "platform": "macos",
