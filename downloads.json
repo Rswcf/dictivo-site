@@ -3,18 +3,18 @@
   "domain": "https://dictivo.app",
   "downloadHost": "https://github.com/Rswcf/Dictivo/releases",
   "plannedMirrorHost": "https://downloads.dictivo.app",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "channel": "stable",
-  "updatedAt": "2026-05-21",
+  "updatedAt": "2026-05-24",
   "artifacts": [
     {
       "platform": "macos",
       "label": "macOS Universal DMG",
-      "fileName": "Dictivo_0.3.12_universal.dmg",
+      "fileName": "Dictivo_0.3.13_universal.dmg",
       "architecture": "Apple Silicon + Intel",
-      "url": "https://github.com/Rswcf/Dictivo/releases/download/v0.3.12/Dictivo_0.3.12_universal.dmg",
+      "url": "https://github.com/Rswcf/Dictivo/releases/download/v0.3.13/Dictivo_0.3.13_universal.dmg",
       "redirect": "https://dictivo.app/download/mac",
-      "sha256": "5248738cf3f5815e6323a81f0d35be4d979936e43009d216bb5a49b587aaacd8"
+      "sha256": "9fb375f8174adf1b4547f43cf2834e6657513c6c7c945b69d118be05c00776e9"
     },
     {
       "platform": "windows",
