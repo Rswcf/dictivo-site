@@ -2,7 +2,26 @@ import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
-const htmlFiles = readdirSync(root).filter((name) => name.endsWith(".html"));
+const ignoredDirs = new Set([".git", ".wrangler", "node_modules", "tmp"]);
+
+function listHtmlFiles(dir = root, prefix = "") {
+  const files = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      if (!ignoredDirs.has(entry.name)) {
+        files.push(...listHtmlFiles(resolve(dir, entry.name), `${prefix}${entry.name}/`));
+      }
+      continue;
+    }
+
+    if (entry.isFile() && entry.name.endsWith(".html")) {
+      files.push(`${prefix}${entry.name}`);
+    }
+  }
+  return files;
+}
+
+const htmlFiles = listHtmlFiles();
 
 const BARE = /\/assets\/site\.(?:css|js)(?!\?v=)/g;
 

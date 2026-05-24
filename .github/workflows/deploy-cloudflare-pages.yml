@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  repository_dispatch:
+    types:
+      - desktop-release-published
+  schedule:
+    - cron: "17 3 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -32,6 +37,14 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: test -n "$CLOUDFLARE_API_TOKEN"
+
+      - name: Sync desktop release metadata and generate site
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DICTIVO_DESKTOP_RELEASE_TAG: ${{ github.event.client_payload.tag }}
+        run: |
+          node scripts/sync-latest-release.mjs
+          node scripts/generate-site.mjs
 
       - name: Check Cloud Fast checkout route
         run: node scripts/check-cloud-fast-checkout.mjs

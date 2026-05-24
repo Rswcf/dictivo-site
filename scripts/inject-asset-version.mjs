@@ -3,6 +3,24 @@ import { resolve } from "node:path";
 import { execSync } from "node:child_process";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
+const ignoredDirs = new Set([".git", ".wrangler", "node_modules", "tmp"]);
+
+function listHtmlFiles(dir = root, prefix = "") {
+  const files = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      if (!ignoredDirs.has(entry.name)) {
+        files.push(...listHtmlFiles(resolve(dir, entry.name), `${prefix}${entry.name}/`));
+      }
+      continue;
+    }
+
+    if (entry.isFile() && entry.name.endsWith(".html")) {
+      files.push(`${prefix}${entry.name}`);
+    }
+  }
+  return files;
+}
 
 function resolveVersionToken() {
   const fromEnv = process.env.GITHUB_SHA;
@@ -19,7 +37,7 @@ function resolveVersionToken() {
 const token = resolveVersionToken();
 const PATTERN = /(\/assets\/site\.(?:css|js))\?v=[A-Za-z0-9_.-]+/g;
 
-const htmlFiles = readdirSync(root).filter((name) => name.endsWith(".html"));
+const htmlFiles = listHtmlFiles();
 let totalReplacements = 0;
 const touched = [];
 

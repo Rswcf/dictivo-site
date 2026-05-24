@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dictivo - Dictado privado para Mac con Cloud Fast opcional</title>
+    <meta name="description" content="Dictivo es una app de dictado para Mac centrada en la privacidad. Dicta localmente y usa Cloud Fast cuando la velocidad importa." />
+    <meta name="theme-color" content="#0a1110" />
+    <meta property="og:title" content="Primero, dictado privado." />
+    <meta property="og:description" content="Dictivo es una app de dictado para Mac centrada en la privacidad. Dicta localmente y usa Cloud Fast cuando la velocidad importa." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dictivo.app/es/" />
+    <meta property="og:image" content="https://dictivo.app/assets/dictivo-demo-poster.jpg" />
+    <link rel="alternate" hreflang="en" href="https://dictivo.app/" />
+    <link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
+    <link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
+    <link rel="alternate" hreflang="es" href="https://dictivo.app/es/" />
+    <link rel="alternate" hreflang="it" href="https://dictivo.app/it/" />
+    <link rel="alternate" hreflang="nl" href="https://dictivo.app/nl/" />
+    <link rel="alternate" hreflang="pt" href="https://dictivo.app/pt/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://dictivo.app/zh/" />
+    <link rel="alternate" hreflang="ja" href="https://dictivo.app/ja/" />
+    <link rel="alternate" hreflang="ko" href="https://dictivo.app/ko/" />
+    <link rel="alternate" hreflang="x-default" href="https://dictivo.app/" />
+    <link rel="canonical" href="https://dictivo.app/es/" />
+    
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/assets/dictivo-demo-poster.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="/assets/site.css?v=local" />
+    <script src="/assets/site.js?v=local" defer></script>
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"Dictivo","url":"https://dictivo.app","email":"support@dictivo.app"},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Dictivo","applicationCategory":"BusinessApplication","operatingSystem":"macOS","url":"https://dictivo.app/es/","downloadUrl":"https://dictivo.app/download/mac","softwareVersion":"0.3.14","description":"Dictivo es una app de dictado para Mac centrada en la privacidad. Dicta localmente y usa Cloud Fast cuando la velocidad importa.","offers":[{"@type":"Offer","name":"Free Local","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Dictivo Local","price":"49","priceCurrency":"USD"},{"@type":"Offer","name":"Cloud Fast","price":"6.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"6.99","priceCurrency":"USD","billingDuration":"P1M"}}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Mi voz sale de mi Mac?","acceptedAnswer":{"@type":"Answer","text":"En modo Local, no. Audio y transcripciones quedan en el dispositivo. En Cloud Fast, la grabación elegida se sube para transcribir más rápido."}},{"@type":"Question","name":"¿Qué incluye gratis?","acceptedAnswer":{"@type":"Answer","text":"El plan gratuito incluye modo Local con el modelo pequeño, atajo global e historial local."}},{"@type":"Question","name":"¿Cuándo comprar Dictivo Local?","acceptedAnswer":{"@type":"Answer","text":"Compra Local si quieres modelos en el dispositivo más potentes, 12 meses de actualizaciones y dictado privado sin depender de la nube."}},{"@type":"Question","name":"¿Qué es Cloud Fast?","acceptedAnswer":{"@type":"Answer","text":"Cloud Fast es el modo rápido opcional. Sube grabaciones seleccionadas para transcripción más veloz."}},{"@type":"Question","name":"¿Elijo manualmente el idioma de dictado?","acceptedAnswer":{"@type":"Answer","text":"No. El idioma de dictado se detecta automáticamente. El menú de idioma solo cambia el sitio y la interfaz."}},{"@type":"Question","name":"¿Está disponible Windows?","acceptedAnswer":{"@type":"Answer","text":"Todavía no. Dictivo está disponible para Mac ahora y Windows llegará más adelante."}}]},{"@context":"https://schema.org","@type":"VideoObject","name":"Dictivo product demo","description":"Dictivo es una app de dictado para Mac centrada en la privacidad. Dicta localmente y usa Cloud Fast cuando la velocidad importa.","thumbnailUrl":"https://dictivo.app/assets/dictivo-demo-poster.jpg","uploadDate":"2026-05-21","duration":"PT1M16S","contentUrl":"https://dictivo.app/assets/dictivo-cinematic-demo.mp4","embedUrl":"https://dictivo.app/es/#demo-video"}]</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#downloads">Saltar a descargas</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/es/" aria-label="Dictivo home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span class="brand-name">Dictivo</span>
+      </a>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="/es/#privacy">Privacidad</a>
+        <a href="/es/#cloud-fast">Cloud Fast</a>
+        <a href="/es/#pricing">Precios</a>
+        <a href="/es/#faq">FAQ</a>
+        <a href="/es/#downloads">Descargas</a>
+      </nav>
+      <div class="header-actions">
+        <details class="language-menu">
+            <summary aria-label="Cambiar idioma de visualización del sitio">
+              <span class="language-label">Idioma</span>
+              <strong>Español</strong>
+            </summary>
+            <div class="language-menu-panel">
+              <a href="/" lang="en" hreflang="en">
+              <span>English</span>
+              <small>English</small>
+            </a>
+<a href="/de/" lang="de" hreflang="de">
+              <span>Deutsch</span>
+              <small>German</small>
+            </a>
+<a href="/fr/" lang="fr" hreflang="fr">
+              <span>Français</span>
+              <small>French</small>
+            </a>
+<a href="/es/" lang="es" hreflang="es" aria-current="page">
+              <span>Español</span>
+              <small>Spanish</small>
+            </a>
+<a href="/it/" lang="it" hreflang="it">
+              <span>Italiano</span>
+              <small>Italian</small>
+            </a>
+<a href="/nl/" lang="nl" hreflang="nl">
+              <span>Nederlands</span>
+              <small>Dutch</small>
+            </a>
+<a href="/pt/" lang="pt" hreflang="pt">
+              <span>Português</span>
+              <small>Portuguese</small>
+            </a>
+<a href="/zh/" lang="zh-Hans" hreflang="zh-Hans">
+              <span>简体中文</span>
+              <small>Chinese</small>
+            </a>
+<a href="/ja/" lang="ja" hreflang="ja">
+              <span>日本語</span>
+              <small>Japanese</small>
+            </a>
+<a href="/ko/" lang="ko" hreflang="ko">
+              <span>한국어</span>
+              <small>Korean</small>
+            </a>
+            </div>
+          </details>
+        <a class="header-download" href="/es/#downloads">Descargar</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero hero--film" id="demo" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="hero-statement">
+              <span class="eyebrow">
+                <span class="eyebrow-dot" aria-hidden="true"></span>
+                Dictado privado para Mac
+              </span>
+              <h1 id="hero-title">Primero, dictado privado. <em>Velocidad cuando la eliges.</em></h1>
+            </div>
+          </div>
+
+          <figure class="hero-film" id="demo-video">
+            <button class="hero-video-poster" type="button" aria-label="Ver demo de 76 segundos">
+              <img src="/assets/dictivo-demo-poster.jpg" alt="Video de Dictivo mostrando un flujo de dictado privado" width="1920" height="1080" />
+              <span class="hero-video-play">Ver demo de 76 segundos</span>
+            </button>
+            <video controls preload="none" poster="/assets/dictivo-demo-poster.jpg" playsinline hidden data-src="/assets/dictivo-cinematic-demo.mp4">
+              <track kind="captions" srclang="en" label="English" src="/assets/dictivo-cinematic-demo.en.vtt" default />
+            </video>
+          </figure>
+
+          <div class="hero-support">
+            <div class="hero-actions" aria-label="Download Dictivo">
+              <a class="button button-light download-link" href="/download/mac" data-platform="macos">Descargar para Mac</a>
+              <a class="button button-outline" href="#pricing">Ver precios</a>
+              <p class="hero-note">Versión para Windows más adelante.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-section reveal" id="privacy" aria-labelledby="privacy-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left trust-heading">
+            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>Privacidad primero</span>
+            <h2 id="privacy-title">Tus palabras privadas se quedan en tu Mac.</h2>
+            <p>Dictivo empieza en local porque el dictado debería ser privado por defecto. Cloud Fast es visible porque cambia dónde se procesa el audio.</p>
+          </div>
+
+          <div class="trust-grid">
+            <article class="trust-column trust-column--local">
+              <header class="trust-column-head">
+                <span class="trust-tag trust-tag--local"><span class="trust-dot trust-dot--local" aria-hidden="true"></span>Modo Local</span>
+                <p class="trust-column-lede">La ruta diaria para trabajo privado, notas sensibles, conversaciones con clientes y borradores personales.</p>
+              </header>
+              <ul class="trust-list">
+                <li>El audio del micrófono queda en este dispositivo</li>
+                <li>Transcripciones, historial, diccionario y fragmentos quedan locales</li>
+                <li>Funciona sin una cuenta de transcripción en la nube</li>
+                <li>El plan gratis incluye el modelo local pequeño</li>
+                <li>Los modelos locales más grandes están disponibles al actualizar</li>
+              </ul>
+            </article>
+
+            <article class="trust-column trust-column--network">
+              <header class="trust-column-head">
+                <span class="trust-tag trust-tag--network"><span class="trust-dot trust-dot--network" aria-hidden="true"></span>Modo Cloud Fast</span>
+                <p class="trust-column-lede">Una ruta rápida separada para grabaciones poco sensibles cuando esperar rompe tu flujo.</p>
+              </header>
+              <ul class="trust-list trust-list--network">
+                <li>Solo funciona cuando eliges Cloud Fast</li>
+                <li>Sube la grabación seleccionada para transcribir más rápido</li>
+                <li>Diseñado para grabaciones poco sensibles</li>
+                <li>Local sigue disponible cuando la privacidad importa más</li>
+                <li>Usa Local siempre que el audio sea sensible.</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="trust-footnote"><a href="/security">Lee el límite completo de privacidad en la página de seguridad.</a></p>
+        </div>
+      </section>
+
+      <section class="cloud-comparison reveal" id="cloud-fast" aria-labelledby="cloud-fast-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>Cloud Fast</span>
+            <h2 id="cloud-fast-title">Transcripción rápida sin hacer que la nube sea el valor predeterminado.</h2>
+            <p>Usa Local cuando las palabras son privadas. Usa Cloud Fast para trabajo poco sensible cuando esperar corta el ritmo.</p>
+          </div>
+
+          <div class="cloud-mode-grid">
+            <article class="cloud-mode-card">
+              <div class="card-topline"><span>Local</span><span>Por defecto</span></div>
+              <h3>Privado por defecto.</h3>
+              <ul class="tier-features">
+                <li>El audio permanece en tu ordenador</li>
+                <li>Transcripciones, historial, diccionario y fragmentos quedan locales</li>
+                <li>Ideal para clientes, notas, reuniones y borradores sensibles</li>
+              </ul>
+              <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">Descargar para Mac</a>
+            </article>
+
+            <article class="cloud-mode-card cloud-mode-card--highlight">
+              <div class="card-topline"><span>Cloud Fast</span><span>Opcional</span></div>
+              <h3>Velocidad cuando la eliges.</h3>
+              <ul class="tier-features">
+                <li>Solo sube las grabaciones que envías con Cloud Fast</li>
+                <li>Ideal cuando la rapidez pesa más que procesar solo en local</li>
+                <li>Para trabajo poco sensible cuando importa la velocidad</li>
+              </ul>
+              <a class="button button-light" href="/checkout/cloud-fast" data-cloud-fast-checkout>Añadir Cloud Fast</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing-section reveal" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-shell">
+          <div class="pricing-head">
+            <h2 id="pricing-title">Empieza gratis. Mejora solo cuando los límites importen.</h2>
+            <p>Prueba Dictivo con el modelo local pequeño. Compra Local para dictado privado más potente o añade Cloud Fast cuando la velocidad valga la subida.</p>
+          </div>
+
+          <div class="pricing-band" role="list">
+            <article class="tier" role="listitem" data-od-id="tier-free">
+              <h3 class="tier-name">Free Local</h3>
+              <p class="tier-sub">Prueba el flujo privado en tu Mac.</p>
+              <p class="tier-price">Gratis<small>nivel local</small></p>
+              <ul class="tier-features">
+                <li>Dictado local en tu dispositivo</li>
+                <li>Modelo pequeño en el dispositivo incluido</li>
+                <li>Atajo global e historial local</li>
+                <li>Los modelos locales grandes requieren Dictivo Local</li>
+                <li>Sin subida a la nube en modo Local</li>
+              </ul>
+              <a class="button button-secondary" href="/download/mac" data-platform="macos">Descargar para Mac</a>
+            </article>
+<article class="tier tier--highlight" role="listitem" data-od-id="tier-local">
+              <h3 class="tier-name">Dictivo Local</h3>
+              <p class="tier-sub">Desbloquea modelos locales grandes y 12 meses de actualizaciones.</p>
+              <p class="tier-price">$49<small>pago único</small></p>
+              <ul class="tier-features">
+                <li>Licencia perpetua para la versión comprada</li>
+                <li>12 meses de actualizaciones y nuevos modelos locales</li>
+                <li>Uso en hasta 5 dispositivos personales</li>
+                <li>Renovación opcional de $24/año</li>
+                <li>Reembolso de 14 días, sin preguntas</li>
+              </ul>
+              <a class="button button-dark" href="/checkout/local" data-local-checkout>Comprar Local</a>
+            </article>
+<article class="tier" role="listitem" data-od-id="tier-cloud-fast">
+              <h3 class="tier-name">Cloud Fast</h3>
+              <p class="tier-sub">Añade transcripción cloud rápida para grabaciones seleccionadas.</p>
+              <p class="tier-price">$6.99<small>al mes</small></p>
+              <ul class="tier-features">
+                <li>1.500 minutos de transcripción al mes</li>
+                <li>Solo o junto a Dictivo Local</li>
+                <li>Un simple interruptor Cloud Fast en la app</li>
+                <li>Sube solo las grabaciones que eliges</li>
+                <li>Diccionario local y fragmentos se aplican al volver el texto</li>
+              </ul>
+              <a class="button button-secondary" href="/checkout/cloud-fast" data-cloud-fast-checkout>Añadir Cloud Fast</a>
+            </article>
+          </div>
+
+          <p class="pricing-footnote">Mac está disponible ahora. Windows llegará más adelante.</p>
+          <div class="checkout-pending" id="checkout-local-pending" tabindex="-1" role="status">
+            <strong>El pago de Local se abre en Lemon Squeezy.</strong>
+            <p>Dictivo Local se vende mediante Lemon Squeezy. Si el pago no se abre, escribe a support@dictivo.app.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>App para Mac</span>
+            <h2 id="downloads-title">Descarga Dictivo para Mac.</h2>
+            <p>La app de Mac incluye modo Local, modelo pequeño gratis, activación Local, Cloud Fast opcional e idiomas de visualización.</p>
+          </div>
+
+          <div class="download-grid" aria-label="Instaladores disponibles">
+            <article class="download-card" data-platform-card="macos">
+              <div class="card-topline"><span>macOS</span><span class="recommendation" data-recommendation="macos">Recomendado</span></div>
+              <h3>Instalador para Mac</h3>
+              <p>Para Mac Apple Silicon e Intel. Firmado y notarizado para que macOS pueda verificar la app antes de abrirla.</p>
+              <a class="button button-dark download-link" href="/download/mac" data-platform="macos">Descargar para Mac</a>
+              <p class="download-note">Versión 0.3.14 - beta pública.</p>
+            </article>
+
+            <article class="download-card" data-platform-card="windows">
+              <div class="card-topline"><span>Windows</span><span>Después</span></div>
+              <h3>Versión para Windows</h3>
+              <p>Dictivo para Windows está previsto, pero el lanzamiento público empieza con Mac.</p>
+              <span class="download-status">Más adelante</span>
+              <p class="download-note">Empieza hoy en Mac; Windows seguirá después de las pruebas de lanzamiento.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="signed-strip reveal" aria-labelledby="signed-title">
+        <div class="section-shell">
+          <div class="signed-head">
+            <h2 id="signed-title">La versión pública para Mac está firmada, notarizada y versionada.</h2>
+          </div>
+          <div class="signed-grid">
+            <article class="signed-cell">
+              <p class="signed-cell-label">Versión actual</p>
+              <p class="signed-cell-value">Versión 0.3.14</p>
+            </article>
+<article class="signed-cell">
+              <p class="signed-cell-label">Instalador</p>
+              <p class="signed-cell-value">DMG universal de macOS</p>
+            </article>
+<article class="signed-cell">
+              <p class="signed-cell-label">Manifiesto</p>
+              <p class="signed-cell-value">downloads.json legible por máquina</p>
+            </article>
+          </div>
+          <p class="signed-footnote">Los metadatos de descarga se publican en /downloads.json y se sincronizan desde el último GitHub Release.</p>
+        </div>
+      </section>
+
+      <section class="channel-section language-section reveal" id="languages" aria-labelledby="languages-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>Idiomas</span>
+            <h2 id="languages-title">Idiomas de visualización para mercados con alta capacidad de pago.</h2>
+            <p>Dictivo puede mostrar el sitio y la interfaz en Deutsch, Français, Español, Italiano, Nederlands, Português, además de 简体中文, 日本語, 한국어. La detección del idioma dictado sigue siendo automática.</p>
+          </div>
+          <div class="locale-list" aria-label="Idioma">
+            <a href="/" lang="en" hreflang="en">English</a>
+                <a href="/de/" lang="de" hreflang="de">Deutsch</a>
+                <a href="/fr/" lang="fr" hreflang="fr">Français</a>
+                <a href="/es/" lang="es" hreflang="es">Español</a>
+                <a href="/it/" lang="it" hreflang="it">Italiano</a>
+                <a href="/nl/" lang="nl" hreflang="nl">Nederlands</a>
+                <a href="/pt/" lang="pt" hreflang="pt">Português</a>
+                <a href="/zh/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a>
+                <a href="/ja/" lang="ja" hreflang="ja">日本語</a>
+                <a href="/ko/" lang="ko" hreflang="ko">한국어</a>
+          </div>
+          <p class="language-note">El idioma de visualización cambia la interfaz. El idioma de dictado se detecta automáticamente.</p>
+        </div>
+      </section>
+
+      <section class="cloud-flow reveal" id="workflow" aria-labelledby="workflow-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>Flujo</span>
+            <h2 id="workflow-title">El flujo es deliberadamente simple.</h2>
+            <p>Dictivo está diseñado para pasar tus palabras a la app en la que trabajas justo cuando lo necesitas.</p>
+          </div>
+
+          <ol class="cloud-steps">
+            <li>
+              <span>01</span>
+              <strong>Descargar para Mac</strong>
+              <p>Empieza con el modelo local gratuito. No hace falta cuenta cloud para el modo Local.</p>
+            </li>
+<li>
+              <span>02</span>
+              <strong>Pulsa el atajo</strong>
+              <p>Habla desde cualquier app, detén la grabación y recupera la transcripción.</p>
+            </li>
+<li>
+              <span>03</span>
+              <strong>Cambia solo cuando haga falta</strong>
+              <p>Mantente en Local para lo privado. Usa Cloud Fast cuando la grabación no sea sensible y la velocidad importe.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="faq-section reveal" id="faq" aria-labelledby="faq-title">
+        <div class="section-shell faq-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>FAQ</span>
+            <h2 id="faq-title">Preguntas antes de descargar.</h2>
+            <p>Respuestas breves sobre privacidad, precios, Cloud Fast, idiomas y disponibilidad.</p>
+          </div>
+
+          <div class="faq-grid">
+            <details class="faq-item">
+              <summary>
+                <span class="faq-index">01</span>
+                <span class="faq-question">¿Mi voz sale de mi Mac?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">En modo Local, no. Audio y transcripciones quedan en el dispositivo. En Cloud Fast, la grabación elegida se sube para transcribir más rápido.</p>
+              </div>
+            </details>
+<details class="faq-item">
+              <summary>
+                <span class="faq-index">02</span>
+                <span class="faq-question">¿Qué incluye gratis?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">El plan gratuito incluye modo Local con el modelo pequeño, atajo global e historial local.</p>
+              </div>
+            </details>
+<details class="faq-item">
+              <summary>
+                <span class="faq-index">03</span>
+                <span class="faq-question">¿Cuándo comprar Dictivo Local?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">Compra Local si quieres modelos en el dispositivo más potentes, 12 meses de actualizaciones y dictado privado sin depender de la nube.</p>
+              </div>
+            </details>
+<details class="faq-item">
+              <summary>
+                <span class="faq-index">04</span>
+                <span class="faq-question">¿Qué es Cloud Fast?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">Cloud Fast es el modo rápido opcional. Sube grabaciones seleccionadas para transcripción más veloz.</p>
+              </div>
+            </details>
+<details class="faq-item">
+              <summary>
+                <span class="faq-index">05</span>
+                <span class="faq-question">¿Elijo manualmente el idioma de dictado?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">No. El idioma de dictado se detecta automáticamente. El menú de idioma solo cambia el sitio y la interfaz.</p>
+              </div>
+            </details>
+<details class="faq-item">
+              <summary>
+                <span class="faq-index">06</span>
+                <span class="faq-question">¿Está disponible Windows?</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">Todavía no. Dictivo está disponible para Mac ahora y Windows llegará más adelante.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-meta">
+        <a class="brand footer-brand" href="/es/" aria-label="Dictivo home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span class="brand-name">Dictivo</span>
+        </a>
+        <p class="footer-tagline">Primero dictado privado - Cloud Fast opcional</p>
+        <p>Beta pública para Mac - 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="/es/#privacy">Privacidad</a>
+        <a href="/es/#pricing">Precios</a>
+        <a href="/es/#cloud-fast">Cloud Fast</a>
+        <a href="/es/#downloads">Descargas</a>
+        <a href="/changelog">Changelog</a>
+        <a href="/security">Security</a>
+        <a href="mailto:support@dictivo.app">support@dictivo.app</a>
+      </div>
+    </footer>
+  </body>
+</html>

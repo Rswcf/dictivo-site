@@ -4,31 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Changelog · Dictivo</title>
-    <meta
-      name="description"
-      content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast."
-    />
+    <meta name="description" content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast." />
     <meta name="theme-color" content="#0a1110" />
     <meta property="og:title" content="Dictivo · Changelog" />
-    <meta
-      property="og:description"
-      content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast."
-    />
+    <meta property="og:description" content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dictivo.app/changelog" />
+    <meta property="og:image" content="https://dictivo.app/assets/dictivo-demo-poster.jpg" />
     <link rel="canonical" href="https://dictivo.app/changelog" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    />
-    <link rel="stylesheet" href="/assets/site.css?v=20260521f" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="/assets/site.css?v=local" />
   </head>
   <body>
     <a class="skip-link" href="#changelog">Skip to changelog</a>
-
     <header class="site-header" aria-label="Primary navigation">
       <a class="brand" href="/" aria-label="Dictivo home">
         <span class="brand-mark" aria-hidden="true">D</span>
@@ -41,23 +32,80 @@
         <a href="/#faq">FAQ</a>
         <a href="/#downloads">Downloads</a>
       </nav>
-      <a class="header-download" href="/#downloads">Download</a>
+      <div class="header-actions">
+        <details class="language-menu">
+            <summary aria-label="Change site display language">
+              <span class="language-label">Language</span>
+              <strong>English</strong>
+            </summary>
+            <div class="language-menu-panel">
+              <a href="/" lang="en" hreflang="en" aria-current="page">
+              <span>English</span>
+              <small>English</small>
+            </a>
+<a href="/de/" lang="de" hreflang="de">
+              <span>Deutsch</span>
+              <small>German</small>
+            </a>
+<a href="/fr/" lang="fr" hreflang="fr">
+              <span>Français</span>
+              <small>French</small>
+            </a>
+<a href="/es/" lang="es" hreflang="es">
+              <span>Español</span>
+              <small>Spanish</small>
+            </a>
+<a href="/it/" lang="it" hreflang="it">
+              <span>Italiano</span>
+              <small>Italian</small>
+            </a>
+<a href="/nl/" lang="nl" hreflang="nl">
+              <span>Nederlands</span>
+              <small>Dutch</small>
+            </a>
+<a href="/pt/" lang="pt" hreflang="pt">
+              <span>Português</span>
+              <small>Portuguese</small>
+            </a>
+<a href="/zh/" lang="zh-Hans" hreflang="zh-Hans">
+              <span>简体中文</span>
+              <small>Chinese</small>
+            </a>
+<a href="/ja/" lang="ja" hreflang="ja">
+              <span>日本語</span>
+              <small>Japanese</small>
+            </a>
+<a href="/ko/" lang="ko" hreflang="ko">
+              <span>한국어</span>
+              <small>Korean</small>
+            </a>
+            </div>
+          </details>
+        <a class="header-download" href="/#downloads">Mac download</a>
+      </div>
     </header>
-
     <main class="doc-page" id="changelog">
-      <span class="doc-eyebrow">
-        <span class="eyebrow-dot" aria-hidden="true"></span>
-        Release notes
-      </span>
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Release notes</span>
       <h1>Changelog</h1>
       <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
 
-      <section class="doc-section" id="0.3.13" aria-labelledby="release-0-3-13">
+      <section class="doc-section" id="0.3.14" aria-labelledby="release-0-3-14">
         <p class="release-line">
-          <span class="release-tag">v0.3.13</span>
+          <span class="release-tag">v0.3.14</span>
           <span class="release-status">Public beta</span>
-          <time class="release-date" datetime="2026-05-24">May&nbsp;24,&nbsp;2026</time>
+          <time class="release-date" datetime="2026-05-24">May 24, 2026</time>
         </p>
+        <h2 id="release-0-3-14">Language display, sound themes, and release sync.</h2>
+        <ul>
+          <li>Added display language options for German, French, Spanish, Italian, Dutch, Portuguese, Chinese, Japanese, and Korean while dictation language detection stays automatic.</li>
+          <li>Refined dictation sound themes so start, stop, success, and error cues stay short and less fatiguing.</li>
+          <li>Published the signed and notarized macOS universal DMG as the canonical public download.</li>
+          <li>Connected dictivo.app release metadata to the latest desktop GitHub Release.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="0.3.13" aria-labelledby="release-0-3-13">
+        <p class="release-line"><span class="release-tag">v0.3.13</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-05-24">May 24, 2026</time></p>
         <h2 id="release-0-3-13">Reliable dictation sounds and mute control.</h2>
         <ul>
           <li>Start and stop cues now use native macOS playback first, keeping dictation sounds reliable over long sessions.</li>
@@ -67,11 +115,7 @@
       </section>
 
       <section class="doc-section" id="0.3.12" aria-labelledby="release-0-3-12">
-        <p class="release-line">
-          <span class="release-tag">v0.3.12</span>
-          <span class="release-status">Public beta</span>
-          <time class="release-date" datetime="2026-05-20">May&nbsp;20,&nbsp;2026</time>
-        </p>
+        <p class="release-line"><span class="release-tag">v0.3.12</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-05-20">May 20, 2026</time></p>
         <h2 id="release-0-3-12">One-click install and restart for updates.</h2>
         <ul>
           <li>Check for updates now installs the downloaded update immediately and restarts Dictivo into the new version.</li>
@@ -82,11 +126,7 @@
       </section>
 
       <section class="doc-section" id="0.3.11" aria-labelledby="release-0-3-11">
-        <p class="release-line">
-          <span class="release-tag">v0.3.11</span>
-          <span class="release-status">Public beta</span>
-          <time class="release-date" datetime="2026-05-20">May&nbsp;20,&nbsp;2026</time>
-        </p>
+        <p class="release-line"><span class="release-tag">v0.3.11</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-05-20">May 20, 2026</time></p>
         <h2 id="release-0-3-11">Cloud Fast recovery for upgraded installs.</h2>
         <ul>
           <li>Fixed upgraded Windows installs that could stay stuck on Local setup after Cloud Fast was activated.</li>
@@ -97,10 +137,7 @@
       </section>
 
       <section class="doc-section" id="windows-validation-pending" aria-labelledby="windows-validation-title">
-        <p class="release-line">
-          <span class="release-tag">Windows</span>
-          <span class="release-status" data-status="alpha">Validation pending</span>
-        </p>
+        <p class="release-line"><span class="release-tag">Windows</span><span class="release-status" data-status="alpha">Validation pending</span></p>
         <h2 id="windows-validation-title">Windows public downloads wait for signing and real-machine QA.</h2>
         <ul>
           <li>Windows x64 builds pass CI, installer smoke, and feature-parity contract tests.</li>
@@ -110,11 +147,7 @@
       </section>
 
       <section class="doc-section" aria-labelledby="release-0-2-8">
-        <p class="release-line">
-          <span class="release-tag">v0.2.8</span>
-          <span class="release-status">Public beta</span>
-          <time class="release-date" datetime="2026-05-17">May&nbsp;17,&nbsp;2026</time>
-        </p>
+        <p class="release-line"><span class="release-tag">v0.2.8</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-05-17">May 17, 2026</time></p>
         <h2 id="release-0-2-8">Local first, <em>Cloud Fast</em> optional.</h2>
         <ul>
           <li>Added the Local / Cloud Fast mode switch to the desktop dictation surface.</li>
@@ -127,11 +160,7 @@
       </section>
 
       <section class="doc-section" aria-labelledby="release-0-2-0">
-        <p class="release-line">
-          <span class="release-tag">v0.2.0</span>
-          <span class="release-status">Public beta</span>
-          <time class="release-date" datetime="2026-05-13">May&nbsp;13,&nbsp;2026</time>
-        </p>
+        <p class="release-line"><span class="release-tag">v0.2.0</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-05-13">May 13, 2026</time></p>
         <h2 id="release-0-2-0">Onboarding tiers &amp; <em>history</em>.</h2>
         <ul>
           <li>Onboarding matches the local engine tier to detected hardware on first launch.</li>
@@ -144,10 +173,7 @@
       </section>
 
       <section class="doc-section" aria-labelledby="release-0-1-0">
-        <p class="release-line">
-          <span class="release-tag">v0.1.0</span>
-          <span class="release-status" data-status="alpha">Private alpha</span>
-        </p>
+        <p class="release-line"><span class="release-tag">v0.1.0</span><span class="release-status" data-status="alpha">Private alpha</span></p>
         <h2 id="release-0-1-0">Initial dictation surface.</h2>
         <ul>
           <li>Local-first dictation engine running the on-device speech pipeline.</li>
@@ -157,15 +183,11 @@
         </ul>
       </section>
     </main>
-
     <footer class="site-footer">
       <div class="footer-meta">
-        <a class="brand footer-brand" href="/" aria-label="Dictivo home">
-          <span class="brand-mark" aria-hidden="true">D</span>
-          <span class="brand-name">Dictivo</span>
-        </a>
-        <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
-        <p>Mac public beta · 2026</p>
+        <a class="brand footer-brand" href="/" aria-label="Dictivo home"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-name">Dictivo</span></a>
+        <p class="footer-tagline">Private dictation first - optional Cloud Fast</p>
+        <p>Mac public beta - 2026</p>
       </div>
       <div class="footer-links">
         <a href="/#privacy">Privacy</a>

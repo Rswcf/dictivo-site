@@ -39,7 +39,16 @@ and desktop installers should be treated as release artifacts rather than websit
 ## GitHub deployment
 
 The `.github/workflows/deploy-cloudflare-pages.yml` workflow deploys the repository root to Cloudflare Pages whenever
-`main` is pushed.
+`main` is pushed. It also accepts a `desktop-release-published` `repository_dispatch` event from the desktop app repo
+and runs daily as a fallback. Every deploy runs:
+
+```sh
+node scripts/sync-latest-release.mjs
+node scripts/generate-site.mjs
+```
+
+That keeps the homepage, localized pages, `downloads.json`, `_redirects`, `sitemap.xml`, and changelog aligned with
+the latest stable GitHub Release in `Rswcf/Dictivo`.
 
 Required GitHub Actions secret:
 
@@ -138,8 +147,8 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 
 1. Build the release artifacts from the desktop workflow.
 2. Sign and notarize the macOS DMG.
-3. Update `changelog.html` with the tag that the app's `latest.json` links to.
-4. Point `/download/mac` at the signed/notarized DMG or upload the DMG to R2.
+3. Push the desktop tag. The desktop workflow triggers the site deploy when `DICTIVO_SITE_DISPATCH_TOKEN` is configured.
+4. If the dispatch token is missing, run the site deploy workflow manually or wait for the scheduled sync.
 5. Sign the Windows EXE and MSI installers before making Windows public.
 6. Verify the public URLs under `https://dictivo.app/download/*`.
 7. Deploy the repository root to Cloudflare Pages and attach `dictivo.app`.
