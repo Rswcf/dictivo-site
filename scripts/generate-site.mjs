@@ -32,6 +32,12 @@ function comparePath(slug = "") {
   return slug ? `/compare/${slug}` : "/compare";
 }
 
+function localizedComparePath(code, slug = "") {
+  if (code === "en") return comparePath(slug);
+  const locale = localeByCode(code);
+  return `${locale.path}compare${slug ? `/${slug}` : ""}`;
+}
+
 function localePath(code, fragment = "") {
   const locale = localeByCode(code);
   return `${locale.path}${fragment}`;
@@ -39,6 +45,1392 @@ function localePath(code, fragment = "") {
 
 function localeUrl(code) {
   return absoluteUrl(localeByCode(code).path);
+}
+
+function localizedCompareUrl(code, slug = "") {
+  return absoluteUrl(localizedComparePath(code, slug));
+}
+
+function fillCompareTemplate(value, page) {
+  return value.replaceAll("{competitor}", page.competitor);
+}
+
+const COMPARE_I18N = {
+  en: {
+    skipComparison: "Skip to comparison",
+    skipComparisons: "Skip to comparisons",
+    languageAria: "Change comparison page language",
+    updatedLabel: "Last updated:",
+    hubEyebrow: "Comparison hub",
+    hubMetaTitle: COMPARE_HUB.metaTitle,
+    hubMetaDescription: COMPARE_HUB.metaDescription,
+    hubH1: COMPARE_HUB.h1,
+    hubLede: COMPARE_HUB.lede,
+    hubGridLabel: "Dictivo comparison pages",
+    cardTitle: "{competitor} alternative",
+    cardCta: "Compare Dictivo with {competitor}",
+    pageTitle: "{competitor} Alternative: Local Mac Dictation",
+    pageMeta:
+      "Compare Dictivo with {competitor} across privacy, pricing, platforms, and local Mac dictation workflow.",
+    pageH1: "{competitor} alternative for local Mac dictation",
+    eyebrow: "Compare alternatives",
+    intro: [
+      "This localized comparison explains where {competitor} can make sense, then shows where Dictivo's local-first Mac workflow fits better.",
+      "Use the facts table, source links, and decision notes to compare privacy, pricing, platform support, and the Local versus Cloud Fast boundary.",
+    ],
+    quickAria: "Quick comparison",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["Best for", "Private local Mac dictation", "{competitor}'s existing workflow"],
+      ["Dictivo model", "$49 once, Tiny free forever, 14-day full Local trial", "See {competitor} pricing and trial notes below"],
+      ["Privacy model", "Local mode by default", "See processing-location details below"],
+    ],
+    atAGlanceKicker: "At a glance",
+    atAGlanceTitle: "{competitor} vs Dictivo at a glance",
+    tableCaption: "{competitor} vs Dictivo at a glance",
+    questionHeader: "Question",
+    competitorHeader: "{competitor}",
+    rowLabels: {
+      "Processing location": "Processing location",
+      "Trains AI on your voice": "Trains AI on your voice",
+      "Works fully offline": "Works fully offline",
+      "Account required": "Account required",
+      "Pricing model": "Pricing model",
+      "Free tier / trial": "Free tier / trial",
+      Platforms: "Platforms",
+      "Code and data boundary": "Code and data boundary",
+    },
+    dictivoRows: {
+      "Processing location":
+        "On-device in Local mode with whisper.cpp. Optional Cloud Fast is a separate user-selected path.",
+      "Trains AI on your voice": "Never in Local mode.",
+      "Works fully offline": "Yes in Local mode after the local model is installed.",
+      "Account required": "No Dictivo account for Local dictation.",
+      "Pricing model": "$49 once, 12 months of updates, then optional $24/year update renewal.",
+      "Free tier / trial":
+        "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
+      Platforms: "macOS now. Windows is in validation.",
+      "Code and data boundary":
+        "Closed-source desktop app. Local mode has no transcription account, no client-side analytics, and customer-owned transcripts stay on the Mac.",
+    },
+    sections: [
+      {
+        kicker: "Context",
+        title: "Where {competitor} can make sense",
+        paragraphs: [
+          "{competitor} may be the right choice if its platform support, existing workflow, team features, or cloud model behavior match what you need today.",
+          "The comparison below does not treat every competitor as weak. It separates product fit from Dictivo's narrower promise: private Mac dictation that starts locally.",
+        ],
+        bullets: [
+          "Choose the competitor when you need its specific platform or workflow advantages.",
+          "Check the official source links because pricing, trial limits, and privacy controls can change.",
+          "Use Dictivo when the default path should be local Mac transcription with no Dictivo account.",
+        ],
+      },
+      {
+        kicker: "Dictivo difference",
+        title: "Where Dictivo is different",
+        paragraphs: [
+          "Dictivo is built around Local mode first. Speech recognition runs on the Mac, and transcripts, history, dictionary terms, snippets, and local settings stay on the machine.",
+          "Cloud Fast is intentionally separate. Use it only for recordings where speed matters more than local-only processing.",
+        ],
+        bullets: [
+          "Tiny stays free forever.",
+          "A 14-day full Local trial unlocks every local model.",
+          "Dictivo Local is $49 once, with optional update renewals after the first year.",
+          "The Local workflow does not require a Dictivo transcription account.",
+        ],
+      },
+      {
+        kicker: "Decision",
+        title: "Who should choose which",
+        cards: [
+          {
+            title: "Choose {competitor} if",
+            items: [
+              "You need its current platform coverage or product-specific workflow.",
+              "You are comfortable with the processing and account model described in its documentation.",
+              "Its subscription, lifetime price, or built-in status fits your budget better.",
+            ],
+          },
+          {
+            title: "Choose Dictivo if",
+            items: [
+              "You want local Mac dictation as the default path.",
+              "You prefer no Dictivo account for Local mode.",
+              "You want a lower one-time Local license after trying every local model for 14 days.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqKicker: "FAQ",
+    faqTitle: "Frequently asked questions",
+    faqs: [
+      [
+        "Is Dictivo an alternative to {competitor}?",
+        "Yes. Dictivo is an alternative when you want a local-first Mac dictation workflow with optional Cloud Fast instead of making cloud processing the default.",
+      ],
+      [
+        "Can I use Dictivo without a Dictivo account?",
+        "Yes. Local dictation does not require a Dictivo account. The optional Cloud Fast path is separate from Local mode.",
+      ],
+      [
+        "What can I try for free?",
+        "Tiny stays free forever, and new installs get a 14-day full Local trial with every local model unlocked plus 10 lifetime Cloud Fast minutes on that device.",
+      ],
+      [
+        "Why do the comparison pages link to sources?",
+        "Pricing, trial limits, platform support, and privacy controls change. The source section keeps the comparison tied to public product and support pages.",
+      ],
+      [
+        "Which should I choose?",
+        "Choose Dictivo if private Mac dictation and buy-once Local pricing matter most. Choose the competitor if its platform support, cloud features, or built-in workflow matters more.",
+      ],
+    ],
+    sourcesKicker: "Sources checked",
+    sourcesTitle: "Facts re-checked on {date}",
+    sourcesBody:
+      "Pricing, trial, platform, and privacy claims change. These comparison notes were checked against the official product pages and support documents below.",
+    ctaKicker: "Try Dictivo",
+    ctaTitle: "Try Dictivo free for 14 days.",
+    ctaBody:
+      "Every local model unlocked, no Dictivo account for Local mode. Buy Local for $49 once if it fits your workflow.",
+    ctaPrimary: "Try Dictivo free for 14 days",
+    ctaSecondary: "See pricing",
+    resourceAria: "Comparison next steps",
+    resourcePricing: "Compare Dictivo pricing and plans",
+    resourceSecurity: "Read where Dictivo data lives",
+    resourceRelated: "See how Dictivo compares to {competitor}",
+    compareFooter: "Compare alternatives",
+    footerAlternative: "{competitor} alternative",
+    teaserKicker: "Compare",
+    teaserTitle: "Choosing against another dictation app?",
+    teaserBody:
+      "Compare Dictivo with the tools people usually evaluate first: cloud dictation, local mode systems, file transcription apps, low-cost public-code tools, and Apple's built-in Dictation.",
+  },
+  de: {
+    skipComparison: "Zum Vergleich springen",
+    skipComparisons: "Zu den Vergleichen springen",
+    languageAria: "Sprache der Vergleichsseite ändern",
+    updatedLabel: "Zuletzt aktualisiert:",
+    hubEyebrow: "Vergleichs-Hub",
+    hubMetaTitle: "Dictivo-Vergleiche: Alternativen für lokales Mac-Diktat",
+    hubMetaDescription:
+      "Vergleichen Sie Dictivo mit Wispr Flow, Superwhisper, MacWhisper, VoiceInk und macOS Dictation nach Datenschutz, Preis und Workflow.",
+    hubH1: "Dictivo mit anderen Diktier-Tools vergleichen",
+    hubLede:
+      "Ein praktischer Einstieg für private Mac-Diktier-Workflows. Jede Seite zeigt, wo das andere Produkt gut passt und wo Dictivos lokaler Ansatz sinnvoller ist.",
+    hubGridLabel: "Dictivo-Vergleichsseiten",
+    cardTitle: "{competitor}-Alternative",
+    cardCta: "Dictivo mit {competitor} vergleichen",
+    pageTitle: "{competitor}-Alternative: lokales Mac-Diktat mit Dictivo",
+    pageMeta:
+      "Vergleichen Sie Dictivo mit {competitor}: Datenschutz, Preis, Plattformen und lokaler Mac-Diktier-Workflow.",
+    pageH1: "{competitor}-Alternative für lokales Mac-Diktat",
+    eyebrow: "Alternativen vergleichen",
+    intro: [
+      "Diese Vergleichsseite zeigt, wann {competitor} sinnvoll sein kann und wann Dictivos lokaler Mac-Workflow besser passt.",
+      "Nutzen Sie Faktentabelle, Quellen und Entscheidungshinweise, um Datenschutz, Preis, Plattformen und Local versus Cloud Fast zu prüfen.",
+    ],
+    quickAria: "Kurzvergleich",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["Am besten für", "Privates lokales Mac-Diktat", "Den bestehenden {competitor}-Workflow"],
+      ["Dictivo-Modell", "$49 einmalig, Tiny dauerhaft gratis, 14 Tage voller Local-Test", "Siehe Preis- und Testnotizen unten"],
+      ["Datenschutzmodell", "Local standardmäßig", "Siehe Details zum Verarbeitungsort unten"],
+    ],
+    atAGlanceKicker: "Auf einen Blick",
+    atAGlanceTitle: "{competitor} vs. Dictivo auf einen Blick",
+    tableCaption: "{competitor} vs. Dictivo auf einen Blick",
+    questionHeader: "Frage",
+    competitorHeader: "{competitor}",
+    rowLabels: {
+      "Processing location": "Verarbeitungsort",
+      "Trains AI on your voice": "Trainiert KI mit Ihrer Stimme",
+      "Works fully offline": "Vollständig offline nutzbar",
+      "Account required": "Konto erforderlich",
+      "Pricing model": "Preismodell",
+      "Free tier / trial": "Gratisversion / Testphase",
+      Platforms: "Plattformen",
+      "Code and data boundary": "Code- und Datengrenze",
+    },
+    dictivoRows: {
+      "Processing location": "Lokal auf dem Gerät im Local-Modus mit whisper.cpp. Cloud Fast ist ein separat gewählter Pfad.",
+      "Trains AI on your voice": "Nie im Local-Modus.",
+      "Works fully offline": "Ja, im Local-Modus nach Installation des lokalen Modells.",
+      "Account required": "Kein Dictivo-Konto für Local-Diktat.",
+      "Pricing model": "$49 einmalig, 12 Monate Updates, danach optionale Verlängerung für $24/Jahr.",
+      "Free tier / trial": "Tiny dauerhaft gratis plus 14 Tage voller Local-Test mit allen lokalen Modellen.",
+      Platforms: "macOS jetzt. Windows ist in Validierung.",
+      "Code and data boundary": "Closed-Source-Desktop-App. Local-Modus ohne Transkriptionskonto, clientseitige Analytics und mit Transkripten auf dem Mac.",
+    },
+    sections: [
+      {
+        kicker: "Kontext",
+        title: "Wann {competitor} sinnvoll sein kann",
+        paragraphs: [
+          "{competitor} kann passen, wenn Plattformabdeckung, bestehender Workflow, Teamfunktionen oder Cloud-Modellverhalten genau Ihren Bedarf treffen.",
+          "Dieser Vergleich macht Wettbewerber nicht künstlich klein. Er trennt Produkt-Fit von Dictivos engerem Versprechen: privates Mac-Diktat, das lokal startet.",
+        ],
+        bullets: [
+          "Wählen Sie den Wettbewerber, wenn Sie seine spezifischen Plattform- oder Workflow-Vorteile brauchen.",
+          "Prüfen Sie die offiziellen Quellen, weil Preise, Testlimits und Datenschutzkontrollen sich ändern können.",
+          "Nutzen Sie Dictivo, wenn der Standardpfad lokale Mac-Transkription ohne Dictivo-Konto sein soll.",
+        ],
+      },
+      {
+        kicker: "Dictivo-Unterschied",
+        title: "Worin Dictivo anders ist",
+        paragraphs: [
+          "Dictivo ist zuerst um Local mode gebaut. Spracherkennung läuft auf dem Mac; Transkripte, Verlauf, Wörterbuch, Textbausteine und lokale Einstellungen bleiben auf dem Gerät.",
+          "Cloud Fast ist bewusst getrennt. Nutzen Sie es nur für Aufnahmen, bei denen Geschwindigkeit wichtiger ist als reine lokale Verarbeitung.",
+        ],
+        bullets: [
+          "Tiny bleibt dauerhaft gratis.",
+          "Der 14-tägige volle Local-Test entsperrt jedes lokale Modell.",
+          "Dictivo Local kostet $49 einmalig, mit optionaler Update-Verlängerung nach dem ersten Jahr.",
+          "Der Local-Workflow erfordert kein Dictivo-Transkriptionskonto.",
+        ],
+      },
+      {
+        kicker: "Entscheidung",
+        title: "Wer welches Produkt wählen sollte",
+        cards: [
+          {
+            title: "{competitor} wählen, wenn",
+            items: [
+              "Sie die aktuelle Plattformabdeckung oder einen produktspezifischen Workflow brauchen.",
+              "Das in der Dokumentation beschriebene Verarbeitungs- und Kontomodell für Sie passt.",
+              "Abo, Lifetime-Preis oder eingebauter Systemstatus besser zu Ihrem Budget passen.",
+            ],
+          },
+          {
+            title: "Dictivo wählen, wenn",
+            items: [
+              "Lokales Mac-Diktat Ihr Standardpfad sein soll.",
+              "Sie für Local mode kein Dictivo-Konto möchten.",
+              "Sie nach 14 Tagen Test aller lokalen Modelle lieber eine niedrigere Einmalzahlung nutzen.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqKicker: "FAQ",
+    faqTitle: "Häufige Fragen",
+    faqs: [
+      ["Ist Dictivo eine Alternative zu {competitor}?", "Ja. Dictivo ist eine Alternative, wenn Sie einen lokalen Mac-Diktier-Workflow mit optionalem Cloud Fast suchen."],
+      ["Kann ich Dictivo ohne Dictivo-Konto nutzen?", "Ja. Local-Diktat benötigt kein Dictivo-Konto. Cloud Fast bleibt ein separater optionaler Pfad."],
+      ["Was kann ich kostenlos testen?", "Tiny bleibt dauerhaft gratis. Neue Installationen erhalten 14 Tage vollen Local-Test mit allen lokalen Modellen plus 10 lebenslange Cloud-Fast-Minuten auf diesem Gerät."],
+      ["Warum verlinken die Vergleichsseiten Quellen?", "Preise, Testlimits, Plattformen und Datenschutzkontrollen ändern sich. Die Quellen halten den Vergleich an öffentliche Produkt- und Supportseiten gebunden."],
+      ["Was sollte ich wählen?", "Wählen Sie Dictivo, wenn privates Mac-Diktat und Buy-once-Local-Preis am wichtigsten sind. Wählen Sie den Wettbewerber, wenn Plattformabdeckung oder Cloud-Funktionen wichtiger sind."],
+    ],
+    sourcesKicker: "Geprüfte Quellen",
+    sourcesTitle: "Fakten erneut geprüft am {date}",
+    sourcesBody:
+      "Preise, Testphasen, Plattformen und Datenschutzangaben ändern sich. Diese Notizen wurden gegen die folgenden offiziellen Produkt- und Supportseiten geprüft.",
+    ctaKicker: "Dictivo testen",
+    ctaTitle: "Dictivo 14 Tage kostenlos testen.",
+    ctaBody: "Alle lokalen Modelle entsperrt, kein Dictivo-Konto für Local mode. Dictivo Local kostet $49 einmalig, wenn es passt.",
+    ctaPrimary: "Dictivo 14 Tage testen",
+    ctaSecondary: "Preise ansehen",
+    resourceAria: "Nächste Vergleichsschritte",
+    resourcePricing: "Dictivo-Preise und Pläne vergleichen",
+    resourceSecurity: "Lesen, wo Dictivo-Daten bleiben",
+    resourceRelated: "Weitere Alternative: {competitor}",
+    compareFooter: "Alternativen vergleichen",
+    footerAlternative: "{competitor}-Alternative",
+    teaserKicker: "Vergleichen",
+    teaserTitle: "Vergleichen Sie gerade Diktier-Apps?",
+    teaserBody:
+      "Vergleichen Sie Dictivo mit Cloud-Diktat, lokalen Modus-Systemen, Datei-Transkription, günstigen öffentlichen Tools und Apples eingebautem Diktat.",
+  },
+  fr: {
+    skipComparison: "Aller au comparatif",
+    skipComparisons: "Aller aux comparatifs",
+    languageAria: "Changer la langue du comparatif",
+    updatedLabel: "Dernière mise à jour :",
+    hubEyebrow: "Hub de comparaison",
+    hubMetaTitle: "Comparatifs Dictivo : alternatives de dictée locale pour Mac",
+    hubMetaDescription:
+      "Comparez Dictivo avec Wispr Flow, Superwhisper, MacWhisper, VoiceInk et la dictée macOS selon la confidentialité, le prix et le flux de travail.",
+    hubH1: "Comparer Dictivo avec d'autres outils de dictée",
+    hubLede:
+      "Un hub pratique pour choisir une dictée privée sur Mac. Chaque comparatif commence par les points forts du produit concurrent, puis situe Dictivo.",
+    hubGridLabel: "Pages de comparaison Dictivo",
+    cardTitle: "Alternative à {competitor}",
+    cardCta: "Comparer Dictivo avec {competitor}",
+    pageTitle: "Alternative à {competitor} : dictée locale Mac avec Dictivo",
+    pageMeta:
+      "Comparez Dictivo avec {competitor} : confidentialité, prix, plateformes et flux de dictée locale sur Mac.",
+    pageH1: "Alternative à {competitor} pour la dictée locale sur Mac",
+    eyebrow: "Comparer les alternatives",
+    intro: [
+      "Cette page explique quand {competitor} peut convenir, puis où le flux local de Dictivo sur Mac devient plus pertinent.",
+      "Consultez le tableau, les sources et les notes de décision pour comparer confidentialité, prix, plateformes et frontière entre Local et Cloud Fast.",
+    ],
+    quickAria: "Comparatif rapide",
+    quickPrefix: "{competitor} :",
+    quickTake: [
+      ["Idéal pour", "Dictée Mac locale et privée", "Le flux existant de {competitor}"],
+      ["Modèle Dictivo", "$49 une fois, Tiny gratuit à vie, essai Local complet 14 jours", "Voir les notes de prix et d'essai ci-dessous"],
+      ["Modèle de confidentialité", "Local par défaut", "Voir les détails de traitement ci-dessous"],
+    ],
+    atAGlanceKicker: "En bref",
+    atAGlanceTitle: "{competitor} vs Dictivo en bref",
+    tableCaption: "{competitor} vs Dictivo en bref",
+    questionHeader: "Question",
+    competitorHeader: "{competitor}",
+    rowLabels: {
+      "Processing location": "Lieu de traitement",
+      "Trains AI on your voice": "Entraîne l'IA avec votre voix",
+      "Works fully offline": "Fonctionne entièrement hors ligne",
+      "Account required": "Compte requis",
+      "Pricing model": "Modèle tarifaire",
+      "Free tier / trial": "Offre gratuite / essai",
+      Platforms: "Plateformes",
+      "Code and data boundary": "Limite code et données",
+    },
+    dictivoRows: {
+      "Processing location": "Sur l'appareil en mode Local avec whisper.cpp. Cloud Fast est un chemin séparé choisi par l'utilisateur.",
+      "Trains AI on your voice": "Jamais en mode Local.",
+      "Works fully offline": "Oui en mode Local après installation du modèle.",
+      "Account required": "Pas de compte Dictivo pour la dictée locale.",
+      "Pricing model": "$49 une fois, 12 mois de mises à jour, puis renouvellement optionnel à $24/an.",
+      "Free tier / trial": "Tiny gratuit à vie plus essai Local complet de 14 jours avec tous les modèles.",
+      Platforms: "macOS maintenant. Windows est en validation.",
+      "Code and data boundary": "Application de bureau fermée. En mode Local : pas de compte de transcription, pas d'analytics côté client, transcriptions sur le Mac.",
+    },
+    sections: [
+      {
+        kicker: "Contexte",
+        title: "Quand {competitor} peut convenir",
+        paragraphs: [
+          "{competitor} peut être le bon choix si sa couverture de plateformes, son workflow, ses fonctions d'équipe ou son cloud correspondent à votre besoin actuel.",
+          "Ce comparatif ne dénigre pas les concurrents. Il sépare l'adéquation produit de la promesse plus ciblée de Dictivo : une dictée Mac privée qui commence en local.",
+        ],
+        bullets: [
+          "Choisissez le concurrent si vous avez besoin de ses avantages spécifiques.",
+          "Vérifiez les sources officielles : prix, essais et règles de confidentialité peuvent changer.",
+          "Choisissez Dictivo si la voie par défaut doit être une transcription locale sur Mac sans compte Dictivo.",
+        ],
+      },
+      {
+        kicker: "Différence Dictivo",
+        title: "Ce qui rend Dictivo différent",
+        paragraphs: [
+          "Dictivo est d'abord conçu autour du mode Local. La reconnaissance vocale s'exécute sur le Mac, et les transcriptions, l'historique, le dictionnaire, les extraits et les réglages locaux restent sur la machine.",
+          "Cloud Fast reste séparé. Utilisez-le seulement quand la vitesse compte plus qu'un traitement strictement local.",
+        ],
+        bullets: [
+          "Tiny reste gratuit à vie.",
+          "L'essai Local complet de 14 jours déverrouille tous les modèles locaux.",
+          "Dictivo Local coûte $49 une fois, avec renouvellement de mises à jour optionnel après un an.",
+          "Le flux Local ne nécessite pas de compte de transcription Dictivo.",
+        ],
+      },
+      {
+        kicker: "Décision",
+        title: "Qui devrait choisir quoi",
+        cards: [
+          {
+            title: "Choisissez {competitor} si",
+            items: [
+              "Vous avez besoin de sa couverture de plateformes ou de son workflow propre.",
+              "Son modèle de traitement et de compte vous convient.",
+              "Son abonnement, son prix à vie ou son intégration système correspondent mieux à votre budget.",
+            ],
+          },
+          {
+            title: "Choisissez Dictivo si",
+            items: [
+              "Vous voulez que la dictée locale sur Mac soit le chemin par défaut.",
+              "Vous préférez ne pas créer de compte Dictivo pour le mode Local.",
+              "Vous voulez essayer tous les modèles locaux 14 jours puis payer un prix unique plus bas.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqKicker: "FAQ",
+    faqTitle: "Questions fréquentes",
+    faqs: [
+      ["Dictivo est-il une alternative à {competitor} ?", "Oui. Dictivo est une alternative si vous voulez une dictée Mac locale d'abord, avec Cloud Fast en option."],
+      ["Puis-je utiliser Dictivo sans compte Dictivo ?", "Oui. La dictée locale ne demande pas de compte Dictivo. Cloud Fast est un chemin optionnel séparé."],
+      ["Que puis-je essayer gratuitement ?", "Tiny reste gratuit à vie. Les nouvelles installations obtiennent 14 jours d'essai Local complet avec tous les modèles locaux, plus 10 minutes Cloud Fast à vie sur cet appareil."],
+      ["Pourquoi les comparatifs citent-ils des sources ?", "Les prix, essais, plateformes et règles de confidentialité changent. Les sources relient le comparatif aux pages publiques de produit et de support."],
+      ["Que choisir ?", "Choisissez Dictivo si la dictée Mac privée et le prix Local en achat unique comptent le plus. Choisissez l'autre outil si ses plateformes ou fonctions cloud comptent davantage."],
+    ],
+    sourcesKicker: "Sources vérifiées",
+    sourcesTitle: "Faits revérifiés le {date}",
+    sourcesBody:
+      "Les prix, essais, plateformes et affirmations de confidentialité changent. Ces notes ont été vérifiées avec les pages produit et support officielles ci-dessous.",
+    ctaKicker: "Essayer Dictivo",
+    ctaTitle: "Essayez Dictivo gratuitement pendant 14 jours.",
+    ctaBody: "Tous les modèles locaux sont déverrouillés, sans compte Dictivo pour le mode Local. Dictivo Local coûte $49 une fois si cela vous convient.",
+    ctaPrimary: "Essayer Dictivo 14 jours",
+    ctaSecondary: "Voir les prix",
+    resourceAria: "Étapes suivantes",
+    resourcePricing: "Comparer les prix et offres Dictivo",
+    resourceSecurity: "Lire où vivent les données Dictivo",
+    resourceRelated: "Voir la comparaison avec {competitor}",
+    compareFooter: "Comparer les alternatives",
+    footerAlternative: "Alternative à {competitor}",
+    teaserKicker: "Comparer",
+    teaserTitle: "Vous hésitez avec une autre app de dictée ?",
+    teaserBody:
+      "Comparez Dictivo avec les outils évalués en premier : dictée cloud, systèmes locaux, apps de transcription de fichiers, outils publics peu coûteux et dictée intégrée d'Apple.",
+  },
+};
+
+function compactCompareLocale(overrides) {
+  return {
+    ...COMPARE_I18N.en,
+    ...overrides,
+    rowLabels: { ...COMPARE_I18N.en.rowLabels, ...(overrides.rowLabels || {}) },
+    dictivoRows: { ...COMPARE_I18N.en.dictivoRows, ...(overrides.dictivoRows || {}) },
+  };
+}
+
+Object.assign(COMPARE_I18N, {
+  es: compactCompareLocale({
+    skipComparison: "Saltar a la comparación",
+    skipComparisons: "Saltar a las comparaciones",
+    languageAria: "Cambiar idioma de la página comparativa",
+    updatedLabel: "Última actualización:",
+    hubEyebrow: "Centro de comparación",
+    hubMetaTitle: "Comparativas de Dictivo: alternativas de dictado local para Mac",
+    hubMetaDescription:
+      "Compara Dictivo con Wispr Flow, Superwhisper, MacWhisper, VoiceInk y Dictado de macOS por privacidad, precio y flujo de trabajo.",
+    hubH1: "Compara Dictivo con otras herramientas de dictado",
+    hubLede:
+      "Un centro práctico para elegir un flujo de dictado privado en Mac. Cada página muestra dónde encaja la otra herramienta y dónde encaja Dictivo.",
+    hubGridLabel: "Páginas comparativas de Dictivo",
+    cardTitle: "Alternativa a {competitor}",
+    cardCta: "Comparar Dictivo con {competitor}",
+    pageTitle: "Alternativa a {competitor}: dictado local para Mac con Dictivo",
+    pageMeta:
+      "Compara Dictivo con {competitor}: privacidad, precio, plataformas y flujo de dictado local en Mac.",
+    pageH1: "Alternativa a {competitor} para dictado local en Mac",
+    eyebrow: "Comparar alternativas",
+    intro: [
+      "Esta página explica cuándo {competitor} puede tener sentido y cuándo el flujo local de Dictivo en Mac encaja mejor.",
+      "Usa la tabla, las fuentes y las notas de decisión para comparar privacidad, precio, plataformas y el límite entre Local y Cloud Fast.",
+    ],
+    quickAria: "Comparación rápida",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["Mejor para", "Dictado local privado en Mac", "El flujo existente de {competitor}"],
+      ["Modelo de Dictivo", "$49 una vez, Tiny gratis para siempre, prueba Local completa de 14 días", "Ver notas de precio y prueba abajo"],
+      ["Modelo de privacidad", "Local por defecto", "Ver detalles de procesamiento abajo"],
+    ],
+    atAGlanceKicker: "De un vistazo",
+    atAGlanceTitle: "{competitor} vs Dictivo de un vistazo",
+    tableCaption: "{competitor} vs Dictivo de un vistazo",
+    questionHeader: "Pregunta",
+    rowLabels: {
+      "Processing location": "Lugar de procesamiento",
+      "Trains AI on your voice": "Entrena IA con tu voz",
+      "Works fully offline": "Funciona totalmente sin conexión",
+      "Account required": "Cuenta requerida",
+      "Pricing model": "Modelo de precio",
+      "Free tier / trial": "Plan gratis / prueba",
+      Platforms: "Plataformas",
+      "Code and data boundary": "Límite de código y datos",
+    },
+    dictivoRows: {
+      "Processing location": "En el dispositivo en modo Local con whisper.cpp. Cloud Fast es una ruta separada elegida por el usuario.",
+      "Trains AI on your voice": "Nunca en modo Local.",
+      "Works fully offline": "Sí en modo Local después de instalar el modelo local.",
+      "Account required": "No hace falta cuenta de Dictivo para el dictado Local.",
+      "Pricing model": "$49 una vez, 12 meses de actualizaciones y renovación opcional de $24/año.",
+      "Free tier / trial": "Tiny gratis para siempre más 14 días de prueba Local completa con todos los modelos.",
+      Platforms: "macOS ahora. Windows está en validación.",
+      "Code and data boundary": "Aplicación de escritorio cerrada. En Local no hay cuenta de transcripción, analytics de cliente ni subida de transcripciones.",
+    },
+    sections: [
+      {
+        kicker: "Contexto",
+        title: "Cuándo {competitor} puede tener sentido",
+        paragraphs: [
+          "{competitor} puede ser la elección correcta si su cobertura de plataformas, flujo de trabajo, funciones de equipo o comportamiento en la nube coinciden con lo que necesitas.",
+          "Esta comparación no intenta debilitar a cada competidor. Separa el encaje de producto de la promesa más concreta de Dictivo: dictado privado en Mac que empieza en local.",
+        ],
+        bullets: [
+          "Elige el competidor si necesitas sus ventajas específicas de plataforma o flujo.",
+          "Revisa las fuentes oficiales porque precios, pruebas y controles de privacidad pueden cambiar.",
+          "Usa Dictivo si la ruta predeterminada debe ser transcripción local en Mac sin cuenta de Dictivo.",
+        ],
+      },
+      {
+        kicker: "Diferencia Dictivo",
+        title: "Dónde Dictivo es diferente",
+        paragraphs: [
+          "Dictivo está construido primero alrededor del modo Local. El reconocimiento de voz corre en el Mac y las transcripciones, historial, diccionario, snippets y ajustes locales permanecen en la máquina.",
+          "Cloud Fast está separado a propósito. Úsalo solo cuando la velocidad importe más que el procesamiento estrictamente local.",
+        ],
+        bullets: [
+          "Tiny sigue gratis para siempre.",
+          "La prueba Local completa de 14 días desbloquea todos los modelos locales.",
+          "Dictivo Local cuesta $49 una vez, con renovación opcional de actualizaciones después del primer año.",
+          "El flujo Local no requiere cuenta de transcripción de Dictivo.",
+        ],
+      },
+      {
+        kicker: "Decisión",
+        title: "Quién debería elegir cada opción",
+        cards: [
+          {
+            title: "Elige {competitor} si",
+            items: [
+              "Necesitas su cobertura de plataformas o su flujo específico.",
+              "Aceptas el modelo de procesamiento y cuenta descrito en su documentación.",
+              "Su suscripción, precio de por vida o integración del sistema encaja mejor con tu presupuesto.",
+            ],
+          },
+          {
+            title: "Elige Dictivo si",
+            items: [
+              "Quieres que el dictado local en Mac sea la ruta predeterminada.",
+              "Prefieres no crear una cuenta de Dictivo para el modo Local.",
+              "Quieres probar todos los modelos locales durante 14 días y luego pagar menos una sola vez.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqKicker: "FAQ",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      ["¿Dictivo es una alternativa a {competitor}?", "Sí. Dictivo es una alternativa si quieres un flujo de dictado en Mac local primero, con Cloud Fast como opción separada."],
+      ["¿Puedo usar Dictivo sin cuenta?", "Sí. El dictado Local no requiere cuenta de Dictivo. Cloud Fast es una ruta opcional separada."],
+      ["¿Qué puedo probar gratis?", "Tiny sigue gratis para siempre. Las nuevas instalaciones reciben 14 días de prueba Local completa con todos los modelos, más 10 minutos Cloud Fast de por vida en ese dispositivo."],
+      ["¿Por qué estas páginas enlazan fuentes?", "Los precios, límites de prueba, plataformas y controles de privacidad cambian. Las fuentes mantienen la comparación ligada a páginas públicas de producto y soporte."],
+      ["¿Cuál debería elegir?", "Elige Dictivo si importan más el dictado privado en Mac y el precio Local de compra única. Elige el competidor si sus plataformas o funciones cloud pesan más."],
+    ],
+    sourcesKicker: "Fuentes revisadas",
+    sourcesTitle: "Datos revisados el {date}",
+    sourcesBody:
+      "Los precios, pruebas, plataformas y afirmaciones de privacidad cambian. Estas notas se comprobaron con las páginas oficiales de producto y soporte siguientes.",
+    ctaKicker: "Probar Dictivo",
+    ctaTitle: "Prueba Dictivo gratis durante 14 días.",
+    ctaBody: "Todos los modelos locales desbloqueados, sin cuenta de Dictivo para Local. Dictivo Local cuesta $49 una vez si encaja con tu flujo.",
+    ctaPrimary: "Probar Dictivo 14 días",
+    ctaSecondary: "Ver precios",
+    resourceAria: "Siguientes pasos",
+    resourcePricing: "Comparar precios y planes de Dictivo",
+    resourceSecurity: "Leer dónde viven los datos de Dictivo",
+    resourceRelated: "Ver comparación con {competitor}",
+    compareFooter: "Comparar alternativas",
+    footerAlternative: "Alternativa a {competitor}",
+    teaserKicker: "Comparar",
+    teaserTitle: "¿Estás evaluando otra app de dictado?",
+    teaserBody:
+      "Compara Dictivo con dictado cloud, sistemas locales, apps de transcripción de archivos, herramientas públicas de bajo coste y el dictado integrado de Apple.",
+  }),
+  zh: compactCompareLocale({
+    skipComparison: "跳到比较内容",
+    skipComparisons: "跳到比较列表",
+    languageAria: "切换比较页语言",
+    updatedLabel: "最后更新：",
+    hubEyebrow: "比较中心",
+    hubMetaTitle: "Dictivo 对比：Mac 本地听写替代方案",
+    hubMetaDescription:
+      "从隐私、价格和工作流角度，对比 Dictivo 与 Wispr Flow、Superwhisper、MacWhisper、VoiceInk 和 macOS Dictation。",
+    hubH1: "将 Dictivo 与其他听写工具对比",
+    hubLede:
+      "这个比较中心帮助你选择更适合的私密 Mac 听写工作流。每页先说明对方产品适合什么场景，再说明 Dictivo 的本地优先架构适合哪里。",
+    hubGridLabel: "Dictivo 比较页面",
+    cardTitle: "{competitor} 替代方案",
+    cardCta: "对比 Dictivo 与 {competitor}",
+    pageTitle: "{competitor} 替代方案：Dictivo 的 Mac 本地听写",
+    pageMeta:
+      "对比 Dictivo 与 {competitor}：隐私、价格、平台支持，以及 Mac 本地听写工作流。",
+    pageH1: "{competitor} 替代方案：以 Mac 本地听写为默认路径",
+    eyebrow: "比较替代方案",
+    intro: [
+      "这页说明 {competitor} 在什么情况下可能合适，以及 Dictivo 的 Mac 本地工作流在什么情况下更合适。",
+      "你可以通过事实表、来源链接和选择建议，对比隐私、价格、平台支持，以及 Local 与 Cloud Fast 的边界。",
+    ],
+    quickAria: "快速比较",
+    quickPrefix: "{competitor}：",
+    quickTake: [
+      ["最适合", "私密 Mac 本地听写", "{competitor} 现有工作流"],
+      ["Dictivo 模式", "$49 一次买断，Tiny 永久免费，14 天完整 Local 试用", "见下方价格与试用说明"],
+      ["隐私模式", "默认 Local", "见下方处理位置说明"],
+    ],
+    atAGlanceKicker: "快速概览",
+    atAGlanceTitle: "{competitor} vs Dictivo 快速对比",
+    tableCaption: "{competitor} vs Dictivo 快速对比",
+    questionHeader: "问题",
+    rowLabels: {
+      "Processing location": "处理位置",
+      "Trains AI on your voice": "是否用你的声音训练 AI",
+      "Works fully offline": "是否可完全离线",
+      "Account required": "是否需要账号",
+      "Pricing model": "价格模式",
+      "Free tier / trial": "免费版 / 试用",
+      Platforms: "平台",
+      "Code and data boundary": "代码与数据边界",
+    },
+    dictivoRows: {
+      "Processing location": "Local 模式使用 whisper.cpp 在本机处理；Cloud Fast 是用户主动选择的独立路径。",
+      "Trains AI on your voice": "Local 模式下不会。",
+      "Works fully offline": "可以。安装本地模型后，Local 模式可离线使用。",
+      "Account required": "Local 听写不需要 Dictivo 账号。",
+      "Pricing model": "$49 一次买断，含 12 个月更新，之后可选 $24/年更新续费。",
+      "Free tier / trial": "Tiny 永久免费，外加 14 天完整 Local 试用，可解锁所有本地模型。",
+      Platforms: "目前 macOS。Windows 正在验证。",
+      "Code and data boundary": "闭源桌面应用。Local 模式没有转录账号、没有客户端分析，用户转录内容留在 Mac 上。",
+    },
+    sections: [
+      {
+        kicker: "背景",
+        title: "{competitor} 什么时候可能合适",
+        paragraphs: [
+          "如果你需要 {competitor} 当前的平台覆盖、特定工作流、团队功能或云模型能力，它可能是更合适的选择。",
+          "这页不是为了贬低竞争产品，而是区分产品适配度和 Dictivo 更窄的承诺：默认从本地开始的私密 Mac 听写。",
+        ],
+        bullets: [
+          "如果你需要对方特定的平台或工作流优势，可以选择对方。",
+          "价格、试用限制和隐私控制可能变化，因此要查看官方来源。",
+          "如果默认路径应该是无需 Dictivo 账号的 Mac 本地转录，选择 Dictivo。",
+        ],
+      },
+      {
+        kicker: "Dictivo 的不同",
+        title: "Dictivo 不同在哪里",
+        paragraphs: [
+          "Dictivo 首先围绕 Local 模式构建。语音识别在 Mac 上运行，转录、历史、词典、片段和本地设置都保留在本机。",
+          "Cloud Fast 被刻意做成独立路径。只有当速度比纯本地处理更重要时才使用它。",
+        ],
+        bullets: [
+          "Tiny 永久免费。",
+          "14 天完整 Local 试用解锁所有本地模型。",
+          "Dictivo Local 是 $49 一次买断，第一年后可选更新续费。",
+          "Local 工作流不需要 Dictivo 转录账号。",
+        ],
+      },
+      {
+        kicker: "选择建议",
+        title: "应该选择哪一个",
+        cards: [
+          {
+            title: "选择 {competitor} 如果",
+            items: [
+              "你需要它当前的平台覆盖或产品特定工作流。",
+              "你接受它文档中描述的处理和账号模式。",
+              "它的订阅、终身价格或系统内置状态更符合预算。",
+            ],
+          },
+          {
+            title: "选择 Dictivo 如果",
+            items: [
+              "你希望 Mac 本地听写是默认路径。",
+              "你不想为了 Local 模式创建 Dictivo 账号。",
+              "你想先试用所有本地模型 14 天，再用较低的一次性价格购买。",
+            ],
+          },
+        ],
+      },
+    ],
+    faqKicker: "FAQ",
+    faqTitle: "常见问题",
+    faqs: [
+      ["Dictivo 是 {competitor} 的替代方案吗？", "是。如果你想要本地优先的 Mac 听写工作流，并把 Cloud Fast 作为可选路径，Dictivo 就是一个替代方案。"],
+      ["可以不注册 Dictivo 账号使用吗？", "可以。Local 听写不需要 Dictivo 账号。Cloud Fast 是独立的可选路径。"],
+      ["免费可以试什么？", "Tiny 永久免费。新安装还会获得 14 天完整 Local 试用，解锁所有本地模型，并在该设备上获得 10 分钟终身 Cloud Fast 免费额度。"],
+      ["为什么比较页要列来源？", "价格、试用限制、平台支持和隐私控制会变化。来源链接让比较内容与公开产品和支持页面绑定。"],
+      ["我应该选哪个？", "如果私密 Mac 听写和 Local 一次买断价格最重要，选择 Dictivo。如果对方的平台或云功能更重要，选择对方。"],
+    ],
+    sourcesKicker: "已核对来源",
+    sourcesTitle: "事实核对日期：{date}",
+    sourcesBody:
+      "价格、试用、平台和隐私声明会变化。以下比较说明已根据下面的官方产品页和支持文档核对。",
+    ctaKicker: "试用 Dictivo",
+    ctaTitle: "免费试用 Dictivo 14 天。",
+    ctaBody: "所有本地模型解锁，Local 模式不需要 Dictivo 账号。如果适合你的工作流，Dictivo Local $49 一次买断。",
+    ctaPrimary: "试用 Dictivo 14 天",
+    ctaSecondary: "查看价格",
+    resourceAria: "比较后的下一步",
+    resourcePricing: "比较 Dictivo 价格与套餐",
+    resourceSecurity: "阅读 Dictivo 数据存放位置",
+    resourceRelated: "查看与 {competitor} 的比较",
+    compareFooter: "比较替代方案",
+    footerAlternative: "{competitor} 替代方案",
+    teaserKicker: "比较",
+    teaserTitle: "正在和其他听写应用做选择？",
+    teaserBody:
+      "对比 Dictivo 与常见候选：云听写、本地模式系统、文件转录应用、低成本公开代码工具，以及 Apple 内置听写。",
+  }),
+});
+
+Object.assign(COMPARE_I18N, {
+  it: compactCompareLocale({
+    skipComparison: "Vai al confronto",
+    skipComparisons: "Vai ai confronti",
+    languageAria: "Cambia lingua della pagina di confronto",
+    updatedLabel: "Ultimo aggiornamento:",
+    hubEyebrow: "Centro confronti",
+    hubMetaTitle: "Confronti Dictivo: alternative di dettatura locale per Mac",
+    hubMetaDescription:
+      "Confronta Dictivo con Wispr Flow, Superwhisper, MacWhisper, VoiceInk e Dettatura macOS per privacy, prezzo e flusso di lavoro.",
+    hubH1: "Confronta Dictivo con altri strumenti di dettatura",
+    hubLede:
+      "Un centro pratico per scegliere un flusso di dettatura privata su Mac. Ogni pagina spiega dove il concorrente funziona bene e dove si inserisce Dictivo.",
+    hubGridLabel: "Pagine di confronto Dictivo",
+    cardTitle: "Alternativa a {competitor}",
+    cardCta: "Confronta Dictivo con {competitor}",
+    pageTitle: "Alternativa a {competitor}: dettatura locale Mac con Dictivo",
+    pageMeta:
+      "Confronta Dictivo con {competitor}: privacy, prezzo, piattaforme e flusso di dettatura locale su Mac.",
+    pageH1: "Alternativa a {competitor} per la dettatura locale su Mac",
+    eyebrow: "Confronta alternative",
+    intro: [
+      "Questa pagina spiega quando {competitor} può avere senso e quando il flusso locale di Dictivo su Mac è più adatto.",
+      "Usa tabella, fonti e note decisionali per confrontare privacy, prezzo, piattaforme e confine tra Local e Cloud Fast.",
+    ],
+    quickAria: "Confronto rapido",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["Ideale per", "Dettatura Mac locale e privata", "Il flusso esistente di {competitor}"],
+      ["Modello Dictivo", "$49 una volta, Tiny gratis per sempre, prova Local completa di 14 giorni", "Vedi note su prezzi e prova sotto"],
+      ["Privacy", "Local per impostazione predefinita", "Vedi dettagli sul luogo di elaborazione sotto"],
+    ],
+    atAGlanceKicker: "In breve",
+    atAGlanceTitle: "{competitor} vs Dictivo in breve",
+    tableCaption: "{competitor} vs Dictivo in breve",
+    questionHeader: "Domanda",
+    rowLabels: {
+      "Processing location": "Luogo di elaborazione",
+      "Trains AI on your voice": "Addestra IA sulla tua voce",
+      "Works fully offline": "Funziona completamente offline",
+      "Account required": "Account richiesto",
+      "Pricing model": "Modello di prezzo",
+      "Free tier / trial": "Piano gratuito / prova",
+      Platforms: "Piattaforme",
+      "Code and data boundary": "Confine tra codice e dati",
+    },
+    dictivoRows: {
+      "Processing location": "Sul dispositivo in modalità Local con whisper.cpp. Cloud Fast è un percorso separato scelto dall'utente.",
+      "Trains AI on your voice": "Mai in modalità Local.",
+      "Works fully offline": "Sì in modalità Local dopo l'installazione del modello locale.",
+      "Account required": "Nessun account Dictivo per la dettatura Local.",
+      "Pricing model": "$49 una volta, 12 mesi di aggiornamenti, poi rinnovo opzionale da $24/anno.",
+      "Free tier / trial": "Tiny gratis per sempre più prova Local completa di 14 giorni con tutti i modelli locali.",
+      Platforms: "macOS ora. Windows è in validazione.",
+      "Code and data boundary": "App desktop closed-source. In Local non ci sono account di trascrizione, analytics client-side o caricamento delle trascrizioni.",
+    },
+    sections: [
+      {
+        kicker: "Contesto",
+        title: "Quando {competitor} può avere senso",
+        paragraphs: [
+          "{competitor} può essere la scelta giusta se piattaforme, workflow, funzioni di team o comportamento cloud corrispondono a ciò che ti serve oggi.",
+          "Questo confronto non svaluta i concorrenti. Separa l'adattamento del prodotto dalla promessa più stretta di Dictivo: dettatura privata su Mac che parte in locale.",
+        ],
+        bullets: [
+          "Scegli il concorrente se hai bisogno dei suoi vantaggi specifici di piattaforma o workflow.",
+          "Controlla le fonti ufficiali perché prezzi, prove e controlli privacy possono cambiare.",
+          "Usa Dictivo se il percorso predefinito deve essere trascrizione locale su Mac senza account Dictivo.",
+        ],
+      },
+      {
+        kicker: "Differenza Dictivo",
+        title: "Dove Dictivo è diverso",
+        paragraphs: [
+          "Dictivo è costruito prima attorno alla modalità Local. Il riconoscimento vocale gira sul Mac e trascrizioni, cronologia, dizionario, snippet e impostazioni locali restano sulla macchina.",
+          "Cloud Fast resta separato. Usalo solo quando la velocità conta più del trattamento esclusivamente locale.",
+        ],
+        bullets: [
+          "Tiny resta gratis per sempre.",
+          "La prova Local completa di 14 giorni sblocca tutti i modelli locali.",
+          "Dictivo Local costa $49 una volta, con rinnovi opzionali degli aggiornamenti dopo il primo anno.",
+          "Il workflow Local non richiede un account di trascrizione Dictivo.",
+        ],
+      },
+      {
+        kicker: "Decisione",
+        title: "Chi dovrebbe scegliere cosa",
+        cards: [
+          {
+            title: "Scegli {competitor} se",
+            items: [
+              "Ti servono la sua copertura di piattaforme o il suo workflow specifico.",
+              "Il modello di elaborazione e account descritto nella documentazione ti va bene.",
+              "Abbonamento, prezzo lifetime o integrazione di sistema sono più adatti al tuo budget.",
+            ],
+          },
+          {
+            title: "Scegli Dictivo se",
+            items: [
+              "Vuoi che la dettatura locale su Mac sia il percorso predefinito.",
+              "Preferisci non creare un account Dictivo per la modalità Local.",
+              "Vuoi provare tutti i modelli locali per 14 giorni e poi pagare meno una sola volta.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      ["Dictivo è un'alternativa a {competitor}?", "Sì. Dictivo è un'alternativa se vuoi un workflow di dettatura Mac prima locale, con Cloud Fast come opzione separata."],
+      ["Posso usare Dictivo senza account?", "Sì. La dettatura Local non richiede un account Dictivo. Cloud Fast è un percorso opzionale separato."],
+      ["Cosa posso provare gratis?", "Tiny resta gratis per sempre. Le nuove installazioni hanno 14 giorni di prova Local completa con tutti i modelli, più 10 minuti Cloud Fast a vita su quel dispositivo."],
+      ["Perché queste pagine citano fonti?", "Prezzi, limiti di prova, piattaforme e controlli privacy cambiano. Le fonti collegano il confronto a pagine pubbliche di prodotto e supporto."],
+      ["Cosa dovrei scegliere?", "Scegli Dictivo se contano di più dettatura privata su Mac e prezzo Local una tantum. Scegli il concorrente se piattaforme o funzioni cloud contano di più."],
+    ],
+    sourcesKicker: "Fonti verificate",
+    sourcesTitle: "Dati ricontrollati il {date}",
+    sourcesBody: "Prezzi, prove, piattaforme e privacy cambiano. Queste note sono state controllate sulle pagine ufficiali prodotto e supporto qui sotto.",
+    ctaKicker: "Prova Dictivo",
+    ctaTitle: "Prova Dictivo gratis per 14 giorni.",
+    ctaBody: "Tutti i modelli locali sbloccati, senza account Dictivo per Local. Dictivo Local costa $49 una volta se si adatta al tuo flusso.",
+    ctaPrimary: "Prova Dictivo 14 giorni",
+    ctaSecondary: "Vedi prezzi",
+    resourceAria: "Passi successivi",
+    resourcePricing: "Confronta prezzi e piani Dictivo",
+    resourceSecurity: "Leggi dove restano i dati Dictivo",
+    resourceRelated: "Vedi confronto con {competitor}",
+    compareFooter: "Confronta alternative",
+    footerAlternative: "Alternativa a {competitor}",
+    teaserKicker: "Confronta",
+    teaserTitle: "Stai valutando un'altra app di dettatura?",
+    teaserBody:
+      "Confronta Dictivo con dettatura cloud, sistemi locali, app di trascrizione file, strumenti pubblici a basso costo e la dettatura integrata di Apple.",
+  }),
+  nl: compactCompareLocale({
+    skipComparison: "Ga naar vergelijking",
+    skipComparisons: "Ga naar vergelijkingen",
+    languageAria: "Taal van vergelijkingspagina wijzigen",
+    updatedLabel: "Laatst bijgewerkt:",
+    hubEyebrow: "Vergelijkingshub",
+    hubMetaTitle: "Dictivo-vergelijkingen: lokale dicteeralternatieven voor Mac",
+    hubMetaDescription:
+      "Vergelijk Dictivo met Wispr Flow, Superwhisper, MacWhisper, VoiceInk en macOS Dictation op privacy, prijs en workflow.",
+    hubH1: "Vergelijk Dictivo met andere dicteertools",
+    hubLede:
+      "Een praktisch overzicht voor een private Mac-dicteerworkflow. Elke pagina laat zien waar de andere tool goed past en waar Dictivo past.",
+    hubGridLabel: "Dictivo-vergelijkingspagina's",
+    cardTitle: "{competitor}-alternatief",
+    cardCta: "Vergelijk Dictivo met {competitor}",
+    pageTitle: "{competitor}-alternatief: lokale Mac-dictatie met Dictivo",
+    pageMeta:
+      "Vergelijk Dictivo met {competitor}: privacy, prijs, platforms en lokale Mac-dicteerworkflow.",
+    pageH1: "{competitor}-alternatief voor lokale Mac-dictatie",
+    eyebrow: "Alternatieven vergelijken",
+    intro: [
+      "Deze pagina legt uit wanneer {competitor} logisch kan zijn en wanneer Dictivo's lokale Mac-workflow beter past.",
+      "Gebruik de tabel, bronnen en beslisnotities om privacy, prijs, platforms en de grens tussen Local en Cloud Fast te vergelijken.",
+    ],
+    quickAria: "Snelle vergelijking",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["Beste voor", "Private lokale Mac-dictatie", "De bestaande workflow van {competitor}"],
+      ["Dictivo-model", "$49 eenmalig, Tiny altijd gratis, 14 dagen volledige Local-proef", "Zie prijs- en proefnotities hieronder"],
+      ["Privacymodel", "Local standaard", "Zie verwerkingslocatie hieronder"],
+    ],
+    atAGlanceKicker: "In één oogopslag",
+    atAGlanceTitle: "{competitor} vs Dictivo in één oogopslag",
+    tableCaption: "{competitor} vs Dictivo in één oogopslag",
+    questionHeader: "Vraag",
+    rowLabels: {
+      "Processing location": "Verwerkingslocatie",
+      "Trains AI on your voice": "Traint AI op je stem",
+      "Works fully offline": "Werkt volledig offline",
+      "Account required": "Account vereist",
+      "Pricing model": "Prijsmodel",
+      "Free tier / trial": "Gratis laag / proef",
+      Platforms: "Platforms",
+      "Code and data boundary": "Grens tussen code en data",
+    },
+    dictivoRows: {
+      "Processing location": "Op het apparaat in Local-modus met whisper.cpp. Cloud Fast is een apart gekozen pad.",
+      "Trains AI on your voice": "Nooit in Local-modus.",
+      "Works fully offline": "Ja in Local-modus nadat het lokale model is geïnstalleerd.",
+      "Account required": "Geen Dictivo-account voor Local-dictatie.",
+      "Pricing model": "$49 eenmalig, 12 maanden updates, daarna optionele verlenging van $24/jaar.",
+      "Free tier / trial": "Tiny altijd gratis plus 14 dagen volledige Local-proef met alle lokale modellen.",
+      Platforms: "macOS nu. Windows wordt gevalideerd.",
+      "Code and data boundary": "Closed-source desktopapp. Local heeft geen transcriptieaccount, client-side analytics of upload van transcripties.",
+    },
+    sections: [
+      {
+        kicker: "Context",
+        title: "Wanneer {competitor} logisch kan zijn",
+        paragraphs: [
+          "{competitor} kan de juiste keuze zijn als platformdekking, workflow, teamfuncties of cloudgedrag precies passen bij wat je nu nodig hebt.",
+          "Deze vergelijking maakt concurrenten niet kleiner dan ze zijn. Ze scheidt product-fit van Dictivo's smallere belofte: private Mac-dictatie die lokaal begint.",
+        ],
+        bullets: [
+          "Kies de concurrent als je zijn specifieke platform- of workflowvoordelen nodig hebt.",
+          "Controleer de officiële bronnen, want prijzen, proeflimieten en privacycontroles kunnen veranderen.",
+          "Gebruik Dictivo als de standaardroute lokale Mac-transcriptie zonder Dictivo-account moet zijn.",
+        ],
+      },
+      {
+        kicker: "Dictivo-verschil",
+        title: "Waar Dictivo anders is",
+        paragraphs: [
+          "Dictivo is eerst gebouwd rond Local-modus. Spraakherkenning draait op de Mac en transcripties, geschiedenis, woordenboek, snippets en lokale instellingen blijven op de machine.",
+          "Cloud Fast is bewust gescheiden. Gebruik het alleen wanneer snelheid belangrijker is dan strikt lokale verwerking.",
+        ],
+        bullets: [
+          "Tiny blijft altijd gratis.",
+          "De volledige Local-proef van 14 dagen ontgrendelt elk lokaal model.",
+          "Dictivo Local kost $49 eenmalig, met optionele updateverlenging na het eerste jaar.",
+          "De Local-workflow vereist geen Dictivo-transcriptieaccount.",
+        ],
+      },
+      {
+        kicker: "Beslissing",
+        title: "Wie welke optie zou moeten kiezen",
+        cards: [
+          {
+            title: "Kies {competitor} als",
+            items: [
+              "Je zijn huidige platformdekking of productspecifieke workflow nodig hebt.",
+              "Het verwerkings- en accountmodel uit de documentatie voor jou werkt.",
+              "Zijn abonnement, lifetime-prijs of ingebouwde status beter bij je budget past.",
+            ],
+          },
+          {
+            title: "Kies Dictivo als",
+            items: [
+              "Je lokale Mac-dictatie als standaardroute wilt.",
+              "Je geen Dictivo-account wilt voor Local-modus.",
+              "Je alle lokale modellen 14 dagen wilt proberen en daarna liever lager eenmalig betaalt.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      ["Is Dictivo een alternatief voor {competitor}?", "Ja. Dictivo is een alternatief als je een lokale Mac-dicteerworkflow wilt met Cloud Fast als aparte optie."],
+      ["Kan ik Dictivo zonder Dictivo-account gebruiken?", "Ja. Local-dictatie vereist geen Dictivo-account. Cloud Fast is een aparte optionele route."],
+      ["Wat kan ik gratis proberen?", "Tiny blijft altijd gratis. Nieuwe installaties krijgen 14 dagen volledige Local-proef met alle lokale modellen plus 10 Cloud Fast-minuten voor altijd op dat apparaat."],
+      ["Waarom linken deze pagina's naar bronnen?", "Prijzen, proeflimieten, platforms en privacycontroles veranderen. Bronnen houden de vergelijking gekoppeld aan publieke product- en supportpagina's."],
+      ["Welke moet ik kiezen?", "Kies Dictivo als private Mac-dictatie en eenmalige Local-prijs het belangrijkst zijn. Kies de concurrent als platforms of cloudfuncties belangrijker zijn."],
+    ],
+    sourcesKicker: "Gecontroleerde bronnen",
+    sourcesTitle: "Feiten opnieuw gecontroleerd op {date}",
+    sourcesBody: "Prijzen, proefperiodes, platforms en privacyclaims veranderen. Deze notities zijn gecontroleerd op de officiële product- en supportpagina's hieronder.",
+    ctaKicker: "Probeer Dictivo",
+    ctaTitle: "Probeer Dictivo 14 dagen gratis.",
+    ctaBody: "Alle lokale modellen ontgrendeld, geen Dictivo-account voor Local. Dictivo Local kost $49 eenmalig als het past.",
+    ctaPrimary: "Probeer Dictivo 14 dagen",
+    ctaSecondary: "Bekijk prijzen",
+    resourceAria: "Volgende stappen",
+    resourcePricing: "Vergelijk Dictivo-prijzen en plannen",
+    resourceSecurity: "Lees waar Dictivo-data blijven",
+    resourceRelated: "Bekijk vergelijking met {competitor}",
+    compareFooter: "Alternatieven vergelijken",
+    footerAlternative: "{competitor}-alternatief",
+    teaserKicker: "Vergelijk",
+    teaserTitle: "Vergelijk je met een andere dicteerapp?",
+    teaserBody:
+      "Vergelijk Dictivo met cloud-dictatie, lokale modussystemen, bestandstranscriptieapps, goedkope publieke tools en Apple's ingebouwde dictatie.",
+  }),
+  pt: compactCompareLocale({
+    skipComparison: "Ir para a comparação",
+    skipComparisons: "Ir para as comparações",
+    languageAria: "Alterar idioma da página de comparação",
+    updatedLabel: "Última atualização:",
+    hubEyebrow: "Central de comparação",
+    hubMetaTitle: "Comparações do Dictivo: alternativas de ditado local para Mac",
+    hubMetaDescription:
+      "Compare o Dictivo com Wispr Flow, Superwhisper, MacWhisper, VoiceInk e Ditado do macOS por privacidade, preço e fluxo de trabalho.",
+    hubH1: "Compare o Dictivo com outras ferramentas de ditado",
+    hubLede:
+      "Uma central prática para escolher um fluxo privado de ditado no Mac. Cada página mostra onde a outra ferramenta faz sentido e onde o Dictivo se encaixa.",
+    hubGridLabel: "Páginas de comparação do Dictivo",
+    cardTitle: "Alternativa ao {competitor}",
+    cardCta: "Comparar Dictivo com {competitor}",
+    pageTitle: "Alternativa ao {competitor}: ditado local no Mac com Dictivo",
+    pageMeta:
+      "Compare o Dictivo com {competitor}: privacidade, preço, plataformas e fluxo de ditado local no Mac.",
+    pageH1: "Alternativa ao {competitor} para ditado local no Mac",
+    eyebrow: "Comparar alternativas",
+    intro: [
+      "Esta página explica quando {competitor} pode fazer sentido e quando o fluxo local do Dictivo no Mac é melhor.",
+      "Use a tabela, as fontes e as notas de decisão para comparar privacidade, preço, plataformas e a fronteira entre Local e Cloud Fast.",
+    ],
+    quickAria: "Comparação rápida",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["Melhor para", "Ditado local e privado no Mac", "O fluxo existente do {competitor}"],
+      ["Modelo Dictivo", "$49 uma vez, Tiny grátis para sempre, teste Local completo de 14 dias", "Veja notas de preço e teste abaixo"],
+      ["Modelo de privacidade", "Local por padrão", "Veja detalhes de processamento abaixo"],
+    ],
+    atAGlanceKicker: "Resumo",
+    atAGlanceTitle: "{competitor} vs Dictivo em resumo",
+    tableCaption: "{competitor} vs Dictivo em resumo",
+    questionHeader: "Pergunta",
+    rowLabels: {
+      "Processing location": "Local de processamento",
+      "Trains AI on your voice": "Treina IA com sua voz",
+      "Works fully offline": "Funciona totalmente offline",
+      "Account required": "Conta obrigatória",
+      "Pricing model": "Modelo de preço",
+      "Free tier / trial": "Plano gratuito / teste",
+      Platforms: "Plataformas",
+      "Code and data boundary": "Limite de código e dados",
+    },
+    dictivoRows: {
+      "Processing location": "No dispositivo em modo Local com whisper.cpp. Cloud Fast é um caminho separado escolhido pelo usuário.",
+      "Trains AI on your voice": "Nunca no modo Local.",
+      "Works fully offline": "Sim no modo Local depois que o modelo local é instalado.",
+      "Account required": "Não há conta Dictivo para ditado Local.",
+      "Pricing model": "$49 uma vez, 12 meses de atualizações e renovação opcional de $24/ano.",
+      "Free tier / trial": "Tiny grátis para sempre mais teste Local completo de 14 dias com todos os modelos locais.",
+      Platforms: "macOS agora. Windows está em validação.",
+      "Code and data boundary": "Aplicativo desktop fechado. Local não usa conta de transcrição, analytics no cliente nem upload de transcrições.",
+    },
+    sections: [
+      {
+        kicker: "Contexto",
+        title: "Quando {competitor} pode fazer sentido",
+        paragraphs: [
+          "{competitor} pode ser a escolha certa se cobertura de plataformas, fluxo de trabalho, recursos de equipe ou comportamento em nuvem forem exatamente o que você precisa.",
+          "Esta comparação não diminui concorrentes. Ela separa encaixe de produto da promessa mais focada do Dictivo: ditado privado no Mac que começa localmente.",
+        ],
+        bullets: [
+          "Escolha o concorrente se você precisa das vantagens específicas dele.",
+          "Confira as fontes oficiais porque preços, limites de teste e controles de privacidade podem mudar.",
+          "Use o Dictivo se o caminho padrão deve ser transcrição local no Mac sem conta Dictivo.",
+        ],
+      },
+      {
+        kicker: "Diferença Dictivo",
+        title: "Onde o Dictivo é diferente",
+        paragraphs: [
+          "O Dictivo é construído primeiro em torno do modo Local. O reconhecimento de voz roda no Mac, e transcrições, histórico, dicionário, snippets e configurações locais ficam na máquina.",
+          "Cloud Fast é separado de propósito. Use apenas quando velocidade for mais importante que processamento somente local.",
+        ],
+        bullets: [
+          "Tiny continua grátis para sempre.",
+          "O teste Local completo de 14 dias desbloqueia todos os modelos locais.",
+          "Dictivo Local custa $49 uma vez, com renovação opcional de atualizações após o primeiro ano.",
+          "O fluxo Local não exige conta de transcrição Dictivo.",
+        ],
+      },
+      {
+        kicker: "Decisão",
+        title: "Quem deve escolher cada opção",
+        cards: [
+          {
+            title: "Escolha {competitor} se",
+            items: [
+              "Você precisa da cobertura de plataformas ou do fluxo específico dele.",
+              "O modelo de processamento e conta descrito na documentação funciona para você.",
+              "A assinatura, preço vitalício ou status integrado combina melhor com seu orçamento.",
+            ],
+          },
+          {
+            title: "Escolha Dictivo se",
+            items: [
+              "Você quer ditado local no Mac como caminho padrão.",
+              "Você prefere não criar conta Dictivo para o modo Local.",
+              "Você quer testar todos os modelos locais por 14 dias e depois pagar menos uma única vez.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      ["O Dictivo é uma alternativa ao {competitor}?", "Sim. O Dictivo é uma alternativa se você quer um fluxo de ditado no Mac primeiro local, com Cloud Fast como opção separada."],
+      ["Posso usar o Dictivo sem conta?", "Sim. O ditado Local não exige conta Dictivo. Cloud Fast é um caminho opcional separado."],
+      ["O que posso testar grátis?", "Tiny continua grátis para sempre. Novas instalações recebem 14 dias de teste Local completo com todos os modelos, mais 10 minutos Cloud Fast vitalícios nesse dispositivo."],
+      ["Por que estas páginas citam fontes?", "Preços, limites de teste, plataformas e controles de privacidade mudam. As fontes mantêm a comparação ligada a páginas públicas de produto e suporte."],
+      ["Qual devo escolher?", "Escolha Dictivo se ditado privado no Mac e preço Local de compra única importam mais. Escolha o concorrente se plataformas ou recursos em nuvem importam mais."],
+    ],
+    sourcesKicker: "Fontes verificadas",
+    sourcesTitle: "Fatos revistos em {date}",
+    sourcesBody: "Preços, testes, plataformas e afirmações de privacidade mudam. Estas notas foram verificadas nas páginas oficiais abaixo.",
+    ctaKicker: "Teste o Dictivo",
+    ctaTitle: "Teste o Dictivo grátis por 14 dias.",
+    ctaBody: "Todos os modelos locais desbloqueados, sem conta Dictivo para Local. Dictivo Local custa $49 uma vez se fizer sentido.",
+    ctaPrimary: "Testar Dictivo por 14 dias",
+    ctaSecondary: "Ver preços",
+    resourceAria: "Próximos passos",
+    resourcePricing: "Comparar preços e planos do Dictivo",
+    resourceSecurity: "Ler onde ficam os dados do Dictivo",
+    resourceRelated: "Ver comparação com {competitor}",
+    compareFooter: "Comparar alternativas",
+    footerAlternative: "Alternativa ao {competitor}",
+    teaserKicker: "Comparar",
+    teaserTitle: "Comparando com outro app de ditado?",
+    teaserBody:
+      "Compare o Dictivo com ditado em nuvem, sistemas locais, apps de transcrição de arquivos, ferramentas públicas de baixo custo e o Ditado integrado da Apple.",
+  }),
+  ja: compactCompareLocale({
+    skipComparison: "比較へ移動",
+    skipComparisons: "比較一覧へ移動",
+    languageAria: "比較ページの言語を変更",
+    updatedLabel: "最終更新:",
+    hubEyebrow: "比較ハブ",
+    hubMetaTitle: "Dictivo 比較: Mac 向けローカル音声入力の代替候補",
+    hubMetaDescription:
+      "Dictivo を Wispr Flow、Superwhisper、MacWhisper、VoiceInk、macOS Dictation とプライバシー、価格、ワークフローで比較します。",
+    hubH1: "Dictivo と他の音声入力ツールを比較",
+    hubLede:
+      "Mac でプライベートな音声入力ワークフローを選ぶための比較ハブです。各ページでは相手製品が合う場面と Dictivo が合う場面を分けて説明します。",
+    hubGridLabel: "Dictivo 比較ページ",
+    cardTitle: "{competitor} の代替",
+    cardCta: "Dictivo と {competitor} を比較",
+    pageTitle: "{competitor} の代替: Dictivo の Mac ローカル音声入力",
+    pageMeta:
+      "Dictivo と {competitor} を、プライバシー、価格、対応プラットフォーム、Mac ローカル音声入力ワークフローで比較します。",
+    pageH1: "{competitor} の代替になる Mac ローカル音声入力",
+    eyebrow: "代替候補を比較",
+    intro: [
+      "このページでは {competitor} が合う場面と、Dictivo の Mac ローカルワークフローが合う場面を説明します。",
+      "事実表、参照元、判断メモを使って、プライバシー、価格、プラットフォーム、Local と Cloud Fast の境界を比較できます。",
+    ],
+    quickAria: "クイック比較",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["向いている用途", "プライベートな Mac ローカル音声入力", "{competitor} の既存ワークフロー"],
+      ["Dictivo の形", "$49 買い切り、Tiny は永久無料、14 日間の完全 Local トライアル", "価格とトライアルの注記は下を参照"],
+      ["プライバシー", "Local がデフォルト", "処理場所の詳細は下を参照"],
+    ],
+    atAGlanceKicker: "概要",
+    atAGlanceTitle: "{competitor} vs Dictivo 概要",
+    tableCaption: "{competitor} vs Dictivo 概要",
+    questionHeader: "項目",
+    rowLabels: {
+      "Processing location": "処理場所",
+      "Trains AI on your voice": "音声を AI 学習に使うか",
+      "Works fully offline": "完全オフライン対応",
+      "Account required": "アカウント要否",
+      "Pricing model": "価格モデル",
+      "Free tier / trial": "無料枠 / トライアル",
+      Platforms: "プラットフォーム",
+      "Code and data boundary": "コードとデータの境界",
+    },
+    dictivoRows: {
+      "Processing location": "Local モードでは whisper.cpp により端末上で処理。Cloud Fast はユーザーが選ぶ別経路です。",
+      "Trains AI on your voice": "Local モードでは使いません。",
+      "Works fully offline": "ローカルモデルをインストール後、Local モードで利用できます。",
+      "Account required": "Local 音声入力に Dictivo アカウントは不要です。",
+      "Pricing model": "$49 買い切り、12 か月のアップデート、その後は任意で $24/年更新。",
+      "Free tier / trial": "Tiny は永久無料。さらに全ローカルモデルを 14 日間試せる完全 Local トライアル。",
+      Platforms: "現在 macOS。Windows は検証中。",
+      "Code and data boundary": "クローズドソースのデスクトップアプリ。Local では文字起こしアカウント、クライアント分析、文字起こしのアップロードはありません。",
+    },
+    sections: [
+      {
+        kicker: "背景",
+        title: "{competitor} が向いている場合",
+        paragraphs: [
+          "{competitor} は、対応プラットフォーム、既存ワークフロー、チーム機能、クラウド機能が今の要件に合う場合に適しています。",
+          "この比較は競合製品を不当に低く扱うものではありません。製品の適合度と、Dictivo のより限定された約束を分けて見ます。",
+        ],
+        bullets: [
+          "その製品固有のプラットフォームやワークフローが必要なら、競合製品を選ぶ理由があります。",
+          "価格、トライアル、プライバシー設定は変わるため、公式ソースを確認してください。",
+          "Dictivo は、Dictivo アカウントなしの Mac ローカル文字起こしを標準にしたい場合に向いています。",
+        ],
+      },
+      {
+        kicker: "Dictivo の違い",
+        title: "Dictivo が違うところ",
+        paragraphs: [
+          "Dictivo は Local モードを中心に設計されています。音声認識は Mac 上で動き、文字起こし、履歴、辞書、スニペット、ローカル設定は端末に残ります。",
+          "Cloud Fast は明確に別経路です。速度が完全ローカル処理より重要な録音だけに使います。",
+        ],
+        bullets: [
+          "Tiny は永久無料です。",
+          "14 日間の完全 Local トライアルで全ローカルモデルを使えます。",
+          "Dictivo Local は $49 買い切りで、1 年後のアップデート更新は任意です。",
+          "Local ワークフローに Dictivo の文字起こしアカウントは不要です。",
+        ],
+      },
+      {
+        kicker: "判断",
+        title: "どちらを選ぶべきか",
+        cards: [
+          {
+            title: "{competitor} を選ぶ場合",
+            items: [
+              "現在の対応プラットフォームや製品固有のワークフローが必要な場合。",
+              "ドキュメントに書かれた処理方式やアカウントモデルを受け入れられる場合。",
+              "サブスクリプション、買い切り価格、または内蔵機能であることが予算に合う場合。",
+            ],
+          },
+          {
+            title: "Dictivo を選ぶ場合",
+            items: [
+              "Mac のローカル音声入力を標準経路にしたい場合。",
+              "Local モードに Dictivo アカウントを使いたくない場合。",
+              "全ローカルモデルを 14 日間試してから、低い一括価格で使いたい場合。",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      ["Dictivo は {competitor} の代替ですか？", "はい。Mac のローカル優先音声入力ワークフローを求め、Cloud Fast を別の任意経路として使いたい場合の代替です。"],
+      ["Dictivo アカウントなしで使えますか？", "はい。Local 音声入力には Dictivo アカウントは不要です。Cloud Fast は別の任意経路です。"],
+      ["無料で何を試せますか？", "Tiny は永久無料です。新規インストールでは全ローカルモデルを使える 14 日間の Local トライアルと、その端末で使える Cloud Fast 10 分が付属します。"],
+      ["なぜ比較ページにソースがあるのですか？", "価格、トライアル、対応プラットフォーム、プライバシー設定は変わります。ソースにより比較内容を公開ページに結びつけています。"],
+      ["どちらを選べばよいですか？", "プライベートな Mac 音声入力と Local の買い切り価格が最重要なら Dictivo。対応プラットフォームやクラウド機能が重要なら競合製品を選んでください。"],
+    ],
+    sourcesKicker: "確認済みソース",
+    sourcesTitle: "事実確認日: {date}",
+    sourcesBody: "価格、トライアル、対応平台、プライバシー表記は変わります。以下の公式ページとサポート文書で確認しています。",
+    ctaKicker: "Dictivo を試す",
+    ctaTitle: "Dictivo を 14 日間無料で試す。",
+    ctaBody: "すべてのローカルモデルを利用可能。Local には Dictivo アカウント不要。合えば Dictivo Local は $49 買い切りです。",
+    ctaPrimary: "Dictivo を 14 日間試す",
+    ctaSecondary: "価格を見る",
+    resourceAria: "次の比較ステップ",
+    resourcePricing: "Dictivo の価格とプランを比較",
+    resourceSecurity: "Dictivo のデータ保存場所を読む",
+    resourceRelated: "{competitor} との比較を見る",
+    compareFooter: "代替候補を比較",
+    footerAlternative: "{competitor} の代替",
+    teaserKicker: "比較",
+    teaserTitle: "他の音声入力アプリと迷っていますか？",
+    teaserBody:
+      "クラウド音声入力、ローカルモード型ツール、ファイル文字起こしアプリ、低価格の公開コード系ツール、Apple の内蔵音声入力と Dictivo を比較できます。",
+  }),
+  ko: compactCompareLocale({
+    skipComparison: "비교로 이동",
+    skipComparisons: "비교 목록으로 이동",
+    languageAria: "비교 페이지 언어 변경",
+    updatedLabel: "마지막 업데이트:",
+    hubEyebrow: "비교 허브",
+    hubMetaTitle: "Dictivo 비교: Mac 로컬 받아쓰기 대안",
+    hubMetaDescription:
+      "Dictivo를 Wispr Flow, Superwhisper, MacWhisper, VoiceInk, macOS Dictation과 개인정보, 가격, 워크플로 기준으로 비교합니다.",
+    hubH1: "Dictivo와 다른 받아쓰기 도구 비교",
+    hubLede:
+      "비공개 Mac 받아쓰기 워크플로를 고르기 위한 비교 허브입니다. 각 페이지는 상대 제품이 맞는 경우와 Dictivo가 맞는 경우를 나눠 설명합니다.",
+    hubGridLabel: "Dictivo 비교 페이지",
+    cardTitle: "{competitor} 대안",
+    cardCta: "Dictivo와 {competitor} 비교",
+    pageTitle: "{competitor} 대안: Dictivo의 Mac 로컬 받아쓰기",
+    pageMeta:
+      "Dictivo와 {competitor}를 개인정보, 가격, 플랫폼, Mac 로컬 받아쓰기 워크플로 기준으로 비교합니다.",
+    pageH1: "{competitor}의 대안이 되는 Mac 로컬 받아쓰기",
+    eyebrow: "대안 비교",
+    intro: [
+      "이 페이지는 {competitor}가 맞는 경우와 Dictivo의 Mac 로컬 워크플로가 더 맞는 경우를 설명합니다.",
+      "사실 표, 출처 링크, 선택 기준을 통해 개인정보, 가격, 플랫폼, Local과 Cloud Fast의 경계를 비교할 수 있습니다.",
+    ],
+    quickAria: "빠른 비교",
+    quickPrefix: "{competitor}:",
+    quickTake: [
+      ["적합한 용도", "비공개 Mac 로컬 받아쓰기", "{competitor}의 기존 워크플로"],
+      ["Dictivo 모델", "$49 일회 구매, Tiny 영구 무료, 14일 전체 Local 체험", "아래 가격과 체험 정보 참고"],
+      ["개인정보 모델", "Local 기본값", "아래 처리 위치 세부 정보 참고"],
+    ],
+    atAGlanceKicker: "요약",
+    atAGlanceTitle: "{competitor} vs Dictivo 요약",
+    tableCaption: "{competitor} vs Dictivo 요약",
+    questionHeader: "항목",
+    rowLabels: {
+      "Processing location": "처리 위치",
+      "Trains AI on your voice": "음성을 AI 학습에 사용하는지",
+      "Works fully offline": "완전 오프라인 동작",
+      "Account required": "계정 필요 여부",
+      "Pricing model": "가격 모델",
+      "Free tier / trial": "무료 티어 / 체험",
+      Platforms: "플랫폼",
+      "Code and data boundary": "코드와 데이터 경계",
+    },
+    dictivoRows: {
+      "Processing location": "Local 모드에서는 whisper.cpp로 기기에서 처리합니다. Cloud Fast는 사용자가 선택하는 별도 경로입니다.",
+      "Trains AI on your voice": "Local 모드에서는 사용하지 않습니다.",
+      "Works fully offline": "로컬 모델 설치 후 Local 모드에서 가능합니다.",
+      "Account required": "Local 받아쓰기에 Dictivo 계정은 필요 없습니다.",
+      "Pricing model": "$49 일회 구매, 12개월 업데이트, 이후 선택적 $24/년 업데이트 갱신.",
+      "Free tier / trial": "Tiny는 영구 무료이며, 모든 로컬 모델을 여는 14일 전체 Local 체험을 제공합니다.",
+      Platforms: "현재 macOS. Windows는 검증 중입니다.",
+      "Code and data boundary": "폐쇄형 데스크톱 앱. Local에는 전사 계정, 클라이언트 분석, 전사 업로드가 없습니다.",
+    },
+    sections: [
+      {
+        kicker: "배경",
+        title: "{competitor}가 맞을 수 있는 경우",
+        paragraphs: [
+          "{competitor}는 플랫폼 지원, 기존 워크플로, 팀 기능, 클라우드 기능이 현재 요구에 맞을 때 좋은 선택일 수 있습니다.",
+          "이 비교는 경쟁 제품을 낮춰 보려는 것이 아닙니다. 제품 적합성과 Dictivo의 더 좁은 약속, 즉 로컬에서 시작하는 비공개 Mac 받아쓰기를 구분합니다.",
+        ],
+        bullets: [
+          "특정 플랫폼이나 워크플로 장점이 필요하면 경쟁 제품을 선택할 이유가 있습니다.",
+          "가격, 체험 제한, 개인정보 제어는 변할 수 있으므로 공식 출처를 확인하세요.",
+          "기본 경로가 Dictivo 계정 없는 Mac 로컬 전사여야 한다면 Dictivo를 사용하세요.",
+        ],
+      },
+      {
+        kicker: "Dictivo 차이",
+        title: "Dictivo가 다른 점",
+        paragraphs: [
+          "Dictivo는 먼저 Local 모드를 중심으로 만들어졌습니다. 음성 인식은 Mac에서 실행되고 전사, 기록, 사전, 스니펫, 로컬 설정은 기기에 남습니다.",
+          "Cloud Fast는 의도적으로 별도 경로입니다. 속도가 완전 로컬 처리보다 중요할 때만 사용합니다.",
+        ],
+        bullets: [
+          "Tiny는 영구 무료입니다.",
+          "14일 전체 Local 체험으로 모든 로컬 모델이 열립니다.",
+          "Dictivo Local은 $49 일회 구매이며, 첫해 이후 업데이트 갱신은 선택 사항입니다.",
+          "Local 워크플로에는 Dictivo 전사 계정이 필요 없습니다.",
+        ],
+      },
+      {
+        kicker: "선택",
+        title: "어느 쪽을 선택해야 할까",
+        cards: [
+          {
+            title: "{competitor}를 선택할 때",
+            items: [
+              "현재 플랫폼 지원이나 제품 고유 워크플로가 필요할 때.",
+              "문서에 설명된 처리 방식과 계정 모델이 적합할 때.",
+              "구독, 평생 가격, 또는 내장 기능이라는 점이 예산에 더 맞을 때.",
+            ],
+          },
+          {
+            title: "Dictivo를 선택할 때",
+            items: [
+              "Mac 로컬 받아쓰기를 기본 경로로 쓰고 싶을 때.",
+              "Local 모드에 Dictivo 계정을 만들고 싶지 않을 때.",
+              "모든 로컬 모델을 14일 체험한 뒤 더 낮은 일회 구매 가격을 원할 때.",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      ["Dictivo는 {competitor}의 대안인가요?", "예. Mac에서 로컬 우선 받아쓰기 워크플로를 원하고 Cloud Fast를 별도 옵션으로 쓰고 싶다면 Dictivo는 대안입니다."],
+      ["Dictivo 계정 없이 사용할 수 있나요?", "예. Local 받아쓰기는 Dictivo 계정이 필요 없습니다. Cloud Fast는 별도의 선택 경로입니다."],
+      ["무료로 무엇을 써볼 수 있나요?", "Tiny는 영구 무료입니다. 새 설치에는 모든 로컬 모델을 여는 14일 Local 체험과 해당 기기의 Cloud Fast 10분 평생 무료 사용이 포함됩니다."],
+      ["왜 비교 페이지에 출처가 있나요?", "가격, 체험, 플랫폼 지원, 개인정보 제어는 바뀔 수 있습니다. 출처는 비교 내용을 공개 제품 및 지원 페이지에 연결합니다."],
+      ["무엇을 선택해야 하나요?", "비공개 Mac 받아쓰기와 Local 일회 구매 가격이 가장 중요하면 Dictivo를 선택하세요. 플랫폼이나 클라우드 기능이 더 중요하면 경쟁 제품을 선택하세요."],
+    ],
+    sourcesKicker: "확인한 출처",
+    sourcesTitle: "사실 재확인일: {date}",
+    sourcesBody: "가격, 체험, 플랫폼, 개인정보 조건은 바뀔 수 있습니다. 아래 공식 제품 및 지원 문서 기준으로 확인했습니다.",
+    ctaKicker: "Dictivo 체험",
+    ctaTitle: "Dictivo를 14일 무료로 체험하세요.",
+    ctaBody: "모든 로컬 모델이 열리고, Local에는 Dictivo 계정이 필요 없습니다. 맞는다면 Dictivo Local은 $49 일회 구매입니다.",
+    ctaPrimary: "Dictivo 14일 체험",
+    ctaSecondary: "가격 보기",
+    resourceAria: "다음 비교 단계",
+    resourcePricing: "Dictivo 가격과 플랜 비교",
+    resourceSecurity: "Dictivo 데이터 위치 읽기",
+    resourceRelated: "{competitor}와의 비교 보기",
+    compareFooter: "대안 비교",
+    footerAlternative: "{competitor} 대안",
+    teaserKicker: "비교",
+    teaserTitle: "다른 받아쓰기 앱과 비교 중인가요?",
+    teaserBody:
+      "클라우드 받아쓰기, 로컬 모드 도구, 파일 전사 앱, 저가 공개 코드 도구, Apple 내장 받아쓰기와 Dictivo를 비교하세요.",
+  }),
+});
+
+function compareCopy(code) {
+  if (code === "en") return COMPARE_I18N.en;
+  return compactCompareLocale(COMPARE_I18N[code] || {});
 }
 
 function assetTags() {
@@ -64,11 +1456,20 @@ function hreflangTags(currentCode) {
   return alternates.join("\n    ");
 }
 
-function renderLanguageMenu(currentCode, t) {
+function compareHreflangTags(currentCode, slug = "") {
+  const alternates = LOCALES.map(
+    (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(localizedCompareUrl(locale.code, slug))}" />`,
+  );
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${attr(localizedCompareUrl("en", slug))}" />`);
+  alternates.push(`<link rel="canonical" href="${attr(localizedCompareUrl(currentCode, slug))}" />`);
+  return alternates.join("\n    ");
+}
+
+function renderLanguageMenu(currentCode, t, hrefForLocale = (locale) => locale.path) {
   const current = localeByCode(currentCode);
   const links = LOCALES.map((locale) => {
     const active = locale.code === currentCode ? ' aria-current="page"' : "";
-    return `<a href="${attr(locale.path)}" lang="${attr(locale.htmlLang)}" hreflang="${attr(locale.htmlLang)}"${active}>
+    return `<a href="${attr(hrefForLocale(locale))}" lang="${attr(locale.htmlLang)}" hreflang="${attr(locale.htmlLang)}"${active}>
               <span>${html(locale.nativeName)}</span>
               <small>${html(locale.name)}</small>
             </a>`;
@@ -85,7 +1486,7 @@ function renderLanguageMenu(currentCode, t) {
           </details>`;
 }
 
-function renderHeader(currentCode, t) {
+function renderHeader(currentCode, t, options = {}) {
   const hash = (id) => localePath(currentCode, `#${id}`);
   return `<header class="site-header" aria-label="Primary navigation">
       <a class="brand" href="${attr(localePath(currentCode))}" aria-label="Dictivo home">
@@ -100,7 +1501,7 @@ function renderHeader(currentCode, t) {
         <a href="${attr(hash("downloads"))}">${html(t.nav.downloads)}</a>
       </nav>
       <div class="header-actions">
-        ${renderLanguageMenu(currentCode, t)}
+        ${renderLanguageMenu(currentCode, t, options.hrefForLocale)}
         <a class="header-download" href="${attr(hash("downloads"))}">${html(t.nav.download)}</a>
       </div>
     </header>`;
@@ -193,8 +1594,60 @@ function renderSchema(currentCode, t) {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
-function renderCompareSchema(page) {
-  const pageUrl = absoluteUrl(comparePath(page.slug));
+function localizedCompareTitle(page, copy) {
+  return fillCompareTemplate(copy.pageTitle, page);
+}
+
+function localizedCompareMeta(page, copy) {
+  return fillCompareTemplate(copy.pageMeta, page);
+}
+
+function localizedCompareH1(page, copy) {
+  return fillCompareTemplate(copy.pageH1, page);
+}
+
+function localizedTemplateList(items, page) {
+  return items.map((item) => (Array.isArray(item) ? item.map((value) => fillCompareTemplate(value, page)) : fillCompareTemplate(item, page)));
+}
+
+function localizedCompareQuickTake(page, copy) {
+  if (copy === COMPARE_I18N.en) return page.quickTake;
+  return localizedTemplateList(copy.quickTake, page);
+}
+
+function localizedCompareRows(page, copy) {
+  if (copy === COMPARE_I18N.en) return page.rows;
+  return page.rows.map((row) => ({
+    ...row,
+    label: copy.rowLabels[row.label] || row.label,
+    dictivo: copy.dictivoRows[row.label] || row.dictivo,
+  }));
+}
+
+function localizedCompareSections(page, copy) {
+  if (copy === COMPARE_I18N.en) return page.sections;
+  return copy.sections.map((section) => ({
+    ...section,
+    title: fillCompareTemplate(section.title, page),
+    paragraphs: localizedTemplateList(section.paragraphs || [], page),
+    bullets: localizedTemplateList(section.bullets || [], page),
+    cards: section.cards?.map((card) => ({
+      ...card,
+      title: fillCompareTemplate(card.title, page),
+      items: localizedTemplateList(card.items, page),
+    })),
+  }));
+}
+
+function localizedCompareFaqs(page, copy) {
+  if (copy === COMPARE_I18N.en) return page.faqs;
+  return localizedTemplateList(copy.faqs, page);
+}
+
+function renderCompareSchema(page, currentCode) {
+  const copy = compareCopy(currentCode);
+  const pageUrl = localizedCompareUrl(currentCode, page.slug);
+  const faqs = localizedCompareFaqs(page, copy);
   const schema = [
     {
       "@context": "https://schema.org",
@@ -205,8 +1658,7 @@ function renderCompareSchema(page) {
       url: BASE_URL,
       downloadUrl: `${BASE_URL}/download/mac`,
       softwareVersion: release.version,
-      description:
-        "Private-first Mac dictation with on-device Local mode, optional Cloud Fast, local history, dictionary, and snippets.",
+      description: localizedCompareMeta(page, copy),
       offers: {
         "@type": "Offer",
         name: "Dictivo Local",
@@ -217,7 +1669,7 @@ function renderCompareSchema(page) {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: page.faqs.map(([question, answer]) => ({
+      mainEntity: faqs.map(([question, answer]) => ({
         "@type": "Question",
         name: question,
         acceptedAnswer: {
@@ -230,9 +1682,9 @@ function renderCompareSchema(page) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
-        { "@type": "ListItem", position: 2, name: "Compare", item: absoluteUrl(comparePath()) },
-        { "@type": "ListItem", position: 3, name: `${page.competitor} alternative`, item: pageUrl },
+        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        { "@type": "ListItem", position: 2, name: copy.compareFooter, item: localizedCompareUrl(currentCode) },
+        { "@type": "ListItem", position: 3, name: fillCompareTemplate(copy.footerAlternative, page), item: pageUrl },
       ],
     },
   ];
@@ -282,33 +1734,35 @@ ${section.cards
           </section>`;
 }
 
-function renderCompareQuickTake(page) {
-  return `<div class="compare-quick-take" aria-label="Quick comparison">
-${page.quickTake
+function renderCompareQuickTake(page, copy) {
+  const quickTake = localizedCompareQuickTake(page, copy);
+  return `<div class="compare-quick-take" aria-label="${attr(copy.quickAria)}">
+${quickTake
   .map(
     ([label, dictivo, competitor]) => `          <article>
             <span>${html(label)}</span>
             <strong>${html(dictivo)}</strong>
-            <p>${html(page.competitor)}: ${html(competitor)}</p>
+            <p>${html(fillCompareTemplate(copy.quickPrefix, page))} ${html(competitor)}</p>
           </article>`,
   )
   .join("\n")}
         </div>`;
 }
 
-function renderCompareTable(page) {
+function renderCompareTable(page, copy) {
+  const rows = localizedCompareRows(page, copy);
   return `<div class="compare-table-wrap">
             <table class="compare-table">
-              <caption>${html(page.competitor)} vs Dictivo at a glance</caption>
+              <caption>${html(fillCompareTemplate(copy.tableCaption, page))}</caption>
               <thead>
                 <tr>
-                  <th scope="col">Question</th>
+                  <th scope="col">${html(copy.questionHeader)}</th>
                   <th scope="col">Dictivo</th>
-                  <th scope="col">${html(page.competitor)}</th>
+                  <th scope="col">${html(fillCompareTemplate(copy.competitorHeader, page))}</th>
                 </tr>
               </thead>
               <tbody>
-${page.rows
+${rows
   .map(
     (row) => `                <tr>
                   <th scope="row">${html(row.label)}</th>
@@ -330,27 +1784,28 @@ function relatedComparePages(page) {
   });
 }
 
-function renderCompareLinks(page) {
+function renderCompareLinks(page, currentCode, copy) {
   const relatedLinks = relatedComparePages(page)
     .map(
       (related) =>
-        `<a href="${attr(comparePath(related.slug))}">See how Dictivo compares to ${html(related.competitor)}</a>`,
+        `<a href="${attr(localizedComparePath(currentCode, related.slug))}">${html(fillCompareTemplate(copy.resourceRelated, related))}</a>`,
     )
     .join("\n              ");
 
-  return `<nav class="compare-resource-links" aria-label="Comparison next steps">
-              <a href="/#pricing">Compare Dictivo pricing and plans</a>
-              <a href="/security">Read where Dictivo data lives</a>
+  return `<nav class="compare-resource-links" aria-label="${attr(copy.resourceAria)}">
+              <a href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.resourcePricing)}</a>
+              <a href="/security">${html(copy.resourceSecurity)}</a>
               ${relatedLinks}
             </nav>`;
 }
 
-function renderCompareFaq(page) {
+function renderCompareFaq(page, copy) {
+  const faqs = localizedCompareFaqs(page, copy);
   return `<section class="compare-section compare-faq-section" id="faq" aria-labelledby="compare-faq-title">
-            <p class="doc-meta">FAQ</p>
-            <h2 id="compare-faq-title">Frequently asked questions</h2>
+            <p class="doc-meta">${html(copy.faqKicker)}</p>
+            <h2 id="compare-faq-title">${html(copy.faqTitle)}</h2>
             <div class="compare-faq-list">
-${page.faqs
+${faqs
   .map(
     ([question, answer], index) => `              <details class="faq-item">
                 <summary>
@@ -378,160 +1833,173 @@ function sourceLabel(source) {
   }
 }
 
-function renderCompareSources(page) {
+function renderCompareSources(page, copy) {
   return `<section class="compare-section compare-source-section" aria-labelledby="compare-sources-title">
-            <p class="doc-meta">Sources checked</p>
-            <h2 id="compare-sources-title">Facts re-checked on ${html(COMPARE_SOURCE_CHECK_DATE)}</h2>
-            <p>Pricing, trial, platform, and privacy claims change. These comparison notes were checked against the official product pages and support documents below.</p>
+            <p class="doc-meta">${html(copy.sourcesKicker)}</p>
+            <h2 id="compare-sources-title">${html(copy.sourcesTitle.replace("{date}", COMPARE_SOURCE_CHECK_DATE))}</h2>
+            <p>${html(copy.sourcesBody)}</p>
             <ul class="compare-source-list">
 ${page.sources.map((source) => `              <li><a href="${attr(source)}" rel="nofollow noopener">${html(sourceLabel(source))}</a></li>`).join("\n")}
             </ul>
           </section>`;
 }
 
-function renderCompareCta(page) {
+function renderCompareCta(page, currentCode, copy) {
   return `<section class="compare-cta" aria-labelledby="compare-cta-title">
             <div>
-              <p class="doc-meta">Try Dictivo</p>
-              <h2 id="compare-cta-title">Try Dictivo free for 14 days.</h2>
-              <p>Every local model unlocked, no Dictivo account for Local mode. Buy Local for $49 once if it fits your workflow.</p>
+              <p class="doc-meta">${html(copy.ctaKicker)}</p>
+              <h2 id="compare-cta-title">${html(copy.ctaTitle)}</h2>
+              <p>${html(copy.ctaBody)}</p>
             </div>
             <div class="compare-cta-actions">
-              <a class="button button-light download-link" href="/download/mac" data-platform="macos">Try Dictivo free for 14 days</a>
-              <a class="button button-outline" href="/#pricing">See pricing</a>
+              <a class="button button-light download-link" href="/download/mac" data-platform="macos">${html(copy.ctaPrimary)}</a>
+              <a class="button button-outline" href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.ctaSecondary)}</a>
             </div>
-            ${renderCompareLinks(page)}
+            ${renderCompareLinks(page, currentCode, copy)}
           </section>`;
 }
 
-function renderComparePage(page) {
-  const canonical = absoluteUrl(comparePath(page.slug));
+function renderComparePage(page, currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  const t = HOME_COPY[currentCode];
+  const copy = compareCopy(currentCode);
+  const canonical = localizedCompareUrl(currentCode, page.slug);
+  const title = currentCode === "en" ? page.title : localizedCompareTitle(page, copy);
+  const metaDescription = currentCode === "en" ? page.metaDescription : localizedCompareMeta(page, copy);
+  const h1 = currentCode === "en" ? page.h1 : localizedCompareH1(page, copy);
+  const intro = currentCode === "en" ? page.intro : localizedTemplateList(copy.intro, page);
+  const sections = localizedCompareSections(page, copy);
   return `<!doctype html>
-<html lang="en">
+<html lang="${attr(locale.htmlLang)}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(page.title)}</title>
-    <meta name="description" content="${attr(page.metaDescription)}" />
+    <title>${html(title)}</title>
+    <meta name="description" content="${attr(metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(page.title)}" />
-    <meta property="og:description" content="${attr(page.metaDescription)}" />
+    <meta property="og:title" content="${attr(title)}" />
+    <meta property="og:description" content="${attr(metaDescription)}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="${attr(canonical)}" />
     <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
-    <link rel="canonical" href="${attr(canonical)}" />
+    ${compareHreflangTags(currentCode, page.slug)}
     ${assetTags()}
-    ${renderCompareSchema(page)}
+    ${renderCompareSchema(page, currentCode)}
   </head>
   <body>
     ${renderCompareSourceComment(page)}
-    <a class="skip-link" href="#comparison">Skip to comparison</a>
-    ${renderHeader("en", HOME_COPY.en)}
+    <a class="skip-link" href="#comparison">${html(copy.skipComparison)}</a>
+    ${renderHeader(currentCode, t, { hrefForLocale: (item) => localizedComparePath(item.code, page.slug) })}
     <main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
-        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(page.eyebrow)}</span>
-        <p class="compare-updated">Last updated: <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
-        <h1 id="compare-title">${html(page.h1)}</h1>
-        <p class="doc-lede">${html(page.intro.join(" "))}</p>
-        ${renderCompareQuickTake(page)}
+        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
+        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
+        <h1 id="compare-title">${html(h1)}</h1>
+        <p class="doc-lede">${html(intro.join(" "))}</p>
+        ${renderCompareQuickTake(page, copy)}
       </section>
 
       <section class="compare-section compare-table-section" aria-labelledby="at-a-glance">
-        <p class="doc-meta">At a glance</p>
-        <h2 id="at-a-glance">${html(page.competitor)} vs Dictivo at a glance</h2>
-        ${renderCompareTable(page)}
+        <p class="doc-meta">${html(copy.atAGlanceKicker)}</p>
+        <h2 id="at-a-glance">${html(currentCode === "en" ? `${page.competitor} vs Dictivo at a glance` : fillCompareTemplate(copy.atAGlanceTitle, page))}</h2>
+        ${renderCompareTable(page, copy)}
       </section>
 
-      ${page.sections.map(renderCompareSection).join("\n\n      ")}
+      ${sections.map(renderCompareSection).join("\n\n      ")}
 
-      ${renderCompareFaq(page)}
+      ${renderCompareFaq(page, copy)}
 
-      ${renderCompareSources(page)}
+      ${renderCompareSources(page, copy)}
 
-      ${renderCompareCta(page)}
+      ${renderCompareCta(page, currentCode, copy)}
     </main>
-    ${renderFooterOnly()}
+    ${renderFooterOnly(currentCode)}
   </body>
 </html>
 `;
 }
 
-function renderCompareHubSchema() {
+function renderCompareHubSchema(currentCode) {
+  const copy = compareCopy(currentCode);
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: COMPARE_HUB.title,
-    url: absoluteUrl(comparePath()),
+    name: copy.hubMetaTitle,
+    url: localizedCompareUrl(currentCode),
     hasPart: COMPARE_PAGES.map((page) => ({
       "@type": "WebPage",
-      name: page.title,
-      url: absoluteUrl(comparePath(page.slug)),
+      name: currentCode === "en" ? page.title : localizedCompareTitle(page, copy),
+      url: localizedCompareUrl(currentCode, page.slug),
     })),
   };
 
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
-function renderCompareHub() {
-  const canonical = absoluteUrl(comparePath());
+function renderCompareHub(currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  const t = HOME_COPY[currentCode];
+  const copy = compareCopy(currentCode);
+  const canonical = localizedCompareUrl(currentCode);
   return `<!doctype html>
-<html lang="en">
+<html lang="${attr(locale.htmlLang)}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(COMPARE_HUB.metaTitle)}</title>
-    <meta name="description" content="${attr(COMPARE_HUB.metaDescription)}" />
+    <title>${html(copy.hubMetaTitle)}</title>
+    <meta name="description" content="${attr(copy.hubMetaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(COMPARE_HUB.metaTitle)}" />
-    <meta property="og:description" content="${attr(COMPARE_HUB.metaDescription)}" />
+    <meta property="og:title" content="${attr(copy.hubMetaTitle)}" />
+    <meta property="og:description" content="${attr(copy.hubMetaDescription)}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${attr(canonical)}" />
     <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
-    <link rel="canonical" href="${attr(canonical)}" />
+    ${compareHreflangTags(currentCode)}
     ${assetTags()}
-    ${renderCompareHubSchema()}
+    ${renderCompareHubSchema(currentCode)}
   </head>
   <body>
-    <a class="skip-link" href="#compare-hub">Skip to comparisons</a>
-    ${renderHeader("en", HOME_COPY.en)}
+    <a class="skip-link" href="#compare-hub">${html(copy.skipComparisons)}</a>
+    ${renderHeader(currentCode, t, { hrefForLocale: (item) => localizedComparePath(item.code) })}
     <main class="compare-page compare-hub" id="compare-hub">
       <section class="compare-hero" aria-labelledby="compare-hub-title">
-        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Comparison hub</span>
-        <p class="compare-updated">Last updated: <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
-        <h1 id="compare-hub-title">${html(COMPARE_HUB.h1)}</h1>
-        <p class="doc-lede">${html(COMPARE_HUB.lede)}</p>
+        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.hubEyebrow)}</span>
+        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
+        <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
+        <p class="doc-lede">${html(copy.hubLede)}</p>
       </section>
 
-      <section class="compare-hub-grid" aria-label="Dictivo comparison pages">
+      <section class="compare-hub-grid" aria-label="${attr(copy.hubGridLabel)}">
 ${COMPARE_PAGES.map(
   (page) => `        <article class="compare-hub-card">
           <span>${html(page.primaryKeyword)}</span>
-          <h2>${html(page.competitor)} alternative</h2>
-          <p>${html(page.intro[1])}</p>
-          <a class="button-link" href="${attr(comparePath(page.slug))}">Compare Dictivo with ${html(page.competitor)}</a>
+          <h2>${html(currentCode === "en" ? `${page.competitor} alternative` : fillCompareTemplate(copy.cardTitle, page))}</h2>
+          <p>${html(currentCode === "en" ? page.intro[1] : fillCompareTemplate(copy.pageMeta, page))}</p>
+          <a class="button-link" href="${attr(localizedComparePath(currentCode, page.slug))}">${html(fillCompareTemplate(copy.cardCta, page))}</a>
         </article>`,
 ).join("\n")}
       </section>
     </main>
-    ${renderFooterOnly()}
+    ${renderFooterOnly(currentCode)}
   </body>
 </html>
 `;
 }
 
-function renderCompareTeaser() {
+function renderCompareTeaser(currentCode = "en") {
+  const copy = compareCopy(currentCode);
   return `<section class="compare-teaser reveal" id="compare" aria-labelledby="compare-teaser-title">
         <div class="section-shell">
           <div class="section-heading section-heading-left">
-            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>Compare</span>
-            <h2 id="compare-teaser-title">Choosing against another dictation app?</h2>
-            <p>Compare Dictivo with the tools people usually evaluate first: cloud dictation, local mode systems, file transcription apps, low-cost public-code tools, and Apple's built-in Dictation.</p>
+            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(copy.teaserKicker)}</span>
+            <h2 id="compare-teaser-title">${html(copy.teaserTitle)}</h2>
+            <p>${html(copy.teaserBody)}</p>
           </div>
           <div class="compare-teaser-grid">
 ${COMPARE_NAV_LINKS.map(
-  (link) => `            <a href="${attr(link.href)}">
+  (link) => `            <a href="${attr(localizedComparePath(currentCode, link.slug))}">
               <span>${html(link.competitor)}</span>
-              <strong>${html(link.title)}</strong>
+              <strong>${html(currentCode === "en" ? link.title : fillCompareTemplate(copy.footerAlternative, { competitor: link.competitor }))}</strong>
             </a>`,
 ).join("\n")}
           </div>
@@ -539,9 +2007,10 @@ ${COMPARE_NAV_LINKS.map(
       </section>`;
 }
 
-function renderCompareFooterLinks() {
-  return `<a href="/compare">Compare alternatives</a>
-        ${COMPARE_NAV_LINKS.map((link) => `<a href="${attr(link.href)}">${html(link.competitor)} alternative</a>`).join("\n        ")}`;
+function renderCompareFooterLinks(currentCode = "en") {
+  const copy = compareCopy(currentCode);
+  return `<a href="${attr(localizedComparePath(currentCode))}">${html(copy.compareFooter)}</a>
+        ${COMPARE_NAV_LINKS.map((link) => `<a href="${attr(localizedComparePath(currentCode, link.slug))}">${html(fillCompareTemplate(copy.footerAlternative, { competitor: link.competitor }))}</a>`).join("\n        ")}`;
 }
 
 function renderHomeFooterLinks(currentCode, t) {
@@ -550,7 +2019,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
     `<a href="${attr(localePath(currentCode, "#cloud-fast"))}">${html(t.nav.cloudFast)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
-    currentCode === "en" ? renderCompareFooterLinks() : "",
+    renderCompareFooterLinks(currentCode),
     `<a href="/changelog">Changelog</a>`,
     `<a href="/security">Security</a>`,
     `<a href="mailto:support@dictivo.app">support@dictivo.app</a>`,
@@ -562,7 +2031,7 @@ function renderHome(currentCode) {
   const locale = localeByCode(currentCode);
   const t = HOME_COPY[currentCode];
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
-  const compareTeaser = currentCode === "en" ? `${renderCompareTeaser()}\n\n` : "";
+  const compareTeaser = `${renderCompareTeaser(currentCode)}\n\n`;
 
   const languagePills = LOCALES.map(
     (item) => `<a href="${attr(item.path)}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
@@ -900,20 +2369,25 @@ ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
   </url>`,
   ).join("\n");
-  const compareEntries = [
-    `  <url>
-    <loc>${absoluteUrl(comparePath())}</loc>
+  const compareEntry = (code, slug = "", priority = "0.7") => {
+    const compareAlternates = LOCALES.map(
+      (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localizedCompareUrl(locale.code, slug)}" />`,
+    ).join("\n");
+    const compareXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedCompareUrl("en", slug)}" />`;
+    return `  <url>
+    <loc>${localizedCompareUrl(code, slug)}</loc>
     <lastmod>${COMPARE_LAST_UPDATED.iso}</lastmod>
-    <priority>0.8</priority>
-  </url>`,
-    ...COMPARE_PAGES.map(
-      (page) => `  <url>
-    <loc>${absoluteUrl(comparePath(page.slug))}</loc>
-    <lastmod>${COMPARE_LAST_UPDATED.iso}</lastmod>
-    <priority>${page.slug === "wispr-flow-alternative" ? "0.8" : "0.7"}</priority>
-  </url>`,
+${compareAlternates}
+${compareXDefault}
+    <priority>${priority}</priority>
+  </url>`;
+  };
+  const compareEntries = LOCALES.flatMap((locale) => [
+    compareEntry(locale.code, "", locale.code === "en" ? "0.8" : "0.75"),
+    ...COMPARE_PAGES.map((page) =>
+      compareEntry(locale.code, page.slug, page.slug === "wispr-flow-alternative" ? "0.8" : "0.7"),
     ),
-  ].join("\n");
+  ]).join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -1062,20 +2536,20 @@ function renderChangelog() {
 `;
 }
 
-function renderFooterOnly() {
-  const t = HOME_COPY.en;
+function renderFooterOnly(currentCode = "en") {
+  const t = HOME_COPY[currentCode] || HOME_COPY.en;
   return `<footer class="site-footer">
       <div class="footer-meta">
-        <a class="brand footer-brand" href="/" aria-label="Dictivo home"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-name">Dictivo</span></a>
+        <a class="brand footer-brand" href="${attr(localePath(currentCode))}" aria-label="Dictivo home"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-name">Dictivo</span></a>
         <p class="footer-tagline">${html(t.footer.tagline)}</p>
         <p>${html(t.footer.beta)}</p>
       </div>
       <div class="footer-links">
-        <a href="/#privacy">Privacy</a>
-        <a href="/#pricing">Pricing</a>
-        <a href="/#cloud-fast">Cloud Fast</a>
-        <a href="/#downloads">Downloads</a>
-        ${renderCompareFooterLinks()}
+        <a href="${attr(localePath(currentCode, "#privacy"))}">${html(t.nav.privacy)}</a>
+        <a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>
+        <a href="${attr(localePath(currentCode, "#cloud-fast"))}">${html(t.nav.cloudFast)}</a>
+        <a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>
+        ${renderCompareFooterLinks(currentCode)}
         <a href="/changelog">Changelog</a>
         <a href="/security">Security</a>
         <a href="mailto:support@dictivo.app">support@dictivo.app</a>
@@ -1105,9 +2579,12 @@ for (const locale of LOCALES) {
   write(locale.code === "en" ? "index.html" : `${locale.code}/index.html`, renderHome(locale.code));
 }
 
-write("compare/index.html", renderCompareHub());
-for (const page of COMPARE_PAGES) {
-  write(`compare/${page.slug}/index.html`, renderComparePage(page));
+for (const locale of LOCALES) {
+  const compareRoot = locale.code === "en" ? "compare" : `${locale.code}/compare`;
+  write(`${compareRoot}/index.html`, renderCompareHub(locale.code));
+  for (const page of COMPARE_PAGES) {
+    write(`${compareRoot}/${page.slug}/index.html`, renderComparePage(page, locale.code));
+  }
 }
 
 write("downloads.json", renderDownloadsJson());

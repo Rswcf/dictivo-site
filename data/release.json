@@ -1,14 +1,14 @@
 {
-  "version": "0.3.14",
-  "tag": "v0.3.14",
+  "version": "0.3.16",
+  "tag": "v0.3.16",
   "channel": "stable",
   "updatedAt": "2026-05-25",
-  "publishedAt": "2026-05-24T21:20:43Z",
-  "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.14",
+  "publishedAt": "2026-05-25T21:22:27Z",
+  "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.16",
   "dmg": {
-    "fileName": "Dictivo_0.3.14_universal.dmg",
-    "url": "https://downloads.dictivo.app/v0.3.14/Dictivo_0.3.14_universal.dmg",
-    "sha256": "d4019113580fdb82cc7bd4badd8df588e6f540f7120fb90d1f37ae8e92c86a7c",
-    "size": 23362661
+    "fileName": "Dictivo_0.3.16_universal.dmg",
+    "url": "https://downloads.dictivo.app/v0.3.16/Dictivo_0.3.16_universal.dmg",
+    "sha256": "a9df4e82a0f4e6c410526b03449bd898f0804dc124cd2952fb06c4de1fe3ec8c",
+    "size": 23425369
   }
 }
