@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+import { COMPARE_HUB, COMPARE_LAST_UPDATED, COMPARE_NAV_LINKS, COMPARE_PAGES, COMPARE_SOURCE_CHECK_DATE } from "../data/compare-pages.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -25,6 +26,10 @@ function localeByCode(code) {
 
 function absoluteUrl(path) {
   return new URL(path, BASE_URL).toString();
+}
+
+function comparePath(slug = "") {
+  return slug ? `/compare/${slug}` : "/compare";
 }
 
 function localePath(code, fragment = "") {
@@ -188,10 +193,376 @@ function renderSchema(currentCode, t) {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
+function renderCompareSchema(page) {
+  const pageUrl = absoluteUrl(comparePath(page.slug));
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "Dictivo",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "macOS",
+      url: BASE_URL,
+      downloadUrl: `${BASE_URL}/download/mac`,
+      softwareVersion: release.version,
+      description:
+        "Private-first Mac dictation with on-device Local mode, optional Cloud Fast, local history, dictionary, and snippets.",
+      offers: {
+        "@type": "Offer",
+        name: "Dictivo Local",
+        price: "49",
+        priceCurrency: "USD",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: page.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: "Compare", item: absoluteUrl(comparePath()) },
+        { "@type": "ListItem", position: 3, name: `${page.competitor} alternative`, item: pageUrl },
+      ],
+    },
+  ];
+
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderCompareSourceComment(page) {
+  const sourceLines = page.sources.map((source) => `  - ${source}`).join("\n");
+  return `<!--
+Comparison facts re-verified on ${COMPARE_SOURCE_CHECK_DATE}.
+Price/trial/privacy sources:
+${sourceLines}
+-->`;
+}
+
+function renderCompareBullets(items, className = "compare-bullets") {
+  if (!items?.length) return "";
+  return `<ul class="${attr(className)}">
+${items.map((item) => `              <li>${html(item)}</li>`).join("\n")}
+            </ul>`;
+}
+
+function renderCompareSection(section, index) {
+  const id = `compare-section-${index + 1}`;
+  const paragraphs = (section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n            ");
+  const bullets = renderCompareBullets(section.bullets || []);
+  const cards = section.cards?.length
+    ? `<div class="compare-choice-grid">
+${section.cards
+  .map(
+    (card) => `              <article class="compare-choice-card">
+                <h3>${html(card.title)}</h3>
+                ${renderCompareBullets(card.items, "compare-bullets compare-bullets--compact")}
+              </article>`,
+  )
+  .join("\n")}
+            </div>`
+    : "";
+
+  return `<section class="compare-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+            <p class="doc-meta">${html(section.kicker)}</p>
+            <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
+            ${paragraphs}
+            ${bullets}
+            ${cards}
+          </section>`;
+}
+
+function renderCompareQuickTake(page) {
+  return `<div class="compare-quick-take" aria-label="Quick comparison">
+${page.quickTake
+  .map(
+    ([label, dictivo, competitor]) => `          <article>
+            <span>${html(label)}</span>
+            <strong>${html(dictivo)}</strong>
+            <p>${html(page.competitor)}: ${html(competitor)}</p>
+          </article>`,
+  )
+  .join("\n")}
+        </div>`;
+}
+
+function renderCompareTable(page) {
+  return `<div class="compare-table-wrap">
+            <table class="compare-table">
+              <caption>${html(page.competitor)} vs Dictivo at a glance</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Question</th>
+                  <th scope="col">Dictivo</th>
+                  <th scope="col">${html(page.competitor)}</th>
+                </tr>
+              </thead>
+              <tbody>
+${page.rows
+  .map(
+    (row) => `                <tr>
+                  <th scope="row">${html(row.label)}</th>
+                  <td>${html(row.dictivo)}</td>
+                  <td>${html(row.competitor)}</td>
+                </tr>`,
+  )
+  .join("\n")}
+              </tbody>
+            </table>
+          </div>`;
+}
+
+function relatedComparePages(page) {
+  return page.related.map((slug) => {
+    const related = COMPARE_PAGES.find((item) => item.slug === slug);
+    if (!related) throw new Error(`Unknown related comparison page: ${slug}`);
+    return related;
+  });
+}
+
+function renderCompareLinks(page) {
+  const relatedLinks = relatedComparePages(page)
+    .map(
+      (related) =>
+        `<a href="${attr(comparePath(related.slug))}">See how Dictivo compares to ${html(related.competitor)}</a>`,
+    )
+    .join("\n              ");
+
+  return `<nav class="compare-resource-links" aria-label="Comparison next steps">
+              <a href="/#pricing">Compare Dictivo pricing and plans</a>
+              <a href="/security">Read where Dictivo data lives</a>
+              ${relatedLinks}
+            </nav>`;
+}
+
+function renderCompareFaq(page) {
+  return `<section class="compare-section compare-faq-section" id="faq" aria-labelledby="compare-faq-title">
+            <p class="doc-meta">FAQ</p>
+            <h2 id="compare-faq-title">Frequently asked questions</h2>
+            <div class="compare-faq-list">
+${page.faqs
+  .map(
+    ([question, answer], index) => `              <details class="faq-item">
+                <summary>
+                  <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                  <span class="faq-question">${html(question)}</span>
+                  <span class="faq-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p class="faq-answer-body">${html(answer)}</p>
+                </div>
+              </details>`,
+  )
+  .join("\n")}
+            </div>
+          </section>`;
+}
+
+function sourceLabel(source) {
+  try {
+    const url = new URL(source);
+    const path = url.pathname === "/" ? "" : url.pathname.replace(/\/$/, "");
+    return `${url.hostname.replace(/^www\./, "")}${path}`;
+  } catch {
+    return source;
+  }
+}
+
+function renderCompareSources(page) {
+  return `<section class="compare-section compare-source-section" aria-labelledby="compare-sources-title">
+            <p class="doc-meta">Sources checked</p>
+            <h2 id="compare-sources-title">Facts re-checked on ${html(COMPARE_SOURCE_CHECK_DATE)}</h2>
+            <p>Pricing, trial, platform, and privacy claims change. These comparison notes were checked against the official product pages and support documents below.</p>
+            <ul class="compare-source-list">
+${page.sources.map((source) => `              <li><a href="${attr(source)}" rel="nofollow noopener">${html(sourceLabel(source))}</a></li>`).join("\n")}
+            </ul>
+          </section>`;
+}
+
+function renderCompareCta(page) {
+  return `<section class="compare-cta" aria-labelledby="compare-cta-title">
+            <div>
+              <p class="doc-meta">Try Dictivo</p>
+              <h2 id="compare-cta-title">Try Dictivo free for 14 days.</h2>
+              <p>Every local model unlocked, no Dictivo account for Local mode. Buy Local for $49 once if it fits your workflow.</p>
+            </div>
+            <div class="compare-cta-actions">
+              <a class="button button-light download-link" href="/download/mac" data-platform="macos">Try Dictivo free for 14 days</a>
+              <a class="button button-outline" href="/#pricing">See pricing</a>
+            </div>
+            ${renderCompareLinks(page)}
+          </section>`;
+}
+
+function renderComparePage(page) {
+  const canonical = absoluteUrl(comparePath(page.slug));
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(page.title)}</title>
+    <meta name="description" content="${attr(page.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    <meta property="og:title" content="${attr(page.title)}" />
+    <meta property="og:description" content="${attr(page.metaDescription)}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="${attr(canonical)}" />
+    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    <link rel="canonical" href="${attr(canonical)}" />
+    ${assetTags()}
+    ${renderCompareSchema(page)}
+  </head>
+  <body>
+    ${renderCompareSourceComment(page)}
+    <a class="skip-link" href="#comparison">Skip to comparison</a>
+    ${renderHeader("en", HOME_COPY.en)}
+    <main class="compare-page" id="comparison">
+      <section class="compare-hero" aria-labelledby="compare-title">
+        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(page.eyebrow)}</span>
+        <p class="compare-updated">Last updated: <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
+        <h1 id="compare-title">${html(page.h1)}</h1>
+        <p class="doc-lede">${html(page.intro.join(" "))}</p>
+        ${renderCompareQuickTake(page)}
+      </section>
+
+      <section class="compare-section compare-table-section" aria-labelledby="at-a-glance">
+        <p class="doc-meta">At a glance</p>
+        <h2 id="at-a-glance">${html(page.competitor)} vs Dictivo at a glance</h2>
+        ${renderCompareTable(page)}
+      </section>
+
+      ${page.sections.map(renderCompareSection).join("\n\n      ")}
+
+      ${renderCompareFaq(page)}
+
+      ${renderCompareSources(page)}
+
+      ${renderCompareCta(page)}
+    </main>
+    ${renderFooterOnly()}
+  </body>
+</html>
+`;
+}
+
+function renderCompareHubSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: COMPARE_HUB.title,
+    url: absoluteUrl(comparePath()),
+    hasPart: COMPARE_PAGES.map((page) => ({
+      "@type": "WebPage",
+      name: page.title,
+      url: absoluteUrl(comparePath(page.slug)),
+    })),
+  };
+
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderCompareHub() {
+  const canonical = absoluteUrl(comparePath());
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(COMPARE_HUB.metaTitle)}</title>
+    <meta name="description" content="${attr(COMPARE_HUB.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    <meta property="og:title" content="${attr(COMPARE_HUB.metaTitle)}" />
+    <meta property="og:description" content="${attr(COMPARE_HUB.metaDescription)}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${attr(canonical)}" />
+    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    <link rel="canonical" href="${attr(canonical)}" />
+    ${assetTags()}
+    ${renderCompareHubSchema()}
+  </head>
+  <body>
+    <a class="skip-link" href="#compare-hub">Skip to comparisons</a>
+    ${renderHeader("en", HOME_COPY.en)}
+    <main class="compare-page compare-hub" id="compare-hub">
+      <section class="compare-hero" aria-labelledby="compare-hub-title">
+        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Comparison hub</span>
+        <p class="compare-updated">Last updated: <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
+        <h1 id="compare-hub-title">${html(COMPARE_HUB.h1)}</h1>
+        <p class="doc-lede">${html(COMPARE_HUB.lede)}</p>
+      </section>
+
+      <section class="compare-hub-grid" aria-label="Dictivo comparison pages">
+${COMPARE_PAGES.map(
+  (page) => `        <article class="compare-hub-card">
+          <span>${html(page.primaryKeyword)}</span>
+          <h2>${html(page.competitor)} alternative</h2>
+          <p>${html(page.intro[1])}</p>
+          <a class="button-link" href="${attr(comparePath(page.slug))}">Compare Dictivo with ${html(page.competitor)}</a>
+        </article>`,
+).join("\n")}
+      </section>
+    </main>
+    ${renderFooterOnly()}
+  </body>
+</html>
+`;
+}
+
+function renderCompareTeaser() {
+  return `<section class="compare-teaser reveal" id="compare" aria-labelledby="compare-teaser-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-left">
+            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>Compare</span>
+            <h2 id="compare-teaser-title">Choosing against another dictation app?</h2>
+            <p>Compare Dictivo with the tools people usually evaluate first: cloud dictation, local mode systems, file transcription apps, low-cost public-code tools, and Apple's built-in Dictation.</p>
+          </div>
+          <div class="compare-teaser-grid">
+${COMPARE_NAV_LINKS.map(
+  (link) => `            <a href="${attr(link.href)}">
+              <span>${html(link.competitor)}</span>
+              <strong>${html(link.title)}</strong>
+            </a>`,
+).join("\n")}
+          </div>
+        </div>
+      </section>`;
+}
+
+function renderCompareFooterLinks() {
+  return `<a href="/compare">Compare alternatives</a>
+        ${COMPARE_NAV_LINKS.map((link) => `<a href="${attr(link.href)}">${html(link.competitor)} alternative</a>`).join("\n        ")}`;
+}
+
+function renderHomeFooterLinks(currentCode, t) {
+  const links = [
+    `<a href="${attr(localePath(currentCode, "#privacy"))}">${html(t.nav.privacy)}</a>`,
+    `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
+    `<a href="${attr(localePath(currentCode, "#cloud-fast"))}">${html(t.nav.cloudFast)}</a>`,
+    `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
+    currentCode === "en" ? renderCompareFooterLinks() : "",
+    `<a href="/changelog">Changelog</a>`,
+    `<a href="/security">Security</a>`,
+    `<a href="mailto:support@dictivo.app">support@dictivo.app</a>`,
+  ].filter(Boolean);
+  return links.map((link) => `        ${link}`).join("\n");
+}
+
 function renderHome(currentCode) {
   const locale = localeByCode(currentCode);
   const t = HOME_COPY[currentCode];
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
+  const compareTeaser = currentCode === "en" ? `${renderCompareTeaser()}\n\n` : "";
 
   const languagePills = LOCALES.map(
     (item) => `<a href="${attr(item.path)}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
@@ -327,6 +698,7 @@ function renderHome(currentCode) {
         </div>
       </section>
 
+${compareTeaser}
       <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
         <div class="section-shell">
           <div class="section-heading">
@@ -448,13 +820,7 @@ function renderHome(currentCode) {
         <p>${html(t.footer.beta)}</p>
       </div>
       <div class="footer-links">
-        <a href="${attr(localePath(currentCode, "#privacy"))}">${html(t.nav.privacy)}</a>
-        <a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>
-        <a href="${attr(localePath(currentCode, "#cloud-fast"))}">${html(t.nav.cloudFast)}</a>
-        <a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>
-        <a href="/changelog">Changelog</a>
-        <a href="/security">Security</a>
-        <a href="mailto:support@dictivo.app">support@dictivo.app</a>
+${renderHomeFooterLinks(currentCode, t)}
       </div>
     </footer>
   </body>
@@ -534,10 +900,25 @@ ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
   </url>`,
   ).join("\n");
+  const compareEntries = [
+    `  <url>
+    <loc>${absoluteUrl(comparePath())}</loc>
+    <lastmod>${COMPARE_LAST_UPDATED.iso}</lastmod>
+    <priority>0.8</priority>
+  </url>`,
+    ...COMPARE_PAGES.map(
+      (page) => `  <url>
+    <loc>${absoluteUrl(comparePath(page.slug))}</loc>
+    <lastmod>${COMPARE_LAST_UPDATED.iso}</lastmod>
+    <priority>${page.slug === "wispr-flow-alternative" ? "0.8" : "0.7"}</priority>
+  </url>`,
+    ),
+  ].join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${homepageEntries}
+${compareEntries}
   <url>
     <loc>${BASE_URL}/changelog</loc>
     <lastmod>${release.updatedAt}</lastmod>
@@ -694,6 +1075,7 @@ function renderFooterOnly() {
         <a href="/#pricing">Pricing</a>
         <a href="/#cloud-fast">Cloud Fast</a>
         <a href="/#downloads">Downloads</a>
+        ${renderCompareFooterLinks()}
         <a href="/changelog">Changelog</a>
         <a href="/security">Security</a>
         <a href="mailto:support@dictivo.app">support@dictivo.app</a>
@@ -708,7 +1090,7 @@ function formatEnglishDate(isoDate) {
 function write(path, body) {
   const abs = resolve(root, path);
   mkdirSync(dirname(abs), { recursive: true });
-  writeFileSync(abs, body);
+  writeFileSync(abs, body.replace(/[ \t]+$/gm, ""));
   console.log(`Wrote ${path}`);
 }
 
@@ -717,9 +1099,15 @@ for (const locale of LOCALES) {
     rmSync(resolve(root, locale.code), { recursive: true, force: true });
   }
 }
+rmSync(resolve(root, "compare"), { recursive: true, force: true });
 
 for (const locale of LOCALES) {
   write(locale.code === "en" ? "index.html" : `${locale.code}/index.html`, renderHome(locale.code));
+}
+
+write("compare/index.html", renderCompareHub());
+for (const page of COMPARE_PAGES) {
+  write(`compare/${page.slug}/index.html`, renderComparePage(page));
 }
 
 write("downloads.json", renderDownloadsJson());

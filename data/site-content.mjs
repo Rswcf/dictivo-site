@@ -54,8 +54,8 @@ export const HOME_COPY = {
         "Microphone audio stays on this device",
         "Transcripts, history, dictionary, and snippets stay local",
         "Works without a cloud transcription account",
-        "Free tier includes the tiny local model",
-        "Larger local models are available when you upgrade",
+        "Tiny stays free forever",
+        "14-day full Local trial unlocks every local model",
       ],
       cloudTitle: "Cloud Fast mode",
       cloudLead: "A separate speed path for low-sensitivity recordings where waiting would break your flow.",
@@ -90,7 +90,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Start free. Upgrade only when the limits matter.",
-      body: "Try Dictivo with the tiny local model. Buy Local for stronger private dictation, or add Cloud Fast when speed is worth the upload.",
+      body: "Start with Tiny free forever, try every local model free for 14 days, and use 10 free Cloud Fast minutes on this device before subscribing.",
       tiers: [
         {
           name: "Free Local",
@@ -101,7 +101,7 @@ export const HOME_COPY = {
             "Local dictation on your device",
             "Tiny on-device model included",
             "Global hotkey and local history",
-            "Larger local models require Dictivo Local",
+            "14-day full Local trial unlocks every local model",
             "No cloud upload in Local mode",
           ],
           button: "Download for Mac",
@@ -112,11 +112,11 @@ export const HOME_COPY = {
           price: "$49",
           small: "one-time",
           features: [
+            "Every local model unlocked after the trial",
             "Perpetual license for the version you buy",
             "12 months of updates and new local models",
             "Use on up to 5 personal devices",
             "$24/year optional renewal for future updates",
-            "14-day refund, no questions",
           ],
           button: "Buy Local",
         },
@@ -126,11 +126,11 @@ export const HOME_COPY = {
           price: "$6.99",
           small: "per month",
           features: [
+            "10 free minutes on this device",
             "1,500 transcription minutes per month",
             "Standalone or alongside Dictivo Local",
             "One simple Cloud Fast switch in the app",
             "Uploads only recordings you choose",
-            "Local dictionary and snippets still apply after text returns",
           ],
           button: "Add Cloud Fast",
         },
@@ -143,7 +143,7 @@ export const HOME_COPY = {
     downloads: {
       kicker: "Mac app",
       title: "Download Dictivo for Mac.",
-      body: "The Mac app includes Local mode, the free tiny model, Local license activation, optional Cloud Fast, and display language choices.",
+      body: "The Mac app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
       available: "Available installers",
       macTop: ["macOS", "Recommended"],
       macTitle: "Mac installer",
@@ -176,7 +176,7 @@ export const HOME_COPY = {
       title: "The workflow is intentionally simple.",
       body: "Dictivo is designed for the moment you need words out of your head and into the app in front of you.",
       steps: [
-        ["01", "Download for Mac", "Start with the free local model. No cloud transcription account is required for Local mode."],
+        ["01", "Download for Mac", "Start with Tiny free forever and 14 days of every local model. No cloud transcription account is required for Local mode."],
         ["02", "Press the hotkey", "Speak from any app, stop recording, and get the transcript back into your workflow."],
         ["03", "Switch only when needed", "Stay Local for private work. Use Cloud Fast when the recording is not sensitive and speed matters."],
       ],
@@ -192,7 +192,7 @@ export const HOME_COPY = {
         ],
         [
           "What is included for free?",
-          "The free tier includes Local mode with the tiny on-device model, global hotkey dictation, and local history. Larger local models require Dictivo Local.",
+          "Tiny Local dictation is free forever. New installs also get a 14-day full Local trial with every local model unlocked, plus 10 lifetime Cloud Fast minutes on that device.",
         ],
         [
           "When should I buy Dictivo Local?",
