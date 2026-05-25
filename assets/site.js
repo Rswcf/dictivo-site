@@ -77,7 +77,7 @@ const demos = {
     points: [
       "Personal terms stay on the same device",
       "Snippets are applied after transcription",
-      "No provider-facing custom vocabulary upload",
+      "Personal vocabulary stays local",
     ],
     image: "/assets/ui/06-dictionary.png",
     alt: "Dictivo dictionary screen with local terms",
@@ -91,7 +91,7 @@ const demos = {
     points: [
       "Local model tiers are hidden in Cloud Fast mode",
       "Text cleanup is shared across both modes",
-      "Cloud provider details stay out of the UI",
+      "Local and Cloud Fast stay clearly separated",
     ],
     image: "/assets/ui/07-settings-local-engine.png",
     alt: "Dictivo settings screen for the local speech engine",

@@ -59,6 +59,9 @@ jobs:
       - name: Check asset versioning
         run: node scripts/check-asset-version.mjs
 
+      - name: Check public output surface
+        run: node scripts/check-public-output.mjs
+
       - name: Inject commit SHA into asset URLs
         run: node scripts/inject-asset-version.mjs
 
@@ -68,4 +71,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 0a78c0c34d3e08a9297247ce98d44ad1
           wranglerVersion: 4.90.1
-          command: pages deploy . --project-name=dictivo-app --branch=main
+          command: pages deploy dist --project-name=dictivo-app --branch=main

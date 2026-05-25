@@ -3,11 +3,9 @@ export const COMPARE_LAST_UPDATED = {
   iso: "2026-05-25",
 };
 
-export const COMPARE_SOURCE_CHECK_DATE = "2026-05-25";
-
 const dictivoRows = {
   processing:
-    "On-device in Local mode with whisper.cpp. Optional Cloud Fast is a separate user-selected path.",
+    "Local mode runs on your Mac. Optional Cloud Fast is separate and only used when you select it.",
   trains: "Never in Local mode.",
   offline: "Yes in Local mode after the local model is installed.",
   account: "No Dictivo account for Local dictation.",
@@ -15,7 +13,7 @@ const dictivoRows = {
   trial: "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
   platforms: "macOS now. Windows is in validation.",
   boundary:
-    "Closed-source desktop app. Local mode has no transcription account, no client-side analytics, and customer-owned transcripts stay on the Mac.",
+    "Local mode keeps transcripts, history, dictionary terms, snippets, and settings on your Mac. No Dictivo account is required for Local dictation.",
 };
 
 export const COMPARE_PAGES = [
@@ -45,7 +43,7 @@ export const COMPARE_PAGES = [
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$15/user/month monthly or $12/user/month billed annually for Pro, as listed on Wispr Flow pricing." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Basic free tier plus a 14-day Flow Pro trial; Basic lists 2,000 desktop words/week and 1,000 iPhone words/week." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Mac, Windows, iPhone, and Android." },
-      { label: "Code and data boundary", dictivo: dictivoRows.boundary, competitor: "Closed cloud service. Privacy Mode and enterprise controls change retention policy, not the fact that transcription runs remotely." },
+      { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Cloud transcription service. Privacy Mode and enterprise controls change retention policy, not the fact that transcription runs remotely." },
     ],
     sections: [
       {
@@ -71,7 +69,7 @@ export const COMPARE_PAGES = [
           "Dictivo is also buy-once. The $49 Local license includes 12 months of updates. Keeping update access active for years two and three brings a three-year total to $97; skipping renewal keeps the version you bought. The point is simple: local compute should not require a permanent monthly meter for every user.",
         ],
         bullets: [
-          "Local mode processes speech on-device with whisper.cpp.",
+          "Local mode keeps everyday speech recognition on your Mac.",
           "No Dictivo account is required for Local dictation.",
           "Hardware-aware setup helps pick local model tiers for the Mac in front of you.",
           "Dictionary, snippets, transcript history, and local settings stay on the machine.",
@@ -167,7 +165,7 @@ export const COMPARE_PAGES = [
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$8.49/month, $84.99/year, or $249.99 lifetime for Pro." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free local models plus 15 minutes of Pro access for new users, according to Superwhisper docs." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Mac, Windows, iPhone, and iPad." },
-      { label: "Code and data boundary", dictivo: dictivoRows.boundary, competitor: "Closed-source app with local model options and optional cloud model routing." },
+      { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Local model options with optional cloud model routing." },
     ],
     sections: [
       {
@@ -286,7 +284,7 @@ export const COMPARE_PAGES = [
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$29 once for MacWhisper Pro on the public site as of May 25, 2026; the FAQ says the Gumroad price can vary." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free download with Tiny, Base, and Small Whisper models." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "macOS." },
-      { label: "Code and data boundary", dictivo: dictivoRows.boundary, competitor: "Closed-source Mac app focused on local file transcription, with optional integrations." },
+      { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Mac app focused on local file transcription, with optional integrations." },
     ],
     sections: [
       {
@@ -387,11 +385,11 @@ export const COMPARE_PAGES = [
     eyebrow: "Compare alternatives",
     primaryKeyword: "voiceink alternative",
     intro: [
-      "VoiceInk is a strong choice if you want a public GPL-code Mac dictation project, local transcription, and the lowest paid lifetime price in this comparison set.",
+      "VoiceInk is a strong choice if you want a low-cost indie Mac dictation app, local transcription, and the lowest paid lifetime price in this comparison set.",
       "Dictivo is the VoiceInk alternative for users who will pay a little more for a calmer commercial UX, hardware-aware model setup, a no-account Local path, and direct indie support.",
     ],
     quickTake: [
-      ["Best for", "Polished commercial local workflow", "Lowest-cost public-code Mac dictation"],
+      ["Best for", "Polished commercial local workflow", "Lowest-cost indie Mac dictation"],
       ["3-year cost", "$49 to $97 depending on update renewals", "$25, $39, or $49 lifetime tiers"],
       ["Privacy model", "Local mode first", "Local processing with optional cloud enhancement"],
     ],
@@ -403,21 +401,21 @@ export const COMPARE_PAGES = [
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$25 lifetime for Solo, $39 lifetime for Personal, or $49 lifetime for Extended." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Try Free button on the site plus a 14-day money-back guarantee on paid tiers." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Apple Silicon Mac, macOS 14.4 or later." },
-      { label: "Code and data boundary", dictivo: dictivoRows.boundary, competitor: "Public GPL-code project with local processing and optional cloud enhancement." },
+      { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Local processing with optional cloud enhancement." },
     ],
     sections: [
       {
         kicker: "Where it wins",
         title: "What VoiceInk is great at",
         paragraphs: [
-          "VoiceInk is the hardest honesty test because it is genuinely good. It is local-first, inexpensive, and transparent about being a public GPL-code project. If your top priority is the lowest price and you are comfortable with a smaller indie tool, VoiceInk deserves a serious look.",
+          "VoiceInk is the hardest honesty test because it is genuinely good. It is local-first, inexpensive, and comfortable as a smaller indie tool. If your top priority is the lowest price, VoiceInk deserves a serious look.",
           "Its current pricing is aggressive: $25 lifetime for one Mac, $39 lifetime for two Macs, and $49 lifetime for three Macs. The site also lists lifetime updates and a 14-day money-back guarantee. For many users, that is enough.",
         ],
         bullets: [
           "Low lifetime pricing.",
           "Local transcription and privacy-first positioning.",
           "Power Mode and enhancement prompts for app-specific writing.",
-          "A public codebase and active solo-developer project.",
+          "A focused solo-developer product.",
         ],
       },
       {
@@ -426,7 +424,7 @@ export const COMPARE_PAGES = [
         paragraphs: [
           "Dictivo does not beat VoiceInk by being cheaper. It is not cheaper. Dictivo Local is $49 once for the first year of updates, with optional $24/year update renewal after that. VoiceInk's Solo and Personal tiers cost less.",
           "Dictivo's argument is polish and predictability. The app is shaped around a guided local setup, hardware-aware model selection, a clear Local versus Cloud Fast boundary, local history, dictionary terms, snippets, and a commercial support channel. It is for people who would rather pay a little more than tinker when dictation becomes part of daily work.",
-          "This is also where Dictivo's closed-source status should be stated plainly. Dictivo is a closed-source commercial desktop app. The privacy promise is not that you can inspect the code; it is that Local mode is architected to keep microphone audio, transcripts, history, dictionary, snippets, and settings on the customer's Mac, with no Dictivo account required for Local dictation.",
+          "Dictivo's privacy promise is the product workflow: Local mode keeps microphone audio, transcripts, history, dictionary terms, snippets, and settings on the customer's Mac, with no Dictivo account required for Local dictation.",
         ],
         bullets: [
           "More guided Local setup for non-tinkerers.",
@@ -440,7 +438,7 @@ export const COMPARE_PAGES = [
         title: "Privacy: local processing without pretending price is the only factor",
         paragraphs: [
           "Both VoiceInk and Dictivo can keep dictation local. VoiceInk's site says processing is offline and that voice data stays on the Mac. Dictivo Local follows the same local-first expectation.",
-          "The difference is how much product structure you want around that private workflow. VoiceInk appeals to users who like public-code indie projects and low lifetime pricing. Dictivo appeals to users who want a more packaged commercial app, a support channel, and a sharper distinction between local work and optional cloud speed.",
+          "The difference is how much product structure you want around that private workflow. VoiceInk appeals to users who prioritize the lowest lifetime pricing. Dictivo appeals to users who want a more packaged commercial app, a support channel, and a sharper distinction between local work and optional cloud speed.",
         ],
         bullets: [
           "Use VoiceInk if you want the lowest-cost local Mac dictation path.",
@@ -465,7 +463,7 @@ export const COMPARE_PAGES = [
             title: "Choose VoiceInk if",
             items: [
               "You want the lowest price for local Mac dictation.",
-              "You prefer a public GPL-code project.",
+              "You prefer the lowest-cost indie option.",
               "You are comfortable with Apple Silicon and macOS 14.4 or later requirements.",
               "You like smaller tools and can tolerate a rough edge if the price is right.",
             ],
@@ -484,10 +482,10 @@ export const COMPARE_PAGES = [
     ],
     faqs: [
       ["Is VoiceInk really free?", "VoiceInk's site has a Try Free path and paid lifetime tiers. The listed paid tiers are $25, $39, and $49 as of May 25, 2026."],
-      ["VoiceInk vs Dictivo: which is more accurate?", "Both use local AI speech models, so accuracy depends on the model, microphone, accent, and hardware. Dictivo's claim is not secret accuracy; it is a polished local workflow and hardware-aware setup."],
-      ["Is Dictivo closed-source?", "Yes. Dictivo is a closed-source commercial desktop app. Its privacy architecture is Local mode: audio, transcripts, history, dictionary, snippets, and settings stay on the customer's Mac."],
+      ["VoiceInk vs Dictivo: which is more accurate?", "Both use local AI speech models, so accuracy depends on the model, microphone, accent, and hardware. Dictivo's advantage is a polished local workflow and hardware-aware setup."],
+      ["How does Dictivo protect local work?", "Use Local mode for private dictation. Audio, transcripts, history, dictionary terms, snippets, and settings stay on the customer's Mac."],
       ["Does VoiceInk run on Windows?", "VoiceInk's official site lists Apple Silicon Macs and macOS 14.4 or later. Dictivo is also Mac public today, with Windows in validation."],
-      ["Which app is more polished?", "That is subjective. VoiceInk is strong for price and public-code transparency. Dictivo is built as a more packaged paid product with guided setup, Local versus Cloud Fast separation, and support expectations."],
+      ["Which app is more polished?", "That is subjective. VoiceInk is strong for price. Dictivo is built as a more packaged paid product with guided setup, Local versus Cloud Fast separation, and support expectations."],
     ],
     related: ["superwhisper-alternative", "macwhisper-alternative"],
     sources: [
@@ -521,7 +519,7 @@ export const COMPARE_PAGES = [
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "Included with macOS." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free built-in feature." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "macOS and other Apple platforms." },
-      { label: "Code and data boundary", dictivo: dictivoRows.boundary, competitor: "Apple system feature with settings-dependent processing and Apple privacy controls." },
+      { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Apple system feature with settings-dependent processing and Apple privacy controls." },
     ],
     sections: [
       {
@@ -543,7 +541,7 @@ export const COMPARE_PAGES = [
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo is for the point where built-in dictation stops feeling like enough. Serious dictation is not just speech recognition. It is model choice, local history, correction loops, a personal dictionary, snippets, visible privacy mode, and a product surface designed for repeated daily use.",
-          "Dictivo Local uses Whisper-family on-device transcription through whisper.cpp. The app guides setup based on hardware, then keeps transcripts, dictionary terms, snippets, and local settings on the Mac. That creates a repeatable workflow for people who dictate long emails, support replies, notes, prompts, documentation, or first drafts every day.",
+          "Dictivo Local uses stronger local transcription models for daily writing. The app guides setup based on hardware, then keeps transcripts, dictionary terms, snippets, and local settings on the Mac. That creates a repeatable workflow for people who dictate long emails, support replies, notes, prompts, documentation, or first drafts every day.",
           "The productivity layer matters as much as the model. Built-in dictation gives you text. Dictivo gives you a workbench around that text: history when a paste fails, dictionary terms for names and jargon, snippets for repeated phrasing, and a clear Local versus Cloud Fast mode boundary.",
         ],
         bullets: [
@@ -601,7 +599,7 @@ export const COMPARE_PAGES = [
     ],
     faqs: [
       ["Is Apple Dictation private?", "It depends on your Mac, language, and settings. Apple says Keyboard settings indicate whether audio and transcripts are processed on-device and not sent to Siri servers; otherwise dictated content is sent to servers for processing."],
-      ["Is there a more accurate dictation app for Mac?", "Dictivo uses Whisper-family local transcription through whisper.cpp. For many users, larger local Whisper models are more accurate than built-in dictation, especially for longer text, jargon, names, and mixed phrasing."],
+      ["Is there a more accurate dictation app for Mac?", "Dictivo uses stronger local transcription models. For many users, larger local models are more accurate than built-in dictation, especially for longer text, jargon, names, and mixed phrasing."],
       ["Does macOS Dictation work offline?", "Apple says Keyboard settings can indicate whether an internet connection is needed. Offline availability depends on the device, language, and current system behavior."],
       ["What is the best offline dictation app for Mac?", "If you want a paid, local-first workflow with hotkey dictation, local history, dictionary terms, snippets, and a clear privacy boundary, Dictivo is built for that job."],
       ["Is Dictivo free?", "Dictivo has a tiny free local tier and a 14-day full Local trial with every local model unlocked. Dictivo Local is $49 once if you decide to buy."],

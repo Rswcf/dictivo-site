@@ -75,12 +75,11 @@
         <p class="doc-meta">Cloud Fast boundary</p>
         <h2 id="cloud-fast-boundary">Cloud Fast uploads only when you choose Cloud Fast.</h2>
         <p>
-          Cloud Fast is an optional speed path. If you switch to Cloud Fast, Dictivo uploads the current recording to
-          cloud transcription providers for faster results. The app does not expose provider choice and does not
-          silently switch Local recordings into cloud transcription.
+          Cloud Fast is an optional speed path. If you switch to Cloud Fast, Dictivo sends the recording you choose
+          for faster transcription. Local recordings do not silently switch into Cloud Fast.
         </p>
         <ul>
-          <li><strong>Uploaded in Cloud Fast</strong> — the selected recording audio and request metadata needed to transcribe and meter the request.</li>
+          <li><strong>Used in Cloud Fast</strong> — the selected recording audio needed to return the transcript.</li>
           <li><strong>Kept local</strong> — dictionary terms, snippets, local history, and local settings.</li>
           <li><strong>Returned to the app</strong> — transcript text, then local cleanup runs on the desktop.</li>
         </ul>
@@ -91,16 +90,16 @@
         <h2 id="network-traffic">What actually crosses the network.</h2>
         <p>
           A desktop product does need network access for licensing, updates, downloads, and optional Cloud Fast.
-          Local mode does not need a dictation upload path.
+          Local mode keeps everyday dictation on your Mac.
         </p>
         <ul>
-          <li><strong>Update checks</strong> — periodic requests to the GitHub Release updater manifest; update payloads are signature-verified.</li>
+          <li><strong>Updates</strong> — Dictivo checks for new Mac releases and verifies them before install.</li>
           <li><strong>License activation</strong> — Local and Cloud Fast licenses are activated and cached separately.</li>
           <li><strong>Model downloads</strong> — Local model files download when you choose or re-run local setup.</li>
           <li><strong>Cloud Fast transcription</strong> — only after you select Cloud Fast and record audio.</li>
         </ul>
         <p>
-          Dictivo does not use third-party ads or client-side analytics in the desktop app.
+          Dictivo does not use third-party ads or hidden tracking in the desktop app.
         </p>
       </section>
 
@@ -108,14 +107,12 @@
         <p class="doc-meta">Installer integrity</p>
         <h2 id="installer-integrity">Signed builds, verifiable downloads.</h2>
         <p>
-          Every public macOS release is signed and notarized before it leaves the build pipeline, so you can verify
-          the installer you got is the installer we shipped.
+          Every public Mac release is prepared for macOS security checks before it reaches customers.
         </p>
         <ul>
-          <li>macOS DMG — signed with a Developer ID certificate and notarized by Apple.</li>
+          <li>Mac installer — built for Apple Silicon and Intel Macs.</li>
           <li>Windows app — not public yet; the Windows version is coming later.</li>
-          <li>Canonical macOS download — served from the official Dictivo release channel.</li>
-          <li>Machine-readable manifest — <a href="/downloads.json"><code>/downloads.json</code></a> on dictivo.app.</li>
+          <li>Official Mac download — available from the Dictivo website.</li>
         </ul>
       </section>
 
@@ -123,8 +120,7 @@
         <p class="doc-meta">Updates</p>
         <h2 id="updates">Updates verify themselves before they install.</h2>
         <p>
-          Dictivo's updater pulls release metadata from the canonical host and verifies the installer signature before
-          replacing the running build. It rejects any tampered or unsigned package.
+          Dictivo verifies Mac updates before replacing the running app, so update checks stay quiet and deliberate.
         </p>
       </section>
 

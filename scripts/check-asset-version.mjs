@@ -2,15 +2,13 @@ import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
-const ignoredDirs = new Set([".git", ".wrangler", "node_modules", "tmp"]);
+const publicRoot = resolve(root, "dist");
 
-function listHtmlFiles(dir = root, prefix = "") {
+function listHtmlFiles(dir = publicRoot, prefix = "") {
   const files = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     if (entry.isDirectory()) {
-      if (!ignoredDirs.has(entry.name)) {
-        files.push(...listHtmlFiles(resolve(dir, entry.name), `${prefix}${entry.name}/`));
-      }
+      files.push(...listHtmlFiles(resolve(dir, entry.name), `${prefix}${entry.name}/`));
       continue;
     }
 
@@ -28,7 +26,7 @@ const BARE = /\/assets\/site\.(?:css|js)(?!\?v=)/g;
 const failures = [];
 
 for (const file of htmlFiles) {
-  const html = readFileSync(resolve(root, file), "utf8");
+  const html = readFileSync(resolve(publicRoot, file), "utf8");
   const bare = html.match(BARE);
   if (bare) {
     failures.push(`${file}: ${bare.length} reference(s) missing ?v= cache buster: ${[...new Set(bare)].join(", ")}`);

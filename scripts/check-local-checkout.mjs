@@ -2,8 +2,9 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
-const redirects = readFileSync(resolve(root, "_redirects"), "utf8");
-const page = readFileSync(resolve(root, "index.html"), "utf8");
+const publicRoot = resolve(root, "dist");
+const redirects = readFileSync(resolve(publicRoot, "_redirects"), "utf8");
+const page = readFileSync(resolve(publicRoot, "index.html"), "utf8");
 
 const route = "/checkout/local";
 const pendingTarget = "/#checkout-local-pending";
