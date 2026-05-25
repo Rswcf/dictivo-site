@@ -1,6 +1,7 @@
 const token = process.env.CLOUDFLARE_API_TOKEN;
 const configuredZoneId = process.env.CLOUDFLARE_ZONE_ID;
 const zoneName = process.env.CLOUDFLARE_ZONE_NAME || "dictivo.app";
+const allowFailure = process.env.ALLOW_PURGE_FAILURE === "true";
 
 if (!token) {
   fail("Missing CLOUDFLARE_API_TOKEN.");
@@ -51,6 +52,10 @@ function formatErrors(payload) {
 }
 
 function fail(message) {
+  if (allowFailure) {
+    console.warn(`Cloudflare cache purge skipped: ${message}`);
+    process.exit(0);
+  }
   console.error(message);
   process.exit(1);
 }

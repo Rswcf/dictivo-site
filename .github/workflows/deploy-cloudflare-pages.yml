@@ -78,4 +78,5 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: 5a6b0c150ad5e15a3990e65cb00b419e
+          ALLOW_PURGE_FAILURE: "true"
         run: node scripts/purge-cloudflare-cache.mjs
