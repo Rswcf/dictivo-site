@@ -1,4 +1,4 @@
-import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, cpSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, COMPARE_LAST_UPDATED, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
@@ -6,6 +6,14 @@ import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
+const transparentPng = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAKBuc622QAAAABJRU5ErkJggg==",
+  "base64",
+);
+const blankJpeg = Buffer.from(
+  "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAH/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAEFAqf/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAEDAQE/ASP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAECAQE/ASP/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAY/Al//xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAE/IV//2gAMAwEAAgADAAAAEP/EFBQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8QH//EFBQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8QH//EFBQBAQAAAAAAAAAAAAAAAAAAABD/2gAIAQEAAT8QH//Z",
+  "base64",
+);
 
 function html(value) {
   return String(value)
@@ -2530,12 +2538,71 @@ function write(path, body) {
   console.log(`Wrote ${path}`);
 }
 
+function writeBinary(path, body) {
+  const abs = resolve(outDir, path);
+  mkdirSync(dirname(abs), { recursive: true });
+  writeFileSync(abs, body);
+  console.log(`Wrote ${path}`);
+}
+
 function copyStatic(path) {
   const src = resolve(root, path);
   const dest = resolve(outDir, path);
   mkdirSync(dirname(dest), { recursive: true });
   cpSync(src, dest, { recursive: true });
   console.log(`Copied ${path}`);
+}
+
+function listFiles(dir, prefix = "") {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const relative = `${prefix}${entry.name}`;
+    const absolute = resolve(dir, entry.name);
+    return entry.isDirectory() ? listFiles(absolute, `${relative}/`) : [relative];
+  });
+}
+
+function tombstoneBody(path) {
+  if (path.endsWith(".mjs") || path.endsWith(".js")) return "// Not available.\n";
+  if (path.endsWith(".json")) return "{}\n";
+  return "Not available.\n";
+}
+
+function writeLegacyTombstone(path) {
+  if (path.endsWith(".png")) {
+    writeBinary(path, transparentPng);
+    return;
+  }
+  if (path.endsWith(".jpg") || path.endsWith(".jpeg")) {
+    writeBinary(path, blankJpeg);
+    return;
+  }
+  write(path, tombstoneBody(path));
+}
+
+function writeLegacyPrivateTombstones() {
+  const legacyTextPaths = [
+    ".github/workflows/deploy-cloudflare-pages.yml",
+    ".gitignore",
+    "README.md",
+    "wrangler.toml",
+    "data/compare-pages.mjs",
+    "data/release.json",
+    "data/site-content.mjs",
+    "scripts/check-asset-version.mjs",
+    "scripts/check-cloud-fast-checkout.mjs",
+    "scripts/check-local-checkout.mjs",
+    "scripts/check-public-output.mjs",
+    "scripts/generate-site.mjs",
+    "scripts/inject-asset-version.mjs",
+    "scripts/purge-cloudflare-cache.mjs",
+    "scripts/set-cloud-fast-checkout.mjs",
+    "scripts/set-local-checkout.mjs",
+    "scripts/sync-latest-release.mjs",
+    "scripts/upload-downloads.sh",
+  ];
+
+  for (const path of legacyTextPaths) writeLegacyTombstone(path);
+  for (const path of listFiles(resolve(root, "tmp"), "tmp/")) writeLegacyTombstone(path);
 }
 
 rmSync(outDir, { recursive: true, force: true });
@@ -2562,3 +2629,4 @@ write("_redirects", renderRedirects());
 write("sitemap.xml", renderSitemap());
 write("changelog.html", renderChangelog());
 write("404.html", renderNotFound());
+writeLegacyPrivateTombstones();

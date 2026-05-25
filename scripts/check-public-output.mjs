@@ -4,7 +4,8 @@ import { resolve } from "node:path";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
 
-const forbiddenPaths = ["data", "scripts", "tmp", "README.md", "wrangler.toml"];
+const tombstoneRoots = ["data/", "scripts/", "tmp/", ".github/"];
+const tombstoneFiles = new Set([".gitignore", "README.md", "wrangler.toml"]);
 const textExtensions = new Set([".html", ".js", ".css", ".vtt", ".xml", ".txt", ".json"]);
 const forbiddenContent = [
   /sources checked/i,
@@ -71,13 +72,11 @@ if (!existsSync(publicRoot)) {
 
 const failures = [];
 
-for (const forbiddenPath of forbiddenPaths) {
-  if (existsSync(resolve(publicRoot, forbiddenPath))) {
-    failures.push(`Forbidden public path: ${forbiddenPath}`);
-  }
-}
-
 for (const file of listFiles()) {
+  if (isLegacyTombstone(file)) {
+    verifyTombstone(file);
+    continue;
+  }
   if (!textExtensions.has(extension(file))) continue;
   const body = readFileSync(resolve(publicRoot, file), "utf8");
   for (const pattern of forbiddenContent) {
@@ -96,4 +95,21 @@ console.log("Public output check passed.");
 function fail(message) {
   console.error(message);
   process.exit(1);
+}
+
+function isLegacyTombstone(file) {
+  return tombstoneFiles.has(file) || tombstoneRoots.some((root) => file.startsWith(root));
+}
+
+function verifyTombstone(file) {
+  const abs = resolve(publicRoot, file);
+  if (file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".jpeg")) {
+    const bytes = readFileSync(abs);
+    if (bytes.length < 32 || bytes.length > 1024) failures.push(`${file}: unexpected tombstone image size`);
+    return;
+  }
+
+  const body = readFileSync(abs, "utf8");
+  const expected = file.endsWith(".mjs") || file.endsWith(".js") ? "// Not available.\n" : file.endsWith(".json") ? "{}\n" : "Not available.\n";
+  if (body !== expected) failures.push(`${file}: unexpected tombstone body`);
 }
