@@ -1,4 +1,4 @@
-import { copyFileSync, cpSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, COMPARE_LAST_UPDATED, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
@@ -2602,7 +2602,10 @@ function writeLegacyPrivateTombstones() {
   ];
 
   for (const path of legacyTextPaths) writeLegacyTombstone(path);
-  for (const path of listFiles(resolve(root, "tmp"), "tmp/")) writeLegacyTombstone(path);
+  const tmpDir = resolve(root, "tmp");
+  if (existsSync(tmpDir)) {
+    for (const path of listFiles(tmpDir, "tmp/")) writeLegacyTombstone(path);
+  }
 }
 
 rmSync(outDir, { recursive: true, force: true });
