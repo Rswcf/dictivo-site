@@ -72,3 +72,8 @@ jobs:
           accountId: 0a78c0c34d3e08a9297247ce98d44ad1
           wranglerVersion: 4.90.1
           command: pages deploy dist --project-name=dictivo-app --branch=main
+
+      - name: Purge Cloudflare cache
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/purge-cloudflare-cache.mjs

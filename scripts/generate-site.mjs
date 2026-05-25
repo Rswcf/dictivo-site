@@ -2264,7 +2264,14 @@ function renderDownloadsJson() {
 }
 
 function renderRedirects() {
-  return `/cloud-fast /#cloud-fast 302
+  return `/data/* /404.html 404
+/scripts/* /404.html 404
+/tmp/* /404.html 404
+/README.md /404.html 404
+/wrangler.toml /404.html 404
+/.git/* /404.html 404
+/.github/* /404.html 404
+/cloud-fast /#cloud-fast 302
 /cloud-fast.html /#cloud-fast 302
 /download/mac ${release.dmg.url} 302
 /download/windows /#downloads 302
@@ -2274,6 +2281,39 @@ function renderRedirects() {
 /downloads/Dictivo-Windows-x64.msi /#downloads 302
 /checkout/local https://dictivo.lemonsqueezy.com/checkout/buy/d4cb72ba-68a7-494f-a711-29993b2ea7a1 302
 /checkout/cloud-fast https://dictivo.lemonsqueezy.com/checkout/buy/2a12baa1-2368-47ac-884b-0721f8b5484d 302
+`;
+}
+
+function renderNotFound() {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Page not found · Dictivo</title>
+    <meta name="description" content="This Dictivo page is not available." />
+    <meta name="theme-color" content="#0a1110" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="/assets/site.css?v=local" />
+  </head>
+  <body>
+    ${renderHeader("en", HOME_COPY.en)}
+    <main class="doc-page" id="not-found">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dictivo</span>
+      <h1>Page not found</h1>
+      <p class="doc-lede">The page you requested is not available. Start from Dictivo home to compare plans, privacy options, and the Mac download.</p>
+      <section class="doc-section" aria-labelledby="not-found-next">
+        <h2 id="not-found-next">Continue with Dictivo</h2>
+        <p><a href="/">Go to the Dictivo homepage</a></p>
+      </section>
+    </main>
+    ${renderFooterOnly()}
+  </body>
+</html>
 `;
 }
 
@@ -2521,3 +2561,4 @@ write("downloads.json", renderDownloadsJson());
 write("_redirects", renderRedirects());
 write("sitemap.xml", renderSitemap());
 write("changelog.html", renderChangelog());
+write("404.html", renderNotFound());

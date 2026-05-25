@@ -20,3 +20,27 @@
 
 /download/*
   Cache-Control: no-store
+
+/404.html
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
+/data/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
+/scripts/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
+/tmp/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
+/README.md
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
+/wrangler.toml
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
