@@ -41,6 +41,10 @@ jobs:
       - name: Sync desktop release metadata and generate site
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          # Optional PAT with read access to the private desktop repo. When set,
+          # release metadata refreshes live; when absent, sync keeps the
+          # committed data/release.json instead of failing the deploy.
+          DICTIVO_DESKTOP_TOKEN: ${{ secrets.DICTIVO_DESKTOP_TOKEN }}
           DICTIVO_DESKTOP_RELEASE_TAG: ${{ github.event.client_payload.tag }}
         run: |
           node scripts/sync-latest-release.mjs

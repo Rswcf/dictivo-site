@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -28,8 +28,11 @@ async function fetchJson(url) {
     "X-GitHub-Api-Version": "2022-11-28",
   };
 
-  if (process.env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  // Prefer a dedicated PAT that can read the private desktop repo; the default
+  // Actions github.token is scoped to this site repo only and cannot read it.
+  const token = process.env.DICTIVO_DESKTOP_TOKEN || process.env.GITHUB_TOKEN;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
 
   const response = await fetch(url, { headers });
@@ -49,7 +52,21 @@ function normalizeDigest(asset) {
   return digest || null;
 }
 
-const release = await fetchJson(releaseUrl);
+let release;
+try {
+  release = await fetchJson(releaseUrl);
+} catch (error) {
+  // The desktop repo is private, so the default CI github.token gets a 404.
+  // Don't break the deploy: keep the already-committed data/release.json (whose
+  // download URLs already point at R2). Provide DICTIVO_DESKTOP_TOKEN (a PAT
+  // with read access to the private repo) to re-enable live metadata refresh.
+  if (existsSync(outputPath)) {
+    console.warn(`⚠ Could not refresh release metadata: ${error.message}`);
+    console.warn(`Keeping existing ${outputPath}. Set DICTIVO_DESKTOP_TOKEN to re-enable live refresh.`);
+    process.exit(0);
+  }
+  throw error;
+}
 
 if (release.draft) {
   throw new Error(`Release ${release.tag_name} is a draft and should not be published on dictivo.app.`);
