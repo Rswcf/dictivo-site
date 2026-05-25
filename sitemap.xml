@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dictivo.app/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/de/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/fr/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/es/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/it/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/nl/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/pt/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -114,7 +114,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/zh/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -130,7 +130,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/ja/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -146,7 +146,7 @@
   </url>
   <url>
     <loc>https://dictivo.app/ko/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://dictivo.app/" />
     <xhtml:link rel="alternate" hreflang="de" href="https://dictivo.app/de/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://dictivo.app/fr/" />
@@ -162,12 +162,12 @@
   </url>
   <url>
     <loc>https://dictivo.app/changelog</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dictivo.app/security</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>

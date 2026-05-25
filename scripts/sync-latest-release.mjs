@@ -6,6 +6,11 @@ const outputPath = resolve(root, "data/release.json");
 const owner = process.env.DICTIVO_DESKTOP_OWNER || "Rswcf";
 const repo = process.env.DICTIVO_DESKTOP_REPO || "Dictivo";
 const releaseTag = process.env.DICTIVO_DESKTOP_RELEASE_TAG;
+// Release metadata (filename, size, digest) is read from the private GitHub
+// repo, but the public download URL must point at the Cloudflare R2 mirror —
+// the GitHub repo is private, so its release assets 404 for everyone but the
+// owner. The release CI uploads the DMG to downloads.dictivo.app/<tag>/.
+const downloadsHost = (process.env.DICTIVO_DOWNLOADS_HOST || "https://downloads.dictivo.app").replace(/\/+$/, "");
 
 const apiBase = `https://api.github.com/repos/${owner}/${repo}`;
 const releaseUrl = releaseTag
@@ -76,7 +81,7 @@ const manifest = {
   releaseUrl: release.html_url,
   dmg: {
     fileName: dmg.name,
-    url: dmg.browser_download_url,
+    url: `${downloadsHost}/${tag}/${dmg.name}`,
     sha256: normalizeDigest(dmg),
     size: dmg.size || null,
   },

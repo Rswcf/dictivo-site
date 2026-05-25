@@ -467,8 +467,7 @@ function renderDownloadsJson() {
     {
       product: "Dictivo",
       domain: BASE_URL,
-      downloadHost: "https://github.com/Rswcf/Dictivo/releases",
-      plannedMirrorHost: "https://downloads.dictivo.app",
+      downloadHost: "https://downloads.dictivo.app",
       version: release.version,
       channel: release.channel || "stable",
       updatedAt: release.updatedAt,
@@ -510,8 +509,6 @@ function renderDownloadsJson() {
 function renderRedirects() {
   return `/cloud-fast /#cloud-fast 302
 /cloud-fast.html /#cloud-fast 302
-/security /security.html 200
-/changelog /changelog.html 200
 /download/mac ${release.dmg.url} 302
 /download/windows /#downloads 302
 /download/windows-msi /#downloads 302
