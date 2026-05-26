@@ -3,7 +3,7 @@ set -euo pipefail
 
 BUCKET="${BUCKET:-dictivo-downloads}"
 DOMAIN="${DOMAIN:-downloads.dictivo.app}"
-ZONE_ID="${ZONE_ID:-5a6b0c150ad5e15a3990e65cb00b419e}"
+ZONE_ID="${ZONE_ID:-${CLOUDFLARE_ZONE_ID:-}}"
 SOURCE_DIR="${SOURCE_DIR:-/tmp/dictivo-r2-upload}"
 CACHE_CONTROL="${CACHE_CONTROL:-public, max-age=31536000, immutable}"
 INCLUDE_WINDOWS="${INCLUDE_WINDOWS:-0}"
@@ -31,6 +31,10 @@ if ! npx wrangler r2 bucket info "$BUCKET" >/dev/null 2>&1; then
 fi
 
 if ! npx wrangler r2 bucket domain list "$BUCKET" | grep -F "$DOMAIN" >/dev/null 2>&1; then
+  if [[ -z "$ZONE_ID" ]]; then
+    echo "Missing ZONE_ID or CLOUDFLARE_ZONE_ID for adding $DOMAIN." >&2
+    exit 1
+  fi
   npx wrangler r2 bucket domain add "$BUCKET" --domain "$DOMAIN" --zone-id "$ZONE_ID" --min-tls 1.2 --force
 fi
 

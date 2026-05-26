@@ -54,7 +54,9 @@ the latest stable GitHub Release in `Rswcf/Dictivo`.
 
 Required GitHub Actions secret:
 
-- `CLOUDFLARE_API_TOKEN` with Cloudflare Pages edit permission for account `0a78c0c34d3e08a9297247ce98d44ad1`.
+- `CLOUDFLARE_API_TOKEN` with Cloudflare Pages edit permission.
+- `CLOUDFLARE_ACCOUNT_ID` for the Cloudflare account that owns the Pages project.
+- `CLOUDFLARE_ZONE_ID` for cache purge. If omitted, the purge script falls back to resolving `dictivo.app` by name.
 
 ## Download hosting
 
