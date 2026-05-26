@@ -1770,6 +1770,16 @@ main section[id] {
   margin-top: auto;
 }
 
+.download-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.download-actions .button {
+  margin-top: 0;
+}
+
 .download-status {
   display: inline-flex;
   align-items: center;

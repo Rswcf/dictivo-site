@@ -67,11 +67,12 @@ verified.
 Expected objects:
 
 - `Dictivo-macOS-universal.dmg`
-- Windows installer objects are held back until the Windows public release is signed and real-machine QA is complete.
+- `Dictivo_*_x64-setup.exe`
+- `Dictivo_*_x64_en-US.msi`
 
 The public download buttons use `/download/*` routes in `_redirects`. The macOS route may point directly at the latest
-GitHub Release DMG while R2 mirroring is being prepared; Windows routes should stay validation-only until signing and
-real-machine QA are complete. The machine-readable release manifest lives at `/downloads.json`.
+GitHub Release DMG while R2 mirroring is being prepared; Windows routes point at R2 when the synced desktop release
+contains Windows assets. The machine-readable release manifest lives at `/downloads.json`.
 
 After R2 is enabled in the Cloudflare dashboard and selected as the public mirror, macOS uploads can be run with:
 

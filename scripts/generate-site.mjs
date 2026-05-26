@@ -6,6 +6,8 @@ import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
+const windowsRelease = release.windows || null;
+const hasWindowsRelease = Boolean(windowsRelease?.exe?.url && windowsRelease?.msi?.url);
 const sourceRedirects = existsSync(resolve(root, "_redirects"))
   ? readFileSync(resolve(root, "_redirects"), "utf8")
   : "";
@@ -26,6 +28,79 @@ const blankJpeg = Buffer.from(
   "base64",
 );
 
+const WINDOWS_DOWNLOAD_COPY = {
+  en: {
+    badge: "Available",
+    body: "Windows x64 is available with the same Local, Cloud Fast, license, and update flow as the Mac app.",
+    exeButton: "Download for Windows",
+    msiButton: "MSI installer",
+    note: (version) => `Version ${version} - Windows x64 public beta.`,
+  },
+  de: {
+    badge: "Verfügbar",
+    body: "Windows x64 ist mit demselben Local-, Cloud-Fast-, Lizenz- und Update-Ablauf wie die Mac-App verfügbar.",
+    exeButton: "Für Windows herunterladen",
+    msiButton: "MSI-Installer",
+    note: (version) => `Version ${version} - öffentliche Beta für Windows x64.`,
+  },
+  fr: {
+    badge: "Disponible",
+    body: "Windows x64 est disponible avec le même flux Local, Cloud Fast, licence et mise à jour que l'app Mac.",
+    exeButton: "Télécharger pour Windows",
+    msiButton: "Installateur MSI",
+    note: (version) => `Version ${version} - bêta publique Windows x64.`,
+  },
+  es: {
+    badge: "Disponible",
+    body: "Windows x64 está disponible con el mismo flujo de Local, Cloud Fast, licencia y actualizaciones que la app para Mac.",
+    exeButton: "Descargar para Windows",
+    msiButton: "Instalador MSI",
+    note: (version) => `Versión ${version} - beta pública para Windows x64.`,
+  },
+  it: {
+    badge: "Disponibile",
+    body: "Windows x64 è disponibile con lo stesso flusso Local, Cloud Fast, licenza e aggiornamenti dell'app Mac.",
+    exeButton: "Scarica per Windows",
+    msiButton: "Installer MSI",
+    note: (version) => `Versione ${version} - beta pubblica Windows x64.`,
+  },
+  nl: {
+    badge: "Beschikbaar",
+    body: "Windows x64 is beschikbaar met dezelfde Local-, Cloud Fast-, licentie- en updateflow als de Mac-app.",
+    exeButton: "Download voor Windows",
+    msiButton: "MSI-installer",
+    note: (version) => `Versie ${version} - openbare beta voor Windows x64.`,
+  },
+  pt: {
+    badge: "Disponível",
+    body: "Windows x64 está disponível com o mesmo fluxo de Local, Cloud Fast, licença e atualizações do app para Mac.",
+    exeButton: "Baixar para Windows",
+    msiButton: "Instalador MSI",
+    note: (version) => `Versão ${version} - beta pública para Windows x64.`,
+  },
+  zh: {
+    badge: "可用",
+    body: "Windows x64 版本现已可用，包含与 Mac 版一致的 Local、Cloud Fast、许可证和更新流程。",
+    exeButton: "下载 Windows 版",
+    msiButton: "MSI 安装包",
+    note: (version) => `版本 ${version} - Windows x64 公测版。`,
+  },
+  ja: {
+    badge: "利用可能",
+    body: "Windows x64 版が利用可能です。Local、Cloud Fast、ライセンス、更新フローは Mac 版と同じです。",
+    exeButton: "Windows 版をダウンロード",
+    msiButton: "MSI インストーラ",
+    note: (version) => `バージョン ${version} - Windows x64 公開ベータ。`,
+  },
+  ko: {
+    badge: "사용 가능",
+    body: "Windows x64 버전을 사용할 수 있습니다. Local, Cloud Fast, 라이선스, 업데이트 흐름은 Mac 앱과 동일합니다.",
+    exeButton: "Windows용 다운로드",
+    msiButton: "MSI 설치 파일",
+    note: (version) => `버전 ${version} - Windows x64 공개 베타.`,
+  },
+};
+
 function html(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -36,6 +111,10 @@ function html(value) {
 
 function attr(value) {
   return html(value).replaceAll("'", "&#39;");
+}
+
+function windowsDownloadCopy(code) {
+  return WINDOWS_DOWNLOAD_COPY[code] || WINDOWS_DOWNLOAD_COPY.en;
 }
 
 function localeByCode(code) {
@@ -2075,6 +2154,7 @@ function renderHome(currentCode) {
   const t = HOME_COPY[currentCode];
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
   const compareTeaser = `${renderCompareTeaser(currentCode)}\n\n`;
+  const liveWindowsCopy = windowsDownloadCopy(currentCode);
 
   const languagePills = LOCALES.map(
     (item) => `<a href="${attr(item.path)}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
@@ -2229,11 +2309,14 @@ ${compareTeaser}
             </article>
 
             <article class="download-card" data-platform-card="windows">
-              <div class="card-topline"><span>${html(t.downloads.windowsTop[0])}</span><span>${html(t.downloads.windowsTop[1])}</span></div>
+              <div class="card-topline"><span>${html(t.downloads.windowsTop[0])}</span><span>${html(hasWindowsRelease ? liveWindowsCopy.badge : t.downloads.windowsTop[1])}</span></div>
               <h3>${html(t.downloads.windowsTitle)}</h3>
-              <p>${html(t.downloads.windowsBody)}</p>
-              <span class="download-status">${html(t.downloads.windowsStatus)}</span>
-              <p class="download-note">${html(t.downloads.windowsNote)}</p>
+              <p>${html(hasWindowsRelease ? liveWindowsCopy.body : t.downloads.windowsBody)}</p>
+              ${hasWindowsRelease ? `<div class="download-actions">
+                <a class="button button-dark download-link" href="/download/windows" data-platform="windows">${html(liveWindowsCopy.exeButton)}</a>
+                <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">${html(liveWindowsCopy.msiButton)}</a>
+              </div>` : `<span class="download-status">${html(t.downloads.windowsStatus)}</span>`}
+              <p class="download-note">${html(hasWindowsRelease ? liveWindowsCopy.note(release.version) : t.downloads.windowsNote)}</p>
             </article>
           </div>
         </div>
@@ -2341,24 +2424,28 @@ ${renderHomeFooterLinks(currentCode, t)}
 }
 
 function renderDownloadsJson() {
-  return `${JSON.stringify(
-    {
-      product: "Dictivo",
-      domain: BASE_URL,
-      downloadHost: "https://downloads.dictivo.app",
-      version: release.version,
-      channel: release.channel || "stable",
-      updatedAt: release.updatedAt,
-      artifacts: [
+  const windowsArtifacts = hasWindowsRelease
+    ? [
         {
-          platform: "macos",
-          label: "macOS Universal DMG",
-          fileName: release.dmg.fileName,
-          architecture: "Apple Silicon + Intel",
-          url: release.dmg.url,
-          redirect: `${BASE_URL}/download/mac`,
-          sha256: release.dmg.sha256,
+          platform: "windows",
+          label: "Windows x64 EXE",
+          fileName: windowsRelease.exe.fileName,
+          architecture: "x64",
+          url: windowsRelease.exe.url,
+          redirect: `${BASE_URL}/download/windows`,
+          sha256: windowsRelease.exe.sha256,
         },
+        {
+          platform: "windows",
+          label: "Windows x64 MSI",
+          fileName: windowsRelease.msi.fileName,
+          architecture: "x64",
+          url: windowsRelease.msi.url,
+          redirect: `${BASE_URL}/download/windows-msi`,
+          sha256: windowsRelease.msi.sha256,
+        },
+      ]
+    : [
         {
           platform: "windows",
           label: "Windows x64 EXE",
@@ -2377,6 +2464,27 @@ function renderDownloadsJson() {
           url: `${BASE_URL}/#downloads`,
           redirect: `${BASE_URL}/download/windows-msi`,
         },
+      ];
+
+  return `${JSON.stringify(
+    {
+      product: "Dictivo",
+      domain: BASE_URL,
+      downloadHost: "https://downloads.dictivo.app",
+      version: release.version,
+      channel: release.channel || "stable",
+      updatedAt: release.updatedAt,
+      artifacts: [
+        {
+          platform: "macos",
+          label: "macOS Universal DMG",
+          fileName: release.dmg.fileName,
+          architecture: "Apple Silicon + Intel",
+          url: release.dmg.url,
+          redirect: `${BASE_URL}/download/mac`,
+          sha256: release.dmg.sha256,
+        },
+        ...windowsArtifacts,
       ],
     },
     null,
@@ -2385,6 +2493,8 @@ function renderDownloadsJson() {
 }
 
 function renderRedirects() {
+  const windowsExeUrl = hasWindowsRelease ? windowsRelease.exe.url : "/#downloads";
+  const windowsMsiUrl = hasWindowsRelease ? windowsRelease.msi.url : "/#downloads";
   return `/data/* /404.html 404
 /scripts/* /404.html 404
 /tmp/* /404.html 404
@@ -2395,11 +2505,11 @@ function renderRedirects() {
 /cloud-fast /#cloud-fast 302
 /cloud-fast.html /#cloud-fast 302
 /download/mac ${release.dmg.url} 302
-/download/windows /#downloads 302
-/download/windows-msi /#downloads 302
+/download/windows ${windowsExeUrl} 302
+/download/windows-msi ${windowsMsiUrl} 302
 /downloads/Dictivo-macOS-universal.dmg ${release.dmg.url} 302
-/downloads/Dictivo-Windows-x64.exe /#downloads 302
-/downloads/Dictivo-Windows-x64.msi /#downloads 302
+/downloads/Dictivo-Windows-x64.exe ${windowsExeUrl} 302
+/downloads/Dictivo-Windows-x64.msi ${windowsMsiUrl} 302
 /checkout/local ${localCheckoutTarget} 302
 /checkout/cloud-fast ${cloudFastCheckoutTarget} 302
 `;
@@ -2529,7 +2639,7 @@ function renderChangelog() {
         <ul>
           <li>Added display language options for German, French, Spanish, Italian, Dutch, Portuguese, Chinese, Japanese, and Korean while dictation language detection stays automatic.</li>
           <li>Refined dictation sound themes so start, stop, success, and error cues stay short and less fatiguing.</li>
-          <li>Updated the public Mac download to the latest Dictivo build.</li>
+          <li>Updated the public Mac${hasWindowsRelease ? " and Windows" : ""} download to the latest Dictivo build.</li>
           <li>Kept the website download and in-app version messaging aligned.</li>
         </ul>
       </section>
@@ -2566,7 +2676,15 @@ function renderChangelog() {
         </ul>
       </section>
 
-      <section class="doc-section" id="windows-validation-pending" aria-labelledby="windows-validation-title">
+      ${hasWindowsRelease ? `<section class="doc-section" id="windows-public-beta" aria-labelledby="windows-public-title">
+        <p class="release-line"><span class="release-tag">Windows</span><span class="release-status">Public beta</span></p>
+        <h2 id="windows-public-title">Windows x64 downloads and in-app updates are available.</h2>
+        <ul>
+          <li>The Windows NSIS installer is now published with the same stable release version as macOS.</li>
+          <li>Windows Check for updates reads the shared Dictivo updater manifest.</li>
+          <li>The MSI installer is available for users who prefer that package format.</li>
+        </ul>
+      </section>` : `<section class="doc-section" id="windows-validation-pending" aria-labelledby="windows-validation-title">
         <p class="release-line"><span class="release-tag">Windows</span><span class="release-status" data-status="alpha">Validation pending</span></p>
         <h2 id="windows-validation-title">Windows public downloads wait for signing and real-machine QA.</h2>
         <ul>
@@ -2574,7 +2692,7 @@ function renderChangelog() {
           <li>Public Windows downloads will appear only after the install and update experience is ready.</li>
           <li>The current public download is the Mac app.</li>
         </ul>
-      </section>
+      </section>`}
 
       <section class="doc-section" aria-labelledby="release-0-2-8">
         <p class="release-line"><span class="release-tag">v0.2.8</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-05-17">May 17, 2026</time></p>

@@ -7,9 +7,8 @@ const owner = process.env.DICTIVO_DESKTOP_OWNER || "Rswcf";
 const repo = process.env.DICTIVO_DESKTOP_REPO || "Dictivo";
 const releaseTag = process.env.DICTIVO_DESKTOP_RELEASE_TAG;
 // Release metadata (filename, size, digest) is read from the private GitHub
-// repo, but the public download URL must point at the Cloudflare R2 mirror —
-// the GitHub repo is private, so its release assets 404 for everyone but the
-// owner. The release CI uploads the DMG to downloads.dictivo.app/<tag>/.
+// repo, but the public download URL must point at the Cloudflare R2 mirror.
+// The release CI uploads installers to downloads.dictivo.app/<tag>/.
 const downloadsHost = (process.env.DICTIVO_DOWNLOADS_HOST || "https://downloads.dictivo.app").replace(/\/+$/, "");
 
 const apiBase = `https://api.github.com/repos/${owner}/${repo}`;
@@ -56,10 +55,10 @@ let release;
 try {
   release = await fetchJson(releaseUrl);
 } catch (error) {
-  // The desktop repo is private, so the default CI github.token gets a 404.
-  // Don't break the deploy: keep the already-committed data/release.json (whose
-  // download URLs already point at R2). Provide DICTIVO_DESKTOP_TOKEN (a PAT
-  // with read access to the private repo) to re-enable live metadata refresh.
+    // Don't break the deploy if the desktop release cannot be reached: keep the
+    // already-committed data/release.json, whose download URLs already point at R2.
+    // DICTIVO_DESKTOP_TOKEN can still be used when GitHub API limits or repo
+    // permissions require a dedicated token.
   if (existsSync(outputPath)) {
     console.warn(`⚠ Could not refresh release metadata: ${error.message}`);
     console.warn(`Keeping existing ${outputPath}. Set DICTIVO_DESKTOP_TOKEN to re-enable live refresh.`);
@@ -84,6 +83,8 @@ if (!tag || !version || !/^\d+\.\d+\.\d+(?:[.-].+)?$/.test(version)) {
 }
 
 const dmg = release.assets?.find((asset) => /^Dictivo_.+_universal\.dmg$/.test(asset.name));
+const windowsExe = release.assets?.find((asset) => /^Dictivo_.+_x64-setup\.exe$/.test(asset.name));
+const windowsMsi = release.assets?.find((asset) => /^Dictivo_.+_x64_en-US\.msi$/.test(asset.name));
 
 if (!dmg) {
   throw new Error(`Release ${tag} has no Dictivo_*_universal.dmg asset.`);
@@ -102,6 +103,22 @@ const manifest = {
     sha256: normalizeDigest(dmg),
     size: dmg.size || null,
   },
+  windows: windowsExe && windowsMsi
+    ? {
+        exe: {
+          fileName: windowsExe.name,
+          url: `${downloadsHost}/${tag}/${windowsExe.name}`,
+          sha256: normalizeDigest(windowsExe),
+          size: windowsExe.size || null,
+        },
+        msi: {
+          fileName: windowsMsi.name,
+          url: `${downloadsHost}/${tag}/${windowsMsi.name}`,
+          sha256: normalizeDigest(windowsMsi),
+          size: windowsMsi.size || null,
+        },
+      }
+    : null,
 };
 
 mkdirSync(dirname(outputPath), { recursive: true });
@@ -109,3 +126,7 @@ writeFileSync(outputPath, JSON.stringify(manifest, null, 2) + "\n");
 
 console.log(`Synced Dictivo desktop release ${manifest.tag} to ${outputPath}`);
 console.log(`DMG: ${manifest.dmg.fileName}`);
+if (manifest.windows) {
+  console.log(`Windows EXE: ${manifest.windows.exe.fileName}`);
+  console.log(`Windows MSI: ${manifest.windows.msi.fileName}`);
+}

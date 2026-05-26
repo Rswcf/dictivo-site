@@ -3,13 +3,13 @@ import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
+const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
+const hasWindowsRelease = Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
 
 const tombstoneRoots = ["data/", "scripts/", "tmp/", ".github/"];
 const tombstoneFiles = new Set([".gitignore", "README.md", "wrangler.toml"]);
 const textExtensions = new Set([".html", ".js", ".css", ".vtt", ".xml", ".txt", ".json"]);
 const forbiddenContent = [
-  /href=["']\/download\/windows/i,
-  /href=["']\/downloads\/Dictivo-Windows-x64/i,
   /sources checked/i,
   /source links/i,
   /source section/i,
@@ -122,7 +122,7 @@ for (const file of listFiles()) {
   }
 }
 
-verifyWindowsDownloadsHeldBack();
+verifyWindowsDownloads();
 
 if (failures.length > 0) {
   fail(`Public output check failed:\n${failures.map((line) => `  - ${line}`).join("\n")}`);
@@ -156,8 +156,37 @@ function verifyTombstone(file) {
   if (body !== expected) failures.push(`${file}: unexpected tombstone body`);
 }
 
-function verifyWindowsDownloadsHeldBack() {
+function verifyWindowsDownloads() {
   const redirectsPath = resolve(publicRoot, "_redirects");
+  const downloadsPath = resolve(publicRoot, "downloads.json");
+
+  if (hasWindowsRelease) {
+    if (existsSync(redirectsPath)) {
+      const redirects = readFileSync(redirectsPath, "utf8");
+      const requiredRedirects = [
+        /^\/download\/windows\s+https:\/\/downloads\.dictivo\.app\/\S+_x64-setup\.exe\s+302/im,
+        /^\/download\/windows-msi\s+https:\/\/downloads\.dictivo\.app\/\S+_x64_en-US\.msi\s+302/im,
+      ];
+      for (const pattern of requiredRedirects) {
+        if (!pattern.test(redirects)) failures.push(`_redirects: Windows public download did not match ${pattern}`);
+      }
+    }
+
+    if (!existsSync(downloadsPath)) return;
+
+    const manifest = JSON.parse(readFileSync(downloadsPath, "utf8"));
+    for (const artifact of manifest.artifacts ?? []) {
+      if (artifact.platform !== "windows") continue;
+      if (artifact.status === "coming-later") {
+        failures.push(`downloads.json: Windows artifact ${artifact.label ?? artifact.fileName} is still coming-later`);
+      }
+      if (!/^https:\/\/downloads\.dictivo\.app/i.test(String(artifact.url ?? ""))) {
+        failures.push(`downloads.json: Windows artifact ${artifact.label ?? artifact.fileName} does not point at downloads.dictivo.app`);
+      }
+    }
+    return;
+  }
+
   if (existsSync(redirectsPath)) {
     const redirects = readFileSync(redirectsPath, "utf8");
     const forbiddenRedirects = [
@@ -170,7 +199,6 @@ function verifyWindowsDownloadsHeldBack() {
     }
   }
 
-  const downloadsPath = resolve(publicRoot, "downloads.json");
   if (!existsSync(downloadsPath)) return;
 
   const manifest = JSON.parse(readFileSync(downloadsPath, "utf8"));
