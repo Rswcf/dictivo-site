@@ -6,6 +6,17 @@ import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
+const sourceRedirects = existsSync(resolve(root, "_redirects"))
+  ? readFileSync(resolve(root, "_redirects"), "utf8")
+  : "";
+const localCheckoutTarget = redirectTargetFromSource(
+  "/checkout/local",
+  "https://dictivo.lemonsqueezy.com/checkout/buy/d4cb72ba-68a7-494f-a711-29993b2ea7a1",
+);
+const cloudFastCheckoutTarget = redirectTargetFromSource(
+  "/checkout/cloud-fast",
+  "https://dictivo.lemonsqueezy.com/checkout/buy/2a12baa1-2368-47ac-884b-0721f8b5484d",
+);
 const transparentPng = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAKBuc622QAAAABJRU5ErkJggg==",
   "base64",
@@ -35,6 +46,15 @@ function localeByCode(code) {
 
 function absoluteUrl(path) {
   return new URL(path, BASE_URL).toString();
+}
+
+function redirectTargetFromSource(route, fallback) {
+  const line = sourceRedirects
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .find((item) => item.startsWith(`${route} `));
+  if (!line) return fallback;
+  return line.split(/\s+/)[1] || fallback;
 }
 
 function comparePath(slug = "") {
@@ -1392,9 +1412,102 @@ Object.assign(COMPARE_I18N, {
   }),
 });
 
+const LOCALIZED_COMPETITOR_ROWS = {
+  de: {
+    "Processing location": "{competitor} nutzt den eigenen Produkt-Workflow. Vergleichen Sie das mit Dictivo Local als Standard auf dem Mac.",
+    "Trains AI on your voice": "{competitor} beschreibt eigene Datenschutz- und KI-Regeln. Dictivo Local entfernt diesen Konflikt fuer normale Diktate.",
+    "Works fully offline": "{competitor} ist fuer seinen eigenen Workflow gebaut. Dictivo Local ist die Wahl, wenn Offline-Diktat wichtig ist.",
+    "Account required": "{competitor} kann ein Konto oder eine eigene Kaufstrecke voraussetzen. Dictivo Local braucht kein Dictivo-Konto.",
+    "Pricing model": "Pruefen Sie das aktuelle {competitor}-Angebot im Kaufprozess. Dictivo Local bleibt bei $49 einmalig.",
+    "Free tier / trial": "{competitor} kann eigene kostenlose Stufen oder Tests haben. Dictivo kombiniert Tiny dauerhaft kostenlos mit 14 Tagen vollem Local-Test.",
+    Platforms: "{competitor} hat seine eigene Plattformabdeckung. Dictivo ist jetzt fuer Mac verfuegbar; Windows bleibt in Validierung.",
+    "Privacy boundary": "{competitor} passt, wenn sein Modell zu Ihrem Workflow passt. Dictivo Local ist fuer Arbeit gedacht, die standardmaessig auf dem Mac bleibt.",
+  },
+  fr: {
+    "Processing location": "{competitor} suit son propre flux produit. Comparez-le a Dictivo Local, qui garde le Mac comme chemin par defaut.",
+    "Trains AI on your voice": "{competitor} decrit ses propres regles de confidentialite et d'IA. Dictivo Local evite ce compromis pour la dictee quotidienne.",
+    "Works fully offline": "{competitor} est concu pour son propre workflow. Dictivo Local est le choix quand la dictee hors ligne compte.",
+    "Account required": "{competitor} peut demander un compte ou son propre parcours d'achat. Dictivo Local ne demande pas de compte Dictivo.",
+    "Pricing model": "Verifiez l'offre {competitor} au moment de l'achat. Dictivo Local reste a $49 une seule fois.",
+    "Free tier / trial": "{competitor} peut proposer ses propres options gratuites ou essais. Dictivo offre Tiny gratuit a vie et 14 jours d'essai Local complet.",
+    Platforms: "{competitor} a sa propre couverture de plateformes. Dictivo est disponible sur Mac aujourd'hui; Windows reste en validation.",
+    "Privacy boundary": "{competitor} convient si son modele correspond a votre workflow. Dictivo Local vise les travaux qui doivent rester sur le Mac par defaut.",
+  },
+  es: {
+    "Processing location": "{competitor} usa su propio flujo de producto. Compáralo con Dictivo Local como ruta predeterminada en el Mac.",
+    "Trains AI on your voice": "{competitor} define sus propias reglas de privacidad e IA. Dictivo Local evita ese compromiso para el dictado diario.",
+    "Works fully offline": "{competitor} está diseñado para su propio flujo. Dictivo Local es la opción cuando importa dictar sin conexión.",
+    "Account required": "{competitor} puede requerir cuenta o su propio proceso de compra. Dictivo Local no requiere una cuenta de Dictivo.",
+    "Pricing model": "Revisa la oferta actual de {competitor} al comprar. Dictivo Local se mantiene en $49 una sola vez.",
+    "Free tier / trial": "{competitor} puede tener sus propias opciones gratis o pruebas. Dictivo combina Tiny gratis para siempre con 14 días de prueba Local completa.",
+    Platforms: "{competitor} tiene su propia cobertura de plataformas. Dictivo está disponible para Mac; Windows sigue en validación.",
+    "Privacy boundary": "{competitor} encaja si su modelo se adapta a tu flujo. Dictivo Local está pensado para trabajo que debe quedarse en el Mac por defecto.",
+  },
+  it: {
+    "Processing location": "{competitor} segue il proprio flusso di prodotto. Confrontalo con Dictivo Local come percorso predefinito sul Mac.",
+    "Trains AI on your voice": "{competitor} definisce le proprie regole di privacy e IA. Dictivo Local evita questo compromesso nella dettatura quotidiana.",
+    "Works fully offline": "{competitor} è costruito per il proprio workflow. Dictivo Local è la scelta quando conta dettare offline.",
+    "Account required": "{competitor} può richiedere un account o un percorso di acquisto dedicato. Dictivo Local non richiede un account Dictivo.",
+    "Pricing model": "Controlla l'offerta {competitor} al momento dell'acquisto. Dictivo Local resta a $49 una sola volta.",
+    "Free tier / trial": "{competitor} può avere opzioni gratuite o prove proprie. Dictivo offre Tiny gratis per sempre e 14 giorni di prova Local completa.",
+    Platforms: "{competitor} ha la propria copertura piattaforme. Dictivo è disponibile per Mac; Windows resta in validazione.",
+    "Privacy boundary": "{competitor} va bene se il suo modello si adatta al tuo workflow. Dictivo Local è pensato per il lavoro che deve restare sul Mac per impostazione predefinita.",
+  },
+  nl: {
+    "Processing location": "{competitor} volgt zijn eigen productworkflow. Vergelijk dat met Dictivo Local als standaardroute op de Mac.",
+    "Trains AI on your voice": "{competitor} heeft eigen privacy- en AI-regels. Dictivo Local haalt dit spanningsveld weg voor dagelijkse dictaten.",
+    "Works fully offline": "{competitor} is gebouwd voor zijn eigen workflow. Dictivo Local is de keuze wanneer offline dicteren belangrijk is.",
+    "Account required": "{competitor} kan een account of eigen aankoopflow vragen. Dictivo Local vraagt geen Dictivo-account.",
+    "Pricing model": "Controleer het actuele {competitor}-aanbod tijdens aankoop. Dictivo Local blijft eenmalig $49.",
+    "Free tier / trial": "{competitor} kan eigen gratis opties of proefperiodes hebben. Dictivo combineert Tiny gratis voor altijd met 14 dagen volledige Local-proef.",
+    Platforms: "{competitor} heeft eigen platformdekking. Dictivo is nu beschikbaar voor Mac; Windows blijft in validatie.",
+    "Privacy boundary": "{competitor} past als het model bij je workflow past. Dictivo Local is bedoeld voor werk dat standaard op de Mac moet blijven.",
+  },
+  pt: {
+    "Processing location": "{competitor} segue o seu próprio fluxo de produto. Compare com o Dictivo Local como caminho padrão no Mac.",
+    "Trains AI on your voice": "{competitor} define as suas próprias regras de privacidade e IA. O Dictivo Local evita esse compromisso na ditado diário.",
+    "Works fully offline": "{competitor} foi criado para o seu próprio workflow. O Dictivo Local é a escolha quando ditado offline é importante.",
+    "Account required": "{competitor} pode exigir conta ou o seu próprio processo de compra. O Dictivo Local não exige conta Dictivo.",
+    "Pricing model": "Verifique a oferta atual de {competitor} no momento da compra. O Dictivo Local continua a $49 uma única vez.",
+    "Free tier / trial": "{competitor} pode ter opções gratuitas ou testes próprios. O Dictivo combina Tiny grátis para sempre com 14 dias de teste Local completo.",
+    Platforms: "{competitor} tem a sua própria cobertura de plataformas. O Dictivo está disponível para Mac; Windows continua em validação.",
+    "Privacy boundary": "{competitor} serve se o seu modelo encaixar no seu workflow. O Dictivo Local é para trabalho que deve ficar no Mac por padrão.",
+  },
+  zh: {
+    "Processing location": "{competitor} 使用自己的产品路径。请把它与默认在 Mac 本地运行的 Dictivo Local 对比。",
+    "Trains AI on your voice": "{competitor} 有自己的隐私和 AI 规则。Dictivo Local 让日常听写避开这个取舍。",
+    "Works fully offline": "{competitor} 面向自己的工作流。需要离线听写时，Dictivo Local 是更直接的选择。",
+    "Account required": "{competitor} 可能需要账号或自己的购买流程。Dictivo Local 不需要 Dictivo 账号。",
+    "Pricing model": "购买前查看 {competitor} 的当前方案。Dictivo Local 保持 $49 一次买断。",
+    "Free tier / trial": "{competitor} 可能有自己的免费或试用方案。Dictivo 提供 Tiny 永久免费和 14 天完整 Local 试用。",
+    Platforms: "{competitor} 有自己的平台覆盖。Dictivo 当前面向 Mac；Windows 仍在验证。",
+    "Privacy boundary": "{competitor} 适合接受其产品模型的工作流。Dictivo Local 面向默认留在 Mac 上的内容。",
+  },
+  ja: {
+    "Processing location": "{competitor} は独自の製品フローで動きます。Mac 上で Local を標準にする Dictivo と比較してください。",
+    "Trains AI on your voice": "{competitor} には独自のプライバシーと AI のルールがあります。Dictivo Local は日常の音声入力でその迷いを減らします。",
+    "Works fully offline": "{competitor} は独自のワークフロー向けです。オフライン音声入力が重要なら Dictivo Local が直接的です。",
+    "Account required": "{competitor} はアカウントや独自の購入フローが必要な場合があります。Dictivo Local は Dictivo アカウント不要です。",
+    "Pricing model": "購入時に {competitor} の現在の提供内容を確認してください。Dictivo Local は $49 の買い切りです。",
+    "Free tier / trial": "{competitor} には独自の無料枠や体験版がある場合があります。Dictivo は Tiny 永久無料と 14 日間の完全 Local 体験を提供します。",
+    Platforms: "{competitor} には独自の対応プラットフォームがあります。Dictivo は現在 Mac 向けで、Windows は検証中です。",
+    "Privacy boundary": "{competitor} はその製品モデルが合う場合に適しています。Dictivo Local は標準で Mac に残す作業向けです。",
+  },
+  ko: {
+    "Processing location": "{competitor}는 자체 제품 흐름을 사용합니다. Mac에서 Local을 기본으로 두는 Dictivo와 비교하세요.",
+    "Trains AI on your voice": "{competitor}에는 자체 개인정보 및 AI 규칙이 있습니다. Dictivo Local은 일상 받아쓰기에서 이 고민을 줄입니다.",
+    "Works fully offline": "{competitor}는 자체 워크플로에 맞춰져 있습니다. 오프라인 받아쓰기가 중요하면 Dictivo Local이 더 직접적입니다.",
+    "Account required": "{competitor}는 계정이나 자체 구매 흐름이 필요할 수 있습니다. Dictivo Local은 Dictivo 계정이 필요 없습니다.",
+    "Pricing model": "구매 시점에 {competitor}의 현재 제공 조건을 확인하세요. Dictivo Local은 $49 일회 구매입니다.",
+    "Free tier / trial": "{competitor}에는 자체 무료 옵션이나 체험판이 있을 수 있습니다. Dictivo는 Tiny 영구 무료와 14일 전체 Local 체험을 제공합니다.",
+    Platforms: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo는 현재 Mac용이며 Windows는 검증 중입니다.",
+    "Privacy boundary": "{competitor}는 그 제품 모델이 워크플로에 맞을 때 적합합니다. Dictivo Local은 기본적으로 Mac에 남겨야 하는 작업을 위한 선택입니다.",
+  },
+};
+
 function compareCopy(code) {
   if (code === "en") return COMPARE_I18N.en;
-  return compactCompareLocale(COMPARE_I18N[code] || {});
+  return { ...compactCompareLocale(COMPARE_I18N[code] || {}), locale: code };
 }
 
 function assetTags() {
@@ -1581,10 +1694,12 @@ function localizedCompareQuickTake(page, copy) {
 
 function localizedCompareRows(page, copy) {
   if (copy === COMPARE_I18N.en) return page.rows;
+  const competitorRows = LOCALIZED_COMPETITOR_ROWS[copy.locale] || {};
   return page.rows.map((row) => ({
     ...row,
     label: copy.rowLabels[row.label] || row.label,
     dictivo: copy.dictivoRows[row.label] || row.dictivo,
+    competitor: fillCompareTemplate(competitorRows[row.label] || row.competitor, page),
   }));
 }
 
@@ -1825,7 +1940,6 @@ function renderComparePage(page, currentCode = "en") {
     <main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
-        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
         ${renderCompareQuickTake(page, copy)}
@@ -1894,7 +2008,6 @@ function renderCompareHub(currentCode = "en") {
     <main class="compare-page compare-hub" id="compare-hub">
       <section class="compare-hero" aria-labelledby="compare-hub-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.hubEyebrow)}</span>
-        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${COMPARE_LAST_UPDATED.iso}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
         <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
         <p class="doc-lede">${html(copy.hubLede)}</p>
       </section>
@@ -2287,8 +2400,8 @@ function renderRedirects() {
 /downloads/Dictivo-macOS-universal.dmg ${release.dmg.url} 302
 /downloads/Dictivo-Windows-x64.exe /#downloads 302
 /downloads/Dictivo-Windows-x64.msi /#downloads 302
-/checkout/local https://dictivo.lemonsqueezy.com/checkout/buy/d4cb72ba-68a7-494f-a711-29993b2ea7a1 302
-/checkout/cloud-fast https://dictivo.lemonsqueezy.com/checkout/buy/2a12baa1-2368-47ac-884b-0721f8b5484d 302
+/checkout/local ${localCheckoutTarget} 302
+/checkout/cloud-fast ${cloudFastCheckoutTarget} 302
 `;
 }
 

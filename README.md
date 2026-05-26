@@ -14,7 +14,8 @@ Current public pricing copy:
 From the repository root:
 
 ```sh
-python3 -m http.server 4173
+node scripts/generate-site.mjs
+python3 -m http.server 4173 -d dist
 ```
 
 Then open `http://127.0.0.1:4173/`.
@@ -25,12 +26,13 @@ Then open `http://127.0.0.1:4173/`.
 - Production domain: `dictivo.app`
 - Optional redirect domain: `www.dictivo.app`
 - Build command: leave empty
-- Output directory: repository root
+- Output directory: `dist`
 
-The site can also be deployed from the repository root with:
+The site can also be deployed from the generated output with:
 
 ```sh
-npx wrangler pages deploy . --project-name dictivo-app
+node scripts/generate-site.mjs
+npx wrangler pages deploy dist --project-name dictivo-app
 ```
 
 Do not upload installer binaries into the Pages project. Cloudflare Pages direct uploads have a 25 MiB per-file limit,
@@ -38,7 +40,7 @@ and desktop installers should be treated as release artifacts rather than websit
 
 ## GitHub deployment
 
-The `.github/workflows/deploy-cloudflare-pages.yml` workflow deploys the repository root to Cloudflare Pages whenever
+The `.github/workflows/deploy-cloudflare-pages.yml` workflow deploys `dist/` to Cloudflare Pages whenever
 `main` is pushed. It also accepts a `desktop-release-published` `repository_dispatch` event from the desktop app repo
 and runs daily as a fallback. Every deploy runs:
 
@@ -47,7 +49,7 @@ node scripts/sync-latest-release.mjs
 node scripts/generate-site.mjs
 ```
 
-That keeps the homepage, localized pages, `downloads.json`, `_redirects`, `sitemap.xml`, and changelog aligned with
+That keeps the homepage, localized pages, comparison pages, `downloads.json`, `_redirects`, `sitemap.xml`, and changelog aligned with
 the latest stable GitHub Release in `Rswcf/Dictivo`.
 
 Required GitHub Actions secret:
@@ -76,8 +78,8 @@ SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
 ```
 
 The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads installer
-objects with long-lived cache headers. Do not publish Windows objects until the Windows signing and real-machine QA
-gates are complete.
+objects with long-lived cache headers. It uploads macOS by default. Do not set `INCLUDE_WINDOWS=1` or publish Windows
+objects until the Windows signing and real-machine QA gates are complete.
 
 ## Local checkout
 
@@ -151,7 +153,7 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 4. If the dispatch token is missing, run the site deploy workflow manually or wait for the scheduled sync.
 5. Sign the Windows EXE and MSI installers before making Windows public.
 6. Verify the public URLs under `https://dictivo.app/download/*`.
-7. Deploy the repository root to Cloudflare Pages and attach `dictivo.app`.
+7. Deploy `dist/` to Cloudflare Pages and attach `dictivo.app`.
 
 ## References
 

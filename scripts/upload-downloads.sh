@@ -6,12 +6,18 @@ DOMAIN="${DOMAIN:-downloads.dictivo.app}"
 ZONE_ID="${ZONE_ID:-5a6b0c150ad5e15a3990e65cb00b419e}"
 SOURCE_DIR="${SOURCE_DIR:-/tmp/dictivo-r2-upload}"
 CACHE_CONTROL="${CACHE_CONTROL:-public, max-age=31536000, immutable}"
+INCLUDE_WINDOWS="${INCLUDE_WINDOWS:-0}"
 
 required_files=(
   "Dictivo-macOS-universal.dmg"
-  "Dictivo-Windows-x64.exe"
-  "Dictivo-Windows-x64.msi"
 )
+
+if [[ "$INCLUDE_WINDOWS" == "1" ]]; then
+  required_files+=(
+    "Dictivo-Windows-x64.exe"
+    "Dictivo-Windows-x64.msi"
+  )
+fi
 
 for file in "${required_files[@]}"; do
   if [[ ! -f "$SOURCE_DIR/$file" ]]; then
@@ -35,19 +41,23 @@ npx wrangler r2 object put "$BUCKET/Dictivo-macOS-universal.dmg" \
   --cache-control "$CACHE_CONTROL" \
   --remote
 
-npx wrangler r2 object put "$BUCKET/Dictivo-Windows-x64.exe" \
-  --file "$SOURCE_DIR/Dictivo-Windows-x64.exe" \
-  --content-type "application/vnd.microsoft.portable-executable" \
-  --content-disposition "attachment; filename=\"Dictivo-Windows-x64.exe\"" \
-  --cache-control "$CACHE_CONTROL" \
-  --remote
+if [[ "$INCLUDE_WINDOWS" == "1" ]]; then
+  npx wrangler r2 object put "$BUCKET/Dictivo-Windows-x64.exe" \
+    --file "$SOURCE_DIR/Dictivo-Windows-x64.exe" \
+    --content-type "application/vnd.microsoft.portable-executable" \
+    --content-disposition "attachment; filename=\"Dictivo-Windows-x64.exe\"" \
+    --cache-control "$CACHE_CONTROL" \
+    --remote
 
-npx wrangler r2 object put "$BUCKET/Dictivo-Windows-x64.msi" \
-  --file "$SOURCE_DIR/Dictivo-Windows-x64.msi" \
-  --content-type "application/x-msi" \
-  --content-disposition "attachment; filename=\"Dictivo-Windows-x64.msi\"" \
-  --cache-control "$CACHE_CONTROL" \
-  --remote
+  npx wrangler r2 object put "$BUCKET/Dictivo-Windows-x64.msi" \
+    --file "$SOURCE_DIR/Dictivo-Windows-x64.msi" \
+    --content-type "application/x-msi" \
+    --content-disposition "attachment; filename=\"Dictivo-Windows-x64.msi\"" \
+    --cache-control "$CACHE_CONTROL" \
+    --remote
+else
+  echo "Skipping Windows upload. Set INCLUDE_WINDOWS=1 only after Windows public release approval."
+fi
 
 for file in "${required_files[@]}"; do
   echo "https://$DOMAIN/$file"
