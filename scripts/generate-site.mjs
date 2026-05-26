@@ -101,6 +101,109 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
 };
 
+const WINDOWS_HOME_COPY = {
+  en: {
+    navDownload: "Downloads",
+    heroEyebrow: "Private desktop dictation",
+    heroNote: "Mac and Windows x64 are available now.",
+    pricingFootnote: "Mac and Windows x64 are available now.",
+    faqAnswer: "Yes. Dictivo is available for macOS and Windows x64 public beta.",
+    footerBeta: "Mac and Windows public beta - 2026",
+    metaDescription:
+      "Dictivo is a private-first desktop dictation app for macOS and Windows. Dictate locally by default, then use optional Cloud Fast when speed matters.",
+  },
+  de: {
+    navDownload: "Downloads",
+    heroEyebrow: "Privates Desktop-Diktat",
+    heroNote: "Mac und Windows x64 sind jetzt verfügbar.",
+    pricingFootnote: "Mac und Windows x64 sind jetzt verfügbar.",
+    faqAnswer: "Ja. Dictivo ist für macOS und als öffentliche Windows-x64-Beta verfügbar.",
+    footerBeta: "Mac und Windows öffentliche Beta - 2026",
+    metaDescription:
+      "Dictivo ist eine private Desktop-Diktat-App für macOS und Windows. Diktieren Sie standardmäßig lokal und nutzen Sie optional Cloud Fast, wenn Geschwindigkeit wichtiger ist.",
+  },
+  fr: {
+    navDownload: "Téléchargements",
+    heroEyebrow: "Dictée privée sur ordinateur",
+    heroNote: "Mac et Windows x64 sont disponibles maintenant.",
+    pricingFootnote: "Mac et Windows x64 sont disponibles maintenant.",
+    faqAnswer: "Oui. Dictivo est disponible pour macOS et en bêta publique Windows x64.",
+    footerBeta: "Bêta publique Mac et Windows - 2026",
+    metaDescription:
+      "Dictivo est une app de dictée privée pour macOS et Windows. Dictez localement par défaut, puis utilisez Cloud Fast en option quand la vitesse compte.",
+  },
+  es: {
+    navDownload: "Descargas",
+    heroEyebrow: "Dictado privado de escritorio",
+    heroNote: "Mac y Windows x64 ya están disponibles.",
+    pricingFootnote: "Mac y Windows x64 ya están disponibles.",
+    faqAnswer: "Sí. Dictivo está disponible para macOS y en beta pública para Windows x64.",
+    footerBeta: "Beta pública para Mac y Windows - 2026",
+    metaDescription:
+      "Dictivo es una app de dictado privada para macOS y Windows. Dicta localmente por defecto y usa Cloud Fast opcional cuando importa la velocidad.",
+  },
+  it: {
+    navDownload: "Download",
+    heroEyebrow: "Dettatura desktop privata",
+    heroNote: "Mac e Windows x64 sono disponibili ora.",
+    pricingFootnote: "Mac e Windows x64 sono disponibili ora.",
+    faqAnswer: "Sì. Dictivo è disponibile per macOS e in beta pubblica per Windows x64.",
+    footerBeta: "Beta pubblica Mac e Windows - 2026",
+    metaDescription:
+      "Dictivo è un'app di dettatura privata per macOS e Windows. Detti localmente per impostazione predefinita e usi Cloud Fast quando conta la velocità.",
+  },
+  nl: {
+    navDownload: "Downloads",
+    heroEyebrow: "Privé desktopdictatie",
+    heroNote: "Mac en Windows x64 zijn nu beschikbaar.",
+    pricingFootnote: "Mac en Windows x64 zijn nu beschikbaar.",
+    faqAnswer: "Ja. Dictivo is beschikbaar voor macOS en als openbare Windows x64-beta.",
+    footerBeta: "Mac en Windows openbare beta - 2026",
+    metaDescription:
+      "Dictivo is een privacygerichte desktopdictatie-app voor macOS en Windows. Dicteer standaard lokaal en gebruik optioneel Cloud Fast wanneer snelheid telt.",
+  },
+  pt: {
+    navDownload: "Downloads",
+    heroEyebrow: "Ditado privado no desktop",
+    heroNote: "Mac e Windows x64 estão disponíveis agora.",
+    pricingFootnote: "Mac e Windows x64 estão disponíveis agora.",
+    faqAnswer: "Sim. O Dictivo está disponível para macOS e em beta pública para Windows x64.",
+    footerBeta: "Beta pública para Mac e Windows - 2026",
+    metaDescription:
+      "O Dictivo é um app de ditado privado para macOS e Windows. Dite localmente por padrão e use Cloud Fast como opção quando velocidade importar.",
+  },
+  zh: {
+    navDownload: "下载",
+    heroEyebrow: "私密桌面听写",
+    heroNote: "Mac 与 Windows x64 现已可用。",
+    pricingFootnote: "Mac 与 Windows x64 现已可用。",
+    faqAnswer: "可以。Dictivo 已支持 macOS，并提供 Windows x64 公测版。",
+    footerBeta: "Mac 与 Windows 公测版 - 2026",
+    metaDescription:
+      "Dictivo 是面向 macOS 和 Windows 的私密优先桌面听写应用。默认本地听写，需要速度时可选择 Cloud Fast。",
+  },
+  ja: {
+    navDownload: "ダウンロード",
+    heroEyebrow: "プライベートなデスクトップ音声入力",
+    heroNote: "Mac と Windows x64 が利用可能です。",
+    pricingFootnote: "Mac と Windows x64 が利用可能です。",
+    faqAnswer: "はい。Dictivo は macOS と Windows x64 公開ベータで利用できます。",
+    footerBeta: "Mac と Windows 公開ベータ - 2026",
+    metaDescription:
+      "Dictivo は macOS と Windows 向けのプライベート重視デスクトップ音声入力アプリです。標準はローカル、速度が必要なときだけ Cloud Fast を使えます。",
+  },
+  ko: {
+    navDownload: "다운로드",
+    heroEyebrow: "비공개 데스크톱 받아쓰기",
+    heroNote: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
+    pricingFootnote: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
+    faqAnswer: "예. Dictivo는 macOS와 Windows x64 공개 베타로 사용할 수 있습니다.",
+    footerBeta: "Mac 및 Windows 공개 베타 - 2026",
+    metaDescription:
+      "Dictivo는 macOS와 Windows용 비공개 우선 데스크톱 받아쓰기 앱입니다. 기본은 로컬 받아쓰기이며, 속도가 필요할 때 Cloud Fast를 선택할 수 있습니다.",
+  },
+};
+
 function html(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -115,6 +218,35 @@ function attr(value) {
 
 function windowsDownloadCopy(code) {
   return WINDOWS_DOWNLOAD_COPY[code] || WINDOWS_DOWNLOAD_COPY.en;
+}
+
+function windowsHomeCopy(code) {
+  return WINDOWS_HOME_COPY[code] || WINDOWS_HOME_COPY.en;
+}
+
+function questionIsAboutWindows(question) {
+  return String(question).toLowerCase().includes("windows");
+}
+
+function homeCopyForRender(code) {
+  const base = HOME_COPY[code];
+  if (!base || !hasWindowsRelease) return base;
+
+  const live = windowsHomeCopy(code);
+  return {
+    ...base,
+    metaDescription: live.metaDescription,
+    nav: { ...base.nav, download: live.navDownload },
+    hero: { ...base.hero, eyebrow: live.heroEyebrow, windows: live.heroNote },
+    pricing: { ...base.pricing, footnote: live.pricingFootnote },
+    faq: {
+      ...base.faq,
+      items: base.faq.items.map(([question, answer]) =>
+        questionIsAboutWindows(question) ? [question, live.faqAnswer] : [question, answer],
+      ),
+    },
+    footer: { ...base.footer, beta: live.footerBeta },
+  };
 }
 
 function localeByCode(code) {
@@ -217,7 +349,7 @@ const COMPARE_I18N = {
       "Pricing model": "$49 once, 12 months of updates, then optional $24/year update renewal.",
       "Free tier / trial":
         "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
-      Platforms: "macOS now. Windows is in validation.",
+      Platforms: "macOS and Windows x64 public beta are available now.",
       "Privacy boundary":
         "Local mode keeps transcripts, history, dictionary terms, snippets, and settings on your Mac. No Dictivo account is required for Local dictation.",
     },
@@ -365,7 +497,7 @@ const COMPARE_I18N = {
       "Account required": "Kein Dictivo-Konto für Local-Diktat.",
       "Pricing model": "$49 einmalig, 12 Monate Updates, danach optionale Verlängerung für $24/Jahr.",
       "Free tier / trial": "Tiny dauerhaft gratis plus 14 Tage voller Local-Test mit allen lokalen Modellen.",
-      Platforms: "macOS jetzt. Windows ist in Validierung.",
+      Platforms: "macOS und Windows x64 sind jetzt verfügbar.",
       "Privacy boundary": "Local-Modus hält Transkripte, Verlauf, Wörterbuch, Snippets und Einstellungen auf dem Mac. Für Local-Diktat ist kein Dictivo-Konto nötig.",
     },
     sections: [
@@ -496,7 +628,7 @@ const COMPARE_I18N = {
       "Account required": "Pas de compte Dictivo pour la dictée locale.",
       "Pricing model": "$49 une fois, 12 mois de mises à jour, puis renouvellement optionnel à $24/an.",
       "Free tier / trial": "Tiny gratuit à vie plus essai Local complet de 14 jours avec tous les modèles.",
-      Platforms: "macOS maintenant. Windows est en validation.",
+      Platforms: "macOS et Windows x64 sont disponibles maintenant.",
       "Privacy boundary": "Le mode Local garde transcriptions, historique, dictionnaire, extraits et réglages sur le Mac. Aucun compte Dictivo n'est requis pour la dictée Local.",
     },
     sections: [
@@ -638,7 +770,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "No hace falta cuenta de Dictivo para el dictado Local.",
       "Pricing model": "$49 una vez, 12 meses de actualizaciones y renovación opcional de $24/año.",
       "Free tier / trial": "Tiny gratis para siempre más 14 días de prueba Local completa con todos los modelos.",
-      Platforms: "macOS ahora. Windows está en validación.",
+      Platforms: "macOS y Windows x64 ya están disponibles.",
       "Privacy boundary": "El modo Local mantiene transcripciones, historial, diccionario, fragmentos y ajustes en tu Mac. No hace falta cuenta de Dictivo para dictado Local.",
     },
     sections: [
@@ -768,7 +900,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "Local 听写不需要 Dictivo 账号。",
       "Pricing model": "$49 一次买断，含 12 个月更新，之后可选 $24/年更新续费。",
       "Free tier / trial": "Tiny 永久免费，外加 14 天完整 Local 试用，可解锁所有本地模型。",
-      Platforms: "目前 macOS。Windows 正在验证。",
+      Platforms: "macOS 与 Windows x64 现已可用。",
       "Privacy boundary": "Local 模式会把转录、历史、词典、片段和设置保留在 Mac 上。Local 听写不需要 Dictivo 账号。",
     },
     sections: [
@@ -901,7 +1033,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "Nessun account Dictivo per la dettatura Local.",
       "Pricing model": "$49 una volta, 12 mesi di aggiornamenti, poi rinnovo opzionale da $24/anno.",
       "Free tier / trial": "Tiny gratis per sempre più prova Local completa di 14 giorni con tutti i modelli locali.",
-      Platforms: "macOS ora. Windows è in validazione.",
+      Platforms: "macOS e Windows x64 sono disponibili ora.",
       "Privacy boundary": "La modalità Local tiene trascrizioni, cronologia, dizionario, snippet e impostazioni sul Mac. La dettatura Local non richiede un account Dictivo.",
     },
     sections: [
@@ -1029,7 +1161,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "Geen Dictivo-account voor Local-dictatie.",
       "Pricing model": "$49 eenmalig, 12 maanden updates, daarna optionele verlenging van $24/jaar.",
       "Free tier / trial": "Tiny altijd gratis plus 14 dagen volledige Local-proef met alle lokale modellen.",
-      Platforms: "macOS nu. Windows wordt gevalideerd.",
+      Platforms: "macOS en Windows x64 zijn nu beschikbaar.",
       "Privacy boundary": "Local-modus houdt transcripties, geschiedenis, woordenboek, snippets en instellingen op je Mac. Voor Local-dictatie is geen Dictivo-account nodig.",
     },
     sections: [
@@ -1157,7 +1289,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "Não há conta Dictivo para ditado Local.",
       "Pricing model": "$49 uma vez, 12 meses de atualizações e renovação opcional de $24/ano.",
       "Free tier / trial": "Tiny grátis para sempre mais teste Local completo de 14 dias com todos os modelos locais.",
-      Platforms: "macOS agora. Windows está em validação.",
+      Platforms: "macOS e Windows x64 estão disponíveis agora.",
       "Privacy boundary": "O modo Local mantém transcrições, histórico, dicionário, snippets e configurações no Mac. O ditado Local não exige conta Dictivo.",
     },
     sections: [
@@ -1285,7 +1417,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "Local 音声入力に Dictivo アカウントは不要です。",
       "Pricing model": "$49 買い切り、12 か月のアップデート、その後は任意で $24/年更新。",
       "Free tier / trial": "Tiny は永久無料。さらに全ローカルモデルを 14 日間試せる完全 Local トライアル。",
-      Platforms: "現在 macOS。Windows は検証中。",
+      Platforms: "macOS と Windows x64 が利用可能です。",
       "Privacy boundary": "Local モードでは文字起こし、履歴、辞書、スニペット、設定が Mac に残ります。Local 音声入力に Dictivo アカウントは不要です。",
     },
     sections: [
@@ -1413,7 +1545,7 @@ Object.assign(COMPARE_I18N, {
       "Account required": "Local 받아쓰기에 Dictivo 계정은 필요 없습니다.",
       "Pricing model": "$49 일회 구매, 12개월 업데이트, 이후 선택적 $24/년 업데이트 갱신.",
       "Free tier / trial": "Tiny는 영구 무료이며, 모든 로컬 모델을 여는 14일 전체 Local 체험을 제공합니다.",
-      Platforms: "현재 macOS. Windows는 검증 중입니다.",
+      Platforms: "macOS와 Windows x64를 지금 사용할 수 있습니다.",
       "Privacy boundary": "Local 모드는 전사문, 기록, 사전, 스니펫, 설정을 Mac에 보관합니다. Local 받아쓰기에는 Dictivo 계정이 필요 없습니다.",
     },
     sections: [
@@ -1499,7 +1631,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} kann ein Konto oder eine eigene Kaufstrecke voraussetzen. Dictivo Local braucht kein Dictivo-Konto.",
     "Pricing model": "Pruefen Sie das aktuelle {competitor}-Angebot im Kaufprozess. Dictivo Local bleibt bei $49 einmalig.",
     "Free tier / trial": "{competitor} kann eigene kostenlose Stufen oder Tests haben. Dictivo kombiniert Tiny dauerhaft kostenlos mit 14 Tagen vollem Local-Test.",
-    Platforms: "{competitor} hat seine eigene Plattformabdeckung. Dictivo ist jetzt fuer Mac verfuegbar; Windows bleibt in Validierung.",
+    Platforms: "{competitor} hat seine eigene Plattformabdeckung. Dictivo ist jetzt fuer Mac und Windows x64 verfuegbar.",
     "Privacy boundary": "{competitor} passt, wenn sein Modell zu Ihrem Workflow passt. Dictivo Local ist fuer Arbeit gedacht, die standardmaessig auf dem Mac bleibt.",
   },
   fr: {
@@ -1509,7 +1641,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} peut demander un compte ou son propre parcours d'achat. Dictivo Local ne demande pas de compte Dictivo.",
     "Pricing model": "Verifiez l'offre {competitor} au moment de l'achat. Dictivo Local reste a $49 une seule fois.",
     "Free tier / trial": "{competitor} peut proposer ses propres options gratuites ou essais. Dictivo offre Tiny gratuit a vie et 14 jours d'essai Local complet.",
-    Platforms: "{competitor} a sa propre couverture de plateformes. Dictivo est disponible sur Mac aujourd'hui; Windows reste en validation.",
+    Platforms: "{competitor} a sa propre couverture de plateformes. Dictivo est disponible sur Mac et Windows x64 aujourd'hui.",
     "Privacy boundary": "{competitor} convient si son modele correspond a votre workflow. Dictivo Local vise les travaux qui doivent rester sur le Mac par defaut.",
   },
   es: {
@@ -1519,7 +1651,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} puede requerir cuenta o su propio proceso de compra. Dictivo Local no requiere una cuenta de Dictivo.",
     "Pricing model": "Revisa la oferta actual de {competitor} al comprar. Dictivo Local se mantiene en $49 una sola vez.",
     "Free tier / trial": "{competitor} puede tener sus propias opciones gratis o pruebas. Dictivo combina Tiny gratis para siempre con 14 días de prueba Local completa.",
-    Platforms: "{competitor} tiene su propia cobertura de plataformas. Dictivo está disponible para Mac; Windows sigue en validación.",
+    Platforms: "{competitor} tiene su propia cobertura de plataformas. Dictivo está disponible para Mac y Windows x64.",
     "Privacy boundary": "{competitor} encaja si su modelo se adapta a tu flujo. Dictivo Local está pensado para trabajo que debe quedarse en el Mac por defecto.",
   },
   it: {
@@ -1529,7 +1661,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} può richiedere un account o un percorso di acquisto dedicato. Dictivo Local non richiede un account Dictivo.",
     "Pricing model": "Controlla l'offerta {competitor} al momento dell'acquisto. Dictivo Local resta a $49 una sola volta.",
     "Free tier / trial": "{competitor} può avere opzioni gratuite o prove proprie. Dictivo offre Tiny gratis per sempre e 14 giorni di prova Local completa.",
-    Platforms: "{competitor} ha la propria copertura piattaforme. Dictivo è disponibile per Mac; Windows resta in validazione.",
+    Platforms: "{competitor} ha la propria copertura piattaforme. Dictivo è disponibile per Mac e Windows x64.",
     "Privacy boundary": "{competitor} va bene se il suo modello si adatta al tuo workflow. Dictivo Local è pensato per il lavoro che deve restare sul Mac per impostazione predefinita.",
   },
   nl: {
@@ -1539,7 +1671,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} kan een account of eigen aankoopflow vragen. Dictivo Local vraagt geen Dictivo-account.",
     "Pricing model": "Controleer het actuele {competitor}-aanbod tijdens aankoop. Dictivo Local blijft eenmalig $49.",
     "Free tier / trial": "{competitor} kan eigen gratis opties of proefperiodes hebben. Dictivo combineert Tiny gratis voor altijd met 14 dagen volledige Local-proef.",
-    Platforms: "{competitor} heeft eigen platformdekking. Dictivo is nu beschikbaar voor Mac; Windows blijft in validatie.",
+    Platforms: "{competitor} heeft eigen platformdekking. Dictivo is nu beschikbaar voor Mac en Windows x64.",
     "Privacy boundary": "{competitor} past als het model bij je workflow past. Dictivo Local is bedoeld voor werk dat standaard op de Mac moet blijven.",
   },
   pt: {
@@ -1549,7 +1681,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} pode exigir conta ou o seu próprio processo de compra. O Dictivo Local não exige conta Dictivo.",
     "Pricing model": "Verifique a oferta atual de {competitor} no momento da compra. O Dictivo Local continua a $49 uma única vez.",
     "Free tier / trial": "{competitor} pode ter opções gratuitas ou testes próprios. O Dictivo combina Tiny grátis para sempre com 14 dias de teste Local completo.",
-    Platforms: "{competitor} tem a sua própria cobertura de plataformas. O Dictivo está disponível para Mac; Windows continua em validação.",
+    Platforms: "{competitor} tem a sua própria cobertura de plataformas. O Dictivo está disponível para Mac e Windows x64.",
     "Privacy boundary": "{competitor} serve se o seu modelo encaixar no seu workflow. O Dictivo Local é para trabalho que deve ficar no Mac por padrão.",
   },
   zh: {
@@ -1559,7 +1691,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} 可能需要账号或自己的购买流程。Dictivo Local 不需要 Dictivo 账号。",
     "Pricing model": "购买前查看 {competitor} 的当前方案。Dictivo Local 保持 $49 一次买断。",
     "Free tier / trial": "{competitor} 可能有自己的免费或试用方案。Dictivo 提供 Tiny 永久免费和 14 天完整 Local 试用。",
-    Platforms: "{competitor} 有自己的平台覆盖。Dictivo 当前面向 Mac；Windows 仍在验证。",
+    Platforms: "{competitor} 有自己的平台覆盖。Dictivo 现已支持 Mac 和 Windows x64。",
     "Privacy boundary": "{competitor} 适合接受其产品模型的工作流。Dictivo Local 面向默认留在 Mac 上的内容。",
   },
   ja: {
@@ -1569,7 +1701,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor} はアカウントや独自の購入フローが必要な場合があります。Dictivo Local は Dictivo アカウント不要です。",
     "Pricing model": "購入時に {competitor} の現在の提供内容を確認してください。Dictivo Local は $49 の買い切りです。",
     "Free tier / trial": "{competitor} には独自の無料枠や体験版がある場合があります。Dictivo は Tiny 永久無料と 14 日間の完全 Local 体験を提供します。",
-    Platforms: "{competitor} には独自の対応プラットフォームがあります。Dictivo は現在 Mac 向けで、Windows は検証中です。",
+    Platforms: "{competitor} には独自の対応プラットフォームがあります。Dictivo は Mac と Windows x64 で利用できます。",
     "Privacy boundary": "{competitor} はその製品モデルが合う場合に適しています。Dictivo Local は標準で Mac に残す作業向けです。",
   },
   ko: {
@@ -1579,7 +1711,7 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Account required": "{competitor}는 계정이나 자체 구매 흐름이 필요할 수 있습니다. Dictivo Local은 Dictivo 계정이 필요 없습니다.",
     "Pricing model": "구매 시점에 {competitor}의 현재 제공 조건을 확인하세요. Dictivo Local은 $49 일회 구매입니다.",
     "Free tier / trial": "{competitor}에는 자체 무료 옵션이나 체험판이 있을 수 있습니다. Dictivo는 Tiny 영구 무료와 14일 전체 Local 체험을 제공합니다.",
-    Platforms: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo는 현재 Mac용이며 Windows는 검증 중입니다.",
+    Platforms: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo는 Mac 및 Windows x64에서 사용할 수 있습니다.",
     "Privacy boundary": "{competitor}는 그 제품 모델이 워크플로에 맞을 때 적합합니다. Dictivo Local은 기본적으로 Mac에 남겨야 하는 작업을 위한 선택입니다.",
   },
 };
@@ -1707,9 +1839,9 @@ function renderSchema(currentCode, t) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
-      operatingSystem: "macOS",
+      operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: pageUrl,
-      downloadUrl: `${BASE_URL}/download/mac`,
+      downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
       softwareVersion: release.version,
       description: t.metaDescription,
       offers: [
@@ -1812,9 +1944,9 @@ function renderCompareSchema(page, currentCode) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
-      operatingSystem: "macOS",
+      operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: BASE_URL,
-      downloadUrl: `${BASE_URL}/download/mac`,
+      downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
       softwareVersion: release.version,
       description: localizedCompareMeta(page, copy),
       offers: {
@@ -1988,7 +2120,7 @@ function renderCompareCta(page, currentCode, copy) {
 
 function renderComparePage(page, currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = HOME_COPY[currentCode];
+  const t = homeCopyForRender(currentCode);
   const copy = compareCopy(currentCode);
   const canonical = localizedCompareUrl(currentCode, page.slug);
   const title = currentCode === "en" ? page.title : localizedCompareTitle(page, copy);
@@ -2061,7 +2193,7 @@ function renderCompareHubSchema(currentCode) {
 
 function renderCompareHub(currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = HOME_COPY[currentCode];
+  const t = homeCopyForRender(currentCode);
   const copy = compareCopy(currentCode);
   const canonical = localizedCompareUrl(currentCode);
   return `<!doctype html>
@@ -2151,7 +2283,7 @@ function renderHomeFooterLinks(currentCode, t) {
 
 function renderHome(currentCode) {
   const locale = localeByCode(currentCode);
-  const t = HOME_COPY[currentCode];
+  const t = homeCopyForRender(currentCode);
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
   const compareTeaser = `${renderCompareTeaser(currentCode)}\n\n`;
   const liveWindowsCopy = windowsDownloadCopy(currentCode);
@@ -2208,6 +2340,7 @@ function renderHome(currentCode) {
           <div class="hero-support">
             <div class="hero-actions" aria-label="Download Dictivo">
               <a class="button button-light download-link" href="/download/mac" data-platform="macos">${html(t.hero.download)}</a>
+              ${hasWindowsRelease ? `<a class="button button-outline download-link" href="/download/windows" data-platform="windows">${html(liveWindowsCopy.exeButton)}</a>` : ""}
               <a class="button button-outline" href="#pricing">${html(t.hero.pricing)}</a>
               <p class="hero-note">${html(t.hero.windows)}</p>
             </div>
@@ -2532,11 +2665,11 @@ function renderNotFound() {
     <link rel="stylesheet" href="/assets/site.css?v=local" />
   </head>
   <body>
-    ${renderHeader("en", HOME_COPY.en)}
+    ${renderHeader("en", homeCopyForRender("en"))}
     <main class="doc-page" id="not-found">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dictivo</span>
       <h1>Page not found</h1>
-      <p class="doc-lede">The page you requested is not available. Start from Dictivo home to compare plans, privacy options, and the Mac download.</p>
+      <p class="doc-lede">The page you requested is not available. Start from Dictivo home to compare plans, privacy options, and downloads.</p>
       <section class="doc-section" aria-labelledby="not-found-next">
         <h2 id="not-found-next">Continue with Dictivo</h2>
         <p><a href="/">Go to the Dictivo homepage</a></p>
@@ -2623,7 +2756,7 @@ function renderChangelog() {
   </head>
   <body>
     <a class="skip-link" href="#changelog">Skip to changelog</a>
-    ${renderHeader("en", HOME_COPY.en)}
+    ${renderHeader("en", homeCopyForRender("en"))}
     <main class="doc-page" id="changelog">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Release notes</span>
       <h1>Changelog</h1>
@@ -2716,7 +2849,7 @@ function renderChangelog() {
           <li>Dedicated panes for privacy controls and local engine settings.</li>
           <li>Companion overlay during dictation keeps the transcript visible while you work.</li>
           <li>Mac download path established.</li>
-          <li>Windows packaging groundwork added; the public Windows version is coming later.</li>
+          <li>Windows packaging groundwork added ahead of the public beta.</li>
         </ul>
       </section>
 
@@ -2738,7 +2871,7 @@ function renderChangelog() {
 }
 
 function renderFooterOnly(currentCode = "en") {
-  const t = HOME_COPY[currentCode] || HOME_COPY.en;
+  const t = homeCopyForRender(currentCode) || homeCopyForRender("en");
   return `<footer class="site-footer">
       <div class="footer-meta">
         <a class="brand footer-brand" href="${attr(localePath(currentCode))}" aria-label="Dictivo home"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-name">Dictivo</span></a>

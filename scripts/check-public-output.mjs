@@ -76,6 +76,32 @@ const forbiddenCompareContent = [
   /Laatst bijgewerkt/,
   /Última atualização/,
 ];
+const staleWindowsHomeContent = [
+  /Windows version coming later/i,
+  /Not yet\. Dictivo is available/i,
+  /Mac is available now\. Windows/i,
+  /Mac public beta - 2026/i,
+  /Windows-Version folgt später/i,
+  /Noch nicht\. Dictivo/i,
+  /Windows folgt später/i,
+  /Windows arrive plus tard/i,
+  /Pas encore\. Dictivo/i,
+  /Windows llegará más adelante/i,
+  /Todavía no\. Dictivo/i,
+  /Windows arriverà più avanti/i,
+  /Non ancora\. Dictivo/i,
+  /Windows komt later/i,
+  /Nog niet\. Dictivo/i,
+  /Windows virá depois/i,
+  /Ainda não\. O Dictivo/i,
+  /Windows 版本稍后推出/,
+  /还没有。Dictivo/,
+  /Windows 版は今後提供予定/,
+  /まだです。Dictivo/,
+  /Windows 버전은 나중에 제공/,
+  /아직은 아닙니다\. Dictivo/,
+];
+const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html"];
 
 function extension(file) {
   const index = file.lastIndexOf(".");
@@ -117,6 +143,13 @@ for (const file of listFiles()) {
     for (const pattern of forbiddenCompareContent) {
       if (pattern.test(body)) {
         failures.push(`${file}: matched compare-only ${pattern}`);
+      }
+    }
+  }
+  if (hasWindowsRelease && homeFiles.includes(file)) {
+    for (const pattern of staleWindowsHomeContent) {
+      if (pattern.test(body)) {
+        failures.push(`${file}: matched stale Windows copy ${pattern}`);
       }
     }
   }

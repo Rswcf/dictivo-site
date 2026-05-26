@@ -60,9 +60,8 @@ Required GitHub Actions secret:
 
 ## Download hosting
 
-The current public macOS download points at the signed and notarized GitHub Release DMG. R2 mirroring under
-`downloads.dictivo.app` is planned, but should not be treated as the canonical download host until it is enabled and
-verified.
+The current public macOS and Windows downloads point at signed release artifacts mirrored under
+`downloads.dictivo.app`. GitHub Releases remain the archive; the website and updater use the R2-backed download host.
 
 Expected objects:
 
@@ -70,19 +69,18 @@ Expected objects:
 - `Dictivo_*_x64-setup.exe`
 - `Dictivo_*_x64_en-US.msi`
 
-The public download buttons use `/download/*` routes in `_redirects`. The macOS route may point directly at the latest
-GitHub Release DMG while R2 mirroring is being prepared; Windows routes point at R2 when the synced desktop release
-contains Windows assets. The machine-readable release manifest lives at `/downloads.json`.
+The public download buttons use `/download/*` routes in `_redirects`. macOS and Windows routes point at R2 when the
+synced desktop release contains those assets. The machine-readable release manifest lives at `/downloads.json`.
 
-After R2 is enabled in the Cloudflare dashboard and selected as the public mirror, macOS uploads can be run with:
+Manual R2 uploads, when needed outside the desktop release workflow, can be run with:
 
 ```sh
 SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
 ```
 
 The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads installer
-objects with long-lived cache headers. It uploads macOS by default. Do not set `INCLUDE_WINDOWS=1` or publish Windows
-objects until the Windows signing and real-machine QA gates are complete.
+objects with long-lived cache headers. It uploads macOS by default; set `INCLUDE_WINDOWS=1` only when the release
+directory contains the matching Windows EXE and MSI from the same signed desktop release.
 
 ## Local checkout
 
@@ -154,8 +152,8 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 2. Sign and notarize the macOS DMG.
 3. Push the desktop tag. The desktop workflow triggers the site deploy when `DICTIVO_SITE_DISPATCH_TOKEN` is configured.
 4. If the dispatch token is missing, run the site deploy workflow manually or wait for the scheduled sync.
-5. Sign the Windows EXE and MSI installers before making Windows public.
-6. Verify the public URLs under `https://dictivo.app/download/*`.
+5. Verify the public URLs under `https://dictivo.app/download/*`.
+6. Verify `https://downloads.dictivo.app/latest.json` includes macOS and `windows-x86_64`.
 7. Deploy `dist/` to Cloudflare Pages and attach `dictivo.app`.
 
 ## References

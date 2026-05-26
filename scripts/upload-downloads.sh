@@ -60,7 +60,7 @@ if [[ "$INCLUDE_WINDOWS" == "1" ]]; then
     --cache-control "$CACHE_CONTROL" \
     --remote
 else
-  echo "Skipping Windows upload. Set INCLUDE_WINDOWS=1 only after Windows public release approval."
+  echo "Skipping Windows upload. Set INCLUDE_WINDOWS=1 when the source directory contains Windows assets from the same release."
 fi
 
 for file in "${required_files[@]}"; do

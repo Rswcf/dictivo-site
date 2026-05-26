@@ -1,14 +1,28 @@
 {
-  "version": "0.3.17",
-  "tag": "v0.3.17",
+  "version": "0.3.18",
+  "tag": "v0.3.18",
   "channel": "stable",
   "updatedAt": "2026-05-26",
-  "publishedAt": "2026-05-26T14:39:59Z",
-  "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.17",
+  "publishedAt": "2026-05-26T17:13:02Z",
+  "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.18",
   "dmg": {
-    "fileName": "Dictivo_0.3.17_universal.dmg",
-    "url": "https://downloads.dictivo.app/v0.3.17/Dictivo_0.3.17_universal.dmg",
-    "sha256": "ee27088599b64d4ab6a17c13b71b55cff62d3c4545feff0d5138c899c2afe632",
-    "size": 23435239
+    "fileName": "Dictivo_0.3.18_universal.dmg",
+    "url": "https://downloads.dictivo.app/v0.3.18/Dictivo_0.3.18_universal.dmg",
+    "sha256": "4095405686673ee3e21ed389321afcbe0d67101afef806623f05eb9c334d31b0",
+    "size": 23433324
+  },
+  "windows": {
+    "exe": {
+      "fileName": "Dictivo_0.3.18_x64-setup.exe",
+      "url": "https://downloads.dictivo.app/v0.3.18/Dictivo_0.3.18_x64-setup.exe",
+      "sha256": "2cf75a90706fe5f7c2168923f7b3254a45b022e516f5e4aaf52594360bdd0c8a",
+      "size": 8410459
+    },
+    "msi": {
+      "fileName": "Dictivo_0.3.18_x64_en-US.msi",
+      "url": "https://downloads.dictivo.app/v0.3.18/Dictivo_0.3.18_x64_en-US.msi",
+      "sha256": "149724a8c84156f343cab11e92ab83835730a822f749a486ece3f8cc92877361",
+      "size": 11083776
+    }
   }
 }
