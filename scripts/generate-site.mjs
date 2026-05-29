@@ -2540,23 +2540,16 @@ ${COMPARE_NAV_LINKS.map(
       </section>`;
 }
 
-function renderCompareFooterLinks(currentCode = "en") {
-  const copy = compareCopy(currentCode);
-  return `<a href="${attr(localizedComparePath(currentCode))}">${html(copy.compareFooter)}</a>
-        ${COMPARE_NAV_LINKS.map((link) => `<a href="${attr(localizedComparePath(currentCode, link.slug))}">${html(fillCompareTemplate(copy.footerAlternative, { competitor: link.competitor }))}</a>`).join("\n        ")}`;
-}
-
 function renderHomeFooterLinks(currentCode, t) {
   const links = [
-    `<a href="${attr(localePath(currentCode, "#privacy"))}">${html(t.nav.privacy)}</a>`,
+    `<a href="/privacy">Privacy</a>`,
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
-    `<a href="${attr(localePath(currentCode, "#cloud-fast"))}">${html(t.nav.cloudFast)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
-    renderCompareFooterLinks(currentCode),
-    `<a href="/changelog">Changelog</a>`,
     `<a href="/security">Security</a>`,
-    TRUST_PAGES.map((page) => `<a href="${attr(trustPath(page.slug))}">${html(page.navLabel)}</a>`).join("\n        "),
-    `<a href="mailto:support@dictivo.app">support@dictivo.app</a>`,
+    `<a href="/terms">Terms</a>`,
+    `<a href="/refund">Refunds</a>`,
+    `<a href="/contact">Contact</a>`,
+    `<a href="/about">About</a>`,
   ].filter(Boolean);
   return links.map((link) => `        ${link}`).join("\n");
 }
@@ -3237,15 +3230,7 @@ function renderFooterOnly(currentCode = "en") {
         <p>${html(t.footer.beta)}</p>
       </div>
       <div class="footer-links">
-        <a href="${attr(localePath(currentCode, "#privacy"))}">${html(t.nav.privacy)}</a>
-        <a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>
-        <a href="${attr(localePath(currentCode, "#cloud-fast"))}">${html(t.nav.cloudFast)}</a>
-        <a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>
-        ${renderCompareFooterLinks(currentCode)}
-        <a href="/changelog">Changelog</a>
-        <a href="/security">Security</a>
-        ${TRUST_PAGES.map((page) => `<a href="${attr(trustPath(page.slug))}">${html(page.navLabel)}</a>`).join("\n        ")}
-        <a href="mailto:support@dictivo.app">support@dictivo.app</a>
+${renderHomeFooterLinks(currentCode, t)}
       </div>
     </footer>`;
 }
