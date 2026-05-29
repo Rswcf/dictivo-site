@@ -102,6 +102,7 @@ const staleWindowsHomeContent = [
   /아직은 아닙니다\. Dictivo/,
 ];
 const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html"];
+const requiredTrustFiles = ["privacy.html", "terms.html", "refund.html", "contact.html", "about.html"];
 
 function extension(file) {
   const index = file.lastIndexOf(".");
@@ -126,6 +127,12 @@ if (!existsSync(publicRoot)) {
 }
 
 const failures = [];
+
+for (const file of requiredTrustFiles) {
+  if (!existsSync(resolve(publicRoot, file))) {
+    failures.push(`${file}: required trust page is missing`);
+  }
+}
 
 for (const file of listFiles()) {
   if (isLegacyTombstone(file)) {

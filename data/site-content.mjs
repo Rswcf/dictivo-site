@@ -18,9 +18,9 @@ const asianLanguages = "简体中文, 日本語, 한국어";
 
 export const HOME_COPY = {
   en: {
-    metaTitle: "Dictivo - Private Mac dictation with optional Cloud Fast",
+    metaTitle: "Dictivo - Private desktop dictation with optional Cloud Fast",
     metaDescription:
-      "Dictivo is a private-first Mac dictation app. Dictate locally by default, then use optional Cloud Fast when speed matters.",
+      "Dictivo is a private-first desktop dictation app for macOS and Windows. Dictate locally by default, then use optional Cloud Fast when speed matters.",
     skip: "Skip to downloads",
     nav: {
       privacy: "Privacy",
@@ -28,25 +28,25 @@ export const HOME_COPY = {
       pricing: "Pricing",
       faq: "FAQ",
       downloads: "Downloads",
-      download: "Mac download",
+      download: "Downloads",
     },
     language: {
       label: "Language",
       aria: "Change site display language",
     },
     hero: {
-      eyebrow: "Private-first Mac dictation",
+      eyebrow: "Private-first desktop dictation",
       title: "Private dictation first.",
       emphasis: "Speed when you choose.",
       play: "Play 76-second demo",
       posterAlt: "Dictivo product video poster showing a private dictation workflow",
       download: "Download for Mac",
       pricing: "See pricing",
-      windows: "Windows version coming later.",
+      windows: "Mac and Windows x64 are available now.",
     },
     privacy: {
       kicker: "Privacy first",
-      title: "Your private words stay on your Mac.",
+      title: "Your private words stay on your device.",
       body: "Dictivo starts local because most dictation should feel private by default. Cloud Fast is visible because it changes where audio is processed.",
       localTitle: "Local mode",
       localLead: "The everyday path for private work, sensitive notes, client conversations, and personal drafting.",
@@ -94,7 +94,7 @@ export const HOME_COPY = {
       tiers: [
         {
           name: "Free Local",
-          sub: "Try the private-first workflow on your Mac.",
+          sub: "Try the private-first workflow on your desktop.",
           price: "Free",
           small: "local tier",
           features: [
@@ -104,7 +104,7 @@ export const HOME_COPY = {
             "14-day full Local trial unlocks every local model",
             "No cloud upload in Local mode",
           ],
-          button: "Download for Mac",
+          button: "See downloads",
         },
         {
           name: "Dictivo Local",
@@ -135,15 +135,15 @@ export const HOME_COPY = {
           button: "Add Cloud Fast",
         },
       ],
-      footnote: "Mac is available now. Windows version coming later.",
+      footnote: "Mac and Windows x64 are available now.",
       checkoutTitle: "Secure checkout opens in a new tab.",
       checkoutBody:
         "After purchase, return to Dictivo and activate Local with your license email. If checkout does not open, email support@dictivo.app.",
     },
     downloads: {
-      kicker: "Mac app",
-      title: "Download Dictivo for Mac.",
-      body: "The Mac app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
+      kicker: "Desktop app",
+      title: "Download Dictivo for Mac or Windows.",
+      body: "The desktop app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
       available: "Available installers",
       macTop: ["macOS", "Recommended"],
       macTitle: "Mac installer",
@@ -157,17 +157,17 @@ export const HOME_COPY = {
       windowsNote: "Join from Mac today; Windows will follow after release testing.",
     },
     signed: {
-      title: "Start on Mac today and decide after the trial.",
+      title: "Start today and decide after the trial.",
       cells: [
         ["Current version", "Version {version}"],
         ["Local trial", "14 days with every local model"],
         ["Cloud Fast", "10 free minutes on this device"],
       ],
-      footnote: "Download Dictivo for Mac, try the full Local experience, and buy only if it fits your workflow.",
+      footnote: "Download Dictivo, try the full Local experience, and buy only if it fits your workflow.",
     },
     languages: {
       kicker: "Languages",
-      title: "Display language choices for global Mac users.",
+      title: "Display language choices for global desktop users.",
       body: `Dictivo can present the site and product interface in ${westernLanguages}, plus ${asianLanguages}. Speech language detection remains automatic.`,
       note: "Display language changes the interface. Dictation language detection stays automatic.",
     },
@@ -176,7 +176,7 @@ export const HOME_COPY = {
       title: "The workflow is intentionally simple.",
       body: "Dictivo is designed for the moment you need words out of your head and into the app in front of you.",
       steps: [
-        ["01", "Download for Mac", "Start with Tiny free forever and 14 days of every local model. No cloud transcription account is required for Local mode."],
+        ["01", "Download Dictivo", "Start with Tiny free forever and 14 days of every local model. No cloud transcription account is required for Local mode."],
         ["02", "Press the hotkey", "Speak from any app, stop recording, and get the transcript back into your workflow."],
         ["03", "Switch only when needed", "Stay Local for private work. Use Cloud Fast when the recording is not sensitive and speed matters."],
       ],
@@ -187,7 +187,7 @@ export const HOME_COPY = {
       body: "Short answers about privacy, pricing, Cloud Fast, languages, and availability.",
       items: [
         [
-          "Does my voice leave my Mac?",
+          "Does my voice leave my device?",
           "In Local mode, no. Audio and transcripts stay on your device. In Cloud Fast mode, the recording you choose is uploaded for faster transcription.",
         ],
         [
@@ -206,12 +206,12 @@ export const HOME_COPY = {
           "Do I choose a dictation language manually?",
           "No. Dictation language detection is automatic. The language menu only changes the website and interface display language.",
         ],
-        ["Is Windows available?", "Not yet. Dictivo is available for Mac now, and the Windows version is coming later."],
+        ["Is Windows available?", "Yes. Dictivo is available for macOS and Windows x64 public beta."],
       ],
     },
     footer: {
       tagline: "Private dictation first - optional Cloud Fast",
-      beta: "Mac public beta - 2026",
+      beta: "Mac and Windows public beta - 2026",
     },
   },
 
