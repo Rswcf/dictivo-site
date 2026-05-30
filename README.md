@@ -42,7 +42,12 @@ and desktop installers should be treated as release artifacts rather than websit
 
 The `.github/workflows/deploy-cloudflare-pages.yml` workflow deploys `dist/` to Cloudflare Pages whenever
 `main` is pushed. It also accepts a `desktop-release-published` `repository_dispatch` event from the desktop app repo
-and runs daily as a fallback. Every deploy runs:
+and runs daily as a fallback. Normal desktop releases send a complete `client_payload.release` object containing the
+R2-backed DMG/EXE/MSI URLs, sizes, and SHA-256 digests. That lets this public site repo update without read access to
+the private desktop app repo. Manual and scheduled runs without a payload can still use GitHub Release metadata as a
+fallback when `DICTIVO_DESKTOP_TOKEN` is configured.
+
+Every deploy runs:
 
 ```sh
 node scripts/sync-latest-release.mjs
@@ -50,13 +55,15 @@ node scripts/generate-site.mjs
 ```
 
 That keeps the homepage, localized pages, comparison pages, `downloads.json`, `_redirects`, `sitemap.xml`, and changelog aligned with
-the latest stable GitHub Release in `Rswcf/Dictivo`.
+the latest stable desktop release.
 
 Required GitHub Actions secret:
 
 - `CLOUDFLARE_API_TOKEN` with Cloudflare Pages edit permission.
 - `CLOUDFLARE_ACCOUNT_ID` for the Cloudflare account that owns the Pages project.
 - `CLOUDFLARE_ZONE_ID` for cache purge. If omitted, the purge script falls back to resolving `dictivo.app` by name.
+- `DICTIVO_DESKTOP_TOKEN` is optional and only needed for manual/scheduled fallback syncs that must read the private
+  desktop repo's GitHub Release API.
 
 ## Download hosting
 
@@ -152,11 +159,11 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 
 1. Build the release artifacts from the desktop workflow.
 2. Sign and notarize the macOS DMG.
-3. Push the desktop tag. The desktop workflow triggers the site deploy when `DICTIVO_SITE_DISPATCH_TOKEN` is configured.
-4. If the dispatch token is missing, run the site deploy workflow manually or wait for the scheduled sync.
-5. Verify the public URLs under `https://dictivo.app/download/*`.
-6. Verify `https://downloads.dictivo.app/latest.json` includes macOS and `windows-x86_64` so existing Windows testers can update.
-7. Deploy `dist/` to Cloudflare Pages and attach `dictivo.app`.
+3. Push the desktop tag. The desktop workflow uploads release artifacts and `latest.json` to R2.
+4. Confirm the desktop workflow's final `repository_dispatch` sent the complete release payload to this site repo.
+5. If the dispatch token is missing, run the site deploy workflow manually after updating `data/release.json`.
+6. Verify the public URLs under `https://dictivo.app/download/*`.
+7. Verify `https://downloads.dictivo.app/latest.json` includes macOS and `windows-x86_64` so existing Windows testers can update.
 
 ## References
 

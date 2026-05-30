@@ -40,9 +40,11 @@ jobs:
 
       - name: Sync desktop release metadata and generate site
         env:
+          # Normal desktop releases send a complete release manifest here, so
+          # this public site repo does not need read access to the private app repo.
+          DICTIVO_RELEASE_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
           GITHUB_TOKEN: ${{ github.token }}
-          # Optional PAT for desktop release metadata. When absent, sync can
-          # still keep the committed data/release.json instead of failing deploy.
+          # Optional fallback for manual/scheduled runs without a dispatch payload.
           DICTIVO_DESKTOP_TOKEN: ${{ secrets.DICTIVO_DESKTOP_TOKEN }}
           DICTIVO_DESKTOP_RELEASE_TAG: ${{ github.event.client_payload.tag }}
         run: |
@@ -54,6 +56,9 @@ jobs:
 
       - name: Check Local checkout route
         run: node scripts/check-local-checkout.mjs
+
+      - name: Check release payload sync
+        run: node scripts/check-release-payload-sync.mjs
 
       - name: Check asset versioning
         run: node scripts/check-asset-version.mjs
