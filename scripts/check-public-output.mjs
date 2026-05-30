@@ -4,7 +4,8 @@ import { resolve } from "node:path";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
-const hasWindowsRelease = Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
+const hasWindowsArtifacts = Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
+const hasWindowsRelease = release.publicWindowsDownloads === true && hasWindowsArtifacts;
 
 const tombstoneRoots = ["data/", "scripts/", "tmp/", ".github/"];
 const tombstoneFiles = new Set([".gitignore", "README.md", "wrangler.toml"]);
@@ -101,6 +102,24 @@ const staleWindowsHomeContent = [
   /Windows 버전은 나중에 제공/,
   /아직은 아닙니다\. Dictivo/,
 ];
+const publicWindowsLaunchContent = [
+  /Mac and Windows x64 are available now/i,
+  /Mac and Windows public beta/i,
+  /Download for Windows/i,
+  /Windows x64 public beta/i,
+  /Dictivo is available for macOS and Windows x64 public beta/i,
+  /Windows x64 downloads and in-app updates are available/i,
+  /Mac 与 Windows x64 现已可用/,
+  /Mac 与 Windows 公测版/,
+  /Windows x64 公测版/,
+  /下载 Windows 版/,
+  /Mac と Windows x64 が利用可能/,
+  /Windows x64 公開ベータ/,
+  /Windows 版をダウンロード/,
+  /Mac과 Windows x64를 지금 사용할 수 있습니다/,
+  /Windows x64 공개 베타/,
+  /Windows용 다운로드/,
+];
 const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html"];
 const requiredTrustFiles = ["privacy.html", "terms.html", "refund.html", "contact.html", "about.html"];
 
@@ -157,6 +176,13 @@ for (const file of listFiles()) {
     for (const pattern of staleWindowsHomeContent) {
       if (pattern.test(body)) {
         failures.push(`${file}: matched stale Windows copy ${pattern}`);
+      }
+    }
+  }
+  if (!hasWindowsRelease) {
+    for (const pattern of publicWindowsLaunchContent) {
+      if (pattern.test(body)) {
+        failures.push(`${file}: matched public Windows launch copy ${pattern}`);
       }
     }
   }
@@ -244,11 +270,6 @@ function verifyWindowsDownloads() {
   const manifest = JSON.parse(readFileSync(downloadsPath, "utf8"));
   for (const artifact of manifest.artifacts ?? []) {
     if (artifact.platform !== "windows") continue;
-    if (artifact.status !== "coming-later") {
-      failures.push(`downloads.json: Windows artifact ${artifact.label ?? artifact.fileName} is not coming-later`);
-    }
-    if (/^https?:\/\/downloads\.dictivo\.app/i.test(String(artifact.url ?? ""))) {
-      failures.push(`downloads.json: Windows artifact ${artifact.label ?? artifact.fileName} points at downloads.dictivo.app`);
-    }
+    failures.push(`downloads.json: Windows artifact ${artifact.label ?? artifact.fileName} is exposed while public Windows downloads are disabled`);
   }
 }

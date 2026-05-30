@@ -8,7 +8,8 @@ const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
 const windowsRelease = release.windows || null;
-const hasWindowsRelease = Boolean(windowsRelease?.exe?.url && windowsRelease?.msi?.url);
+const hasWindowsArtifacts = Boolean(windowsRelease?.exe?.url && windowsRelease?.msi?.url);
+const hasWindowsRelease = release.publicWindowsDownloads === true && hasWindowsArtifacts;
 const sourceRedirects = existsSync(resolve(root, "_redirects"))
   ? readFileSync(resolve(root, "_redirects"), "utf8")
   : "";
@@ -2183,14 +2184,56 @@ function localizedCompareQuickTake(page, copy) {
 }
 
 function localizedCompareRows(page, copy) {
-  if (copy === COMPARE_I18N.en) return page.rows;
+  if (copy === COMPARE_I18N.en) {
+    return page.rows.map((row) => ({
+      ...row,
+      dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformValidationCopy("en") : row.dictivo,
+    }));
+  }
   const competitorRows = LOCALIZED_COMPETITOR_ROWS[copy.locale] || {};
   return page.rows.map((row) => ({
     ...row,
     label: copy.rowLabels[row.label] || row.label,
-    dictivo: copy.dictivoRows[row.label] || row.dictivo,
-    competitor: fillCompareTemplate(competitorRows[row.label] || row.competitor, page),
+    dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformValidationCopy(copy.locale) : copy.dictivoRows[row.label] || row.dictivo,
+    competitor: fillCompareTemplate(
+      row.label === "Platforms" && !hasWindowsRelease
+        ? platformCompetitorValidationCopy(copy.locale)
+        : competitorRows[row.label] || row.competitor,
+      page,
+    ),
   }));
+}
+
+function platformValidationCopy(code) {
+  const copy = {
+    en: "macOS public beta. Windows x64 is in validation before public downloads.",
+    de: "macOS öffentliche Beta. Windows x64 bleibt vor öffentlichen Downloads in Validierung.",
+    fr: "Bêta publique macOS. Windows x64 reste en validation avant les téléchargements publics.",
+    es: "Beta pública para macOS. Windows x64 sigue en validación antes de las descargas públicas.",
+    it: "Beta pubblica macOS. Windows x64 è in validazione prima dei download pubblici.",
+    nl: "Openbare macOS-beta. Windows x64 blijft in validatie vóór publieke downloads.",
+    pt: "Beta pública para macOS. Windows x64 segue em validação antes dos downloads públicos.",
+    zh: "macOS 公测版。Windows x64 仍在公开下载前验证。",
+    ja: "macOS 公開ベータ。Windows x64 は公開ダウンロード前の検証中です。",
+    ko: "macOS 공개 베타. Windows x64는 공개 다운로드 전 검증 중입니다.",
+  };
+  return copy[code] || copy.en;
+}
+
+function platformCompetitorValidationCopy(code) {
+  const copy = {
+    en: "{competitor} has its own platform coverage. Dictivo's public download is macOS today; Windows x64 is in validation.",
+    de: "{competitor} hat eigene Plattformabdeckung. Dictivo ist öffentlich für Mac verfügbar; Windows x64 ist in Validierung.",
+    fr: "{competitor} a sa propre couverture de plateformes. Dictivo est public sur Mac aujourd'hui; Windows x64 reste en validation.",
+    es: "{competitor} tiene su propia cobertura de plataformas. La descarga pública de Dictivo es para Mac; Windows x64 sigue en validación.",
+    it: "{competitor} ha la propria copertura piattaforme. Il download pubblico di Dictivo è per Mac; Windows x64 è in validazione.",
+    nl: "{competitor} heeft eigen platformdekking. De publieke download van Dictivo is voor Mac; Windows x64 blijft in validatie.",
+    pt: "{competitor} tem a sua própria cobertura de plataformas. O download público do Dictivo é para Mac; Windows x64 segue em validação.",
+    zh: "{competitor} 有自己的平台覆盖。Dictivo 当前公开下载为 Mac 版；Windows x64 仍在验证。",
+    ja: "{competitor} には独自の対応プラットフォームがあります。Dictivo の公開ダウンロードは現在 Mac 版で、Windows x64 は検証中です。",
+    ko: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo의 공개 다운로드는 현재 Mac용이며 Windows x64는 검증 중입니다.",
+  };
+  return copy[code] || copy.en;
 }
 
 function localizedCompareSections(page, copy) {
@@ -2705,7 +2748,7 @@ ${compareTeaser}
             <p>${html(t.downloads.body)}</p>
           </div>
 
-          <div class="download-grid" aria-label="${attr(t.downloads.available)}">
+          <div class="download-grid" data-layout="${hasWindowsRelease ? "multi" : "single"}" aria-label="${attr(t.downloads.available)}">
             <article class="download-card" data-platform-card="macos">
               <div class="card-topline"><span>${html(t.downloads.macTop[0])}</span><span class="recommendation" data-recommendation="macos">${html(t.downloads.macTop[1])}</span></div>
               <h3>${html(t.downloads.macTitle)}</h3>
@@ -2714,16 +2757,16 @@ ${compareTeaser}
               <p class="download-note">${html(t.downloads.versionNote(release.version))}</p>
             </article>
 
-            <article class="download-card" data-platform-card="windows">
+            ${hasWindowsRelease ? `<article class="download-card" data-platform-card="windows">
               <div class="card-topline"><span>${html(t.downloads.windowsTop[0])}</span><span>${html(hasWindowsRelease ? liveWindowsCopy.badge : t.downloads.windowsTop[1])}</span></div>
               <h3>${html(t.downloads.windowsTitle)}</h3>
               <p>${html(hasWindowsRelease ? liveWindowsCopy.body : t.downloads.windowsBody)}</p>
-              ${hasWindowsRelease ? `<div class="download-actions">
+              <div class="download-actions">
                 <a class="button button-dark download-link" href="/download/windows" data-platform="windows">${html(liveWindowsCopy.exeButton)}</a>
                 <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">${html(liveWindowsCopy.msiButton)}</a>
-              </div>` : `<span class="download-status">${html(t.downloads.windowsStatus)}</span>`}
-              <p class="download-note">${html(hasWindowsRelease ? liveWindowsCopy.note(release.version) : t.downloads.windowsNote)}</p>
-            </article>
+              </div>
+              <p class="download-note">${html(liveWindowsCopy.note(release.version))}</p>
+            </article>` : ""}
           </div>
         </div>
       </section>
@@ -2851,26 +2894,7 @@ function renderDownloadsJson() {
           sha256: windowsRelease.msi.sha256,
         },
       ]
-    : [
-        {
-          platform: "windows",
-          label: "Windows x64 EXE",
-          fileName: "Dictivo-Windows-x64.exe",
-          architecture: "x64",
-          status: "coming-later",
-          url: `${BASE_URL}/#downloads`,
-          redirect: `${BASE_URL}/download/windows`,
-        },
-        {
-          platform: "windows",
-          label: "Windows x64 MSI",
-          fileName: "Dictivo-Windows-x64.msi",
-          architecture: "x64",
-          status: "coming-later",
-          url: `${BASE_URL}/#downloads`,
-          redirect: `${BASE_URL}/download/windows-msi`,
-        },
-      ];
+    : [];
 
   return `${JSON.stringify(
     {

@@ -11,7 +11,7 @@ const dictivoRows = {
   account: "No Dictivo account for Local dictation.",
   pricing: "$49 once, 12 months of updates, then optional $24/year update renewal.",
   trial: "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
-  platforms: "macOS and Windows x64 public beta are available now.",
+  platforms: "macOS public beta is available now. Windows x64 is in validation before public downloads.",
   boundary:
     "Local mode keeps transcripts, history, dictionary terms, snippets, and settings on your device. No Dictivo account is required for Local dictation.",
 };
@@ -125,7 +125,7 @@ export const COMPARE_PAGES = [
       },
     ],
     faqs: [
-      ["Is there an offline alternative to Wispr Flow?", "Yes. Dictivo Local is an offline Wispr Flow alternative for macOS and Windows x64. Local mode runs speech recognition on-device after the model is installed, so you can dictate without sending audio to a transcription server."],
+      ["Is there an offline alternative to Wispr Flow?", "Yes. Dictivo Local is an offline Wispr Flow alternative for macOS. Local mode runs speech recognition on-device after the model is installed, so you can dictate without sending audio to a transcription server. Windows x64 remains in validation before public downloads."],
       ["Does Wispr Flow work without internet?", "Wispr Flow's own Data Controls page says transcription always occurs on the cloud, so it is not a fully offline dictation app. It has privacy and retention controls, but the transcription path is still remote."],
       ["Is Wispr Flow private?", "Wispr Flow provides Privacy Mode and enterprise controls, and those controls matter. The architectural difference is that Flow remains cloud-based, while Dictivo Local keeps everyday dictation on the device."],
       ["What is the cheapest Wispr Flow alternative?", "For a local desktop workflow, Dictivo is $49 once, or $97 over three years if you keep optional update renewals active. Flow Pro is $144 per year on annual billing."],
@@ -247,7 +247,7 @@ export const COMPARE_PAGES = [
     faqs: [
       ["Is there a cheaper alternative to Superwhisper?", "Yes. Dictivo Local is $49 once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime."],
       ["Is Superwhisper a subscription?", "Superwhisper Pro has monthly and annual subscriptions, and it also offers a lifetime purchase. The plans include the same Pro features but differ by billing frequency."],
-      ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and iPad. Dictivo is available for macOS and Windows x64 public beta."],
+      ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and iPad. Dictivo's public download is macOS today; Windows x64 remains in validation before public release."],
       ["Is Dictivo as accurate as Superwhisper?", "Both products can use Whisper-family local models, so raw accuracy depends on the model size, microphone, accent, and hardware. Dictivo's edge is not a magic model; it is the lower-cost local workflow and hardware-aware setup."],
       ["Can I try before buying?", "Dictivo's comparison CTA is a 14-day full Local trial with every local model unlocked. Superwhisper docs describe free local models and 15 minutes of Pro access for new users."],
     ],
@@ -484,7 +484,7 @@ export const COMPARE_PAGES = [
       ["Is VoiceInk really free?", "VoiceInk's site has a Try Free path and paid lifetime tiers. The listed paid tiers are $25, $39, and $49."],
       ["VoiceInk vs Dictivo: which is more accurate?", "Both use local AI speech models, so accuracy depends on the model, microphone, accent, and hardware. Dictivo's advantage is a polished local workflow and hardware-aware setup."],
       ["How does Dictivo protect local work?", "Use Local mode for private dictation. Audio, transcripts, history, dictionary terms, snippets, and settings stay on the customer's device."],
-      ["Does VoiceInk run on Windows?", "VoiceInk's official site lists Apple Silicon Macs and macOS 14.4 or later. Dictivo is available for macOS and Windows x64 public beta."],
+      ["Does VoiceInk run on Windows?", "VoiceInk's official site lists Apple Silicon Macs and macOS 14.4 or later. Dictivo's public download is macOS today; Windows x64 remains in validation before public release."],
       ["Which app is more polished?", "That is subjective. VoiceInk is strong for price. Dictivo is built as a more packaged paid product with guided setup, Local versus Cloud Fast separation, and support expectations."],
     ],
     related: ["superwhisper-alternative", "macwhisper-alternative"],

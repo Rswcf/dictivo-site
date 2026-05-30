@@ -20,7 +20,7 @@ export const HOME_COPY = {
   en: {
     metaTitle: "Dictivo - Private desktop dictation with optional Cloud Fast",
     metaDescription:
-      "Dictivo is a private-first desktop dictation app for macOS and Windows. Dictate locally by default, then use optional Cloud Fast when speed matters.",
+      "Dictivo is a private-first Mac dictation app. Dictate locally by default, then use optional Cloud Fast when speed matters.",
     skip: "Skip to downloads",
     nav: {
       privacy: "Privacy",
@@ -42,7 +42,7 @@ export const HOME_COPY = {
       posterAlt: "Dictivo product video poster showing a private dictation workflow",
       download: "Download for Mac",
       pricing: "See pricing",
-      windows: "Mac and Windows x64 are available now.",
+      windows: "Mac is available now. Windows is in validation before public release.",
     },
     privacy: {
       kicker: "Privacy first",
@@ -135,15 +135,15 @@ export const HOME_COPY = {
           button: "Add Cloud Fast",
         },
       ],
-      footnote: "Mac and Windows x64 are available now.",
+      footnote: "Mac is available now. Windows is in validation before public release.",
       checkoutTitle: "Secure checkout opens in a new tab.",
       checkoutBody:
         "After purchase, return to Dictivo and activate Local with your license email. If checkout does not open, email support@dictivo.app.",
     },
     downloads: {
       kicker: "Desktop app",
-      title: "Download Dictivo for Mac or Windows.",
-      body: "The desktop app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
+      title: "Download Dictivo for Mac.",
+      body: "The Mac app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
       available: "Available installers",
       macTop: ["macOS", "Recommended"],
       macTitle: "Mac installer",
@@ -206,12 +206,12 @@ export const HOME_COPY = {
           "Do I choose a dictation language manually?",
           "No. Dictation language detection is automatic. The language menu only changes the website and interface display language.",
         ],
-        ["Is Windows available?", "Yes. Dictivo is available for macOS and Windows x64 public beta."],
+        ["Is Windows available?", "Not publicly yet. The Mac app is available now, and Windows is still being validated before public downloads."],
       ],
     },
     footer: {
       tagline: "Private dictation first - optional Cloud Fast",
-      beta: "Mac and Windows public beta - 2026",
+      beta: "Mac public beta - 2026",
     },
   },
 

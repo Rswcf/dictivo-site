@@ -60,8 +60,9 @@ Required GitHub Actions secret:
 
 ## Download hosting
 
-The current public macOS and Windows downloads point at signed release artifacts mirrored under
-`downloads.dictivo.app`. GitHub Releases remain the archive; the website and updater use the R2-backed download host.
+The current public website download is macOS. Windows artifacts can still be mirrored under
+`downloads.dictivo.app` for existing testers and in-app updates, but they are not exposed on the public site until
+Windows QA is ready. GitHub Releases remain the archive; the website and updater use the R2-backed download host.
 
 Expected objects:
 
@@ -69,8 +70,9 @@ Expected objects:
 - `Dictivo_*_x64-setup.exe`
 - `Dictivo_*_x64_en-US.msi`
 
-The public download buttons use `/download/*` routes in `_redirects`. macOS and Windows routes point at R2 when the
-synced desktop release contains those assets. The machine-readable release manifest lives at `/downloads.json`.
+The public download buttons use `/download/*` routes in `_redirects`. The macOS route points at R2. Windows routes
+redirect back to the downloads section unless `publicWindowsDownloads` is explicitly enabled in `data/release.json`.
+The machine-readable website release manifest lives at `/downloads.json` and lists only public artifacts.
 
 Manual R2 uploads, when needed outside the desktop release workflow, can be run with:
 
@@ -153,7 +155,7 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 3. Push the desktop tag. The desktop workflow triggers the site deploy when `DICTIVO_SITE_DISPATCH_TOKEN` is configured.
 4. If the dispatch token is missing, run the site deploy workflow manually or wait for the scheduled sync.
 5. Verify the public URLs under `https://dictivo.app/download/*`.
-6. Verify `https://downloads.dictivo.app/latest.json` includes macOS and `windows-x86_64`.
+6. Verify `https://downloads.dictivo.app/latest.json` includes macOS and `windows-x86_64` so existing Windows testers can update.
 7. Deploy `dist/` to Cloudflare Pages and attach `dictivo.app`.
 
 ## References

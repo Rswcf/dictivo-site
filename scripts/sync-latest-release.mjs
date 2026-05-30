@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -10,6 +10,7 @@ const releaseTag = process.env.DICTIVO_DESKTOP_RELEASE_TAG;
 // repo, but the public download URL must point at the Cloudflare R2 mirror.
 // The release CI uploads installers to downloads.dictivo.app/<tag>/.
 const downloadsHost = (process.env.DICTIVO_DOWNLOADS_HOST || "https://downloads.dictivo.app").replace(/\/+$/, "");
+const existingManifest = readExistingReleaseManifest();
 
 const apiBase = `https://api.github.com/repos/${owner}/${repo}`;
 const releaseUrl = releaseTag
@@ -97,6 +98,10 @@ const manifest = {
   updatedAt: isoDate(),
   publishedAt: release.published_at || null,
   releaseUrl: release.html_url,
+  publicWindowsDownloads: booleanEnv(
+    process.env.DICTIVO_PUBLIC_WINDOWS_DOWNLOADS,
+    existingManifest?.publicWindowsDownloads === true,
+  ),
   dmg: {
     fileName: dmg.name,
     url: `${downloadsHost}/${tag}/${dmg.name}`,
@@ -129,4 +134,20 @@ console.log(`DMG: ${manifest.dmg.fileName}`);
 if (manifest.windows) {
   console.log(`Windows EXE: ${manifest.windows.exe.fileName}`);
   console.log(`Windows MSI: ${manifest.windows.msi.fileName}`);
+}
+
+function readExistingReleaseManifest() {
+  if (!existsSync(outputPath)) return null;
+  try {
+    return JSON.parse(readFileSync(outputPath, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function booleanEnv(value, fallback) {
+  if (value === undefined) return fallback;
+  if (/^(1|true|yes|on)$/i.test(value)) return true;
+  if (/^(0|false|no|off)$/i.test(value)) return false;
+  return fallback;
 }
