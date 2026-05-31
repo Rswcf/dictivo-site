@@ -1,6 +1,13 @@
 import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, COMPARE_LAST_UPDATED, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
+import {
+  MAC_ADVISOR_COPY,
+  MAC_ADVISOR_FAMILIES,
+  MAC_ADVISOR_LASTMOD,
+  MAC_ADVISOR_MEMORY,
+  MAC_ADVISOR_PROFILES,
+} from "../data/mac-model-advisor.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
@@ -348,6 +355,10 @@ function attr(value) {
   return html(value).replaceAll("'", "&#39;");
 }
 
+function jsonForScript(value) {
+  return JSON.stringify(value).replaceAll("<", "\\u003c");
+}
+
 function windowsDownloadCopy(code) {
   return WINDOWS_DOWNLOAD_COPY[code] || WINDOWS_DOWNLOAD_COPY.en;
 }
@@ -462,6 +473,15 @@ function localeUrl(code) {
 
 function localizedCompareUrl(code, slug = "") {
   return absoluteUrl(localizedComparePath(code, slug));
+}
+
+function macGuidePath(code) {
+  if (code === "en") return "/mac-model-guide/";
+  return `${localeByCode(code).path}mac-model-guide/`;
+}
+
+function macGuideUrl(code) {
+  return absoluteUrl(macGuidePath(code));
 }
 
 function trustPath(slug) {
@@ -2033,6 +2053,15 @@ function compareHreflangTags(currentCode, slug = "") {
   return alternates.join("\n    ");
 }
 
+function macGuideHreflangTags(currentCode) {
+  const alternates = LOCALES.map(
+    (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(macGuideUrl(locale.code))}" />`,
+  );
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${attr(macGuideUrl("en"))}" />`);
+  alternates.push(`<link rel="canonical" href="${attr(macGuideUrl(currentCode))}" />`);
+  return alternates.join("\n    ");
+}
+
 function renderLanguageMenu(currentCode, t, hrefForLocale = (locale) => locale.path) {
   const current = localeByCode(currentCode);
   const links = LOCALES.map((locale) => {
@@ -2583,6 +2612,243 @@ ${COMPARE_NAV_LINKS.map(
       </section>`;
 }
 
+function macAdvisorCopy(code) {
+  return MAC_ADVISOR_COPY[code] || MAC_ADVISOR_COPY.en;
+}
+
+function fillMacAdvisorTemplate(template, values) {
+  return String(template).replace(/\{([a-z]+)\}/gi, (_match, key) => values[key] ?? "");
+}
+
+function macMemoryLabel(id, currentCode = "en") {
+  if (id === "unknown") {
+    return (
+      {
+        en: "I'm not sure",
+        de: "Ich bin nicht sicher",
+        fr: "Je ne suis pas sûr",
+        es: "No estoy seguro",
+        it: "Non sono sicuro",
+        nl: "Ik weet het niet",
+        pt: "Não tenho certeza",
+        zh: "不确定",
+        ja: "分からない",
+        ko: "잘 모르겠음",
+      }[currentCode] || MAC_ADVISOR_MEMORY.find((item) => item.id === id)?.label || id
+    );
+  }
+  return MAC_ADVISOR_MEMORY.find((item) => item.id === id)?.label || id;
+}
+
+function macFamilyById(familyId) {
+  return MAC_ADVISOR_FAMILIES.find((family) => family.id === familyId) || MAC_ADVISOR_FAMILIES[0];
+}
+
+function macAdvisorProfileFor(family, memoryId) {
+  const profileId = family.profiles[memoryId] || family.profiles[family.defaultMemoryId] || family.profiles.unknown;
+  return MAC_ADVISOR_PROFILES[profileId] || MAC_ADVISOR_PROFILES.appleAir16;
+}
+
+function macAdvisorResult(currentCode, familyId = "air-m3-m5", memoryId = "") {
+  const copy = macAdvisorCopy(currentCode);
+  const family = macFamilyById(familyId);
+  const resolvedMemoryId = family.memoryOptions.includes(memoryId) ? memoryId : family.defaultMemoryId;
+  const memory = macMemoryLabel(resolvedMemoryId, currentCode);
+  const profile = macAdvisorProfileFor(family, resolvedMemoryId);
+  return {
+    title: fillMacAdvisorTemplate(copy.resultTitle, { mac: family.label, memory }),
+    familyLabel: family.label,
+    memoryLabel: memory,
+    fit: copy.fit[profile.fit],
+    summary: copy.fitSummary[profile.fit],
+    tier: copy.tierNames[profile.tier],
+    dailyModel: profile.dailyModel,
+    qualityModel: profile.qualityModel,
+    cloud: copy.cloud[profile.cloud],
+    note: copy.notes[profile.note],
+  };
+}
+
+function localizedMacAdvisorData(currentCode) {
+  const copy = macAdvisorCopy(currentCode);
+  return {
+    copy,
+    memory: MAC_ADVISOR_MEMORY.map((memory) => ({ ...memory, label: macMemoryLabel(memory.id, currentCode) })),
+    families: MAC_ADVISOR_FAMILIES,
+    profiles: MAC_ADVISOR_PROFILES,
+  };
+}
+
+function renderMacAdvisorMetric(label, value, dataAttr) {
+  return `<div class="mac-advisor-metric">
+                    <dt>${html(label)}</dt>
+                    <dd${dataAttr ? ` ${dataAttr}` : ""}>${html(value)}</dd>
+                  </div>`;
+}
+
+function renderMacAdvisorTool(currentCode = "en") {
+  const copy = macAdvisorCopy(currentCode);
+  const defaultFamily = macFamilyById("air-m3-m5");
+  const defaultMemoryId = defaultFamily.defaultMemoryId;
+  const result = macAdvisorResult(currentCode, defaultFamily.id, defaultMemoryId);
+  const memoryOptions = defaultFamily.memoryOptions
+    .map((id) => `<option value="${attr(id)}"${id === defaultMemoryId ? " selected" : ""}>${html(macMemoryLabel(id, currentCode))}</option>`)
+    .join("\n                    ");
+
+  return `<div class="mac-advisor-tool" data-mac-advisor>
+            <div class="mac-advisor-control-panel">
+              <p class="mac-advisor-kicker">${html(copy.resultKicker)}</p>
+              <div class="mac-advisor-fields">
+                <label>
+                  <span>${html(copy.modelLabel)}</span>
+                  <select data-mac-family aria-label="${attr(copy.modelLabel)}">
+                    ${MAC_ADVISOR_FAMILIES.map(
+                      (family) =>
+                        `<option value="${attr(family.id)}"${family.id === defaultFamily.id ? " selected" : ""}>${html(`${family.label} · ${family.examples}`)}</option>`,
+                    ).join("\n                    ")}
+                  </select>
+                </label>
+
+                <label>
+                  <span>${html(copy.memoryLabel)}</span>
+                  <select data-mac-memory aria-label="${attr(copy.memoryLabel)}">
+                    ${memoryOptions}
+                  </select>
+                </label>
+              </div>
+              <noscript><p class="mac-advisor-noscript">${html(copy.noScript)}</p></noscript>
+            </div>
+
+            <article class="mac-advisor-result" aria-live="polite">
+              <div class="mac-advisor-result-top">
+                <span>${html(copy.resultKicker)}</span>
+                <strong data-mac-fit>${html(result.fit)}</strong>
+              </div>
+              <h3 data-mac-title>${html(result.title)}</h3>
+              <p data-mac-summary>${html(result.summary)}</p>
+              <dl class="mac-advisor-metrics">
+                ${renderMacAdvisorMetric(copy.tierLabel, result.tier, "data-mac-tier")}
+                ${renderMacAdvisorMetric(copy.dailyModelLabel, result.dailyModel, "data-mac-daily-model")}
+                ${renderMacAdvisorMetric(copy.qualityModelLabel, result.qualityModel, "data-mac-quality-model")}
+                ${renderMacAdvisorMetric(copy.cloudLabel, result.cloud, "data-mac-cloud")}
+              </dl>
+              <p class="mac-advisor-note" data-mac-note>${html(result.note)}</p>
+              <div class="mac-advisor-actions">
+                <a class="button button-light download-link" href="/download/mac" data-platform="macos">${html(copy.download)}</a>
+                <a class="button button-secondary" href="${attr(macGuidePath(currentCode))}">${html(copy.fullGuide)}</a>
+              </div>
+            </article>
+            <script type="application/json" data-mac-advisor-json>${jsonForScript(localizedMacAdvisorData(currentCode))}</script>
+          </div>`;
+}
+
+function renderMacAdvisorSection(currentCode = "en") {
+  const copy = macAdvisorCopy(currentCode);
+  return `<section class="mac-advisor-section reveal" id="mac-advisor" aria-labelledby="mac-advisor-title">
+        <div class="section-shell">
+          <div class="mac-advisor-layout">
+            <div class="section-heading section-heading-left">
+              <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(copy.sectionKicker)}</span>
+              <h2 id="mac-advisor-title">${html(copy.sectionTitle)}</h2>
+              <p>${html(copy.sectionBody)}</p>
+            </div>
+            ${renderMacAdvisorTool(currentCode)}
+          </div>
+        </div>
+      </section>`;
+}
+
+function renderMacGuideSchema(currentCode = "en") {
+  const copy = macAdvisorCopy(currentCode);
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: copy.pageMetaTitle,
+      description: copy.pageMetaDescription,
+      url: macGuideUrl(currentCode),
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: copy.faqItems.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderMacModelGuidePage(currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  const t = homeCopyForRender(currentCode);
+  const copy = macAdvisorCopy(currentCode);
+  return `<!doctype html>
+<html lang="${attr(locale.htmlLang)}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.pageMetaTitle)}</title>
+    <meta name="description" content="${attr(copy.pageMetaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    <meta property="og:title" content="${attr(copy.pageMetaTitle)}" />
+    <meta property="og:description" content="${attr(copy.pageMetaDescription)}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${attr(macGuideUrl(currentCode))}" />
+    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${macGuideHreflangTags(currentCode)}
+    ${assetTags()}
+    ${renderMacGuideSchema(currentCode)}
+  </head>
+  <body>
+    <a class="skip-link" href="#mac-model-guide">${html(copy.navLabel)}</a>
+    ${renderHeader(currentCode, t, { hrefForLocale: (item) => macGuidePath(item.code) })}
+    <main class="doc-page mac-guide-page" id="mac-model-guide">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.pageEyebrow)}</span>
+      <h1>${html(copy.pageTitle)}</h1>
+      <p class="doc-lede">${html(copy.pageLede)}</p>
+
+      <section class="doc-section mac-guide-advisor" aria-labelledby="mac-guide-advisor-title">
+        <p class="doc-meta">${html(copy.sectionKicker)}</p>
+        <h2 id="mac-guide-advisor-title">${html(copy.pageSectionTitle)}</h2>
+        <p>${html(copy.pageSectionBody)}</p>
+        ${renderMacAdvisorTool(currentCode)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="mac-guide-faq-title">
+        <p class="doc-meta">${html(copy.pageEyebrow)}</p>
+        <h2 id="mac-guide-faq-title">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid mac-guide-faq">
+          ${copy.faqItems
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+    </main>
+    ${renderFooterOnly(currentCode)}
+  </body>
+</html>
+`;
+}
+
 function renderHomeFooterLinks(currentCode, t) {
   const links = [
     `<a href="/privacy">Privacy</a>`,
@@ -2738,6 +3004,8 @@ function renderHome(currentCode) {
           </div>
         </div>
       </section>
+
+      ${renderMacAdvisorSection(currentCode)}
 
 ${compareTeaser}
       <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
@@ -3062,6 +3330,19 @@ ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
   </url>`,
   ).join("\n");
+  const macGuideAlternates = LOCALES.map(
+    (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${macGuideUrl(locale.code)}" />`,
+  ).join("\n");
+  const macGuideXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${macGuideUrl("en")}" />`;
+  const macGuideEntries = LOCALES.map(
+    (locale) => `  <url>
+    <loc>${macGuideUrl(locale.code)}</loc>
+    <lastmod>${MAC_ADVISOR_LASTMOD}</lastmod>
+${macGuideAlternates}
+${macGuideXDefault}
+    <priority>${locale.code === "en" ? "0.8" : "0.75"}</priority>
+  </url>`,
+  ).join("\n");
   const compareEntry = (code, slug = "", priority = "0.7") => {
     const compareAlternates = LOCALES.map(
       (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localizedCompareUrl(locale.code, slug)}" />`,
@@ -3092,6 +3373,7 @@ ${compareXDefault}
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${homepageEntries}
+${macGuideEntries}
 ${compareEntries}
 ${trustEntries}
   <url>
@@ -3318,6 +3600,7 @@ function writeLegacyPrivateTombstones() {
     "README.md",
     "wrangler.toml",
     "data/compare-pages.mjs",
+    "data/mac-model-advisor.mjs",
     "data/release.json",
     "data/site-content.mjs",
     "data/trust-pages.mjs",
@@ -3350,6 +3633,7 @@ copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));
 
 for (const locale of LOCALES) {
   write(locale.code === "en" ? "index.html" : `${locale.code}/index.html`, renderHome(locale.code));
+  write(locale.code === "en" ? "mac-model-guide/index.html" : `${locale.code}/mac-model-guide/index.html`, renderMacModelGuidePage(locale.code));
 }
 
 for (const locale of LOCALES) {

@@ -912,6 +912,7 @@ main section[id] {
 }
 
 .pricing-section,
+.mac-advisor-section,
 .download-band,
 .signed-strip,
 .channel-section,
@@ -925,6 +926,14 @@ main section[id] {
 
 .pricing-section {
   border-top: 1px solid var(--hairline);
+}
+
+.mac-advisor-section {
+  border-top: 1px solid var(--hairline);
+  background:
+    linear-gradient(180deg, rgb(125 211 199 / 8%), transparent 38%),
+    radial-gradient(circle at center, rgb(255 255 255 / 7%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
+    var(--canvas-deep);
 }
 
 .compare-teaser {
@@ -1691,6 +1700,208 @@ main section[id] {
 }
 
 /* ---------------------------------------------------------- *
+ * Mac advisor                                                 *
+ * ---------------------------------------------------------- */
+
+.mac-advisor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  align-items: stretch;
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.mac-advisor-tool {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.86fr) minmax(0, 1.14fr);
+  min-width: 0;
+  min-height: 420px;
+  border: 1px solid rgb(125 211 199 / 34%);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgb(125 211 199 / 13%), transparent 38%),
+    rgb(255 255 255 / 4%);
+  box-shadow: 0 20px 80px rgb(0 0 0 / 24%);
+  overflow: hidden;
+}
+
+.mac-guide-advisor .mac-advisor-tool {
+  margin-top: 24px;
+}
+
+.mac-advisor-control-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 22px;
+  border-right: 1px solid rgb(255 255 255 / 11%);
+  padding: 28px;
+}
+
+.mac-advisor-kicker,
+.mac-advisor-result-top span {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mac-advisor-fields {
+  display: grid;
+  gap: 16px;
+}
+
+.mac-advisor-fields label {
+  display: grid;
+  gap: 8px;
+}
+
+.mac-advisor-fields label > span {
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mac-advisor-fields select {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 14px;
+  background: rgb(6 16 15 / 74%);
+  color: var(--ink);
+  padding: 0 42px 0 14px;
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+}
+
+.mac-advisor-fields select:hover {
+  border-color: rgb(125 211 199 / 45%);
+}
+
+.mac-advisor-fields select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mac-advisor-noscript {
+  margin: auto 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.mac-advisor-result {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 28px;
+}
+
+.mac-advisor-result-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.mac-advisor-result-top strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid rgb(125 211 199 / 42%);
+  border-radius: var(--radius-pill);
+  background: rgb(125 211 199 / 13%);
+  color: var(--accent);
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mac-advisor-result h3 {
+  margin: 24px 0 0;
+  max-width: 16ch;
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 850;
+  line-height: 1.04;
+  letter-spacing: 0;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.mac-advisor-result p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.mac-advisor-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 26px 0 0;
+  border-top: 1px solid rgb(255 255 255 / 11%);
+  border-left: 1px solid rgb(255 255 255 / 11%);
+}
+
+.mac-advisor-metric {
+  min-width: 0;
+  border-right: 1px solid rgb(255 255 255 / 11%);
+  border-bottom: 1px solid rgb(255 255 255 / 11%);
+  padding: 14px;
+}
+
+.mac-advisor-metric dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mac-advisor-metric dd {
+  margin: 6px 0 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.mac-advisor-note {
+  min-height: 46px;
+}
+
+.mac-advisor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.mac-advisor-actions .button {
+  min-width: 168px;
+}
+
+.mac-guide-page .doc-lede {
+  max-width: 760px;
+}
+
+.mac-guide-page h1 {
+  overflow-wrap: anywhere;
+}
+
+.mac-guide-faq {
+  margin-top: 22px;
+}
+
+/* ---------------------------------------------------------- *
  * Downloads                                                   *
  * ---------------------------------------------------------- */
 
@@ -2253,6 +2464,14 @@ main section[id] {
 
 .doc-section a:hover {
   color: var(--accent);
+}
+
+.doc-section .button {
+  text-decoration: none;
+}
+
+.doc-section .button-light {
+  color: var(--button-ink);
 }
 
 .doc-section code {
@@ -3089,6 +3308,8 @@ main section[id] {
   .compare-choice-grid,
   .compare-cta,
   .compare-hub-grid,
+  .mac-advisor-layout,
+  .mac-advisor-tool,
   .cloud-brief-grid,
   .cloud-mode-grid,
   .cloud-steps,
@@ -3104,6 +3325,15 @@ main section[id] {
   .tier + .tier {
     border-left: 0;
     border-top: 1px solid var(--hairline);
+  }
+
+  .mac-advisor-control-panel {
+    border-right: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 11%);
+  }
+
+  .mac-advisor-result h3 {
+    max-width: none;
   }
 
   .download-card {
@@ -3200,6 +3430,7 @@ main section[id] {
   }
 
   .pricing-section,
+  .mac-advisor-section,
   .download-band,
   .signed-strip,
   .channel-section,
@@ -3217,6 +3448,33 @@ main section[id] {
 
   .tier {
     padding: 28px 22px 26px;
+  }
+
+  .mac-advisor-tool {
+    min-height: 0;
+    border-radius: 22px;
+  }
+
+  .mac-advisor-control-panel,
+  .mac-advisor-result {
+    padding: 22px;
+  }
+
+  .mac-advisor-result-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mac-advisor-result h3 {
+    font-size: 26px;
+  }
+
+  .mac-advisor-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .mac-advisor-actions {
+    display: grid;
   }
 
   .trust-column {
@@ -3249,6 +3507,12 @@ main section[id] {
 
   .doc-page {
     padding-top: 112px;
+  }
+
+  .mac-guide-page h1 {
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: 0;
   }
 
   .compare-page {

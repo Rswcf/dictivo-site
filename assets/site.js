@@ -235,6 +235,95 @@ if (recommendedPlatform) {
   document.querySelector(`[data-platform-card="${recommendedPlatform}"]`)?.setAttribute("data-recommended", "true");
 }
 
+function fillTemplate(template, values) {
+  return String(template || "").replace(/\{([a-z]+)\}/gi, (_match, key) => values[key] ?? "");
+}
+
+function initMacAdvisor(root) {
+  const dataNode = root.querySelector("[data-mac-advisor-json]");
+  const familySelect = root.querySelector("[data-mac-family]");
+  const memorySelect = root.querySelector("[data-mac-memory]");
+  if (!dataNode || !familySelect || !memorySelect) return;
+
+  let data;
+  try {
+    data = JSON.parse(dataNode.textContent || "{}");
+  } catch {
+    return;
+  }
+
+  const familyById = new Map((data.families || []).map((family) => [family.id, family]));
+  const memoryById = new Map((data.memory || []).map((memory) => [memory.id, memory]));
+  const copy = data.copy || {};
+
+  const resultNodes = {
+    title: root.querySelector("[data-mac-title]"),
+    summary: root.querySelector("[data-mac-summary]"),
+    fit: root.querySelector("[data-mac-fit]"),
+    tier: root.querySelector("[data-mac-tier]"),
+    dailyModel: root.querySelector("[data-mac-daily-model]"),
+    qualityModel: root.querySelector("[data-mac-quality-model]"),
+    cloud: root.querySelector("[data-mac-cloud]"),
+    note: root.querySelector("[data-mac-note]"),
+  };
+
+  function memoryLabel(id) {
+    return memoryById.get(id)?.label || id;
+  }
+
+  function currentFamily() {
+    return familyById.get(familySelect.value) || data.families?.[0];
+  }
+
+  function setText(node, value) {
+    if (node) node.textContent = value || "";
+  }
+
+  function syncMemoryOptions() {
+    const family = currentFamily();
+    if (!family) return;
+    const previous = memorySelect.value;
+    const options = family.memoryOptions || [];
+    memorySelect.textContent = "";
+    for (const id of options) {
+      const option = document.createElement("option");
+      option.value = id;
+      option.textContent = memoryLabel(id);
+      memorySelect.appendChild(option);
+    }
+    memorySelect.value = options.includes(previous) ? previous : family.defaultMemoryId || options[0] || "";
+  }
+
+  function renderResult() {
+    const family = currentFamily();
+    if (!family) return;
+    const memoryId = family.memoryOptions?.includes(memorySelect.value) ? memorySelect.value : family.defaultMemoryId;
+    const profileId = family.profiles?.[memoryId] || family.profiles?.[family.defaultMemoryId] || family.profiles?.unknown;
+    const profile = data.profiles?.[profileId];
+    if (!profile) return;
+
+    const memory = memoryLabel(memoryId);
+    setText(resultNodes.title, fillTemplate(copy.resultTitle, { mac: family.label, memory }));
+    setText(resultNodes.summary, copy.fitSummary?.[profile.fit]);
+    setText(resultNodes.fit, copy.fit?.[profile.fit]);
+    setText(resultNodes.tier, copy.tierNames?.[profile.tier]);
+    setText(resultNodes.dailyModel, profile.dailyModel);
+    setText(resultNodes.qualityModel, profile.qualityModel);
+    setText(resultNodes.cloud, copy.cloud?.[profile.cloud]);
+    setText(resultNodes.note, copy.notes?.[profile.note]);
+  }
+
+  familySelect.addEventListener("change", () => {
+    syncMemoryOptions();
+    renderResult();
+  });
+  memorySelect.addEventListener("change", renderResult);
+  syncMemoryOptions();
+  renderResult();
+}
+
+document.querySelectorAll("[data-mac-advisor]").forEach(initMacAdvisor);
+
 const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 const reveals = document.querySelectorAll(".reveal");
 const initialAnchorTarget = location.hash ? document.querySelector(location.hash) : null;
