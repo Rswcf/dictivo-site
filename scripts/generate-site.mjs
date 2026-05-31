@@ -2094,7 +2094,7 @@ function renderHeader(currentCode, t, options = {}) {
         <a href="${attr(hash("privacy"))}">${html(t.nav.privacy)}</a>
         <a href="${attr(hash("cloud-fast"))}">${html(t.nav.cloudFast)}</a>
         <a href="${attr(hash("pricing"))}">${html(t.nav.pricing)}</a>
-        <a href="${attr(hash("faq"))}">${html(t.nav.faq)}</a>
+        <a href="${attr(macGuidePath(currentCode))}">${html(macAdvisorCopy(currentCode).navLabel)}</a>
         <a href="${attr(hash("downloads"))}">${html(t.nav.downloads)}</a>
       </nav>
       <div class="header-actions">
@@ -2986,6 +2986,28 @@ function renderHome(currentCode) {
         </div>
       </section>
 
+      <section class="cloud-flow reveal" id="workflow" aria-labelledby="workflow-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(t.workflow.kicker)}</span>
+            <h2 id="workflow-title">${html(t.workflow.title)}</h2>
+            <p>${html(t.workflow.body)}</p>
+          </div>
+
+          <ol class="cloud-steps">
+            ${t.workflow.steps
+              .map(
+                ([number, title, body]) => `<li>
+              <span>${html(number)}</span>
+              <strong>${html(title)}</strong>
+              <p>${html(body)}</p>
+            </li>`,
+              )
+              .join("\n")}
+          </ol>
+        </div>
+      </section>
+
       <section class="pricing-section reveal" id="pricing" aria-labelledby="pricing-title">
         <div class="section-shell">
           <div class="pricing-head">
@@ -3007,7 +3029,25 @@ function renderHome(currentCode) {
 
       ${renderMacAdvisorSection(currentCode)}
 
-${compareTeaser}
+      <section class="signed-strip reveal" aria-labelledby="signed-title">
+        <div class="section-shell">
+          <div class="signed-head">
+            <h2 id="signed-title">${html(t.signed.title)}</h2>
+          </div>
+          <div class="signed-grid">
+            ${t.signed.cells
+              .map(
+                ([label, value]) => `<article class="signed-cell">
+              <p class="signed-cell-label">${html(label)}</p>
+              <p class="signed-cell-value">${html(value.replace("{version}", release.version))}</p>
+            </article>`,
+              )
+              .join("\n")}
+          </div>
+          <p class="signed-footnote">${html(t.signed.footnote)}</p>
+        </div>
+      </section>
+
       <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
         <div class="section-shell">
           <div class="section-heading">
@@ -3039,25 +3079,7 @@ ${compareTeaser}
         </div>
       </section>
 
-      <section class="signed-strip reveal" aria-labelledby="signed-title">
-        <div class="section-shell">
-          <div class="signed-head">
-            <h2 id="signed-title">${html(t.signed.title)}</h2>
-          </div>
-          <div class="signed-grid">
-            ${t.signed.cells
-              .map(
-                ([label, value]) => `<article class="signed-cell">
-              <p class="signed-cell-label">${html(label)}</p>
-              <p class="signed-cell-value">${html(value.replace("{version}", release.version))}</p>
-            </article>`,
-              )
-              .join("\n")}
-          </div>
-          <p class="signed-footnote">${html(t.signed.footnote)}</p>
-        </div>
-      </section>
-
+${compareTeaser}
       <section class="channel-section language-section reveal" id="languages" aria-labelledby="languages-title">
         <div class="section-shell">
           <div class="section-heading section-heading-left">
@@ -3069,28 +3091,6 @@ ${compareTeaser}
             ${languagePills}
           </div>
           <p class="language-note">${html(t.languages.note)}</p>
-        </div>
-      </section>
-
-      <section class="cloud-flow reveal" id="workflow" aria-labelledby="workflow-title">
-        <div class="section-shell">
-          <div class="section-heading">
-            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(t.workflow.kicker)}</span>
-            <h2 id="workflow-title">${html(t.workflow.title)}</h2>
-            <p>${html(t.workflow.body)}</p>
-          </div>
-
-          <ol class="cloud-steps">
-            ${t.workflow.steps
-              .map(
-                ([number, title, body]) => `<li>
-              <span>${html(number)}</span>
-              <strong>${html(title)}</strong>
-              <p>${html(body)}</p>
-            </li>`,
-              )
-              .join("\n")}
-          </ol>
         </div>
       </section>
 
