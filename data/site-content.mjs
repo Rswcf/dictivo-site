@@ -1278,3 +1278,91 @@ HOME_COPY.pt = mergeCopy(deriveFromEnglish(HOME_COPY.en, portuguese, "pt"), deta
 HOME_COPY.zh = mergeCopy(deriveFromEnglish(HOME_COPY.en, chinese, "zh"), asiaDetails.zh);
 HOME_COPY.ja = mergeCopy(deriveFromEnglish(HOME_COPY.en, japanese, "ja"), asiaDetails.ja);
 HOME_COPY.ko = mergeCopy(deriveFromEnglish(HOME_COPY.en, korean, "ko"), asiaDetails.ko);
+
+const LAUNCH_OFFER_COPY = {
+  de: {
+    privacyTail: ["Tiny bleibt dauerhaft gratis", "14 Tage voller Local-Test schalten jedes lokale Modell frei"],
+    pricingBody: "Starten Sie mit Tiny dauerhaft gratis, testen Sie jedes lokale Modell 14 Tage kostenlos und nutzen Sie 10 kostenlose Cloud-Fast-Minuten auf diesem Gerät, bevor Sie abonnieren.",
+    freeFeatures: ["Lokales Diktieren auf Ihrem Gerät", "Tiny On-Device-Modell enthalten", "Globaler Hotkey und lokaler Verlauf", "14 Tage voller Local-Test schalten jedes lokale Modell frei", "Kein Cloud-Upload im lokalen Modus"],
+    cloudFeatures: ["10 kostenlose Minuten auf diesem Gerät", "1.500 Transkriptionsminuten pro Monat", "Eigenständig oder zusammen mit Dictivo Local", "Ein klarer Cloud Fast Schalter in der App", "Lädt nur ausgewählte Aufnahmen hoch"],
+    downloadsBody: "Die Mac App enthält lokalen Modus, Tiny dauerhaft gratis, 14 Tage vollen Local-Test, 10 kostenlose Cloud-Fast-Minuten, Lizenzaktivierung und Anzeigesprachen.",
+    faqFree: "Tiny Local bleibt dauerhaft gratis. Neue Installationen erhalten außerdem 14 Tage vollen Local-Test mit allen lokalen Modellen sowie 10 lebenslange Cloud-Fast-Minuten auf diesem Gerät.",
+  },
+  fr: {
+    privacyTail: ["Tiny reste gratuit à vie", "L'essai Local complet de 14 jours débloque tous les modèles locaux"],
+    pricingBody: "Commencez avec Tiny gratuit à vie, essayez chaque modèle local gratuitement pendant 14 jours et utilisez 10 minutes Cloud Fast gratuites sur cet appareil avant de vous abonner.",
+    freeFeatures: ["Dictée locale sur votre appareil", "Modèle Tiny embarqué inclus", "Raccourci global et historique local", "L'essai Local complet de 14 jours débloque tous les modèles locaux", "Aucun envoi cloud en mode Local"],
+    cloudFeatures: ["10 minutes gratuites sur cet appareil", "1 500 minutes de transcription par mois", "Seul ou avec Dictivo Local", "Un simple bouton Cloud Fast dans l'app", "N'envoie que les enregistrements choisis"],
+    downloadsBody: "L'app Mac inclut le mode Local, Tiny gratuit à vie, 14 jours d'essai Local complet, 10 minutes Cloud Fast gratuites, l'activation de licence et les langues d'affichage.",
+    faqFree: "Tiny Local est gratuit à vie. Les nouvelles installations reçoivent aussi 14 jours d'essai Local complet avec tous les modèles locaux débloqués, plus 10 minutes Cloud Fast à vie sur cet appareil.",
+  },
+  es: {
+    privacyTail: ["Tiny es gratis para siempre", "La prueba Local completa de 14 días desbloquea todos los modelos locales"],
+    pricingBody: "Empieza con Tiny gratis para siempre, prueba todos los modelos locales gratis durante 14 días y usa 10 minutos gratis de Cloud Fast en este dispositivo antes de suscribirte.",
+    freeFeatures: ["Dictado local en tu dispositivo", "Modelo Tiny en el dispositivo incluido", "Atajo global e historial local", "La prueba Local completa de 14 días desbloquea todos los modelos locales", "Sin subida a la nube en modo Local"],
+    cloudFeatures: ["10 minutos gratis en este dispositivo", "1.500 minutos de transcripción al mes", "Solo o junto a Dictivo Local", "Un simple interruptor Cloud Fast en la app", "Sube solo las grabaciones que eliges"],
+    downloadsBody: "La app de Mac incluye modo Local, Tiny gratis para siempre, 14 días de prueba Local completa, 10 minutos gratis de Cloud Fast, activación de licencia e idiomas de visualización.",
+    faqFree: "Tiny Local es gratis para siempre. Las nuevas instalaciones también reciben 14 días de prueba Local completa con todos los modelos locales desbloqueados, más 10 minutos de Cloud Fast de por vida en ese dispositivo.",
+  },
+  it: {
+    privacyTail: ["Tiny resta gratis per sempre", "La prova Local completa di 14 giorni sblocca ogni modello locale"],
+    pricingBody: "Inizia con Tiny gratis per sempre, prova ogni modello locale gratis per 14 giorni e usa 10 minuti Cloud Fast gratuiti su questo dispositivo prima di abbonarti.",
+    freeFeatures: ["Dettatura locale sul tuo dispositivo", "Modello Tiny on-device incluso", "Scorciatoia globale e cronologia locale", "La prova Local completa di 14 giorni sblocca ogni modello locale", "Nessun upload cloud in modalità Local"],
+    cloudFeatures: ["10 minuti gratis su questo dispositivo", "1.500 minuti di trascrizione al mese", "Da solo o insieme a Dictivo Local", "Un semplice interruttore Cloud Fast nell'app", "Carica solo le registrazioni che scegli"],
+    downloadsBody: "L'app Mac include modalità Local, Tiny gratis per sempre, 14 giorni di prova Local completa, 10 minuti Cloud Fast gratuiti, attivazione licenza e lingue di visualizzazione.",
+    faqFree: "Tiny Local resta gratis per sempre. Le nuove installazioni ricevono anche 14 giorni di prova Local completa con ogni modello locale sbloccato, più 10 minuti Cloud Fast a vita su quel dispositivo.",
+  },
+  nl: {
+    privacyTail: ["Tiny blijft altijd gratis", "De volledige Local-proef van 14 dagen ontgrendelt elk lokaal model"],
+    pricingBody: "Begin met Tiny altijd gratis, probeer elk lokaal model 14 dagen gratis en gebruik 10 gratis Cloud Fast-minuten op dit apparaat voordat je abonneert.",
+    freeFeatures: ["Lokaal dicteren op je apparaat", "Tiny on-device model inbegrepen", "Globale sneltoets en lokale geschiedenis", "De volledige Local-proef van 14 dagen ontgrendelt elk lokaal model", "Geen cloud-upload in Local-modus"],
+    cloudFeatures: ["10 gratis minuten op dit apparaat", "1.500 transcriptieminuten per maand", "Los of naast Dictivo Local", "Een eenvoudige Cloud Fast-schakelaar in de app", "Uploadt alleen opnames die je kiest"],
+    downloadsBody: "De Mac-app bevat Local-modus, Tiny altijd gratis, een volledige Local-proef van 14 dagen, 10 gratis Cloud Fast-minuten, licentieactivatie en weergavetalen.",
+    faqFree: "Tiny Local-dictatie blijft altijd gratis. Nieuwe installaties krijgen ook een volledige Local-proef van 14 dagen met elk lokaal model ontgrendeld, plus 10 levenslange Cloud Fast-minuten op dat apparaat.",
+  },
+  pt: {
+    privacyTail: ["Tiny fica grátis para sempre", "O teste Local completo de 14 dias desbloqueia todos os modelos locais"],
+    pricingBody: "Comece com Tiny grátis para sempre, teste todos os modelos locais grátis por 14 dias e use 10 minutos grátis de Cloud Fast neste dispositivo antes de assinar.",
+    freeFeatures: ["Ditado local no seu dispositivo", "Modelo Tiny no dispositivo incluído", "Atalho global e histórico local", "O teste Local completo de 14 dias desbloqueia todos os modelos locais", "Sem envio para nuvem no modo Local"],
+    cloudFeatures: ["10 minutos grátis neste dispositivo", "1.500 minutos de transcrição por mês", "Separado ou junto com Dictivo Local", "Um interruptor Cloud Fast simples no app", "Envia apenas gravações escolhidas"],
+    downloadsBody: "O app para Mac inclui modo Local, Tiny grátis para sempre, teste Local completo de 14 dias, 10 minutos grátis de Cloud Fast, ativação de licença e idiomas de exibição.",
+    faqFree: "O ditado Tiny Local fica grátis para sempre. Novas instalações também recebem teste Local completo de 14 dias com todos os modelos locais desbloqueados, mais 10 minutos vitalícios de Cloud Fast nesse dispositivo.",
+  },
+  zh: {
+    privacyTail: ["Tiny 永久免费", "14 天完整 Local 试用可解锁所有本地模型"],
+    pricingBody: "先从 Tiny 永久免费开始，14 天免费试用所有本地模型，并在订阅前使用本设备 10 分钟免费 Cloud Fast 额度。",
+    freeFeatures: ["在本设备上本地听写", "包含 Tiny 设备端模型", "全局快捷键和本地历史记录", "14 天完整 Local 试用可解锁所有本地模型", "本地模式不会上传到云端"],
+    cloudFeatures: ["本设备 10 分钟免费额度", "每月 1,500 分钟转录", "可单独使用，也可搭配 Dictivo Local", "应用内一个清晰的 Cloud Fast 开关", "只上传你选择的录音"],
+    downloadsBody: "Mac 应用包含本地模式、Tiny 永久免费、14 天完整 Local 试用、10 分钟免费 Cloud Fast、许可证激活和显示语言选项。",
+    faqFree: "Tiny Local 听写永久免费。新安装还会获得 14 天完整 Local 试用，解锁所有本地模型，并在本设备上获得终身 10 分钟 Cloud Fast 免费额度。",
+  },
+  ja: {
+    privacyTail: ["Tiny は永久無料です", "14 日間の完全 Local トライアルで全ローカルモデルを利用できます"],
+    pricingBody: "Tiny は永久無料で始められます。14 日間すべてのローカルモデルを無料で試し、この端末で Cloud Fast 10 分を無料で使ってから購読できます。",
+    freeFeatures: ["デバイス上でのローカル音声入力", "Tiny オンデバイスモデルを含む", "グローバルショートカットとローカル履歴", "14 日間の完全 Local トライアルで全ローカルモデルを利用できます", "Local モードではクラウドアップロードなし"],
+    cloudFeatures: ["この端末で 10 分無料", "月 1,500 分の文字起こし", "単体でも Dictivo Local と併用でも利用可能", "アプリ内のシンプルな Cloud Fast スイッチ", "選択した録音だけをアップロード"],
+    downloadsBody: "Mac アプリには Local モード、永久無料の Tiny、14 日間の完全 Local トライアル、10 分の無料 Cloud Fast、ライセンス有効化、表示言語が含まれます。",
+    faqFree: "Tiny Local 音声入力は永久無料です。新規インストールでは全ローカルモデルを使える 14 日間の完全 Local トライアルと、その端末で使える Cloud Fast 10 分が付属します。",
+  },
+  ko: {
+    privacyTail: ["Tiny는 영구 무료입니다", "14일 전체 Local 체험으로 모든 로컬 모델을 사용할 수 있습니다"],
+    pricingBody: "Tiny는 영구 무료로 시작할 수 있습니다. 14일 동안 모든 로컬 모델을 무료로 체험하고, 구독 전에 이 기기에서 Cloud Fast 10분을 무료로 사용할 수 있습니다.",
+    freeFeatures: ["기기에서 로컬 받아쓰기", "Tiny 온디바이스 모델 포함", "전역 단축키와 로컬 기록", "14일 전체 Local 체험으로 모든 로컬 모델을 사용할 수 있습니다", "Local 모드에서는 클라우드 업로드 없음"],
+    cloudFeatures: ["이 기기에서 10분 무료", "월 1,500분 전사", "단독 또는 Dictivo Local과 함께 사용", "앱 안의 단순한 Cloud Fast 스위치", "선택한 녹음만 업로드"],
+    downloadsBody: "Mac 앱에는 Local 모드, 영구 무료 Tiny, 14일 전체 Local 체험, 10분 무료 Cloud Fast, 라이선스 활성화, 표시 언어가 포함됩니다.",
+    faqFree: "Tiny Local 받아쓰기는 영구 무료입니다. 새 설치에는 모든 로컬 모델을 여는 14일 전체 Local 체험과 해당 기기의 Cloud Fast 10분 평생 무료 사용이 포함됩니다.",
+  },
+};
+
+for (const [localeCode, copy] of Object.entries(LAUNCH_OFFER_COPY)) {
+  const target = HOME_COPY[localeCode];
+  target.privacy.localItems = [
+    ...target.privacy.localItems.slice(0, 3),
+    ...copy.privacyTail,
+  ];
+  target.pricing.body = copy.pricingBody;
+  target.pricing.tiers[0].features = copy.freeFeatures;
+  target.pricing.tiers[2].features = copy.cloudFeatures;
+  target.downloads.body = copy.downloadsBody;
+  target.faq.items[1][1] = copy.faqFree;
+}
