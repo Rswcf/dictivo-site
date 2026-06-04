@@ -438,7 +438,7 @@ const SEO_HOME_COPY = {
   },
 };
 
-function html(value) {
+function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -446,8 +446,14 @@ function html(value) {
     .replaceAll('"', "&quot;");
 }
 
+function html(value) {
+  return escapeHtml(value)
+    .replaceAll("support@dictivo.app", "<!--email_off-->support@dictivo.app<!--/email_off-->")
+    .replaceAll("security@dictivo.app", "<!--email_off-->security@dictivo.app<!--/email_off-->");
+}
+
 function attr(value) {
-  return html(value).replaceAll("'", "&#39;");
+  return escapeHtml(value).replaceAll("'", "&#39;");
 }
 
 function jsonForScript(value) {
