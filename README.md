@@ -77,8 +77,17 @@ Expected objects:
 - `Dictivo_*_x64-setup.exe`
 - `Dictivo_*_x64_en-US.msi`
 
-The public download buttons use `/download/*` routes in `_redirects`. The macOS route points at R2. Windows routes
-redirect back to the downloads section unless `publicWindowsDownloads` is explicitly enabled in `data/release.json`.
+The public download buttons point at `api.dictivo.app/download/*` with release and UTM parameters. The API records the
+download funnel event, then redirects to the R2 object under `downloads.dictivo.app`. The legacy `/download/*` routes
+in `_redirects` also point at the API tracking redirect. Windows routes redirect back to the downloads section unless
+`publicWindowsDownloads` is explicitly enabled in `data/release.json`.
+
+For local preview against a non-production API, set `DICTIVO_DOWNLOAD_API_BASE_URL` before generating the site:
+
+```sh
+DICTIVO_DOWNLOAD_API_BASE_URL=http://localhost:8787 node scripts/generate-site.mjs
+```
+
 The machine-readable website release manifest lives at `/downloads.json` and lists only public artifacts.
 
 Manual R2 uploads, when needed outside the desktop release workflow, can be run with:

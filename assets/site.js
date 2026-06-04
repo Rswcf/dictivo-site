@@ -235,6 +235,69 @@ if (recommendedPlatform) {
   document.querySelector(`[data-platform-card="${recommendedPlatform}"]`)?.setAttribute("data-recommended", "true");
 }
 
+function normalizeDownloadPlatform(value) {
+  const platform = String(value || "").toLowerCase();
+  if (platform.includes("win")) return "windows";
+  if (platform.includes("mac")) return "macos";
+  return platform || "unknown";
+}
+
+function downloadEventPayload(link) {
+  const href = new URL(link.href, window.location.href);
+  const platform = normalizeDownloadPlatform(link.dataset.platform || href.pathname);
+  const artifact = link.dataset.artifact || href.searchParams.get("artifact") || (platform === "macos" ? "dmg" : "nsis");
+
+  return {
+    event: "download_cta_clicked",
+    platform,
+    releaseVersion:
+      link.dataset.releaseVersion ||
+      href.searchParams.get("version") ||
+      href.searchParams.get("releaseVersion") ||
+      href.searchParams.get("tag") ||
+      undefined,
+    artifact,
+    source: href.searchParams.get("utm_source") || "site",
+    medium: href.searchParams.get("utm_medium") || "download_cta",
+    campaign: href.searchParams.get("utm_campaign") || undefined,
+    content: link.dataset.downloadContent || href.searchParams.get("utm_content") || undefined,
+    term: href.searchParams.get("utm_term") || undefined,
+    referrer: window.location.href,
+  };
+}
+
+function sendDownloadClick(link) {
+  let href;
+  try {
+    href = new URL(link.href, window.location.href);
+  } catch {
+    return;
+  }
+
+  if (!href.pathname.includes("/download/")) return;
+
+  const endpoint = new URL("/v1/analytics/download-events", href.origin).toString();
+  const body = JSON.stringify(downloadEventPayload(link));
+
+  try {
+    if (navigator.sendBeacon?.(endpoint, body)) return;
+  } catch {
+    // Fall through to fetch with keepalive.
+  }
+
+  fetch(endpoint, {
+    method: "POST",
+    headers: { "content-type": "text/plain;charset=UTF-8" },
+    body,
+    keepalive: true,
+    credentials: "include",
+  }).catch(() => {});
+}
+
+document.querySelectorAll("a.download-link").forEach((link) => {
+  link.addEventListener("click", () => sendDownloadClick(link));
+});
+
 function fillTemplate(template, values) {
   return String(template || "").replace(/\{([a-z]+)\}/gi, (_match, key) => values[key] ?? "");
 }

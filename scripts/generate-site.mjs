@@ -8,12 +8,14 @@ import {
   MAC_ADVISOR_MEMORY,
   MAC_ADVISOR_PROFILES,
 } from "../data/mac-model-advisor.mjs";
+import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
+const DOWNLOAD_API_BASE_URL = (process.env.DICTIVO_DOWNLOAD_API_BASE_URL || "https://api.dictivo.app").replace(/\/$/, "");
 const windowsRelease = release.windows || null;
 const hasWindowsArtifacts = Boolean(windowsRelease?.exe?.url && windowsRelease?.msi?.url);
 const hasWindowsRelease = release.publicWindowsDownloads === true && hasWindowsArtifacts;
@@ -343,6 +345,99 @@ const WINDOWS_HOME_COPY = {
   },
 };
 
+const SEO_HOME_COPY = {
+  en: {
+    metaTitle: "Dictivo - Local-first Mac dictation",
+    metaDescription:
+      "Dictivo is a local-first Mac dictation app with hotkey voice typing, offline Local mode, Tiny free forever, a 14-day Local trial, and optional Cloud Fast.",
+    heroTitle: "Local-first Mac dictation.",
+    heroEmphasis: "Cloud Fast when you choose.",
+    heroEyebrow: "Local-first Mac dictation app",
+    footerPrivacyProof: "Privacy proof",
+  },
+  de: {
+    metaTitle: "Dictivo - Lokales Mac-Diktat mit Cloud Fast",
+    metaDescription:
+      "Dictivo ist eine lokale Mac-Diktat-App mit Hotkey-Diktat, Offline-Local-Modus, Tiny dauerhaft gratis, 14 Tagen Local-Test und optionalem Cloud Fast.",
+    heroTitle: "Lokales Mac-Diktat zuerst.",
+    heroEmphasis: "Cloud Fast, wenn Sie es wählen.",
+    heroEyebrow: "Lokale Mac-Diktat-App",
+    footerPrivacyProof: "Datenschutznachweis",
+  },
+  fr: {
+    metaTitle: "Dictivo - Dictée Mac locale avec Cloud Fast",
+    metaDescription:
+      "Dictivo est une app de dictée Mac locale avec raccourci global, mode Local hors ligne, Tiny gratuit à vie, essai Local de 14 jours et Cloud Fast.",
+    heroTitle: "Dictée Mac locale d'abord.",
+    heroEmphasis: "Cloud Fast quand vous le choisissez.",
+    heroEyebrow: "App de dictée Mac locale",
+    footerPrivacyProof: "Preuve confidentialité",
+  },
+  es: {
+    metaTitle: "Dictivo - Dictado local para Mac",
+    metaDescription:
+      "Dictivo es una app de dictado local para Mac con atajo global, modo Local offline, Tiny gratis, prueba Local de 14 días y Cloud Fast opcional.",
+    heroTitle: "Dictado local para Mac primero.",
+    heroEmphasis: "Cloud Fast cuando lo eliges.",
+    heroEyebrow: "App de dictado local para Mac",
+    footerPrivacyProof: "Prueba de privacidad",
+  },
+  it: {
+    metaTitle: "Dictivo - Dettatura locale per Mac",
+    metaDescription:
+      "Dictivo è un'app di dettatura locale per Mac con hotkey globale, Local offline, Tiny gratis, prova Local di 14 giorni e Cloud Fast opzionale.",
+    heroTitle: "Dettatura locale per Mac prima.",
+    heroEmphasis: "Cloud Fast quando lo scegli.",
+    heroEyebrow: "App di dettatura locale per Mac",
+    footerPrivacyProof: "Prova privacy",
+  },
+  nl: {
+    metaTitle: "Dictivo - Lokale Mac-dictatie-app met optionele Cloud Fast",
+    metaDescription:
+      "Dictivo is een lokale Mac-dictatie-app met globale sneltoets, offline Local-modus, Tiny altijd gratis, volledige Local-proef van 14 dagen en optionele Cloud Fast.",
+    heroTitle: "Lokale Mac-dictatie eerst.",
+    heroEmphasis: "Cloud Fast wanneer je kiest.",
+    heroEyebrow: "Lokale Mac-dictatie-app",
+    footerPrivacyProof: "Privacybewijs",
+  },
+  pt: {
+    metaTitle: "Dictivo - Ditado local para Mac",
+    metaDescription:
+      "Dictivo é um app de ditado local para Mac com atalho global, modo Local offline, Tiny grátis, teste Local de 14 dias e Cloud Fast opcional.",
+    heroTitle: "Ditado local para Mac primeiro.",
+    heroEmphasis: "Cloud Fast quando você escolhe.",
+    heroEyebrow: "App de ditado local para Mac",
+    footerPrivacyProof: "Prova de privacidade",
+  },
+  zh: {
+    metaTitle: "Dictivo - 本地优先的 Mac 听写应用，可选 Cloud Fast",
+    metaDescription:
+      "Dictivo 是本地优先的 Mac 听写应用，支持全局快捷键、离线 Local 模式、Tiny 永久免费、14 天完整 Local 试用，以及可选 Cloud Fast。",
+    heroTitle: "本地优先的 Mac 听写。",
+    heroEmphasis: "需要速度时再用 Cloud Fast。",
+    heroEyebrow: "本地优先的 Mac 听写应用",
+    footerPrivacyProof: "隐私证明",
+  },
+  ja: {
+    metaTitle: "Dictivo - Cloud Fast を選べるローカル優先 Mac 音声入力アプリ",
+    metaDescription:
+      "Dictivo はローカル優先の Mac 音声入力アプリです。グローバルショートカット、オフライン Local、永久無料の Tiny、14 日間の完全 Local トライアル、任意の Cloud Fast に対応します。",
+    heroTitle: "ローカル優先の Mac 音声入力。",
+    heroEmphasis: "必要なときだけ Cloud Fast。",
+    heroEyebrow: "ローカル優先 Mac 音声入力アプリ",
+    footerPrivacyProof: "プライバシー証明",
+  },
+  ko: {
+    metaTitle: "Dictivo - Cloud Fast를 선택할 수 있는 로컬 우선 Mac 받아쓰기 앱",
+    metaDescription:
+      "Dictivo는 로컬 우선 Mac 받아쓰기 앱입니다. 전역 단축키, 오프라인 Local 모드, 영구 무료 Tiny, 14일 전체 Local 체험, 선택형 Cloud Fast를 제공합니다.",
+    heroTitle: "로컬 우선 Mac 받아쓰기.",
+    heroEmphasis: "필요할 때만 Cloud Fast.",
+    heroEyebrow: "로컬 우선 Mac 받아쓰기 앱",
+    footerPrivacyProof: "개인정보 증명",
+  },
+};
+
 function html(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -371,8 +466,28 @@ function questionIsAboutWindows(question) {
   return String(question).toLowerCase().includes("windows");
 }
 
+function applySeoHomeCopy(code, base) {
+  if (!base) return base;
+  const seo = SEO_HOME_COPY[code] || SEO_HOME_COPY.en;
+  return {
+    ...base,
+    seo: {
+      ...(base.seo || {}),
+      privacyProofLabel: seo.footerPrivacyProof,
+    },
+    metaTitle: seo.metaTitle,
+    metaDescription: seo.metaDescription,
+    hero: {
+      ...base.hero,
+      eyebrow: seo.heroEyebrow,
+      title: seo.heroTitle,
+      emphasis: seo.heroEmphasis,
+    },
+  };
+}
+
 function homeCopyForRender(code) {
-  const base = HOME_COPY[code];
+  const base = applySeoHomeCopy(code, HOME_COPY[code]);
   if (!base || !hasWindowsRelease) return base;
 
   const live = windowsHomeCopy(code);
@@ -443,6 +558,23 @@ function absoluteUrl(path) {
   return new URL(path, BASE_URL).toString();
 }
 
+function downloadUrl(platform, content, options = {}) {
+  const path = platform === "windows" ? "/download/windows" : "/download/mac";
+  const url = new URL(path, DOWNLOAD_API_BASE_URL);
+  url.searchParams.set("version", release.version);
+  url.searchParams.set("utm_source", "site");
+  url.searchParams.set("utm_medium", "download_cta");
+  url.searchParams.set("utm_campaign", `release_${release.version}`);
+  url.searchParams.set("utm_content", content);
+  if (options.artifact) url.searchParams.set("artifact", options.artifact);
+  return url.toString();
+}
+
+function downloadData(platform, content, options = {}) {
+  const artifact = options.artifact || (platform === "windows" ? "nsis" : "dmg");
+  return ` data-platform="${attr(platform)}" data-release-version="${attr(release.version)}" data-artifact="${attr(artifact)}" data-download-content="${attr(content)}"`;
+}
+
 function redirectTargetFromSource(route, fallback) {
   const line = sourceRedirects
     .split(/\r?\n/)
@@ -453,13 +585,13 @@ function redirectTargetFromSource(route, fallback) {
 }
 
 function comparePath(slug = "") {
-  return slug ? `/compare/${slug}` : "/compare";
+  return slug ? `/compare/${slug}/` : "/compare/";
 }
 
 function localizedComparePath(code, slug = "") {
   if (code === "en") return comparePath(slug);
   const locale = localeByCode(code);
-  return `${locale.path}compare${slug ? `/${slug}` : ""}`;
+  return `${locale.path}compare/${slug ? `${slug}/` : ""}`;
 }
 
 function localePath(code, fragment = "") {
@@ -484,8 +616,17 @@ function macGuideUrl(code) {
   return absoluteUrl(macGuidePath(code));
 }
 
+function privacyProofPath(code) {
+  if (code === "en") return "/privacy-proof/";
+  return `${localeByCode(code).path}privacy-proof/`;
+}
+
+function privacyProofUrl(code) {
+  return absoluteUrl(privacyProofPath(code));
+}
+
 function trustPath(slug) {
-  return `/${slug}`;
+  return `/${slug}/`;
 }
 
 function trustUrl(slug) {
@@ -2062,6 +2203,15 @@ function macGuideHreflangTags(currentCode) {
   return alternates.join("\n    ");
 }
 
+function privacyProofHreflangTags(currentCode) {
+  const alternates = LOCALES.map(
+    (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(privacyProofUrl(locale.code))}" />`,
+  );
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${attr(privacyProofUrl("en"))}" />`);
+  alternates.push(`<link rel="canonical" href="${attr(privacyProofUrl(currentCode))}" />`);
+  return alternates.join("\n    ");
+}
+
 function renderLanguageMenu(currentCode, t, hrefForLocale = (locale) => locale.path) {
   const current = localeByCode(currentCode);
   const links = LOCALES.map((locale) => {
@@ -2112,15 +2262,15 @@ ${items.map((item) => `                <li>${html(item)}</li>`).join("\n")}
 
 function renderTier(tier, index) {
   const classes = index === 1 ? "tier tier--highlight" : "tier";
-  const buttonClass = index === 1 ? "button button-dark" : "button button-secondary";
-  const href = tier.href || (index === 0 ? "/download/mac" : index === 1 ? "/checkout/local" : "/checkout/cloud-fast");
-  const data = tier.dataAttr ?? (index === 0 ? ' data-platform="macos"' : index === 1 ? " data-local-checkout" : " data-cloud-fast-checkout");
+  const buttonClass = `${index === 1 ? "button button-dark" : "button button-secondary"}${index === 0 ? " download-link" : ""}`;
+  const href = tier.href || (index === 0 ? downloadUrl("macos", "pricing_free") : index === 1 ? "/checkout/local" : "/checkout/cloud-fast");
+  const data = tier.dataAttr ?? (index === 0 ? downloadData("macos", "pricing_free") : index === 1 ? " data-local-checkout" : " data-cloud-fast-checkout");
   return `<article class="${classes}" role="listitem" data-od-id="${index === 0 ? "tier-free" : index === 1 ? "tier-local" : "tier-cloud-fast"}">
               <h3 class="tier-name">${html(tier.name)}</h3>
               <p class="tier-sub">${html(tier.sub)}</p>
               <p class="tier-price">${html(tier.price)}<small>${html(tier.small)}</small></p>
               ${renderList(tier.features)}
-              <a class="${buttonClass}" href="${href}"${data}>${html(tier.button)}</a>
+              <a class="${buttonClass}" href="${attr(href)}"${data}>${html(tier.button)}</a>
             </article>`;
 }
 
@@ -2462,7 +2612,7 @@ function renderCompareCta(page, currentCode, copy) {
               <p>${html(copy.ctaBody)}</p>
             </div>
             <div class="compare-cta-actions">
-              <a class="button button-light download-link" href="/download/mac" data-platform="macos">${html(copy.ctaPrimary)}</a>
+              <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_${page.slug}`))}"${downloadData("macos", `compare_${page.slug}`)}>${html(copy.ctaPrimary)}</a>
               <a class="button button-outline" href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.ctaSecondary)}</a>
             </div>
             ${renderCompareLinks(page, currentCode, copy)}
@@ -2734,7 +2884,7 @@ function renderMacAdvisorTool(currentCode = "en") {
               </dl>
               <p class="mac-advisor-note" data-mac-note>${html(result.note)}</p>
               <div class="mac-advisor-actions">
-                <a class="button button-light download-link" href="/download/mac" data-platform="macos">${html(copy.download)}</a>
+                <a class="button button-light download-link" href="${attr(downloadUrl("macos", "mac_advisor"))}"${downloadData("macos", "mac_advisor")}>${html(copy.download)}</a>
                 <a class="button button-secondary" href="${attr(macGuidePath(currentCode))}">${html(copy.fullGuide)}</a>
               </div>
             </article>
@@ -2851,14 +3001,15 @@ function renderMacModelGuidePage(currentCode = "en") {
 
 function renderHomeFooterLinks(currentCode, t) {
   const links = [
-    `<a href="/privacy">Privacy</a>`,
+    `<a href="/privacy/">Privacy</a>`,
+    `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || "Privacy proof")}</a>`,
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
-    `<a href="/security">Security</a>`,
-    `<a href="/terms">Terms</a>`,
-    `<a href="/refund">Refunds</a>`,
-    `<a href="/contact">Contact</a>`,
-    `<a href="/about">About</a>`,
+    `<a href="/security/">Security</a>`,
+    `<a href="/terms/">Terms</a>`,
+    `<a href="/refund/">Refunds</a>`,
+    `<a href="/contact/">Contact</a>`,
+    `<a href="/about/">About</a>`,
   ].filter(Boolean);
   return links.map((link) => `        ${link}`).join("\n");
 }
@@ -2921,8 +3072,8 @@ function renderHome(currentCode) {
 
           <div class="hero-support">
             <div class="hero-actions" aria-label="Download Dictivo">
-              <a class="button button-light download-link" href="/download/mac" data-platform="macos">${html(t.hero.download)}</a>
-              ${hasWindowsRelease ? `<a class="button button-outline download-link" href="/download/windows" data-platform="windows">${html(liveWindowsCopy.exeButton)}</a>` : ""}
+              <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_primary"))}"${downloadData("macos", "hero_primary")}>${html(t.hero.download)}</a>
+              ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_windows"))}"${downloadData("windows", "hero_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
               <a class="button button-outline" href="#pricing">${html(t.hero.pricing)}</a>
               <p class="hero-note">${html(t.hero.windows)}</p>
             </div>
@@ -2956,7 +3107,7 @@ function renderHome(currentCode) {
             </article>
           </div>
 
-          <p class="trust-footnote"><a href="/security">${html(t.privacy.footnote)}</a></p>
+          <p class="trust-footnote"><a href="/security/">${html(t.privacy.footnote)}</a></p>
         </div>
       </section>
 
@@ -2973,7 +3124,7 @@ function renderHome(currentCode) {
               <div class="card-topline"><span>${html(t.cloud.localTop[0])}</span><span>${html(t.cloud.localTop[1])}</span></div>
               <h3>${html(t.cloud.localTitle)}</h3>
               ${renderList(t.cloud.localItems)}
-              <a class="button button-secondary download-link" href="/download/mac" data-platform="macos">${html(t.hero.download)}</a>
+              <a class="button button-secondary download-link" href="${attr(downloadUrl("macos", "cloud_local_card"))}"${downloadData("macos", "cloud_local_card")}>${html(t.hero.download)}</a>
             </article>
 
             <article class="cloud-mode-card cloud-mode-card--highlight">
@@ -3061,7 +3212,7 @@ function renderHome(currentCode) {
               <div class="card-topline"><span>${html(t.downloads.macTop[0])}</span><span class="recommendation" data-recommendation="macos">${html(t.downloads.macTop[1])}</span></div>
               <h3>${html(t.downloads.macTitle)}</h3>
               <p>${html(t.downloads.macBody)}</p>
-              <a class="button button-dark download-link" href="/download/mac" data-platform="macos">${html(t.downloads.macButton)}</a>
+              <a class="button button-dark download-link" href="${attr(downloadUrl("macos", "downloads_mac_card"))}"${downloadData("macos", "downloads_mac_card")}>${html(t.downloads.macButton)}</a>
               <p class="download-note">${html(t.downloads.versionNote(release.version))}</p>
             </article>
 
@@ -3070,8 +3221,8 @@ function renderHome(currentCode) {
               <h3>${html(t.downloads.windowsTitle)}</h3>
               <p>${html(hasWindowsRelease ? liveWindowsCopy.body : t.downloads.windowsBody)}</p>
               <div class="download-actions">
-                <a class="button button-dark download-link" href="/download/windows" data-platform="windows">${html(liveWindowsCopy.exeButton)}</a>
-                <a class="button button-secondary download-link" href="/download/windows-msi" data-platform="windows-msi">${html(liveWindowsCopy.msiButton)}</a>
+                <a class="button button-dark download-link" href="${attr(downloadUrl("windows", "downloads_windows_exe"))}"${downloadData("windows", "downloads_windows_exe")}>${html(liveWindowsCopy.exeButton)}</a>
+                <a class="button button-secondary download-link" href="${attr(downloadUrl("windows", "downloads_windows_msi", { artifact: "msi" }))}"${downloadData("windows", "downloads_windows_msi", { artifact: "msi" })}>${html(liveWindowsCopy.msiButton)}</a>
               </div>
               <p class="download-note">${html(liveWindowsCopy.note(release.version))}</p>
             </article>` : ""}
@@ -3190,9 +3341,360 @@ function renderDownloadsJson() {
   )}\n`;
 }
 
+const LLMS_LABELS = {
+  en: {
+    title: "Dictivo",
+    summary:
+      "Dictivo is a local-first Mac dictation app. Local mode keeps audio on the device, while optional Cloud Fast can be used when speed matters more than keeping audio local.",
+    pagesTitle: "Important pages",
+    audiencesTitle: "Who Dictivo is for",
+    factsTitle: "Key facts",
+    pageLabels: {
+      home: "Home",
+      pricing: "Pricing",
+      privacy: "Privacy",
+      cloudFast: "Cloud Fast",
+      downloads: "Downloads",
+      macGuide: "Mac model guide",
+      privacyProof: "Privacy proof",
+      compare: "Compare alternatives",
+      contact: "Contact support",
+      refunds: "Refunds",
+    },
+    audiences: [
+      "People who dictate private notes, client work, meeting notes, research notes, or long-form writing on a Mac.",
+      "Buyers comparing local dictation apps, cloud dictation apps, file transcription tools, and Apple's built-in Dictation.",
+      "Users who want a free tiny local mode, a 14-day full Local trial, and optional Cloud Fast minutes.",
+    ],
+    facts: [
+      "The public Mac download is the primary launch path today.",
+      "Windows builds can still receive updates, but public Windows downloads are hidden until that version is ready for broader launch.",
+      "Local mode and Cloud Fast are separate choices in the app, so users can keep sensitive audio local and use Cloud Fast only when they decide it is appropriate.",
+      "Support is available at support@dictivo.app.",
+    ],
+  },
+  de: {
+    title: "Dictivo",
+    summary:
+      "Dictivo ist eine lokal ausgerichtete Diktier-App fur den Mac. Der lokale Modus behalt Audio auf dem Gerat; optionales Cloud Fast ist fur Situationen gedacht, in denen Geschwindigkeit wichtiger ist.",
+    pagesTitle: "Wichtige Seiten",
+    audiencesTitle: "Fur wen Dictivo gedacht ist",
+    factsTitle: "Wichtige Fakten",
+    pageLabels: {
+      home: "Startseite",
+      pricing: "Preise",
+      privacy: "Privatsphare",
+      cloudFast: "Cloud Fast",
+      downloads: "Downloads",
+      macGuide: "Mac-Modellberater",
+      privacyProof: "Privacy proof",
+      compare: "Alternativen vergleichen",
+      contact: "Support kontaktieren",
+      refunds: "Ruckerstattungen",
+    },
+    audiences: [
+      "Menschen, die private Notizen, Kundenarbeit, Meeting-Notizen, Recherche oder lange Texte auf dem Mac diktieren.",
+      "Kaufer, die lokale Diktier-Apps, Cloud-Diktat, Datei-Transkription und Apples integrierte Diktierfunktion vergleichen.",
+      "Nutzer, die einen kleinen kostenlosen lokalen Modus, eine 14-tagige volle Local-Testphase und optionale Cloud-Fast-Minuten mochten.",
+    ],
+    facts: [
+      "Der offentliche Mac-Download ist aktuell der wichtigste Launch-Pfad.",
+      "Windows-Builds konnen weiter Updates erhalten, aber neue offentliche Windows-Downloads bleiben verborgen, bis diese Version breit genug ist.",
+      "Local und Cloud Fast sind getrennte Entscheidungen in der App.",
+      "Support ist unter support@dictivo.app erreichbar.",
+    ],
+  },
+  fr: {
+    title: "Dictivo",
+    summary:
+      "Dictivo est une app de dictee Mac pensee d'abord pour le local. Le mode Local garde l'audio sur l'appareil; Cloud Fast reste optionnel quand la vitesse compte davantage.",
+    pagesTitle: "Pages importantes",
+    audiencesTitle: "A qui s'adresse Dictivo",
+    factsTitle: "Points cles",
+    pageLabels: {
+      home: "Accueil",
+      pricing: "Tarifs",
+      privacy: "Confidentialite",
+      cloudFast: "Cloud Fast",
+      downloads: "Telechargements",
+      macGuide: "Guide des Mac",
+      privacyProof: "Preuve de confidentialite",
+      compare: "Comparer les alternatives",
+      contact: "Contacter le support",
+      refunds: "Remboursements",
+    },
+    audiences: [
+      "Les personnes qui dictent des notes privees, du travail client, des comptes rendus, de la recherche ou des textes longs sur Mac.",
+      "Les acheteurs qui comparent les apps de dictee locale, les apps cloud, les outils de transcription de fichiers et la dictee integree d'Apple.",
+      "Les utilisateurs qui veulent un petit mode local gratuit, un essai Local complet de 14 jours et des minutes Cloud Fast optionnelles.",
+    ],
+    facts: [
+      "Le telechargement Mac public est le principal canal de lancement aujourd'hui.",
+      "Les versions Windows peuvent recevoir les mises a jour, mais les nouveaux telechargements Windows publics restent caches jusqu'a une disponibilite plus large.",
+      "Local et Cloud Fast sont des choix separes dans l'app.",
+      "Le support est disponible a support@dictivo.app.",
+    ],
+  },
+  es: {
+    title: "Dictivo",
+    summary:
+      "Dictivo es una app de dictado para Mac con prioridad local. El modo Local mantiene el audio en el dispositivo; Cloud Fast es opcional cuando la velocidad importa mas.",
+    pagesTitle: "Paginas importantes",
+    audiencesTitle: "Para quien es Dictivo",
+    factsTitle: "Datos clave",
+    pageLabels: {
+      home: "Inicio",
+      pricing: "Precios",
+      privacy: "Privacidad",
+      cloudFast: "Cloud Fast",
+      downloads: "Descargas",
+      macGuide: "Guia de modelos Mac",
+      privacyProof: "Prueba de privacidad",
+      compare: "Comparar alternativas",
+      contact: "Contactar soporte",
+      refunds: "Reembolsos",
+    },
+    audiences: [
+      "Personas que dictan notas privadas, trabajo de clientes, notas de reuniones, investigacion o textos largos en Mac.",
+      "Compradores que comparan apps de dictado local, dictado en la nube, transcripcion de archivos y Dictado de Apple.",
+      "Usuarios que quieren un modo local pequeno gratis, una prueba Local completa de 14 dias y minutos opcionales de Cloud Fast.",
+    ],
+    facts: [
+      "La descarga publica para Mac es el canal principal de lanzamiento hoy.",
+      "Las builds de Windows pueden recibir actualizaciones, pero las nuevas descargas publicas de Windows siguen ocultas hasta que esa version este lista para mas usuarios.",
+      "Local y Cloud Fast son decisiones separadas dentro de la app.",
+      "El soporte esta disponible en support@dictivo.app.",
+    ],
+  },
+  it: {
+    title: "Dictivo",
+    summary:
+      "Dictivo e un'app di dettatura per Mac con approccio local-first. Il modo Local mantiene l'audio sul dispositivo; Cloud Fast e opzionale quando la velocita conta di piu.",
+    pagesTitle: "Pagine importanti",
+    audiencesTitle: "Per chi e Dictivo",
+    factsTitle: "Fatti chiave",
+    pageLabels: {
+      home: "Home",
+      pricing: "Prezzi",
+      privacy: "Privacy",
+      cloudFast: "Cloud Fast",
+      downloads: "Download",
+      macGuide: "Guida ai modelli Mac",
+      privacyProof: "Prova privacy",
+      compare: "Confronta alternative",
+      contact: "Contatta il supporto",
+      refunds: "Rimborsi",
+    },
+    audiences: [
+      "Persone che dettano note private, lavoro per clienti, appunti di riunioni, ricerca o testi lunghi su Mac.",
+      "Acquirenti che confrontano app di dettatura locale, app cloud, strumenti di trascrizione file e Dettatura di Apple.",
+      "Utenti che vogliono una piccola modalita locale gratuita, una prova Local completa di 14 giorni e minuti Cloud Fast opzionali.",
+    ],
+    facts: [
+      "Il download pubblico per Mac e oggi il principale percorso di lancio.",
+      "Le build Windows possono ricevere aggiornamenti, ma i nuovi download pubblici per Windows restano nascosti finche la versione non sara pronta per un lancio piu ampio.",
+      "Local e Cloud Fast sono scelte separate nell'app.",
+      "Il supporto e disponibile a support@dictivo.app.",
+    ],
+  },
+  nl: {
+    title: "Dictivo",
+    summary:
+      "Dictivo is een local-first dicteerapp voor Mac. De Local-modus houdt audio op het apparaat; Cloud Fast is optioneel wanneer snelheid belangrijker is.",
+    pagesTitle: "Belangrijke pagina's",
+    audiencesTitle: "Voor wie Dictivo is",
+    factsTitle: "Kernpunten",
+    pageLabels: {
+      home: "Home",
+      pricing: "Prijzen",
+      privacy: "Privacy",
+      cloudFast: "Cloud Fast",
+      downloads: "Downloads",
+      macGuide: "Mac-modelgids",
+      privacyProof: "Privacybewijs",
+      compare: "Alternatieven vergelijken",
+      contact: "Support contacteren",
+      refunds: "Terugbetalingen",
+    },
+    audiences: [
+      "Mensen die prive-notities, klantwerk, vergadernotities, onderzoek of lange teksten op Mac dicteren.",
+      "Kopers die lokale dicteerapps, cloud-dictaat, bestandstranscriptie en Apple's ingebouwde Dictation vergelijken.",
+      "Gebruikers die een kleine gratis lokale modus, een volledige Local-proef van 14 dagen en optionele Cloud Fast-minuten willen.",
+    ],
+    facts: [
+      "De openbare Mac-download is vandaag het belangrijkste lanceringstraject.",
+      "Windows-builds kunnen updates blijven ontvangen, maar nieuwe openbare Windows-downloads blijven verborgen tot die versie klaar is voor bredere lancering.",
+      "Local en Cloud Fast zijn aparte keuzes in de app.",
+      "Support is bereikbaar via support@dictivo.app.",
+    ],
+  },
+  pt: {
+    title: "Dictivo",
+    summary:
+      "Dictivo e um app de ditado para Mac com prioridade local. O modo Local mantem o audio no dispositivo; Cloud Fast e opcional quando velocidade importa mais.",
+    pagesTitle: "Paginas importantes",
+    audiencesTitle: "Para quem e o Dictivo",
+    factsTitle: "Fatos principais",
+    pageLabels: {
+      home: "Inicio",
+      pricing: "Precos",
+      privacy: "Privacidade",
+      cloudFast: "Cloud Fast",
+      downloads: "Downloads",
+      macGuide: "Guia de modelos Mac",
+      privacyProof: "Prova de privacidade",
+      compare: "Comparar alternativas",
+      contact: "Contatar suporte",
+      refunds: "Reembolsos",
+    },
+    audiences: [
+      "Pessoas que ditam notas privadas, trabalho de clientes, notas de reuniao, pesquisa ou textos longos no Mac.",
+      "Compradores que comparam apps de ditado local, ditado na nuvem, transcricao de arquivos e o Dictation da Apple.",
+      "Usuarios que querem um pequeno modo local gratis, um teste Local completo de 14 dias e minutos Cloud Fast opcionais.",
+    ],
+    facts: [
+      "O download publico para Mac e hoje o principal caminho de lancamento.",
+      "Builds do Windows ainda podem receber atualizacoes, mas novos downloads publicos do Windows ficam ocultos ate essa versao estar pronta para um lancamento mais amplo.",
+      "Local e Cloud Fast sao escolhas separadas dentro do app.",
+      "O suporte esta disponivel em support@dictivo.app.",
+    ],
+  },
+  zh: {
+    title: "Dictivo",
+    summary:
+      "Dictivo 是一款本地优先的 Mac 听写应用。Local 模式把音频留在本机；当用户更看重速度时，可以选择 Cloud Fast。",
+    pagesTitle: "重要页面",
+    audiencesTitle: "Dictivo 适合谁",
+    factsTitle: "关键信息",
+    pageLabels: {
+      home: "首页",
+      pricing: "价格",
+      privacy: "隐私",
+      cloudFast: "Cloud Fast",
+      downloads: "下载",
+      macGuide: "Mac 机型指南",
+      privacyProof: "隐私说明",
+      compare: "对比替代品",
+      contact: "联系支持",
+      refunds: "退款",
+    },
+    audiences: [
+      "在 Mac 上听写私人笔记、客户工作、会议记录、研究笔记或长文的人。",
+      "正在比较本地听写、云端听写、文件转录工具和 Apple 内置听写的购买者。",
+      "想要长期免费的 Tiny 本地模式、14 天完整 Local 试用和可选 Cloud Fast 分钟数的用户。",
+    ],
+    facts: [
+      "当前公开发布以 Mac 下载为主。",
+      "Windows 版本仍可接收更新，但新的公开 Windows 下载会等到该版本更成熟后再开放。",
+      "Local 和 Cloud Fast 是应用里的两个独立选择。",
+      "售后支持邮箱是 support@dictivo.app。",
+    ],
+  },
+  ja: {
+    title: "Dictivo",
+    summary:
+      "Dictivo はローカル優先の Mac 向け音声入力アプリです。Local モードでは音声を端末内に残し、速度を優先したい場面では任意で Cloud Fast を使えます。",
+    pagesTitle: "重要なページ",
+    audiencesTitle: "Dictivo が向いている人",
+    factsTitle: "主な情報",
+    pageLabels: {
+      home: "ホーム",
+      pricing: "価格",
+      privacy: "プライバシー",
+      cloudFast: "Cloud Fast",
+      downloads: "ダウンロード",
+      macGuide: "Mac モデルガイド",
+      privacyProof: "プライバシー説明",
+      compare: "代替アプリ比較",
+      contact: "サポートに連絡",
+      refunds: "返金",
+    },
+    audiences: [
+      "Mac で個人的なメモ、クライアントワーク、会議メモ、調査メモ、長文を音声入力する人。",
+      "ローカル音声入力、クラウド音声入力、ファイル文字起こし、Apple の内蔵音声入力を比較している購入者。",
+      "小さな無料ローカルモード、14 日間の完全 Local トライアル、任意の Cloud Fast 分数が欲しいユーザー。",
+    ],
+    facts: [
+      "現在の公開ローンチは Mac ダウンロードが中心です。",
+      "Windows ビルドは更新を受け取れますが、新規の公開 Windows ダウンロードは広く出せる状態になるまで非表示です。",
+      "Local と Cloud Fast はアプリ内で別々に選べます。",
+      "サポートは support@dictivo.app で受け付けています。",
+    ],
+  },
+  ko: {
+    title: "Dictivo",
+    summary:
+      "Dictivo는 로컬 우선 Mac 받아쓰기 앱입니다. Local 모드는 오디오를 기기에 남기고, 속도가 더 중요할 때 선택적으로 Cloud Fast를 사용할 수 있습니다.",
+    pagesTitle: "중요 페이지",
+    audiencesTitle: "Dictivo가 맞는 사용자",
+    factsTitle: "핵심 정보",
+    pageLabels: {
+      home: "홈",
+      pricing: "가격",
+      privacy: "개인정보",
+      cloudFast: "Cloud Fast",
+      downloads: "다운로드",
+      macGuide: "Mac 모델 가이드",
+      privacyProof: "개인정보 설명",
+      compare: "대안 비교",
+      contact: "지원 문의",
+      refunds: "환불",
+    },
+    audiences: [
+      "Mac에서 개인 메모, 고객 업무, 회의 메모, 리서치 메모, 긴 글을 받아쓰는 사람.",
+      "로컬 받아쓰기 앱, 클라우드 받아쓰기, 파일 전사 도구, Apple 기본 받아쓰기를 비교하는 구매자.",
+      "작은 무료 로컬 모드, 14일 전체 Local 체험, 선택형 Cloud Fast 시간을 원하는 사용자.",
+    ],
+    facts: [
+      "현재 공개 출시는 Mac 다운로드가 중심입니다.",
+      "Windows 빌드는 계속 업데이트를 받을 수 있지만, 신규 공개 Windows 다운로드는 더 넓은 출시 준비가 될 때까지 숨겨져 있습니다.",
+      "Local과 Cloud Fast는 앱 안에서 따로 선택할 수 있습니다.",
+      "지원은 support@dictivo.app 으로 받을 수 있습니다.",
+    ],
+  },
+};
+
+function llmsCopy(currentCode = "en") {
+  return LLMS_LABELS[currentCode] || LLMS_LABELS.en;
+}
+
+function renderLlmsTxt(currentCode = "en") {
+  const copy = llmsCopy(currentCode);
+  const pages = [
+    [copy.pageLabels.home, localeUrl(currentCode)],
+    [copy.pageLabels.pricing, `${localeUrl(currentCode)}#pricing`],
+    [copy.pageLabels.privacy, `${localeUrl(currentCode)}#privacy`],
+    [copy.pageLabels.cloudFast, `${localeUrl(currentCode)}#cloud-fast`],
+    [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
+    [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
+    [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
+    [copy.pageLabels.compare, localizedCompareUrl(currentCode)],
+    [copy.pageLabels.contact, `${BASE_URL}/contact/`],
+    [copy.pageLabels.refunds, `${BASE_URL}/refund/`],
+  ];
+
+  return `# ${copy.title}
+
+${copy.summary}
+
+## ${copy.pagesTitle}
+
+${pages.map(([label, url]) => `- ${label}: ${url}`).join("\n")}
+
+## ${copy.audiencesTitle}
+
+${copy.audiences.map((item) => `- ${item}`).join("\n")}
+
+## ${copy.factsTitle}
+
+${copy.facts.map((item) => `- ${item}`).join("\n")}
+`;
+}
+
 function renderRedirects() {
-  const windowsExeUrl = hasWindowsRelease ? windowsRelease.exe.url : "/#downloads";
-  const windowsMsiUrl = hasWindowsRelease ? windowsRelease.msi.url : "/#downloads";
+  const macDownloadRedirect = downloadUrl("macos", "legacy_mac_route");
+  const windowsExeUrl = hasWindowsRelease ? downloadUrl("windows", "legacy_windows_route") : "/#downloads";
+  const windowsMsiUrl = hasWindowsRelease ? downloadUrl("windows", "legacy_windows_msi", { artifact: "msi" }) : "/#downloads";
   return `/data/* /404.html 404
 /scripts/* /404.html 404
 /tmp/* /404.html 404
@@ -3202,12 +3704,26 @@ function renderRedirects() {
 /.github/* /404.html 404
 /cloud-fast /#cloud-fast 302
 /cloud-fast.html /#cloud-fast 302
-/download/mac ${release.dmg.url} 302
+/download/mac ${macDownloadRedirect} 302
 /download/windows ${windowsExeUrl} 302
 /download/windows-msi ${windowsMsiUrl} 302
-/downloads/Dictivo-macOS-universal.dmg ${release.dmg.url} 302
+/downloads/Dictivo-macOS-universal.dmg ${macDownloadRedirect} 302
 /downloads/Dictivo-Windows-x64.exe ${windowsExeUrl} 302
 /downloads/Dictivo-Windows-x64.msi ${windowsMsiUrl} 302
+/privacy /privacy/ 301
+/privacy.html /privacy/ 301
+/terms /terms/ 301
+/terms.html /terms/ 301
+/refund /refund/ 301
+/refund.html /refund/ 301
+/contact /contact/ 301
+/contact.html /contact/ 301
+/about /about/ 301
+/about.html /about/ 301
+/security /security/ 301
+/security.html /security/ 301
+/changelog /changelog/ 301
+/changelog.html /changelog/ 301
 /checkout/local ${localCheckoutTarget} 302
 /checkout/cloud-fast ${cloudFastCheckoutTarget} 302
 `;
@@ -3316,6 +3832,134 @@ function renderTrustPage(page) {
 `;
 }
 
+function privacyProofCopy(currentCode = "en") {
+  return PRIVACY_PROOF_COPY[currentCode] || PRIVACY_PROOF_COPY.en;
+}
+
+function renderPrivacyProofSchema(currentCode, copy) {
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: copy.title,
+      url: privacyProofUrl(currentCode),
+      description: copy.metaDescription,
+      dateModified: PRIVACY_PROOF_LASTMOD,
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      about: [
+        "local dictation",
+        "desktop privacy",
+        "speech to text",
+        "Cloud Fast",
+        "Mac dictation app",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: privacyProofUrl(currentCode) },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderPrivacyProofPage(currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  const t = homeCopyForRender(currentCode);
+  const copy = privacyProofCopy(currentCode);
+  const sectionHtml = copy.sections
+    .map(
+      (section, index) => `<section class="doc-section" aria-labelledby="${attr(`privacy-proof-${index + 1}`)}">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="${attr(`privacy-proof-${index + 1}`)}">${html(section.title)}</h2>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${section.bullets ? `<ul>
+          ${section.bullets.map((item) => `<li>${html(item)}</li>`).join("\n          ")}
+        </ul>` : ""}
+      </section>`,
+    )
+    .join("\n\n      ");
+  const faqHtml = copy.faqs
+    .map(
+      ([question, answer], index) => `<details class="faq-item">
+          <summary>
+            <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+            <span class="faq-question">${html(question)}</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p class="faq-answer-body">${html(answer)}</p>
+          </div>
+        </details>`,
+    )
+    .join("\n        ");
+
+  return `<!doctype html>
+<html lang="${attr(locale.htmlLang)}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    <meta property="og:title" content="${attr(copy.metaTitle)}" />
+    <meta property="og:description" content="${attr(copy.metaDescription)}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="${attr(privacyProofUrl(currentCode))}" />
+    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${privacyProofHreflangTags(currentCode)}
+    ${assetTags()}
+    ${renderPrivacyProofSchema(currentCode, copy)}
+  </head>
+  <body>
+    <a class="skip-link" href="#privacy-proof">${html(copy.navLabel)}</a>
+    ${renderHeader(currentCode, t, { hrefForLocale: (item) => privacyProofPath(item.code) })}
+    <main class="doc-page" id="privacy-proof">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+
+      <section class="doc-section" aria-labelledby="privacy-proof-answer">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="privacy-proof-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      ${sectionHtml}
+
+      <section class="doc-section" aria-labelledby="privacy-proof-faq">
+        <p class="doc-meta">FAQ</p>
+        <h2 id="privacy-proof-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+        ${faqHtml}
+        </div>
+      </section>
+    </main>
+    ${renderFooterOnly(currentCode)}
+  </body>
+</html>
+`;
+}
+
 function renderSitemap() {
   const alternates = LOCALES.map(
     (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localeUrl(locale.code)}" />`,
@@ -3341,6 +3985,19 @@ ${xDefault}
 ${macGuideAlternates}
 ${macGuideXDefault}
     <priority>${locale.code === "en" ? "0.8" : "0.75"}</priority>
+  </url>`,
+  ).join("\n");
+  const privacyProofAlternates = LOCALES.map(
+    (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${privacyProofUrl(locale.code)}" />`,
+  ).join("\n");
+  const privacyProofXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${privacyProofUrl("en")}" />`;
+  const privacyProofEntries = LOCALES.map(
+    (locale) => `  <url>
+    <loc>${privacyProofUrl(locale.code)}</loc>
+    <lastmod>${PRIVACY_PROOF_LASTMOD}</lastmod>
+${privacyProofAlternates}
+${privacyProofXDefault}
+    <priority>${locale.code === "en" ? "0.85" : "0.8"}</priority>
   </url>`,
   ).join("\n");
   const compareEntry = (code, slug = "", priority = "0.7") => {
@@ -3374,15 +4031,16 @@ ${compareXDefault}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${homepageEntries}
 ${macGuideEntries}
+${privacyProofEntries}
 ${compareEntries}
 ${trustEntries}
   <url>
-    <loc>${BASE_URL}/changelog</loc>
+    <loc>${BASE_URL}/changelog/</loc>
     <lastmod>${release.updatedAt}</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>${BASE_URL}/security</loc>
+    <loc>${BASE_URL}/security/</loc>
     <lastmod>${release.updatedAt}</lastmod>
     <priority>0.6</priority>
   </url>
@@ -3402,9 +4060,9 @@ function renderChangelog() {
     <meta property="og:title" content="Dictivo · Changelog" />
     <meta property="og:description" content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="${BASE_URL}/changelog" />
+    <meta property="og:url" content="${BASE_URL}/changelog/" />
     <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
-    <link rel="canonical" href="${BASE_URL}/changelog" />
+    <link rel="canonical" href="${BASE_URL}/changelog/" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -3630,10 +4288,13 @@ copyStatic("assets");
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
 copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));
+write("security/index.html", readFileSync(resolve(root, "security.html"), "utf8"));
 
 for (const locale of LOCALES) {
   write(locale.code === "en" ? "index.html" : `${locale.code}/index.html`, renderHome(locale.code));
   write(locale.code === "en" ? "mac-model-guide/index.html" : `${locale.code}/mac-model-guide/index.html`, renderMacModelGuidePage(locale.code));
+  write(locale.code === "en" ? "privacy-proof/index.html" : `${locale.code}/privacy-proof/index.html`, renderPrivacyProofPage(locale.code));
+  write(locale.code === "en" ? "llms.txt" : `${locale.code}/llms.txt`, renderLlmsTxt(locale.code));
 }
 
 for (const locale of LOCALES) {
@@ -3648,8 +4309,9 @@ write("downloads.json", renderDownloadsJson());
 write("_redirects", renderRedirects());
 write("sitemap.xml", renderSitemap());
 write("changelog.html", renderChangelog());
+write("changelog/index.html", renderChangelog());
 for (const page of TRUST_PAGES) {
   write(`${page.slug}.html`, renderTrustPage(page));
+  write(`${page.slug}/index.html`, renderTrustPage(page));
 }
 write("404.html", renderNotFound());
-writeLegacyPrivateTombstones();

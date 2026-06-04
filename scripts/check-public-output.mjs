@@ -122,6 +122,37 @@ const publicWindowsLaunchContent = [
 ];
 const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html"];
 const requiredTrustFiles = ["privacy.html", "terms.html", "refund.html", "contact.html", "about.html"];
+const requiredCleanTrustFiles = [
+  "privacy/index.html",
+  "terms/index.html",
+  "refund/index.html",
+  "contact/index.html",
+  "about/index.html",
+  "security/index.html",
+  "changelog/index.html",
+];
+const requiredGeoFiles = [
+  "llms.txt",
+  "de/llms.txt",
+  "fr/llms.txt",
+  "es/llms.txt",
+  "it/llms.txt",
+  "nl/llms.txt",
+  "pt/llms.txt",
+  "zh/llms.txt",
+  "ja/llms.txt",
+  "ko/llms.txt",
+  "privacy-proof/index.html",
+  "de/privacy-proof/index.html",
+  "fr/privacy-proof/index.html",
+  "es/privacy-proof/index.html",
+  "it/privacy-proof/index.html",
+  "nl/privacy-proof/index.html",
+  "pt/privacy-proof/index.html",
+  "zh/privacy-proof/index.html",
+  "ja/privacy-proof/index.html",
+  "ko/privacy-proof/index.html",
+];
 
 function extension(file) {
   const index = file.lastIndexOf(".");
@@ -153,9 +184,21 @@ for (const file of requiredTrustFiles) {
   }
 }
 
+for (const file of requiredCleanTrustFiles) {
+  if (!existsSync(resolve(publicRoot, file))) {
+    failures.push(`${file}: required clean trust page is missing`);
+  }
+}
+
+for (const file of requiredGeoFiles) {
+  if (!existsSync(resolve(publicRoot, file))) {
+    failures.push(`${file}: required GEO page is missing`);
+  }
+}
+
 for (const file of listFiles()) {
   if (isLegacyTombstone(file)) {
-    verifyTombstone(file);
+    failures.push(`${file}: legacy private path must not be published`);
     continue;
   }
   if (!textExtensions.has(extension(file))) continue;
