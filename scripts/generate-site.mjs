@@ -16,6 +16,7 @@ const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
 const DOWNLOAD_API_BASE_URL = (process.env.DICTIVO_DOWNLOAD_API_BASE_URL || "https://api.dictivo.app").replace(/\/$/, "");
+const GOOGLE_SITE_VERIFICATION = "8-r56qWU5Uh_14BGcUVEGzUfsksmFWeadloEM-iv9zE";
 const windowsRelease = release.windows || null;
 const hasWindowsArtifacts = Boolean(windowsRelease?.exe?.url && windowsRelease?.msi?.url);
 const hasWindowsRelease = release.publicWindowsDownloads === true && hasWindowsArtifacts;
@@ -2170,6 +2171,7 @@ function compareCopy(code) {
 
 function assetTags() {
   return `
+    <meta name="google-site-verification" content="${attr(GOOGLE_SITE_VERIFICATION)}" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="preload" as="image" href="/assets/dictivo-demo-poster.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
