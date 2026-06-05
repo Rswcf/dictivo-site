@@ -2184,6 +2184,39 @@ function assetTags() {
     <script src="/assets/site.js?v=local" defer></script>`;
 }
 
+const OG_LOCALE_BY_HTML_LANG = {
+  en: "en_US",
+  de: "de_DE",
+  fr: "fr_FR",
+  es: "es_ES",
+  it: "it_IT",
+  nl: "nl_NL",
+  pt: "pt_PT",
+  "zh-Hans": "zh_CN",
+  ja: "ja_JP",
+  ko: "ko_KR",
+};
+
+function socialMeta({ title, description, url, htmlLang = "en", type = "website" }) {
+  const image = `${BASE_URL}/assets/dictivo-demo-poster.jpg`;
+  const ogLocale = OG_LOCALE_BY_HTML_LANG[htmlLang] || "en_US";
+  return [
+    `<meta property="og:site_name" content="Dictivo" />`,
+    `<meta property="og:locale" content="${attr(ogLocale)}" />`,
+    `<meta property="og:title" content="${attr(title)}" />`,
+    `<meta property="og:description" content="${attr(description)}" />`,
+    `<meta property="og:type" content="${attr(type)}" />`,
+    `<meta property="og:url" content="${attr(url)}" />`,
+    `<meta property="og:image" content="${image}" />`,
+    `<meta property="og:image:width" content="1920" />`,
+    `<meta property="og:image:height" content="1080" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${attr(title)}" />`,
+    `<meta name="twitter:description" content="${attr(description)}" />`,
+    `<meta name="twitter:image" content="${image}" />`,
+  ].join("\n    ");
+}
+
 function hreflangTags(currentCode) {
   const alternates = LOCALES.map(
     (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(localeUrl(locale.code))}" />`,
@@ -2645,11 +2678,7 @@ function renderComparePage(page, currentCode = "en") {
     <title>${html(title)}</title>
     <meta name="description" content="${attr(metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(title)}" />
-    <meta property="og:description" content="${attr(metaDescription)}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="${attr(canonical)}" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title, description: metaDescription, url: canonical, htmlLang: locale.htmlLang, type: "article" })}
     ${compareHreflangTags(currentCode, page.slug)}
     ${assetTags()}
     ${renderCompareSchema(page, currentCode)}
@@ -2713,11 +2742,7 @@ function renderCompareHub(currentCode = "en") {
     <title>${html(copy.hubMetaTitle)}</title>
     <meta name="description" content="${attr(copy.hubMetaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(copy.hubMetaTitle)}" />
-    <meta property="og:description" content="${attr(copy.hubMetaDescription)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${attr(canonical)}" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title: copy.hubMetaTitle, description: copy.hubMetaDescription, url: canonical, htmlLang: locale.htmlLang })}
     ${compareHreflangTags(currentCode)}
     ${assetTags()}
     ${renderCompareHubSchema(currentCode)}
@@ -2956,11 +2981,7 @@ function renderMacModelGuidePage(currentCode = "en") {
     <title>${html(copy.pageMetaTitle)}</title>
     <meta name="description" content="${attr(copy.pageMetaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(copy.pageMetaTitle)}" />
-    <meta property="og:description" content="${attr(copy.pageMetaDescription)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${attr(macGuideUrl(currentCode))}" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title: copy.pageMetaTitle, description: copy.pageMetaDescription, url: macGuideUrl(currentCode), htmlLang: locale.htmlLang })}
     ${macGuideHreflangTags(currentCode)}
     ${assetTags()}
     ${renderMacGuideSchema(currentCode)}
@@ -3041,11 +3062,7 @@ function renderHome(currentCode) {
     <title>${html(t.metaTitle)}</title>
     <meta name="description" content="${attr(t.metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(t.hero.title)}" />
-    <meta property="og:description" content="${attr(t.metaDescription)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${attr(localeUrl(currentCode))}" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title: t.metaTitle, description: t.metaDescription, url: localeUrl(currentCode), htmlLang: locale.htmlLang })}
     ${hreflangTags(currentCode)}
     ${assetTags()}
     ${renderSchema(currentCode, t)}
@@ -3815,11 +3832,7 @@ function renderTrustPage(page) {
     <title>${html(page.metaTitle)}</title>
     <meta name="description" content="${attr(page.metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(page.metaTitle)}" />
-    <meta property="og:description" content="${attr(page.metaDescription)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${attr(trustUrl(page.slug))}" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title: page.metaTitle, description: page.metaDescription, url: trustUrl(page.slug), htmlLang: "en" })}
     <link rel="canonical" href="${attr(trustUrl(page.slug))}" />
     ${assetTags()}
     <script type="application/ld+json">${JSON.stringify(schema)}</script>
@@ -3929,11 +3942,7 @@ function renderPrivacyProofPage(currentCode = "en") {
     <title>${html(copy.metaTitle)}</title>
     <meta name="description" content="${attr(copy.metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="${attr(copy.metaTitle)}" />
-    <meta property="og:description" content="${attr(copy.metaDescription)}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="${attr(privacyProofUrl(currentCode))}" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: privacyProofUrl(currentCode), htmlLang: locale.htmlLang, type: "article" })}
     ${privacyProofHreflangTags(currentCode)}
     ${assetTags()}
     ${renderPrivacyProofSchema(currentCode, copy)}
@@ -4065,11 +4074,7 @@ function renderChangelog() {
     <title>Changelog · Dictivo</title>
     <meta name="description" content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast." />
     <meta name="theme-color" content="#0a1110" />
-    <meta property="og:title" content="Dictivo · Changelog" />
-    <meta property="og:description" content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${BASE_URL}/changelog/" />
-    <meta property="og:image" content="${BASE_URL}/assets/dictivo-demo-poster.jpg" />
+    ${socialMeta({ title: "Dictivo · Changelog", description: "Release notes for Dictivo, the local-first dictation app with optional Cloud Fast.", url: `${BASE_URL}/changelog/`, htmlLang: "en" })}
     <link rel="canonical" href="${BASE_URL}/changelog/" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
