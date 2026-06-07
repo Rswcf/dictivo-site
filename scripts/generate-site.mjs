@@ -2745,6 +2745,7 @@ function renderCompareLinks(page, currentCode, copy) {
 
   return `<nav class="compare-resource-links" aria-label="${attr(copy.resourceAria)}">
               <a href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.resourcePricing)}</a>
+              ${currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : ""}
               ${relatedLinks}
             </nav>`;
 }
