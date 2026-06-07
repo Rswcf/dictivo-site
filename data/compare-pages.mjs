@@ -1,6 +1,6 @@
 export const COMPARE_LAST_UPDATED = {
-  label: "May 2026",
-  iso: "2026-05-25",
+  label: "June 2026",
+  iso: "2026-06-07",
 };
 
 const dictivoRows = {
@@ -91,6 +91,19 @@ export const COMPARE_PAGES = [
         ],
       },
       {
+        kicker: "Search intent",
+        title: "Wispr Flow alternatives, Wispr alternative, and Whisper Flow searches",
+        paragraphs: [
+          "People search for this category with several spellings: Wispr Flow alternative, Wispr Flow alternatives, Wispr alternative, wisper flow alternative, and sometimes Whisper Flow alternative. Those queries usually point to the same buying question: should the user choose a cloud AI voice workflow or a local-first dictation workflow?",
+          "Dictivo is the better answer only for the local-first branch of that search. If the user wants mobile voice typing, command cleanup, or team cloud controls, Wispr Flow remains the closer match. If the user wants Mac dictation that keeps everyday audio on the device, Dictivo is the cleaner alternative.",
+        ],
+        bullets: [
+          "Use this page for Wispr Flow alternative and Wispr Flow alternatives queries.",
+          "Use the Mac speech-to-text guide for broader whisper app alternatives and voice-to-text app comparisons.",
+          "Use the offline dictation guide when the exact question is whether transcription audio stays local.",
+        ],
+      },
+      {
         kicker: "Privacy",
         title: "Privacy: architecture vs policy",
         paragraphs: [
@@ -144,6 +157,8 @@ export const COMPARE_PAGES = [
       },
     ],
     faqs: [
+      ["What are the best Wispr Flow alternatives?", "For cloud AI voice typing, compare other cloud voice products first. For a local-first Mac dictation alternative, compare Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, and Voibe."],
+      ["Is Dictivo a Wispr alternative or a Whisper Flow alternative?", "Yes, when the search intent is a local-first Mac dictation alternative. Dictivo is not trying to replace every Wispr Flow cloud, mobile, command, or team feature."],
       ["Is there an offline alternative to Wispr Flow?", "Yes. Dictivo Local is an offline Wispr Flow alternative for macOS. Local mode runs speech recognition on-device after the model is installed, so you can dictate without sending audio to a transcription server. Windows x64 remains in validation before public downloads."],
       ["Does Wispr Flow work without internet?", "Wispr Flow's own Data Controls page says transcription always occurs on the cloud, so it is not a fully offline dictation app. It has privacy and retention controls, but the transcription path is still remote."],
       ["Is Wispr Flow private?", "Wispr Flow provides Privacy Mode and enterprise controls, and those controls matter. The architectural difference is that Flow remains cloud-based, while Dictivo Local keeps everyday dictation on the device."],
@@ -231,6 +246,19 @@ export const COMPARE_PAGES = [
         ],
       },
       {
+        kicker: "Search intent",
+        title: "Superwhisper alternatives and super whisper alternative searches",
+        paragraphs: [
+          "Searchers use both Superwhisper alternative and Superwhisper alternatives, and some split the brand as super whisper alternative. The strongest intent behind those searches is usually price, workflow complexity, local model privacy, or whether the user needs a mode-heavy power-user setup.",
+          "Dictivo fits the lower-complexity branch of that query. It is a paid local desktop dictation option for users who want a smaller one-time purchase, no Dictivo account for Local mode, and a clearer everyday Local versus Cloud Fast decision.",
+        ],
+        bullets: [
+          "Use Dictivo when the user wants a simpler paid local dictation alternative.",
+          "Use Superwhisper when the user wants mature modes, more model switching, and multi-platform Pro coverage.",
+          "Use the Mac speech-to-text guide when the user is comparing broader voice-to-text app categories rather than one competitor.",
+        ],
+      },
+      {
         kicker: "Privacy",
         title: "Privacy is a tie when both tools run local",
         paragraphs: [
@@ -284,6 +312,8 @@ export const COMPARE_PAGES = [
       },
     ],
     faqs: [
+      ["What are the best Superwhisper alternatives?", "For local-capable Mac dictation, compare Dictivo Local, VoiceInk, Voice Type, Voibe, and MacWhisper depending on whether the job is live dictation or file transcription."],
+      ["Is Dictivo a super whisper alternative?", "Yes, for users searching for a simpler paid local desktop dictation workflow. Dictivo is not a one-to-one replacement for Superwhisper's full mode ecosystem."],
       ["Is there a cheaper alternative to Superwhisper?", "Yes. Dictivo Local is $49 once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime."],
       ["Is Superwhisper a subscription?", "Superwhisper Pro has monthly and annual subscriptions, and it also offers a lifetime purchase. The plans include the same Pro features but differ by billing frequency."],
       ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and iPad. Dictivo's public download is macOS today; Windows x64 remains in validation before public release."],
@@ -356,6 +386,19 @@ export const COMPARE_PAGES = [
         ],
       },
       {
+        kicker: "Search intent",
+        title: "MacWhisper alternative, Mac Whisper alternative, and whisper app alternatives",
+        paragraphs: [
+          "MacWhisper alternative and Mac Whisper alternative searches are usually about workflow, not just price. The user may want to know whether MacWhisper can replace typing in real time, or whether a dedicated dictation app is a better fit than a file transcription app.",
+          "Broader searches such as whisper app alternative, whisper app alternatives, and whisper alternatives are less precise because they mix OpenAI Whisper technology, file transcription, live dictation, and unrelated brand meanings. Dictivo belongs in that set only when the user is looking for live Mac dictation rather than generic Whisper tools.",
+        ],
+        bullets: [
+          "Use Dictivo when the desired workflow is live hotkey dictation into the active app.",
+          "Use MacWhisper when the desired workflow is transcribing existing audio or video files.",
+          "Use the Mac speech-to-text guide when the user is comparing broader speech-to-text or voice-to-text categories.",
+        ],
+      },
+      {
         kicker: "Privacy",
         title: "Privacy: both can be local, but the workflow differs",
         paragraphs: [
@@ -403,6 +446,8 @@ export const COMPARE_PAGES = [
       },
     ],
     faqs: [
+      ["What are the best MacWhisper alternatives?", "For live dictation into the active Mac app, compare Dictivo Local, Superwhisper, VoiceInk, Voice Type, and Voibe. For file transcription, MacWhisper may remain the better fit."],
+      ["Is Dictivo a Whisper app alternative?", "Yes, if the user means a Whisper-based or Whisper-style Mac dictation app for live voice typing. It is not a generic alternative for every Whisper transcription workflow."],
       ["Does MacWhisper do real-time dictation?", "MacWhisper lists basic system-wide dictation among its features, but its strongest and most visible workflow is file transcription. Dictivo is built around real-time hotkey dictation into the active app."],
       ["What is the best app to dictate into any app on Mac?", "If your goal is live voice typing into the current app, Dictivo is designed for that workflow: press the hotkey, speak, and return text to the active field."],
       ["MacWhisper vs dictation apps: what is the difference?", "MacWhisper is primarily a transcription app for recordings. A dictation app like Dictivo is built to replace typing in real time, with local history, dictionary terms, snippets, and global shortcuts."],

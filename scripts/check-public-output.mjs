@@ -218,7 +218,7 @@ for (const file of listFiles()) {
     if (isCompareSpokePage(file) && !/class="compare-updated"/.test(body)) {
       failures.push(`${file}: missing visible comparison update marker`);
     }
-    if (isCompareSpokePage(file) && !/datetime="2026-05-25"/.test(body)) {
+    if (isCompareSpokePage(file) && !/datetime="2026-06-07"/.test(body)) {
       failures.push(`${file}: missing comparison update date`);
     }
   }
