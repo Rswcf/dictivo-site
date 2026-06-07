@@ -1,0 +1,100 @@
+export const MEDIA_KIT_LASTMOD = "2026-06-07";
+
+export const MEDIA_KIT_COPY = {
+  navLabel: "Media kit",
+  metaTitle: "Dictivo Media Kit: Local-First Mac Dictation Facts",
+  metaDescription:
+    "Copy-ready Dictivo facts for directories, reviewers, and comparison authors covering Local mode, Cloud Fast, pricing, platform status, and evidence links.",
+  eyebrow: "Media kit",
+  title: "Dictivo media kit",
+  lede:
+    "Use this page when listing, reviewing, or comparing Dictivo. It keeps the product facts narrow, current, and easy to cite.",
+  answerTitle: "Short answer",
+  answer:
+    "Dictivo is a local-first Mac dictation app for people who want hotkey voice typing without making cloud transcription the default. Local mode processes dictation audio on the device after a local model is installed. Optional Cloud Fast is a separate speed path for selected low-sensitivity recordings.",
+  factsTitle: "Product facts",
+  factRows: [
+    ["Product", "Dictivo"],
+    ["Website", "https://dictivo.app/"],
+    ["Category", "Local-first desktop dictation, speech-to-text, Mac productivity"],
+    ["Public platform", "macOS public beta today. Windows x64 is in validation before public downloads."],
+    ["Best fit", "Private everyday dictation into the active desktop app."],
+    ["Not built for", "Meeting recording, call recording, cloud-first collaboration, or regulated compliance claims without separate review."],
+    ["Local mode", "Processes dictation audio on the device and does not require a Dictivo account."],
+    ["Cloud Fast", "Optional speed mode that uploads only the selected recording for remote transcription."],
+    ["Free path", "Tiny Local dictation is free forever. New installs include a 14-day full Local trial."],
+    ["Paid Local", "$49 once, including 12 months of updates. Update renewal is optional after the first year."],
+    ["Cloud Fast price", "$6.99/month for optional Cloud Fast minutes."],
+    ["Support", "support@dictivo.app"],
+  ],
+  copyBlocksTitle: "Copy-ready descriptions",
+  copyBlocks: [
+    ["Tagline", "Private dictation first. Optional Cloud Fast."],
+    ["Short listing", "Dictivo is a local-first Mac dictation app for private hotkey voice typing, with optional Cloud Fast when speed matters more than keeping audio local."],
+    ["Directory description", "Dictivo turns speech into text in the active Mac app. Local mode runs on-device after a local model is installed, while optional Cloud Fast is a separate path for selected low-sensitivity recordings that need faster turnaround."],
+    ["Comparison description", "Dictivo fits users comparing Wispr Flow, Superwhisper, MacWhisper, VoiceInk, and macOS Dictation who want a supported local-first desktop dictation workflow, a one-time Local license, and a clear boundary between Local and Cloud Fast."],
+  ],
+  categoriesTitle: "Suggested directory categories",
+  categories: [
+    "Mac dictation app",
+    "Offline speech-to-text",
+    "Local transcription",
+    "AI productivity",
+    "Privacy tools",
+    "Voice typing",
+    "Writing assistants",
+    "Desktop productivity",
+  ],
+  claimsTitle: "Claim boundaries",
+  claimRows: [
+    ["Use", "Local-first Mac dictation app", "Avoid", "Fully cloudless app in every mode"],
+    ["Use", "Local mode keeps dictation audio on the device", "Avoid", "Dictivo never uses the network"],
+    ["Use", "Optional Cloud Fast uploads selected recordings", "Avoid", "Cloud Fast has the same privacy boundary as Local mode"],
+    ["Use", "macOS public beta; Windows x64 in validation", "Avoid", "Windows is publicly available"],
+    ["Use", "$49 one-time Local license", "Avoid", "Free unlimited full product"],
+    ["Use", "Benchmark method documented", "Avoid", "Unpublished M-series speed claims"],
+    ["Use", "Private-first workflow for sensitive drafts", "Avoid", "HIPAA, legal, medical, or compliance-ready without review"],
+  ],
+  comparisonTitle: "Where Dictivo fits in comparisons",
+  comparisonRows: [
+    ["Wispr Flow", "Use Dictivo as the local-first Mac alternative when audio location and one-time Local pricing matter more than mobile/cloud workflow."],
+    ["Superwhisper", "Use Dictivo as the simpler paid local desktop dictation alternative with a lower one-time Local entry price."],
+    ["MacWhisper", "Compare Dictivo for live dictation into the active app; compare MacWhisper for file transcription workflows."],
+    ["VoiceInk", "Compare Dictivo when guided setup, support, Local vs Cloud Fast clarity, and hardware-aware model tiers matter more than lowest lifetime price."],
+    ["macOS Dictation", "Compare Dictivo when users want local model choice, local history, dictionary terms, snippets, and a clearer Local vs Cloud Fast boundary."],
+  ],
+  linksTitle: "Evidence links",
+  linkRows: [
+    ["Home", "https://dictivo.app/"],
+    ["Mac model guide", "https://dictivo.app/mac-model-guide/"],
+    ["Offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
+    ["Benchmark method", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],
+    ["Audio path answer", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
+    ["Local mode network test", "https://dictivo.app/privacy/local-dictation-network-test/"],
+    ["Privacy proof", "https://dictivo.app/privacy-proof/"],
+    ["Comparisons", "https://dictivo.app/compare/"],
+    ["Contact", "https://dictivo.app/contact/"],
+  ],
+  outreachTitle: "Outreach note",
+  outreach:
+    "If you maintain a list of Mac dictation apps, offline speech-to-text tools, Wispr Flow alternatives, or Superwhisper alternatives, Dictivo is a good fit when the list needs a local-first paid Mac option with a clear Local vs Cloud Fast privacy boundary.",
+  faqTitle: "Media kit questions",
+  faqs: [
+    [
+      "What is the most accurate one-sentence description of Dictivo?",
+      "Dictivo is a local-first Mac dictation app for private hotkey voice typing, with optional Cloud Fast for selected recordings when speed matters more than keeping audio local.",
+    ],
+    [
+      "Can directories list Dictivo as an offline dictation app?",
+      "Yes, if they specify Dictivo Local mode. Local mode processes dictation audio on the device after a local model is installed. Cloud Fast is a separate optional mode.",
+    ],
+    [
+      "Is Dictivo a meeting transcription app?",
+      "No. Dictivo is focused on everyday dictation into the active desktop app. It is not positioned as a meeting recorder or call recorder.",
+    ],
+    [
+      "What should comparison authors not claim?",
+      "Do not claim Windows is publicly available, do not treat Cloud Fast as the same privacy boundary as Local mode, and do not publish hardware benchmark numbers that Dictivo has not published.",
+    ],
+  ],
+};

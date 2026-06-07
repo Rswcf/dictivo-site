@@ -6,6 +6,7 @@ import {
   BENCHMARK_METHOD_GUIDE_LASTMOD,
   BENCHMARK_METHOD_GUIDE_REFERENCES,
 } from "../data/benchmark-method-guide.mjs";
+import { MEDIA_KIT_COPY, MEDIA_KIT_LASTMOD } from "../data/media-kit.mjs";
 import {
   MAC_ADVISOR_COPY,
   MAC_ADVISOR_FAMILIES,
@@ -657,6 +658,14 @@ function benchmarkMethodGuidePath() {
 
 function benchmarkMethodGuideUrl() {
   return absoluteUrl(benchmarkMethodGuidePath());
+}
+
+function mediaKitPath() {
+  return "/media-kit/";
+}
+
+function mediaKitUrl() {
+  return absoluteUrl(mediaKitPath());
 }
 
 function trustPath(slug) {
@@ -2320,6 +2329,15 @@ function benchmarkMethodGuideHreflangTags() {
   ].join("\n    ");
 }
 
+function mediaKitHreflangTags() {
+  const url = mediaKitUrl();
+  return [
+    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
+    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
+    `<link rel="canonical" href="${attr(url)}" />`,
+  ].join("\n    ");
+}
+
 function privacyProofHreflangTags(currentCode) {
   const alternates = LOCALES.map(
     (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(privacyProofUrl(locale.code))}" />`,
@@ -3462,6 +3480,235 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
 `;
 }
 
+function renderMediaKitSchema() {
+  const copy = MEDIA_KIT_COPY;
+  const pageUrl = mediaKitUrl();
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: copy.metaTitle,
+      description: copy.metaDescription,
+      url: pageUrl,
+      inLanguage: "en",
+      dateModified: MEDIA_KIT_LASTMOD,
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      about: {
+        "@type": "SoftwareApplication",
+        name: "Dictivo",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
+        url: BASE_URL,
+        description: copy.answer,
+        offers: [
+          { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
+          { "@type": "Offer", name: "Dictivo Local", price: "49", priceCurrency: "USD" },
+          { "@type": "Offer", name: "Cloud Fast", price: "6.99", priceCurrency: "USD" },
+        ],
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: "en",
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderMediaKitKeyValueTable(caption, rows) {
+  return `<div class="compare-table-wrap">
+            <table class="compare-table">
+              <caption>${html(caption)}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Field</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+${rows
+  .map(
+    ([label, value]) => `                <tr>
+                  <th scope="row">${html(label)}</th>
+                  <td>${html(value)}</td>
+                </tr>`,
+  )
+  .join("\n")}
+              </tbody>
+            </table>
+          </div>`;
+}
+
+function renderMediaKitClaimsTable(copy) {
+  return `<div class="compare-table-wrap">
+            <table class="compare-table">
+              <caption>${html(copy.claimsTitle)}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Use</th>
+                  <th scope="col">Recommended wording</th>
+                  <th scope="col">Avoid</th>
+                  <th scope="col">Risky wording</th>
+                </tr>
+              </thead>
+              <tbody>
+${copy.claimRows
+  .map(
+    ([useLabel, useValue, avoidLabel, avoidValue]) => `                <tr>
+                  <th scope="row">${html(useLabel)}</th>
+                  <td>${html(useValue)}</td>
+                  <th scope="row">${html(avoidLabel)}</th>
+                  <td>${html(avoidValue)}</td>
+                </tr>`,
+  )
+  .join("\n")}
+              </tbody>
+            </table>
+          </div>`;
+}
+
+function renderMediaKitLinks(copy) {
+  return `<div class="compare-table-wrap">
+            <table class="compare-table">
+              <caption>${html(copy.linksTitle)}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Source</th>
+                  <th scope="col">URL</th>
+                </tr>
+              </thead>
+              <tbody>
+${copy.linkRows
+  .map(
+    ([label, url]) => `                <tr>
+                  <th scope="row">${html(label)}</th>
+                  <td><a href="${attr(url)}">${html(url)}</a></td>
+                </tr>`,
+  )
+  .join("\n")}
+              </tbody>
+            </table>
+          </div>`;
+}
+
+function renderMediaKitPage() {
+  const copy = MEDIA_KIT_COPY;
+  const t = homeCopyForRender("en");
+  const canonical = mediaKitUrl();
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
+    ${mediaKitHreflangTags()}
+    ${assetTags()}
+    ${renderMediaKitSchema()}
+  </head>
+  <body>
+    <a class="skip-link" href="#media-kit">${html(copy.navLabel)}</a>
+    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? mediaKitPath() : localePath(item.code)) })}
+    <main class="doc-page offline-guide-page" id="media-kit">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+
+      <section class="doc-section" aria-labelledby="media-kit-answer">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-facts">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-facts">${html(copy.factsTitle)}</h2>
+        ${renderMediaKitKeyValueTable(copy.factsTitle, copy.factRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-copy">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-copy">${html(copy.copyBlocksTitle)}</h2>
+        ${renderMediaKitKeyValueTable(copy.copyBlocksTitle, copy.copyBlocks)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-categories">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-categories">${html(copy.categoriesTitle)}</h2>
+        ${renderDocBullets(copy.categories)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-claims">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-claims">${html(copy.claimsTitle)}</h2>
+        ${renderMediaKitClaimsTable(copy)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-comparisons">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-comparisons">${html(copy.comparisonTitle)}</h2>
+        ${renderMediaKitKeyValueTable(copy.comparisonTitle, copy.comparisonRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-links">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-links">${html(copy.linksTitle)}</h2>
+        ${renderMediaKitLinks(copy)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-outreach">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-outreach">${html(copy.outreachTitle)}</h2>
+        <p>${html(copy.outreach)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="media-kit-faq">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="media-kit-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+          ${copy.faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+    </main>
+    ${renderFooterOnly("en")}
+  </body>
+</html>
+`;
+}
+
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const links = [
@@ -3470,6 +3717,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
     `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
     currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
+    currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
@@ -4321,6 +4569,7 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
     [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
+    [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
     [ui.footer.audioPath, localizedTrustUrl(currentCode, "privacy/where-dictation-audio-goes")],
@@ -4739,6 +4988,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${benchmarkMethodGuideUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const mediaKitEntry = `  <url>
+    <loc>${mediaKitUrl()}</loc>
+    <lastmod>${MEDIA_KIT_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${mediaKitUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${mediaKitUrl()}" />
+    <priority>0.75</priority>
+  </url>`;
   const compareEntry = (code, slug = "", priority = "0.7") => {
     const compareAlternates = LOCALES.map(
       (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localizedCompareUrl(locale.code, slug)}" />`,
@@ -4790,6 +5046,7 @@ ${macGuideEntries}
 ${privacyProofEntries}
 ${offlineGuideEntries}
 ${benchmarkMethodEntry}
+${mediaKitEntry}
 ${compareEntries}
 ${trustEntries}
   <url>
@@ -5062,6 +5319,7 @@ for (const locale of LOCALES) {
 }
 
 write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
+write("media-kit/index.html", renderMediaKitPage());
 
 for (const locale of LOCALES) {
   const compareRoot = locale.code === "en" ? "compare" : `${locale.code}/compare`;
