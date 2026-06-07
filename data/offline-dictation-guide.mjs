@@ -1,6 +1,7 @@
 export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-06-06";
 
 export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
+  ["Dictivo benchmark method", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],
   ["Dictivo audio path", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
   ["Dictivo privacy proof", "https://dictivo.app/privacy-proof/"],
   ["VoiceInk privacy policy", "https://tryvoiceink.com/privacy"],

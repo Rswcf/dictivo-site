@@ -2,6 +2,11 @@ import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync,
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, COMPARE_LAST_UPDATED, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
 import {
+  BENCHMARK_METHOD_GUIDE_COPY,
+  BENCHMARK_METHOD_GUIDE_LASTMOD,
+  BENCHMARK_METHOD_GUIDE_REFERENCES,
+} from "../data/benchmark-method-guide.mjs";
+import {
   MAC_ADVISOR_COPY,
   MAC_ADVISOR_FAMILIES,
   MAC_ADVISOR_LASTMOD,
@@ -644,6 +649,14 @@ function offlineDictationGuidePath(code) {
 
 function offlineDictationGuideUrl(code) {
   return absoluteUrl(offlineDictationGuidePath(code));
+}
+
+function benchmarkMethodGuidePath() {
+  return "/guides/mac-dictation-benchmark-method/";
+}
+
+function benchmarkMethodGuideUrl() {
+  return absoluteUrl(benchmarkMethodGuidePath());
 }
 
 function trustPath(slug) {
@@ -2298,6 +2311,15 @@ function offlineDictationGuideHreflangTags(currentCode) {
   return alternates.join("\n    ");
 }
 
+function benchmarkMethodGuideHreflangTags() {
+  const url = benchmarkMethodGuideUrl();
+  return [
+    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
+    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
+    `<link rel="canonical" href="${attr(url)}" />`,
+  ].join("\n    ");
+}
+
 function privacyProofHreflangTags(currentCode) {
   const alternates = LOCALES.map(
     (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(privacyProofUrl(locale.code))}" />`,
@@ -3088,6 +3110,8 @@ function renderMacModelGuidePage(currentCode = "en") {
             .join("\n")}
         </div>
       </section>
+
+      ${currentCode === "en" ? renderBenchmarkMethodRelatedSection("mac-guide") : ""}
     </main>
     ${renderFooterOnly(currentCode)}
   </body>
@@ -3244,9 +3268,195 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
         </div>
       </section>
 
+      ${currentCode === "en" ? renderBenchmarkMethodRelatedSection("offline-guide") : ""}
+
       ${renderOfflineGuideReferences(copy)}
     </main>
     ${renderFooterOnly(currentCode)}
+  </body>
+</html>
+`;
+}
+
+function renderBenchmarkMethodSchema() {
+  const copy = BENCHMARK_METHOD_GUIDE_COPY;
+  const pageUrl = benchmarkMethodGuideUrl();
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: copy.metaTitle,
+      description: copy.metaDescription,
+      url: pageUrl,
+      inLanguage: "en",
+      datePublished: BENCHMARK_METHOD_GUIDE_LASTMOD,
+      dateModified: BENCHMARK_METHOD_GUIDE_LASTMOD,
+      mainEntityOfPage: pageUrl,
+      publisher: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: "en",
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderBenchmarkMethodTable(caption, headers, rows) {
+  return `<div class="compare-table-wrap">
+            <table class="compare-table">
+              <caption>${html(caption)}</caption>
+              <thead>
+                <tr>
+                  ${headers.map((item) => `<th scope="col">${html(item)}</th>`).join("\n                  ")}
+                </tr>
+              </thead>
+              <tbody>
+${rows
+  .map(
+    (row) => `                <tr>
+                  ${row.map((cell, index) => (index === 0 ? `<th scope="row">${html(cell)}</th>` : `<td>${html(cell)}</td>`)).join("\n                  ")}
+                </tr>`,
+  )
+  .join("\n")}
+              </tbody>
+            </table>
+          </div>`;
+}
+
+function renderBenchmarkMethodSection(section, index) {
+  const id = `benchmark-method-section-${index + 1}`;
+  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+        <p class="doc-meta">${html(section.kicker)}</p>
+        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${renderDocBullets(section.bullets)}
+      </section>`;
+}
+
+function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
+  return `<section class="doc-section" id="${attr(`${sourceId}-benchmark-method`)}" aria-labelledby="${attr(`${sourceId}-benchmark-method-title`)}">
+        <p class="doc-meta">Evidence</p>
+        <h2 id="${attr(`${sourceId}-benchmark-method-title`)}">How Dictivo decides local model fit</h2>
+        <p>Dictivo's Mac model recommendations are backed by a local calibration method that measures real-time factor and maps the result to Fast, Medium, and Quality local model tiers.</p>
+        <p><a href="${attr(benchmarkMethodGuidePath())}">Read the Mac dictation benchmark method</a>.</p>
+      </section>`;
+}
+
+function renderBenchmarkMethodReferences(copy) {
+  return `<section class="doc-section" aria-labelledby="benchmark-method-references">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-references">${html(copy.referencesTitle)}</h2>
+        <ul class="compare-source-list">
+${BENCHMARK_METHOD_GUIDE_REFERENCES.map(
+  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
+).join("\n")}
+        </ul>
+      </section>`;
+}
+
+function renderBenchmarkMethodGuidePage() {
+  const copy = BENCHMARK_METHOD_GUIDE_COPY;
+  const t = homeCopyForRender("en");
+  const canonical = benchmarkMethodGuideUrl();
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
+    ${benchmarkMethodGuideHreflangTags()}
+    ${assetTags()}
+    ${renderBenchmarkMethodSchema()}
+  </head>
+  <body>
+    <a class="skip-link" href="#benchmark-method-guide">${html(copy.navLabel)}</a>
+    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? benchmarkMethodGuidePath() : localePath(item.code)) })}
+    <main class="doc-page offline-guide-page" id="benchmark-method-guide">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+
+      <section class="doc-section" aria-labelledby="benchmark-method-answer">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="benchmark-method-summary">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-summary">${html(copy.summaryTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.summaryTitle, ["Signal", "How Dictivo uses it"], copy.summaryRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="benchmark-method-steps">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-steps">${html(copy.stepsTitle)}</h2>
+        <ol>
+${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
+        </ol>
+      </section>
+
+      <section class="doc-section" aria-labelledby="benchmark-method-tiers">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-tiers">${html(copy.tierTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.tierCaption, copy.tierHeaders, copy.tierRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="benchmark-method-models">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-models">${html(copy.modelTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.modelCaption, copy.modelHeaders, copy.modelRows)}
+      </section>
+
+      ${copy.sections.map(renderBenchmarkMethodSection).join("\n\n      ")}
+
+      <section class="doc-section" aria-labelledby="benchmark-method-faq">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="benchmark-method-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+          ${copy.faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+
+      ${renderBenchmarkMethodReferences(copy)}
+    </main>
+    ${renderFooterOnly("en")}
   </body>
 </html>
 `;
@@ -3259,6 +3469,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
     `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
+    currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
@@ -4109,6 +4320,7 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.cloudFast, `${localeUrl(currentCode)}#cloud-fast`],
     [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
+    [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
     [ui.footer.audioPath, localizedTrustUrl(currentCode, "privacy/where-dictation-audio-goes")],
@@ -4520,6 +4732,13 @@ ${offlineGuideXDefault}
     <priority>${locale.code === "en" ? "0.85" : "0.8"}</priority>
   </url>`,
   ).join("\n");
+  const benchmarkMethodEntry = `  <url>
+    <loc>${benchmarkMethodGuideUrl()}</loc>
+    <lastmod>${BENCHMARK_METHOD_GUIDE_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${benchmarkMethodGuideUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${benchmarkMethodGuideUrl()}" />
+    <priority>0.8</priority>
+  </url>`;
   const compareEntry = (code, slug = "", priority = "0.7") => {
     const compareAlternates = LOCALES.map(
       (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localizedCompareUrl(locale.code, slug)}" />`,
@@ -4570,6 +4789,7 @@ ${homepageEntries}
 ${macGuideEntries}
 ${privacyProofEntries}
 ${offlineGuideEntries}
+${benchmarkMethodEntry}
 ${compareEntries}
 ${trustEntries}
   <url>
@@ -4840,6 +5060,8 @@ for (const locale of LOCALES) {
   );
   write(locale.code === "en" ? "llms.txt" : `${locale.code}/llms.txt`, renderLlmsTxt(locale.code));
 }
+
+write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
 
 for (const locale of LOCALES) {
   const compareRoot = locale.code === "en" ? "compare" : `${locale.code}/compare`;

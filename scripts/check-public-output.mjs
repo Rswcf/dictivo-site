@@ -150,6 +150,7 @@ const requiredGeoFiles = [
   "zh/guides/offline-dictation-on-mac/index.html",
   "ja/guides/offline-dictation-on-mac/index.html",
   "ko/guides/offline-dictation-on-mac/index.html",
+  "guides/mac-dictation-benchmark-method/index.html",
 ];
 
 function extension(file) {
