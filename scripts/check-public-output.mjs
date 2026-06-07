@@ -1,5 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
+import { LOCALES } from "../data/site-content.mjs";
+import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
@@ -42,17 +44,8 @@ const forbiddenContent = [
   /bronnen/i,
   /Quellen/i,
   /事实核对/,
-  /最后更新/,
   /来源/,
   /核对/,
-  /最終更新/,
-  /마지막 업데이트/,
-  /Zuletzt aktualisiert/,
-  /Dernière mise à jour/,
-  /Última actualización/,
-  /Ultimo aggiornamento/,
-  /Laatst bijgewerkt/,
-  /Última atualização/,
   /ソース/,
   /출처/,
   /公開コード/,
@@ -60,22 +53,11 @@ const forbiddenContent = [
   /공개 코드/,
 ];
 const forbiddenCompareContent = [
-  /last updated/i,
   /as of May 25, 2026/i,
   /May 25, 2026/i,
-  /2026-05-25/i,
   /facts re-?checked/i,
   /事实核对/,
-  /最后更新/,
   /核对/,
-  /最終更新/,
-  /마지막 업데이트/,
-  /Zuletzt aktualisiert/,
-  /Dernière mise à jour/,
-  /Última actualización/,
-  /Ultimo aggiornamento/,
-  /Laatst bijgewerkt/,
-  /Última atualização/,
 ];
 const staleWindowsHomeContent = [
   /Windows version coming later/i,
@@ -122,8 +104,14 @@ const publicWindowsLaunchContent = [
 ];
 const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html"];
 const requiredTrustFiles = ["privacy.html", "terms.html", "refund.html", "contact.html", "about.html"];
+const requiredLocalizedTrustFiles = TRUST_PAGES.filter((page) => page.locales).flatMap((page) =>
+  LOCALES.filter((locale) => locale.code !== "en").map((locale) => `${locale.code}/${page.slug}/index.html`),
+);
 const requiredCleanTrustFiles = [
   "privacy/index.html",
+  "privacy/where-dictation-audio-goes/index.html",
+  "privacy/local-dictation-network-test/index.html",
+  ...requiredLocalizedTrustFiles,
   "terms/index.html",
   "refund/index.html",
   "contact/index.html",
@@ -152,6 +140,16 @@ const requiredGeoFiles = [
   "zh/privacy-proof/index.html",
   "ja/privacy-proof/index.html",
   "ko/privacy-proof/index.html",
+  "guides/offline-dictation-on-mac/index.html",
+  "de/guides/offline-dictation-on-mac/index.html",
+  "fr/guides/offline-dictation-on-mac/index.html",
+  "es/guides/offline-dictation-on-mac/index.html",
+  "it/guides/offline-dictation-on-mac/index.html",
+  "nl/guides/offline-dictation-on-mac/index.html",
+  "pt/guides/offline-dictation-on-mac/index.html",
+  "zh/guides/offline-dictation-on-mac/index.html",
+  "ja/guides/offline-dictation-on-mac/index.html",
+  "ko/guides/offline-dictation-on-mac/index.html",
 ];
 
 function extension(file) {
@@ -214,6 +212,12 @@ for (const file of listFiles()) {
         failures.push(`${file}: matched compare-only ${pattern}`);
       }
     }
+    if (isCompareSpokePage(file) && !/class="compare-updated"/.test(body)) {
+      failures.push(`${file}: missing visible comparison update marker`);
+    }
+    if (isCompareSpokePage(file) && !/datetime="2026-05-25"/.test(body)) {
+      failures.push(`${file}: missing comparison update date`);
+    }
   }
   if (hasWindowsRelease && homeFiles.includes(file)) {
     for (const pattern of staleWindowsHomeContent) {
@@ -250,6 +254,10 @@ function isLegacyTombstone(file) {
 
 function isComparePage(file) {
   return file.startsWith("compare/") || file.includes("/compare/");
+}
+
+function isCompareSpokePage(file) {
+  return isComparePage(file) && !file.endsWith("compare/index.html");
 }
 
 function verifyTombstone(file) {

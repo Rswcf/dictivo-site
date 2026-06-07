@@ -8,6 +8,11 @@ import {
   MAC_ADVISOR_MEMORY,
   MAC_ADVISOR_PROFILES,
 } from "../data/mac-model-advisor.mjs";
+import {
+  OFFLINE_DICTATION_GUIDE_COPY,
+  OFFLINE_DICTATION_GUIDE_LASTMOD,
+  OFFLINE_DICTATION_GUIDE_REFERENCES,
+} from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
@@ -632,12 +637,52 @@ function privacyProofUrl(code) {
   return absoluteUrl(privacyProofPath(code));
 }
 
+function offlineDictationGuidePath(code) {
+  if (code === "en") return "/guides/offline-dictation-on-mac/";
+  return `${localeByCode(code).path}guides/offline-dictation-on-mac/`;
+}
+
+function offlineDictationGuideUrl(code) {
+  return absoluteUrl(offlineDictationGuidePath(code));
+}
+
 function trustPath(slug) {
   return `/${slug}/`;
 }
 
 function trustUrl(slug) {
   return absoluteUrl(trustPath(slug));
+}
+
+function hasLocalizedTrustPage(page) {
+  return Boolean(page.locales);
+}
+
+function localizedTrustPath(code, slug) {
+  if (code === "en") return trustPath(slug);
+  return `${localeByCode(code).path}${slug}/`;
+}
+
+function localizedTrustUrl(code, slug) {
+  return absoluteUrl(localizedTrustPath(code, slug));
+}
+
+function localizedTrustPage(page, currentCode = "en") {
+  const localized = currentCode === "en" ? {} : page.locales?.[currentCode] || {};
+  return {
+    ...page,
+    ...localized,
+    slug: page.slug,
+    navLabel: localized.navLabel || page.navLabel,
+    lastModified: localized.lastModified || page.lastModified,
+  };
+}
+
+function localizeTrustHref(href, currentCode = "en") {
+  if (href === "/privacy-proof/") return privacyProofPath(currentCode);
+  const target = TRUST_PAGES.find((page) => href === trustPath(page.slug));
+  if (target && hasLocalizedTrustPage(target)) return localizedTrustPath(currentCode, target.slug);
+  return href;
 }
 
 function fillCompareTemplate(value, page) {
@@ -2244,12 +2289,33 @@ function macGuideHreflangTags(currentCode) {
   return alternates.join("\n    ");
 }
 
+function offlineDictationGuideHreflangTags(currentCode) {
+  const alternates = LOCALES.map(
+    (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(offlineDictationGuideUrl(locale.code))}" />`,
+  );
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${attr(offlineDictationGuideUrl("en"))}" />`);
+  alternates.push(`<link rel="canonical" href="${attr(offlineDictationGuideUrl(currentCode))}" />`);
+  return alternates.join("\n    ");
+}
+
 function privacyProofHreflangTags(currentCode) {
   const alternates = LOCALES.map(
     (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(privacyProofUrl(locale.code))}" />`,
   );
   alternates.push(`<link rel="alternate" hreflang="x-default" href="${attr(privacyProofUrl("en"))}" />`);
   alternates.push(`<link rel="canonical" href="${attr(privacyProofUrl(currentCode))}" />`);
+  return alternates.join("\n    ");
+}
+
+function trustHreflangTags(page, currentCode = "en") {
+  if (!hasLocalizedTrustPage(page)) {
+    return `<link rel="canonical" href="${attr(trustUrl(page.slug))}" />`;
+  }
+  const alternates = LOCALES.map(
+    (locale) => `<link rel="alternate" hreflang="${attr(locale.htmlLang)}" href="${attr(localizedTrustUrl(locale.code, page.slug))}" />`,
+  );
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${attr(localizedTrustUrl("en", page.slug))}" />`);
+  alternates.push(`<link rel="canonical" href="${attr(localizedTrustUrl(currentCode, page.slug))}" />`);
   return alternates.join("\n    ");
 }
 
@@ -2689,6 +2755,7 @@ function renderComparePage(page, currentCode = "en") {
     <main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
+        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(COMPARE_LAST_UPDATED.iso)}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
         ${renderCompareQuickTake(page, copy)}
@@ -3028,17 +3095,178 @@ function renderMacModelGuidePage(currentCode = "en") {
 `;
 }
 
+function offlineDictationGuideCopy(currentCode = "en") {
+  return OFFLINE_DICTATION_GUIDE_COPY[currentCode] || OFFLINE_DICTATION_GUIDE_COPY.en;
+}
+
+function renderOfflineGuideSchema(currentCode = "en") {
+  const copy = offlineDictationGuideCopy(currentCode);
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: copy.metaTitle,
+      description: copy.metaDescription,
+      url: offlineDictationGuideUrl(currentCode),
+      inLanguage: localeByCode(currentCode).htmlLang,
+      dateModified: OFFLINE_DICTATION_GUIDE_LASTMOD,
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: localeByCode(currentCode).htmlLang,
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderOfflineGuideTable(copy) {
+  return `<div class="compare-table-wrap">
+            <table class="compare-table">
+              <caption>${html(copy.tableCaption)}</caption>
+              <thead>
+                <tr>
+                  ${copy.headers.map((item) => `<th scope="col">${html(item)}</th>`).join("\n                  ")}
+                </tr>
+              </thead>
+              <tbody>
+${copy.rows
+  .map(
+    ([app, localAudio, caveat, bestFit]) => `                <tr>
+                  <th scope="row">${html(app)}</th>
+                  <td>${html(localAudio)}</td>
+                  <td>${html(caveat)}</td>
+                  <td>${html(bestFit)}</td>
+                </tr>`,
+  )
+  .join("\n")}
+              </tbody>
+            </table>
+          </div>`;
+}
+
+function renderDocBullets(items) {
+  if (!items?.length) return "";
+  return `<ul>
+${items.map((item) => `            <li>${html(item)}</li>`).join("\n")}
+          </ul>`;
+}
+
+function renderOfflineGuideSection(section, index) {
+  const id = `offline-guide-section-${index + 1}`;
+  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+        <p class="doc-meta">${html(section.kicker)}</p>
+        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${renderDocBullets(section.bullets)}
+      </section>`;
+}
+
+function renderOfflineGuideReferences(copy) {
+  return `<section class="doc-section" aria-labelledby="offline-guide-references">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-guide-references">${html(copy.referenceTitle)}</h2>
+        <ul class="compare-source-list">
+${OFFLINE_DICTATION_GUIDE_REFERENCES.map(
+  ([label, url]) => `          <li><a href="${attr(url)}" rel="nofollow noopener">${html(label)}</a></li>`,
+).join("\n")}
+        </ul>
+      </section>`;
+}
+
+function renderOfflineDictationGuidePage(currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  const t = homeCopyForRender(currentCode);
+  const copy = offlineDictationGuideCopy(currentCode);
+  return `<!doctype html>
+<html lang="${attr(locale.htmlLang)}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: offlineDictationGuideUrl(currentCode), htmlLang: locale.htmlLang, type: "article" })}
+    ${offlineDictationGuideHreflangTags(currentCode)}
+    ${assetTags()}
+    ${renderOfflineGuideSchema(currentCode)}
+  </head>
+  <body>
+    <a class="skip-link" href="#offline-dictation-guide">${html(copy.navLabel)}</a>
+    ${renderHeader(currentCode, t, { hrefForLocale: (item) => offlineDictationGuidePath(item.code) })}
+    <main class="doc-page offline-guide-page" id="offline-dictation-guide">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+
+      <section class="doc-section" aria-labelledby="offline-guide-answer">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-guide-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="offline-guide-table">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-guide-table">${html(copy.tableCaption)}</h2>
+        ${renderOfflineGuideTable(copy)}
+      </section>
+
+      ${copy.sections.map(renderOfflineGuideSection).join("\n\n      ")}
+
+      <section class="doc-section" aria-labelledby="offline-guide-faq">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-guide-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+          ${copy.faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+
+      ${renderOfflineGuideReferences(copy)}
+    </main>
+    ${renderFooterOnly(currentCode)}
+  </body>
+</html>
+`;
+}
+
 function renderHomeFooterLinks(currentCode, t) {
+  const ui = trustUiCopy(currentCode);
   const links = [
-    `<a href="/privacy/">Privacy</a>`,
-    `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || "Privacy proof")}</a>`,
+    `<a href="/privacy/">${html(ui.footer.privacy)}</a>`,
+    `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
+    `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
+    `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
+    `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
-    `<a href="/security/">Security</a>`,
-    `<a href="/terms/">Terms</a>`,
-    `<a href="/refund/">Refunds</a>`,
-    `<a href="/contact/">Contact</a>`,
-    `<a href="/about/">About</a>`,
+    `<a href="/security/">${html(ui.footer.security)}</a>`,
+    `<a href="/terms/">${html(ui.footer.terms)}</a>`,
+    `<a href="/refund/">${html(ui.footer.refunds)}</a>`,
+    `<a href="/contact/">${html(ui.footer.contact)}</a>`,
+    `<a href="/about/">${html(ui.footer.about)}</a>`,
   ].filter(Boolean);
   return links.map((link) => `        ${link}`).join("\n");
 }
@@ -3366,6 +3594,193 @@ function renderDownloadsJson() {
   )}\n`;
 }
 
+const TRUST_UI = {
+  en: {
+    lastUpdated: "Last updated",
+    faq: "FAQ",
+    faqTitle: "Frequently asked questions",
+    related: "Related",
+    relatedTitle: "Related pages",
+    footer: {
+      privacy: "Privacy",
+      audioPath: "Audio path",
+      privacyProof: "Privacy proof",
+      networkTest: "Network test",
+      security: "Security",
+      terms: "Terms",
+      refunds: "Refunds",
+      contact: "Contact",
+      about: "About",
+    },
+  },
+  de: {
+    lastUpdated: "Zuletzt aktualisiert",
+    faq: "FAQ",
+    faqTitle: "Häufige Fragen",
+    related: "Verwandt",
+    relatedTitle: "Verwandte Seiten",
+    footer: {
+      privacy: "Datenschutz",
+      audioPath: "Audio-Weg",
+      privacyProof: "Datenschutznachweis",
+      networkTest: "Netzwerktest",
+      security: "Sicherheit",
+      terms: "Bedingungen",
+      refunds: "Rückerstattungen",
+      contact: "Kontakt",
+      about: "Über Dictivo",
+    },
+  },
+  fr: {
+    lastUpdated: "Dernière mise à jour",
+    faq: "FAQ",
+    faqTitle: "Questions fréquentes",
+    related: "Liens associés",
+    relatedTitle: "Pages associées",
+    footer: {
+      privacy: "Confidentialité",
+      audioPath: "Chemin audio",
+      privacyProof: "Preuve de confidentialité",
+      networkTest: "Test réseau",
+      security: "Sécurité",
+      terms: "Conditions",
+      refunds: "Remboursements",
+      contact: "Contact",
+      about: "À propos",
+    },
+  },
+  es: {
+    lastUpdated: "Última actualización",
+    faq: "FAQ",
+    faqTitle: "Preguntas frecuentes",
+    related: "Relacionado",
+    relatedTitle: "Páginas relacionadas",
+    footer: {
+      privacy: "Privacidad",
+      audioPath: "Ruta de audio",
+      privacyProof: "Prueba de privacidad",
+      networkTest: "Prueba de red",
+      security: "Seguridad",
+      terms: "Términos",
+      refunds: "Reembolsos",
+      contact: "Contacto",
+      about: "Acerca de",
+    },
+  },
+  it: {
+    lastUpdated: "Ultimo aggiornamento",
+    faq: "FAQ",
+    faqTitle: "Domande frequenti",
+    related: "Correlati",
+    relatedTitle: "Pagine correlate",
+    footer: {
+      privacy: "Privacy",
+      audioPath: "Percorso audio",
+      privacyProof: "Prova privacy",
+      networkTest: "Test rete",
+      security: "Sicurezza",
+      terms: "Termini",
+      refunds: "Rimborsi",
+      contact: "Contatti",
+      about: "Informazioni",
+    },
+  },
+  nl: {
+    lastUpdated: "Laatst bijgewerkt",
+    faq: "FAQ",
+    faqTitle: "Veelgestelde vragen",
+    related: "Gerelateerd",
+    relatedTitle: "Gerelateerde pagina's",
+    footer: {
+      privacy: "Privacy",
+      audioPath: "Audiopad",
+      privacyProof: "Privacybewijs",
+      networkTest: "Netwerktest",
+      security: "Beveiliging",
+      terms: "Voorwaarden",
+      refunds: "Terugbetalingen",
+      contact: "Contact",
+      about: "Over",
+    },
+  },
+  pt: {
+    lastUpdated: "Última atualização",
+    faq: "FAQ",
+    faqTitle: "Perguntas frequentes",
+    related: "Relacionado",
+    relatedTitle: "Páginas relacionadas",
+    footer: {
+      privacy: "Privacidade",
+      audioPath: "Caminho do áudio",
+      privacyProof: "Prova de privacidade",
+      networkTest: "Teste de rede",
+      security: "Segurança",
+      terms: "Termos",
+      refunds: "Reembolsos",
+      contact: "Contato",
+      about: "Sobre",
+    },
+  },
+  zh: {
+    lastUpdated: "最后更新",
+    faq: "FAQ",
+    faqTitle: "常见问题",
+    related: "相关",
+    relatedTitle: "相关页面",
+    footer: {
+      privacy: "隐私",
+      audioPath: "音频流向",
+      privacyProof: "隐私说明",
+      networkTest: "网络测试",
+      security: "安全",
+      terms: "条款",
+      refunds: "退款",
+      contact: "联系",
+      about: "关于",
+    },
+  },
+  ja: {
+    lastUpdated: "最終更新",
+    faq: "FAQ",
+    faqTitle: "よくある質問",
+    related: "関連",
+    relatedTitle: "関連ページ",
+    footer: {
+      privacy: "プライバシー",
+      audioPath: "音声の行き先",
+      privacyProof: "プライバシー説明",
+      networkTest: "ネットワークテスト",
+      security: "セキュリティ",
+      terms: "利用規約",
+      refunds: "返金",
+      contact: "問い合わせ",
+      about: "概要",
+    },
+  },
+  ko: {
+    lastUpdated: "마지막 업데이트",
+    faq: "FAQ",
+    faqTitle: "자주 묻는 질문",
+    related: "관련",
+    relatedTitle: "관련 페이지",
+    footer: {
+      privacy: "개인정보",
+      audioPath: "오디오 경로",
+      privacyProof: "개인정보 설명",
+      networkTest: "네트워크 테스트",
+      security: "보안",
+      terms: "약관",
+      refunds: "환불",
+      contact: "문의",
+      about: "소개",
+    },
+  },
+};
+
+function trustUiCopy(currentCode = "en") {
+  return TRUST_UI[currentCode] || TRUST_UI.en;
+}
+
 const LLMS_LABELS = {
   en: {
     title: "Dictivo",
@@ -3685,6 +4100,8 @@ function llmsCopy(currentCode = "en") {
 
 function renderLlmsTxt(currentCode = "en") {
   const copy = llmsCopy(currentCode);
+  const compare = compareCopy(currentCode);
+  const ui = trustUiCopy(currentCode);
   const pages = [
     [copy.pageLabels.home, localeUrl(currentCode)],
     [copy.pageLabels.pricing, `${localeUrl(currentCode)}#pricing`],
@@ -3693,10 +4110,17 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
+    [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
+    [ui.footer.audioPath, localizedTrustUrl(currentCode, "privacy/where-dictation-audio-goes")],
+    [ui.footer.networkTest, localizedTrustUrl(currentCode, "privacy/local-dictation-network-test")],
     [copy.pageLabels.compare, localizedCompareUrl(currentCode)],
     [copy.pageLabels.contact, `${BASE_URL}/contact/`],
     [copy.pageLabels.refunds, `${BASE_URL}/refund/`],
   ];
+  const comparisonPages = COMPARE_PAGES.map((page) => [
+    currentCode === "en" ? page.title.replace(" (2026)", "") : localizedCompareTitle(page, compare),
+    localizedCompareUrl(currentCode, page.slug),
+  ]);
 
   return `# ${copy.title}
 
@@ -3705,6 +4129,10 @@ ${copy.summary}
 ## ${copy.pagesTitle}
 
 ${pages.map(([label, url]) => `- ${label}: ${url}`).join("\n")}
+
+## ${copy.pageLabels.compare}
+
+${comparisonPages.map(([label, url]) => `- ${label}: ${url}`).join("\n")}
 
 ## ${copy.audiencesTitle}
 
@@ -3787,15 +4215,24 @@ function renderNotFound() {
 `;
 }
 
-function renderTrustPage(page) {
-  const t = homeCopyForRender("en");
+function renderTrustPage(sourcePage, currentCode = "en") {
+  const page = localizedTrustPage(sourcePage, currentCode);
+  const locale = localeByCode(currentCode);
+  const t = homeCopyForRender(currentCode);
+  const ui = trustUiCopy(currentCode);
+  const pageUrl = hasLocalizedTrustPage(sourcePage) ? localizedTrustUrl(currentCode, sourcePage.slug) : trustUrl(sourcePage.slug);
+  const pageId = sourcePage.slug.replaceAll("/", "-");
+  const headerOptions = hasLocalizedTrustPage(sourcePage)
+    ? { hrefForLocale: (item) => localizedTrustPath(item.code, sourcePage.slug) }
+    : {};
   const schema = [
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: page.title,
-      url: trustUrl(page.slug),
+      url: pageUrl,
       description: page.metaDescription,
+      inLanguage: locale.htmlLang,
       isPartOf: {
         "@type": "WebSite",
         name: "Dictivo",
@@ -3810,12 +4247,28 @@ function renderTrustPage(page) {
       email: "support@dictivo.app",
     },
   ];
+  if (page.lastModified) schema[0].dateModified = page.lastModified;
+  if (page.faqs?.length) {
+    schema.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: locale.htmlLang,
+      mainEntity: page.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    });
+  }
 
   const sectionHtml = page.sections
     .map(
-      (section, index) => `<section class="doc-section" aria-labelledby="${attr(`${page.slug}-${index + 1}`)}">
+      (section, index) => `<section class="doc-section" aria-labelledby="${attr(`${pageId}-${index + 1}`)}">
         <p class="doc-meta">${html(page.eyebrow)}</p>
-        <h2 id="${attr(`${page.slug}-${index + 1}`)}">${html(section.title)}</h2>
+        <h2 id="${attr(`${pageId}-${index + 1}`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${section.bullets ? `<ul>
           ${section.bullets.map((item) => `<li>${html(item)}</li>`).join("\n          ")}
@@ -3823,31 +4276,68 @@ function renderTrustPage(page) {
       </section>`,
     )
     .join("\n\n      ");
+  const faqHtml = page.faqs?.length
+    ? `<section class="doc-section" aria-labelledby="${attr(`${pageId}-faq`)}">
+        <p class="doc-meta">${html(ui.faq)}</p>
+        <h2 id="${attr(`${pageId}-faq`)}">${html(ui.faqTitle)}</h2>
+        <div class="faq-grid">
+        ${page.faqs
+          .map(
+            ([question, answer], index) => `<details class="faq-item">
+          <summary>
+            <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+            <span class="faq-question">${html(question)}</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p class="faq-answer-body">${html(answer)}</p>
+          </div>
+        </details>`,
+          )
+          .join("\n        ")}
+        </div>
+      </section>`
+    : "";
+  const updatedHtml = page.lastModified
+    ? `<p class="doc-meta">${html(ui.lastUpdated)} <time datetime="${attr(page.lastModified)}">${html(formatLocalizedDate(page.lastModified, currentCode))}</time></p>`
+    : "";
+  const relatedHtml = page.relatedLinks?.length
+    ? `<section class="doc-section" aria-labelledby="${attr(`${pageId}-related`)}">
+        <p class="doc-meta">${html(ui.related)}</p>
+        <h2 id="${attr(`${pageId}-related`)}">${html(ui.relatedTitle)}</h2>
+        <ul>
+          ${page.relatedLinks.map((item) => `<li><a href="${attr(localizeTrustHref(item.href, currentCode))}">${html(item.label)}</a></li>`).join("\n          ")}
+        </ul>
+      </section>`
+    : "";
 
   return `<!doctype html>
-<html lang="en">
+<html lang="${attr(locale.htmlLang)}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${html(page.metaTitle)}</title>
     <meta name="description" content="${attr(page.metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: page.metaTitle, description: page.metaDescription, url: trustUrl(page.slug), htmlLang: "en" })}
-    <link rel="canonical" href="${attr(trustUrl(page.slug))}" />
+    ${socialMeta({ title: page.metaTitle, description: page.metaDescription, url: pageUrl, htmlLang: locale.htmlLang })}
+    ${trustHreflangTags(sourcePage, currentCode)}
     ${assetTags()}
     <script type="application/ld+json">${JSON.stringify(schema)}</script>
   </head>
   <body>
-    <a class="skip-link" href="#${attr(page.slug)}">Skip to ${html(page.eyebrow.toLowerCase())}</a>
-    ${renderHeader("en", t)}
-    <main class="doc-page" id="${attr(page.slug)}">
+    <a class="skip-link" href="#${attr(pageId)}">Skip to ${html(page.eyebrow.toLowerCase())}</a>
+    ${renderHeader(currentCode, t, headerOptions)}
+    <main class="doc-page" id="${attr(pageId)}">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(page.eyebrow)}</span>
       <h1>${html(page.title)}</h1>
       <p class="doc-lede">${html(page.lede)}</p>
+      ${updatedHtml}
 
       ${sectionHtml}
+      ${faqHtml}
+      ${relatedHtml}
     </main>
-    ${renderFooterOnly()}
+    ${renderFooterOnly(currentCode)}
   </body>
 </html>
 `;
@@ -4017,6 +4507,19 @@ ${privacyProofXDefault}
     <priority>${locale.code === "en" ? "0.85" : "0.8"}</priority>
   </url>`,
   ).join("\n");
+  const offlineGuideAlternates = LOCALES.map(
+    (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${offlineDictationGuideUrl(locale.code)}" />`,
+  ).join("\n");
+  const offlineGuideXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationGuideUrl("en")}" />`;
+  const offlineGuideEntries = LOCALES.map(
+    (locale) => `  <url>
+    <loc>${offlineDictationGuideUrl(locale.code)}</loc>
+    <lastmod>${OFFLINE_DICTATION_GUIDE_LASTMOD}</lastmod>
+${offlineGuideAlternates}
+${offlineGuideXDefault}
+    <priority>${locale.code === "en" ? "0.85" : "0.8"}</priority>
+  </url>`,
+  ).join("\n");
   const compareEntry = (code, slug = "", priority = "0.7") => {
     const compareAlternates = LOCALES.map(
       (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localizedCompareUrl(locale.code, slug)}" />`,
@@ -4036,12 +4539,29 @@ ${compareXDefault}
       compareEntry(locale.code, page.slug, page.slug === "wispr-flow-alternative" ? "0.8" : "0.7"),
     ),
   ]).join("\n");
-  const trustEntries = TRUST_PAGES.map(
-    (page) => `  <url>
+  const trustEntry = (page, code = "en") => {
+    if (!hasLocalizedTrustPage(page)) {
+      return `  <url>
     <loc>${trustUrl(page.slug)}</loc>
-    <lastmod>${release.updatedAt}</lastmod>
+    <lastmod>${page.lastModified || release.updatedAt}</lastmod>
     <priority>${page.slug === "privacy" ? "0.7" : "0.6"}</priority>
-  </url>`,
+  </url>`;
+    }
+    const trustAlternates = LOCALES.map(
+      (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localizedTrustUrl(locale.code, page.slug)}" />`,
+    ).join("\n");
+    const trustXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedTrustUrl("en", page.slug)}" />`;
+    const localized = localizedTrustPage(page, code);
+    return `  <url>
+    <loc>${localizedTrustUrl(code, page.slug)}</loc>
+    <lastmod>${localized.lastModified || release.updatedAt}</lastmod>
+${trustAlternates}
+${trustXDefault}
+    <priority>${code === "en" ? "0.7" : "0.65"}</priority>
+  </url>`;
+  };
+  const trustEntries = TRUST_PAGES.flatMap((page) =>
+    hasLocalizedTrustPage(page) ? LOCALES.map((locale) => trustEntry(page, locale.code)) : [trustEntry(page)],
   ).join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -4049,6 +4569,7 @@ ${compareXDefault}
 ${homepageEntries}
 ${macGuideEntries}
 ${privacyProofEntries}
+${offlineGuideEntries}
 ${compareEntries}
 ${trustEntries}
   <url>
@@ -4216,6 +4737,11 @@ function formatEnglishDate(isoDate) {
   return new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${isoDate}T00:00:00Z`));
 }
 
+function formatLocalizedDate(isoDate, currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  return new Intl.DateTimeFormat(locale.htmlLang, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
 function write(path, body) {
   const abs = resolve(outDir, path);
   mkdirSync(dirname(abs), { recursive: true });
@@ -4272,6 +4798,7 @@ function writeLegacyPrivateTombstones() {
     "wrangler.toml",
     "data/compare-pages.mjs",
     "data/mac-model-advisor.mjs",
+    "data/offline-dictation-guide.mjs",
     "data/release.json",
     "data/site-content.mjs",
     "data/trust-pages.mjs",
@@ -4307,6 +4834,10 @@ for (const locale of LOCALES) {
   write(locale.code === "en" ? "index.html" : `${locale.code}/index.html`, renderHome(locale.code));
   write(locale.code === "en" ? "mac-model-guide/index.html" : `${locale.code}/mac-model-guide/index.html`, renderMacModelGuidePage(locale.code));
   write(locale.code === "en" ? "privacy-proof/index.html" : `${locale.code}/privacy-proof/index.html`, renderPrivacyProofPage(locale.code));
+  write(
+    locale.code === "en" ? "guides/offline-dictation-on-mac/index.html" : `${locale.code}/guides/offline-dictation-on-mac/index.html`,
+    renderOfflineDictationGuidePage(locale.code),
+  );
   write(locale.code === "en" ? "llms.txt" : `${locale.code}/llms.txt`, renderLlmsTxt(locale.code));
 }
 
@@ -4324,7 +4855,12 @@ write("sitemap.xml", renderSitemap());
 write("changelog.html", renderChangelog());
 write("changelog/index.html", renderChangelog());
 for (const page of TRUST_PAGES) {
-  write(`${page.slug}.html`, renderTrustPage(page));
-  write(`${page.slug}/index.html`, renderTrustPage(page));
+  write(`${page.slug}.html`, renderTrustPage(page, "en"));
+  write(`${page.slug}/index.html`, renderTrustPage(page, "en"));
+  if (hasLocalizedTrustPage(page)) {
+    for (const locale of LOCALES.filter((item) => item.code !== "en")) {
+      write(`${locale.code}/${page.slug}/index.html`, renderTrustPage(page, locale.code));
+    }
+  }
 }
 write("404.html", renderNotFound());
