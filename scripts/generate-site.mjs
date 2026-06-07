@@ -21,6 +21,11 @@ import {
 } from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
+import {
+  SPEECH_TO_TEXT_MAC_GUIDE_COPY,
+  SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+  SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES,
+} from "../data/speech-to-text-mac-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -658,6 +663,14 @@ function benchmarkMethodGuidePath() {
 
 function benchmarkMethodGuideUrl() {
   return absoluteUrl(benchmarkMethodGuidePath());
+}
+
+function speechToTextMacGuidePath() {
+  return "/guides/best-speech-to-text-apps-for-mac/";
+}
+
+function speechToTextMacGuideUrl() {
+  return absoluteUrl(speechToTextMacGuidePath());
 }
 
 function mediaKitPath() {
@@ -2329,6 +2342,15 @@ function benchmarkMethodGuideHreflangTags() {
   ].join("\n    ");
 }
 
+function speechToTextMacGuideHreflangTags() {
+  const url = speechToTextMacGuideUrl();
+  return [
+    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
+    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
+    `<link rel="canonical" href="${attr(url)}" />`,
+  ].join("\n    ");
+}
+
 function mediaKitHreflangTags() {
   const url = mediaKitUrl();
   return [
@@ -3480,6 +3502,188 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
 `;
 }
 
+function renderSpeechToTextMacGuideSchema() {
+  const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
+  const pageUrl = speechToTextMacGuideUrl();
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: copy.metaTitle,
+      description: copy.metaDescription,
+      url: pageUrl,
+      inLanguage: "en",
+      datePublished: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+      dateModified: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+      mainEntityOfPage: pageUrl,
+      publisher: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: "en",
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Mac speech-to-text app categories",
+      itemListElement: copy.appRows.map(([name, bestFit], index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name,
+        description: bestFit,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderSpeechToTextMacGuideSection(section, index) {
+  const id = `speech-to-text-mac-section-${index + 1}`;
+  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+        <p class="doc-meta">${html(section.kicker)}</p>
+        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${renderDocBullets(section.bullets)}
+      </section>`;
+}
+
+function renderSpeechToTextMacRelated(copy) {
+  return `<section class="doc-section" aria-labelledby="speech-to-text-mac-related">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="speech-to-text-mac-related">${html(copy.relatedTitle)}</h2>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>${html(copy.relatedTitle)}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page</th>
+                <th scope="col">Use it for</th>
+                <th scope="col">URL</th>
+              </tr>
+            </thead>
+            <tbody>
+${copy.relatedRows
+  .map(
+    ([label, description, url]) => `              <tr>
+                <th scope="row">${html(label)}</th>
+                <td>${html(description)}</td>
+                <td><a href="${attr(url)}">${html(url)}</a></td>
+              </tr>`,
+  )
+  .join("\n")}
+            </tbody>
+          </table>
+        </div>
+      </section>`;
+}
+
+function renderSpeechToTextMacReferences(copy) {
+  return `<section class="doc-section" aria-labelledby="speech-to-text-mac-references">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="speech-to-text-mac-references">${html(copy.referencesTitle)}</h2>
+        <ul class="compare-source-list">
+${SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES.map(
+  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
+).join("\n")}
+        </ul>
+      </section>`;
+}
+
+function renderSpeechToTextMacGuidePage() {
+  const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
+  const t = homeCopyForRender("en");
+  const canonical = speechToTextMacGuideUrl();
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
+    ${speechToTextMacGuideHreflangTags()}
+    ${assetTags()}
+    ${renderSpeechToTextMacGuideSchema()}
+  </head>
+  <body>
+    <a class="skip-link" href="#speech-to-text-mac-guide">${html(copy.navLabel)}</a>
+    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? speechToTextMacGuidePath() : localePath(item.code)) })}
+    <main class="doc-page offline-guide-page" id="speech-to-text-mac-guide">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+
+      <section class="doc-section" aria-labelledby="speech-to-text-mac-answer">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="speech-to-text-mac-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="speech-to-text-mac-intents">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="speech-to-text-mac-intents">${html(copy.intentTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="speech-to-text-mac-apps">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="speech-to-text-mac-apps">${html(copy.appTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows)}
+      </section>
+
+      ${copy.sections.map(renderSpeechToTextMacGuideSection).join("\n\n      ")}
+
+      <section class="doc-section" aria-labelledby="speech-to-text-mac-faq">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="speech-to-text-mac-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+          ${copy.faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+
+      ${renderSpeechToTextMacRelated(copy)}
+
+      ${renderSpeechToTextMacReferences(copy)}
+    </main>
+    ${renderFooterOnly("en")}
+  </body>
+</html>
+`;
+}
+
 function renderMediaKitSchema() {
   const copy = MEDIA_KIT_COPY;
   const pageUrl = mediaKitUrl();
@@ -3717,6 +3921,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
     `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
     currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
+    currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
     `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
@@ -4569,6 +4774,7 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
     [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
+    [SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel, speechToTextMacGuideUrl()],
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
@@ -4988,6 +5194,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${benchmarkMethodGuideUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const speechToTextMacGuideEntry = `  <url>
+    <loc>${speechToTextMacGuideUrl()}</loc>
+    <lastmod>${SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${speechToTextMacGuideUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${speechToTextMacGuideUrl()}" />
+    <priority>0.85</priority>
+  </url>`;
   const mediaKitEntry = `  <url>
     <loc>${mediaKitUrl()}</loc>
     <lastmod>${MEDIA_KIT_LASTMOD}</lastmod>
@@ -5046,6 +5259,7 @@ ${macGuideEntries}
 ${privacyProofEntries}
 ${offlineGuideEntries}
 ${benchmarkMethodEntry}
+${speechToTextMacGuideEntry}
 ${mediaKitEntry}
 ${compareEntries}
 ${trustEntries}
@@ -5319,6 +5533,7 @@ for (const locale of LOCALES) {
 }
 
 write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
+write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
 write("media-kit/index.html", renderMediaKitPage());
 
 for (const locale of LOCALES) {

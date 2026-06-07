@@ -151,6 +151,7 @@ const requiredGeoFiles = [
   "ja/guides/offline-dictation-on-mac/index.html",
   "ko/guides/offline-dictation-on-mac/index.html",
   "guides/mac-dictation-benchmark-method/index.html",
+  "guides/best-speech-to-text-apps-for-mac/index.html",
   "media-kit/index.html",
 ];
 
