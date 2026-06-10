@@ -242,6 +242,64 @@ function normalizeDownloadPlatform(value) {
   return platform || "unknown";
 }
 
+function referrerHost() {
+  try {
+    if (!document.referrer) return "";
+    const host = new URL(document.referrer).hostname;
+    return host && host !== window.location.hostname ? host : "";
+  } catch {
+    return "";
+  }
+}
+
+function cleanReferrer(value) {
+  try {
+    if (!value) return undefined;
+    const url = new URL(value);
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return undefined;
+  }
+}
+
+function pageViewPayload() {
+  const params = new URLSearchParams(window.location.search);
+  const referral = referrerHost();
+
+  return {
+    event: "page_view",
+    path: window.location.pathname || "/",
+    locale: document.documentElement.lang || undefined,
+    source: params.get("utm_source") || referral || "direct",
+    medium: params.get("utm_medium") || (referral ? "referral" : "direct"),
+    campaign: params.get("utm_campaign") || undefined,
+    content: params.get("utm_content") || undefined,
+    term: params.get("utm_term") || undefined,
+    referrer: cleanReferrer(document.referrer),
+  };
+}
+
+function sendPageView() {
+  const endpoint = "https://api.dictivo.app/v1/analytics/page-view";
+  const body = JSON.stringify(pageViewPayload());
+
+  try {
+    if (navigator.sendBeacon?.(endpoint, body)) return;
+  } catch {
+    // Fall through to fetch with keepalive.
+  }
+
+  fetch(endpoint, {
+    method: "POST",
+    headers: { "content-type": "text/plain;charset=UTF-8" },
+    body,
+    keepalive: true,
+    credentials: "include",
+  }).catch(() => {});
+}
+
+sendPageView();
+
 function downloadEventPayload(link) {
   const href = new URL(link.href, window.location.href);
   const platform = normalizeDownloadPlatform(link.dataset.platform || href.pathname);

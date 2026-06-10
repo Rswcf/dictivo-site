@@ -100,6 +100,19 @@ The script creates the `dictivo-downloads` bucket if needed, connects `downloads
 objects with long-lived cache headers. It uploads macOS by default; set `INCLUDE_WINDOWS=1` only when the release
 directory contains the matching Windows EXE and MSI from the same signed desktop release.
 
+## Website analytics
+
+`assets/site.js` emits metadata-only `page_view` events to
+`https://api.dictivo.app/v1/analytics/page-view` with the current path, locale,
+UTM fields, and normalized referrer. The API derives country from Cloudflare
+request metadata and browser family from the user agent; raw IP addresses are
+not stored.
+
+Download CTAs also emit `download_cta_clicked` before navigating to the API
+redirect. The redirect records `download_started`, then sends the browser to the
+R2-backed installer URL. Together these events power the Acquisition funnel:
+site visit -> download click -> download started -> download completed.
+
 ## Local checkout
 
 The Dictivo Local pricing CTA points to `/checkout/local`, so the Lemon Squeezy one-time checkout URL can be swapped
