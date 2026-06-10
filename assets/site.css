@@ -1616,6 +1616,15 @@ main section[id] {
   letter-spacing: 0;
 }
 
+.tier-price-was {
+  font-size: 0.52em;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  letter-spacing: -0.02em;
+}
+
 .tier-features {
   list-style: none;
   margin: 0 0 24px;
@@ -2041,7 +2050,7 @@ main section[id] {
 .signed-grid {
   display: grid;
   gap: 14px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .signed-cell {
