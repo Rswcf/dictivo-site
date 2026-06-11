@@ -3460,6 +3460,15 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
         </ol>
       </section>
 
+      <section class="doc-section" id="measured-results" aria-labelledby="benchmark-measured-title">
+        <p class="doc-meta">${html(copy.measured.kicker)}</p>
+        <h2 id="benchmark-measured-title">${html(copy.measured.title)}</h2>
+        ${copy.measured.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${renderBenchmarkMethodTable(copy.measured.caption, copy.measured.headers, copy.measured.rows)}
+        ${renderDocBullets(copy.measured.bullets)}
+        <p>${html(copy.measured.submitNote)}</p>
+      </section>
+
       <section class="doc-section" aria-labelledby="benchmark-method-tiers">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="benchmark-method-tiers">${html(copy.tierTitle)}</h2>
