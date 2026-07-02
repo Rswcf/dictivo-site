@@ -283,6 +283,12 @@ function verifyTombstone(file) {
 }
 
 function verifyWindowsDownloads() {
+  if (release.publicWindowsDownloads === true && !hasWindowsArtifacts) {
+    failures.push(
+      "release.json: publicWindowsDownloads is true but Windows exe/msi assets are missing — refusing to silently un-launch Windows; fix the release assets or set the flag to false deliberately",
+    );
+  }
+
   const redirectsPath = resolve(publicRoot, "_redirects");
   const downloadsPath = resolve(publicRoot, "downloads.json");
 
