@@ -18,7 +18,6 @@ const forbiddenContent = [
   /source section/i,
   /facts re-?checked/i,
   /price\/trial\/privacy sources/i,
-  /downloads\.json/i,
   /GitHub Release/i,
   /Lemon Squeezy/i,
   /request metadata/i,
@@ -52,6 +51,10 @@ const forbiddenContent = [
   /公开代码/,
   /공개 코드/,
 ];
+// downloads.json may be named on technical surfaces (llms.txt, security page)
+// but stays banned in marketing copy.
+const downloadsJsonPattern = /downloads\.json/i;
+const downloadsJsonExemptFiles = /(^|\/)llms\.txt$|^security\.html$|^security\/index\.html$/;
 const forbiddenCompareContent = [
   /as of May 25, 2026/i,
   /May 25, 2026/i,
@@ -208,6 +211,9 @@ for (const file of listFiles()) {
     if (pattern.test(body)) {
       failures.push(`${file}: matched ${pattern}`);
     }
+  }
+  if (!downloadsJsonExemptFiles.test(file) && downloadsJsonPattern.test(body)) {
+    failures.push(`${file}: matched ${downloadsJsonPattern} (allowed only on llms.txt and the security page)`);
   }
   if (isComparePage(file)) {
     for (const pattern of forbiddenCompareContent) {
