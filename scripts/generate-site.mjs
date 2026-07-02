@@ -4486,6 +4486,12 @@ const LLMS_LABELS = {
       "Local mode and Cloud Fast are separate choices in the app, so users can keep sensitive audio local and use Cloud Fast only when they decide it is appropriate.",
       "Support is available at support@dictivo.app.",
     ],
+    windowsSummary:
+      "Dictivo is a local-first desktop dictation app for Mac and Windows. Local mode keeps audio on the device, while optional Cloud Fast can be used when speed matters more than keeping audio local.",
+    windowsFacts: [
+      "Public downloads are available for both macOS and Windows x64.",
+      "The Windows installer is not yet Authenticode-signed, so SmartScreen may show an unknown-publisher notice; SHA-256 checksums are published in downloads.json.",
+    ],
   },
   de: {
     title: "Dictivo",
@@ -4516,6 +4522,12 @@ const LLMS_LABELS = {
       "Windows-Builds konnen weiter Updates erhalten, aber neue offentliche Windows-Downloads bleiben verborgen, bis diese Version breit genug ist.",
       "Local und Cloud Fast sind getrennte Entscheidungen in der App.",
       "Support ist unter support@dictivo.app erreichbar.",
+    ],
+    windowsSummary:
+      "Dictivo ist eine lokal ausgerichtete Diktier-App fur Mac und Windows. Der lokale Modus behalt Audio auf dem Gerat; optionales Cloud Fast ist fur Situationen gedacht, in denen Geschwindigkeit wichtiger ist.",
+    windowsFacts: [
+      "Offentliche Downloads gibt es fur macOS und Windows x64.",
+      "Der Windows-Installer ist noch nicht Authenticode-signiert; SmartScreen kann daher einen Hinweis zeigen. SHA-256-Prufsummen stehen in downloads.json.",
     ],
   },
   fr: {
@@ -4548,6 +4560,12 @@ const LLMS_LABELS = {
       "Local et Cloud Fast sont des choix separes dans l'app.",
       "Le support est disponible a support@dictivo.app.",
     ],
+    windowsSummary:
+      "Dictivo est une app de dictee pensee d'abord pour le local, sur Mac et Windows. Le mode Local garde l'audio sur l'appareil; Cloud Fast reste optionnel quand la vitesse compte davantage.",
+    windowsFacts: [
+      "Des telechargements publics sont disponibles pour macOS et Windows x64.",
+      "L'installateur Windows n'est pas encore signe Authenticode; SmartScreen peut afficher un avertissement. Les sommes SHA-256 sont publiees dans downloads.json.",
+    ],
   },
   es: {
     title: "Dictivo",
@@ -4578,6 +4596,12 @@ const LLMS_LABELS = {
       "Las builds de Windows pueden recibir actualizaciones, pero las nuevas descargas publicas de Windows siguen ocultas hasta que esa version este lista para mas usuarios.",
       "Local y Cloud Fast son decisiones separadas dentro de la app.",
       "El soporte esta disponible en support@dictivo.app.",
+    ],
+    windowsSummary:
+      "Dictivo es una app de dictado de escritorio con prioridad local para Mac y Windows. El modo Local mantiene el audio en el dispositivo; Cloud Fast es opcional cuando la velocidad importa mas.",
+    windowsFacts: [
+      "Hay descargas publicas para macOS y Windows x64.",
+      "El instalador de Windows aun no tiene firma Authenticode; SmartScreen puede mostrar un aviso. Las sumas SHA-256 estan en downloads.json.",
     ],
   },
   it: {
@@ -4610,6 +4634,12 @@ const LLMS_LABELS = {
       "Local e Cloud Fast sono scelte separate nell'app.",
       "Il supporto e disponibile a support@dictivo.app.",
     ],
+    windowsSummary:
+      "Dictivo e un'app di dettatura desktop con priorita locale per Mac e Windows. La modalita Local tiene l'audio sul dispositivo; Cloud Fast e opzionale quando la velocita conta di piu.",
+    windowsFacts: [
+      "I download pubblici sono disponibili per macOS e Windows x64.",
+      "L'installer di Windows non e ancora firmato Authenticode; SmartScreen puo mostrare un avviso. I checksum SHA-256 sono in downloads.json.",
+    ],
   },
   nl: {
     title: "Dictivo",
@@ -4640,6 +4670,12 @@ const LLMS_LABELS = {
       "Windows-builds kunnen updates blijven ontvangen, maar nieuwe openbare Windows-downloads blijven verborgen tot die versie klaar is voor bredere lancering.",
       "Local en Cloud Fast zijn aparte keuzes in de app.",
       "Support is bereikbaar via support@dictivo.app.",
+    ],
+    windowsSummary:
+      "Dictivo is een lokaal gerichte desktopdictatie-app voor Mac en Windows. De lokale modus houdt audio op het apparaat; Cloud Fast is optioneel wanneer snelheid belangrijker is.",
+    windowsFacts: [
+      "Publieke downloads zijn beschikbaar voor macOS en Windows x64.",
+      "De Windows-installer is nog niet Authenticode-ondertekend; SmartScreen kan waarschuwen. SHA-256-checksums staan in downloads.json.",
     ],
   },
   pt: {
@@ -4672,6 +4708,12 @@ const LLMS_LABELS = {
       "Local e Cloud Fast sao escolhas separadas dentro do app.",
       "O suporte esta disponivel em support@dictivo.app.",
     ],
+    windowsSummary:
+      "Dictivo e um app de ditado para desktop com prioridade local, para Mac e Windows. O modo Local mantem o audio no dispositivo; Cloud Fast e opcional quando a velocidade importa mais.",
+    windowsFacts: [
+      "Ha downloads publicos para macOS e Windows x64.",
+      "O instalador do Windows ainda nao tem assinatura Authenticode; o SmartScreen pode alertar. Os checksums SHA-256 estao em downloads.json.",
+    ],
   },
   zh: {
     title: "Dictivo",
@@ -4702,6 +4744,12 @@ const LLMS_LABELS = {
       "Windows 版本仍可接收更新，但新的公开 Windows 下载会等到该版本更成熟后再开放。",
       "Local 和 Cloud Fast 是应用里的两个独立选择。",
       "售后支持邮箱是 support@dictivo.app。",
+    ],
+    windowsSummary:
+      "Dictivo 是一款本地优先的桌面听写应用，支持 Mac 与 Windows。Local 模式让音频留在设备上；需要速度时可选用 Cloud Fast。",
+    windowsFacts: [
+      "macOS 与 Windows x64 均已提供公开下载。",
+      "Windows 安装包暂未进行 Authenticode 代码签名，SmartScreen 可能提示「未知发布者」；SHA-256 校验值见 downloads.json。",
     ],
   },
   ja: {
@@ -4734,6 +4782,12 @@ const LLMS_LABELS = {
       "Local と Cloud Fast はアプリ内で別々に選べます。",
       "サポートは support@dictivo.app で受け付けています。",
     ],
+    windowsSummary:
+      "Dictivo は Mac と Windows に対応した、ローカル優先のデスクトップ音声入力アプリです。Local モードでは音声がデバイスに残り、速度が必要なときだけ Cloud Fast を選べます。",
+    windowsFacts: [
+      "macOS と Windows x64 の両方で公開ダウンロードを提供しています。",
+      "Windows インストーラーはまだ Authenticode 署名前のため、SmartScreen が警告を表示する場合があります。SHA-256 は downloads.json に掲載しています。",
+    ],
   },
   ko: {
     title: "Dictivo",
@@ -4765,6 +4819,12 @@ const LLMS_LABELS = {
       "Local과 Cloud Fast는 앱 안에서 따로 선택할 수 있습니다.",
       "지원은 support@dictivo.app 으로 받을 수 있습니다.",
     ],
+    windowsSummary:
+      "Dictivo는 Mac과 Windows를 지원하는 로컬 우선 데스크톱 받아쓰기 앱입니다. Local 모드는 오디오를 기기에 남기고, 속도가 필요할 때만 Cloud Fast를 선택할 수 있습니다.",
+    windowsFacts: [
+      "macOS와 Windows x64 모두 공개 다운로드를 제공합니다.",
+      "Windows 설치 파일은 아직 Authenticode 서명이 없어 SmartScreen 경고가 표시될 수 있습니다. SHA-256 체크섬은 downloads.json에 있습니다.",
+    ],
   },
 };
 
@@ -4776,6 +4836,9 @@ function renderLlmsTxt(currentCode = "en") {
   const copy = llmsCopy(currentCode);
   const compare = compareCopy(currentCode);
   const ui = trustUiCopy(currentCode);
+  const summaryText = hasWindowsRelease && copy.windowsSummary ? copy.windowsSummary : copy.summary;
+  const factsList =
+    hasWindowsRelease && copy.windowsFacts ? [...copy.windowsFacts, ...copy.facts.slice(2)] : copy.facts;
   const pages = [
     [copy.pageLabels.home, localeUrl(currentCode)],
     [copy.pageLabels.pricing, `${localeUrl(currentCode)}#pricing`],
@@ -4801,7 +4864,7 @@ function renderLlmsTxt(currentCode = "en") {
 
   return `# ${copy.title}
 
-${copy.summary}
+${summaryText}
 
 ## ${copy.pagesTitle}
 
@@ -4817,7 +4880,7 @@ ${copy.audiences.map((item) => `- ${item}`).join("\n")}
 
 ## ${copy.factsTitle}
 
-${copy.facts.map((item) => `- ${item}`).join("\n")}
+${factsList.map((item) => `- ${item}`).join("\n")}
 `;
 }
 
