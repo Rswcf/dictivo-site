@@ -229,6 +229,8 @@ let recommendedPlatform = "";
 
 if (platform.includes("mac")) {
   recommendedPlatform = "macos";
+} else if (platform.includes("win")) {
+  recommendedPlatform = "windows";
 }
 
 if (recommendedPlatform) {
