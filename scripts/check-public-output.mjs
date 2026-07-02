@@ -286,6 +286,8 @@ function verifyWindowsDownloads() {
       const requiredRedirects = [
         /^\/download\/windows\s+https:\/\/api\.dictivo\.app\/download\/windows\?(?!\S*artifact=msi)\S+\s+302/im,
         /^\/download\/windows-msi\s+https:\/\/api\.dictivo\.app\/download\/windows\?\S*artifact=msi\S*\s+302/im,
+        /^\/downloads\/Dictivo-Windows-x64\.exe\s+https:\/\/api\.dictivo\.app\/download\/windows\?(?!\S*artifact=msi)\S+\s+302/im,
+        /^\/downloads\/Dictivo-Windows-x64\.msi\s+https:\/\/api\.dictivo\.app\/download\/windows\?\S*artifact=msi\S*\s+302/im,
       ];
       for (const pattern of requiredRedirects) {
         if (!pattern.test(redirects)) failures.push(`_redirects: Windows public download did not match ${pattern}`);
