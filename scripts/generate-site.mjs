@@ -4823,8 +4823,8 @@ ${copy.facts.map((item) => `- ${item}`).join("\n")}
 
 function renderRedirects() {
   const macDownloadRedirect = downloadUrl("macos", "legacy_mac_route");
-  const windowsExeUrl = hasWindowsRelease ? windowsRelease.exe.url : "/#downloads";
-  const windowsMsiUrl = hasWindowsRelease ? windowsRelease.msi.url : "/#downloads";
+  const windowsExeUrl = hasWindowsRelease ? downloadUrl("windows", "legacy_windows_route") : "/#downloads";
+  const windowsMsiUrl = hasWindowsRelease ? downloadUrl("windows", "legacy_windows_msi", { artifact: "msi" }) : "/#downloads";
   return `/data/* /404.html 404
 /scripts/* /404.html 404
 /tmp/* /404.html 404
