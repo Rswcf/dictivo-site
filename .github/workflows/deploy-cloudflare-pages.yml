@@ -57,6 +57,9 @@ jobs:
       - name: Check Local checkout route
         run: node scripts/check-local-checkout.mjs
 
+      - name: Check checkout pages are live
+        run: node scripts/check-checkout-live.mjs
+
       - name: Check release payload sync
         run: node scripts/check-release-payload-sync.mjs
 
