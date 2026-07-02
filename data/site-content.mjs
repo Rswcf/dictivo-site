@@ -151,7 +151,7 @@ export const HOME_COPY = {
       macTitle: "Mac installer",
       macBody: "Built for Apple Silicon and Intel Macs. Start with Tiny free forever and a 14-day full Local trial.",
       macButton: "Download for Mac",
-      versionNote: (version) => `Version ${version} - public beta.`,
+      versionNote: (version) => `Version ${version} - macOS Universal.`,
       windowsTop: ["Windows", "Later"],
       windowsTitle: "Windows version",
       windowsBody: "Dictivo for Windows is planned, but the public launch starts with Mac.",
@@ -313,7 +313,7 @@ export const HOME_COPY = {
       macTitle: "Mac Installer",
       macBody: "Für Apple Silicon und Intel Macs. Starten Sie mit Tiny dauerhaft gratis und 14 Tagen vollem Local-Test.",
       macButton: "Für Mac herunterladen",
-      versionNote: (version) => `Version ${version} - öffentliche Beta.`,
+      versionNote: (version) => `Version ${version} - macOS Universal.`,
       windowsTop: ["Windows", "Später"],
       windowsTitle: "Windows-Version",
       windowsBody: "Dictivo für Windows ist geplant, aber der öffentliche Start beginnt mit Mac.",
@@ -409,7 +409,7 @@ export const HOME_COPY = {
       macTitle: "Installateur Mac",
       macBody: "Pour les Mac Apple Silicon et Intel. Commencez avec Tiny gratuit à vie et 14 jours d'essai Local complet.",
       macButton: "Télécharger pour Mac",
-      versionNote: (version) => `Version ${version} - bêta publique.`,
+      versionNote: (version) => `Version ${version} - macOS Universal.`,
       windowsTop: ["Windows", "Plus tard"],
       windowsTitle: "Version Windows",
       windowsBody: "Dictivo pour Windows est prévu, mais le lancement public commence sur Mac.",
@@ -505,7 +505,7 @@ export const HOME_COPY = {
       macTitle: "Instalador para Mac",
       macBody: "Para Mac Apple Silicon e Intel. Empieza con Tiny gratis para siempre y 14 días de prueba Local completa.",
       macButton: "Descargar para Mac",
-      versionNote: (version) => `Versión ${version} - beta pública.`,
+      versionNote: (version) => `Versión ${version} - macOS Universal.`,
       windowsTop: ["Windows", "Después"],
       windowsTitle: "Versión para Windows",
       windowsBody: "Dictivo para Windows está previsto, pero el lanzamiento público empieza con Mac.",
@@ -784,16 +784,16 @@ function deriveFromEnglish(base, overrides, localeName) {
       macButton: overrides.hero.download,
       versionNote: (version) =>
         localeName === "it"
-          ? `Versione ${version} - beta pubblica.`
+          ? `Versione ${version} - macOS Universal.`
           : localeName === "nl"
-            ? `Versie ${version} - publieke beta.`
+            ? `Versie ${version} - macOS Universal.`
             : localeName === "pt"
-              ? `Versão ${version} - beta público.`
+              ? `Versão ${version} - macOS Universal.`
               : localeName === "zh"
-                ? `版本 ${version} - 公开测试版。`
+                ? `版本 ${version} - macOS 通用版。`
                 : localeName === "ja"
-                  ? `バージョン ${version} - 公開ベータ。`
-                  : `버전 ${version} - 공개 베타.`,
+                  ? `バージョン ${version} - macOS ユニバーサル。`
+                  : `버전 ${version} - macOS 유니버설.`,
     },
     languages: {
       ...base.languages,
