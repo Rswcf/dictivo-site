@@ -17,10 +17,15 @@ async function probe(label, startUrl) {
   const cookies = new Map();
   for (let hop = 0; hop < 8; hop += 1) {
     const cookieHeader = [...cookies.entries()].map(([k, v]) => `${k}=${v}`).join("; ");
-    const res = await fetch(url, {
-      redirect: "manual",
-      headers: { "user-agent": UA, ...(cookieHeader ? { cookie: cookieHeader } : {}) },
-    });
+    let res;
+    try {
+      res = await fetch(url, {
+        redirect: "manual",
+        headers: { "user-agent": UA, ...(cookieHeader ? { cookie: cookieHeader } : {}) },
+      });
+    } catch (error) {
+      return { label, url, status: 0, verdict: "inconclusive", error: String(error) };
+    }
     for (const raw of res.headers.getSetCookie?.() ?? []) {
       const [pair] = raw.split(";");
       const eq = pair.indexOf("=");
@@ -46,7 +51,7 @@ for (const [label, route] of ROUTES) {
     failed = true;
     console.error(`FAIL ${label}: ${result.status} at ${result.url} — checkout appears dead.`);
   } else if (result.verdict === "inconclusive") {
-    console.warn(`WARN ${label}: ${result.status} at ${result.url} — inconclusive (bot mitigation?), not failing.`);
+    console.warn(`WARN ${label}: ${result.status} at ${result.url} — inconclusive${result.error ? ` (${result.error})` : " (bot mitigation?)"}, not failing.`);
   } else {
     console.log(`OK ${label}: checkout renders (${result.url}).`);
   }
