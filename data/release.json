@@ -5,7 +5,7 @@
   "updatedAt": "2026-05-30",
   "publishedAt": "2026-05-30T12:09:33Z",
   "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.26",
-  "publicWindowsDownloads": false,
+  "publicWindowsDownloads": true,
   "dmg": {
     "fileName": "Dictivo_0.3.26_universal.dmg",
     "url": "https://downloads.dictivo.app/v0.3.26/Dictivo_0.3.26_universal.dmg",
