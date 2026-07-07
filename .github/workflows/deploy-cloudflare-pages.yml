@@ -85,3 +85,7 @@ jobs:
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           ALLOW_PURGE_FAILURE: "true"
         run: node scripts/purge-cloudflare-cache.mjs
+
+      - name: Submit sitemap URLs to IndexNow
+        continue-on-error: true
+        run: node scripts/submit-indexnow.mjs
