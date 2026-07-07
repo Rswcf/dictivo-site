@@ -19,7 +19,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Offline Mac dictation",
     metaTitle: "Offline Dictation App for Mac: Local Audio Comparison",
     metaDescription:
-      "Compare Mac dictation apps that can keep audio local or offline, including Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation, and Wispr Flow.",
+      "Compare Mac dictation apps that keep audio local or offline: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, and Apple Dictation.",
     eyebrow: "Offline dictation guide",
     title: "Which Mac dictation apps keep audio local?",
     lede:
@@ -81,7 +81,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Offline-Diktat für Mac",
     metaTitle: "Offline-Diktat-App für Mac: lokales Audio im Vergleich",
     metaDescription:
-      "Vergleich von Mac-Diktat-Apps, die Audio lokal oder offline halten können, darunter Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation und Wispr Flow.",
+      "Vergleich von Mac-Diktat-Apps, die Audio lokal halten: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko und Apple Dictation.",
     eyebrow: "Offline-Diktat-Guide",
     title: "Welche Mac-Diktat-Apps halten Audio lokal?",
     lede:
@@ -143,7 +143,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Dictée Mac hors ligne",
     metaTitle: "Application de dictée hors ligne pour Mac : comparaison audio local",
     metaDescription:
-      "Comparez les apps de dictée Mac capables de garder l'audio local ou hors ligne, dont Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation et Wispr Flow.",
+      "Comparez les apps de dictée Mac qui gardent l'audio en local : Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko et Apple Dictation.",
     eyebrow: "Guide dictée hors ligne",
     title: "Quelles apps de dictée Mac gardent l'audio local ?",
     lede:
@@ -205,7 +205,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Dictado offline para Mac",
     metaTitle: "App de dictado offline para Mac: comparación de audio local",
     metaDescription:
-      "Compara apps de dictado para Mac que pueden mantener el audio local u offline, incluidas Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation y Wispr Flow.",
+      "Compara apps de dictado para Mac que mantienen el audio local: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko y Apple Dictation.",
     eyebrow: "Guía de dictado offline",
     title: "¿Qué apps de dictado para Mac mantienen el audio local?",
     lede:
@@ -267,7 +267,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Dettatura Mac offline",
     metaTitle: "App di dettatura offline per Mac: confronto audio locale",
     metaDescription:
-      "Confronta app di dettatura Mac che possono mantenere l'audio locale o offline, tra cui Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation e Wispr Flow.",
+      "Confronta app di dettatura Mac che mantengono l'audio in locale: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko e Apple Dictation.",
     eyebrow: "Guida dettatura offline",
     title: "Quali app di dettatura Mac mantengono l'audio locale?",
     lede:
@@ -329,7 +329,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Offline Mac-dictatie",
     metaTitle: "Offline dicteerapp voor Mac: lokale audio vergeleken",
     metaDescription:
-      "Vergelijk Mac-dicteerapps die audio lokaal of offline kunnen houden, waaronder Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation en Wispr Flow.",
+      "Vergelijk Mac-dicteerapps die audio lokaal houden: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko en Apple Dictation.",
     eyebrow: "Offline dicteergids",
     title: "Welke Mac-dicteerapps houden audio lokaal?",
     lede:
@@ -391,7 +391,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     navLabel: "Ditado Mac offline",
     metaTitle: "App de ditado offline para Mac: comparação de áudio local",
     metaDescription:
-      "Compare apps de ditado para Mac que podem manter o áudio local ou offline, incluindo Dictivo Local, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, Apple Dictation e Wispr Flow.",
+      "Compare apps de ditado para Mac que mantêm o áudio local: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko e Apple Dictation.",
     eyebrow: "Guia de ditado offline",
     title: "Quais apps de ditado para Mac mantêm o áudio local?",
     lede:

@@ -10,9 +10,9 @@ export const BENCHMARK_METHOD_GUIDE_REFERENCES = [
 
 export const BENCHMARK_METHOD_GUIDE_COPY = {
   navLabel: "Mac dictation benchmark method",
-  metaTitle: "Mac Dictation Benchmarks: Method and Measured Apple Silicon Results",
+  metaTitle: "Mac Dictation Benchmarks: Apple Silicon Whisper Results",
   metaDescription:
-    "How Dictivo benchmarks local Mac dictation speed, plus measured Whisper real-time factors on Apple Silicon: Metal vs CPU for Small, Large v3 Turbo, and Large v3.",
+    "How Dictivo benchmarks local Mac dictation speed: measured Whisper real-time factors on Apple Silicon, Metal vs CPU, from Small to Large v3.",
   eyebrow: "Benchmark method",
   title: "How Dictivo benchmarks local dictation on Mac",
   lede:

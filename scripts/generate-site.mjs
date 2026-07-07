@@ -141,9 +141,10 @@ const WINDOWS_DOWNLOAD_COPY = {
 
 const WINDOWS_HOME_COPY = {
   en: {
-    metaTitle: "Dictivo - Private desktop dictation with optional Cloud Fast",
+    metaTitle: "Offline Dictation App for Mac & Windows - $29 Once | Dictivo",
     navDownload: "Downloads",
-    heroEyebrow: "Private desktop dictation",
+    heroEyebrow: "Private dictation for Mac & Windows",
+    heroTitle: "Dictation that stays on your computer.",
     heroNote: "Mac and Windows x64 are available now.",
     privacyTitle: "Your private words stay on your device.",
     pricingFreeSub: "Try the private-first workflow on your desktop.",
@@ -161,12 +162,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Yes. Dictivo is available for macOS and Windows x64.",
     footerBeta: "Mac and Windows - 2026",
     metaDescription:
-      "Dictivo is a private-first desktop dictation app for macOS and Windows. Dictate locally by default, then use optional Cloud Fast when speed matters.",
+      "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. $29 once, no subscription.",
   },
   de: {
-    metaTitle: "Dictivo - Private Desktop-Diktat-App mit Cloud Fast",
+    metaTitle: "Offline-Diktier-App für Mac & Windows - einmal $29 | Dictivo",
     navDownload: "Downloads",
-    heroEyebrow: "Privates Desktop-Diktat",
+    heroEyebrow: "Privates Diktieren für Mac & Windows",
+    heroTitle: "Diktieren, das auf Ihrem Computer bleibt.",
     heroNote: "Mac und Windows x64 sind jetzt verfügbar.",
     privacyTitle: "Ihre privaten Worte bleiben auf Ihrem Gerät.",
     pricingFreeSub: "Testen Sie den privaten Ablauf auf Ihrem Desktop.",
@@ -184,12 +186,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Ja. Dictivo ist für macOS und Windows x64 verfügbar.",
     footerBeta: "Mac und Windows - 2026",
     metaDescription:
-      "Dictivo ist eine private Desktop-Diktat-App für macOS und Windows. Diktieren Sie standardmäßig lokal und nutzen Sie optional Cloud Fast, wenn Geschwindigkeit wichtiger ist.",
+      "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per offenem Netzwerktest überprüfbar. Einmal $29, kein Abo.",
   },
   fr: {
-    metaTitle: "Dictivo - Dictée privée sur ordinateur avec Cloud Fast",
+    metaTitle: "App de dictée hors ligne pour Mac et Windows - $29 | Dictivo",
     navDownload: "Téléchargements",
-    heroEyebrow: "Dictée privée sur ordinateur",
+    heroEyebrow: "Dictée privée pour Mac et Windows",
+    heroTitle: "La dictée qui reste sur votre ordinateur.",
     heroNote: "Mac et Windows x64 sont disponibles maintenant.",
     privacyTitle: "Vos mots privés restent sur votre appareil.",
     pricingFreeSub: "Essayez le flux privé sur votre ordinateur.",
@@ -207,12 +210,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Oui. Dictivo est disponible pour macOS et Windows x64.",
     footerBeta: "Mac et Windows - 2026",
     metaDescription:
-      "Dictivo est une app de dictée privée pour macOS et Windows. Dictez localement par défaut, puis utilisez Cloud Fast en option quand la vitesse compte.",
+      "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. $29 une fois, sans abonnement.",
   },
   es: {
-    metaTitle: "Dictivo - Dictado privado de escritorio con Cloud Fast opcional",
+    metaTitle: "App de dictado sin conexión para Mac y Windows | Dictivo",
     navDownload: "Descargas",
-    heroEyebrow: "Dictado privado de escritorio",
+    heroEyebrow: "Dictado privado para Mac y Windows",
+    heroTitle: "Dictado que se queda en tu equipo.",
     heroNote: "Mac y Windows x64 ya están disponibles.",
     privacyTitle: "Tus palabras privadas se quedan en tu dispositivo.",
     pricingFreeSub: "Prueba el flujo privado en tu escritorio.",
@@ -230,12 +234,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sí. Dictivo está disponible para macOS y Windows x64.",
     footerBeta: "Mac y Windows - 2026",
     metaDescription:
-      "Dictivo es una app de dictado privada para macOS y Windows. Dicta localmente por defecto y usa Cloud Fast opcional cuando importa la velocidad.",
+      "Dictivo escribe lo que dictas en cualquier app de Mac o Windows. En modo local, el audio se queda en tu equipo. $29 una vez, sin suscripción.",
   },
   it: {
-    metaTitle: "Dictivo - Dettatura privata desktop con Cloud Fast opzionale",
+    metaTitle: "App di dettatura offline per Mac e Windows - $29 | Dictivo",
     navDownload: "Download",
-    heroEyebrow: "Dettatura desktop privata",
+    heroEyebrow: "Dettatura privata per Mac e Windows",
+    heroTitle: "La dettatura che resta sul tuo computer.",
     heroNote: "Mac e Windows x64 sono disponibili ora.",
     privacyTitle: "Le tue parole private restano sul tuo dispositivo.",
     pricingFreeSub: "Prova il flusso privato sul tuo desktop.",
@@ -253,12 +258,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sì. Dictivo è disponibile per macOS e Windows x64.",
     footerBeta: "Mac e Windows - 2026",
     metaDescription:
-      "Dictivo è un'app di dettatura privata per macOS e Windows. Detti localmente per impostazione predefinita e usi Cloud Fast quando conta la velocità.",
+      "Dictivo scrive ciò che detti in qualsiasi app per Mac o Windows. In modalità locale l'audio resta sul tuo dispositivo. $29 una volta, senza abbonamento.",
   },
   nl: {
-    metaTitle: "Dictivo - Privé dicteren op desktop met optionele Cloud Fast",
+    metaTitle: "Offline dicteer-app voor Mac en Windows - $29 | Dictivo",
     navDownload: "Downloads",
-    heroEyebrow: "Privé desktopdictatie",
+    heroEyebrow: "Privé dicteren voor Mac en Windows",
+    heroTitle: "Dictatie die op je computer blijft.",
     heroNote: "Mac en Windows x64 zijn nu beschikbaar.",
     privacyTitle: "Je privéwoorden blijven op je apparaat.",
     pricingFreeSub: "Probeer de privacygerichte workflow op je desktop.",
@@ -276,12 +282,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Ja. Dictivo is beschikbaar voor macOS en Windows x64.",
     footerBeta: "Mac en Windows - 2026",
     metaDescription:
-      "Dictivo is een privacygerichte desktopdictatie-app voor macOS en Windows. Dicteer standaard lokaal en gebruik optioneel Cloud Fast wanneer snelheid telt.",
+      "Dictivo typt wat je zegt in elke Mac- of Windows-app. In lokale modus blijft audio op je apparaat. Eenmalig $29, geen abonnement.",
   },
   pt: {
-    metaTitle: "Dictivo - Ditado privado para desktop com Cloud Fast opcional",
+    metaTitle: "App de ditado offline para Mac e Windows - $29 | Dictivo",
     navDownload: "Downloads",
-    heroEyebrow: "Ditado privado no desktop",
+    heroEyebrow: "Ditado privado para Mac e Windows",
+    heroTitle: "Ditado que fica no seu computador.",
     heroNote: "Mac e Windows x64 estão disponíveis agora.",
     privacyTitle: "Suas palavras privadas ficam no seu dispositivo.",
     pricingFreeSub: "Teste o fluxo privado no seu desktop.",
@@ -299,12 +306,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sim. O Dictivo está disponível para macOS e Windows x64.",
     footerBeta: "Mac e Windows - 2026",
     metaDescription:
-      "O Dictivo é um app de ditado privado para macOS e Windows. Dite localmente por padrão e use Cloud Fast como opção quando velocidade importar.",
+      "O Dictivo digita o que você dita em qualquer app do Mac ou Windows. No modo local, o áudio fica no seu dispositivo. $29 uma vez, sem assinatura.",
   },
   zh: {
-    metaTitle: "Dictivo - 私密桌面听写，Cloud Fast 可选",
+    metaTitle: "Mac 和 Windows 离线听写软件 - $29 一次买断 | Dictivo",
     navDownload: "下载",
-    heroEyebrow: "私密桌面听写",
+    heroEyebrow: "Mac 与 Windows 私密听写",
+    heroTitle: "听写内容不离开你的电脑。",
     heroNote: "Mac 与 Windows x64 现已可用。",
     privacyTitle: "你的私密内容留在本设备上。",
     pricingFreeSub: "在桌面端试用隐私优先的流程。",
@@ -322,12 +330,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "可以。Dictivo 已支持 macOS 与 Windows x64。",
     footerBeta: "Mac 与 Windows - 2026",
     metaDescription:
-      "Dictivo 是面向 macOS 和 Windows 的私密优先桌面听写应用。默认本地听写，需要速度时可选择 Cloud Fast。",
+      "Dictivo 一键把语音转成文字，输入到 Mac 或 Windows 的任意应用。本地模式下音频不离开设备，可自行用网络测试验证。$29 一次买断，无订阅。",
   },
   ja: {
-    metaTitle: "Dictivo - Cloud Fast を選べるプライベートなデスクトップ音声入力",
+    metaTitle: "Mac・Windows 対応オフライン音声入力アプリ - 買い切り $29 | Dictivo",
     navDownload: "ダウンロード",
-    heroEyebrow: "プライベートなデスクトップ音声入力",
+    heroEyebrow: "Mac・Windows のプライベート音声入力",
+    heroTitle: "音声入力を、あなたのパソコンの中だけで。",
     heroNote: "Mac と Windows x64 が利用可能です。",
     privacyTitle: "プライベートな言葉はデバイスに残ります。",
     pricingFreeSub: "デスクトップでプライバシー重視の流れを試せます。",
@@ -345,12 +354,13 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "はい。Dictivo は macOS と Windows x64 で利用できます。",
     footerBeta: "Mac と Windows - 2026",
     metaDescription:
-      "Dictivo は macOS と Windows 向けのプライベート重視デスクトップ音声入力アプリです。標準はローカル、速度が必要なときだけ Cloud Fast を使えます。",
+      "Dictivo はホットキーひとつで Mac や Windows のどのアプリにも音声をテキスト入力。ローカルモードでは音声が端末の外に出ません。買い切り $29、サブスクなし。",
   },
   ko: {
-    metaTitle: "Dictivo - Cloud Fast를 선택할 수 있는 데스크톱 비공개 받아쓰기",
+    metaTitle: "Mac·Windows 오프라인 받아쓰기 앱 - $29 한 번 결제 | Dictivo",
     navDownload: "다운로드",
-    heroEyebrow: "비공개 데스크톱 받아쓰기",
+    heroEyebrow: "Mac·Windows 비공개 받아쓰기",
+    heroTitle: "받아쓰기가 내 컴퓨터 안에만 머뭅니다.",
     heroNote: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
     privacyTitle: "내 비공개 말은 기기에 남습니다.",
     pricingFreeSub: "데스크톱에서 개인정보 우선 흐름을 사용해 보세요.",
@@ -368,7 +378,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "예. Dictivo는 macOS와 Windows x64에서 사용할 수 있습니다.",
     footerBeta: "Mac 및 Windows - 2026",
     metaDescription:
-      "Dictivo는 macOS와 Windows용 비공개 우선 데스크톱 받아쓰기 앱입니다. 기본은 로컬 받아쓰기이며, 속도가 필요할 때 Cloud Fast를 선택할 수 있습니다.",
+      "Dictivo는 단축키 하나로 Mac과 Windows의 모든 앱에 음성을 텍스트로 입력합니다. 로컬 모드에서는 오디오가 기기를 떠나지 않습니다. $29 한 번 결제, 구독 없음.",
   },
 };
 
@@ -529,7 +539,7 @@ function homeCopyForRender(code) {
     metaTitle: live.metaTitle ?? base.metaTitle,
     metaDescription: live.metaDescription,
     nav: { ...base.nav, download: live.navDownload },
-    hero: { ...base.hero, eyebrow: live.heroEyebrow, windows: live.heroNote },
+    hero: { ...base.hero, eyebrow: live.heroEyebrow, title: live.heroTitle ?? base.hero.title, windows: live.heroNote },
     privacy: { ...base.privacy, title: live.privacyTitle ?? base.privacy.title },
     pricing: {
       ...base.pricing,
@@ -2471,12 +2481,15 @@ function renderSchema(currentCode, t) {
       name: "Dictivo",
       url: BASE_URL,
       email: "support@dictivo.app",
+      logo: `${BASE_URL}/assets/favicon.svg`,
     },
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
+      image: `${BASE_URL}/assets/dictivo-demo-poster.jpg`,
+      screenshot: `${BASE_URL}/assets/ui/04-dictation-transcript.png`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: pageUrl,
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
@@ -2624,6 +2637,8 @@ function renderCompareSchema(page, currentCode) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
+      image: `${BASE_URL}/assets/dictivo-demo-poster.jpg`,
+      screenshot: `${BASE_URL}/assets/ui/04-dictation-transcript.png`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: BASE_URL,
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
@@ -2866,7 +2881,16 @@ function renderCompareHubSchema(currentCode) {
     })),
   };
 
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+      { "@type": "ListItem", position: 2, name: copy.hubEyebrow, item: localizedCompareUrl(currentCode) },
+    ],
+  };
+
+  return `<script type="application/ld+json">${JSON.stringify([schema, breadcrumb])}</script>`;
 }
 
 function renderCompareHub(currentCode = "en") {
@@ -3105,6 +3129,14 @@ function renderMacGuideSchema(currentCode = "en") {
         acceptedAnswer: { "@type": "Answer", text: answer },
       })),
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        { "@type": "ListItem", position: 2, name: copy.pageMetaTitle, item: macGuideUrl(currentCode) },
+      ],
+    },
   ];
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
@@ -3179,17 +3211,25 @@ function renderOfflineGuideSchema(currentCode = "en") {
   const schema = [
     {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: copy.metaTitle,
+      "@type": "TechArticle",
+      headline: copy.metaTitle,
       description: copy.metaDescription,
       url: offlineDictationGuideUrl(currentCode),
       inLanguage: localeByCode(currentCode).htmlLang,
+      datePublished: OFFLINE_DICTATION_GUIDE_LASTMOD,
       dateModified: OFFLINE_DICTATION_GUIDE_LASTMOD,
-      isPartOf: {
-        "@type": "WebSite",
+      mainEntityOfPage: offlineDictationGuideUrl(currentCode),
+      publisher: {
+        "@type": "Organization",
         name: "Dictivo",
         url: BASE_URL,
       },
+      author: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      about: ["offline dictation", "local dictation", "Mac dictation privacy"],
     },
     {
       "@context": "https://schema.org",
@@ -3200,6 +3240,14 @@ function renderOfflineGuideSchema(currentCode = "en") {
         name: question,
         acceptedAnswer: { "@type": "Answer", text: answer },
       })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: offlineDictationGuideUrl(currentCode) },
+      ],
     },
   ];
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
@@ -3283,6 +3331,7 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(OFFLINE_DICTATION_GUIDE_LASTMOD)}">${html(formatLocalizedDate(OFFLINE_DICTATION_GUIDE_LASTMOD, currentCode))}</time></p>
 
       <section class="doc-section" aria-labelledby="offline-guide-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -3344,6 +3393,11 @@ function renderBenchmarkMethodSchema() {
       dateModified: BENCHMARK_METHOD_GUIDE_LASTMOD,
       mainEntityOfPage: pageUrl,
       publisher: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      author: {
         "@type": "Organization",
         name: "Dictivo",
         url: BASE_URL,
@@ -3449,6 +3503,7 @@ function renderBenchmarkMethodGuidePage() {
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(BENCHMARK_METHOD_GUIDE_LASTMOD)}">${html(formatLocalizedDate(BENCHMARK_METHOD_GUIDE_LASTMOD, "en"))}</time></p>
 
       <section class="doc-section" aria-labelledby="benchmark-method-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -3537,6 +3592,11 @@ function renderSpeechToTextMacGuideSchema() {
       dateModified: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
       mainEntityOfPage: pageUrl,
       publisher: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      author: {
         "@type": "Organization",
         name: "Dictivo",
         url: BASE_URL,
@@ -3652,6 +3712,7 @@ function renderSpeechToTextMacGuidePage() {
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD)}">${html(formatLocalizedDate(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD, "en"))}</time></p>
 
       <section class="doc-section" aria-labelledby="speech-to-text-mac-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -4916,6 +4977,8 @@ function renderRedirects() {
 /downloads/Dictivo-Windows-x64.msi ${windowsMsiUrl} 302
 /privacy /privacy/ 301
 /privacy.html /privacy/ 301
+/privacy/where-dictation-audio-goes.html /privacy/where-dictation-audio-goes/ 301
+/privacy/local-dictation-network-test.html /privacy/local-dictation-network-test/ 301
 /terms /terms/ 301
 /terms.html /terms/ 301
 /refund /refund/ 301
@@ -4996,6 +5059,7 @@ function renderTrustPage(sourcePage, currentCode = "en") {
       name: "Dictivo",
       url: BASE_URL,
       email: "support@dictivo.app",
+      logo: `${BASE_URL}/assets/favicon.svg`,
     },
   ];
   if (page.lastModified) schema[0].dateModified = page.lastModified;
@@ -5377,6 +5441,26 @@ function renderChangelog() {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
+    <script type="application/ld+json">${JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Dictivo Changelog",
+        description: "Release notes for Dictivo, the local-first dictation app with optional Cloud Fast.",
+        url: `${BASE_URL}/changelog/`,
+        inLanguage: "en",
+        dateModified: release.updatedAt,
+        isPartOf: { "@type": "WebSite", name: "Dictivo", url: BASE_URL },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+          { "@type": "ListItem", position: 2, name: "Changelog", item: `${BASE_URL}/changelog/` },
+        ],
+      },
+    ])}</script>
   </head>
   <body>
     <a class="skip-link" href="#changelog">Skip to changelog</a>

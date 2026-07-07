@@ -13,7 +13,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
   navLabel: "Speech-to-text apps for Mac",
-  metaTitle: "Best Speech-to-Text Apps for Mac: Dictation, Voice Typing, and Transcription",
+  metaTitle: "Best Speech-to-Text Apps for Mac: Dictation & Transcription",
   metaDescription:
     "Compare speech-to-text apps for Mac by workflow: live dictation, local privacy, file transcription, cloud AI voice typing, and built-in macOS dictation.",
   eyebrow: "Mac speech-to-text guide",
