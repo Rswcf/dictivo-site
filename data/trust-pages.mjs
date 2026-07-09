@@ -1293,7 +1293,7 @@ export const TRUST_PAGES = [
       {
         title: "What Dictivo is for",
         bullets: [
-          "Private desktop dictation on macOS today, with Windows x64 in validation before public downloads.",
+          "Private desktop dictation with public downloads for macOS and Windows x64.",
           "A free Local tier, a 14-day full Local trial, and optional paid Local upgrade.",
           "Optional Cloud Fast minutes and subscription for selected recordings.",
           "A clear support path through support@dictivo.app.",

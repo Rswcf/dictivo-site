@@ -59,7 +59,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Does Dictivo upload audio in Local mode?", "No. Local mode is designed to keep the recording on the device for transcription."],
       ["Why does Dictivo use the network at all?", "The app checks for updates, activates or refreshes licenses, opens billing flows, handles support, and uses Cloud Fast only when selected."],
       ["When should I use Cloud Fast?", "Use Cloud Fast for low-sensitivity recordings where speed matters more than local-only processing."],
-      ["Is Windows public now?", "No. The public download is macOS today. Windows x64 remains in validation before public downloads."],
+      ["Is Windows public now?", "Yes. Public downloads are available for macOS and Windows x64. The Windows installer is not yet Authenticode-signed, so SmartScreen may show an unknown-publisher notice."],
     ],
   },
   de: {
@@ -120,7 +120,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Lädt Dictivo im Local Mode Audio hoch?", "Nein. Local Mode ist dafür gebaut, die Aufnahme für die Transkription auf dem Gerät zu halten."],
       ["Warum nutzt Dictivo überhaupt das Netzwerk?", "Die App prüft Updates, aktiviert oder aktualisiert Lizenzen, öffnet Zahlungswege, unterstützt Support und nutzt Cloud Fast nur bei Auswahl."],
       ["Wann sollte ich Cloud Fast nutzen?", "Nutzen Sie Cloud Fast für wenig sensible Aufnahmen, wenn Geschwindigkeit wichtiger ist als rein lokale Verarbeitung."],
-      ["Ist Windows öffentlich verfügbar?", "Nein. Der öffentliche Download ist heute macOS. Windows x64 bleibt vor öffentlichen Downloads in Validierung."],
+      ["Ist Windows öffentlich verfügbar?", "Ja. Öffentliche Downloads sind für macOS und Windows x64 verfügbar. Der Windows-Installer ist noch nicht Authenticode-signiert, daher kann Windows SmartScreen eine Warnung anzeigen."],
     ],
   },
   fr: {
@@ -181,7 +181,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Dictivo envoie-t-il l'audio en mode Local ?", "Non. Le mode Local est conçu pour garder l'enregistrement sur l'appareil pendant la transcription."],
       ["Pourquoi Dictivo utilise-t-il le réseau ?", "L'app vérifie les mises à jour, active ou rafraîchit les licences, ouvre la facturation, gère le support et utilise Cloud Fast seulement si vous le sélectionnez."],
       ["Quand utiliser Cloud Fast ?", "Utilisez Cloud Fast pour les enregistrements peu sensibles quand la vitesse compte plus qu'un traitement local uniquement."],
-      ["Windows est-il public ?", "Non. Le téléchargement public est macOS aujourd'hui. Windows x64 reste en validation avant les téléchargements publics."],
+      ["Windows est-il public ?", "Oui. Les téléchargements publics sont disponibles pour macOS et Windows x64. L'installeur Windows n'est pas encore signé Authenticode, SmartScreen peut donc afficher un avertissement."],
     ],
   },
   es: {
@@ -242,7 +242,7 @@ export const PRIVACY_PROOF_COPY = {
       ["¿Dictivo sube audio en modo Local?", "No. El modo Local está diseñado para mantener la grabación en el dispositivo durante la transcripción."],
       ["¿Por qué Dictivo usa la red?", "La app comprueba actualizaciones, activa o refresca licencias, abre flujos de pago, gestiona soporte y usa Cloud Fast solo cuando se selecciona."],
       ["¿Cuándo debería usar Cloud Fast?", "Usa Cloud Fast para grabaciones poco sensibles cuando la velocidad importe más que el procesamiento solo local."],
-      ["¿Windows ya es público?", "No. La descarga pública hoy es macOS. Windows x64 sigue en validación antes de las descargas públicas."],
+      ["¿Windows ya es público?", "Sí. Las descargas públicas están disponibles para macOS y Windows x64. El instalador de Windows aún no está firmado con Authenticode, por lo que SmartScreen puede mostrar un aviso."],
     ],
   },
   it: {
@@ -303,7 +303,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Dictivo carica audio in modalità Local?", "No. La modalità Local è progettata per tenere la registrazione sul dispositivo durante la trascrizione."],
       ["Perché Dictivo usa la rete?", "L'app controlla aggiornamenti, attiva o aggiorna licenze, apre flussi di pagamento, gestisce supporto e usa Cloud Fast solo se selezionato."],
       ["Quando dovrei usare Cloud Fast?", "Usa Cloud Fast per registrazioni poco sensibili quando la velocità conta più dell'elaborazione solo locale."],
-      ["Windows è pubblico?", "No. Il download pubblico oggi è macOS. Windows x64 è ancora in validazione prima dei download pubblici."],
+      ["Windows è pubblico?", "Sì. I download pubblici sono disponibili per macOS e Windows x64. L'installer per Windows non è ancora firmato con Authenticode, quindi SmartScreen può mostrare un avviso."],
     ],
   },
   nl: {
@@ -364,7 +364,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Uploadt Dictivo audio in Local-modus?", "Nee. Local-modus is ontworpen om de opname op het apparaat te houden tijdens transcriptie."],
       ["Waarom gebruikt Dictivo het netwerk?", "De app controleert updates, activeert of ververst licenties, opent betaalflows, behandelt support en gebruikt Cloud Fast alleen wanneer geselecteerd."],
       ["Wanneer moet ik Cloud Fast gebruiken?", "Gebruik Cloud Fast voor weinig gevoelige opnames wanneer snelheid belangrijker is dan alleen lokale verwerking."],
-      ["Is Windows openbaar?", "Nee. De openbare download is vandaag macOS. Windows x64 blijft in validatie vóór publieke downloads."],
+      ["Is Windows openbaar?", "Ja. Openbare downloads zijn beschikbaar voor macOS en Windows x64. Het Windows-installatieprogramma is nog niet Authenticode-ondertekend, dus SmartScreen kan een melding tonen."],
     ],
   },
   pt: {
@@ -425,7 +425,7 @@ export const PRIVACY_PROOF_COPY = {
       ["O Dictivo envia áudio no modo Local?", "Não. O modo Local foi feito para manter a gravação no dispositivo durante a transcrição."],
       ["Por que o Dictivo usa a rede?", "O app verifica atualizações, ativa ou atualiza licenças, abre fluxos de pagamento, lida com suporte e usa Cloud Fast apenas quando selecionado."],
       ["Quando devo usar Cloud Fast?", "Use Cloud Fast para gravações pouco sensíveis quando velocidade importar mais que processamento somente local."],
-      ["Windows está público?", "Não. O download público hoje é macOS. Windows x64 segue em validação antes dos downloads públicos."],
+      ["Windows está público?", "Sim. Os downloads públicos estão disponíveis para macOS e Windows x64. O instalador do Windows ainda não tem assinatura Authenticode, então o SmartScreen pode exibir um aviso."],
     ],
   },
   zh: {
@@ -486,7 +486,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Dictivo 在 Local 模式下会上传音频吗？", "不会。Local 模式的设计目标就是在转录时把录音留在本设备。"],
       ["为什么 Dictivo 还会使用网络？", "应用会检查更新、激活或刷新许可证、打开支付流程、处理支持请求，并且只在你选择时使用 Cloud Fast。"],
       ["什么时候应该使用 Cloud Fast？", "当录音敏感度较低，并且速度比纯本地处理更重要时，可以使用 Cloud Fast。"],
-      ["Windows 已经公开了吗？", "没有。当前公开下载是 macOS。Windows x64 仍在公开下载前验证。"],
+      ["Windows 已经公开了吗？", "是的。macOS 和 Windows x64 均已提供公开下载。Windows 安装包尚未进行 Authenticode 签名，SmartScreen 可能显示未知发布者提示。"],
     ],
   },
   ja: {
@@ -547,7 +547,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Dictivo は Local モードで音声をアップロードしますか？", "いいえ。Local モードは、文字起こし中も録音をデバイス上に保つために設計されています。"],
       ["なぜ Dictivo はネットワークを使うのですか？", "アプリは更新確認、ライセンス更新、支払いフロー、サポート、そして選択時のみ Cloud Fast にネットワークを使います。"],
       ["Cloud Fast はいつ使うべきですか？", "低感度の録音で、速度がローカルのみの処理より重要なときに使います。"],
-      ["Windows は公開されていますか？", "いいえ。現在の公開ダウンロードは macOS です。Windows x64 は公開ダウンロード前の検証中です。"],
+      ["Windows は公開されていますか？", "はい。macOS と Windows x64 の両方で公開ダウンロードを提供しています。Windows インストーラーはまだ Authenticode 署名されていないため、SmartScreen が警告を表示する場合があります。"],
     ],
   },
   ko: {
@@ -608,7 +608,7 @@ export const PRIVACY_PROOF_COPY = {
       ["Dictivo는 Local 모드에서 오디오를 업로드하나요?", "아니요. Local 모드는 전사 중에도 녹음을 기기에 유지하도록 설계되었습니다."],
       ["왜 Dictivo가 네트워크를 사용하나요?", "앱은 업데이트 확인, 라이선스 활성화 또는 갱신, 결제 흐름, 지원, 그리고 선택된 경우의 Cloud Fast에 네트워크를 사용합니다."],
       ["Cloud Fast는 언제 사용해야 하나요?", "민감도가 낮은 녹음에서 속도가 로컬 전용 처리보다 중요할 때 사용하세요."],
-      ["Windows는 공개되었나요?", "아니요. 현재 공개 다운로드는 macOS입니다. Windows x64는 공개 다운로드 전 검증 중입니다."],
+      ["Windows는 공개되었나요?", "네. macOS와 Windows x64 모두 공개 다운로드를 제공합니다. Windows 설치 파일은 아직 Authenticode 서명이 적용되지 않아 SmartScreen 경고가 표시될 수 있습니다."],
     ],
   },
 };
