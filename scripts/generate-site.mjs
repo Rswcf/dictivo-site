@@ -26,6 +26,11 @@ import {
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
   SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES,
 } from "../data/speech-to-text-mac-guide.mjs";
+import {
+  OFFLINE_DICTATION_WINDOWS_GUIDE_COPY,
+  OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
+  OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES,
+} from "../data/offline-dictation-windows-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -691,6 +696,14 @@ function speechToTextMacGuidePath() {
 
 function speechToTextMacGuideUrl() {
   return absoluteUrl(speechToTextMacGuidePath());
+}
+
+function offlineDictationWindowsGuidePath() {
+  return "/guides/offline-dictation-on-windows/";
+}
+
+function offlineDictationWindowsGuideUrl() {
+  return absoluteUrl(offlineDictationWindowsGuidePath());
 }
 
 function mediaKitPath() {
@@ -2371,6 +2384,15 @@ function speechToTextMacGuideHreflangTags() {
   ].join("\n    ");
 }
 
+function offlineDictationWindowsGuideHreflangTags() {
+  const url = offlineDictationWindowsGuideUrl();
+  return [
+    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
+    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
+    `<link rel="canonical" href="${attr(url)}" />`,
+  ].join("\n    ");
+}
+
 function mediaKitHreflangTags() {
   const url = mediaKitUrl();
   return [
@@ -2771,6 +2793,7 @@ function renderCompareLinks(page, currentCode, copy) {
   return `<nav class="compare-resource-links" aria-label="${attr(copy.resourceAria)}">
               <a href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.resourcePricing)}</a>
               ${currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : ""}
+              ${currentCode === "en" ? `<a href="${attr(offlineDictationWindowsGuidePath())}">${html(OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel)}</a>` : ""}
               ${relatedLinks}
             </nav>`;
 }
@@ -3758,6 +3781,194 @@ function renderSpeechToTextMacGuidePage() {
       ${renderSpeechToTextMacRelated(copy)}
 
       ${renderSpeechToTextMacReferences(copy)}
+    </main>
+    ${renderFooterOnly("en")}
+  </body>
+</html>
+`;
+}
+
+function renderOfflineDictationWindowsGuideSchema() {
+  const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
+  const pageUrl = offlineDictationWindowsGuideUrl();
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: copy.metaTitle,
+      description: copy.metaDescription,
+      url: pageUrl,
+      inLanguage: "en",
+      datePublished: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
+      dateModified: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
+      mainEntityOfPage: pageUrl,
+      publisher: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      author: {
+        "@type": "Organization",
+        name: "Dictivo",
+        url: BASE_URL,
+      },
+      about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: "en",
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Windows dictation tools by where audio is processed",
+      itemListElement: copy.appRows.map(([name, bestFit], index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name,
+        description: bestFit,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderOfflineDictationWindowsGuideSection(section, index) {
+  const id = `offline-dictation-windows-section-${index + 1}`;
+  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+        <p class="doc-meta">${html(section.kicker)}</p>
+        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${renderDocBullets(section.bullets)}
+      </section>`;
+}
+
+function renderOfflineDictationWindowsRelated(copy) {
+  return `<section class="doc-section" aria-labelledby="offline-dictation-windows-related">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-dictation-windows-related">${html(copy.relatedTitle)}</h2>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption>${html(copy.relatedTitle)}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page</th>
+                <th scope="col">Use it for</th>
+                <th scope="col">URL</th>
+              </tr>
+            </thead>
+            <tbody>
+${copy.relatedRows
+  .map(
+    ([label, description, url]) => `              <tr>
+                <th scope="row">${html(label)}</th>
+                <td>${html(description)}</td>
+                <td><a href="${attr(url)}">${html(url)}</a></td>
+              </tr>`,
+  )
+  .join("\n")}
+            </tbody>
+          </table>
+        </div>
+      </section>`;
+}
+
+function renderOfflineDictationWindowsReferences(copy) {
+  return `<section class="doc-section" aria-labelledby="offline-dictation-windows-references">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-dictation-windows-references">${html(copy.referencesTitle)}</h2>
+        <ul class="compare-source-list">
+${OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES.map(
+  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
+).join("\n")}
+        </ul>
+      </section>`;
+}
+
+function renderOfflineDictationWindowsGuidePage() {
+  const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
+  const t = homeCopyForRender("en");
+  const canonical = offlineDictationWindowsGuideUrl();
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
+    ${offlineDictationWindowsGuideHreflangTags()}
+    ${assetTags()}
+    ${renderOfflineDictationWindowsGuideSchema()}
+  </head>
+  <body>
+    <a class="skip-link" href="#offline-dictation-windows-guide">${html(copy.navLabel)}</a>
+    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? offlineDictationWindowsGuidePath() : localePath(item.code)) })}
+    <main class="doc-page offline-guide-page" id="offline-dictation-windows-guide">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD)}">${html(formatLocalizedDate(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD, "en"))}</time></p>
+
+      <section class="doc-section" aria-labelledby="offline-dictation-windows-answer">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-dictation-windows-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="offline-dictation-windows-intents">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-dictation-windows-intents">${html(copy.intentTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="offline-dictation-windows-apps">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-dictation-windows-apps">${html(copy.appTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows)}
+      </section>
+
+      ${copy.sections.map(renderOfflineDictationWindowsGuideSection).join("\n\n      ")}
+
+      <section class="doc-section" aria-labelledby="offline-dictation-windows-faq">
+        <p class="doc-meta">${html(copy.eyebrow)}</p>
+        <h2 id="offline-dictation-windows-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+          ${copy.faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+
+      ${renderOfflineDictationWindowsRelated(copy)}
+
+      ${renderOfflineDictationWindowsReferences(copy)}
     </main>
     ${renderFooterOnly("en")}
   </body>
@@ -4920,6 +5131,7 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
     [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
     [SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel, speechToTextMacGuideUrl()],
+    [OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
@@ -5349,6 +5561,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${speechToTextMacGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const offlineDictationWindowsGuideEntry = `  <url>
+    <loc>${offlineDictationWindowsGuideUrl()}</loc>
+    <lastmod>${OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${offlineDictationWindowsGuideUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
+    <priority>0.85</priority>
+  </url>`;
   const mediaKitEntry = `  <url>
     <loc>${mediaKitUrl()}</loc>
     <lastmod>${MEDIA_KIT_LASTMOD}</lastmod>
@@ -5408,6 +5627,7 @@ ${privacyProofEntries}
 ${offlineGuideEntries}
 ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
+${offlineDictationWindowsGuideEntry}
 ${mediaKitEntry}
 ${compareEntries}
 ${trustEntries}
@@ -5715,6 +5935,7 @@ for (const locale of LOCALES) {
 
 write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
+write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write("media-kit/index.html", renderMediaKitPage());
 
 for (const locale of LOCALES) {
