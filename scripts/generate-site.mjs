@@ -5919,6 +5919,7 @@ copyStatic("assets");
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
 copyFileSync(resolve(root, "c5df5e411109537ea4eeadaf411f6618.txt"), resolve(outDir, "c5df5e411109537ea4eeadaf411f6618.txt"));
+copyFileSync(resolve(root, "BingSiteAuth.xml"), resolve(outDir, "BingSiteAuth.xml"));
 copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));
 write("security/index.html", readFileSync(resolve(root, "security.html"), "utf8"));
 
