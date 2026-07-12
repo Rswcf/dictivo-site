@@ -278,6 +278,7 @@ function createAnalyticsVisitId() {
 
 // One id per page load. It links this page view to its CTA and redirect but is
 // never persisted in cookies, localStorage, or a cross-page browser profile.
+const analyticsInstrumentationVersion = "web-linked-v1";
 const analyticsVisitId = createAnalyticsVisitId();
 
 function pageViewPayload() {
@@ -287,6 +288,7 @@ function pageViewPayload() {
   return {
     event: "page_view",
     visitId: analyticsVisitId,
+    instrumentationVersion: analyticsInstrumentationVersion,
     path: window.location.pathname || "/",
     locale: document.documentElement.lang || undefined,
     source: params.get("utm_source") || referral || "direct",
@@ -327,6 +329,7 @@ function downloadEventPayload(link) {
   return {
     event: "download_cta_clicked",
     visitId: analyticsVisitId,
+    instrumentationVersion: analyticsInstrumentationVersion,
     platform,
     releaseVersion:
       link.dataset.releaseVersion ||
@@ -356,8 +359,9 @@ function sendDownloadClick(link) {
 
   if (analyticsVisitId) {
     href.searchParams.set("visitId", analyticsVisitId);
-    link.href = href.toString();
   }
+  href.searchParams.set("instrumentationVersion", analyticsInstrumentationVersion);
+  link.href = href.toString();
 
   const endpoint = new URL("/v1/analytics/download-events", href.origin).toString();
   const body = JSON.stringify(downloadEventPayload(link));

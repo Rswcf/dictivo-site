@@ -245,6 +245,7 @@ for (const file of listFiles()) {
   }
 }
 
+verifyAnalyticsInstrumentation();
 verifyWindowsDownloads();
 
 if (failures.length > 0) {
@@ -268,6 +269,24 @@ function isComparePage(file) {
 
 function isCompareSpokePage(file) {
   return isComparePage(file) && !file.endsWith("compare/index.html");
+}
+
+function verifyAnalyticsInstrumentation() {
+  const siteJsPath = resolve(publicRoot, "assets/site.js");
+  if (!existsSync(siteJsPath)) {
+    failures.push("assets/site.js: missing analytics client");
+    return;
+  }
+  const siteJs = readFileSync(siteJsPath, "utf8");
+  const requiredPatterns = [
+    /analyticsInstrumentationVersion\s*=\s*["']web-linked-v1["']/,
+    /event:\s*["']page_view["'][\s\S]{0,160}instrumentationVersion:\s*analyticsInstrumentationVersion/,
+    /event:\s*["']download_cta_clicked["'][\s\S]{0,160}instrumentationVersion:\s*analyticsInstrumentationVersion/,
+    /searchParams\.set\(["']instrumentationVersion["'],\s*analyticsInstrumentationVersion\)/,
+  ];
+  for (const pattern of requiredPatterns) {
+    if (!pattern.test(siteJs)) failures.push(`assets/site.js: missing current analytics contract ${pattern}`);
+  }
 }
 
 function verifyTombstone(file) {
