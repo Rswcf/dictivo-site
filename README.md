@@ -52,24 +52,30 @@ Every deploy runs:
 ```sh
 node scripts/sync-latest-release.mjs
 node scripts/generate-site.mjs
+node scripts/inject-asset-version.mjs
 ```
 
 That keeps the homepage, localized pages, comparison pages, `downloads.json`, `_redirects`, `sitemap.xml`, and changelog aligned with
-the latest stable desktop release.
+the latest stable desktop release. The final step copies `site.css` and
+`site.js` to content-fingerprinted paths and rewrites generated HTML to those
+paths. Asset correctness therefore does not depend on a successful cache purge.
 
 Required GitHub Actions secret:
 
 - `CLOUDFLARE_API_TOKEN` with Cloudflare Pages edit permission.
 - `CLOUDFLARE_ACCOUNT_ID` for the Cloudflare account that owns the Pages project.
-- `CLOUDFLARE_ZONE_ID` for cache purge. If omitted, the purge script falls back to resolving `dictivo.app` by name.
+- `CLOUDFLARE_ZONE_ID` for the best-effort cache purge. If omitted, the purge
+  script falls back to resolving `dictivo.app` by name. Purge failure should be
+  repaired as operational hygiene, but fingerprinted CSS/JS paths prevent it
+  from serving stale application code after a deploy.
 - `DICTIVO_DESKTOP_TOKEN` is optional and only needed for manual/scheduled fallback syncs that must read the private
   desktop repo's GitHub Release API.
 
 ## Download hosting
 
-The current public website download is macOS. Windows artifacts can still be mirrored under
-`downloads.dictivo.app` for existing testers and in-app updates, but they are not exposed on the public site until
-Windows QA is ready. GitHub Releases remain the archive; the website and updater use the R2-backed download host.
+The public website exposes macOS universal and Windows x64 downloads. GitHub
+Releases remain the archive; the website and updater use the R2-backed download
+host synchronized from the latest stable desktop release.
 
 Expected objects:
 
@@ -114,6 +120,12 @@ not stored in cookies or browser storage. This makes the linked website funnel
 page view -> download click -> download redirect measurable without creating a
 persistent visitor profile. A redirect is download intent, not proof that the
 installer finished downloading or that the app opened.
+
+The same three events carry `instrumentationVersion=web-linked-v1`. Analytics
+decision readiness uses only this current version; older or unversioned page and
+CTA events remain legacy volume and must not be mixed into conversion. Any
+future semantic change to the join contract requires a new instrumentation
+version instead of silently redefining `web-linked-v1`.
 
 ## Local checkout
 
