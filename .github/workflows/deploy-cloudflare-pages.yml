@@ -69,7 +69,7 @@ jobs:
       - name: Check public output surface
         run: node scripts/check-public-output.mjs
 
-      - name: Inject commit SHA into asset URLs
+      - name: Fingerprint CSS and JavaScript assets
         run: node scripts/inject-asset-version.mjs
 
       - name: Deploy to Cloudflare Pages

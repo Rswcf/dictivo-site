@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { copyFileSync, readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
-import { execSync } from "node:child_process";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
@@ -20,20 +20,18 @@ function listHtmlFiles(dir = publicRoot, prefix = "") {
   return files;
 }
 
-function resolveVersionToken() {
-  const fromEnv = process.env.GITHUB_SHA;
-  if (fromEnv && /^[0-9a-f]{7,40}$/i.test(fromEnv)) {
-    return fromEnv.slice(0, 12);
-  }
-  try {
-    return execSync("git rev-parse --short=12 HEAD", { cwd: root }).toString().trim();
-  } catch {
-    return new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  }
-}
-
-const token = resolveVersionToken();
 const PATTERN = /(\/assets\/site\.(?:css|js))\?v=[A-Za-z0-9_.-]+/g;
+const fingerprintedAssets = new Map();
+
+for (const extension of ["css", "js"]) {
+  const sourceName = `site.${extension}`;
+  const sourcePath = resolve(publicRoot, "assets", sourceName);
+  const contents = readFileSync(sourcePath);
+  const fingerprint = createHash("sha256").update(contents).digest("hex").slice(0, 12);
+  const fingerprintedName = `site.${fingerprint}.${extension}`;
+  copyFileSync(sourcePath, resolve(publicRoot, "assets", fingerprintedName));
+  fingerprintedAssets.set(`/assets/${sourceName}`, `/assets/${fingerprintedName}`);
+}
 
 const htmlFiles = listHtmlFiles();
 let totalReplacements = 0;
@@ -45,7 +43,7 @@ for (const file of htmlFiles) {
   let fileReplacements = 0;
   const after = before.replace(PATTERN, (_match, asset) => {
     fileReplacements += 1;
-    return `${asset}?v=${token}`;
+    return fingerprintedAssets.get(asset);
   });
   if (fileReplacements > 0 && after !== before) {
     writeFileSync(path, after);
@@ -59,6 +57,8 @@ if (totalReplacements === 0) {
   process.exit(1);
 }
 
-console.log(`Injected asset version token "${token}" into ${touched.length} file(s):`);
+console.log("Created content-addressed assets:");
+for (const [source, fingerprinted] of fingerprintedAssets) console.log(`  - ${source} -> ${fingerprinted}`);
+console.log(`Injected fingerprinted asset paths into ${touched.length} file(s):`);
 for (const entry of touched) console.log("  - " + entry);
 console.log(`Total replacements: ${totalReplacements}.`);
