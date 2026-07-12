@@ -264,12 +264,29 @@ function cleanReferrer(value) {
   }
 }
 
+function createAnalyticsVisitId() {
+  try {
+    if (typeof crypto.randomUUID === "function") {
+      return crypto.randomUUID().replace(/-/g, "");
+    }
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+  } catch {
+    return undefined;
+  }
+}
+
+// One id per page load. It links this page view to its CTA and redirect but is
+// never persisted in cookies, localStorage, or a cross-page browser profile.
+const analyticsVisitId = createAnalyticsVisitId();
+
 function pageViewPayload() {
   const params = new URLSearchParams(window.location.search);
   const referral = referrerHost();
 
   return {
     event: "page_view",
+    visitId: analyticsVisitId,
     path: window.location.pathname || "/",
     locale: document.documentElement.lang || undefined,
     source: params.get("utm_source") || referral || "direct",
@@ -309,6 +326,7 @@ function downloadEventPayload(link) {
 
   return {
     event: "download_cta_clicked",
+    visitId: analyticsVisitId,
     platform,
     releaseVersion:
       link.dataset.releaseVersion ||
@@ -335,6 +353,11 @@ function sendDownloadClick(link) {
   }
 
   if (!href.pathname.includes("/download/")) return;
+
+  if (analyticsVisitId) {
+    href.searchParams.set("visitId", analyticsVisitId);
+    link.href = href.toString();
+  }
 
   const endpoint = new URL("/v1/analytics/download-events", href.origin).toString();
   const body = JSON.stringify(downloadEventPayload(link));

@@ -108,10 +108,12 @@ UTM fields, and normalized referrer. The API derives country from Cloudflare
 request metadata and browser family from the user agent; raw IP addresses are
 not stored.
 
-Download CTAs also emit `download_cta_clicked` before navigating to the API
-redirect. The redirect records `download_started`, then sends the browser to the
-R2-backed installer URL. Together these events power the Acquisition funnel:
-site visit -> download click -> download started -> download completed.
+Each page load creates an in-memory random `visitId`. It is sent with the page
+view, CTA click, and API redirect, then discarded when the page unloads. It is
+not stored in cookies or browser storage. This makes the linked website funnel
+page view -> download click -> download redirect measurable without creating a
+persistent visitor profile. A redirect is download intent, not proof that the
+installer finished downloading or that the app opened.
 
 ## Local checkout
 
