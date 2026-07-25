@@ -5696,13 +5696,22 @@ function renderChangelog() {
           <span class="release-status">Public beta</span>
           <time class="release-date" datetime="${html(release.updatedAt)}">${html(formatEnglishDate(release.updatedAt))}</time>
         </p>
-        <h2 id="release-${release.version.replaceAll(".", "-")}">Up to 3x faster local dictation on Apple Silicon.</h2>
+        <h2 id="release-${release.version.replaceAll(".", "-")}">Maintenance release.</h2>
+        <ul>
+          <li>No changes to how dictation works. Nothing was added, removed, or moved.</li>
+          <li>Fixed a gap in the opt-in anonymous usage statistics: one onboarding milestone was dropped before you were asked for consent, so the onboarding funnel was reported incomplete. If you never opted in, nothing was sent before and nothing is sent now.</li>
+          <li>Updated the public Mac${hasWindowsRelease ? " and Windows" : ""} download to the latest Dictivo build.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="0.3.36" aria-labelledby="release-0-3-36">
+        <p class="release-line"><span class="release-tag">v0.3.36</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-07-12">July 12, 2026</time></p>
+        <h2 id="release-0-3-36">Up to 3x faster local dictation on Apple Silicon.</h2>
         <ul>
           <li>Local transcription now runs on the Metal GPU on Apple Silicon Macs. Calibration measures both CPU and Metal and picks the faster engine - measured 1.9-2.9x faster end-to-end per model on an M4 Pro.</li>
           <li>The highest-quality local model (Large v3) is now comfortably interactive fully on-device: about 25 seconds per minute of audio on an M4 Pro, down from about 49.</li>
           <li>Settings and the dictation workbench show a live engine indicator (Metal GPU, Vulkan GPU, or CPU) in every display language, refreshed after each dictation so a GPU-to-CPU fallback is visible immediately.</li>
           <li>Measured results and method: <a href="/guides/mac-dictation-benchmark-method/#measured-results">Mac dictation benchmarks</a>.</li>
-          <li>Updated the public Mac${hasWindowsRelease ? " and Windows" : ""} download to the latest Dictivo build.</li>
         </ul>
       </section>
 

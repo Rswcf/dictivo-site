@@ -24,6 +24,12 @@ function isoDate(value = new Date()) {
   return value.toISOString().slice(0, 10);
 }
 
+function publishedDate(value) {
+  if (!value) return undefined;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+}
+
 async function fetchJson(url) {
   const headers = {
     Accept: "application/vnd.github+json",
@@ -201,7 +207,10 @@ function manifestFromGitHubRelease({ release, tag, version, dmg, windowsExe, win
     version,
     tag,
     channel: "stable",
-    updatedAt: isoDate(),
+    // Date the release actually shipped, not the date this site happened to
+    // rebuild — otherwise every unrelated site deploy re-stamps the newest
+    // changelog entry with today and the public history drifts.
+    updatedAt: isoDate(publishedDate(release.published_at)),
     publishedAt: release.published_at || null,
     releaseUrl: release.html_url,
     publicWindowsDownloads: publicWindowsDownloads(),
