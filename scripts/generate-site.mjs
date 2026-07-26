@@ -5699,8 +5699,18 @@ function renderChangelog() {
         <h2 id="release-${release.version.replaceAll(".", "-")}">Maintenance release.</h2>
         <ul>
           <li>No changes to how dictation works. Nothing was added, removed, or moved.</li>
-          <li>Fixed a gap in the opt-in anonymous usage statistics: one onboarding milestone was dropped before you were asked for consent, so the onboarding funnel was reported incomplete. If you never opted in, nothing was sent before and nothing is sent now.</li>
+          <li>For people who turned on anonymous usage statistics, Dictivo now records whether microphone access was granted or denied. It is the most common reason setup fails, and until now it was the one thing we could not see. No audio, no transcripts, no app or file names - just granted or denied, once per install.</li>
+          <li>If you never turned anonymous usage statistics on, this changes nothing: nothing was sent before and nothing is sent now. You can turn it off at any time in Settings.</li>
           <li>Updated the public Mac${hasWindowsRelease ? " and Windows" : ""} download to the latest Dictivo build.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="0.3.37" aria-labelledby="release-0-3-37">
+        <p class="release-line"><span class="release-tag">v0.3.37</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-07-25">July 25, 2026</time></p>
+        <h2 id="release-0-3-37">Maintenance release.</h2>
+        <ul>
+          <li>No changes to how dictation works. Nothing was added, removed, or moved.</li>
+          <li>Fixed a gap in the opt-in anonymous usage statistics: one onboarding milestone was dropped before you were asked for consent, so the onboarding funnel was reported incomplete. If you never opted in, nothing was sent before and nothing is sent now.</li>
         </ul>
       </section>
 
