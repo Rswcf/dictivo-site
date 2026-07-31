@@ -32,6 +32,7 @@ import {
   OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES,
 } from "../data/offline-dictation-windows-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
+import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
@@ -2290,12 +2291,8 @@ function assetTags() {
     <meta name="google-site-verification" content="${attr(GOOGLE_SITE_VERIFICATION)}" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="preload" as="image" href="/assets/dictivo-demo-poster.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
     <script src="/assets/site.js?v=local" defer></script>`;
 }
@@ -4226,6 +4223,10 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="/refund/">${html(ui.footer.refunds)}</a>`,
     `<a href="/contact/">${html(ui.footer.contact)}</a>`,
     `<a href="/about/">${html(ui.footer.about)}</a>`,
+    // § 5 DDG requires the Impressum to be "leicht erkennbar und unmittelbar
+    // erreichbar" — a footer link on every page is the accepted way to do
+    // that. Appears only once data/impressum.json is filled in.
+    IMPRESSUM_READY ? `<a href="/impressum/">${html(IMPRESSUM_LABEL)}</a>` : "",
   ].filter(Boolean);
   return links.map((link) => `        ${link}`).join("\n");
 }
@@ -5222,9 +5223,8 @@ function renderNotFound() {
     <meta name="description" content="This Dictivo page is not available." />
     <meta name="theme-color" content="#0a1110" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
   </head>
   <body>
@@ -5660,9 +5660,8 @@ function renderChangelog() {
     ${socialMeta({ title: "Dictivo · Changelog", description: "Release notes for Dictivo, the local-first dictation app with optional Cloud Fast.", url: `${BASE_URL}/changelog/`, htmlLang: "en" })}
     <link rel="canonical" href="${BASE_URL}/changelog/" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
     <script type="application/ld+json">${JSON.stringify([
       {
@@ -6005,6 +6004,15 @@ write("_redirects", renderRedirects());
 write("sitemap.xml", renderSitemap());
 write("changelog.html", renderChangelog());
 write("changelog/index.html", renderChangelog());
+if (!IMPRESSUM_READY) {
+  console.warn(
+    "\n  !! No Impressum published: data/impressum.json still holds FILL_IN placeholders.\n" +
+    "     dictivo.app is a commercial site operated from Germany, so § 5 DDG requires one.\n" +
+    "     Fill the file and re-run this script; the page, footer link and sitemap entry\n" +
+    "     then appear automatically.\n",
+  );
+}
+
 for (const page of TRUST_PAGES) {
   write(`${page.slug}.html`, renderTrustPage(page, "en"));
   write(`${page.slug}/index.html`, renderTrustPage(page, "en"));

@@ -1,0 +1,44 @@
+{
+  "_README": [
+    "Impressum data for dictivo.app (§ 5 DDG — the successor to § 5 TMG since May 2024).",
+    "",
+    "The page at /impressum/ and its footer link DO NOT RENDER while any value below",
+    "still starts with 'FILL_IN'. That is deliberate: a half-filled Impressum published",
+    "to the web is worse than none. Fill the values, run `node scripts/generate-site.mjs`,",
+    "and the page, the footer link, and the sitemap entry all appear on their own.",
+    "",
+    "This is a scaffold, not legal advice. Have the finished text reviewed before you",
+    "rely on it — the exact obligations depend on your Gewerbe status, whether you are",
+    "VAT-registered, and whether the guides count as journalistic-editorial content.",
+    "",
+    "Field notes:",
+    "  legalName    Your full legal name as an Einzelunternehmer. Not 'Dictivo'.",
+    "  address      A real postal address that can receive mail. A P.O. box does not",
+    "               satisfy § 5 DDG.",
+    "  vatId        USt-IdNr per § 27a UStG. Leave empty ('') if you are a",
+    "               Kleinunternehmer under § 19 UStG and have none — the row is",
+    "               then omitted rather than left blank.",
+    "  contentResponsible  § 18 Abs. 2 MStV. Usually the same person and address.",
+    "               Leave empty to omit the section.",
+    "  disputeResolution   § 36 VSBG. State plainly whether you take part in consumer",
+    "               arbitration. Do NOT add a link to the EU ODR platform: it was shut",
+    "               down on 2025-07-20 and linking to it is now itself a defect."
+  ],
+  "legalName": "FILL_IN_LEGAL_NAME",
+  "addressLines": [
+    "FILL_IN_STREET_AND_NUMBER",
+    "FILL_IN_POSTCODE_AND_CITY",
+    "Deutschland"
+  ],
+  "email": "support@dictivo.app",
+  "phone": "",
+  "vatId": "",
+  "contentResponsible": {
+    "name": "FILL_IN_LEGAL_NAME",
+    "addressLines": [
+      "FILL_IN_STREET_AND_NUMBER",
+      "FILL_IN_POSTCODE_AND_CITY"
+    ]
+  },
+  "disputeResolution": "FILL_IN_DISPUTE_RESOLUTION_STATEMENT"
+}

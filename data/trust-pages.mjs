@@ -1,3 +1,5 @@
+import { IMPRESSUM_PAGE } from "./impressum.mjs";
+
 export const TRUST_PAGES = [
   {
     slug: "privacy",
@@ -1320,4 +1322,7 @@ export const TRUST_PAGES = [
       },
     ],
   },
+  // Rendered only once data/impressum.json is filled in; IMPRESSUM_PAGE is
+  // null until then, so nothing half-written reaches the public site.
+  ...(IMPRESSUM_PAGE ? [IMPRESSUM_PAGE] : []),
 ];
