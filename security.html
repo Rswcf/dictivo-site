@@ -72,7 +72,7 @@
         <a href="/#privacy">Privacy</a>
         <a href="/#cloud-fast">Cloud Fast</a>
         <a href="/#pricing">Pricing</a>
-        <a href="/#faq">FAQ</a>
+        <a href="/mac-model-guide/">Mac model guide</a>
         <a href="/#downloads">Downloads</a>
       </nav>
       <a class="header-download" href="/#downloads">Download</a>
@@ -130,20 +130,25 @@
           <li><strong>License activation</strong> — Local and Cloud Fast licenses are activated and cached separately.</li>
           <li><strong>Model downloads</strong> — Local model files download when you choose or re-run local setup.</li>
           <li><strong>Cloud Fast transcription</strong> — only after you select Cloud Fast and record audio.</li>
+          <li><strong>Anonymous usage statistics</strong> — off by default. Only if you turn on “Share anonymous usage statistics” in Settings does the app send metadata-only events (which step of setup was reached, whether microphone access was granted, dictation duration and word count). No audio, no transcript text, no file or app names. You can turn it off again at any time.</li>
+          <li><strong>Trial activation count</strong> — a single ping when the free trial produces its first result, carrying a hashed device ID, the platform, and the app version, so trials can be counted. It is sent once per install, contains no audio, text, or personal data, and is independent of the usage-statistics setting.</li>
         </ul>
         <p>
-          Dictivo does not use third-party ads or hidden tracking in the desktop app.
+          That list is the whole desktop network surface. Dictivo does not use third-party ads, third-party
+          analytics, or hidden tracking in the desktop app, and no request in Local mode carries your audio or
+          your transcript text. If you want to check it yourself, run the
+          <a href="/privacy/local-dictation-network-test/">Local mode network test</a>.
         </p>
       </section>
 
       <section class="doc-section" aria-labelledby="installer-integrity">
         <p class="doc-meta">Installer integrity</p>
-        <h2 id="installer-integrity">Signed builds, verifiable downloads.</h2>
+        <h2 id="installer-integrity">Verifiable downloads, signed where the platform allows it.</h2>
         <p>
           Every public desktop release is prepared for platform security checks before it reaches customers.
         </p>
         <ul>
-          <li>Mac installer — built for Apple Silicon and Intel Macs.</li>
+          <li>Mac installer — built for Apple Silicon and Intel Macs, Developer ID signed and notarized by Apple.</li>
           <li>Windows installer — NSIS and MSI builds for Windows 11 x64, publicly available. Not yet Authenticode-signed, so SmartScreen may show an unknown-publisher notice; verify the SHA-256 checksums published in <a href="/downloads.json">downloads.json</a>.</li>
           <li>Official downloads — available from the Dictivo website.</li>
         </ul>
@@ -166,7 +171,7 @@
           to acknowledge within two business days and to ship a fix or mitigation as quickly as the severity warrants.
         </p>
         <p>
-          Last reviewed <time datetime="2026-05-29">May&nbsp;29,&nbsp;2026</time>.
+          Last reviewed <time datetime="2026-07-26">July&nbsp;26,&nbsp;2026</time>.
         </p>
       </section>
     </main>
@@ -178,21 +183,24 @@
           <span class="brand-name">Dictivo</span>
         </a>
         <p class="footer-tagline">Private dictation first · optional Cloud Fast</p>
-        <p>Mac public beta · 2026</p>
+        <p>Mac and Windows · 2026</p>
       </div>
       <div class="footer-links">
-        <a href="/#privacy">Privacy</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/privacy/where-dictation-audio-goes/">Audio path</a>
+        <a href="/privacy-proof/">Privacy proof</a>
+        <a href="/guides/offline-dictation-on-mac/">Offline Mac dictation</a>
+        <a href="/guides/mac-dictation-benchmark-method/">Mac dictation benchmark method</a>
+        <a href="/guides/best-speech-to-text-apps-for-mac/">Speech-to-text apps for Mac</a>
+        <a href="/media-kit/">Media kit</a>
+        <a href="/privacy/local-dictation-network-test/">Network test</a>
         <a href="/#pricing">Pricing</a>
-        <a href="/#cloud-fast">Cloud Fast</a>
         <a href="/#downloads">Downloads</a>
-        <a href="/changelog/">Changelog</a>
         <a href="/security/">Security</a>
-        <a href="/privacy/">Privacy Policy</a>
         <a href="/terms/">Terms</a>
         <a href="/refund/">Refunds</a>
         <a href="/contact/">Contact</a>
         <a href="/about/">About</a>
-        <!--email_off--><a href="mailto:support@dictivo.app">support@dictivo.app</a><!--/email_off-->
       </div>
     </footer>
   </body>

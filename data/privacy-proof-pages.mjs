@@ -1,4 +1,4 @@
-export const PRIVACY_PROOF_LASTMOD = "2026-06-04";
+export const PRIVACY_PROOF_LASTMOD = "2026-07-26";
 
 export const PRIVACY_PROOF_COPY = {
   en: {
@@ -13,7 +13,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo is local-first, not cloud-only. Local mode keeps speech processing and product data on the device; Cloud Fast is a separate option for recordings you choose to process remotely.",
     answerTitle: "Short answer for private dictation",
     answer:
-      "In Dictivo Local mode, microphone audio, transcripts, history, dictionary terms, snippets, settings, and local model choices stay on the device. Dictivo uses the network for update checks, license or billing actions, support, and optional Cloud Fast. Cloud Fast uploads only the recording you send through that mode.",
+      "In Dictivo Local mode, microphone audio, transcripts, history, dictionary terms, snippets, settings, and local model choices stay on the device. Dictivo uses the network for update checks, license or billing actions, support, and optional Cloud Fast. Cloud Fast uploads only the recording you send through that mode. Anonymous usage statistics, off unless you turn them on in Settings, and a one-time trial activation ping also use the network; neither carries audio or transcript text.",
     sections: [
       {
         title: "Local mode",
@@ -38,7 +38,7 @@ export const PRIVACY_PROOF_COPY = {
           "Update checks ask whether a newer app version is available.",
           "License and billing actions activate purchases, refresh status, manage subscriptions, or support refunds.",
           "Support email happens only when you contact support.",
-          "Cloud Fast uploads only recordings you choose to send through Cloud Fast.",
+          "Cloud Fast uploads only recordings you choose to send through Cloud Fast.", "Anonymous usage statistics are sent only if you turn them on in Settings, and starting the free trial sends one anonymous activation ping; both are metadata only, never audio or transcript text.",
         ],
       },
       {
@@ -74,7 +74,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo ist lokal zuerst, nicht cloud-only. Local Mode hält Spracherkennung und Produktdaten auf dem Gerät; Cloud Fast ist eine separate Option für Aufnahmen, die Sie bewusst remote verarbeiten lassen.",
     answerTitle: "Kurzantwort für privates Diktieren",
     answer:
-      "Im Local Mode von Dictivo bleiben Mikrofonaudio, Transkripte, Verlauf, Wörterbuchbegriffe, Textbausteine, Einstellungen und lokale Modellwahl auf dem Gerät. Dictivo nutzt das Netzwerk für Updates, Lizenz- oder Zahlungsaktionen, Support und optional Cloud Fast. Cloud Fast lädt nur die Aufnahme hoch, die Sie über diesen Modus senden.",
+      "Im Local Mode von Dictivo bleiben Mikrofonaudio, Transkripte, Verlauf, Wörterbuchbegriffe, Textbausteine, Einstellungen und lokale Modellwahl auf dem Gerät. Dictivo nutzt das Netzwerk für Updates, Lizenz- oder Zahlungsaktionen, Support und optional Cloud Fast. Cloud Fast lädt nur die Aufnahme hoch, die Sie über diesen Modus senden. Auch anonyme Nutzungsstatistiken, die aus bleiben, bis Sie sie in den Einstellungen aktivieren, und ein einmaliger Trial-Aktivierungs-Ping nutzen das Netzwerk; keiner davon enthält Audio oder Transkripttext.",
     sections: [
       {
         title: "Local Mode",
@@ -99,7 +99,7 @@ export const PRIVACY_PROOF_COPY = {
           "Update-Checks fragen, ob eine neuere App-Version verfügbar ist.",
           "Lizenz- und Zahlungsaktionen aktivieren Käufe, aktualisieren Status, verwalten Abos oder unterstützen Erstattungen.",
           "Support-E-Mail passiert nur, wenn Sie Support kontaktieren.",
-          "Cloud Fast lädt nur Aufnahmen hoch, die Sie über Cloud Fast senden.",
+          "Cloud Fast lädt nur Aufnahmen hoch, die Sie über Cloud Fast senden.", "Anonyme Nutzungsstatistiken werden nur gesendet, wenn Sie sie in den Einstellungen aktivieren, und der Start der kostenlosen Testphase sendet einen einmaligen anonymen Aktivierungs-Ping; beide enthalten nur Metadaten, niemals Audio oder Transkripttext.",
         ],
       },
       {
@@ -135,7 +135,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo est local d'abord, pas cloud-only. Le mode Local garde le traitement vocal et les données produit sur l'appareil; Cloud Fast reste une option séparée pour les enregistrements que vous choisissez de traiter à distance.",
     answerTitle: "Réponse courte pour une dictée privée",
     answer:
-      "En mode Local, l'audio du micro, les transcriptions, l'historique, les termes du dictionnaire, les extraits, les réglages et les choix de modèles locaux restent sur l'appareil. Dictivo utilise le réseau pour les mises à jour, licences ou paiements, le support et Cloud Fast en option. Cloud Fast envoie uniquement l'enregistrement choisi.",
+      "En mode Local, l'audio du micro, les transcriptions, l'historique, les termes du dictionnaire, les extraits, les réglages et les choix de modèles locaux restent sur l'appareil. Dictivo utilise le réseau pour les mises à jour, licences ou paiements, le support et Cloud Fast en option. Cloud Fast envoie uniquement l'enregistrement choisi. Les statistiques d'utilisation anonymes, désactivées tant que vous ne les activez pas dans les Réglages, et un ping d'activation d'essai unique utilisent aussi le réseau ; aucun des deux ne contient d'audio ni de texte de transcription.",
     sections: [
       {
         title: "Mode Local",
@@ -160,7 +160,7 @@ export const PRIVACY_PROOF_COPY = {
           "Les vérifications de mise à jour demandent si une version plus récente existe.",
           "Les actions de licence et de paiement activent les achats, rafraîchissent le statut, gèrent les abonnements ou aident aux remboursements.",
           "Le support par e-mail n'intervient que si vous contactez le support.",
-          "Cloud Fast envoie uniquement les enregistrements choisis pour Cloud Fast.",
+          "Cloud Fast envoie uniquement les enregistrements choisis pour Cloud Fast.", "Les statistiques d'utilisation anonymes ne sont envoyées que si vous les activez dans les Réglages, et le démarrage de l'essai gratuit envoie un ping d'activation anonyme unique ; les deux ne contiennent que des métadonnées, jamais d'audio ni de texte de transcription.",
         ],
       },
       {
@@ -196,7 +196,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo es local primero, no solo nube. El modo Local mantiene el procesamiento de voz y los datos del producto en el dispositivo; Cloud Fast es una opción separada para grabaciones que eliges procesar remotamente.",
     answerTitle: "Respuesta corta para dictado privado",
     answer:
-      "En el modo Local de Dictivo, el audio del micrófono, las transcripciones, el historial, los términos del diccionario, los fragmentos, los ajustes y la elección de modelos locales permanecen en el dispositivo. Dictivo usa la red para actualizaciones, licencias o pagos, soporte y Cloud Fast opcional. Cloud Fast sube solo la grabación que envías por ese modo.",
+      "En el modo Local de Dictivo, el audio del micrófono, las transcripciones, el historial, los términos del diccionario, los fragmentos, los ajustes y la elección de modelos locales permanecen en el dispositivo. Dictivo usa la red para actualizaciones, licencias o pagos, soporte y Cloud Fast opcional. Cloud Fast sube solo la grabación que envías por ese modo. Las estadísticas de uso anónimas, desactivadas hasta que las actives en Ajustes, y un ping único de activación de la prueba también usan la red; ninguno contiene audio ni texto de transcripción.",
     sections: [
       {
         title: "Modo Local",
@@ -221,7 +221,7 @@ export const PRIVACY_PROOF_COPY = {
           "Las comprobaciones de actualización preguntan si hay una versión nueva.",
           "Las acciones de licencia y pago activan compras, actualizan estado, gestionan suscripciones o ayudan con reembolsos.",
           "El correo de soporte ocurre solo cuando contactas con soporte.",
-          "Cloud Fast sube solo grabaciones que envías por Cloud Fast.",
+          "Cloud Fast sube solo grabaciones que envías por Cloud Fast.", "Las estadísticas de uso anónimas solo se envían si las activas en Ajustes, y al empezar la prueba gratuita se envía un ping de activación anónimo único; ambos son solo metadatos, nunca audio ni texto de transcripción.",
         ],
       },
       {
@@ -257,7 +257,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo è local-first, non cloud-only. La modalità Local mantiene riconoscimento vocale e dati prodotto sul dispositivo; Cloud Fast è un'opzione separata per registrazioni che scegli di elaborare da remoto.",
     answerTitle: "Risposta breve per la dettatura privata",
     answer:
-      "In modalità Local, audio del microfono, trascrizioni, cronologia, termini del dizionario, snippet, impostazioni e scelta dei modelli locali restano sul dispositivo. Dictivo usa la rete per aggiornamenti, licenze o pagamenti, supporto e Cloud Fast opzionale. Cloud Fast carica solo la registrazione inviata tramite quella modalità.",
+      "In modalità Local, audio del microfono, trascrizioni, cronologia, termini del dizionario, snippet, impostazioni e scelta dei modelli locali restano sul dispositivo. Dictivo usa la rete per aggiornamenti, licenze o pagamenti, supporto e Cloud Fast opzionale. Cloud Fast carica solo la registrazione inviata tramite quella modalità. Anche le statistiche d'uso anonime, disattivate finché non le attivi nelle Impostazioni, e un ping di attivazione della prova una tantum usano la rete; nessuno dei due contiene audio o testo del trascritto.",
     sections: [
       {
         title: "Modalità Local",
@@ -282,7 +282,7 @@ export const PRIVACY_PROOF_COPY = {
           "I controlli aggiornamento chiedono se esiste una versione più recente.",
           "Azioni di licenza e pagamento attivano acquisti, aggiornano stato, gestiscono abbonamenti o aiutano i rimborsi.",
           "L'email di supporto avviene solo quando contatti il supporto.",
-          "Cloud Fast carica solo registrazioni che invii tramite Cloud Fast.",
+          "Cloud Fast carica solo registrazioni che invii tramite Cloud Fast.", "Le statistiche d'uso anonime vengono inviate solo se le attivi nelle Impostazioni, e l'avvio della prova gratuita invia un ping di attivazione anonimo una tantum; entrambi contengono solo metadati, mai audio né testo del trascritto.",
         ],
       },
       {
@@ -318,7 +318,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo is local-first, niet cloud-only. Local-modus houdt spraakverwerking en productgegevens op het apparaat; Cloud Fast is een aparte optie voor opnames die je bewust op afstand laat verwerken.",
     answerTitle: "Kort antwoord voor privé dicteren",
     answer:
-      "In Dictivo Local-modus blijven microfoonaudio, transcripties, geschiedenis, woordenboektermen, snippets, instellingen en lokale modelkeuzes op het apparaat. Dictivo gebruikt het netwerk voor updates, licentie- of betaalacties, support en optionele Cloud Fast. Cloud Fast uploadt alleen de opname die je via die modus verstuurt.",
+      "In Dictivo Local-modus blijven microfoonaudio, transcripties, geschiedenis, woordenboektermen, snippets, instellingen en lokale modelkeuzes op het apparaat. Dictivo gebruikt het netwerk voor updates, licentie- of betaalacties, support en optionele Cloud Fast. Cloud Fast uploadt alleen de opname die je via die modus verstuurt. Ook anonieme gebruiksstatistieken, die uit blijven tot je ze in Instellingen aanzet, en een eenmalige activatieping van de proefperiode gebruiken het netwerk; geen van beide bevat audio of transcripttekst.",
     sections: [
       {
         title: "Local-modus",
@@ -343,7 +343,7 @@ export const PRIVACY_PROOF_COPY = {
           "Updatecontroles vragen of er een nieuwere appversie beschikbaar is.",
           "Licentie- en betaalacties activeren aankopen, verversen status, beheren abonnementen of helpen bij terugbetalingen.",
           "Supportmail gebeurt alleen wanneer je support contacteert.",
-          "Cloud Fast uploadt alleen opnames die je via Cloud Fast verstuurt.",
+          "Cloud Fast uploadt alleen opnames die je via Cloud Fast verstuurt.", "Anonieme gebruiksstatistieken worden alleen verstuurd als je ze in Instellingen aanzet, en het starten van de gratis proefperiode stuurt één anonieme activatieping; beide bevatten alleen metadata, nooit audio of transcripttekst.",
         ],
       },
       {
@@ -379,7 +379,7 @@ export const PRIVACY_PROOF_COPY = {
       "O Dictivo é local-first, não cloud-only. O modo Local mantém processamento de fala e dados do produto no dispositivo; Cloud Fast é uma opção separada para gravações que você escolhe processar remotamente.",
     answerTitle: "Resposta curta para ditado privado",
     answer:
-      "No modo Local do Dictivo, áudio do microfone, transcrições, histórico, termos do dicionário, snippets, configurações e escolhas de modelos locais ficam no dispositivo. O Dictivo usa a rede para atualizações, licenças ou pagamentos, suporte e Cloud Fast opcional. Cloud Fast envia apenas a gravação enviada por esse modo.",
+      "No modo Local do Dictivo, áudio do microfone, transcrições, histórico, termos do dicionário, snippets, configurações e escolhas de modelos locais ficam no dispositivo. O Dictivo usa a rede para atualizações, licenças ou pagamentos, suporte e Cloud Fast opcional. Cloud Fast envia apenas a gravação enviada por esse modo. As estatísticas de uso anônimas, desligadas até você ativá-las em Configurações, e um ping único de ativação do teste também usam a rede; nenhum deles contém áudio nem texto de transcrição.",
     sections: [
       {
         title: "Modo Local",
@@ -404,7 +404,7 @@ export const PRIVACY_PROOF_COPY = {
           "Checagens de atualização perguntam se há uma versão mais recente.",
           "Ações de licença e pagamento ativam compras, atualizam status, gerenciam assinaturas ou ajudam com reembolsos.",
           "Email de suporte acontece apenas quando você contata o suporte.",
-          "Cloud Fast envia apenas gravações que você manda pelo Cloud Fast.",
+          "Cloud Fast envia apenas gravações que você manda pelo Cloud Fast.", "As estatísticas de uso anônimas só são enviadas se você as ativar em Configurações, e iniciar o teste gratuito envia um ping de ativação anônimo único; ambos contêm apenas metadados, nunca áudio nem texto de transcrição.",
         ],
       },
       {
@@ -440,7 +440,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo 是本地优先，而不是云端默认。Local 模式把语音处理和产品数据留在本设备；Cloud Fast 是独立选项，只用于你主动选择远程处理的录音。",
     answerTitle: "私密听写的简短答案",
     answer:
-      "在 Dictivo Local 模式下，麦克风音频、转录文本、历史记录、词典条目、文本片段、设置和本地模型选择都会留在本设备。Dictivo 会为了更新检查、许可证或支付操作、支持服务和可选 Cloud Fast 使用网络。Cloud Fast 只上传你通过该模式发送的那段录音。",
+      "在 Dictivo Local 模式下，麦克风音频、转录文本、历史记录、词典条目、文本片段、设置和本地模型选择都会留在本设备。Dictivo 会为了更新检查、许可证或支付操作、支持服务和可选 Cloud Fast 使用网络。Cloud Fast 只上传你通过该模式发送的那段录音。匿名使用统计（除非你在设置中开启，否则不发送）以及一次性试用激活 ping 也会使用网络；两者都不包含音频或转写文本。",
     sections: [
       {
         title: "Local 模式",
@@ -465,7 +465,7 @@ export const PRIVACY_PROOF_COPY = {
           "更新检查用于确认是否有新版本。",
           "许可证和支付操作用于激活购买、刷新状态、管理订阅或处理退款。",
           "支持邮件只会在你主动联系支持时发生。",
-          "Cloud Fast 只上传你主动通过 Cloud Fast 发送的录音。",
+          "Cloud Fast 只上传你主动通过 Cloud Fast 发送的录音。", "匿名使用统计只有在你于设置中开启后才会发送；开始免费试用时会发送一次性匿名激活 ping。两者都只包含元数据，绝不包含音频或转写文本。",
         ],
       },
       {
@@ -501,7 +501,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo はローカル優先であり、クラウド専用ではありません。Local モードは音声処理と製品データをデバイス上に保ちます。Cloud Fast は、選択した録音をリモート処理するための別オプションです。",
     answerTitle: "プライベートな音声入力への短い答え",
     answer:
-      "Dictivo の Local モードでは、マイク音声、文字起こし、履歴、辞書語句、スニペット、設定、ローカルモデル選択がデバイス上に残ります。Dictivo は更新確認、ライセンスや支払い、サポート、任意の Cloud Fast にネットワークを使います。Cloud Fast はそのモードで送信した録音だけをアップロードします。",
+      "Dictivo の Local モードでは、マイク音声、文字起こし、履歴、辞書語句、スニペット、設定、ローカルモデル選択がデバイス上に残ります。Dictivo は更新確認、ライセンスや支払い、サポート、任意の Cloud Fast にネットワークを使います。Cloud Fast はそのモードで送信した録音だけをアップロードします。設定でオンにするまで送信されない匿名の使用統計と、一度だけのトライアル有効化 ping もネットワークを使います。どちらも音声や文字起こしテキストは含みません。",
     sections: [
       {
         title: "Local モード",
@@ -526,7 +526,7 @@ export const PRIVACY_PROOF_COPY = {
           "更新確認は新しいアプリ版があるかを確認します。",
           "ライセンスや支払い操作は購入の有効化、状態更新、購読管理、返金対応に使われます。",
           "サポートメールは、あなたがサポートに連絡したときだけ発生します。",
-          "Cloud Fast は Cloud Fast で送った録音だけをアップロードします。",
+          "Cloud Fast は Cloud Fast で送った録音だけをアップロードします。", "匿名の使用統計は設定でオンにした場合にのみ送信され、無料トライアルの開始時には一度だけ匿名のアクティベーション ping が送られます。どちらもメタデータのみで、音声や文字起こしテキストは含みません。",
         ],
       },
       {
@@ -562,7 +562,7 @@ export const PRIVACY_PROOF_COPY = {
       "Dictivo는 로컬 우선이며 클라우드 전용이 아닙니다. Local 모드는 음성 처리와 제품 데이터를 기기에 유지합니다. Cloud Fast는 사용자가 선택한 녹음을 원격 처리하는 별도 옵션입니다.",
     answerTitle: "비공개 받아쓰기에 대한 짧은 답",
     answer:
-      "Dictivo Local 모드에서는 마이크 오디오, 전사문, 기록, 사전 용어, 스니펫, 설정, 로컬 모델 선택이 기기에 남습니다. Dictivo는 업데이트 확인, 라이선스 또는 결제 작업, 지원, 선택형 Cloud Fast에 네트워크를 사용합니다. Cloud Fast는 해당 모드로 보낸 녹음만 업로드합니다.",
+      "Dictivo Local 모드에서는 마이크 오디오, 전사문, 기록, 사전 용어, 스니펫, 설정, 로컬 모델 선택이 기기에 남습니다. Dictivo는 업데이트 확인, 라이선스 또는 결제 작업, 지원, 선택형 Cloud Fast에 네트워크를 사용합니다. Cloud Fast는 해당 모드로 보낸 녹음만 업로드합니다. 설정에서 켜기 전까지 전송되지 않는 익명 사용 통계와 일회성 체험 활성화 핑도 네트워크를 사용하며, 둘 다 오디오나 전사 텍스트를 포함하지 않습니다.",
     sections: [
       {
         title: "Local 모드",
@@ -587,7 +587,7 @@ export const PRIVACY_PROOF_COPY = {
           "업데이트 확인은 더 새 앱 버전이 있는지 묻습니다.",
           "라이선스와 결제 작업은 구매 활성화, 상태 갱신, 구독 관리, 환불 지원에 쓰입니다.",
           "지원 이메일은 사용자가 지원팀에 연락할 때만 발생합니다.",
-          "Cloud Fast는 Cloud Fast로 보낸 녹음만 업로드합니다.",
+          "Cloud Fast는 Cloud Fast로 보낸 녹음만 업로드합니다.", "익명 사용 통계는 설정에서 켠 경우에만 전송되며, 무료 체험을 시작하면 일회성 익명 활성화 핑이 전송됩니다. 둘 다 메타데이터만 포함하며 오디오나 전사 텍스트는 포함하지 않습니다.",
         ],
       },
       {

@@ -40,6 +40,19 @@ export const TRUST_PAGES = [
         ],
       },
       {
+        title: "Anonymous usage statistics",
+        paragraphs: [
+          "Dictivo can send anonymous, metadata-only usage statistics so setup problems and dead ends can be found. This is off by default. Nothing is sent unless you turn on \"Share anonymous usage statistics\" in Settings, and you can turn it off again at any time. The events describe what happened, not what you said: which setup step was reached, whether microphone access was granted or denied, how long a dictation ran, and how many words it produced. They never include audio, transcript text, file names, or application names.",
+          "Separately from that setting, starting the free Local trial sends one anonymous activation ping so trials can be counted. It carries a hashed device identifier, the platform, and the app version, is sent once per install, and contains no audio, no text, and no personal data.",
+          "Both go to Dictivo's own endpoint. There is no third-party analytics or advertising SDK in the desktop app. The website records anonymous, cookieless page views and download clicks for the same purpose.",
+        ],
+        bullets: [
+          "Usage statistics are off by default and can be turned off again at any time in Settings.",
+          "No dictation audio and no transcript text is ever included in either stream.",
+          "The full desktop network surface is listed on the security page.",
+        ],
+      },
+      {
         title: "Purchases, licenses, and support",
         paragraphs: [
           "When you buy Dictivo, the checkout provider handles payment details, billing address, tax calculation, receipts, and payment security. Dictivo receives the information needed to issue and validate the license.",
@@ -63,7 +76,7 @@ export const TRUST_PAGES = [
       "A direct answer to what happens to dictation audio in Dictivo Local mode and optional Cloud Fast mode.",
     lede:
       "Dictivo has two separate processing paths. Local mode keeps dictation audio on your device. Cloud Fast is optional and sends only the recording you choose for faster remote transcription.",
-    lastModified: "2026-06-06",
+    lastModified: "2026-07-26",
     relatedLinks: [
       { label: "Run the Local mode network test", href: "/privacy/local-dictation-network-test/" },
       { label: "Read the full Privacy Policy", href: "/privacy/" },
@@ -97,7 +110,7 @@ export const TRUST_PAGES = [
       {
         title: "What can use the network",
         paragraphs: [
-          "Dictivo can still use the network for normal product operations such as update checks, model downloads, license actions, billing actions, support, and optional Cloud Fast. Those product operations are different from uploading a Local mode recording for transcription.",
+          "Dictivo can still use the network for normal product operations such as update checks, model downloads, license actions, billing actions, support, and optional Cloud Fast. Those product operations are different from uploading a Local mode recording for transcription. Two of these are easy to overlook: anonymous usage statistics, which stay off unless you turn them on in Settings, and a one-time anonymous ping when the free trial produces its first result. Both carry metadata only, never audio or transcript text.",
           "If you need to verify the boundary yourself, run a Local dictation while a network monitor is open, then compare it with a Cloud Fast dictation. The two tests should not look the same.",
         ],
         bullets: [
@@ -155,7 +168,7 @@ export const TRUST_PAGES = [
           {
             title: "Was das Netzwerk nutzen kann",
             paragraphs: [
-              "Dictivo kann das Netzwerk weiter für normale Produktvorgänge nutzen, etwa Update-Prüfungen, Modell-Downloads, Lizenzaktionen, Abrechnung, Support und optionales Cloud Fast. Diese Vorgänge sind etwas anderes als das Hochladen einer Local mode Aufnahme zur Transkription.",
+              "Dictivo kann das Netzwerk weiter für normale Produktvorgänge nutzen, etwa Update-Prüfungen, Modell-Downloads, Lizenzaktionen, Abrechnung, Support und optionales Cloud Fast. Diese Vorgänge sind etwas anderes als das Hochladen einer Local mode Aufnahme zur Transkription. Zwei davon werden leicht übersehen: anonyme Nutzungsstatistiken, die ausgeschaltet bleiben, bis du sie in den Einstellungen aktivierst, und ein einmaliger anonymer Ping, wenn die kostenlose Testphase ihr erstes Ergebnis liefert. Beide enthalten nur Metadaten, niemals Audio oder Transkripttext.",
               "Wenn du die Grenze selbst prüfen möchtest, führe ein Local-Diktat mit geöffnetem Netzwerkmonitor aus und vergleiche es danach mit einem Cloud Fast Diktat. Die beiden Tests sollten nicht gleich aussehen.",
             ],
             bullets: [
@@ -213,7 +226,7 @@ export const TRUST_PAGES = [
           {
             title: "Ce qui peut utiliser le réseau",
             paragraphs: [
-              "Dictivo peut toujours utiliser le réseau pour les opérations produit normales comme les vérifications de mises à jour, les téléchargements de modèles, les actions de licence, la facturation, le support et Cloud Fast optionnel. Ces opérations sont différentes de l'envoi d'un enregistrement Local pour transcription.",
+              "Dictivo peut toujours utiliser le réseau pour les opérations produit normales comme les vérifications de mises à jour, les téléchargements de modèles, les actions de licence, la facturation, le support et Cloud Fast optionnel. Ces opérations sont différentes de l'envoi d'un enregistrement Local pour transcription. Deux d'entre elles passent facilement inaperçues : les statistiques d'utilisation anonymes, désactivées tant que vous ne les activez pas dans les Réglages, et un ping anonyme unique lorsque l'essai gratuit produit son premier résultat. Les deux ne contiennent que des métadonnées, jamais d'audio ni de texte de transcription.",
               "Pour vérifier cette limite vous-même, lancez une dictée Local avec un moniteur réseau ouvert, puis comparez-la avec une dictée Cloud Fast. Les deux tests ne devraient pas se ressembler.",
             ],
             bullets: [
@@ -271,7 +284,7 @@ export const TRUST_PAGES = [
           {
             title: "Qué puede usar la red",
             paragraphs: [
-              "Dictivo puede seguir usando la red para operaciones normales del producto, como comprobaciones de actualización, descargas de modelos, acciones de licencia, facturación, soporte y Cloud Fast opcional. Esas operaciones son distintas de subir una grabación Local para transcripción.",
+              "Dictivo puede seguir usando la red para operaciones normales del producto, como comprobaciones de actualización, descargas de modelos, acciones de licencia, facturación, soporte y Cloud Fast opcional. Esas operaciones son distintas de subir una grabación Local para transcripción. Dos de ellas pasan desapercibidas con facilidad: las estadísticas de uso anónimas, que siguen desactivadas hasta que las actives en Ajustes, y un ping anónimo único cuando la prueba gratuita produce su primer resultado. Ambas contienen solo metadatos, nunca audio ni texto de transcripción.",
               "Si quieres verificar el límite por tu cuenta, realiza un dictado Local con un monitor de red abierto y compáralo después con un dictado Cloud Fast. Las dos pruebas no deberían verse iguales.",
             ],
             bullets: [
@@ -329,7 +342,7 @@ export const TRUST_PAGES = [
           {
             title: "Cosa può usare la rete",
             paragraphs: [
-              "Dictivo può comunque usare la rete per normali operazioni del prodotto come controlli aggiornamenti, download dei modelli, azioni di licenza, fatturazione, supporto e Cloud Fast opzionale. Queste operazioni sono diverse dal caricamento di una registrazione Local per trascrizione.",
+              "Dictivo può comunque usare la rete per normali operazioni del prodotto come controlli aggiornamenti, download dei modelli, azioni di licenza, fatturazione, supporto e Cloud Fast opzionale. Queste operazioni sono diverse dal caricamento di una registrazione Local per trascrizione. Due di queste sfuggono facilmente: le statistiche d'uso anonime, che restano disattivate finché non le attivi nelle Impostazioni, e un ping anonimo una tantum quando la prova gratuita produce il primo risultato. Entrambe contengono solo metadati, mai audio né testo del trascritto.",
               "Se vuoi verificare il confine da solo, esegui una dettatura Local con un monitor di rete aperto e poi confrontala con una dettatura Cloud Fast. I due test non dovrebbero apparire uguali.",
             ],
             bullets: [
@@ -387,7 +400,7 @@ export const TRUST_PAGES = [
           {
             title: "Wat het netwerk kan gebruiken",
             paragraphs: [
-              "Dictivo kan het netwerk nog steeds gebruiken voor normale productacties zoals updatechecks, modeldownloads, licentieacties, facturering, support en optionele Cloud Fast. Die acties zijn anders dan het uploaden van een Local opname voor transcriptie.",
+              "Dictivo kan het netwerk nog steeds gebruiken voor normale productacties zoals updatechecks, modeldownloads, licentieacties, facturering, support en optionele Cloud Fast. Die acties zijn anders dan het uploaden van een Local opname voor transcriptie. Twee daarvan worden makkelijk over het hoofd gezien: anonieme gebruiksstatistieken, die uit blijven tot je ze in Instellingen aanzet, en een eenmalige anonieme ping wanneer de gratis proefperiode haar eerste resultaat oplevert. Beide bevatten alleen metadata, nooit audio of transcripttekst.",
               "Wil je de grens zelf verifiëren, voer dan een Local dictaat uit met een netwerkmonitor open en vergelijk dat daarna met een Cloud Fast dictaat. De twee tests zouden er niet hetzelfde uit moeten zien.",
             ],
             bullets: [
@@ -445,7 +458,7 @@ export const TRUST_PAGES = [
           {
             title: "O que pode usar a rede",
             paragraphs: [
-              "O Dictivo ainda pode usar a rede para operações normais do produto, como verificações de atualização, downloads de modelos, ações de licença, cobrança, suporte e Cloud Fast opcional. Essas operações são diferentes de enviar uma gravação Local para transcrição.",
+              "O Dictivo ainda pode usar a rede para operações normais do produto, como verificações de atualização, downloads de modelos, ações de licença, cobrança, suporte e Cloud Fast opcional. Essas operações são diferentes de enviar uma gravação Local para transcrição. Duas delas passam facilmente despercebidas: as estatísticas de uso anônimas, que ficam desligadas até você ativá-las em Configurações, e um ping anônimo único quando o teste gratuito produz o primeiro resultado. Ambas contêm apenas metadados, nunca áudio nem texto de transcrição.",
               "Se quiser verificar esse limite, faça um ditado Local com um monitor de rede aberto e compare depois com um ditado Cloud Fast. Os dois testes não devem parecer iguais.",
             ],
             bullets: [
@@ -503,7 +516,7 @@ export const TRUST_PAGES = [
           {
             title: "哪些操作可能使用网络",
             paragraphs: [
-              "Dictivo 仍可能为正常产品操作使用网络，例如更新检查、模型下载、许可证操作、账单操作、支持请求和可选的 Cloud Fast。这些操作不同于把 Local 模式录音上传去转写。",
+              "Dictivo 仍可能为正常产品操作使用网络，例如更新检查、模型下载、许可证操作、账单操作、支持请求和可选的 Cloud Fast。这些操作不同于把 Local 模式录音上传去转写。其中两项容易被忽略：匿名使用统计除非你在设置中开启，否则始终不发送；免费试用首次产生结果时会发送一次性匿名 ping。两者都只包含元数据，绝不包含音频或转写文本。",
               "如果你想自行验证边界，可以打开网络监控工具后执行一次 Local 听写，再和一次 Cloud Fast 听写对比。两次测试不应该看起来一样。",
             ],
             bullets: [
@@ -561,7 +574,7 @@ export const TRUST_PAGES = [
           {
             title: "ネットワークを使う可能性があるもの",
             paragraphs: [
-              "Dictivo は、アップデート確認、モデルダウンロード、ライセンス操作、請求操作、サポート、任意の Cloud Fast など、通常の製品操作でネットワークを使うことがあります。これらは Local 録音を文字起こしのためにアップロードすることとは別です。",
+              "Dictivo は、アップデート確認、モデルダウンロード、ライセンス操作、請求操作、サポート、任意の Cloud Fast など、通常の製品操作でネットワークを使うことがあります。これらは Local 録音を文字起こしのためにアップロードすることとは別です。そのうち 2 つは見落としやすいものです。匿名の使用統計は設定でオンにするまで送信されません。もう 1 つは、無料トライアルが最初の結果を出したときに一度だけ送られる匿名の ping です。どちらもメタデータのみで、音声や文字起こしテキストは含みません。",
               "境界を自分で確認するには、ネットワークモニターを開いた状態で Local 音声入力を実行し、その後 Cloud Fast 音声入力と比較してください。2 つのテストは同じ見え方にはならないはずです。",
             ],
             bullets: [
@@ -619,7 +632,7 @@ export const TRUST_PAGES = [
           {
             title: "네트워크를 사용할 수 있는 경우",
             paragraphs: [
-              "Dictivo는 업데이트 확인, 모델 다운로드, 라이선스 작업, 결제 작업, 지원, 선택형 Cloud Fast 같은 일반 제품 작업에 네트워크를 사용할 수 있습니다. 이는 Local 녹음을 전사를 위해 업로드하는 것과 다릅니다.",
+              "Dictivo는 업데이트 확인, 모델 다운로드, 라이선스 작업, 결제 작업, 지원, 선택형 Cloud Fast 같은 일반 제품 작업에 네트워크를 사용할 수 있습니다. 이는 Local 녹음을 전사를 위해 업로드하는 것과 다릅니다. 이 중 두 가지는 놓치기 쉽습니다. 익명 사용 통계는 설정에서 켜기 전까지 전송되지 않으며, 무료 체험이 첫 결과를 만들 때 일회성 익명 핑이 전송됩니다. 둘 다 메타데이터만 포함하며 오디오나 전사 텍스트는 포함하지 않습니다.",
               "경계를 직접 확인하려면 네트워크 모니터를 연 상태에서 Local 받아쓰기를 실행한 뒤 Cloud Fast 받아쓰기와 비교하세요. 두 테스트는 같아 보이지 않아야 합니다.",
             ],
             bullets: [
@@ -648,7 +661,7 @@ export const TRUST_PAGES = [
       "A practical network-monitor checklist for verifying that Dictivo Local mode keeps dictation audio on the device.",
     lede:
       "Dictivo Local mode is designed so microphone audio is processed on your device. This page explains how to verify that boundary with a network monitor before using Dictivo for sensitive dictation.",
-    lastModified: "2026-06-06",
+    lastModified: "2026-07-26",
     relatedLinks: [
       { label: "Where dictation audio goes", href: "/privacy/where-dictation-audio-goes/" },
       { label: "Read the full Privacy Policy", href: "/privacy/" },
@@ -677,7 +690,7 @@ export const TRUST_PAGES = [
         title: "Expected network surface",
         paragraphs: [
           "Dictivo does not promise that the desktop app never uses the network. The privacy claim is narrower and more useful: Local dictation should not send the recording or transcript to a transcription server.",
-          "If your monitor shows activity, check whether it matches a visible product action: update check, model download, license or billing action, support, or Cloud Fast. If it appears during a Local dictation without any of those actions, contact support with the timestamp, app version, operating system, and destination host.",
+          "If your monitor shows activity, check whether it matches a visible product action: update check, model download, license or billing action, support, or Cloud Fast. If it appears during a Local dictation without any of those actions, contact support with the timestamp, app version, operating system, and destination host. Before you report anything, note two connections that also belong on that list: anonymous usage statistics, if you turned them on in Settings, and a one-time anonymous activation ping when the free trial produces its first result. Both go to api.dictivo.app and carry metadata only, never audio or transcript text.",
         ],
         bullets: [
           "Use Local mode for sensitive audio.",
@@ -688,7 +701,7 @@ export const TRUST_PAGES = [
     ],
     faqs: [
       ["Does Dictivo Local mode upload audio?", "No. Local mode is designed to keep dictation audio on the device for transcription."],
-      ["Why might I still see Dictivo use the network?", "The app can use the network for updates, model downloads, license or billing actions, support, and optional Cloud Fast."],
+      ["Why might I still see Dictivo use the network?", "The app can use the network for updates, model downloads, license or billing actions, support, and optional Cloud Fast. Anonymous usage statistics, if you turned them on, and a one-time trial activation ping also use it; both are metadata only."],
       ["Should Cloud Fast show network activity?", "Yes. Cloud Fast is the optional speed mode that sends the selected recording for remote transcription."],
       ["What should I do if a Local dictation opens an unexpected connection?", "Record the timestamp, app version, operating system, and destination host, then email support@dictivo.app so the discrepancy can be investigated."],
     ],
@@ -729,7 +742,7 @@ export const TRUST_PAGES = [
             title: "Erwartete Netzwerkfläche",
             paragraphs: [
               "Dictivo verspricht nicht, dass die Desktop-App niemals Netzwerk nutzt. Die Datenschutzbehauptung ist enger und nützlicher: Local-Diktat sollte die Aufnahme oder das Transkript nicht an einen Transkriptionsserver senden.",
-              "Wenn dein Monitor Aktivität zeigt, prüfe, ob sie zu einer sichtbaren Produktaktion passt: Update-Prüfung, Modell-Download, Lizenz- oder Abrechnungsaktion, Support oder Cloud Fast. Wenn sie während eines Local-Diktats ohne solche Aktion erscheint, kontaktiere den Support mit Zeitstempel, App-Version, Betriebssystem und Zielhost.",
+              "Wenn dein Monitor Aktivität zeigt, prüfe, ob sie zu einer sichtbaren Produktaktion passt: Update-Prüfung, Modell-Download, Lizenz- oder Abrechnungsaktion, Support oder Cloud Fast. Wenn sie während eines Local-Diktats ohne solche Aktion erscheint, kontaktiere den Support mit Zeitstempel, App-Version, Betriebssystem und Zielhost. Bevor du etwas meldest: Zwei weitere Verbindungen gehören ebenfalls auf diese Liste — anonyme Nutzungsstatistiken, falls du sie in den Einstellungen aktiviert hast, und ein einmaliger anonymer Aktivierungs-Ping, wenn die kostenlose Testphase ihr erstes Ergebnis liefert. Beide gehen an api.dictivo.app und enthalten nur Metadaten, niemals Audio oder Transkripttext.",
             ],
             bullets: [
               "Nutze Local mode für sensibles Audio.",
@@ -740,7 +753,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Lädt Dictivo Local mode Audio hoch?", "Nein. Local mode ist so ausgelegt, dass Diktat-Audio zur Transkription auf dem Gerät bleibt."],
-          ["Warum kann Dictivo trotzdem das Netzwerk nutzen?", "Die App kann das Netzwerk für Updates, Modell-Downloads, Lizenz- oder Abrechnungsaktionen, Support und optionales Cloud Fast nutzen."],
+          ["Warum kann Dictivo trotzdem das Netzwerk nutzen?", "Die App kann das Netzwerk für Updates, Modell-Downloads, Lizenz- oder Abrechnungsaktionen, Support und optionales Cloud Fast nutzen. Auch anonyme Nutzungsstatistiken, falls aktiviert, und ein einmaliger Trial-Aktivierungs-Ping nutzen es; beide enthalten nur Metadaten."],
           ["Sollte Cloud Fast Netzwerkaktivität zeigen?", "Ja. Cloud Fast ist der optionale Schnellmodus, der die ausgewählte Aufnahme für entfernte Transkription sendet."],
           ["Was tun, wenn Local-Diktat eine unerwartete Verbindung öffnet?", "Notiere Zeitstempel, App-Version, Betriebssystem und Zielhost und schreibe an support@dictivo.app, damit die Abweichung geprüft werden kann."],
         ],
@@ -781,7 +794,7 @@ export const TRUST_PAGES = [
             title: "Surface réseau attendue",
             paragraphs: [
               "Dictivo ne promet pas que l'app de bureau n'utilise jamais le réseau. La promesse de confidentialité est plus précise : la dictée Local ne devrait pas envoyer l'enregistrement ou le transcript à un serveur de transcription.",
-              "Si votre moniteur montre une activité, vérifiez si elle correspond à une action visible : mise à jour, téléchargement de modèle, licence, facturation, support ou Cloud Fast. Si elle apparaît pendant une dictée Local sans ces actions, contactez le support avec l'heure, la version de l'app, le système et l'hôte distant.",
+              "Si votre moniteur montre une activité, vérifiez si elle correspond à une action visible : mise à jour, téléchargement de modèle, licence, facturation, support ou Cloud Fast. Si elle apparaît pendant une dictée Local sans ces actions, contactez le support avec l'heure, la version de l'app, le système et l'hôte distant. Avant de signaler quoi que ce soit, notez deux connexions qui font aussi partie de cette liste : les statistiques d'utilisation anonymes, si vous les avez activées dans les Réglages, et un ping d'activation anonyme unique lorsque l'essai gratuit produit son premier résultat. Les deux vont vers api.dictivo.app et ne contiennent que des métadonnées, jamais d'audio ni de texte de transcription.",
             ],
             bullets: [
               "Utilisez le mode Local pour l'audio sensible.",
@@ -792,7 +805,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Le mode Local de Dictivo téléverse-t-il l'audio ?", "Non. Le mode Local est conçu pour garder l'audio de dictée sur l'appareil pour la transcription."],
-          ["Pourquoi Dictivo peut-il quand même utiliser le réseau ?", "L'app peut utiliser le réseau pour les mises à jour, téléchargements de modèles, licences, facturation, support et Cloud Fast optionnel."],
+          ["Pourquoi Dictivo peut-il quand même utiliser le réseau ?", "L'app peut utiliser le réseau pour les mises à jour, téléchargements de modèles, licences, facturation, support et Cloud Fast optionnel. Les statistiques d'utilisation anonymes, si vous les avez activées, et un ping d'activation d'essai unique l'utilisent aussi ; les deux ne contiennent que des métadonnées."],
           ["Cloud Fast doit-il montrer une activité réseau ?", "Oui. Cloud Fast est le mode rapide optionnel qui envoie l'enregistrement sélectionné pour transcription distante."],
           ["Que faire si une dictée Local ouvre une connexion inattendue ?", "Notez l'heure, la version de l'app, le système et l'hôte distant, puis écrivez à support@dictivo.app pour investigation."],
         ],
@@ -833,7 +846,7 @@ export const TRUST_PAGES = [
             title: "Superficie de red esperada",
             paragraphs: [
               "Dictivo no promete que la app de escritorio nunca use la red. La afirmación de privacidad es más estrecha y útil: el dictado Local no debería enviar la grabación ni la transcripción a un servidor de transcripción.",
-              "Si tu monitor muestra actividad, comprueba si coincide con una acción visible: actualización, descarga de modelo, licencia, facturación, soporte o Cloud Fast. Si aparece durante un dictado Local sin esas acciones, contacta a soporte con hora, versión de la app, sistema operativo y host de destino.",
+              "Si tu monitor muestra actividad, comprueba si coincide con una acción visible: actualización, descarga de modelo, licencia, facturación, soporte o Cloud Fast. Si aparece durante un dictado Local sin esas acciones, contacta a soporte con hora, versión de la app, sistema operativo y host de destino. Antes de informar de nada, ten en cuenta dos conexiones que también forman parte de esa lista: las estadísticas de uso anónimas, si las activaste en Ajustes, y un ping de activación anónimo único cuando la prueba gratuita produce su primer resultado. Ambas van a api.dictivo.app y contienen solo metadatos, nunca audio ni texto de transcripción.",
             ],
             bullets: [
               "Usa el modo Local para audio sensible.",
@@ -844,7 +857,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["¿El modo Local de Dictivo sube audio?", "No. El modo Local está diseñado para mantener el audio de dictado en el dispositivo para la transcripción."],
-          ["¿Por qué Dictivo podría usar la red?", "La app puede usar la red para actualizaciones, descargas de modelos, licencias, facturación, soporte y Cloud Fast opcional."],
+          ["¿Por qué Dictivo podría usar la red?", "La app puede usar la red para actualizaciones, descargas de modelos, licencias, facturación, soporte y Cloud Fast opcional. Las estadísticas de uso anónimas, si las activaste, y un ping único de activación de la prueba también la usan; ambas son solo metadatos."],
           ["¿Cloud Fast debería mostrar actividad de red?", "Sí. Cloud Fast es el modo rápido opcional que envía la grabación seleccionada para transcripción remota."],
           ["¿Qué hago si un dictado Local abre una conexión inesperada?", "Registra la hora, versión de la app, sistema operativo y host de destino, y escribe a support@dictivo.app para investigarlo."],
         ],
@@ -885,7 +898,7 @@ export const TRUST_PAGES = [
             title: "Superficie di rete prevista",
             paragraphs: [
               "Dictivo non promette che l'app desktop non usi mai la rete. La promessa privacy è più precisa: la dettatura Local non dovrebbe inviare registrazione o trascrizione a un server di trascrizione.",
-              "Se il monitor mostra attività, verifica se corrisponde a un'azione visibile: aggiornamento, download modello, licenza, fatturazione, supporto o Cloud Fast. Se compare durante una dettatura Local senza queste azioni, contatta il supporto con orario, versione app, sistema operativo e host di destinazione.",
+              "Se il monitor mostra attività, verifica se corrisponde a un'azione visibile: aggiornamento, download modello, licenza, fatturazione, supporto o Cloud Fast. Se compare durante una dettatura Local senza queste azioni, contatta il supporto con orario, versione app, sistema operativo e host di destinazione. Prima di segnalare qualcosa, considera due connessioni che appartengono anch'esse a quell'elenco: le statistiche d'uso anonime, se le hai attivate nelle Impostazioni, e un ping di attivazione anonimo una tantum quando la prova gratuita produce il primo risultato. Entrambe vanno a api.dictivo.app e contengono solo metadati, mai audio né testo del trascritto.",
             ],
             bullets: [
               "Usa Local mode per audio sensibile.",
@@ -896,7 +909,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Dictivo Local mode carica audio?", "No. Local mode è progettato per mantenere l'audio della dettatura sul dispositivo per la trascrizione."],
-          ["Perché Dictivo potrebbe usare la rete?", "L'app può usare la rete per aggiornamenti, download dei modelli, licenze, fatturazione, supporto e Cloud Fast opzionale."],
+          ["Perché Dictivo potrebbe usare la rete?", "L'app può usare la rete per aggiornamenti, download dei modelli, licenze, fatturazione, supporto e Cloud Fast opzionale. Anche le statistiche d'uso anonime, se attivate, e un ping di attivazione della prova una tantum la usano; entrambi contengono solo metadati."],
           ["Cloud Fast dovrebbe mostrare attività di rete?", "Sì. Cloud Fast è la modalità veloce opzionale che invia la registrazione selezionata per trascrizione remota."],
           ["Cosa fare se una dettatura Local apre una connessione inattesa?", "Registra orario, versione app, sistema operativo e host di destinazione, poi scrivi a support@dictivo.app per la verifica."],
         ],
@@ -937,7 +950,7 @@ export const TRUST_PAGES = [
             title: "Verwacht netwerkoppervlak",
             paragraphs: [
               "Dictivo belooft niet dat de desktopapp nooit het netwerk gebruikt. De privacyclaim is smaller en nuttiger: Local dictation zou de opname of het transcript niet naar een transcriptieserver moeten sturen.",
-              "Als je monitor activiteit toont, controleer dan of die past bij een zichtbare productactie: updatecheck, modeldownload, licentie of facturering, support of Cloud Fast. Verschijnt die activiteit tijdens een Local dictaat zonder zo'n actie, neem dan contact op met support met tijdstip, appversie, besturingssysteem en doelhost.",
+              "Als je monitor activiteit toont, controleer dan of die past bij een zichtbare productactie: updatecheck, modeldownload, licentie of facturering, support of Cloud Fast. Verschijnt die activiteit tijdens een Local dictaat zonder zo'n actie, neem dan contact op met support met tijdstip, appversie, besturingssysteem en doelhost. Voordat je iets meldt: twee verbindingen horen ook in dat lijstje — anonieme gebruiksstatistieken, als je die in Instellingen hebt aangezet, en een eenmalige anonieme activatieping wanneer de gratis proefperiode haar eerste resultaat oplevert. Beide gaan naar api.dictivo.app en bevatten alleen metadata, nooit audio of transcripttekst.",
             ],
             bullets: [
               "Gebruik Local mode voor gevoelige audio.",
@@ -948,7 +961,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Uploadt Dictivo Local mode audio?", "Nee. Local mode is ontworpen om dicteeraudio op het apparaat te houden voor transcriptie."],
-          ["Waarom kan Dictivo toch het netwerk gebruiken?", "De app kan het netwerk gebruiken voor updates, modeldownloads, licentie of facturering, support en optionele Cloud Fast."],
+          ["Waarom kan Dictivo toch het netwerk gebruiken?", "De app kan het netwerk gebruiken voor updates, modeldownloads, licentie of facturering, support en optionele Cloud Fast. Ook anonieme gebruiksstatistieken, als je die hebt aangezet, en een eenmalige activatieping van de proefperiode gebruiken het; beide bevatten alleen metadata."],
           ["Moet Cloud Fast netwerkactiviteit tonen?", "Ja. Cloud Fast is de optionele snelle modus die de geselecteerde opname verstuurt voor externe transcriptie."],
           ["Wat als een Local dictaat een onverwachte verbinding opent?", "Noteer tijdstip, appversie, besturingssysteem en doelhost, en mail support@dictivo.app zodat het verschil onderzocht kan worden."],
         ],
@@ -989,7 +1002,7 @@ export const TRUST_PAGES = [
             title: "Superfície de rede esperada",
             paragraphs: [
               "O Dictivo não promete que o app desktop nunca use a rede. A promessa de privacidade é mais específica e útil: o ditado Local não deve enviar a gravação ou a transcrição para um servidor de transcrição.",
-              "Se o monitor mostrar atividade, veja se ela corresponde a uma ação visível: atualização, download de modelo, licença, cobrança, suporte ou Cloud Fast. Se aparecer durante um ditado Local sem essas ações, contate o suporte com horário, versão do app, sistema operacional e host de destino.",
+              "Se o monitor mostrar atividade, veja se ela corresponde a uma ação visível: atualização, download de modelo, licença, cobrança, suporte ou Cloud Fast. Se aparecer durante um ditado Local sem essas ações, contate o suporte com horário, versão do app, sistema operacional e host de destino. Antes de relatar qualquer coisa, considere duas conexões que também fazem parte dessa lista: as estatísticas de uso anônimas, se você as ativou em Configurações, e um ping de ativação anônimo único quando o teste gratuito produz o primeiro resultado. Ambas vão para api.dictivo.app e contêm apenas metadados, nunca áudio nem texto de transcrição.",
             ],
             bullets: [
               "Use o modo Local para áudio sensível.",
@@ -1000,7 +1013,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["O modo Local do Dictivo envia áudio?", "Não. O modo Local foi projetado para manter o áudio do ditado no dispositivo para transcrição."],
-          ["Por que o Dictivo ainda pode usar a rede?", "O app pode usar a rede para atualizações, downloads de modelos, licença ou cobrança, suporte e Cloud Fast opcional."],
+          ["Por que o Dictivo ainda pode usar a rede?", "O app pode usar a rede para atualizações, downloads de modelos, licença ou cobrança, suporte e Cloud Fast opcional. As estatísticas de uso anônimas, se você as ativou, e um ping único de ativação do teste também a usam; ambos contêm apenas metadados."],
           ["O Cloud Fast deve mostrar atividade de rede?", "Sim. O Cloud Fast é o modo rápido opcional que envia a gravação selecionada para transcrição remota."],
           ["O que fazer se um ditado Local abrir uma conexão inesperada?", "Registre horário, versão do app, sistema operacional e host de destino, e escreva para support@dictivo.app para investigação."],
         ],
@@ -1041,7 +1054,7 @@ export const TRUST_PAGES = [
             title: "预期的网络范围",
             paragraphs: [
               "Dictivo 并不承诺桌面应用永远不使用网络。更准确也更有用的隐私声明是：Local 听写不应把录音或转写文本发送到转写服务器。",
-              "如果监控工具显示网络活动，请先判断它是否对应可见的产品操作：更新检查、模型下载、许可证或账单操作、支持请求或 Cloud Fast。如果它在没有这些操作的 Local 听写期间出现，请带上时间戳、应用版本、操作系统和目标主机联系支持。",
+              "如果监控工具显示网络活动，请先判断它是否对应可见的产品操作：更新检查、模型下载、许可证或账单操作、支持请求或 Cloud Fast。如果它在没有这些操作的 Local 听写期间出现，请带上时间戳、应用版本、操作系统和目标主机联系支持。在报告之前请注意，还有两类连接同样属于上述清单：匿名使用统计（若你在设置中开启过），以及免费试用首次产生结果时的一次性匿名激活 ping。两者都发往 api.dictivo.app，且只包含元数据，绝不包含音频或转写文本。",
             ],
             bullets: [
               "敏感音频请使用 Local 模式。",
@@ -1052,7 +1065,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Dictivo Local 模式会上传音频吗？", "不会。Local 模式的设计目标是把听写音频留在设备上完成转写。"],
-          ["为什么我仍可能看到 Dictivo 使用网络？", "应用可能为更新、模型下载、许可证或账单操作、支持请求以及可选 Cloud Fast 使用网络。"],
+          ["为什么我仍可能看到 Dictivo 使用网络？", "应用可能为更新、模型下载、许可证或账单操作、支持请求以及可选 Cloud Fast 使用网络。匿名使用统计（若已开启）以及一次性试用激活 ping 也会使用网络；两者都只包含元数据。"],
           ["Cloud Fast 应该出现网络活动吗？", "应该。Cloud Fast 是可选加速模式，会发送你选中的录音进行远程转写。"],
           ["如果 Local 听写打开了意外连接怎么办？", "记录时间戳、应用版本、操作系统和目标主机，然后发送到 support@dictivo.app 以便调查。"],
         ],
@@ -1093,7 +1106,7 @@ export const TRUST_PAGES = [
             title: "想定されるネットワーク範囲",
             paragraphs: [
               "Dictivo はデスクトップアプリが一切ネットワークを使わないとは約束していません。プライバシーの主張はより狭く実用的です。Local 音声入力は録音や transcript を文字起こしサーバーへ送信しないはずです。",
-              "モニターに活動が表示された場合は、アップデート確認、モデルダウンロード、ライセンスや請求、サポート、Cloud Fast など目に見える製品操作と一致するか確認してください。そうした操作なしに Local 音声入力中に表示される場合は、時刻、アプリ版、OS、接続先ホストを添えてサポートへ連絡してください。",
+              "モニターに活動が表示された場合は、アップデート確認、モデルダウンロード、ライセンスや請求、サポート、Cloud Fast など目に見える製品操作と一致するか確認してください。そうした操作なしに Local 音声入力中に表示される場合は、時刻、アプリ版、OS、接続先ホストを添えてサポートへ連絡してください。報告する前に、この一覧に含まれる接続がもう 2 つあることをご確認ください。設定でオンにした場合の匿名の使用統計と、無料トライアルが最初の結果を出したときに一度だけ送られる匿名のアクティベーション ping です。どちらも api.dictivo.app に送られ、メタデータのみで、音声や文字起こしテキストは含みません。",
             ],
             bullets: [
               "機密性の高い音声には Local モードを使ってください。",
@@ -1104,7 +1117,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Dictivo Local モードは音声をアップロードしますか？", "いいえ。Local モードは音声入力の音声をデバイス上に保持して文字起こしする設計です。"],
-          ["なぜ Dictivo がネットワークを使うことがありますか？", "アプリはアップデート、モデルダウンロード、ライセンスや請求、サポート、任意の Cloud Fast でネットワークを使うことがあります。"],
+          ["なぜ Dictivo がネットワークを使うことがありますか？", "アプリはアップデート、モデルダウンロード、ライセンスや請求、サポート、任意の Cloud Fast でネットワークを使うことがあります。オンにした場合の匿名の使用統計と、一度だけのトライアル有効化 ping もネットワークを使います。どちらもメタデータのみです。"],
           ["Cloud Fast ではネットワーク活動が出るべきですか？", "はい。Cloud Fast は選択した録音をリモート文字起こしへ送る任意の高速モードです。"],
           ["Local 音声入力で予期しない接続が開いたら？", "時刻、アプリ版、OS、接続先ホストを記録し、support@dictivo.app へ送って調査を依頼してください。"],
         ],
@@ -1145,7 +1158,7 @@ export const TRUST_PAGES = [
             title: "예상되는 네트워크 범위",
             paragraphs: [
               "Dictivo는 데스크톱 앱이 네트워크를 전혀 쓰지 않는다고 약속하지 않습니다. 개인정보 주장은 더 좁고 실용적입니다. Local 받아쓰기는 녹음이나 transcript를 전사 서버로 보내지 않아야 합니다.",
-              "모니터에 활동이 보이면 업데이트 확인, 모델 다운로드, 라이선스 또는 결제, 지원, Cloud Fast 같은 보이는 제품 작업과 일치하는지 확인하세요. 그런 작업 없이 Local 받아쓰기 중 나타나면 시각, 앱 버전, 운영체제, 대상 호스트를 포함해 지원팀에 문의하세요.",
+              "모니터에 활동이 보이면 업데이트 확인, 모델 다운로드, 라이선스 또는 결제, 지원, Cloud Fast 같은 보이는 제품 작업과 일치하는지 확인하세요. 그런 작업 없이 Local 받아쓰기 중 나타나면 시각, 앱 버전, 운영체제, 대상 호스트를 포함해 지원팀에 문의하세요. 신고하기 전에, 이 목록에 함께 속하는 연결이 두 가지 더 있다는 점을 확인하세요. 설정에서 켠 경우의 익명 사용 통계와, 무료 체험이 첫 결과를 만들 때 전송되는 일회성 익명 활성화 핑입니다. 둘 다 api.dictivo.app으로 전송되며 메타데이터만 포함하고 오디오나 전사 텍스트는 포함하지 않습니다.",
             ],
             bullets: [
               "민감한 오디오에는 Local 모드를 사용하세요.",
@@ -1156,7 +1169,7 @@ export const TRUST_PAGES = [
         ],
         faqs: [
           ["Dictivo Local 모드는 오디오를 업로드하나요?", "아니요. Local 모드는 받아쓰기 오디오를 기기에 유지해 전사하도록 설계되었습니다."],
-          ["왜 Dictivo가 네트워크를 사용할 수 있나요?", "앱은 업데이트, 모델 다운로드, 라이선스 또는 결제, 지원, 선택형 Cloud Fast에 네트워크를 사용할 수 있습니다."],
+          ["왜 Dictivo가 네트워크를 사용할 수 있나요?", "앱은 업데이트, 모델 다운로드, 라이선스 또는 결제, 지원, 선택형 Cloud Fast에 네트워크를 사용할 수 있습니다. 켜 둔 경우의 익명 사용 통계와 일회성 체험 활성화 핑도 네트워크를 사용하며, 둘 다 메타데이터만 포함합니다."],
           ["Cloud Fast는 네트워크 활동을 보여야 하나요?", "네. Cloud Fast는 선택한 녹음을 원격 전사로 보내는 선택형 빠른 모드입니다."],
           ["Local 받아쓰기가 예상치 못한 연결을 열면 어떻게 하나요?", "시각, 앱 버전, 운영체제, 대상 호스트를 기록한 뒤 support@dictivo.app으로 보내 조사를 요청하세요."],
         ],

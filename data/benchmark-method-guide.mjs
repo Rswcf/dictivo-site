@@ -1,4 +1,4 @@
-export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-06-11";
+export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-07-08";
 
 export const BENCHMARK_METHOD_GUIDE_REFERENCES = [
   ["Dictivo Mac model guide", "https://dictivo.app/mac-model-guide/"],

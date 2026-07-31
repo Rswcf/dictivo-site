@@ -474,7 +474,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Polished commercial local workflow", "Lowest-cost indie Mac dictation"],
-      ["3-year cost", "$29 to $97 depending on update renewals", "$25, $39, or $49 lifetime tiers"],
+      ["3-year cost", "$29 to $97 depending on update renewals", "$29, $49, or $69 lifetime tiers"],
       ["Privacy model", "Local mode first", "Local processing with optional cloud enhancement"],
     ],
     rows: [
@@ -482,7 +482,7 @@ export const COMPARE_PAGES = [
       { label: "Trains AI on your voice", dictivo: dictivoRows.trains, competitor: "No for local transcription. Optional cloud enhancement has separate provider boundaries." },
       { label: "Works fully offline", dictivo: dictivoRows.offline, competitor: "Yes for local transcription." },
       { label: "Account required", dictivo: dictivoRows.account, competitor: "Paid licenses are device-limited; local use is Mac app based." },
-      { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$25 lifetime for Solo, $39 lifetime for Personal, or $49 lifetime for Extended." },
+      { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$29 lifetime for Solo, $49 lifetime for Personal, or $69 lifetime for Extended." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Try Free button on the site plus a 14-day money-back guarantee on paid tiers." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Apple Silicon Mac, macOS 14.4 or later." },
       { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Local processing with optional cloud enhancement." },
@@ -493,7 +493,7 @@ export const COMPARE_PAGES = [
         title: "What VoiceInk is great at",
         paragraphs: [
           "VoiceInk is the hardest honesty test because it is genuinely good. It is local-first, inexpensive, and comfortable as a smaller indie tool. If your top priority is the lowest price, VoiceInk deserves a serious look.",
-          "Its current pricing is aggressive: $25 lifetime for one Mac, $39 lifetime for two Macs, and $29 lifetime for three Macs. The site also lists lifetime updates and a 14-day money-back guarantee. For many users, that is enough.",
+          "Its pricing is simple: $29 lifetime for one Mac, $49 lifetime for two Macs, and $69 lifetime for three Macs. The site also lists lifetime updates and a 14-day money-back guarantee. For many users, that is enough.",
         ],
         bullets: [
           "Low lifetime pricing.",
@@ -506,7 +506,7 @@ export const COMPARE_PAGES = [
         kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
-          "Dictivo does not beat VoiceInk by being cheaper. It is not cheaper. Dictivo Local is $29 once for the first year of updates, with optional $24/year update renewal after that. VoiceInk's Solo and Personal tiers cost less.",
+          "Dictivo does not win this on price. Dictivo Local is $29 once and includes the first year of updates, with an optional $24/year renewal after that. VoiceInk's Solo tier is also $29 once and advertises lifetime updates, so over enough years VoiceInk is the cheaper way to stay current. Choose on the Local versus Cloud Fast boundary, guided setup, and support - not on a few dollars.",
           "Dictivo's argument is polish and predictability. The app is shaped around a guided local setup, hardware-aware model selection, a clear Local versus Cloud Fast boundary, local history, dictionary terms, snippets, and a commercial support channel. It is for people who would rather pay a little more than tinker when dictation becomes part of daily work.",
           "Dictivo's privacy promise is the product workflow: Local mode keeps microphone audio, transcripts, history, dictionary terms, snippets, and settings on the customer's device, with no Dictivo account required for Local dictation.",
         ],
@@ -534,7 +534,7 @@ export const COMPARE_PAGES = [
         kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
-          "VoiceInk lists $25 lifetime for Solo, $39 lifetime for Personal, and $29 lifetime for Extended. Those tiers differ by device count, not by core feature access. The page also advertises a Try Free path and 14-day money-back guarantee.",
+          "VoiceInk lists $29 lifetime for Solo, $49 lifetime for Personal, and $69 lifetime for Extended. Those tiers differ by device count, not by core feature access. The page also advertises a Try Free path and 14-day money-back guarantee.",
           "Dictivo Local is $29 once. If you keep optional update renewals active for years two and three, the three-year total is $97. Without renewals, it is a $29 purchase for the version you bought.",
           "VoiceInk is the lower-price option. Dictivo is the option for users who value a more controlled onboarding experience, hardware-aware model setup, and a direct paid-product support relationship.",
         ],
@@ -565,7 +565,7 @@ export const COMPARE_PAGES = [
       },
     ],
     faqs: [
-      ["Is VoiceInk really free?", "VoiceInk's site has a Try Free path and paid lifetime tiers. The listed paid tiers are $25, $39, and $29."],
+      ["Is VoiceInk really free?", "VoiceInk's site has a Try Free path and paid lifetime tiers. The listed paid tiers are $29, $49, and $69."],
       ["VoiceInk vs Dictivo: which is more accurate?", "Both use local AI speech models, so accuracy depends on the model, microphone, accent, and hardware. Dictivo's advantage is a polished local workflow and hardware-aware setup."],
       ["How does Dictivo protect local work?", "Use Local mode for private dictation. Audio, transcripts, history, dictionary terms, snippets, and settings stay on the customer's device."],
       ["Does VoiceInk run on Windows?", "VoiceInk's official site lists Apple Silicon Macs and macOS 14.4 or later. Dictivo is publicly available for both macOS and Windows x64."],

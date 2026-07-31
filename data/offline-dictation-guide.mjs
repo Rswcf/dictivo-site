@@ -1,4 +1,4 @@
-export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-06-06";
+export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-07-08";
 
 export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Dictivo benchmark method", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],

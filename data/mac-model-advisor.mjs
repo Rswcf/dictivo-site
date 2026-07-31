@@ -1,4 +1,4 @@
-export const MAC_ADVISOR_LASTMOD = "2026-05-30";
+export const MAC_ADVISOR_LASTMOD = "2026-05-31";
 
 export const MAC_ADVISOR_MEMORY = [
   { id: "8", label: "8 GB" },

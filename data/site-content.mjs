@@ -161,8 +161,8 @@ export const HOME_COPY = {
     signed: {
       title: "Proof, not promises.",
       cells: [
-        ["Verify it yourself", "Run the open network test: dictate in Local mode and watch zero audio leave your Mac"],
-        ["Native and notarized", "Signed, notarized, under 25 MB - with signed automatic updates"],
+        ["Verify it yourself", "Run the open network test: dictate in Local mode and watch zero audio leave your device"],
+        ["Native and notarized", "Notarized on macOS, a {dmgSizeMb} MB download - with signed automatic updates"],
         ["No account, ever", "Local mode never asks for an email or login"],
         ["Risk-free", "14-day refund on purchases, and Tiny stays free forever"],
       ],

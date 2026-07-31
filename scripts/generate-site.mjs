@@ -38,6 +38,9 @@ const outDir = resolve(root, "dist");
 const release = JSON.parse(readFileSync(resolve(root, "data/release.json"), "utf8"));
 const DOWNLOAD_API_BASE_URL = (process.env.DICTIVO_DOWNLOAD_API_BASE_URL || "https://api.dictivo.app").replace(/\/$/, "");
 const GOOGLE_SITE_VERIFICATION = "8-r56qWU5Uh_14BGcUVEGzUfsksmFWeadloEM-iv9zE";
+// Rendered into the "Native and notarized" proof cell via the {dmgSizeMb} token
+// so the download-size claim tracks the real artifact instead of drifting.
+const dmgSizeMb = release.dmg?.size ? Math.round(release.dmg.size / 1e6) : null;
 const windowsRelease = release.windows || null;
 const hasWindowsArtifacts = Boolean(windowsRelease?.exe?.url && windowsRelease?.msi?.url);
 const hasWindowsRelease = release.publicWindowsDownloads === true && hasWindowsArtifacts;
@@ -4399,7 +4402,7 @@ function renderHome(currentCode) {
               .map(
                 ([label, value]) => `<article class="signed-cell">
               <p class="signed-cell-label">${html(label)}</p>
-              <p class="signed-cell-value">${html(value.replace("{version}", release.version))}</p>
+              <p class="signed-cell-value">${html(value.replace("{version}", release.version).replace("{dmgSizeMb}", dmgSizeMb))}</p>
             </article>`,
               )
               .join("\n")}
@@ -5716,7 +5719,38 @@ function renderChangelog() {
 
       <section class="doc-section" id="0.3.36" aria-labelledby="release-0-3-36">
         <p class="release-line"><span class="release-tag">v0.3.36</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-07-12">July 12, 2026</time></p>
-        <h2 id="release-0-3-36">Up to 3x faster local dictation on Apple Silicon.</h2>
+        <h2 id="release-0-3-36">Maintenance release.</h2>
+        <ul>
+          <li>No changes to how dictation works.</li>
+          <li>For people who turned on anonymous usage statistics, events now carry the app version they came from, so a problem introduced by one release can be told apart from a problem that was always there. If you never turned usage statistics on, nothing is sent.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="0.3.35" aria-labelledby="release-0-3-35">
+        <p class="release-line"><span class="release-tag">v0.3.35</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-07-04">July 4, 2026</time></p>
+        <h2 id="release-0-3-35">Model downloads you can watch, cancel, and resume.</h2>
+        <ul>
+          <li>Local model downloads now show live progress and can be cancelled and resumed, both during onboarding and in the model manager. If a model will not fit the machine, Dictivo suggests a smaller one instead of failing late.</li>
+          <li>Models download from Dictivo's own mirror first and fall back to the original source, so a slow or unavailable upstream no longer blocks local setup.</li>
+          <li>Your license, trial state, and anonymous device ID are now also kept in the operating system credential store (Keychain on macOS, Credential Manager on Windows) and restored automatically after a reinstall or a wiped profile.</li>
+          <li>Cloud Fast device sign-out is now self-serve from Settings, so freeing a device no longer needs a support request.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="0.3.34" aria-labelledby="release-0-3-34">
+        <p class="release-line"><span class="release-tag">v0.3.34</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-06-13">June 13, 2026</time></p>
+        <h2 id="release-0-3-34">Hotkey setup in onboarding, and a trial you can always see.</h2>
+        <ul>
+          <li>Onboarding now includes a hotkey step with a real test dictation, plus recovery when the shortcut you picked is already taken by another app.</li>
+          <li>A persistent alert appears if the dictation hotkey stops being available, instead of dictation silently doing nothing.</li>
+          <li>The 14-day full Local trial now starts when you begin setup rather than at first launch, and the days remaining stay visible.</li>
+          <li>Starting the trial sends a one-time anonymous activation ping (hashed device ID, platform, app version) so trials can be counted. It never includes audio, text, or personal data, and it is separate from the opt-in usage statistics setting. See <a href="/privacy/">the Privacy Policy</a>.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="0.3.33" aria-labelledby="release-0-3-33">
+        <p class="release-line"><span class="release-tag">v0.3.33</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-06-11">June 11, 2026</time></p>
+        <h2 id="release-0-3-33">Up to 3x faster local dictation on Apple Silicon.</h2>
         <ul>
           <li>Local transcription now runs on the Metal GPU on Apple Silicon Macs. Calibration measures both CPU and Metal and picks the faster engine - measured 1.9-2.9x faster end-to-end per model on an M4 Pro.</li>
           <li>The highest-quality local model (Large v3) is now comfortably interactive fully on-device: about 25 seconds per minute of audio on an M4 Pro, down from about 49.</li>
