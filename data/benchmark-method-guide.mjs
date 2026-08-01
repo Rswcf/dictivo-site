@@ -77,7 +77,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
       "One machine is published so far. Results vary with thermal state and background load; numbers for other Macs are added only after they are measured with this exact method.",
     ],
     submitNote:
-      "Have a different Mac? Run Settings -> Local Engine -> Re-run setup in Dictivo and email the measured tier numbers to support@dictivo.app. Measured machines are added to this table with their macOS version and date.",
+      "Have a different Mac? Run Settings -> Engine -> Re-run setup in Dictivo and email the measured tier numbers to support@dictivo.app. Measured machines are added to this table with their macOS version and date.",
   },
   sections: [
     {

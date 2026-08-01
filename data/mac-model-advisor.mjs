@@ -1,4 +1,4 @@
-export const MAC_ADVISOR_LASTMOD = "2026-05-31";
+export const MAC_ADVISOR_LASTMOD = "2026-08-01";
 
 export const MAC_ADVISOR_MEMORY = [
   { id: "8", label: "8 GB" },
@@ -85,6 +85,16 @@ export const MAC_ADVISOR_PROFILES = {
 
 export const MAC_ADVISOR_FAMILIES = [
   {
+    // Apple's entry-level 13-inch Mac. A18 Pro, 8 GB unified memory with no
+    // configurable option, so the memory picker offers a single value.
+    id: "macbook-neo",
+    label: "MacBook Neo",
+    examples: "A18 Pro",
+    memoryOptions: ["8"],
+    defaultMemoryId: "8",
+    profiles: { "8": "appleAir8" },
+  },
+  {
     id: "intel-air",
     label: "MacBook Air Intel",
     examples: "2018-2020",
@@ -112,9 +122,12 @@ export const MAC_ADVISOR_FAMILIES = [
     id: "air-m3-m5",
     label: "MacBook Air M3 / M4 / M5",
     examples: "2024-2026",
-    memoryOptions: ["8", "16", "24", "48", "unknown"],
+    // Apple's own MacBook Air specs top out at 32 GB, which falls inside the
+    // "24-36 GB" bucket. 48 GB has never been an Air configuration, so offering
+    // "48 GB+" here invited a shopper to pick a machine that does not exist.
+    memoryOptions: ["8", "16", "24", "unknown"],
     defaultMemoryId: "16",
-    profiles: { "8": "appleAir8", "16": "modernAir", "24": "modernAir", "48": "modernAir", unknown: "modernAir" },
+    profiles: { "8": "appleAir8", "16": "modernAir", "24": "modernAir", unknown: "modernAir" },
   },
   {
     id: "pro-base-m1-m3",

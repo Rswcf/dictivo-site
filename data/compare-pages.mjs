@@ -342,7 +342,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Real-time hotkey dictation", "File and batch transcription"],
-      ["3-year cost", "$97 with optional update renewals", "$29 once for Pro on the public site"],
+      ["3-year cost", "$97 with optional update renewals", "€64 once for Pro, lifetime updates included"],
       ["Workflow", "Replace typing in any app", "Transcribe audio/video files"],
     ],
     rows: [
@@ -350,7 +350,7 @@ export const COMPARE_PAGES = [
       { label: "Trains AI on your voice", dictivo: dictivoRows.trains, competitor: "No for local transcription; optional AI/cloud integrations have their own provider boundaries." },
       { label: "Works fully offline", dictivo: dictivoRows.offline, competitor: "Yes for local model transcription." },
       { label: "Account required", dictivo: dictivoRows.account, competitor: "No account for the core local Mac workflow." },
-      { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$29 once for MacWhisper Pro on the public site; the FAQ says the Gumroad price can vary." },
+      { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "€64 once for MacWhisper Pro, with lifetime updates. A free tier covers the smaller Whisper models." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free download with Tiny, Base, and Small Whisper models." },
       { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "macOS." },
       { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Mac app focused on local file transcription, with optional integrations." },
@@ -367,7 +367,7 @@ export const COMPARE_PAGES = [
           "Audio and video file transcription.",
           "Batch processing and subtitle/export workflows in Pro.",
           "Free local models for casual use.",
-          "A low one-time Pro price on the current public site.",
+          "One payment for Pro, with lifetime updates rather than a renewal window.",
         ],
       },
       {
@@ -376,7 +376,7 @@ export const COMPARE_PAGES = [
         paragraphs: [
           "Dictivo is not trying to be a batch transcription workstation. It is built for the moment when your cursor is already in Mail, Linear, Slack, Notion, Xcode, Cursor, a browser field, or a support tool, and typing is the slow part.",
           "That changes the product details. Dictivo cares about the global hotkey, the active app, the transcript returning to your workflow, local history for recent dictations, and dictionary/snippet behavior that improves repeated phrases. The recording is not a file you manage later; it is a temporary input to get text into the place you were already working.",
-          "MacWhisper's public feature list includes basic system-wide dictation, so it is not fair to say it has no dictation at all. The honest distinction is emphasis. MacWhisper is strongest when you bring it files. Dictivo is strongest when you use your voice instead of the keyboard.",
+          "MacWhisper markets real-time, system-wide dictation as its own feature, with automatic spelling and grammar improvement, so it would be wrong to treat dictation as an afterthought there. The honest distinction is emphasis: MacWhisper leads with what it does to files you bring it, and Dictivo is built around the moment you would otherwise be typing.",
         ],
         bullets: [
           "Hold a hotkey and dictate into the current app.",
@@ -415,8 +415,8 @@ export const COMPARE_PAGES = [
         kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
-          "MacWhisper's public site lists MacWhisper Pro at $29 once, while also noting in its FAQ that the Gumroad price can vary. The free version includes Tiny, Base, and Small Whisper models.",
-          "Dictivo is not cheaper if all you need is MacWhisper's current Pro file-transcription feature set. Dictivo Local is $29 once, and $97 over three years if you keep optional update renewals active. The value case depends on workflow, not price.",
+          "MacWhisper's public site lists MacWhisper Pro at €64 once, with lifetime updates included. A free tier covers the smaller Whisper models.",
+          "The two priced differently rather than one being plainly cheaper. Dictivo Local is $29 once for the first year of updates, or $97 over three years if you keep optional renewals active. MacWhisper Pro is a single €64 payment with lifetime updates, so it costs more up front and less over a long enough horizon. Choose on workflow, not on the gap between those numbers.",
           "Buy MacWhisper if your main job is transcribing recordings. Buy Dictivo if your main job is replacing typing with private hotkey dictation into the apps where you already work.",
         ],
       },
@@ -429,7 +429,7 @@ export const COMPARE_PAGES = [
             items: [
               "You transcribe existing audio or video files.",
               "You need subtitles, exports, speaker recognition, or batch workflows.",
-              "The low one-time Pro price is enough for your use case.",
+              "Lifetime updates for one payment suit you better than a renewal window.",
               "You do not need a dedicated hotkey-first writing surface.",
             ],
           },
@@ -448,7 +448,7 @@ export const COMPARE_PAGES = [
     faqs: [
       ["What are the best MacWhisper alternatives?", "For live dictation into the active Mac app, compare Dictivo Local, Superwhisper, VoiceInk, Voice Type, and Voibe. For file transcription, MacWhisper may remain the better fit."],
       ["Is Dictivo a Whisper app alternative?", "Yes, if the user means a Whisper-based or Whisper-style Mac dictation app for live voice typing. It is not a generic alternative for every Whisper transcription workflow."],
-      ["Does MacWhisper do real-time dictation?", "MacWhisper lists basic system-wide dictation among its features, but its strongest and most visible workflow is file transcription. Dictivo is built around real-time hotkey dictation into the active app."],
+      ["Does MacWhisper do real-time dictation?", "Yes. MacWhisper advertises real-time system-wide dictation with Whisper. Its most visible workflow is still file and meeting transcription, while Dictivo is built solely around hotkey dictation into the active app."],
       ["What is the best app to dictate into any app on Mac?", "If your goal is live voice typing into the current app, Dictivo is designed for that workflow: press the hotkey, speak, and return text to the active field."],
       ["MacWhisper vs dictation apps: what is the difference?", "MacWhisper is primarily a transcription app for recordings. A dictation app like Dictivo is built to replace typing in real time, with local history, dictionary terms, snippets, and global shortcuts."],
       ["Is Dictivo a one-time purchase like MacWhisper?", "Yes. Dictivo Local is $29 once with 12 months of updates, then an optional $24/year update renewal. The version you buy remains usable."],
@@ -720,7 +720,7 @@ export const COMPARE_PAGES = [
       { label: "Account required", dictivo: dictivoRows.account, competitor: "No account for daily use; a one-time online activation is required." },
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$699.99 one-time for Dragon Professional v16. The consumer Dragon Home edition was discontinued in 2023 with no replacement." },
       { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "No free tier. Trial availability varies by reseller." },
-      { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Windows 10/11 desktop only. Dragon for Mac was discontinued in 2018. Dragon Anywhere on mobile is a separate cloud subscription." },
+      { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Windows 10/11 desktop only. Dragon for Mac was discontinued in 2018, and Dragon Anywhere Mobile stopped being sold on 1 July 2026." },
       { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Local desktop processing. The Anywhere and Medical One editions are separate cloud subscription products with cloud processing." },
     ],
     sections: [
@@ -772,7 +772,7 @@ export const COMPARE_PAGES = [
         kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
-          "Dragon Professional v16 is $699.99 as a one-time perpetual license. Dragon Anywhere for mobile is a separate subscription at $14.99/month or $149.99/year. Dragon Medical One is enterprise-priced per user per month.",
+          "Dragon Professional v16 is $699.99 as a one-time perpetual license. Dragon Anywhere Mobile is no longer on sale: as of 1 July 2026 new subscriptions cannot be bought and existing ones cannot be renewed. Dragon Medical One remains, enterprise-priced per user per month.",
           "Dictivo Local is $29 once with 12 months of updates. Keeping optional update renewals active for two more years brings the three-year total to $97. Without renewals, the version you bought keeps working.",
           "The honest framing: if specialized vocabulary accuracy or hands-free control earns you money or independence every day, Dragon's price can be rational. If you want private, local, everyday dictation, you are paying for capabilities you will not use.",
         ],
@@ -803,7 +803,7 @@ export const COMPARE_PAGES = [
       },
     ],
     faqs: [
-      ["Is Dragon NaturallySpeaking still available?", "Partly. The consumer Dragon Home edition was discontinued in 2023 and Dragon for Mac in 2018. The current desktop product is Dragon Professional v16 for Windows at $699.99, plus cloud subscriptions like Dragon Anywhere and Dragon Medical One."],
+      ["Is Dragon NaturallySpeaking still available?", "Partly, and the consumer side keeps shrinking. Dragon Home was discontinued in 2023, Dragon for Mac in 2018, and Dragon Anywhere Mobile stopped being sold on 1 July 2026. What remains is Dragon Professional v16 for Windows at $699.99, plus enterprise offerings like Dragon Medical One."],
       ["What is the best cheap Dragon alternative?", "For everyday dictation, compare modern local tools: Dictivo is $29 once and train-free on Mac and Windows. Windows 11 users can also try the free built-in Voice Access. For specialized legal or medical vocabulary, Dragon Professional remains the strongest option."],
       ["Does Dragon work on Mac?", "No. Nuance discontinued Dragon Professional Individual for Mac in October 2018 and has not shipped a native Mac desktop product since. Dictivo runs its local dictation workflow on both macOS and Windows x64."],
       ["Do I need to train Dictivo like Dragon?", "No. Dictivo uses modern Whisper-grade local models that work without a voice profile. Dragon builds accuracy through profile and vocabulary training, which pays off for specialized terminology but adds setup and maintenance."],
