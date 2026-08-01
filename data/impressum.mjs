@@ -35,6 +35,20 @@ function containsPlaceholder(value) {
 /** True once every required field has been replaced with a real value. */
 export const IMPRESSUM_READY = !containsPlaceholder(data);
 
+/**
+ * Seller identity for legal notices that must name and address the trader —
+ * chiefly the formal Widerrufsbelehrung on /refund/, which is only a valid
+ * notice if the consumer can actually address a withdrawal to someone.
+ *
+ * Null until the Impressum data is filled in, for the same reason the Impressum
+ * page itself is: a withdrawal notice addressed to "FILL_IN_LEGAL_NAME" is not
+ * a notice, and a formal-looking one that cannot be acted on is worse than
+ * plainly saying the statutory right exists.
+ */
+export const IMPRESSUM_CONTACT = IMPRESSUM_READY
+  ? { legalName: data.legalName, addressLines: [...data.addressLines], email: data.email }
+  : null;
+
 /** Label stays "Impressum" in every language: it is the term German law and
  *  German readers recognise, and a translated label is exactly the kind of
  *  thing that gets argued about in an Abmahnung. */

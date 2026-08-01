@@ -1,4 +1,31 @@
-import { IMPRESSUM_PAGE } from "./impressum.mjs";
+import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
+
+/**
+ * Date the legal pages were last revised. These three pages carry a visible
+ * stamp on purpose: the site's marketing pages deliberately omit one, but a
+ * privacy policy, terms, or refund policy with no date gives a reader no way to
+ * tell which version they agreed to.
+ */
+const LEGAL_LASTMOD = "2026-08-01";
+
+/**
+ * The formal withdrawal notice can only name a trader once the Impressum data
+ * exists, so it renders conditionally. The statutory right itself is stated
+ * unconditionally below — that right does not depend on us describing it.
+ */
+const withdrawalNoticeSections = IMPRESSUM_CONTACT
+  ? [
+      {
+        title: "Widerrufsbelehrung (formal notice)",
+        paragraphs: [
+          "You have the right to withdraw from this contract within 14 days without giving any reason. The withdrawal period expires 14 days from the day the contract was concluded.",
+          `To exercise the right of withdrawal, you must inform ${IMPRESSUM_CONTACT.legalName}, ${IMPRESSUM_CONTACT.addressLines.join(", ")}, ${IMPRESSUM_CONTACT.email}, of your decision to withdraw from this contract by an unequivocal statement, for example a letter sent by post or an email. You may use the model withdrawal form, but it is not obligatory.`,
+          "To meet the withdrawal deadline, it is sufficient for you to send your communication concerning your exercise of the right of withdrawal before the withdrawal period has expired.",
+          "If you withdraw from this contract, we shall reimburse all payments received from you without undue delay and not later than 14 days from the day on which we are informed about your decision. We will use the same means of payment as you used for the initial transaction, and you will not incur any fees as a result of the reimbursement.",
+        ],
+      },
+    ]
+  : [];
 
 export const TRUST_PAGES = [
   {
@@ -11,6 +38,7 @@ export const TRUST_PAGES = [
       "How Dictivo handles Local dictation, optional Cloud Fast uploads, licensing, support, and customer data.",
     lede:
       "Dictivo is built around a simple rule: Local dictation should stay local, and Cloud Fast should be an explicit choice.",
+    lastModified: LEGAL_LASTMOD,
     relatedLinks: [
       { label: "Where dictation audio goes", href: "/privacy/where-dictation-audio-goes/" },
       { label: "Local mode network test", href: "/privacy/local-dictation-network-test/" },
@@ -1188,6 +1216,7 @@ export const TRUST_PAGES = [
       "The practical terms for using Dictivo, including Local, Cloud Fast, licenses, updates, refunds, and support.",
     lede:
       "These terms are written for customers, not lawyers. They describe what you can expect when you download, buy, and use Dictivo.",
+    lastModified: LEGAL_LASTMOD,
     sections: [
       {
         title: "License to use Dictivo",
@@ -1215,6 +1244,19 @@ export const TRUST_PAGES = [
           "Cloud Fast depends on remote processing and may be unavailable during maintenance or provider outages. Local mode remains the privacy-first path for everyday dictation.",
         ],
       },
+      {
+        title: "Who you buy from, and which law applies",
+        paragraphs: [
+          "Dictivo is developed and operated from Germany. Purchases go through a payment provider that acts as the merchant of record: it is the seller shown on your receipt and it handles payment, invoicing, and sales tax or VAT. The provider is named at checkout and on the receipt you receive. Your licence to use the software, and support for it, come from Dictivo.",
+          "These terms are governed by the law of the Federal Republic of Germany. If you are a consumer, this choice of law does not deprive you of the protection of any mandatory consumer-protection rules that apply in the country where you live, and you keep the right to bring proceedings there.",
+          "If you are a consumer in the EU, you also have a statutory right of withdrawal that is separate from, and additional to, our own refund policy. It is described on the refund page.",
+        ],
+        bullets: [
+          "Seller of record: the payment provider named on your receipt.",
+          "Software licence and support: Dictivo.",
+          "Governing law: Germany, without prejudice to mandatory consumer protections where you live.",
+        ],
+      },
     ],
   },
   {
@@ -1227,6 +1269,7 @@ export const TRUST_PAGES = [
       "How to request a Dictivo refund for Local purchases and Cloud Fast subscriptions.",
     lede:
       "Buying desktop software should not feel risky. If Dictivo does not fit your workflow, contact support and we will handle the request plainly.",
+    lastModified: LEGAL_LASTMOD,
     sections: [
       {
         title: "Local license refunds",
@@ -1247,6 +1290,20 @@ export const TRUST_PAGES = [
           "If there is a billing mistake or activation problem, email support@dictivo.app. We will review the account and help resolve it.",
         ],
       },
+      {
+        title: "EU right of withdrawal",
+        paragraphs: [
+          "If you are a consumer in the European Union, you have a statutory right to withdraw from a distance contract within 14 days, without giving a reason. That right exists independently of the refund policy above: it is granted by law, not by us, and nothing on this page reduces it.",
+          "For digital content delivered immediately, that right can end early — but only if you expressly asked for delivery to begin before the withdrawal period was over and acknowledged that doing so ends the right. If you were never asked for that consent, the full 14-day period still applies.",
+          "In practice you do not need to work out which applies. Our own policy already refunds any Local purchase within 14 days on request, with no reason needed, so ask support either way and we will not argue about the legal basis.",
+        ],
+        bullets: [
+          "The statutory right is additional to our refund policy, not replaced by it.",
+          "Withdrawal period: 14 days from the conclusion of the contract.",
+          "To withdraw, a clear statement by email to support@dictivo.app is enough.",
+        ],
+      },
+      ...withdrawalNoticeSections,
       {
         title: "Before requesting a refund",
         paragraphs: [
