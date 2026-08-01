@@ -2874,7 +2874,7 @@ function renderComparePage(page, currentCode = "en") {
     <main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
-        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(COMPARE_LAST_UPDATED.iso)}">${html(COMPARE_LAST_UPDATED.label)}</time></p>
+        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(COMPARE_LAST_UPDATED.iso)}">${html(formatLocalizedMonth(COMPARE_LAST_UPDATED.iso, currentCode))}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
         ${renderCompareQuickTake(page, copy)}
@@ -4416,7 +4416,7 @@ function renderHome(currentCode) {
               )
               .join("\n")}
           </div>
-          <p class="signed-footnote">${t.signed.footnoteHref ? `<a href="${attr(t.signed.footnoteHref)}">${html(t.signed.footnote)}</a>` : html(t.signed.footnote)}</p>
+          <p class="signed-footnote">${t.signed.footnoteHref ? `<a href="${attr(localizeTrustHref(t.signed.footnoteHref, currentCode))}">${html(t.signed.footnote)}</a>` : html(t.signed.footnote)}</p>
         </div>
       </section>
 
@@ -5891,6 +5891,15 @@ function formatEnglishDate(isoDate) {
 function formatLocalizedDate(isoDate, currentCode = "en") {
   const locale = localeByCode(currentCode);
   return new Intl.DateTimeFormat(locale.htmlLang, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
+/** Month + year only, for the comparison pages' "Last updated" stamp. The label
+ *  used to be a hardcoded English "July 2026" on all ten languages. */
+function formatLocalizedMonth(isoDate, currentCode = "en") {
+  const locale = localeByCode(currentCode);
+  return new Intl.DateTimeFormat(locale.htmlLang, { year: "numeric", month: "long", timeZone: "UTC" }).format(
+    new Date(`${isoDate}T00:00:00Z`),
+  );
 }
 
 function write(path, body) {

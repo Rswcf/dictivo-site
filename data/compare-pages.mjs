@@ -1,6 +1,7 @@
 export const COMPARE_LAST_UPDATED = {
-  label: "July 2026",
-  iso: "2026-07-12",
+  // `label` is no longer rendered; the stamp is formatted per locale from `iso`.
+  label: "August 2026",
+  iso: "2026-08-01",
 };
 
 const dictivoRows = {
