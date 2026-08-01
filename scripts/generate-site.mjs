@@ -757,8 +757,15 @@ function localizeTrustHref(href, currentCode = "en") {
   return href;
 }
 
-function fillCompareTemplate(value, page) {
-  return value.replaceAll("{competitor}", page.competitor);
+// {competitorFact} lets a localized row keep its own framing while the actual
+// competitor fact stays single-sourced in the English row. Without it the
+// localized fact rows could only say "check the vendor's current offer", and
+// translating the numbers into nine languages would multiply by nine the
+// staleness we already have to chase every time a competitor reprices.
+function fillCompareTemplate(value, page, row) {
+  return value
+    .replaceAll("{competitorFact}", row?.competitor ?? "")
+    .replaceAll("{competitor}", page.competitor);
 }
 
 const COMPARE_I18N = {
@@ -2095,9 +2102,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} beschreibt eigene Datenschutz- und KI-Regeln. Dictivo Local entfernt diesen Konflikt für normale Diktate.",
     "Works fully offline": "{competitor} ist für seinen eigenen Workflow gebaut. Dictivo Local ist die Wahl, wenn Offline-Diktat wichtig ist.",
     "Account required": "{competitor} kann ein Konto oder eine eigene Kaufstrecke voraussetzen. Dictivo Local braucht kein Dictivo-Konto.",
-    "Pricing model": "Prüfen Sie das aktuelle {competitor}-Angebot im Kaufprozess. Dictivo Local bleibt bei $29 einmalig.",
-    "Free tier / trial": "{competitor} kann eigene kostenlose Stufen oder Tests haben. Dictivo kombiniert Tiny dauerhaft kostenlos mit 14 Tagen vollem Local-Test.",
-    Platforms: "{competitor} hat seine eigene Plattformabdeckung. Dictivo ist jetzt für Mac und Windows x64 verfügbar.",
+    "Pricing model": "{competitorFact} Dictivo Local bleibt bei $29 einmalig.",
+    "Free tier / trial": "{competitorFact} Dictivo kombiniert Tiny dauerhaft kostenlos mit 14 Tagen vollem Local-Test.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} passt, wenn sein Modell zu Ihrem Workflow passt. Dictivo Local ist für Arbeit gedacht, die standardmäßig auf dem Gerät bleibt.",
   },
   fr: {
@@ -2105,9 +2112,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} décrit ses propres règles de confidentialité et d'IA. Dictivo Local évite ce compromis pour la dictée quotidienne.",
     "Works fully offline": "{competitor} est conçu pour son propre workflow. Dictivo Local est le choix quand la dictée hors ligne compte.",
     "Account required": "{competitor} peut demander un compte ou son propre parcours d'achat. Dictivo Local ne demande pas de compte Dictivo.",
-    "Pricing model": "Vérifiez l'offre {competitor} au moment de l'achat. Dictivo Local reste à $29 une seule fois.",
-    "Free tier / trial": "{competitor} peut proposer ses propres options gratuites ou essais. Dictivo offre Tiny gratuit a vie et 14 jours d'essai Local complet.",
-    Platforms: "{competitor} a sa propre couverture de plateformes. Dictivo est disponible sur Mac et Windows x64 aujourd'hui.",
+    "Pricing model": "{competitorFact} Dictivo Local reste à $29 une seule fois.",
+    "Free tier / trial": "{competitorFact} Dictivo offre Tiny gratuit à vie et 14 jours d'essai Local complet.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} convient si son modèle correspond à votre workflow. Dictivo Local vise les travaux qui doivent rester sur l'appareil par défaut.",
   },
   es: {
@@ -2115,9 +2122,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} define sus propias reglas de privacidad e IA. Dictivo Local evita ese compromiso para el dictado diario.",
     "Works fully offline": "{competitor} está diseñado para su propio flujo. Dictivo Local es la opción cuando importa dictar sin conexión.",
     "Account required": "{competitor} puede requerir cuenta o su propio proceso de compra. Dictivo Local no requiere una cuenta de Dictivo.",
-    "Pricing model": "Revisa la oferta actual de {competitor} al comprar. Dictivo Local se mantiene en $29 una sola vez.",
-    "Free tier / trial": "{competitor} puede tener sus propias opciones gratis o pruebas. Dictivo combina Tiny gratis para siempre con 14 días de prueba Local completa.",
-    Platforms: "{competitor} tiene su propia cobertura de plataformas. Dictivo está disponible para Mac y Windows x64.",
+    "Pricing model": "{competitorFact} Dictivo Local se mantiene en $29 una sola vez.",
+    "Free tier / trial": "{competitorFact} Dictivo combina Tiny gratis para siempre con 14 días de prueba Local completa.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} encaja si su modelo se adapta a tu flujo. Dictivo Local está pensado para trabajo que debe quedarse en el dispositivo por defecto.",
   },
   it: {
@@ -2125,9 +2132,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} definisce le proprie regole di privacy e IA. Dictivo Local evita questo compromesso nella dettatura quotidiana.",
     "Works fully offline": "{competitor} è costruito per il proprio workflow. Dictivo Local è la scelta quando conta dettare offline.",
     "Account required": "{competitor} può richiedere un account o un percorso di acquisto dedicato. Dictivo Local non richiede un account Dictivo.",
-    "Pricing model": "Controlla l'offerta {competitor} al momento dell'acquisto. Dictivo Local resta a $29 una sola volta.",
-    "Free tier / trial": "{competitor} può avere opzioni gratuite o prove proprie. Dictivo offre Tiny gratis per sempre e 14 giorni di prova Local completa.",
-    Platforms: "{competitor} ha la propria copertura piattaforme. Dictivo è disponibile per Mac e Windows x64.",
+    "Pricing model": "{competitorFact} Dictivo Local resta a $29 una sola volta.",
+    "Free tier / trial": "{competitorFact} Dictivo offre Tiny gratis per sempre e 14 giorni di prova Local completa.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} va bene se il suo modello si adatta al tuo workflow. Dictivo Local è pensato per il lavoro che deve restare sul dispositivo per impostazione predefinita.",
   },
   nl: {
@@ -2135,9 +2142,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} heeft eigen privacy- en AI-regels. Dictivo Local haalt dit spanningsveld weg voor dagelijkse dictaten.",
     "Works fully offline": "{competitor} is gebouwd voor zijn eigen workflow. Dictivo Local is de keuze wanneer offline dicteren belangrijk is.",
     "Account required": "{competitor} kan een account of eigen aankoopflow vragen. Dictivo Local vraagt geen Dictivo-account.",
-    "Pricing model": "Controleer het actuele {competitor}-aanbod tijdens aankoop. Dictivo Local blijft eenmalig $29.",
-    "Free tier / trial": "{competitor} kan eigen gratis opties of proefperiodes hebben. Dictivo combineert Tiny gratis voor altijd met 14 dagen volledige Local-proef.",
-    Platforms: "{competitor} heeft eigen platformdekking. Dictivo is nu beschikbaar voor Mac en Windows x64.",
+    "Pricing model": "{competitorFact} Dictivo Local blijft eenmalig $29.",
+    "Free tier / trial": "{competitorFact} Dictivo combineert Tiny gratis voor altijd met 14 dagen volledige Local-proef.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} past als het model bij je workflow past. Dictivo Local is bedoeld voor werk dat standaard op het apparaat moet blijven.",
   },
   pt: {
@@ -2145,9 +2152,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} define as suas próprias regras de privacidade e IA. O Dictivo Local evita esse compromisso no ditado diário.",
     "Works fully offline": "{competitor} foi criado para o seu próprio workflow. O Dictivo Local é a escolha quando ditado offline é importante.",
     "Account required": "{competitor} pode exigir conta ou o seu próprio processo de compra. O Dictivo Local não exige conta Dictivo.",
-    "Pricing model": "Verifique a oferta atual de {competitor} no momento da compra. O Dictivo Local continua a $29 uma única vez.",
-    "Free tier / trial": "{competitor} pode ter opções gratuitas ou testes próprios. O Dictivo combina Tiny grátis para sempre com 14 dias de teste Local completo.",
-    Platforms: "{competitor} tem a sua própria cobertura de plataformas. O Dictivo está disponível para Mac e Windows x64.",
+    "Pricing model": "{competitorFact} O Dictivo Local continua a $29 uma única vez.",
+    "Free tier / trial": "{competitorFact} O Dictivo combina Tiny grátis para sempre com 14 dias de teste Local completo.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} serve se o seu modelo encaixar no seu workflow. O Dictivo Local é para trabalho que deve ficar no dispositivo por padrão.",
   },
   zh: {
@@ -2155,9 +2162,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} 有自己的隐私和 AI 规则。Dictivo Local 让日常听写避开这个取舍。",
     "Works fully offline": "{competitor} 面向自己的工作流。需要离线听写时，Dictivo Local 是更直接的选择。",
     "Account required": "{competitor} 可能需要账号或自己的购买流程。Dictivo Local 不需要 Dictivo 账号。",
-    "Pricing model": "购买前查看 {competitor} 的当前方案。Dictivo Local 保持 $29 一次买断。",
-    "Free tier / trial": "{competitor} 可能有自己的免费或试用方案。Dictivo 提供 Tiny 永久免费和 14 天完整 Local 试用。",
-    Platforms: "{competitor} 有自己的平台覆盖。Dictivo 现已支持 Mac 和 Windows x64。",
+    "Pricing model": "{competitorFact} Dictivo Local 保持 $29 一次买断。",
+    "Free tier / trial": "{competitorFact} Dictivo 提供 Tiny 永久免费和 14 天完整 Local 试用。",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} 适合接受其产品模型的工作流。Dictivo Local 面向默认留在本机上的内容。",
   },
   ja: {
@@ -2165,9 +2172,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor} には独自のプライバシーと AI のルールがあります。Dictivo Local は日常の音声入力でその迷いを減らします。",
     "Works fully offline": "{competitor} は独自のワークフロー向けです。オフライン音声入力が重要なら Dictivo Local が直接的です。",
     "Account required": "{competitor} はアカウントや独自の購入フローが必要な場合があります。Dictivo Local は Dictivo アカウント不要です。",
-    "Pricing model": "購入時に {competitor} の現在の提供内容を確認してください。Dictivo Local は $29 の買い切りです。",
-    "Free tier / trial": "{competitor} には独自の無料枠や体験版がある場合があります。Dictivo は Tiny 永久無料と 14 日間の完全 Local 体験を提供します。",
-    Platforms: "{competitor} には独自の対応プラットフォームがあります。Dictivo は Mac と Windows x64 で利用できます。",
+    "Pricing model": "{competitorFact} Dictivo Local は $29 の買い切りです。",
+    "Free tier / trial": "{competitorFact} Dictivo は Tiny 永久無料と 14 日間の完全 Local 体験を提供します。",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor} はその製品モデルが合う場合に適しています。Dictivo Local は標準でデバイスに残す作業向けです。",
   },
   ko: {
@@ -2175,9 +2182,9 @@ const LOCALIZED_COMPETITOR_ROWS = {
     "Trains AI on your voice": "{competitor}에는 자체 개인정보 및 AI 규칙이 있습니다. Dictivo Local은 일상 받아쓰기에서 이 고민을 줄입니다.",
     "Works fully offline": "{competitor}는 자체 워크플로에 맞춰져 있습니다. 오프라인 받아쓰기가 중요하면 Dictivo Local이 더 직접적입니다.",
     "Account required": "{competitor}는 계정이나 자체 구매 흐름이 필요할 수 있습니다. Dictivo Local은 Dictivo 계정이 필요 없습니다.",
-    "Pricing model": "구매 시점에 {competitor}의 현재 제공 조건을 확인하세요. Dictivo Local은 $29 일회 구매입니다.",
-    "Free tier / trial": "{competitor}에는 자체 무료 옵션이나 체험판이 있을 수 있습니다. Dictivo는 Tiny 영구 무료와 14일 전체 Local 체험을 제공합니다.",
-    Platforms: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo는 Mac 및 Windows x64에서 사용할 수 있습니다.",
+    "Pricing model": "{competitorFact} Dictivo Local은 $29 일회 구매입니다.",
+    "Free tier / trial": "{competitorFact} Dictivo는 Tiny 영구 무료와 14일 전체 Local 체험을 제공합니다.",
+    Platforms: "{competitorFact}",
     "Privacy boundary": "{competitor}는 그 제품 모델이 워크플로에 맞을 때 적합합니다. Dictivo Local은 기본적으로 기기에 남겨야 하는 작업을 위한 선택입니다.",
   },
 };
@@ -2593,6 +2600,7 @@ function localizedCompareRows(page, copy) {
         ? platformCompetitorValidationCopy(copy.locale)
         : competitorRows[row.label] || row.competitor,
       page,
+      row,
     ),
   }));
 }
