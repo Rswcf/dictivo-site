@@ -1383,3 +1383,154 @@ for (const [localeCode, copy] of Object.entries(LAUNCH_OFFER_COPY)) {
   target.downloads.body = copy.downloadsBody;
   target.faq.items[1][1] = copy.faqFree;
 }
+
+/**
+ * Parity pass for the nine localized homepages (2026-08-01).
+ *
+ * Each locale carried six FAQ entries against the English page's nine, and an
+ * older three-card trust block against the English four. The three missing
+ * answers are the ones that close a sale — that Local is not a subscription,
+ * how to prove Local uploads nothing, and what happens if it does not fit.
+ *
+ * Copy was drafted per locale and then revised by a second native pass; the
+ * revisions are already folded in here. signed.title and signed.footnote are
+ * deliberately absent: WINDOWS_HOME_COPY in the generator already overrides
+ * both per locale, so setting them here would be dead weight.
+ */
+const L10N_PARITY = {
+  de: {
+    faq: [
+      ["Ist das ein Abo?", "Nein. Dictivo Local kostet einmalig $29 zum Aktionspreis (regulär $49). Die Lizenz gilt dauerhaft: Die gekaufte Version läuft unbegrenzt weiter. Die ersten 12 Monate Updates sind enthalten; danach können Sie optional für $24/Jahr verlängern - oder einfach mit Ihrer Version weiterarbeiten."],
+      ["Wie kann ich prüfen, dass der lokale Modus nichts hochlädt?", "Führen Sie den offenen Netzwerktest durch: Starten Sie einen Netzwerkmonitor Ihres Systems, diktieren Sie im lokalen Modus und achten Sie auf ausgehenden Datenverkehr. Die Schritt-für-Schritt-Anleitung steht auf den Seiten zum Datenschutznachweis."],
+      ["Was, wenn es nicht in meinen Workflow passt?", "Für jeden Kauf gibt es 14 Tage Erstattung ohne Fragen, und Tiny Local bleibt so oder so dauerhaft gratis."],
+    ],
+    signedCells: [
+      ["Selbst nachprüfen", "Führen Sie den offenen Netzwerktest durch: Diktieren Sie im lokalen Modus und sehen Sie selbst, dass kein Audio Ihr Gerät verlässt"],
+      ["Nativ und notarisiert", "Auf macOS von Apple notarisiert, ein Download von {dmgSizeMb} MB - mit signierten automatischen Updates"],
+      ["Nie ein Konto nötig", "Der lokale Modus fragt nie nach E-Mail oder Login"],
+      ["Ohne Risiko", "14 Tage Erstattung für jeden Kauf, und Tiny bleibt dauerhaft gratis"],
+    ],
+    tierSub: "Jedes lokale Modell freischalten - einmal zahlen, kein Abo.",
+  },
+  fr: {
+    faq: [
+      ["Est-ce un abonnement?", "Non. Dictivo Local est un paiement unique de $29 pendant le lancement (prix normal $49). La licence est perpétuelle : la version achetée continue de fonctionner indéfiniment. Après 12 mois de mises à jour incluses, vous pouvez renouveler pour $24/an - ou simplement continuer avec ce que vous avez."],
+      ["Comment vérifier que le mode Local n'envoie rien?", "Faites le test réseau vous-même : lancez un moniteur réseau, dictez en mode Local et surveillez le trafic sortant. Le guide pas à pas se trouve sur nos pages de preuve de confidentialité."],
+      ["Et si cela ne convient pas à mon workflow?", "Chaque achat bénéficie d'un remboursement 14 jours, sans question, et Tiny Local reste gratuit à vie dans tous les cas."],
+    ],
+    signedCells: [
+      ["Vérifiez par vous-même", "Faites le test réseau vous-même : dictez en mode Local et constatez qu'aucun audio ne quitte votre appareil"],
+      ["Natif et notarisé", "Notarisé sur macOS - {dmgSizeMb} Mo à télécharger, avec mises à jour automatiques signées"],
+      ["Jamais de compte", "Le mode Local ne demande jamais d'e-mail ni d'identifiant"],
+      ["Sans risque", "Remboursement 14 jours sur les achats, et Tiny reste gratuit à vie"],
+    ],
+    tierSub: "Tous les modèles locaux vous appartiennent - paiement unique, sans abonnement.",
+  },
+  es: {
+    faq: [
+      ["¿Es una suscripción?", "No. Dictivo Local cuesta $29 una sola vez durante el lanzamiento (precio normal $49). La licencia es perpetua: la versión que compras sigue funcionando para siempre. Después de los 12 meses de actualizaciones incluidas puedes renovar opcionalmente por $24/año - o seguir usando lo que ya tienes."],
+      ["¿Cómo puedo comprobar que el modo Local no sube nada?", "Haz la prueba de red: abre un monitor de red, dicta en modo Local y comprueba si hay tráfico saliente. La guía paso a paso está en las páginas de prueba de privacidad."],
+      ["¿Y si no encaja con mi flujo?", "Cada compra tiene un reembolso de 14 días, sin preguntas, y Tiny Local sigue siendo gratis para siempre en cualquier caso."],
+    ],
+    signedCells: [
+      ["Compruébalo tú mismo", "Haz la prueba de red: dicta en modo Local con un monitor de red abierto y comprueba que no sale audio de tu dispositivo"],
+      ["Nativa y notarizada", "Notarizada en macOS, una descarga de {dmgSizeMb} MB - con actualizaciones automáticas firmadas"],
+      ["Sin cuenta, nunca", "El modo Local nunca pide correo ni inicio de sesión"],
+      ["Sin riesgo", "Reembolso de 14 días en las compras, y Tiny sigue gratis para siempre"],
+    ],
+    tierSub: "Todos los modelos locales son tuyos - pago único, sin suscripción.",
+  },
+  it: {
+    faq: [
+      ["È un abbonamento?", "No. Dictivo Local costa $29 una tantum durante il lancio (prezzo regolare $49). La licenza è perpetua: la versione che acquisti continua a funzionare per sempre. Dopo i 12 mesi di aggiornamenti inclusi puoi rinnovare a $24/anno, oppure continuare a usare quello che hai."],
+      ["Come posso verificare che la modalità Local non carichi nulla?", "Esegui il test di rete aperto: avvia un monitor di rete, detta in modalità Local e controlla il traffico in uscita. La guida passo passo è nelle pagine Prova privacy."],
+      ["E se non si adatta al mio flusso?", "Ogni acquisto prevede un rimborso entro 14 giorni, senza domande, e in ogni caso Tiny Local resta gratis per sempre."],
+    ],
+    signedCells: [
+      ["Verificalo tu stesso", "Esegui il test di rete aperto: detta in modalità Local e osserva che nessun audio lascia il tuo dispositivo"],
+      ["App nativa e notarizzata", "Notarizzata su macOS, download da {dmgSizeMb} MB con aggiornamenti automatici firmati"],
+      ["Nessun account, mai", "La modalità Local non chiede mai email o login"],
+      ["Senza rischi", "Rimborso entro 14 giorni sugli acquisti e Tiny resta gratis per sempre"],
+    ],
+    tierSub: "Ogni modello locale è tuo: paghi una volta, senza abbonamento.",
+  },
+  nl: {
+    faq: [
+      ["Is dit een abonnement?", "Nee. Dictivo Local kost eenmalig $29 als introductieprijs (reguliere prijs $49). De licentie is permanent: de versie die je koopt blijft altijd werken. Na de 12 maanden inbegrepen updates kun je optioneel verlengen voor $24/jaar - of gewoon verder met wat je hebt."],
+      ["Hoe controleer ik dat Local-modus niets uploadt?", "Voer de open netwerktest uit: start een netwerkmonitor op je systeem, dicteer in Local-modus en let op uitgaand verkeer. De stapsgewijze uitleg staat op de privacybewijspagina's."],
+      ["Wat als het niet bij mijn workflow past?", "Bij elke aankoop geldt een terugbetaling binnen 14 dagen, zonder vragen - en Tiny Local blijft hoe dan ook altijd gratis."],
+    ],
+    signedCells: [
+      ["Controleer het zelf", "Voer de open netwerktest uit: dicteer in Local-modus en je ziet dat er geen audio je apparaat verlaat"],
+      ["Native en genotariseerd", "Door Apple genotariseerd op macOS, een download van {dmgSizeMb} MB - met ondertekende automatische updates"],
+      ["Nooit een account", "Local-modus vraagt nooit om een e-mailadres of login"],
+      ["Zonder risico", "14 dagen terugbetaling op aankopen, en Tiny blijft altijd gratis"],
+    ],
+    tierSub: "Elk lokaal model ontgrendeld - eenmalig betalen, geen abonnement.",
+  },
+  pt: {
+    faq: [
+      ["Isso é uma assinatura?", "Não. Dictivo Local custa $29 uma vez durante o lançamento (preço normal $49). A licença é perpétua: a versão que você comprar continua funcionando para sempre. Depois dos 12 meses de atualizações incluídas, você pode renovar por $24/ano se quiser - ou continuar com o que já tem."],
+      ["Como posso verificar que o modo Local não envia nada?", "Faça o teste de rede aberto: abra um monitor de rede do sistema, dite no modo Local e observe se aparece algum tráfego de saída. O guia passo a passo está nas páginas de prova de privacidade."],
+      ["E se não se encaixar no meu fluxo?", "Toda compra tem reembolso de 14 dias, sem perguntas - e, de qualquer forma, o ditado Tiny Local fica grátis para sempre."],
+    ],
+    signedCells: [
+      ["Verifique você mesmo", "Faça o teste de rede aberto: dite no modo Local e veja que nenhum áudio sai do seu dispositivo"],
+      ["Nativo e notarizado", "Notarizado pela Apple no macOS, download de {dmgSizeMb} MB - com atualizações automáticas assinadas"],
+      ["Sem conta, nunca", "O modo Local nunca pede e-mail nem login"],
+      ["Sem risco", "Reembolso de 14 dias nas compras, e Tiny fica grátis para sempre"],
+    ],
+    tierSub: "Tenha todos os modelos locais - pagamento único, sem assinatura.",
+  },
+  zh: {
+    faq: [
+      ["这是订阅制吗？", "不是。Dictivo Local 启动价 $29 一次买断（常规价 $49）。许可证永久有效：你买到的那个版本可以一直用下去。包含的 12 个月更新期结束后，可以选择 $24/年续订，也可以继续使用手上的版本。"],
+      ["我怎么验证本地模式确实没有上传？", "运行公开网络测试：打开系统网络监控工具，用本地模式听写，观察有没有对外流量。隐私证明页面上有分步指南。"],
+      ["如果不适合我的工作流怎么办？", "每笔购买都有 14 天无理由退款；无论如何，Tiny Local 听写都永久免费。"],
+    ],
+    signedCells: [
+      ["自己动手验证", "运行公开网络测试：用本地模式听写，确认没有音频离开你的设备"],
+      ["原生应用，已公证", "macOS 版经 Apple 公证，安装包 {dmgSizeMb} MB - 自动更新同样带签名"],
+      ["永不需要账号", "本地模式从不索取邮箱，也不需要登录"],
+      ["零风险", "购买后 14 天无理由退款，Tiny 永久免费"],
+    ],
+    tierSub: "拥有全部本地模型 - 一次买断，不是订阅。",
+  },
+  ja: {
+    faq: [
+      ["これはサブスクリプションですか？", "いいえ。Dictivo Local はローンチ期間中 $29 の買い切りです（通常価格 $49）。ライセンスは永続で、購入したバージョンはずっと使い続けられます。12 か月のアップデート期間が終わったあとは、アップデートを受け取り続けたい場合のみ任意で $24/年で更新できます。更新しない場合も、手元のバージョンはそのまま使えます。"],
+      ["Local モードが何もアップロードしていないことを、どうすれば確認できますか？", "公開ネットワークテストを実行してください。Little Snitch や LuLu などのネットワークモニターを起動し、Local モードで音声入力して、音声が外部に送信されないことを確認するだけです。手順はプライバシー証明ページで順を追って説明しています。"],
+      ["ワークフローに合わなかった場合はどうなりますか？", "購入にはすべて 14 日間の返金保証が付き、理由は問いません。合わなかった場合でも、Tiny Local は永久無料のまま使えます。"],
+    ],
+    signedCells: [
+      ["自分で検証できます", "公開ネットワークテストを実行すれば、Local モードの音声入力で音声が一切デバイスから出ないことを確認できます"],
+      ["ネイティブアプリ", "macOS 版は公証済みで、ダウンロードは {dmgSizeMb} MB - 自動アップデートも署名付きです"],
+      ["アカウントは一切不要", "Local モードがメールアドレスやログインを求めることはありません"],
+      ["リスクなし", "購入には 14 日間の返金保証が付き、Tiny は永久無料のままです"],
+    ],
+    tierSub: "すべてのローカルモデルを買い切りで利用できます - サブスクリプションではありません。",
+  },
+  ko: {
+    faq: [
+      ["구독인가요?", "아니요. Dictivo Local은 런칭 기간 동안 $29 한 번 결제이며 정가는 $49입니다. 라이선스는 영구적이라 구매한 버전은 계속 사용할 수 있습니다. 포함된 12개월 업데이트 기간이 끝난 뒤에는 원하면 $24/년으로 갱신하거나, 쓰던 버전을 그대로 사용하면 됩니다."],
+      ["Local 모드가 아무것도 업로드하지 않는지 어떻게 확인하나요?", "공개 네트워크 테스트를 해 보세요. 시스템 네트워크 모니터를 켜고 Local 모드로 받아쓰기한 뒤 외부로 나가는 트래픽이 있는지 확인하면 됩니다. 단계별 안내는 개인정보 증명 페이지에 있습니다."],
+      ["내 워크플로에 맞지 않으면 어떻게 하나요?", "모든 구매에는 이유를 묻지 않는 14일 환불이 적용되며, 어떤 경우에도 Tiny Local 받아쓰기는 영구 무료로 유지됩니다."],
+    ],
+    signedCells: [
+      ["직접 확인", "공개 네트워크 테스트로 Local 모드에서 오디오가 기기 밖으로 나가지 않는지 확인할 수 있습니다"],
+      ["네이티브 앱, 공증 완료", "macOS에서 공증된 {dmgSizeMb} MB 설치 파일이며 자동 업데이트도 서명됩니다"],
+      ["계정 불필요", "Local 모드는 이메일이나 로그인을 요구하지 않습니다"],
+      ["부담 없는 구매", "구매 후 14일 환불이 가능하고 Tiny는 영구 무료입니다"],
+    ],
+    tierSub: "모든 로컬 모델을 소유하세요 - 한 번 결제, 구독 없음.",
+  },
+};
+
+for (const [localeCode, copy] of Object.entries(L10N_PARITY)) {
+  const target = HOME_COPY[localeCode];
+  if (!target) continue;
+  target.faq.items = [...target.faq.items, ...copy.faq];
+  target.signed.cells = copy.signedCells;
+  target.signed.footnoteHref = "/privacy/local-dictation-network-test/";
+  target.pricing.tiers[1].sub = copy.tierSub;
+}

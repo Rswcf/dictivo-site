@@ -141,9 +141,12 @@ export const MAC_ADVISOR_FAMILIES = [
     id: "pro-base-m4-m5",
     label: "MacBook Pro M4 / M5",
     examples: "base chip",
-    memoryOptions: ["16", "24", "48", "unknown"],
+    // Apple publishes the base chip separately from Pro/Max: the 14-inch M4 and
+    // M5 MacBook Pro are 16/24/32 GB (support.apple.com/en-us/121552 and 125405).
+    // 48 GB first appears one tier up, at M4 Pro / M5 Pro.
+    memoryOptions: ["16", "24", "unknown"],
     defaultMemoryId: "16",
-    profiles: { "16": "basePro16", "24": "basePro16", "48": "proChip", unknown: "basePro16" },
+    profiles: { "16": "basePro16", "24": "basePro16", unknown: "basePro16" },
   },
   {
     id: "pro-pro-chip",
