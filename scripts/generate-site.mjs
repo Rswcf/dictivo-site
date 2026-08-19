@@ -5706,11 +5706,12 @@ function renderChangelog() {
           <span class="release-status">Public beta</span>
           <time class="release-date" datetime="${html(release.updatedAt)}">${html(formatEnglishDate(release.updatedAt))}</time>
         </p>
-        <h2 id="release-${release.version.replaceAll(".", "-")}">Maintenance release.</h2>
+        <h2 id="release-${release.version.replaceAll(".", "-")}">Reliable Windows hotkeys and more resilient Cloud Fast transcription.</h2>
         <ul>
-          <li>No changes to how dictation works. Nothing was added, removed, or moved.</li>
-          <li>For people who turned on anonymous usage statistics, Dictivo now records whether microphone access was granted or denied. It is the most common reason setup fails, and until now it was the one thing we could not see. No audio, no transcripts, no app or file names - just granted or denied, once per install.</li>
-          <li>If you never turned anonymous usage statistics on, this changes nothing: nothing was sent before and nothing is sent now. You can turn it off at any time in Settings.</li>
+          <li>Fixed a Windows issue that could report every global shortcut as unavailable and prevent dictation from starting, especially when another Dictivo process or overlapping shortcut registration was involved.</li>
+          <li>Dictivo now keeps a single desktop instance and applies shortcut changes in order, so one optional shortcut failure no longer disables the main dictation shortcut.</li>
+          <li>Cloud Fast now has a more resilient fallback path for long recordings, including longer asynchronous processing on the final fallback instead of failing at the old short timeout.</li>
+          <li>Automatic language detection remains enabled. The Cloud Fast reliability changes apply to both Mac and Windows without a desktop update; the Windows hotkey fix requires version ${html(release.version)}.</li>
           <li>Updated the public Mac${hasWindowsRelease ? " and Windows" : ""} download to the latest Dictivo build.</li>
         </ul>
       </section>
