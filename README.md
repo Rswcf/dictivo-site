@@ -26,6 +26,12 @@ Then open `http://127.0.0.1:4173/`.
 `dist/` is the only source of truth for what a reader sees. Every string in `data/` is a starting
 point that a later stage may replace. Audit the generated HTML, never the data files.
 
+Release-specific changelog copy lives in `data/release-notes.mjs`, keyed by the
+exact desktop version. Unknown future versions render a deliberately generic
+entry instead of inheriting details from the previous release. Add the new
+version's notes in the desktop release preparation PR, then verify the generated
+`dist/changelog.html` after release metadata sync.
+
 This is not a style preference. An audit that read `data/site-content.mjs` once reported about 178
 Mac-only strings as live defects on the public site. Every one of them had already been rewritten
 at render time and none of them appeared in `dist/`.
@@ -55,7 +61,8 @@ Homepage copy passes through five stages. A later stage always wins.
    `metaDescription`, the hero eyebrow, title and emphasis, and the footer privacy-proof label from
    `SEO_HOME_COPY`.
 5. **`homeCopyForRender()`** in the same file. When `hasWindowsRelease` is true it applies
-   `WINDOWS_HOME_COPY` on top of everything above.
+   `WINDOWS_HOME_COPY`; otherwise it applies the narrow `WINDOWS_UNAVAILABLE_HOME_COPY`
+   safety layer so an incomplete release cannot resurrect pre-launch Windows wording.
 
 Every page renderer calls `homeCopyForRender(code)`. Nothing in the generator reads `HOME_COPY`
 directly except that one function.
@@ -73,6 +80,11 @@ The Mac-only originals for all of those are still sitting in `data/site-content.
 is public they are dead source, not live copy. Do not delete them either: they are the fallback the
 site reverts to when `hasWindowsRelease` goes false.
 
+`WINDOWS_UNAVAILABLE_HOME_COPY` then corrects the fallback's hero note, pricing
+footnote, and Windows FAQ answer in all ten locales to say that Windows x64 is
+supported but downloads are temporarily unavailable. This distinction matters:
+a missing artifact is an availability incident, not a return to pre-launch validation.
+
 `WINDOWS_DOWNLOAD_COPY` is a separate per-locale map in the same file. It supplies the download
 card badge and body, the EXE and MSI button labels, the version note, and the SmartScreen warning
 shown because the Windows installers are not Authenticode-signed.
@@ -89,8 +101,9 @@ the artifact check is the safety catch. `scripts/sync-latest-release.mjs` rewrit
 `data/release.json` on every deploy, so a desktop release that ships a DMG but no EXE and MSI turns
 `hasWindowsRelease` off without anyone touching the flag.
 
-That one boolean is read in 22 places in `scripts/generate-site.mjs` and 2 more in
-`scripts/check-public-output.mjs`. When it goes false the site quietly becomes Mac-only:
+That one boolean is read throughout `scripts/generate-site.mjs` and
+`scripts/check-public-output.mjs`. When it goes false the site switches to a guarded
+Mac-download-only state:
 
 - the whole `WINDOWS_HOME_COPY` layer stops applying, on all ten homepages at once;
 - the hero Windows button and the Windows download card disappear, and the download grid switches
@@ -99,7 +112,7 @@ That one boolean is read in 22 places in `scripts/generate-site.mjs` and 2 more 
   routes point at `/#downloads` instead of the tracking API;
 - `downloads.json` drops the Windows artifacts;
 - schema.org `operatingSystem` goes back to `macOS` alone and `downloadUrl` back to the Mac URL;
-- the comparison pages' `Platforms` rows switch to "in validation" wording and
+- the comparison pages' `Platforms` rows switch to "temporarily unavailable" wording and
   `applyCompareDesktopCopy()` stops rewriting "Mac" to "desktop";
 - `llms.txt` falls back from its Windows summary and facts to the Mac ones;
 - the changelog's Windows section is omitted.
