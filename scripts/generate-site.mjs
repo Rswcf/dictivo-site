@@ -20,6 +20,7 @@ import {
   OFFLINE_DICTATION_GUIDE_REFERENCES,
 } from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
+import { releaseNotesFor } from "../data/release-notes.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import {
   SPEECH_TO_TEXT_MAC_GUIDE_COPY,
@@ -391,6 +392,19 @@ const WINDOWS_HOME_COPY = {
   },
 };
 
+const WINDOWS_UNAVAILABLE_HOME_COPY = {
+  en: { heroNote: "Windows x64 downloads are temporarily unavailable.", pricingFootnote: "macOS is available; Windows x64 downloads are temporarily unavailable.", faqAnswer: "Dictivo supports Windows x64, but its downloads are temporarily unavailable." },
+  de: { heroNote: "Windows-x64-Downloads sind vorübergehend nicht verfügbar.", pricingFootnote: "macOS ist verfügbar; Windows-x64-Downloads sind vorübergehend nicht verfügbar.", faqAnswer: "Dictivo unterstützt Windows x64, aber die Downloads sind vorübergehend nicht verfügbar." },
+  fr: { heroNote: "Les téléchargements Windows x64 sont temporairement indisponibles.", pricingFootnote: "macOS est disponible; les téléchargements Windows x64 sont temporairement indisponibles.", faqAnswer: "Dictivo prend en charge Windows x64, mais ses téléchargements sont temporairement indisponibles." },
+  es: { heroNote: "Las descargas para Windows x64 no están disponibles temporalmente.", pricingFootnote: "macOS está disponible; las descargas para Windows x64 no están disponibles temporalmente.", faqAnswer: "Dictivo es compatible con Windows x64, pero sus descargas no están disponibles temporalmente." },
+  it: { heroNote: "I download per Windows x64 sono temporaneamente non disponibili.", pricingFootnote: "macOS è disponibile; i download per Windows x64 sono temporaneamente non disponibili.", faqAnswer: "Dictivo supporta Windows x64, ma i download sono temporaneamente non disponibili." },
+  nl: { heroNote: "Downloads voor Windows x64 zijn tijdelijk niet beschikbaar.", pricingFootnote: "macOS is beschikbaar; downloads voor Windows x64 zijn tijdelijk niet beschikbaar.", faqAnswer: "Dictivo ondersteunt Windows x64, maar de downloads zijn tijdelijk niet beschikbaar." },
+  pt: { heroNote: "Os downloads para Windows x64 estão temporariamente indisponíveis.", pricingFootnote: "O macOS está disponível; os downloads para Windows x64 estão temporariamente indisponíveis.", faqAnswer: "O Dictivo oferece suporte ao Windows x64, mas os downloads estão temporariamente indisponíveis." },
+  zh: { heroNote: "Windows x64 下载暂时不可用。", pricingFootnote: "macOS 版本可用；Windows x64 下载暂时不可用。", faqAnswer: "Dictivo 支持 Windows x64，但其下载暂时不可用。" },
+  ja: { heroNote: "Windows x64 のダウンロードは一時的に利用できません。", pricingFootnote: "macOS 版は利用できますが、Windows x64 のダウンロードは一時的に利用できません。", faqAnswer: "Dictivo は Windows x64 に対応していますが、ダウンロードは一時的に利用できません。" },
+  ko: { heroNote: "Windows x64 다운로드는 일시적으로 사용할 수 없습니다.", pricingFootnote: "macOS 버전은 사용할 수 있지만 Windows x64 다운로드는 일시적으로 사용할 수 없습니다.", faqAnswer: "Dictivo는 Windows x64를 지원하지만 다운로드는 일시적으로 사용할 수 없습니다." },
+};
+
 const SEO_HOME_COPY = {
   en: {
     metaTitle: "Dictivo - Private Mac dictation. $29 once, no subscription",
@@ -514,6 +528,10 @@ function windowsHomeCopy(code) {
   return WINDOWS_HOME_COPY[code] || WINDOWS_HOME_COPY.en;
 }
 
+function windowsUnavailableHomeCopy(code) {
+  return WINDOWS_UNAVAILABLE_HOME_COPY[code] || WINDOWS_UNAVAILABLE_HOME_COPY.en;
+}
+
 function questionIsAboutWindows(question) {
   return String(question).toLowerCase().includes("windows");
 }
@@ -540,7 +558,21 @@ function applySeoHomeCopy(code, base) {
 
 function homeCopyForRender(code) {
   const base = applySeoHomeCopy(code, HOME_COPY[code]);
-  if (!base || !hasWindowsRelease) return base;
+  if (!base) return base;
+  if (!hasWindowsRelease) {
+    const unavailable = windowsUnavailableHomeCopy(code);
+    return {
+      ...base,
+      hero: { ...base.hero, windows: unavailable.heroNote },
+      pricing: { ...base.pricing, footnote: unavailable.pricingFootnote },
+      faq: {
+        ...base.faq,
+        items: base.faq.items.map(([question, answer]) =>
+          questionIsAboutWindows(question) ? [question, unavailable.faqAnswer] : [question, answer],
+        ),
+      },
+    };
+  }
 
   const live = windowsHomeCopy(code);
   return {
@@ -2587,17 +2619,17 @@ function localizedCompareRows(page, copy) {
   if (copy === COMPARE_I18N.en) {
     return page.rows.map((row) => ({
       ...row,
-      dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformValidationCopy("en") : row.dictivo,
+      dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformUnavailableCopy("en") : row.dictivo,
     }));
   }
   const competitorRows = LOCALIZED_COMPETITOR_ROWS[copy.locale] || {};
   return page.rows.map((row) => ({
     ...row,
     label: copy.rowLabels[row.label] || row.label,
-    dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformValidationCopy(copy.locale) : copy.dictivoRows[row.label] || row.dictivo,
+    dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformUnavailableCopy(copy.locale) : copy.dictivoRows[row.label] || row.dictivo,
     competitor: fillCompareTemplate(
       row.label === "Platforms" && !hasWindowsRelease
-        ? platformCompetitorValidationCopy(copy.locale)
+        ? platformCompetitorUnavailableCopy(copy.locale)
         : competitorRows[row.label] || row.competitor,
       page,
       row,
@@ -2605,34 +2637,34 @@ function localizedCompareRows(page, copy) {
   }));
 }
 
-function platformValidationCopy(code) {
+function platformUnavailableCopy(code) {
   const copy = {
-    en: "macOS public beta. Windows x64 is in validation before public downloads.",
-    de: "macOS öffentliche Beta. Windows x64 bleibt vor öffentlichen Downloads in Validierung.",
-    fr: "Bêta publique macOS. Windows x64 reste en validation avant les téléchargements publics.",
-    es: "Beta pública para macOS. Windows x64 sigue en validación antes de las descargas públicas.",
-    it: "Beta pubblica macOS. Windows x64 è in validazione prima dei download pubblici.",
-    nl: "Openbare macOS-beta. Windows x64 blijft in validatie vóór publieke downloads.",
-    pt: "Beta pública para macOS. Windows x64 segue em validação antes dos downloads públicos.",
-    zh: "macOS 公测版。Windows x64 仍在公开下载前验证。",
-    ja: "macOS 公開ベータ。Windows x64 は公開ダウンロード前の検証中です。",
-    ko: "macOS 공개 베타. Windows x64는 공개 다운로드 전 검증 중입니다.",
+    en: "macOS is available. Windows x64 downloads are temporarily unavailable.",
+    de: "macOS ist verfügbar. Windows-x64-Downloads sind vorübergehend nicht verfügbar.",
+    fr: "macOS est disponible. Les téléchargements Windows x64 sont temporairement indisponibles.",
+    es: "macOS está disponible. Las descargas para Windows x64 no están disponibles temporalmente.",
+    it: "macOS è disponibile. I download per Windows x64 sono temporaneamente non disponibili.",
+    nl: "macOS is beschikbaar. Downloads voor Windows x64 zijn tijdelijk niet beschikbaar.",
+    pt: "O macOS está disponível. Os downloads para Windows x64 estão temporariamente indisponíveis.",
+    zh: "macOS 版本可用。Windows x64 下载暂时不可用。",
+    ja: "macOS 版は利用できます。Windows x64 のダウンロードは一時的に利用できません。",
+    ko: "macOS 버전을 사용할 수 있습니다. Windows x64 다운로드는 일시적으로 사용할 수 없습니다.",
   };
   return copy[code] || copy.en;
 }
 
-function platformCompetitorValidationCopy(code) {
+function platformCompetitorUnavailableCopy(code) {
   const copy = {
-    en: "{competitor} has its own platform coverage. Dictivo's public download is macOS today; Windows x64 is in validation.",
-    de: "{competitor} hat eigene Plattformabdeckung. Dictivo ist öffentlich für Mac verfügbar; Windows x64 ist in Validierung.",
-    fr: "{competitor} a sa propre couverture de plateformes. Dictivo est public sur Mac aujourd'hui; Windows x64 reste en validation.",
-    es: "{competitor} tiene su propia cobertura de plataformas. La descarga pública de Dictivo es para Mac; Windows x64 sigue en validación.",
-    it: "{competitor} ha la propria copertura piattaforme. Il download pubblico di Dictivo è per Mac; Windows x64 è in validazione.",
-    nl: "{competitor} heeft eigen platformdekking. De publieke download van Dictivo is voor Mac; Windows x64 blijft in validatie.",
-    pt: "{competitor} tem a sua própria cobertura de plataformas. O download público do Dictivo é para Mac; Windows x64 segue em validação.",
-    zh: "{competitor} 有自己的平台覆盖。Dictivo 当前公开下载为 Mac 版；Windows x64 仍在验证。",
-    ja: "{competitor} には独自の対応プラットフォームがあります。Dictivo の公開ダウンロードは現在 Mac 版で、Windows x64 は検証中です。",
-    ko: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo의 공개 다운로드는 현재 Mac용이며 Windows x64는 검증 중입니다.",
+    en: "{competitor} has its own platform coverage. Dictivo's macOS download is available; Windows x64 downloads are temporarily unavailable.",
+    de: "{competitor} hat eine eigene Plattformabdeckung. Der macOS-Download von Dictivo ist verfügbar; Windows-x64-Downloads sind vorübergehend nicht verfügbar.",
+    fr: "{competitor} a sa propre couverture de plateformes. Le téléchargement macOS de Dictivo est disponible; les téléchargements Windows x64 sont temporairement indisponibles.",
+    es: "{competitor} tiene su propia cobertura de plataformas. La descarga de Dictivo para macOS está disponible; las descargas para Windows x64 no están disponibles temporalmente.",
+    it: "{competitor} ha la propria copertura di piattaforme. Il download di Dictivo per macOS è disponibile; i download per Windows x64 sono temporaneamente non disponibili.",
+    nl: "{competitor} heeft eigen platformdekking. De macOS-download van Dictivo is beschikbaar; downloads voor Windows x64 zijn tijdelijk niet beschikbaar.",
+    pt: "{competitor} tem a sua própria cobertura de plataformas. O download do Dictivo para macOS está disponível; os downloads para Windows x64 estão temporariamente indisponíveis.",
+    zh: "{competitor} 有自己的平台覆盖。Dictivo 的 macOS 下载可用；Windows x64 下载暂时不可用。",
+    ja: "{competitor} には独自の対応プラットフォームがあります。Dictivo の macOS 版は利用できますが、Windows x64 のダウンロードは一時的に利用できません。",
+    ko: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo의 macOS 다운로드는 사용할 수 있지만 Windows x64 다운로드는 일시적으로 사용할 수 없습니다.",
   };
   return copy[code] || copy.en;
 }
@@ -5657,6 +5689,7 @@ ${trustEntries}
 }
 
 function renderChangelog() {
+  const currentNotes = releaseNotesFor(release.version, hasWindowsRelease);
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -5706,13 +5739,9 @@ function renderChangelog() {
           <span class="release-status">Public beta</span>
           <time class="release-date" datetime="${html(release.updatedAt)}">${html(formatEnglishDate(release.updatedAt))}</time>
         </p>
-        <h2 id="release-${release.version.replaceAll(".", "-")}">Reliable Windows hotkeys and more resilient Cloud Fast transcription.</h2>
+        <h2 id="release-${release.version.replaceAll(".", "-")}">${html(currentNotes.title)}</h2>
         <ul>
-          <li>Fixed a Windows issue that could report every global shortcut as unavailable and prevent dictation from starting, especially when another Dictivo process or overlapping shortcut registration was involved.</li>
-          <li>Dictivo now keeps a single desktop instance and applies shortcut changes in order, so one optional shortcut failure no longer disables the main dictation shortcut.</li>
-          <li>Cloud Fast now has a more resilient fallback path for long recordings, including longer asynchronous processing on the final fallback instead of failing at the old short timeout.</li>
-          <li>Automatic language detection remains enabled. The Cloud Fast reliability changes apply to both Mac and Windows without a desktop update; the Windows hotkey fix requires version ${html(release.version)}.</li>
-          <li>Updated the public Mac${hasWindowsRelease ? " and Windows" : ""} download to the latest Dictivo build.</li>
+          ${currentNotes.bullets.map((bullet) => `<li>${html(bullet)}</li>`).join("\n          ")}
         </ul>
       </section>
 
@@ -5818,13 +5847,13 @@ function renderChangelog() {
           <li>Windows Check for updates reads the shared Dictivo updater manifest.</li>
           <li>The MSI installer is available for users who prefer that package format.</li>
         </ul>
-      </section>` : `<section class="doc-section" id="windows-validation-pending" aria-labelledby="windows-validation-title">
-        <p class="release-line"><span class="release-tag">Windows</span><span class="release-status" data-status="alpha">Validation pending</span></p>
-        <h2 id="windows-validation-title">Windows public downloads wait for signing and real-machine QA.</h2>
+      </section>` : `<section class="doc-section" id="windows-downloads-unavailable" aria-labelledby="windows-unavailable-title">
+        <p class="release-line"><span class="release-tag">Windows</span><span class="release-status" data-status="alpha">Temporarily unavailable</span></p>
+        <h2 id="windows-unavailable-title">Windows x64 support remains public, but downloads are temporarily unavailable.</h2>
         <ul>
-          <li>Windows is still in validation before public release.</li>
-          <li>Public Windows downloads will appear only after the install and update experience is ready.</li>
-          <li>The current public download remains the macOS desktop app.</li>
+          <li>The Windows product has already launched; this state means the current release metadata is missing a required installer.</li>
+          <li>The site hides incomplete Windows releases instead of linking mismatched EXE and MSI files.</li>
+          <li>Use the available macOS download or check back after the Windows artifacts are restored.</li>
         </ul>
       </section>`}
 

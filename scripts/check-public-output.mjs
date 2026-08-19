@@ -2,6 +2,7 @@ import { COMPARE_LAST_UPDATED } from "../data/compare-pages.mjs";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { LOCALES } from "../data/site-content.mjs";
+import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -247,6 +248,7 @@ for (const file of listFiles()) {
 
 verifyAnalyticsInstrumentation();
 verifyWindowsDownloads();
+verifyReleaseNotes();
 
 if (failures.length > 0) {
   fail(`Public output check failed:\n${failures.map((line) => `  - ${line}`).join("\n")}`);
@@ -360,4 +362,37 @@ function verifyWindowsDownloads() {
     if (artifact.platform !== "windows") continue;
     failures.push(`downloads.json: Windows artifact ${artifact.label ?? artifact.fileName} is exposed while public Windows downloads are disabled`);
   }
+}
+
+function verifyReleaseNotes() {
+  const changelogPath = resolve(publicRoot, "changelog.html");
+  if (!existsSync(changelogPath)) {
+    failures.push("changelog.html: missing release notes page");
+    return;
+  }
+
+  const changelog = readFileSync(changelogPath, "utf8");
+  const current = releaseNotesFor(release.version, hasWindowsRelease);
+  for (const text of [current.title, ...current.bullets]) {
+    if (!changelog.includes(escapeHtml(text))) {
+      failures.push(`changelog.html: missing current release note ${JSON.stringify(text)}`);
+    }
+  }
+
+  const future = releaseNotesFor("9.9.9", true);
+  if (future.title !== "New Dictivo release." || !future.bullets.some((line) => line.includes("version 9.9.9"))) {
+    failures.push("release-notes.mjs: unknown versions must use the generic version-specific fallback");
+  }
+  if ([future.title, ...future.bullets].some((line) => /0\.3\.39|Windows hotkey|long recordings/i.test(line))) {
+    failures.push("release-notes.mjs: unknown versions inherited v0.3.39-specific details");
+  }
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
