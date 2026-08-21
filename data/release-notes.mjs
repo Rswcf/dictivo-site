@@ -1,4 +1,13 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.40": Object.freeze({
+    title: "Hotkeys recover on their own, and the free tiers stop running out in silence.",
+    bullets: Object.freeze([
+      "A dictation shortcut that failed to register used to stay broken until you restarted Dictivo. It now retries by itself, tries again whenever you come back to the window, and offers a Try again button.",
+      "When a shortcut cannot be reserved, Dictivo now tells you what actually went wrong instead of assuming another app is holding it.",
+      "The 14-day trial of the larger local models no longer ends without saying so, and the free Cloud Fast minutes are visible while they last.",
+      "Cloud Fast requests now go through the app itself rather than the embedded browser, which makes them survive network changes more reliably.",
+    ]),
+  }),
   "0.3.39": Object.freeze({
     title: "Reliable Windows hotkeys and more resilient Cloud Fast transcription.",
     bullets: Object.freeze([
