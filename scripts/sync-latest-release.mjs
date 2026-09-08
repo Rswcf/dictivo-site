@@ -15,7 +15,9 @@ const releaseTag = process.env.DICTIVO_DESKTOP_RELEASE_TAG;
 const downloadsHost = (process.env.DICTIVO_DOWNLOADS_HOST || "https://downloads.dictivo.app").replace(/\/+$/, "");
 const existingManifest = readExistingReleaseManifest();
 
-const apiBase = `https://api.github.com/repos/${owner}/${repo}`;
+// Overridable so the payload cross-check below can be exercised against a
+// local stand-in for GitHub in check-release-payload-sync.mjs.
+const apiBase = `${(process.env.DICTIVO_GITHUB_API_BASE || "https://api.github.com").replace(/\/+$/, "")}/repos/${owner}/${repo}`;
 const releaseUrl = releaseTag
   ? `${apiBase}/releases/tags/${encodeURIComponent(releaseTag)}`
   : `${apiBase}/releases/latest`;
@@ -64,6 +66,7 @@ function normalizeDigest(asset) {
 const dispatchedRelease = readDispatchedRelease();
 if (dispatchedRelease) {
   const manifest = manifestFromDispatch(dispatchedRelease);
+  await assertPayloadMatchesPublishedAssets(manifest);
   writeManifest(manifest);
   console.log(`Synced Dictivo desktop release ${manifest.tag} from repository_dispatch payload to ${outputPath}`);
   console.log(`DMG: ${manifest.dmg.fileName}`);
@@ -122,6 +125,50 @@ console.log(`DMG: ${manifest.dmg.fileName}`);
 if (manifest.windows) {
   console.log(`Windows EXE: ${manifest.windows.exe.fileName}`);
   console.log(`Windows MSI: ${manifest.windows.msi.fileName}`);
+}
+
+// The payload carries what the desktop workflow *measured*; GitHub's asset
+// digest is what it *uploaded*. Until 2026-09-08 those disagreed for every
+// notarized release — the workflow hashed the DMG before stapling the
+// notarization ticket onto it — and this site published the stale hash as the
+// checksum of a file nobody could download. A checksum that contradicts the
+// bytes people get must not go out; a checksum we cannot check is only a
+// warning, because GitHub being unreachable is not evidence of anything.
+async function assertPayloadMatchesPublishedAssets(manifest) {
+  const token = process.env.DICTIVO_DESKTOP_TOKEN || process.env.GITHUB_TOKEN;
+  if (!token) {
+    console.warn("⚠ No GitHub token: payload checksums were not cross-checked against the release assets.");
+    return;
+  }
+  let release;
+  try {
+    release = await fetchJson(`${apiBase}/releases/tags/${encodeURIComponent(manifest.tag)}`);
+  } catch (error) {
+    console.warn(`⚠ Could not cross-check payload checksums against GitHub release ${manifest.tag}: ${error.message}`);
+    return;
+  }
+  const artifacts = [manifest.dmg, manifest.windows?.exe, manifest.windows?.msi].filter(Boolean);
+  const contradictions = [];
+  for (const artifact of artifacts) {
+    const asset = release.assets?.find((candidate) => candidate.name === artifact.fileName);
+    if (!asset) {
+      contradictions.push(`${artifact.fileName}: not among the assets of release ${manifest.tag}`);
+      continue;
+    }
+    const digest = normalizeDigest(asset);
+    if (!digest) {
+      console.warn(`⚠ GitHub reports no digest for ${artifact.fileName}; its checksum was not cross-checked.`);
+    } else if (digest.toLowerCase() !== artifact.sha256) {
+      contradictions.push(`${artifact.fileName}: payload sha256 ${artifact.sha256}, uploaded asset ${digest.toLowerCase()}`);
+    }
+    if (Number.isInteger(asset.size) && asset.size > 0 && asset.size !== artifact.size) {
+      contradictions.push(`${artifact.fileName}: payload size ${artifact.size}, uploaded asset ${asset.size}`);
+    }
+  }
+  if (contradictions.length > 0) {
+    throw new Error(`Release payload contradicts the published assets:\n  ${contradictions.join("\n  ")}`);
+  }
+  console.log(`Payload checksums match the GitHub release assets for ${manifest.tag}.`);
 }
 
 function readExistingReleaseManifest() {
