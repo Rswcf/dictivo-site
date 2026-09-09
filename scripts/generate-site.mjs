@@ -57,6 +57,12 @@ const cloudFastCheckoutTarget = redirectTargetFromSource(
   "/checkout/cloud-fast",
   "https://dictivo.lemonsqueezy.com/checkout/buy/2a12baa1-2368-47ac-884b-0721f8b5484d",
 );
+// The $24 renewal (Lemon Squeezy product 1349218): a Local licence with a
+// fresh 12-month window, bought from inside the app with a claim nonce.
+const localRenewalCheckoutTarget = redirectTargetFromSource(
+  "/checkout/local-renewal",
+  "https://dictivo.lemonsqueezy.com/checkout/buy/c4d5fb99-22fc-434f-b17b-66743f50275a",
+);
 const transparentPng = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAKBuc622QAAAABJRU5ErkJggg==",
   "base64",
@@ -5253,6 +5259,7 @@ function renderRedirects() {
 /changelog.html /changelog/ 301
 /checkout/local ${localCheckoutTarget} 302
 /checkout/cloud-fast ${cloudFastCheckoutTarget} 302
+/checkout/local-renewal ${localRenewalCheckoutTarget} 302
 `;
 }
 
