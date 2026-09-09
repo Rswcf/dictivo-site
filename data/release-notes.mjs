@@ -1,4 +1,11 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.45": Object.freeze({
+    title: "Renewals can be bought, and they activate themselves.",
+    bullets: Object.freeze([
+      "The $24/year renewal exists now. When your update window has ended, Renew opens the checkout and the new key extends the window on this device automatically.",
+      "A renewal or replacement key that arrives by email can be entered under Account & Billing without removing the saved licence first.",
+    ]),
+  }),
   "0.3.44": Object.freeze({
     title: "Buying Dictivo Local now finishes inside the app.",
     bullets: Object.freeze([
