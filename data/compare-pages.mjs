@@ -23,7 +23,7 @@ export const COMPARE_PAGES = [
     competitor: "Wispr Flow",
     title: "Wispr Flow Alternative: Local, Buy-Once Dictation (2026)",
     metaDescription:
-      "Want a Wispr Flow alternative that runs on-device with no subscription? Dictivo does Whisper-grade dictation locally for $29 once. Compare here.",
+      "Want a Wispr Flow alternative that runs on-device for a one-time price? Dictivo does Whisper-grade dictation locally for $29 once. Compare here.",
     h1: "Wispr Flow alternative: local dictation when cloud is the wrong default",
     eyebrow: "Compare alternatives",
     primaryKeyword: "wispr flow alternative",

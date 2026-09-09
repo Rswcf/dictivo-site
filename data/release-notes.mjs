@@ -1,4 +1,21 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.44": Object.freeze({
+    title: "Buying Dictivo Local now finishes inside the app.",
+    bullets: Object.freeze([
+      "A Dictivo Local purchase activates on this device by itself once the checkout completes, the way a Cloud Fast subscription already did. The emailed key still works as a fallback.",
+      "The trial banner and Account & Billing show the Local price, and the purchase comes first on that screen, with key entry kept underneath for people who already have one.",
+      "First run offers \"Enter your license key\" for anyone who bought on the website before installing.",
+      "The renewal buttons that led nowhere are gone until renewals can actually be bought; the update notice no longer quotes a price it cannot sell.",
+    ]),
+  }),
+  "0.3.43": Object.freeze({
+    title: "A lapsed subscription can be bought again from inside the app.",
+    bullets: Object.freeze([
+      "When a Cloud Fast subscription lapses, Dictivo now says so plainly and offers \"Subscribe again\"; the new checkout activates on this device automatically.",
+      "A device-limit or network problem is no longer mistaken for a lapsed subscription, so paying customers are not asked to pay twice.",
+      "The server stopped quoting a price at people who have already paid.",
+    ]),
+  }),
   "0.3.40": Object.freeze({
     title: "Hotkeys recover on their own, and the free tiers stop running out in silence.",
     bullets: Object.freeze([

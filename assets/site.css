@@ -3711,3 +3711,14 @@ main section[id] {
     transform: none;
   }
 }
+
+/* A download button within the first screen on desktop: at 1280×800 the film
+   pushed the only buttons below the fold. Mobile already fits them. */
+.hero-actions--top {
+  margin-top: 22px;
+}
+@media (max-width: 720px) {
+  .hero-actions--top {
+    display: none;
+  }
+}

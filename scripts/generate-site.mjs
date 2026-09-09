@@ -172,7 +172,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Yes. Dictivo is available for macOS and Windows x64.",
     footerBeta: "Mac and Windows - 2026",
     metaDescription:
-      "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. $29 once, no subscription.",
+      "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. $29 once, yours to keep.",
   },
   de: {
     metaTitle: "Offline-Diktier-App für Mac & Windows - einmal $29 | Dictivo",
@@ -196,7 +196,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Ja. Dictivo ist für macOS und Windows x64 verfügbar.",
     footerBeta: "Mac und Windows - 2026",
     metaDescription:
-      "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per offenem Netzwerktest überprüfbar. Einmal $29, kein Abo.",
+      "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per offenem Netzwerktest überprüfbar. Einmal $29, für immer Ihres.",
   },
   fr: {
     metaTitle: "App de dictée hors ligne pour Mac et Windows - $29 | Dictivo",
@@ -220,7 +220,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Oui. Dictivo est disponible pour macOS et Windows x64.",
     footerBeta: "Mac et Windows - 2026",
     metaDescription:
-      "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. $29 une fois, sans abonnement.",
+      "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. $29 une fois, à vous pour toujours.",
   },
   es: {
     metaTitle: "App de dictado sin conexión para Mac y Windows | Dictivo",
@@ -244,7 +244,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sí. Dictivo está disponible para macOS y Windows x64.",
     footerBeta: "Mac y Windows - 2026",
     metaDescription:
-      "Dictivo escribe lo que dictas en cualquier app de Mac o Windows. En modo local, el audio se queda en tu equipo. $29 una vez, sin suscripción.",
+      "Dictivo escribe lo que dictas en cualquier app de Mac o Windows. En modo local, el audio se queda en tu equipo. $29 una vez, y es tuyo para siempre.",
   },
   it: {
     metaTitle: "App di dettatura offline per Mac e Windows - $29 | Dictivo",
@@ -268,7 +268,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sì. Dictivo è disponibile per macOS e Windows x64.",
     footerBeta: "Mac e Windows - 2026",
     metaDescription:
-      "Dictivo scrive ciò che detti in qualsiasi app per Mac o Windows. In modalità locale l'audio resta sul tuo dispositivo. $29 una volta, senza abbonamento.",
+      "Dictivo scrive ciò che detti in qualsiasi app per Mac o Windows. In modalità locale l'audio resta sul tuo dispositivo. $29 una volta, ed è tuo per sempre.",
   },
   nl: {
     metaTitle: "Offline dicteer-app voor Mac en Windows - $29 | Dictivo",
@@ -292,7 +292,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Ja. Dictivo is beschikbaar voor macOS en Windows x64.",
     footerBeta: "Mac en Windows - 2026",
     metaDescription:
-      "Dictivo typt wat je zegt in elke Mac- of Windows-app. In lokale modus blijft audio op je apparaat. Eenmalig $29, geen abonnement.",
+      "Dictivo typt wat je zegt in elke Mac- of Windows-app. In lokale modus blijft audio op je apparaat. Eenmalig $29, voor altijd van jou.",
   },
   pt: {
     metaTitle: "App de ditado offline para Mac e Windows - $29 | Dictivo",
@@ -316,7 +316,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sim. O Dictivo está disponível para macOS e Windows x64.",
     footerBeta: "Mac e Windows - 2026",
     metaDescription:
-      "O Dictivo digita o que você dita em qualquer app do Mac ou Windows. No modo local, o áudio fica no seu dispositivo. $29 uma vez, sem assinatura.",
+      "O Dictivo digita o que você dita em qualquer app do Mac ou Windows. No modo local, o áudio fica no seu dispositivo. $29 uma veze é seu para sempre.",
   },
   zh: {
     metaTitle: "Mac 和 Windows 离线听写软件 - $29 一次买断 | Dictivo",
@@ -340,7 +340,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "可以。Dictivo 已支持 macOS 与 Windows x64。",
     footerBeta: "Mac 与 Windows - 2026",
     metaDescription:
-      "Dictivo 一键把语音转成文字，输入到 Mac 或 Windows 的任意应用。本地模式下音频不离开设备，可自行用网络测试验证。$29 一次买断，无订阅。",
+      "Dictivo 一键把语音转成文字，输入到 Mac 或 Windows 的任意应用。本地模式下音频不离开设备，可自行用网络测试验证。$29 一次买断，永久使用。",
   },
   ja: {
     metaTitle: "Mac・Windows 対応オフライン音声入力アプリ - 買い切り $29 | Dictivo",
@@ -388,7 +388,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "예. Dictivo는 macOS와 Windows x64에서 사용할 수 있습니다.",
     footerBeta: "Mac 및 Windows - 2026",
     metaDescription:
-      "Dictivo는 단축키 하나로 Mac과 Windows의 모든 앱에 음성을 텍스트로 입력합니다. 로컬 모드에서는 오디오가 기기를 떠나지 않습니다. $29 한 번 결제, 구독 없음.",
+      "Dictivo는 단축키 하나로 Mac과 Windows의 모든 앱에 음성을 텍스트로 입력합니다. 로컬 모드에서는 오디오가 기기를 떠나지 않습니다. $29 한 번 결제, 영구 사용.",
   },
 };
 
@@ -407,92 +407,92 @@ const WINDOWS_UNAVAILABLE_HOME_COPY = {
 
 const SEO_HOME_COPY = {
   en: {
-    metaTitle: "Dictivo - Private Mac dictation. $29 once, no subscription",
+    metaTitle: "Dictivo - Private Mac dictation. $29 once, yours to keep",
     metaDescription:
-      "Press one hotkey and Dictivo types what you say into any Mac app. Local mode keeps audio on your device - verify it yourself with an open network test. $29 launch price, no subscription. Optional Cloud Fast when speed matters more.",
+      "Press one hotkey and Dictivo types what you say into any Mac app. Local mode keeps audio on your device - verify it yourself with an open network test. $29 launch price, yours to keep. Optional Cloud Fast when speed matters more.",
     heroTitle: "Dictation that stays on your Mac.",
-    heroEmphasis: "No subscription. $29 once, own it.",
+    heroEmphasis: "Buy once, own it. $29.",
     heroEyebrow: "Private Mac dictation app",
     footerPrivacyProof: "Privacy proof",
   },
   de: {
-    metaTitle: "Dictivo - Privates Mac-Diktat. Einmal $29, kein Abo",
+    metaTitle: "Dictivo - Privates Mac-Diktat. Einmal $29, für immer Ihres",
     metaDescription:
-      "Ein Hotkey, und Dictivo tippt, was Sie sagen - in jeder Mac-App. Im Local-Modus bleibt Audio auf Ihrem Gerät, überprüfbar per offenem Netzwerktest. $29 Aktionspreis, kein Abo. Optional Cloud Fast, wenn Tempo wichtiger ist.",
+      "Ein Hotkey, und Dictivo tippt, was Sie sagen - in jeder Mac-App. Im Local-Modus bleibt Audio auf Ihrem Gerät, überprüfbar per offenem Netzwerktest. $29 Aktionspreis, für immer Ihres. Optional Cloud Fast, wenn Tempo wichtiger ist.",
     heroTitle: "Diktieren, das auf Ihrem Mac bleibt.",
-    heroEmphasis: "Kein Abo. Einmal $29 - Ihre Lizenz.",
+    heroEmphasis: "Einmal kaufen, für immer Ihres. $29.",
     heroEyebrow: "Private Mac-Diktat-App",
     footerPrivacyProof: "Datenschutznachweis",
   },
   fr: {
-    metaTitle: "Dictivo - Dictée Mac privée. $29 une fois, sans abonnement",
+    metaTitle: "Dictivo - Dictée Mac privée. $29 une fois, à vous pour toujours",
     metaDescription:
-      "Un raccourci, et Dictivo tape ce que vous dites dans n'importe quelle app Mac. Le mode Local garde l'audio sur votre appareil, vérifiable par un test réseau ouvert. Prix de lancement $29, sans abonnement. Cloud Fast en option quand la vitesse prime.",
+      "Un raccourci, et Dictivo tape ce que vous dites dans n'importe quelle app Mac. Le mode Local garde l'audio sur votre appareil, vérifiable par un test réseau ouvert. Prix de lancement $29, à vous pour toujours. Cloud Fast en option quand la vitesse prime.",
     heroTitle: "La dictée qui reste sur votre Mac.",
-    heroEmphasis: "Sans abonnement. $29 une fois.",
+    heroEmphasis: "Achetez une fois, gardez-le. $29.",
     heroEyebrow: "App de dictée Mac privée",
     footerPrivacyProof: "Preuve confidentialité",
   },
   es: {
-    metaTitle: "Dictivo - Dictado privado para Mac. $29 una vez, sin suscripción",
+    metaTitle: "Dictivo - Dictado privado para Mac. $29 una vez, y es tuyo para siempre",
     metaDescription:
-      "Pulsa un atajo y Dictivo escribe lo que dices en cualquier app del Mac. El modo Local mantiene el audio en tu equipo, verificable con un test de red abierto. Precio de lanzamiento de $29, sin suscripción. Cloud Fast opcional cuando importa la velocidad.",
+      "Pulsa un atajo y Dictivo escribe lo que dices en cualquier app del Mac. El modo Local mantiene el audio en tu equipo, verificable con un test de red abierto. Precio de lanzamiento de $29, y es tuyo para siempre. Cloud Fast opcional cuando importa la velocidad.",
     heroTitle: "Dictado que se queda en tu Mac.",
-    heroEmphasis: "Sin suscripción. $29 una vez.",
+    heroEmphasis: "Compra una vez y es tuyo. $29.",
     heroEyebrow: "App de dictado privado para Mac",
     footerPrivacyProof: "Prueba de privacidad",
   },
   it: {
-    metaTitle: "Dictivo - Dettatura privata per Mac. $29 una volta, senza abbonamento",
+    metaTitle: "Dictivo - Dettatura privata per Mac. $29 una volta, ed è tuo per sempre",
     metaDescription:
-      "Premi una scorciatoia e Dictivo scrive ciò che dici in qualsiasi app del Mac. La modalità Local tiene l'audio sul tuo dispositivo, verificabile con un test di rete aperto. Prezzo di lancio $29, senza abbonamento. Cloud Fast opzionale quando conta la velocità.",
+      "Premi una scorciatoia e Dictivo scrive ciò che dici in qualsiasi app del Mac. La modalità Local tiene l'audio sul tuo dispositivo, verificabile con un test di rete aperto. Prezzo di lancio $29, ed è tuo per sempre. Cloud Fast opzionale quando conta la velocità.",
     heroTitle: "La dettatura che resta sul tuo Mac.",
-    heroEmphasis: "Niente abbonamento. $29 una volta.",
+    heroEmphasis: "Compra una volta, è tuo. $29.",
     heroEyebrow: "App di dettatura privata per Mac",
     footerPrivacyProof: "Prova privacy",
   },
   nl: {
-    metaTitle: "Dictivo - Private Mac-dictatie. Eenmalig $29, geen abonnement",
+    metaTitle: "Dictivo - Private Mac-dictatie. Eenmalig $29, voor altijd van jou",
     metaDescription:
-      "Eén sneltoets en Dictivo typt wat je zegt in elke Mac-app. Local-modus houdt audio op je apparaat, controleerbaar met een open netwerktest. Introductieprijs $29, geen abonnement. Optionele Cloud Fast wanneer snelheid telt.",
+      "Eén sneltoets en Dictivo typt wat je zegt in elke Mac-app. Local-modus houdt audio op je apparaat, controleerbaar met een open netwerktest. Introductieprijs $29, voor altijd van jou. Optionele Cloud Fast wanneer snelheid telt.",
     heroTitle: "Dictatie die op je Mac blijft.",
-    heroEmphasis: "Geen abonnement. Eenmalig $29.",
+    heroEmphasis: "Eén keer kopen, voor altijd van jou. $29.",
     heroEyebrow: "Private Mac-dictatie-app",
     footerPrivacyProof: "Privacybewijs",
   },
   pt: {
-    metaTitle: "Dictivo - Ditado privado para Mac. $29 uma vez, sem assinatura",
+    metaTitle: "Dictivo - Ditado privado para Mac. $29 uma veze é seu para sempre",
     metaDescription:
-      "Pressione um atalho e o Dictivo digita o que você fala em qualquer app do Mac. O modo Local mantém o áudio no seu aparelho, verificável com um teste de rede aberto. Preço de lançamento de $29, sem assinatura. Cloud Fast opcional quando a velocidade importa.",
+      "Pressione um atalho e o Dictivo digita o que você fala em qualquer app do Mac. O modo Local mantém o áudio no seu aparelho, verificável com um teste de rede aberto. Preço de lançamento de $29e é seu para sempre. Cloud Fast opcional quando a velocidade importa.",
     heroTitle: "Ditado que fica no seu Mac.",
-    heroEmphasis: "Sem assinatura. $29 uma vez.",
+    heroEmphasis: "Compre uma vez, é seu. $29.",
     heroEyebrow: "App de ditado privado para Mac",
     footerPrivacyProof: "Prova de privacidade",
   },
   zh: {
-    metaTitle: "Dictivo - 私密 Mac 听写，$29 一次买断，无订阅",
+    metaTitle: "Dictivo - 私密 Mac 听写，$29 一次买断，永久使用",
     metaDescription:
-      "按下快捷键，Dictivo 把你说的话直接打进任何 Mac 应用。Local 模式音频不离开设备，可用公开网络测试自行验证。$29 启动价，无订阅。需要速度时可选 Cloud Fast。",
+      "按下快捷键，Dictivo 把你说的话直接打进任何 Mac 应用。Local 模式音频不离开设备，可用公开网络测试自行验证。$29 启动价，永久使用。需要速度时可选 Cloud Fast。",
     heroTitle: "听写，不出你的 Mac。",
-    heroEmphasis: "无订阅，$29 一次买断。",
+    heroEmphasis: "$29 一次买断，永久使用。",
     heroEyebrow: "私密 Mac 听写应用",
     footerPrivacyProof: "隐私证明",
   },
   ja: {
-    metaTitle: "Dictivo - プライベート Mac 音声入力。$29 買い切り、サブスク不要",
+    metaTitle: "Dictivo - プライベート Mac 音声入力。$29 買い切り、ずっと使えます",
     metaDescription:
-      "ホットキーを押して話すだけで、Dictivo がどの Mac アプリにも文字を入力します。Local モードでは音声がデバイスに留まり、公開ネットワークテストで検証できます。ローンチ価格 $29、サブスク不要。速度重視のときは Cloud Fast も選べます。",
+      "ホットキーを押して話すだけで、Dictivo がどの Mac アプリにも文字を入力します。Local モードでは音声がデバイスに留まり、公開ネットワークテストで検証できます。ローンチ価格 $29、ずっと使えます。速度重視のときは Cloud Fast も選べます。",
     heroTitle: "音声が Mac の外に出ない音声入力。",
-    heroEmphasis: "サブスク不要。$29 買い切り。",
+    heroEmphasis: "$29 買い切り。ずっと使えます。",
     heroEyebrow: "プライベート Mac 音声入力アプリ",
     footerPrivacyProof: "プライバシー証明",
   },
   ko: {
-    metaTitle: "Dictivo - 프라이빗 Mac 받아쓰기. $29 일회 구매, 구독 없음",
+    metaTitle: "Dictivo - 프라이빗 Mac 받아쓰기. $29 일회 구매, 영구 사용",
     metaDescription:
-      "단축키를 누르고 말하면 Dictivo가 어떤 Mac 앱에든 텍스트를 입력합니다. Local 모드는 오디오를 기기에 보관하며 공개 네트워크 테스트로 직접 확인할 수 있습니다. 런칭 가격 $29, 구독 없음. 속도가 중요할 때는 Cloud Fast를 선택하세요.",
+      "단축키를 누르고 말하면 Dictivo가 어떤 Mac 앱에든 텍스트를 입력합니다. Local 모드는 오디오를 기기에 보관하며 공개 네트워크 테스트로 직접 확인할 수 있습니다. 런칭 가격 $29, 영구 사용. 속도가 중요할 때는 Cloud Fast를 선택하세요.",
     heroTitle: "오디오가 Mac을 떠나지 않는 받아쓰기.",
-    heroEmphasis: "구독 없음. $29 일회 구매.",
+    heroEmphasis: "$29 일회 구매, 영구 사용.",
     heroEyebrow: "프라이빗 Mac 받아쓰기 앱",
     footerPrivacyProof: "개인정보 증명",
   },
@@ -4310,6 +4310,10 @@ function renderHome(currentCode) {
                 ${html(t.hero.eyebrow)}
               </span>
               <h1 id="hero-title">${html(t.hero.title)} <em>${html(t.hero.emphasis)}</em></h1>
+              <div class="hero-actions hero-actions--top" aria-label="Download Dictivo">
+                <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_top_mac"))}"${downloadData("macos", "hero_top_mac")}>${html(t.hero.download)}</a>
+                ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
+              </div>
             </div>
           </div>
 
