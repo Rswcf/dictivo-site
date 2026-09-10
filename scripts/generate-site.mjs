@@ -24,6 +24,7 @@ import { releaseNotesFor } from "../data/release-notes.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
+import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
 import {
   SPEECH_TO_TEXT_MAC_GUIDE_COPY,
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
@@ -2805,6 +2806,7 @@ function renderComparePage(page, currentCode = "en") {
           ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", `compare_hero_${page.slug}_windows`))}"${downloadData("windows", `compare_hero_${page.slug}_windows`)}>${html(windowsDownloadCopy(currentCode).exeButton)}</a>` : ""}
         </div>
         <p class="compare-trial">${html(HOME_CONVERSION_COPY[currentCode].trial)}</p>
+        ${renderFirstDictationLink(currentCode)}
         ${renderCompareQuickTake(page, copy)}
       </section>
 
@@ -3291,6 +3293,7 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(OFFLINE_DICTATION_GUIDE_LASTMOD)}">${html(formatLocalizedDate(OFFLINE_DICTATION_GUIDE_LASTMOD, currentCode))}</time></p>
+      ${renderFirstDictationLink(currentCode)}
 
       <section class="doc-section" aria-labelledby="offline-guide-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -3335,6 +3338,84 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
   </body>
 </html>
 `;
+}
+
+function firstDictationPath(code) {
+  return `${code === "en" ? "" : `/${code}`}/guides/first-local-dictation/`;
+}
+
+function renderFirstDictationLink(code) {
+  const copy = FIRST_DICTATION_COPY[code];
+  return copy ? `<p class="first-dictation-link"><a href="${firstDictationPath(code)}">${html(copy.link)}</a></p>` : "";
+}
+
+function renderFirstDictationPage(code) {
+  const c = FIRST_DICTATION_COPY[code];
+  const t = homeCopyForRender(code);
+  const url = `${BASE_URL}${firstDictationPath(code)}`;
+  const alternates = Object.keys(FIRST_DICTATION_COPY).map(alt => `<link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n");
+  const schema = {
+    "@context": "https://schema.org", "@type": "WebPage", name: c.metaTitle,
+    description: c.metaDescription, url, inLanguage: code, dateModified: FIRST_DICTATION_LASTMOD,
+    isPartOf: { "@type": "WebSite", name: "Dictivo", url: BASE_URL },
+  };
+  return `<!doctype html>
+<html lang="${code}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(c.metaTitle)}</title>
+    <meta name="description" content="${attr(c.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: c.metaTitle, description: c.metaDescription, url, htmlLang: code, type: "article" })}
+    ${alternates}
+    <link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
+    <link rel="canonical" href="${url}" />
+    ${assetTags()}
+    <script type="application/ld+json">${JSON.stringify(schema)}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#practice">${html(c.jump)}</a>
+    ${renderHeader(code, t, { hrefForLocale: item => FIRST_DICTATION_COPY[item.code] ? firstDictationPath(item.code) : localePath(item.code) })}
+    <main class="doc-page first-dictation-page">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(c.eyebrow)}</span>
+      <h1>${html(c.title)}</h1>
+      <p class="doc-lede">${html(c.lede)}</p>
+      <div class="compare-intro-actions">
+        <a class="button button-light download-link" href="${attr(downloadUrl("macos", "first_dictation_mac"))}"${downloadData("macos", "first_dictation_mac")}>${html(t.hero.download)}</a>
+        ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "first_dictation_windows"))}"${downloadData("windows", "first_dictation_windows")}>${html(windowsDownloadCopy(code).exeButton)}</a>` : ""}
+      </div>
+      <p class="compare-trial">${html(HOME_CONVERSION_COPY[code].trial)}</p>
+      <p><a href="#practice">${html(c.jump)}</a></p>
+      <section class="doc-section" aria-labelledby="setup-title">
+        <h2 id="setup-title">${html(c.setupTitle)}</h2>
+        <ol class="first-dictation-steps">${c.steps.map(([title, body]) => `<li><h3>${html(title)}</h3><p>${html(body)}</p></li>`).join("\n")}</ol>
+      </section>
+      <section class="doc-section practice-panel" id="practice" data-dictation-practice aria-labelledby="practice-title">
+        <h2 id="practice-title">${html(c.practiceTitle)}</h2>
+        <p>${html(c.practiceIntro)}</p>
+        <p class="doc-meta">${html(c.sampleLabel)}</p>
+        <div class="practice-samples">${c.samples.map(([label, text], i) => `<button type="button" class="button button-outline" data-practice-sample="sample-${i}" aria-pressed="${i === 0}" aria-controls="sample-${i}">${html(label)}</button>`).join("\n")}</div>
+        ${c.samples.map(([, text], i) => `<blockquote class="practice-example" id="sample-${i}"${i ? " hidden" : ""}>${html(text)}</blockquote>`).join("\n")}
+        <label for="practice-text">${html(c.fieldLabel)}</label>
+        <textarea id="practice-text" data-practice-text rows="6" autocomplete="off" spellcheck="false" aria-describedby="practice-privacy" placeholder="${attr(c.placeholder)}"></textarea>
+        <p class="practice-privacy" id="practice-privacy">${html(c.privateNote)}</p>
+        <button type="button" class="button button-outline" data-practice-clear>${html(c.clear)}</button>
+        <p class="practice-status" role="status" aria-live="polite" data-practice-status data-cleared-message="${attr(c.cleared)}"></p>
+      </section>
+      <section class="doc-section" aria-labelledby="review-title"><h2 id="review-title">${html(c.successTitle)}</h2><p>${html(c.success)}</p></section>
+      <section class="doc-section" aria-labelledby="fixes-title">
+        <h2 id="fixes-title">${html(c.troubleTitle)}</h2>
+        <div class="faq-grid">${c.fixes.map(([title, body]) => `<details class="faq-item"><summary><span class="faq-question">${html(title)}</span><span class="faq-toggle" aria-hidden="true">+</span></summary><div class="faq-answer"><p class="faq-answer-body">${html(body)}</p></div></details>`).join("\n")}</div>
+      </section>
+      <section class="doc-section" aria-labelledby="next-title">
+        <h2 id="next-title">${html(c.nextTitle)}</h2><p>${html(c.next)}</p>
+        <ul><li><a href="${localePath(code, "#pricing")}">${html(c.pricing)}</a></li><li><a href="${macGuidePath(code)}">${html(c.models)}</a></li><li><a href="${offlineDictationGuidePath(code)}">${html(c.offline)}</a></li></ul>
+      </section>
+    </main>
+    ${renderFooterOnly(code)}
+  </body>
+</html>`;
 }
 
 function renderBenchmarkMethodSchema() {
@@ -4144,6 +4225,7 @@ function renderMediaKitPage() {
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const links = [
+    FIRST_DICTATION_COPY[currentCode] ? `<a href="${firstDictationPath(currentCode)}">${html(FIRST_DICTATION_COPY[currentCode].navLabel)}</a>` : "",
     `<a href="/privacy/">${html(ui.footer.privacy)}</a>`,
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
@@ -4215,6 +4297,7 @@ function renderHome(currentCode) {
                 ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
               </div>
               <p class="hero-trial">${html(conversion.trial)}</p>
+              ${renderFirstDictationLink(currentCode)}
             </div>
           </div>
 
@@ -5577,6 +5660,12 @@ ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
 ${offlineDictationWindowsGuideEntry}
 ${mediaKitEntry}
+${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
+    <loc>${BASE_URL}${firstDictationPath(code)}</loc>
+    <lastmod>${FIRST_DICTATION_LASTMOD}</lastmod>
+${Object.keys(FIRST_DICTATION_COPY).map(alt => `    <xhtml:link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n")}
+    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
+  </url>`).join("\n")}
 ${compareEntries}
 ${trustEntries}
   <url>
@@ -5942,6 +6031,7 @@ write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodG
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write("media-kit/index.html", renderMediaKitPage());
+for (const code of Object.keys(FIRST_DICTATION_COPY)) write(`${firstDictationPath(code).slice(1)}index.html`, renderFirstDictationPage(code));
 
 for (const locale of LOCALES) {
   const compareRoot = locale.code === "en" ? "compare" : `${locale.code}/compare`;

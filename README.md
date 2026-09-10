@@ -46,7 +46,7 @@ node scripts/check-public-output.mjs
 
 ### The homepage override chain
 
-Homepage copy passes through five stages. A later stage always wins.
+Homepage copy passes through six stages. A later stage always wins.
 
 1. **`HOME_COPY`** in `data/site-content.mjs`. English, German, French and Spanish are written out
    in full. Italian, Dutch, Portuguese, Chinese, Japanese and Korean are produced by
@@ -71,6 +71,20 @@ Homepage copy passes through five stages. A later stage always wins.
 
 Every page renderer calls `homeCopyForRender(code)`. Nothing in the generator reads `HOME_COPY`
 directly except that one function.
+
+### First-use guide and practice field
+
+`data/first-dictation-guide.mjs` supplies the English and Japanese guides at
+`/guides/first-local-dictation/` and `/ja/guides/first-local-dictation/`. Other
+language-menu choices return to their own homepage; hreflang only lists the two
+actual guide translations. Relevant homepages, comparisons, offline guides and
+footers link to the guide.
+
+The practice field is a plain textarea for desktop dictation/paste. The page does
+not capture microphone audio, transcribe, send, or store its text. Switching
+examples preserves user input; clearing empties and focuses the field; pagehide
+clears it before leaving. Page-view/download analytics contain metadata only.
+Keep examples labeled as practice text, never as measured recognition results.
 
 ### `WINDOWS_HOME_COPY` is the stage that surprises people
 

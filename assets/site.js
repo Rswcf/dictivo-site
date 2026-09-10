@@ -433,6 +433,29 @@ function fillTemplate(template, values) {
   return String(template || "").replace(/\{([a-z]+)\}/gi, (_match, key) => values[key] ?? "");
 }
 
+// A plain target for the desktop app's paste action. Never read practice text
+// for analytics, send it over the network, or persist it in browser storage.
+document.querySelectorAll("[data-dictation-practice]").forEach((root) => {
+  const field = root.querySelector("[data-practice-text]");
+  const status = root.querySelector("[data-practice-status]");
+  const buttons = root.querySelectorAll("[data-practice-sample]");
+  if (!field || !status) return;
+  buttons.forEach((button) => button.addEventListener("click", () => {
+    buttons.forEach((item) => {
+      const selected = item === button;
+      item.setAttribute("aria-pressed", String(selected));
+      const sample = root.querySelector(`#${item.dataset.practiceSample}`);
+      if (sample) sample.hidden = !selected;
+    });
+  }));
+  root.querySelector("[data-practice-clear]")?.addEventListener("click", () => {
+    field.value = "";
+    status.textContent = status.dataset.clearedMessage;
+    field.focus();
+  });
+  window.addEventListener("pagehide", () => { field.value = ""; });
+});
+
 function initMacAdvisor(root) {
   const dataNode = root.querySelector("[data-mac-advisor-json]");
   const familySelect = root.querySelector("[data-mac-family]");

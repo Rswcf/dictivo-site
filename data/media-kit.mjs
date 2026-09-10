@@ -1,4 +1,4 @@
-export const MEDIA_KIT_LASTMOD = "2026-07-26";
+export const MEDIA_KIT_LASTMOD = "2026-09-10";
 
 export const MEDIA_KIT_COPY = {
   navLabel: "Media kit",
@@ -29,10 +29,11 @@ export const MEDIA_KIT_COPY = {
   ],
   copyBlocksTitle: "Copy-ready descriptions",
   copyBlocks: [
-    ["Tagline", "Private dictation first. Optional Cloud Fast."],
+    ["Tagline", "Speak your next draft. Keep your audio local."],
     ["Short listing", "Dictivo is a local-first desktop dictation app for macOS and Windows, built for private hotkey voice typing, with optional Cloud Fast when speed matters more than keeping audio local."],
     ["Directory description", "Dictivo turns speech into text in the active desktop app on macOS and Windows x64. Local mode runs on-device after a local model is installed, while optional Cloud Fast is a separate path for selected low-sensitivity recordings that need faster turnaround."],
     ["Comparison description", "Dictivo fits users comparing Wispr Flow, Superwhisper, MacWhisper, VoiceInk, and macOS Dictation who want a supported local-first desktop dictation workflow, a one-time Local license, and a clear boundary between Local and Cloud Fast."],
+    ["First task", "Try one email, note or AI prompt with Dictivo Local. Set up a local model, use your dictation shortcut, then review the result in the app you write in. The full Local trial lasts 14 days and needs no Dictivo account or card."],
   ],
   categoriesTitle: "Suggested directory categories",
   categories: [
@@ -60,13 +61,15 @@ export const MEDIA_KIT_COPY = {
   comparisonRows: [
     ["Wispr Flow", "Use Dictivo as the local-first desktop alternative when audio location and one-time Local pricing matter more than mobile/cloud workflow."],
     ["Superwhisper", "Use Dictivo as the simpler paid local desktop dictation alternative with a lower one-time Local entry price."],
-    ["MacWhisper", "Compare Dictivo for live dictation into the active app; compare MacWhisper for file transcription workflows."],
+    ["MacWhisper", "Both offer live dictation. Compare setup, model choice, editing and paste behavior; MacWhisper also offers audio/video file transcription."],
     ["VoiceInk", "Compare Dictivo when guided setup, support, Local vs Cloud Fast clarity, and hardware-aware model tiers matter more than lowest lifetime price."],
     ["macOS Dictation", "Compare Dictivo when users want local model choice, local history, dictionary terms, snippets, and a clearer Local vs Cloud Fast boundary."],
   ],
   linksTitle: "Evidence links",
   linkRows: [
     ["Home", "https://dictivo.app/"],
+    ["First dictation and practice field", "https://dictivo.app/guides/first-local-dictation/"],
+    ["Japanese first dictation guide", "https://dictivo.app/ja/guides/first-local-dictation/"],
     ["Mac model guide", "https://dictivo.app/mac-model-guide/"],
     ["Offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
     ["Benchmark method", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],
