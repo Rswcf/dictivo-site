@@ -64,6 +64,11 @@ Homepage copy passes through five stages. A later stage always wins.
    `WINDOWS_HOME_COPY`; otherwise it applies the narrow `WINDOWS_UNAVAILABLE_HOME_COPY`
    safety layer so an incomplete release cannot resurrect pre-launch Windows wording.
 
+6. **`HOME_CONVERSION_COPY`** in `data/home-conversion.mjs` supplies the final homepage H1,
+   task description, three workflow steps, trial terms, and purchase note in `renderHome()`.
+   It does not change platform availability. `HOME_CONVERSION_LASTMOD` advances homepage
+   sitemap dates when this copy changes; a newer release date still takes precedence.
+
 Every page renderer calls `homeCopyForRender(code)`. Nothing in the generator reads `HOME_COPY`
 directly except that one function.
 
@@ -126,18 +131,18 @@ stale Mac-only strings while Windows is live, and on Windows launch strings whil
 English comparison content lives in `data/compare-pages.mjs`: one entry per competitor, each with a
 `rows` array of `{ label, dictivo, competitor }`.
 
-Localized pages do not restate competitor facts. `LOCALIZED_COMPETITOR_ROWS` in
-`scripts/generate-site.mjs` holds a per-locale competitor string for each row label, and the three
-fact-bearing rows — `Pricing model`, `Free tier / trial` and `Platforms` — begin with a
-`{competitorFact}` token. `fillCompareTemplate()` substitutes the English row's `competitor` value
-into that token, so a competitor's price, trial terms and platform list exist in exactly one place.
+Localized comparison tables use `data/compare-fact-locales.mjs`. Each competitor maps to
+specific factual statements for processing location, offline support, account or license,
+pricing, trial, platforms, and the privacy boundary. English rows in `data/compare-pages.mjs`
+remain the canonical input for prices and trial quantities; numeric placeholders in the
+localized templates read those values instead of maintaining nine copies of a price.
 
-This is deliberate. Translating competitor numbers into nine languages would multiply by nine the
-staleness to chase every time a competitor reprices. **When a competitor changes its pricing, edit
-the English row in `data/compare-pages.mjs` and all ten locales follow.** A localized row that
-spells out a competitor's price instead of using the token is a bug.
-
-`{competitor}` is a second, separate token and expands to the competitor's display name.
+When a competitor changes price, update its English row and its English article. When its
+billing structure, feature allowance, processing model, or platforms change, also review the
+corresponding fact template and profile in every locale. Missing templates or quantities
+fail the build. The quick summary above localized tables now uses these same facts.
+Competitor platform availability must never change when Dictivo's Windows downloads are
+unavailable. The Dictivo three-year cost is calculated from `data/local-offer.mjs`.
 
 `COMPARE_LAST_UPDATED` in `data/compare-pages.mjs` stamps every comparison page.
 `scripts/check-public-output.mjs` fails if a comparison spoke page is missing the visible stamp or
@@ -248,10 +253,11 @@ node scripts/check-checkout-live.mjs
 node scripts/check-release-payload-sync.mjs
 node scripts/check-asset-version.mjs
 node scripts/check-public-output.mjs
+node scripts/check-web-attribution.mjs
 node scripts/inject-asset-version.mjs
 ```
 
-The six check steps are blocking: any one of them fails the deploy before `dist/` reaches
+The seven check steps are blocking: any one of them fails the deploy before `dist/` reaches
 Cloudflare. `scripts/check-public-output.mjs` is the broadest of them - it scans every generated
 text file in `dist/` against a forbidden-content list, so vendor and implementation names must
 never reach public output.
@@ -330,6 +336,26 @@ decision readiness uses only this current version; older or unversioned page and
 CTA events remain legacy volume and must not be mixed into conversion. Any
 future semantic change to the join contract requires a new instrumentation
 version instead of silently redefining `web-linked-v1`.
+
+### Channel continuity (2026-09-10)
+
+A user-initiated internal navigation carries the current UTM campaign fields in its target
+URL. Without UTMs, the external referrer host becomes the source. Static HTML links remain
+canonical and clean; checkout, file downloads, external links, and existing destination
+campaigns are left alone. No visitor id is carried between pages and no browser storage
+is used. Direct visits remain direct. Opening a fresh URL independently or using an
+unhandled navigation path may lose attribution; this is not cross-session tracking.
+
+Download clicks and redirects now inherit this page's source, medium, campaign, and term.
+`content` still identifies the download button; `releaseVersion` still identifies the
+installer. This corrects the former generic `site` attribution, so channel totals before
+and after the change need that context. The `web-linked-v1` per-page join contract is
+unchanged. No install-to-payment join is introduced by this change.
+
+Local and Pages-preview hosts do not emit page or click beacons to production. The
+built-in Node check `node scripts/check-web-attribution.mjs` exercises campaign handoff,
+independent page ids, click/redirect parity, referrer query removal, navigation exclusions,
+and preview isolation. It runs in deployment CI.
 
 ## Local checkout
 

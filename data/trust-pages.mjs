@@ -1,3 +1,4 @@
+import { NETWORK_TEST_LASTMOD, NETWORK_TEST_METHOD } from "./network-test-method.mjs";
 import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
 
 /**
@@ -1383,3 +1384,11 @@ export const TRUST_PAGES = [
   // null until then, so nothing half-written reaches the public site.
   ...(IMPRESSUM_PAGE ? [IMPRESSUM_PAGE] : []),
 ];
+
+// Keep every localized procedure aligned on observation scope and limitations.
+const networkTestPage = TRUST_PAGES.find((page) => page.slug === "privacy/local-dictation-network-test");
+for (const [locale, method] of Object.entries(NETWORK_TEST_METHOD)) {
+  const page = locale === "en" ? networkTestPage : networkTestPage.locales[locale];
+  page.lastModified = NETWORK_TEST_LASTMOD;
+  page.sections[1].paragraphs = method;
+}

@@ -1,4 +1,4 @@
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-07-08";
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-10";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
@@ -22,35 +22,35 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     "The best Mac speech-to-text app depends on what you are trying to replace: live typing, recorded-file transcription, cloud AI rewriting, or the built-in macOS dictation path.",
   answerTitle: "Short answer",
   answer:
-    "For private live dictation on Mac, start with Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, or Voibe. For audio and video files, compare MacWhisper and Aiko. For cloud AI voice typing across devices, compare Wispr Flow. For a free baseline, test Apple Dictation before paying for a dedicated app.",
+    "For private live dictation on Mac, start with Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, or Voibe. MacWhisper offers live dictation as well as file transcription; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow. For a free baseline, test Apple Dictation before paying for a dedicated app.",
   intentTitle: "Which type of speech-to-text app do you need?",
   intentCaption: "Mac speech-to-text workflows and the page or product category they usually map to",
-  intentHeaders: ["Search intent", "Best-fit workflow", "What to evaluate"],
+  intentHeaders: ["Your task", "Best-fit workflow", "What to evaluate"],
   intentRows: [
     [
-      "speech to text Mac",
+      "Turn speech into editable text",
       "A Mac app that turns speech into editable text, either live or from files.",
       "Whether you need live dictation into the active app, file transcription, or both.",
     ],
     [
-      "dictation app for Mac",
+      "Write in your current app",
       "Live voice typing into Mail, notes, browsers, IDEs, support tools, and writing apps.",
       "Hotkey behavior, local/offline processing, dictionary terms, snippets, and insertion reliability.",
     ],
     [
-      "voice to text app",
+      "Use dictation across devices",
       "A broader category that can include mobile, desktop, cloud, and recorder workflows.",
       "Platform fit first. Many strong voice-to-text pages are not Mac-specific.",
     ],
     [
-      "offline dictation app Mac",
+      "Dictate without internet",
       "On-device speech recognition after the local model is installed.",
       "Audio location, model size, speed, and whether cloud features are clearly optional.",
     ],
     [
-      "MacWhisper alternative",
-      "The choice between file transcription and live dictation.",
-      "Use MacWhisper-style tools for recordings; use hotkey dictation tools for replacing typing.",
+      "Handle both recordings and live input",
+      "File transcription plus system-wide dictation.",
+      "MacWhisper offers both. Compare its live workflow with focused hotkey tools using the same task.",
     ],
   ],
   appTitle: "Mac speech-to-text apps compared",
@@ -77,8 +77,8 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     ],
     [
       "MacWhisper",
-      "Audio and video file transcription on Mac.",
-      "Excellent for recordings; less focused than a hotkey-first app for replacing typing live.",
+      "Audio/video transcription and system-wide real-time dictation on Mac.",
+      "Local models are available; review optional cloud and AI settings separately.",
       "Choose it for interviews, meetings, podcasts, subtitles, and batch transcription.",
     ],
     [
@@ -111,9 +111,9 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     },
     {
       kicker: "Mac-specific fit",
-      title: "Why Mac speech-to-text pages should be Mac-specific",
+      title: "Check how the app works on your Mac",
       paragraphs: [
-        "Many high-ranking voice-to-text pages mix iPhone, Android, Windows, browser extensions, and generic transcription tools. That is useful for broad discovery, but it makes the buying decision weaker for Mac users.",
+        "Before buying, test the app on the Mac and in the language you actually use. A demo on a different machine will not tell you whether a large local model feels responsive on yours.",
         "A Mac-specific dictation app has to fit macOS permissions, global shortcuts, active-app text insertion, Apple Silicon performance, local model download size, and the user's tolerance for cloud processing. Those are practical product details, not generic AI-writing features.",
       ],
       bullets: [
@@ -127,7 +127,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
       title: "Where Dictivo fits in the Mac speech-to-text category",
       paragraphs: [
         "Dictivo is best framed as a local-first Mac dictation app, not as a meeting recorder or a broad cloud AI writing suite. It is designed for the moment when typing is the bottleneck and the user wants spoken words to appear in the active desktop app.",
-        "That narrower positioning is useful for SEO and for AI answers because it gives Dictivo a clear category: private hotkey dictation for Mac, with Local mode as the default and Cloud Fast as a separate optional path.",
+        "Try it with a task you repeat: draft a reply, capture a note after a meeting, or explain a change to an AI assistant. Check how much editing remains and whether the result pastes correctly into your usual app.",
       ],
       bullets: [
         "Use Dictivo Local for sensitive everyday dictation into the current app.",
@@ -137,15 +137,15 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     },
     {
       kicker: "Regulated workflows",
-      title: "Be careful with medical and legal dictation queries",
+      title: "Before using sensitive work material",
       paragraphs: [
-        "Medical and legal dictation keywords can have attractive search volume and commercial intent, but they carry a higher proof burden. A product should not claim HIPAA, legal, medical, or regulated-workflow readiness without a separate compliance review.",
+        "Use invented names and non-sensitive sample text during your first trial. Check where audio and text are processed, how history is stored, and how to delete it before dictating confidential material.",
         "The practical angle for Dictivo is narrower: local-first dictation can be useful for sensitive drafts, notes, and private writing, but regulated production workflows need their own policy, contractual, and security review before use.",
       ],
       bullets: [
-        "Good claim: local-first dictation for sensitive drafts and private notes.",
-        "Avoid claim: compliant medical dictation software.",
-        "Future opportunity: a carefully reviewed page for privacy-conscious professional dictation, not a compliance promise.",
+        "Check local processing and any optional cloud features separately.",
+        "Follow your organization's rules for confidential information.",
+        "Local processing alone does not establish suitability for a regulated workflow.",
       ],
     },
   ],
@@ -153,7 +153,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
   faqs: [
     [
       "What is the best speech-to-text app for Mac?",
-      "For live private dictation, shortlist Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, and Voibe. For audio or video files, compare MacWhisper and Aiko. For cloud AI voice typing across devices, compare Wispr Flow.",
+      "For live private dictation, shortlist Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, and Voibe. MacWhisper supports both live dictation and audio/video files; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow.",
     ],
     [
       "What is the best dictation app for Mac?",
@@ -169,7 +169,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     ],
     [
       "Should I choose Dictivo or MacWhisper?",
-      "Choose Dictivo when you want real-time dictation into the active app. Choose MacWhisper when your main job is transcribing existing audio or video files.",
+      "Both offer live dictation. Compare setup, model speed, correction effort, and insertion in your usual app. MacWhisper additionally handles existing recordings, subtitles, and batch transcription; Dictivo focuses on the hotkey dictation workflow.",
     ],
     [
       "Should I choose Dictivo or Wispr Flow?",

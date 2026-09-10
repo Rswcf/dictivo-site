@@ -540,12 +540,74 @@ main section[id] {
 
 .hero-lede {
   max-width: 720px;
-  margin: 0;
+  margin: 24px 0 0;
   color: rgb(255 255 255 / 80%);
   font-family: var(--sans);
   font-size: clamp(16px, 1.4vw, 19px);
   font-weight: 400;
   line-height: 1.55;
+}
+
+.hero-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 0;
+  margin: 24px 0;
+  list-style: none;
+  counter-reset: dictation-step;
+  color: rgb(255 255 255 / 86%);
+  font-size: 14px;
+}
+
+.hero-steps li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  counter-increment: dictation-step;
+}
+
+.hero-steps li::before {
+  content: counter(dictation-step);
+  display: grid;
+  place-items: center;
+  flex: 0 0 23px;
+  height: 23px;
+  border: 1px solid rgb(126 214 198 / 35%);
+  border-radius: 50%;
+  color: var(--signal);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.hero-trial {
+  margin: 14px 0 0;
+  color: rgb(255 255 255 / 85%);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.hero-offer {
+  flex-basis: 100%;
+  margin: 0;
+  color: rgb(255 255 255 / 78%);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.compare-intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0 12px;
+}
+
+.compare-trial {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .hero-actions {
@@ -648,12 +710,12 @@ main section[id] {
   position: absolute;
   z-index: 1;
   left: 50%;
-  top: 50%;
+  bottom: 20px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-height: 50px;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   border: 1px solid rgb(255 255 255 / 20%);
   border-radius: var(--radius-pill);
   background: rgb(5 8 7 / 74%);
@@ -2623,15 +2685,15 @@ main section[id] {
   margin: 0 0 20px;
   color: var(--ink);
   font-family: var(--display);
-  font-size: clamp(42px, 6.4vw, 84px);
+  font-size: clamp(38px, 4.5vw, 60px);
   font-weight: 880;
-  line-height: 0.98;
+  line-height: 1.12;
   letter-spacing: 0;
   text-wrap: balance;
 }
 
 .compare-hero .doc-lede {
-  margin-bottom: clamp(30px, 5vw, 48px);
+  margin-bottom: 24px;
   max-width: 76ch;
   color: rgb(255 255 255 / 72%);
   font-size: clamp(16px, 1.7vw, 19px);
@@ -2672,8 +2734,8 @@ main section[id] {
   display: block;
   margin-top: 18px;
   color: var(--ink);
-  font-size: clamp(18px, 2vw, 24px);
-  line-height: 1.12;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.4;
 }
 
 .compare-quick-take p {
@@ -3597,7 +3659,7 @@ main section[id] {
   }
 
   .compare-hero h1 {
-    font-size: clamp(36px, 11vw, 50px);
+    font-size: clamp(30px, 8.5vw, 40px);
   }
 
   .compare-table th,
@@ -3712,13 +3774,15 @@ main section[id] {
   }
 }
 
-/* A download button within the first screen on desktop: at 1280×800 the film
-   pushed the only buttons below the fold. Mobile already fits them. */
+/* Keep the trial's download controls visible on every viewport. */
 .hero-actions--top {
   margin-top: 22px;
 }
 @media (max-width: 720px) {
   .hero-actions--top {
-    display: none;
+    display: flex;
+  }
+  .hero-lede {
+    margin-top: 20px;
   }
 }

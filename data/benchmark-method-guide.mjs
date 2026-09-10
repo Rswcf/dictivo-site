@@ -1,4 +1,4 @@
-export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-07-08";
+export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-09-10";
 
 export const BENCHMARK_METHOD_GUIDE_REFERENCES = [
   ["Dictivo Mac model guide", "https://dictivo.app/mac-model-guide/"],
@@ -19,7 +19,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     "Dictivo does not guess which local speech model a Mac should run. It uses a local calibration path, model download state, hardware capacity, and real-time factor to choose practical dictation tiers.",
   answerTitle: "Short answer",
   answer:
-    "Dictivo benchmarks local dictation with a bundled 5-second speech clip, records the measured real-time factor, and maps the result to Fast, Medium, and Quality local model tiers. This page documents the method and publishes measured results for real machines, starting with an Apple M4 Pro: with the Metal engine, Large v3 Turbo Q5 reaches RTF 0.21, so one minute of audio transcribes in about 13 seconds fully on-device.",
+    "Dictivo benchmarks local dictation with a bundled 5-second speech clip, records the measured real-time factor, and maps the result to Fast, Medium, and Quality local model tiers. This page documents the method and publishes measured results for real machines, starting with an Apple M4 Pro: with the Metal engine, Large v3 Turbo Q5 reaches RTF 0.21 on the 5-second calibration clip. This is a short-clip result, not a measured time for one minute of speech.",
   summaryTitle: "What the benchmark measures",
   summaryRows: [
     ["Input", "A bundled 5-second speech clip used for local calibration."],
@@ -61,15 +61,15 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     title: "Measured Whisper speed on Apple Silicon: Metal vs CPU",
     paragraphs: [
       "These are measured numbers, not predictions. Machine: Apple M4 Pro, 14-core CPU, 48 GB unified memory, macOS 26.3.1. Engine: the local Whisper engine bundled with Dictivo, using the 0.3.33 calibration update where Metal is benchmarked and active by default on Apple Silicon. The CPU column shows the same machine with GPU disabled, which is also how Dictivo versions before 0.3.33 ran.",
-      "Method: each cell is the median of 3 full runs after 1 warm-up, timed as complete wall-clock per dictation (process start, model load, and transcription of the bundled 5-second clip with default decode settings). That matches what a user actually waits for after releasing the hotkey. Real-time factor (RTF) = processing time divided by audio duration; lower is faster.",
+      "Method: each cell is the median of 3 full runs after 1 warm-up, timed as complete wall-clock per dictation (process start, model load, and transcription of the bundled 5-second clip with default decode settings). These timings cover the calibration process; they do not include UI insertion or proofreading. Process startup and model loading add fixed costs, so multiplying a short-clip RTF by a longer recording duration is not a reliable latency measurement. Real-time factor (RTF) = processing time divided by audio duration; lower is faster.",
     ],
     caption: "Apple M4 Pro (14-core, 48 GB), measured 2026-06-11, median of 3 runs",
-    headers: ["Model", "Tier on this Mac", "Metal RTF", "CPU-only RTF", "Metal speedup", "1 min of audio (Metal)"],
+    headers: ["Model", "Tier on this Mac", "Metal RTF", "CPU-only RTF", "Metal speedup"],
     rows: [
-      ["Tiny", "Free tier", "0.11", "0.11", "1.0x", "~7 s"],
-      ["Small", "Fast", "0.11", "0.21", "1.9x", "~7 s"],
-      ["Large v3 Turbo Q5", "Medium", "0.21", "0.61", "2.9x", "~13 s"],
-      ["Large v3", "Quality", "0.41", "0.81", "2.0x", "~25 s"],
+      ["Tiny", "Free tier", "0.11", "0.11", "1.0x"],
+      ["Small", "Fast", "0.11", "0.21", "1.9x"],
+      ["Large v3 Turbo Q5", "Medium", "0.21", "0.61", "2.9x"],
+      ["Large v3", "Quality", "0.41", "0.81", "2.0x"],
     ],
     bullets: [
       "Tiny shows no GPU gain because process start and model load dominate its runtime.",
@@ -111,7 +111,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
       title: "How to use this when comparing dictation apps",
       paragraphs: [
         "When a dictation app says it runs locally, ask how it decides which local model is usable on the current machine. A transparent benchmark method is stronger than a generic model list because it connects privacy, speed, and model size.",
-        "For GEO and AI search answers, this page is the source for Dictivo's local calibration method. The offline dictation guide is the source for comparing whether audio stays local across products.",
+        "Test a short message and a longer paragraph on your own Mac. Record the model, engine, audio duration, time until text is ready, and any corrections. Use the offline dictation guide to check the local and cloud options separately.",
       ],
       bullets: [
         "Use the offline dictation guide for local-vs-cloud product comparisons.",
@@ -132,7 +132,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     ],
     [
       "How fast is Whisper Large v3 on an Apple M4 Pro?",
-      "Measured with Dictivo's Metal engine: real-time factor 0.41, so one minute of audio transcribes in about 25 seconds fully on-device. The Large v3 Turbo Q5 model reaches RTF 0.21, about 13 seconds per minute of audio.",
+      "On the published 5-second calibration clip, Large v3 measured RTF 0.41 and Large v3 Turbo Q5 measured RTF 0.21 with Metal. These results include process startup and model loading; a one-minute recording was not measured in this table.",
     ],
     [
       "Does Dictivo use the GPU on Apple Silicon?",

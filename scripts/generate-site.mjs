@@ -22,6 +22,8 @@ import {
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
+import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
+import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
 import {
   SPEECH_TO_TEXT_MAC_GUIDE_COPY,
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
@@ -1894,7 +1896,7 @@ Object.assign(COMPARE_I18N, {
     pageTitle: "{competitor} の代替: Dictivo の Mac ローカル音声入力",
     pageMeta:
       "Dictivo と {competitor} を、プライバシー、価格、対応プラットフォーム、Mac ローカル音声入力ワークフローで比較します。",
-    pageH1: "{competitor} の代替になる Mac ローカル音声入力",
+    pageH1: "{competitor}の代替候補：Dictivoと比較",
     eyebrow: "代替候補を比較",
     intro: [
       "このページでは {competitor} が合う場面と、Dictivo の Mac ローカルワークフローが合う場面を説明します。",
@@ -2134,99 +2136,6 @@ Object.assign(COMPARE_I18N, {
   }),
 });
 
-const LOCALIZED_COMPETITOR_ROWS = {
-  de: {
-    "Processing location": "{competitor} nutzt den eigenen Produkt-Workflow. Vergleichen Sie das mit Dictivo Local als Standard auf dem Gerät.",
-    "Trains AI on your voice": "{competitor} beschreibt eigene Datenschutz- und KI-Regeln. Dictivo Local entfernt diesen Konflikt für normale Diktate.",
-    "Works fully offline": "{competitor} ist für seinen eigenen Workflow gebaut. Dictivo Local ist die Wahl, wenn Offline-Diktat wichtig ist.",
-    "Account required": "{competitor} kann ein Konto oder eine eigene Kaufstrecke voraussetzen. Dictivo Local braucht kein Dictivo-Konto.",
-    "Pricing model": "{competitorFact} Dictivo Local bleibt bei $29 einmalig.",
-    "Free tier / trial": "{competitorFact} Dictivo kombiniert Tiny dauerhaft kostenlos mit 14 Tagen vollem Local-Test.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} passt, wenn sein Modell zu Ihrem Workflow passt. Dictivo Local ist für Arbeit gedacht, die standardmäßig auf dem Gerät bleibt.",
-  },
-  fr: {
-    "Processing location": "{competitor} suit son propre flux produit. Comparez-le à Dictivo Local, qui garde l'appareil comme chemin par défaut.",
-    "Trains AI on your voice": "{competitor} décrit ses propres règles de confidentialité et d'IA. Dictivo Local évite ce compromis pour la dictée quotidienne.",
-    "Works fully offline": "{competitor} est conçu pour son propre workflow. Dictivo Local est le choix quand la dictée hors ligne compte.",
-    "Account required": "{competitor} peut demander un compte ou son propre parcours d'achat. Dictivo Local ne demande pas de compte Dictivo.",
-    "Pricing model": "{competitorFact} Dictivo Local reste à $29 une seule fois.",
-    "Free tier / trial": "{competitorFact} Dictivo offre Tiny gratuit à vie et 14 jours d'essai Local complet.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} convient si son modèle correspond à votre workflow. Dictivo Local vise les travaux qui doivent rester sur l'appareil par défaut.",
-  },
-  es: {
-    "Processing location": "{competitor} usa su propio flujo de producto. Compáralo con Dictivo Local como ruta predeterminada en el dispositivo.",
-    "Trains AI on your voice": "{competitor} define sus propias reglas de privacidad e IA. Dictivo Local evita ese compromiso para el dictado diario.",
-    "Works fully offline": "{competitor} está diseñado para su propio flujo. Dictivo Local es la opción cuando importa dictar sin conexión.",
-    "Account required": "{competitor} puede requerir cuenta o su propio proceso de compra. Dictivo Local no requiere una cuenta de Dictivo.",
-    "Pricing model": "{competitorFact} Dictivo Local se mantiene en $29 una sola vez.",
-    "Free tier / trial": "{competitorFact} Dictivo combina Tiny gratis para siempre con 14 días de prueba Local completa.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} encaja si su modelo se adapta a tu flujo. Dictivo Local está pensado para trabajo que debe quedarse en el dispositivo por defecto.",
-  },
-  it: {
-    "Processing location": "{competitor} segue il proprio flusso di prodotto. Confrontalo con Dictivo Local come percorso predefinito sul dispositivo.",
-    "Trains AI on your voice": "{competitor} definisce le proprie regole di privacy e IA. Dictivo Local evita questo compromesso nella dettatura quotidiana.",
-    "Works fully offline": "{competitor} è costruito per il proprio workflow. Dictivo Local è la scelta quando conta dettare offline.",
-    "Account required": "{competitor} può richiedere un account o un percorso di acquisto dedicato. Dictivo Local non richiede un account Dictivo.",
-    "Pricing model": "{competitorFact} Dictivo Local resta a $29 una sola volta.",
-    "Free tier / trial": "{competitorFact} Dictivo offre Tiny gratis per sempre e 14 giorni di prova Local completa.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} va bene se il suo modello si adatta al tuo workflow. Dictivo Local è pensato per il lavoro che deve restare sul dispositivo per impostazione predefinita.",
-  },
-  nl: {
-    "Processing location": "{competitor} volgt zijn eigen productworkflow. Vergelijk dat met Dictivo Local als standaardroute op het apparaat.",
-    "Trains AI on your voice": "{competitor} heeft eigen privacy- en AI-regels. Dictivo Local haalt dit spanningsveld weg voor dagelijkse dictaten.",
-    "Works fully offline": "{competitor} is gebouwd voor zijn eigen workflow. Dictivo Local is de keuze wanneer offline dicteren belangrijk is.",
-    "Account required": "{competitor} kan een account of eigen aankoopflow vragen. Dictivo Local vraagt geen Dictivo-account.",
-    "Pricing model": "{competitorFact} Dictivo Local blijft eenmalig $29.",
-    "Free tier / trial": "{competitorFact} Dictivo combineert Tiny gratis voor altijd met 14 dagen volledige Local-proef.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} past als het model bij je workflow past. Dictivo Local is bedoeld voor werk dat standaard op het apparaat moet blijven.",
-  },
-  pt: {
-    "Processing location": "{competitor} segue o seu próprio fluxo de produto. Compare com o Dictivo Local como caminho padrão no dispositivo.",
-    "Trains AI on your voice": "{competitor} define as suas próprias regras de privacidade e IA. O Dictivo Local evita esse compromisso no ditado diário.",
-    "Works fully offline": "{competitor} foi criado para o seu próprio workflow. O Dictivo Local é a escolha quando ditado offline é importante.",
-    "Account required": "{competitor} pode exigir conta ou o seu próprio processo de compra. O Dictivo Local não exige conta Dictivo.",
-    "Pricing model": "{competitorFact} O Dictivo Local continua a $29 uma única vez.",
-    "Free tier / trial": "{competitorFact} O Dictivo combina Tiny grátis para sempre com 14 dias de teste Local completo.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} serve se o seu modelo encaixar no seu workflow. O Dictivo Local é para trabalho que deve ficar no dispositivo por padrão.",
-  },
-  zh: {
-    "Processing location": "{competitor} 使用自己的产品路径。请把它与默认在本机运行的 Dictivo Local 对比。",
-    "Trains AI on your voice": "{competitor} 有自己的隐私和 AI 规则。Dictivo Local 让日常听写避开这个取舍。",
-    "Works fully offline": "{competitor} 面向自己的工作流。需要离线听写时，Dictivo Local 是更直接的选择。",
-    "Account required": "{competitor} 可能需要账号或自己的购买流程。Dictivo Local 不需要 Dictivo 账号。",
-    "Pricing model": "{competitorFact} Dictivo Local 保持 $29 一次买断。",
-    "Free tier / trial": "{competitorFact} Dictivo 提供 Tiny 永久免费和 14 天完整 Local 试用。",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} 适合接受其产品模型的工作流。Dictivo Local 面向默认留在本机上的内容。",
-  },
-  ja: {
-    "Processing location": "{competitor} は独自の製品フローで動きます。デバイス上で Local を標準にする Dictivo と比較してください。",
-    "Trains AI on your voice": "{competitor} には独自のプライバシーと AI のルールがあります。Dictivo Local は日常の音声入力でその迷いを減らします。",
-    "Works fully offline": "{competitor} は独自のワークフロー向けです。オフライン音声入力が重要なら Dictivo Local が直接的です。",
-    "Account required": "{competitor} はアカウントや独自の購入フローが必要な場合があります。Dictivo Local は Dictivo アカウント不要です。",
-    "Pricing model": "{competitorFact} Dictivo Local は $29 の買い切りです。",
-    "Free tier / trial": "{competitorFact} Dictivo は Tiny 永久無料と 14 日間の完全 Local 体験を提供します。",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor} はその製品モデルが合う場合に適しています。Dictivo Local は標準でデバイスに残す作業向けです。",
-  },
-  ko: {
-    "Processing location": "{competitor}는 자체 제품 흐름을 사용합니다. 기기에서 Local을 기본으로 두는 Dictivo와 비교하세요.",
-    "Trains AI on your voice": "{competitor}에는 자체 개인정보 및 AI 규칙이 있습니다. Dictivo Local은 일상 받아쓰기에서 이 고민을 줄입니다.",
-    "Works fully offline": "{competitor}는 자체 워크플로에 맞춰져 있습니다. 오프라인 받아쓰기가 중요하면 Dictivo Local이 더 직접적입니다.",
-    "Account required": "{competitor}는 계정이나 자체 구매 흐름이 필요할 수 있습니다. Dictivo Local은 Dictivo 계정이 필요 없습니다.",
-    "Pricing model": "{competitorFact} Dictivo Local은 $29 일회 구매입니다.",
-    "Free tier / trial": "{competitorFact} Dictivo는 Tiny 영구 무료와 14일 전체 Local 체험을 제공합니다.",
-    Platforms: "{competitorFact}",
-    "Privacy boundary": "{competitor}는 그 제품 모델이 워크플로에 맞을 때 적합합니다. Dictivo Local은 기본적으로 기기에 남겨야 하는 작업을 위한 선택입니다.",
-  },
-};
-
 const COMPARE_DESKTOP_REPLACEMENTS = {
   de: [
     [/Mac-Diktat/g, "Desktop-Diktat"],
@@ -2335,7 +2244,7 @@ function assetTags() {
   return `
     <meta name="google-site-verification" content="${attr(GOOGLE_SITE_VERIFICATION)}" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="/assets/dictivo-demo-poster.jpg" />
+    <link rel="preload" as="image" href="/assets/dictivo-demo-local-poster.jpg" />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
@@ -2356,7 +2265,7 @@ const OG_LOCALE_BY_HTML_LANG = {
 };
 
 function socialMeta({ title, description, url, htmlLang = "en", type = "website" }) {
-  const image = `${BASE_URL}/assets/dictivo-demo-poster.jpg`;
+  const image = `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`;
   const ogLocale = OG_LOCALE_BY_HTML_LANG[htmlLang] || "en_US";
   return [
     `<meta property="og:site_name" content="Dictivo" />`,
@@ -2555,7 +2464,7 @@ function renderSchema(currentCode, t) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
-      image: `${BASE_URL}/assets/dictivo-demo-poster.jpg`,
+      image: `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`,
       screenshot: `${BASE_URL}/assets/ui/04-dictation-transcript.png`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: pageUrl,
@@ -2589,7 +2498,7 @@ function renderSchema(currentCode, t) {
       "@type": "VideoObject",
       name: "Dictivo product demo",
       description: t.metaDescription,
-      thumbnailUrl: `${BASE_URL}/assets/dictivo-demo-poster.jpg`,
+      thumbnailUrl: `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`,
       uploadDate: "2026-05-21",
       duration: "PT1M16S",
       contentUrl: `${BASE_URL}/assets/dictivo-cinematic-demo.mp4`,
@@ -2618,28 +2527,18 @@ function localizedTemplateList(items, page) {
 
 function localizedCompareQuickTake(page, copy) {
   if (copy === COMPARE_I18N.en) return page.quickTake;
-  return localizedTemplateList(copy.quickTake, page);
+  const rows = localizedCompareRows(page, copy);
+  return [rows[0], rows[4], rows[2]].map((row) => [row.label, row.dictivo, row.competitor]);
 }
 
 function localizedCompareRows(page, copy) {
-  if (copy === COMPARE_I18N.en) {
-    return page.rows.map((row) => ({
-      ...row,
-      dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformUnavailableCopy("en") : row.dictivo,
-    }));
-  }
-  const competitorRows = LOCALIZED_COMPETITOR_ROWS[copy.locale] || {};
   return page.rows.map((row) => ({
     ...row,
     label: copy.rowLabels[row.label] || row.label,
-    dictivo: row.label === "Platforms" && !hasWindowsRelease ? platformUnavailableCopy(copy.locale) : copy.dictivoRows[row.label] || row.dictivo,
-    competitor: fillCompareTemplate(
-      row.label === "Platforms" && !hasWindowsRelease
-        ? platformCompetitorUnavailableCopy(copy.locale)
-        : competitorRows[row.label] || row.competitor,
-      page,
-      row,
-    ),
+    dictivo: row.label === "Platforms" && !hasWindowsRelease
+      ? platformUnavailableCopy(copy.locale)
+      : copy === COMPARE_I18N.en ? row.dictivo : copy.dictivoRows[row.label] || row.dictivo,
+    competitor: copy === COMPARE_I18N.en ? row.competitor : localizedCompetitorFact(page, row, copy.locale),
   }));
 }
 
@@ -2659,21 +2558,6 @@ function platformUnavailableCopy(code) {
   return copy[code] || copy.en;
 }
 
-function platformCompetitorUnavailableCopy(code) {
-  const copy = {
-    en: "{competitor} has its own platform coverage. Dictivo's macOS download is available; Windows x64 downloads are temporarily unavailable.",
-    de: "{competitor} hat eine eigene Plattformabdeckung. Der macOS-Download von Dictivo ist verfügbar; Windows-x64-Downloads sind vorübergehend nicht verfügbar.",
-    fr: "{competitor} a sa propre couverture de plateformes. Le téléchargement macOS de Dictivo est disponible; les téléchargements Windows x64 sont temporairement indisponibles.",
-    es: "{competitor} tiene su propia cobertura de plataformas. La descarga de Dictivo para macOS está disponible; las descargas para Windows x64 no están disponibles temporalmente.",
-    it: "{competitor} ha la propria copertura di piattaforme. Il download di Dictivo per macOS è disponibile; i download per Windows x64 sono temporaneamente non disponibili.",
-    nl: "{competitor} heeft eigen platformdekking. De macOS-download van Dictivo is beschikbaar; downloads voor Windows x64 zijn tijdelijk niet beschikbaar.",
-    pt: "{competitor} tem a sua própria cobertura de plataformas. O download do Dictivo para macOS está disponível; os downloads para Windows x64 estão temporariamente indisponíveis.",
-    zh: "{competitor} 有自己的平台覆盖。Dictivo 的 macOS 下载可用；Windows x64 下载暂时不可用。",
-    ja: "{competitor} には独自の対応プラットフォームがあります。Dictivo の macOS 版は利用できますが、Windows x64 のダウンロードは一時的に利用できません。",
-    ko: "{competitor}는 자체 플랫폼 범위를 가집니다. Dictivo의 macOS 다운로드는 사용할 수 있지만 Windows x64 다운로드는 일시적으로 사용할 수 없습니다.",
-  };
-  return copy[code] || copy.en;
-}
 
 function localizedCompareSections(page, copy) {
   if (copy === COMPARE_I18N.en) return page.sections;
@@ -2705,7 +2589,7 @@ function renderCompareSchema(page, currentCode) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
-      image: `${BASE_URL}/assets/dictivo-demo-poster.jpg`,
+      image: `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`,
       screenshot: `${BASE_URL}/assets/ui/04-dictation-transcript.png`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: BASE_URL,
@@ -2802,7 +2686,7 @@ function renderCompareTable(page, copy) {
                 <tr>
                   <th scope="col">${html(copy.questionHeader)}</th>
                   <th scope="col">Dictivo</th>
-                  <th scope="col">${html(fillCompareTemplate(copy.competitorHeader, page))}</th>
+                  <th scope="col"><a href="${attr(page.sources[0])}">${html(fillCompareTemplate(copy.competitorHeader, page))}</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -2876,7 +2760,8 @@ function renderCompareCta(page, currentCode, copy) {
               <p>${html(copy.ctaBody)}</p>
             </div>
             <div class="compare-cta-actions">
-              <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_${page.slug}`))}"${downloadData("macos", `compare_${page.slug}`)}>${html(copy.ctaPrimary)}</a>
+              <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_${page.slug}`))}"${downloadData("macos", `compare_${page.slug}`)}>${html(copy.ctaPrimary)} · macOS</a>
+              ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", `compare_${page.slug}_windows`))}"${downloadData("windows", `compare_${page.slug}_windows`)}>${html(copy.ctaPrimary)} · Windows</a>` : ""}
               <a class="button button-outline" href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.ctaSecondary)}</a>
             </div>
             ${renderCompareLinks(page, currentCode, copy)}
@@ -2915,6 +2800,11 @@ function renderComparePage(page, currentCode = "en") {
         <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(COMPARE_LAST_UPDATED.iso)}">${html(formatLocalizedMonth(COMPARE_LAST_UPDATED.iso, currentCode))}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
+        <div class="compare-intro-actions">
+          <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_hero_${page.slug}`))}"${downloadData("macos", `compare_hero_${page.slug}`)}>${html(t.hero.download)}</a>
+          ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", `compare_hero_${page.slug}_windows`))}"${downloadData("windows", `compare_hero_${page.slug}_windows`)}>${html(windowsDownloadCopy(currentCode).exeButton)}</a>` : ""}
+        </div>
+        <p class="compare-trial">${html(HOME_CONVERSION_COPY[currentCode].trial)}</p>
         ${renderCompareQuickTake(page, copy)}
       </section>
 
@@ -3370,7 +3260,7 @@ function renderOfflineGuideReferences(copy) {
         <h2 id="offline-guide-references">${html(copy.referenceTitle)}</h2>
         <ul class="compare-source-list">
 ${OFFLINE_DICTATION_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}" rel="nofollow noopener">${html(label)}</a></li>`,
+  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
 ).join("\n")}
         </ul>
       </section>`;
@@ -4269,6 +4159,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="/refund/">${html(ui.footer.refunds)}</a>`,
     `<a href="/contact/">${html(ui.footer.contact)}</a>`,
     `<a href="/about/">${html(ui.footer.about)}</a>`,
+    `<a href="/changelog/">${html(HOME_CONVERSION_COPY[currentCode].changelog)}</a>`,
     // § 5 DDG requires the Impressum to be "leicht erkennbar und unmittelbar
     // erreichbar" — a footer link on every page is the accepted way to do
     // that. Appears only once data/impressum.json is filled in.
@@ -4283,6 +4174,7 @@ function renderHome(currentCode) {
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
   const compareTeaser = `${renderCompareTeaser(currentCode)}\n\n`;
   const liveWindowsCopy = windowsDownloadCopy(currentCode);
+  const conversion = HOME_CONVERSION_COPY[currentCode];
 
   const languagePills = LOCALES.map(
     (item) => `<a href="${attr(item.path)}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
@@ -4315,28 +4207,30 @@ function renderHome(currentCode) {
                 <span class="eyebrow-dot" aria-hidden="true"></span>
                 ${html(t.hero.eyebrow)}
               </span>
-              <h1 id="hero-title">${html(t.hero.title)} <em>${html(t.hero.emphasis)}</em></h1>
+              <h1 id="hero-title">${html(conversion.title)} <em>${html(conversion.emphasis)}</em></h1>
+              <p class="hero-lede">${html(conversion.lede)}</p>
+              <ol class="hero-steps">${conversion.steps.map((step) => `<li>${html(step)}</li>`).join("")}</ol>
               <div class="hero-actions hero-actions--top" aria-label="Download Dictivo">
                 <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_top_mac"))}"${downloadData("macos", "hero_top_mac")}>${html(t.hero.download)}</a>
                 ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
               </div>
+              <p class="hero-trial">${html(conversion.trial)}</p>
             </div>
           </div>
 
           <figure class="hero-film" id="demo-video">
             <button class="hero-video-poster" type="button" aria-label="${attr(t.hero.play)}">
-              <img src="/assets/dictivo-demo-poster.jpg" alt="${attr(t.hero.posterAlt)}" width="1920" height="1080" />
+              <img src="/assets/dictivo-demo-local-poster.jpg" alt="${attr(t.hero.posterAlt)}" width="1920" height="1080" />
               <span class="hero-video-play">${html(t.hero.play)}</span>
             </button>
-            <video controls preload="none" poster="/assets/dictivo-demo-poster.jpg" playsinline hidden data-src="/assets/dictivo-cinematic-demo.mp4">
+            <video controls preload="none" poster="/assets/dictivo-demo-local-poster.jpg" playsinline hidden data-src="/assets/dictivo-cinematic-demo.mp4">
               <track kind="captions" srclang="en" label="English" src="/assets/dictivo-cinematic-demo.en.vtt" default />
             </video>
           </figure>
 
           <div class="hero-support">
             <div class="hero-actions" aria-label="Download Dictivo">
-              <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_primary"))}"${downloadData("macos", "hero_primary")}>${html(t.hero.download)}</a>
-              ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_windows"))}"${downloadData("windows", "hero_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
+              <p class="hero-offer">${html(conversion.offer)}</p>
               <a class="button button-outline" href="#pricing">${html(t.hero.pricing)}</a>
               <p class="hero-note">${html(t.hero.windows)}</p>
             </div>
@@ -4458,7 +4352,7 @@ function renderHome(currentCode) {
               )
               .join("\n")}
           </div>
-          <p class="signed-footnote">${t.signed.footnoteHref ? `<a href="${attr(localizeTrustHref(t.signed.footnoteHref, currentCode))}">${html(t.signed.footnote)}</a>` : html(t.signed.footnote)}</p>
+          <p class="signed-footnote">${t.signed.footnoteHref ? `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.signed.footnote)}</a>` : html(t.signed.footnote)}</p>
         </div>
       </section>
 
@@ -5556,7 +5450,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${release.updatedAt}</lastmod>
+    <lastmod>${[release.updatedAt, HOME_CONVERSION_LASTMOD].sort().at(-1)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
@@ -5801,7 +5695,7 @@ function renderChangelog() {
         <h2 id="release-0-3-33">Up to 3x faster local dictation on Apple Silicon.</h2>
         <ul>
           <li>Local transcription now runs on the Metal GPU on Apple Silicon Macs. Calibration measures both CPU and Metal and picks the faster engine - measured 1.9-2.9x faster end-to-end per model on an M4 Pro.</li>
-          <li>The highest-quality local model (Large v3) is now comfortably interactive fully on-device: about 25 seconds per minute of audio on an M4 Pro, down from about 49.</li>
+          <li>On the published M4 Pro calibration test, Large v3 measured RTF 0.41 with Metal versus 0.81 with CPU. This was a 5-second clip, not a measured one-minute recording.</li>
           <li>Settings and the dictation workbench show a live engine indicator (Metal GPU, Vulkan GPU, or CPU) in every display language, refreshed after each dictation so a GPU-to-CPU fallback is visible immediately.</li>
           <li>Measured results and method: <a href="/guides/mac-dictation-benchmark-method/#measured-results">Mac dictation benchmarks</a>.</li>
         </ul>

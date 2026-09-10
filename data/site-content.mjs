@@ -49,7 +49,7 @@ export const HOME_COPY = {
       title: "Your private words stay on your device.",
       body: "Dictivo starts local because most dictation should feel private by default. Cloud Fast is visible because it changes where audio is processed.",
       localTitle: "Local mode",
-      localLead: "The everyday path for private work, sensitive notes, client conversations, and personal drafting.",
+      localLead: "The everyday path for private work, sensitive notes, notes after client conversations, and personal drafting.",
       localItems: [
         "Microphone audio stays on this device",
         "Transcripts, history, dictionary, and snippets stay local",
@@ -77,7 +77,7 @@ export const HOME_COPY = {
       localItems: [
         "Audio remains on your computer",
         "Transcripts, history, dictionary, and snippets stay local",
-        "Best for client work, notes, meetings, and sensitive drafting",
+        "Best for client work, notes, post-meeting summaries, and sensitive drafting",
       ],
       cloudTop: ["Cloud Fast", "Optional"],
       cloudTitle: "Speed when you choose it.",

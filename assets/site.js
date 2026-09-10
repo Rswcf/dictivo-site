@@ -248,6 +248,7 @@ function referrerHost() {
   try {
     if (!document.referrer) return "";
     const host = new URL(document.referrer).hostname;
+    if (["dictivo.app", "www.dictivo.app"].includes(host)) return "";
     return host && host !== window.location.hostname ? host : "";
   } catch {
     return "";
@@ -280,27 +281,61 @@ function createAnalyticsVisitId() {
 // never persisted in cookies, localStorage, or a cross-page browser profile.
 const analyticsInstrumentationVersion = "web-linked-v1";
 const analyticsVisitId = createAnalyticsVisitId();
+const isPublicSite = ["dictivo.app", "www.dictivo.app"].includes(window.location.hostname);
 
-function pageViewPayload() {
+function campaignValue(value) {
+  return String(value || "").replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, 120) || undefined;
+}
+
+function readPageAttribution() {
   const params = new URLSearchParams(window.location.search);
   const referral = referrerHost();
+  return {
+    source: campaignValue(params.get("utm_source")) || referral || "direct",
+    medium: campaignValue(params.get("utm_medium")) || (referral ? "referral" : "direct"),
+    campaign: campaignValue(params.get("utm_campaign")),
+    content: campaignValue(params.get("utm_content")),
+    term: campaignValue(params.get("utm_term")),
+  };
+}
 
+const pageAttribution = readPageAttribution();
+
+// Carry only campaign metadata through a user-initiated internal navigation.
+// No visit id crosses pages; no cookie or browser storage is created. Keep the
+// static links clean for crawlers and leave checkout/external links untouched.
+function carryCampaign(event) {
+  if (event.defaultPrevented || !event.isTrusted) return;
+  const link = event.target.closest?.("a[href]");
+  if (!link || link.hasAttribute("download") || link.classList.contains("download-link")) return;
+  const href = new URL(link.href, window.location.href);
+  if (href.origin !== window.location.origin || !/^https?:$/.test(href.protocol)) return;
+  if (href.pathname === window.location.pathname || /^\/(checkout|download|downloads)\//.test(href.pathname)) return;
+  if (!href.pathname.endsWith("/") && !href.pathname.endsWith(".html")) return;
+  if (href.searchParams.has("utm_source") || pageAttribution.source === "direct") return;
+  for (const key of ["source", "medium", "campaign", "content", "term"]) {
+    if (pageAttribution[key]) href.searchParams.set(`utm_${key}`, pageAttribution[key]);
+  }
+  link.href = href.toString();
+}
+
+document.addEventListener("click", carryCampaign);
+document.addEventListener("auxclick", carryCampaign);
+
+function pageViewPayload() {
   return {
     event: "page_view",
     visitId: analyticsVisitId,
     instrumentationVersion: analyticsInstrumentationVersion,
     path: window.location.pathname || "/",
     locale: document.documentElement.lang || undefined,
-    source: params.get("utm_source") || referral || "direct",
-    medium: params.get("utm_medium") || (referral ? "referral" : "direct"),
-    campaign: params.get("utm_campaign") || undefined,
-    content: params.get("utm_content") || undefined,
-    term: params.get("utm_term") || undefined,
+    ...pageAttribution,
     referrer: cleanReferrer(document.referrer),
   };
 }
 
 function sendPageView() {
+  if (!isPublicSite) return;
   const endpoint = "https://api.dictivo.app/v1/analytics/page-view";
   const body = JSON.stringify(pageViewPayload());
 
@@ -343,7 +378,7 @@ function downloadEventPayload(link) {
     campaign: href.searchParams.get("utm_campaign") || undefined,
     content: link.dataset.downloadContent || href.searchParams.get("utm_content") || undefined,
     term: href.searchParams.get("utm_term") || undefined,
-    referrer: window.location.href,
+    referrer: cleanReferrer(window.location.href),
   };
 }
 
@@ -357,11 +392,20 @@ function sendDownloadClick(link) {
 
   if (!href.pathname.includes("/download/")) return;
 
+  // Release version and CTA position already have their own fields. Attribute
+  // the click and redirect to the same channel as this page, not "site".
+  for (const key of ["source", "medium", "campaign", "term"]) {
+    if (pageAttribution[key]) href.searchParams.set(`utm_${key}`, pageAttribution[key]);
+    else href.searchParams.delete(`utm_${key}`);
+  }
+
   if (analyticsVisitId) {
     href.searchParams.set("visitId", analyticsVisitId);
   }
   href.searchParams.set("instrumentationVersion", analyticsInstrumentationVersion);
   link.href = href.toString();
+
+  if (!isPublicSite) return;
 
   const endpoint = new URL("/v1/analytics/download-events", href.origin).toString();
   const body = JSON.stringify(downloadEventPayload(link));

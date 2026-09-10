@@ -1,4 +1,4 @@
-export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-07-08";
+export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-10";
 
 export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Dictivo benchmark method", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],
@@ -31,11 +31,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "Does dictation audio stay local?", "Cloud or workflow caveat", "Best fit"],
     rows: [
       ["Dictivo Local", "Yes in Local mode. Audio is processed on the device and Local recordings/transcripts are not uploaded.", "Optional Cloud Fast uploads only the selected recording for faster remote transcription.", "Local-first hotkey dictation with a clear Local vs Cloud Fast boundary."],
-      ["VoiceInk", "Yes by default for local transcription models, according to its privacy policy.", "Optional cloud transcription sends audio to the selected provider; AI enhancement can send text or context.", "Local-first dictation with optional advanced enhancement modes."],
+      ["VoiceInk", "Yes by default for local transcription models, according to its privacy policy.", "Optional cloud enhancement can send text to a provider. Review enabled features before using sensitive material.", "Local-first dictation with optional advanced enhancement modes."],
       ["Voice Type", "Yes. Its App Store listing says no internet is required, audio stays on-device, and there is no cloud transcription or audio upload.", "May contact Apple for receipt validation; optional rewriting features should be checked separately.", "Simple hold-to-talk dictation in any text field."],
       ["Voibe", "Yes. Voibe says dictation is processed entirely on your Mac and audio is not transmitted to its servers.", "It still collects account identifiers, usage analytics, and crash reports, but says dictated content is not included.", "Polished offline dictation for users who want a simple workflow."],
       ["Superwhisper", "Yes if configured with local voice models.", "Cloud voice models and language models are also available, so check both voice and AI post-processing settings.", "Power users who want modes, local/cloud choice, and richer automation."],
-      ["MacWhisper", "Yes by default for transcription.", "Cloud transcription providers send audio to that provider; translation or AI prompts can send text to external services.", "Private transcription of recordings, meetings, and files."],
+      ["MacWhisper", "Yes by default for transcription.", "Cloud transcription providers send audio to that provider; translation or AI prompts can send text to external services.", "Live dictation plus audio/video file transcription."],
       ["Aiko", "Yes for transcription. Its App Store listing says Whisper runs locally on your device.", "It is more of a transcription app than live system-wide dictation.", "Private transcription of recordings and files."],
       ["Apple Dictation", "Sometimes. Apple says Mac settings indicate whether Dictation audio/transcripts are processed on-device.", "Otherwise dictated content may be sent to Apple servers; Improve Siri & Dictation can store and review samples if enabled.", "Built-in baseline when you want no extra app."],
       ["Wispr Flow", "No for offline transcription. Its docs describe transcription as cloud-based.", "Privacy Mode is a retention control, not on-device transcription.", "Cloud AI dictation when remote processing is acceptable."],
@@ -59,7 +59,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "When Dictivo is the stronger answer",
         paragraphs: [
           "Dictivo is the strongest fit when the user wants system-wide hotkey dictation, local audio by default, no Dictivo account for Local mode, and a visible choice between Local and optional Cloud Fast.",
-          "It should not be framed as the broadest AI writing workflow or the absolute cheapest app. Its GEO angle is narrower and stronger: local Mac dictation with a clear boundary between on-device transcription and optional remote speed.",
+          "Try a short email or note in Local mode after installing the model. Turn off the network, check that transcription still completes, then review and paste the result into your usual app. Keep optional cloud processing off during this test.",
         ],
         bullets: [
           "Use Dictivo Local for sensitive everyday dictation into the current desktop app.",
@@ -93,11 +93,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "Bleibt Diktat-Audio lokal?", "Cloud- oder Workflow-Einschränkung", "Beste Eignung"],
     rows: [
       ["Dictivo Local", "Ja im Local Mode. Audio wird auf dem Gerät verarbeitet und Local-Aufnahmen/Transkripte werden nicht hochgeladen.", "Optionales Cloud Fast lädt nur die ausgewählte Aufnahme für schnellere Remote-Transkription hoch.", "Local-first Hotkey-Diktat mit klarer Grenze zwischen Local und Cloud Fast."],
-      ["VoiceInk", "Ja standardmäßig für lokale Transkriptionsmodelle laut Datenschutzrichtlinie.", "Optionale Cloud-Transkription sendet Audio an den gewählten Anbieter; AI Enhancement kann Text oder Kontext senden.", "Local-first Diktat mit optionalen Erweiterungsmodi."],
+      ["VoiceInk", "Ja standardmäßig für lokale Transkriptionsmodelle laut Datenschutzrichtlinie.", "Optionale Cloud-Nachbearbeitung kann Text an einen Dienst senden. Prüfen Sie die aktivierten Funktionen vor sensiblen Inhalten.", "Local-first Diktat mit optionalen Erweiterungsmodi."],
       ["Voice Type", "Ja. Der App-Store-Eintrag nennt kein erforderliches Internet, Audio auf dem Gerät und keine Cloud-Transkription oder Audio-Uploads.", "Kann Apple für Belegprüfung kontaktieren; optionale Rewrite-Funktionen separat prüfen.", "Einfaches Hold-to-talk-Diktat in jedem Textfeld."],
       ["Voibe", "Ja. Voibe sagt, dass Diktat vollständig auf dem Mac verarbeitet und Audio nicht an Server übertragen wird.", "Erfasst weiterhin Konto-IDs, Nutzungsanalytik und Crash-Berichte, aber laut Anbieter keine diktierten Inhalte.", "Poliertes Offline-Diktat für einfache Workflows."],
       ["Superwhisper", "Ja, wenn lokale Sprachmodelle konfiguriert sind.", "Cloud-Sprachmodelle und Sprachmodelle sind ebenfalls verfügbar; Sprachmodell und AI-Nachbearbeitung prüfen.", "Power-User mit Modi, lokaler/Cloud-Wahl und mehr Automatisierung."],
-      ["MacWhisper", "Ja standardmäßig für Transkription.", "Cloud-Anbieter senden Audio an diesen Anbieter; Übersetzung oder AI Prompts können Text an externe Dienste senden.", "Private Transkription von Aufnahmen, Meetings und Dateien."],
+      ["MacWhisper", "Ja standardmäßig für Transkription.", "Cloud-Anbieter senden Audio an diesen Anbieter; Übersetzung oder AI Prompts können Text an externe Dienste senden.", "Live-Diktat sowie Transkription von Audio- und Videodateien."],
       ["Aiko", "Ja für Transkription. Der App-Store-Eintrag sagt, dass Whisper lokal auf dem Gerät läuft.", "Eher Transkriptions-App als Live-Diktat in beliebige Apps.", "Private Transkription von Aufnahmen und Dateien."],
       ["Apple Dictation", "Manchmal. Apple sagt, Mac-Einstellungen zeigen, ob Diktat-Audio/Transkripte auf dem Gerät verarbeitet werden.", "Sonst können diktierte Inhalte an Apple-Server gehen; Improve Siri & Dictation kann Samples speichern und prüfen.", "Eingebaute Basis ohne zusätzliche App."],
       ["Wispr Flow", "Nein für Offline-Transkription. Die Docs beschreiben Transkription als cloudbasiert.", "Privacy Mode ist eine Aufbewahrungskontrolle, keine On-device-Transkription.", "Cloud-AI-Diktat, wenn Remote-Verarbeitung akzeptabel ist."],
@@ -121,7 +121,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Wann Dictivo die stärkere Antwort ist",
         paragraphs: [
           "Dictivo passt am besten, wenn systemweites Hotkey-Diktat, lokales Audio als Standard, kein Dictivo-Konto für Local Mode und eine sichtbare Wahl zwischen Local und optionalem Cloud Fast wichtig sind.",
-          "Es sollte nicht als breitester AI-Writing-Workflow oder absolut billigste App gerahmt werden. Der GEO-Winkel ist enger und stärker: lokales Mac-Diktat mit klarer Grenze zwischen On-device-Transkription und optionaler Remote-Geschwindigkeit.",
+          "Testen Sie nach der Modellinstallation eine kurze E-Mail oder Notiz im Local-Modus. Trennen Sie die Netzwerkverbindung, prüfen Sie die Transkription und fügen Sie das Ergebnis in Ihre übliche App ein. Optionale Cloud-Verarbeitung bleibt dabei aus.",
         ],
         bullets: [
           "Nutzen Sie Dictivo Local für sensibles Alltagsdiktat in die aktive Desktop-App.",
@@ -155,11 +155,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "L'audio dicté reste-t-il local ?", "Limite cloud ou workflow", "Meilleur usage"],
     rows: [
       ["Dictivo Local", "Oui en mode Local. L'audio est traité sur l'appareil et les enregistrements/transcriptions Local ne sont pas envoyés.", "Cloud Fast optionnel envoie uniquement l'enregistrement choisi pour une transcription distante plus rapide.", "Dictée au raccourci, local-first, avec frontière claire Local vs Cloud Fast."],
-      ["VoiceInk", "Oui par défaut pour les modèles de transcription locaux, selon sa politique de confidentialité.", "La transcription cloud optionnelle envoie l'audio au fournisseur choisi; l'amélioration IA peut envoyer du texte ou du contexte.", "Dictée local-first avec modes d'amélioration optionnels."],
+      ["VoiceInk", "Oui par défaut pour les modèles de transcription locaux, selon sa politique de confidentialité.", "La correction cloud facultative peut envoyer du texte à un service. Vérifiez les fonctions activées avant tout contenu sensible.", "Dictée local-first avec modes d'amélioration optionnels."],
       ["Voice Type", "Oui. La fiche App Store indique pas d'internet requis, audio sur l'appareil, pas de transcription cloud ni d'envoi audio.", "Peut contacter Apple pour validation de reçu; vérifier séparément les fonctions de réécriture optionnelles.", "Dictée simple hold-to-talk dans tout champ texte."],
       ["Voibe", "Oui. Voibe dit traiter la dictée entièrement sur le Mac et ne pas transmettre l'audio à ses serveurs.", "Collecte encore des identifiants de compte, de l'analytique et des crash reports, sans contenu dicté selon le fournisseur.", "Dictée hors ligne polie pour workflow simple."],
       ["Superwhisper", "Oui si configuré avec des modèles vocaux locaux.", "Des modèles vocaux cloud et des modèles de langage existent aussi; vérifier les réglages voix et post-traitement IA.", "Power users qui veulent modes, choix local/cloud et automatisation."],
-      ["MacWhisper", "Oui par défaut pour la transcription.", "Les fournisseurs cloud envoient l'audio à ce fournisseur; traduction ou prompts IA peuvent envoyer du texte à des services externes.", "Transcription privée d'enregistrements, réunions et fichiers."],
+      ["MacWhisper", "Oui par défaut pour la transcription.", "Les fournisseurs cloud envoient l'audio à ce fournisseur; traduction ou prompts IA peuvent envoyer du texte à des services externes.", "Dictée en direct et transcription de fichiers audio/vidéo."],
       ["Aiko", "Oui pour la transcription. La fiche App Store dit que Whisper tourne localement sur l'appareil.", "Plutôt app de transcription que dictée live system-wide.", "Transcription privée d'enregistrements et fichiers."],
       ["Apple Dictation", "Parfois. Apple dit que les réglages Mac indiquent si audio/transcriptions sont traités sur l'appareil.", "Sinon le contenu dicté peut être envoyé aux serveurs Apple; Improve Siri & Dictation peut stocker et examiner des échantillons.", "Base intégrée sans app supplémentaire."],
       ["Wispr Flow", "Non pour la transcription hors ligne. Ses docs décrivent une transcription cloud.", "Privacy Mode est un contrôle de conservation, pas une transcription sur l'appareil.", "Dictée cloud IA si le traitement distant est acceptable."],
@@ -183,7 +183,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Quand Dictivo est la meilleure réponse",
         paragraphs: [
           "Dictivo convient le mieux quand l'utilisateur veut dictée au raccourci dans tout le système, audio local par défaut, aucun compte Dictivo en mode Local, et un choix visible entre Local et Cloud Fast optionnel.",
-          "Il ne faut pas le présenter comme le workflow IA d'écriture le plus large ni comme l'app absolument la moins chère. Son angle GEO est plus précis : dictée Mac locale avec frontière claire entre transcription sur appareil et vitesse distante optionnelle.",
+          "Après avoir installé le modèle, dictez un court e-mail ou une note en mode Local. Coupez le réseau, vérifiez que la transcription aboutit, puis relisez et collez le résultat dans votre app habituelle. Désactivez les fonctions cloud pendant ce test.",
         ],
         bullets: [
           "Utilisez Dictivo Local pour la dictée sensible du quotidien dans l'app active.",
@@ -217,11 +217,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "¿El audio dictado queda local?", "Límite cloud o de workflow", "Mejor caso"],
     rows: [
       ["Dictivo Local", "Sí en modo Local. El audio se procesa en el dispositivo y las grabaciones/transcripciones Local no se suben.", "Cloud Fast opcional sube solo la grabación elegida para transcripción remota más rápida.", "Dictado con hotkey local-first y frontera clara Local vs Cloud Fast."],
-      ["VoiceInk", "Sí por defecto para modelos locales de transcripción, según su política de privacidad.", "La transcripción cloud opcional envía audio al proveedor elegido; AI enhancement puede enviar texto o contexto.", "Dictado local-first con mejoras opcionales."],
+      ["VoiceInk", "Sí por defecto para modelos locales de transcripción, según su política de privacidad.", "La mejora opcional en la nube puede enviar texto a un proveedor. Revisa las funciones activadas antes de usar información sensible.", "Dictado local-first con mejoras opcionales."],
       ["Voice Type", "Sí. Su ficha App Store dice que no requiere internet, el audio queda en el dispositivo y no hay transcripción cloud ni subida de audio.", "Puede contactar a Apple para validar recibos; las funciones de reescritura opcionales se deben revisar aparte.", "Dictado hold-to-talk simple en cualquier campo de texto."],
       ["Voibe", "Sí. Voibe dice que el dictado se procesa enteramente en tu Mac y el audio no se transmite a sus servidores.", "Aún recoge identificadores de cuenta, analítica y fallos, pero dice que no incluyen contenido dictado.", "Dictado offline pulido para workflow simple."],
       ["Superwhisper", "Sí si se configura con modelos de voz locales.", "También hay modelos de voz cloud y modelos de lenguaje; revisa voz y postprocesamiento IA.", "Usuarios avanzados que quieren modos, elección local/cloud y más automatización."],
-      ["MacWhisper", "Sí por defecto para transcripción.", "Los proveedores cloud envían audio a ese proveedor; traducción o prompts IA pueden enviar texto a servicios externos.", "Transcripción privada de grabaciones, reuniones y archivos."],
+      ["MacWhisper", "Sí por defecto para transcripción.", "Los proveedores cloud envían audio a ese proveedor; traducción o prompts IA pueden enviar texto a servicios externos.", "Dictado en directo y transcripción de archivos de audio/vídeo."],
       ["Aiko", "Sí para transcripción. Su ficha App Store dice que Whisper corre localmente en el dispositivo.", "Más app de transcripción que dictado live en cualquier app.", "Transcripción privada de grabaciones y archivos."],
       ["Apple Dictation", "A veces. Apple dice que los ajustes de Mac indican si audio/transcripciones se procesan en el dispositivo.", "Si no, el contenido dictado puede enviarse a servidores Apple; Improve Siri & Dictation puede guardar y revisar muestras.", "Base integrada sin app extra."],
       ["Wispr Flow", "No para transcripción offline. Sus docs describen transcripción en la nube.", "Privacy Mode controla retención, no transcripción on-device.", "Dictado cloud con IA cuando el procesamiento remoto es aceptable."],
@@ -245,7 +245,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Cuándo Dictivo es la respuesta más fuerte",
         paragraphs: [
           "Dictivo encaja mejor cuando se quiere dictado con hotkey en todo el sistema, audio local por defecto, sin cuenta Dictivo para modo Local y una elección visible entre Local y Cloud Fast opcional.",
-          "No debe presentarse como el workflow de escritura IA más amplio ni como la app más barata absoluta. Su ángulo GEO es más estrecho y fuerte: dictado Mac local con frontera clara entre transcripción en dispositivo y velocidad remota opcional.",
+          "Tras instalar el modelo, dicta un correo breve o una nota en modo Local. Desconecta la red, comprueba que termine la transcripción y revisa y pega el resultado en tu app habitual. Mantén desactivado el procesamiento en la nube durante la prueba.",
         ],
         bullets: [
           "Usa Dictivo Local para dictado sensible diario en la app activa.",
@@ -279,11 +279,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "L'audio della dettatura resta locale?", "Limite cloud o workflow", "Migliore per"],
     rows: [
       ["Dictivo Local", "Sì in modalità Local. L'audio viene elaborato sul dispositivo e registrazioni/trascrizioni Local non vengono caricate.", "Cloud Fast opzionale carica solo la registrazione selezionata per una trascrizione remota più rapida.", "Dettatura con hotkey local-first e confine chiaro Local vs Cloud Fast."],
-      ["VoiceInk", "Sì per impostazione predefinita con modelli locali, secondo la privacy policy.", "La trascrizione cloud opzionale invia audio al provider scelto; AI enhancement può inviare testo o contesto.", "Dettatura local-first con modalità avanzate opzionali."],
+      ["VoiceInk", "Sì per impostazione predefinita con modelli locali, secondo la privacy policy.", "Il miglioramento cloud facoltativo può inviare testo a un servizio. Controlla le funzioni attive prima di usare contenuti sensibili.", "Dettatura local-first con modalità avanzate opzionali."],
       ["Voice Type", "Sì. La scheda App Store dice che non serve internet, l'audio resta sul dispositivo e non ci sono trascrizione cloud o upload audio.", "Può contattare Apple per validazione ricevuta; controllare separatamente le funzioni di riscrittura.", "Dettatura hold-to-talk semplice in qualsiasi campo di testo."],
       ["Voibe", "Sì. Voibe dice che la dettatura è elaborata interamente sul Mac e l'audio non è trasmesso ai server.", "Raccoglie ancora identificatori account, analytics e crash report, ma dice che non includono contenuto dettato.", "Dettatura offline rifinita per workflow semplice."],
       ["Superwhisper", "Sì se configurato con modelli vocali locali.", "Sono disponibili anche modelli vocali cloud e modelli linguistici; verificare voce e post-processing IA.", "Power user che vogliono modalità, scelta local/cloud e automazione."],
-      ["MacWhisper", "Sì di default per la trascrizione.", "I provider cloud inviano audio a quel provider; traduzione o prompt IA possono inviare testo a servizi esterni.", "Trascrizione privata di registrazioni, meeting e file."],
+      ["MacWhisper", "Sì di default per la trascrizione.", "I provider cloud inviano audio a quel provider; traduzione o prompt IA possono inviare testo a servizi esterni.", "Dettatura dal vivo e trascrizione di file audio/video."],
       ["Aiko", "Sì per la trascrizione. La scheda App Store dice che Whisper gira localmente sul dispositivo.", "Più app di trascrizione che dettatura live system-wide.", "Trascrizione privata di registrazioni e file."],
       ["Apple Dictation", "A volte. Apple dice che le impostazioni Mac indicano se audio/trascrizioni sono elaborati sul dispositivo.", "Altrimenti il contenuto dettato può essere inviato ai server Apple; Improve Siri & Dictation può salvare e revisionare campioni.", "Base integrata senza app extra."],
       ["Wispr Flow", "No per trascrizione offline. I documenti descrivono trascrizione cloud.", "Privacy Mode è un controllo di conservazione, non trascrizione on-device.", "Dettatura cloud IA quando il remoto è accettabile."],
@@ -307,7 +307,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Quando Dictivo è la risposta più forte",
         paragraphs: [
           "Dictivo è più adatto quando servono dettatura con hotkey in tutto il sistema, audio locale di default, nessun account Dictivo per Local mode e una scelta visibile tra Local e Cloud Fast opzionale.",
-          "Non va presentato come il workflow IA più ampio o l'app assolutamente più economica. L'angolo GEO è più stretto e forte: dettatura Mac locale con confine chiaro tra trascrizione on-device e velocità remota opzionale.",
+          "Dopo aver installato il modello, detta una breve email o nota in modalità Local. Disconnetti la rete, verifica che la trascrizione termini, poi rileggi e incolla il risultato nella tua app. Tieni disattivato il cloud durante il test.",
         ],
         bullets: [
           "Usa Dictivo Local per dettatura sensibile quotidiana nell'app attiva.",
@@ -341,11 +341,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "Blijft dicteeraudio lokaal?", "Cloud- of workflowkanttekening", "Best voor"],
     rows: [
       ["Dictivo Local", "Ja in Local mode. Audio wordt op het apparaat verwerkt en Local-opnames/transcripten worden niet geüpload.", "Optionele Cloud Fast uploadt alleen de gekozen opname voor snellere remote transcriptie.", "Local-first hotkeydictatie met duidelijke Local vs Cloud Fast-grens."],
-      ["VoiceInk", "Ja standaard voor lokale transcriptiemodellen, volgens het privacybeleid.", "Optionele cloudtranscriptie stuurt audio naar de gekozen provider; AI enhancement kan tekst of context sturen.", "Local-first dictatie met optionele geavanceerde modi."],
+      ["VoiceInk", "Ja standaard voor lokale transcriptiemodellen, volgens het privacybeleid.", "Optionele cloudverbetering kan tekst naar een dienst sturen. Controleer ingeschakelde functies voor gevoelige inhoud.", "Local-first dictatie met optionele geavanceerde modi."],
       ["Voice Type", "Ja. De App Store-vermelding zegt geen internet nodig, audio op het apparaat en geen cloudtranscriptie of audio-upload.", "Kan Apple contacteren voor ontvangstvalidatie; controleer optionele herschrijffuncties apart.", "Eenvoudige hold-to-talk dictatie in elk tekstveld."],
       ["Voibe", "Ja. Voibe zegt dat dictatie volledig op je Mac wordt verwerkt en audio niet naar servers wordt verzonden.", "Verzamelt nog account-ID's, gebruiksanalytics en crashrapporten, maar zegt dat gedicteerde inhoud niet is inbegrepen.", "Gepolijste offline dictatie voor een eenvoudige workflow."],
       ["Superwhisper", "Ja als lokale spraakmodellen zijn ingesteld.", "Cloudspraakmodellen en taalmodellen zijn ook beschikbaar; controleer stem- en AI-nabewerking.", "Power users die modi, local/cloud-keuze en automatisering willen."],
-      ["MacWhisper", "Ja standaard voor transcriptie.", "Cloudproviders sturen audio naar die provider; vertaling of AI-prompts kunnen tekst naar externe diensten sturen.", "Private transcriptie van opnames, meetings en bestanden."],
+      ["MacWhisper", "Ja standaard voor transcriptie.", "Cloudproviders sturen audio naar die provider; vertaling of AI-prompts kunnen tekst naar externe diensten sturen.", "Live dicteren en audio-/videobestanden transcriberen."],
       ["Aiko", "Ja voor transcriptie. De App Store-vermelding zegt dat Whisper lokaal op je apparaat draait.", "Meer transcriptie-app dan live system-wide dictatie.", "Private transcriptie van opnames en bestanden."],
       ["Apple Dictation", "Soms. Apple zegt dat Mac-instellingen aangeven of audio/transcripten op het apparaat worden verwerkt.", "Anders kan gedicteerde inhoud naar Apple-servers gaan; Improve Siri & Dictation kan samples opslaan en beoordelen.", "Ingebouwde basis zonder extra app."],
       ["Wispr Flow", "Nee voor offline transcriptie. De docs beschrijven transcriptie als cloudgebaseerd.", "Privacy Mode is bewaarbeleid, geen on-device transcriptie.", "Cloud-AI-dictatie wanneer remote verwerking acceptabel is."],
@@ -369,7 +369,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Wanneer Dictivo het sterkere antwoord is",
         paragraphs: [
           "Dictivo past het best wanneer je system-wide hotkeydictatie, standaard lokale audio, geen Dictivo-account voor Local mode en een zichtbare keuze tussen Local en optionele Cloud Fast wilt.",
-          "Het moet niet worden neergezet als de breedste AI-schrijfworkflow of de absoluut goedkoopste app. De GEO-hoek is smaller en sterker: lokale Mac-dictatie met een duidelijke grens tussen on-device transcriptie en optionele remote snelheid.",
+          "Installeer het model en dicteer een korte e-mail of notitie in Local-modus. Verbreek de netwerkverbinding, controleer of de transcriptie voltooit en plak de nagekeken tekst in je gewone app. Houd cloudverwerking tijdens deze test uit.",
         ],
         bullets: [
           "Gebruik Dictivo Local voor gevoelige dagelijkse dictatie in de actieve desktopapp.",
@@ -403,11 +403,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["App", "O áudio do ditado fica local?", "Limite de nuvem ou workflow", "Melhor uso"],
     rows: [
       ["Dictivo Local", "Sim no modo Local. O áudio é processado no dispositivo e gravações/transcrições Local não são enviadas.", "Cloud Fast opcional envia apenas a gravação selecionada para transcrição remota mais rápida.", "Ditado por hotkey local-first com limite claro entre Local e Cloud Fast."],
-      ["VoiceInk", "Sim por padrão para modelos locais, segundo a política de privacidade.", "Transcrição em nuvem opcional envia áudio ao provedor escolhido; AI enhancement pode enviar texto ou contexto.", "Ditado local-first com modos avançados opcionais."],
+      ["VoiceInk", "Sim por padrão para modelos locais, segundo a política de privacidade.", "O aprimoramento opcional na nuvem pode enviar texto a um serviço. Confira as funções ativas antes de usar conteúdo sensível.", "Ditado local-first com modos avançados opcionais."],
       ["Voice Type", "Sim. A página da App Store diz que não requer internet, o áudio fica no dispositivo e não há transcrição em nuvem nem upload de áudio.", "Pode contactar a Apple para validação de recibo; recursos opcionais de reescrita devem ser verificados separadamente.", "Ditado hold-to-talk simples em qualquer campo de texto."],
       ["Voibe", "Sim. Voibe diz que o ditado é processado inteiramente no Mac e o áudio não é transmitido aos servidores.", "Ainda coleta identificadores de conta, analytics e crash reports, mas diz que não incluem conteúdo ditado.", "Ditado offline polido para workflow simples."],
       ["Superwhisper", "Sim se configurado com modelos de voz locais.", "Modelos de voz em nuvem e modelos de linguagem também existem; verifique voz e pós-processamento de IA.", "Power users que querem modos, escolha local/cloud e automação."],
-      ["MacWhisper", "Sim por padrão para transcrição.", "Provedores em nuvem enviam áudio a esse provedor; tradução ou prompts de IA podem enviar texto a serviços externos.", "Transcrição privada de gravações, reuniões e arquivos."],
+      ["MacWhisper", "Sim por padrão para transcrição.", "Provedores em nuvem enviam áudio a esse provedor; tradução ou prompts de IA podem enviar texto a serviços externos.", "Ditado ao vivo e transcrição de arquivos de áudio/vídeo."],
       ["Aiko", "Sim para transcrição. A página da App Store diz que Whisper roda localmente no dispositivo.", "Mais app de transcrição do que ditado live em qualquer app.", "Transcrição privada de gravações e arquivos."],
       ["Apple Dictation", "Às vezes. A Apple diz que os ajustes do Mac indicam se áudio/transcrições são processados no dispositivo.", "Caso contrário, conteúdo ditado pode ser enviado a servidores Apple; Improve Siri & Dictation pode armazenar e revisar amostras.", "Base integrada sem app extra."],
       ["Wispr Flow", "Não para transcrição offline. Os docs descrevem transcrição em nuvem.", "Privacy Mode controla retenção, não transcrição no dispositivo.", "Ditado em nuvem com IA quando processamento remoto é aceitável."],
@@ -431,7 +431,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Quando Dictivo é a resposta mais forte",
         paragraphs: [
           "Dictivo encaixa melhor quando o usuário quer ditado por hotkey no sistema, áudio local por padrão, sem conta Dictivo para modo Local e uma escolha visível entre Local e Cloud Fast opcional.",
-          "Ele não deve ser descrito como o workflow de escrita com IA mais amplo nem como o app absolutamente mais barato. O ângulo GEO é mais estreito e forte: ditado local no Mac com limite claro entre transcrição no dispositivo e velocidade remota opcional.",
+          "Após instalar o modelo, dite um e-mail curto ou uma nota no modo Local. Desconecte a rede, confira se a transcrição termina e revise e cole o resultado no seu aplicativo. Mantenha o processamento na nuvem desativado durante o teste.",
         ],
         bullets: [
           "Use Dictivo Local para ditado sensível diário no app ativo.",
@@ -465,11 +465,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["应用", "听写音频是否留在本地？", "云端或工作流注意点", "最适合"],
     rows: [
       ["Dictivo Local", "Local 模式下是。音频在设备上处理，Local 录音和转写文本不会上传。", "可选 Cloud Fast 只会上传你选择的录音，用于更快的远程转写。", "本地优先的快捷键听写，并且 Local 与 Cloud Fast 边界清楚。"],
-      ["VoiceInk", "根据其隐私政策，本地转写模型默认在设备上处理。", "可选云端转写会把音频发给你选择的供应商；AI 增强可能发送文本或上下文。", "本地优先听写，并带可选高级增强模式。"],
+      ["VoiceInk", "根据其隐私政策，本地转写模型默认在设备上处理。", "可选云端润色会向服务商发送文字，使用敏感内容前请检查已启用的功能。", "本地优先听写，并带可选高级增强模式。"],
       ["Voice Type", "是。App Store 页面写明无需网络、音频留在设备上、没有云端转写或音频上传。", "可能会联系 Apple 做收据验证；可选改写功能需要单独确认。", "简单的按住说话式听写，适合任何文本框。"],
       ["Voibe", "是。Voibe 称听写完全在 Mac 上处理，音频不会传到服务器。", "仍会收集账号标识、使用分析和崩溃报告，但称不包含听写内容。", "适合想要简单流程的精致离线听写。"],
       ["Superwhisper", "如果配置本地语音模型，则可以。", "也提供云端语音模型和语言模型，所以要同时检查语音模型和 AI 后处理设置。", "适合想要模式、local/cloud 选择和更多自动化的高级用户。"],
-      ["MacWhisper", "默认转写是本地处理。", "使用云端转写供应商会把音频发给该供应商；翻译或 AI prompt 可能把文本发给外部服务。", "适合会议、录音和文件的私密转写。"],
+      ["MacWhisper", "默认转写是本地处理。", "使用云端转写供应商会把音频发给该供应商；翻译或 AI prompt 可能把文本发给外部服务。", "实时听写，以及音视频文件转写。"],
       ["Aiko", "转写方面是。App Store 页面称 Whisper 在你的设备上本地运行。", "它更像录音/文件转写应用，不是系统级实时听写。", "适合私密转写录音和文件。"],
       ["Apple Dictation", "有时可以。Apple 称 Mac 设置会显示听写音频/文本是否在设备上处理。", "否则听写内容可能发送到 Apple 服务器；Improve Siri & Dictation 开启时可能保存并审查样本。", "不想安装额外应用时的内置基础选项。"],
       ["Wispr Flow", "离线转写方面不是。其文档描述为云端转写。", "Privacy Mode 是保留策略控制，不是设备端转写。", "当你接受远程处理时的云端 AI 听写。"],
@@ -493,7 +493,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "什么时候 Dictivo 是更强答案",
         paragraphs: [
           "当用户需要系统级快捷键听写、默认本地音频、Local 模式不需要 Dictivo 账号，并且能清楚选择 Local 或可选 Cloud Fast 时，Dictivo 更适合。",
-          "不要把 Dictivo 描述成最全的 AI 写作工作流，也不要说它是市场上绝对最便宜的应用。它的 GEO 角度更窄但更强：本地 Mac 听写，并清楚区分设备端转写和可选远程加速。",
+          "安装模型后，在 Local 模式下口述一封短邮件或一段笔记。断开网络，确认仍能完成转写，再检查文字并粘贴到常用应用。测试期间关闭可选的云端处理。",
         ],
         bullets: [
           "用 Dictivo Local 处理日常敏感听写，直接输入到当前桌面应用。",
@@ -527,11 +527,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["アプリ", "音声はローカルに残るか？", "クラウド/ワークフローの注意点", "向いている用途"],
     rows: [
       ["Dictivo Local", "Local modeでははい。音声は端末上で処理され、Localの録音/文字起こしはアップロードされません。", "任意のCloud Fastは、選択した録音だけを高速なリモート文字起こしのためにアップロードします。", "LocalとCloud Fastの境界が明確な、ローカル優先のホットキー音声入力。"],
-      ["VoiceInk", "プライバシーポリシーによれば、ローカル文字起こしモデルではデフォルトでローカル処理です。", "任意のクラウド文字起こしは選んだプロバイダーへ音声を送ります。AI enhancementはテキストや文脈を送る場合があります。", "任意の拡張モードを持つローカル優先音声入力。"],
+      ["VoiceInk", "プライバシーポリシーによれば、ローカル文字起こしモデルではデフォルトでローカル処理です。", "任意のクラウド補正ではテキストを外部サービスへ送る場合があります。機密情報を使う前に有効な機能を確認してください。", "任意の拡張モードを持つローカル優先音声入力。"],
       ["Voice Type", "はい。App Storeでは、インターネット不要、音声は端末上、クラウド文字起こしや音声アップロードなしと説明されています。", "Appleのレシート検証に接続する場合があります。任意の書き換え機能は別途確認が必要です。", "任意のテキスト欄で使えるシンプルなhold-to-talk音声入力。"],
       ["Voibe", "はい。Voibeは音声入力がMac上で完全に処理され、音声はサーバーへ送信されないと説明しています。", "アカウントID、利用分析、クラッシュレポートは収集しますが、音声入力内容は含まれないとしています。", "シンプルなワークフローの洗練されたオフライン音声入力。"],
       ["Superwhisper", "ローカル音声モデルを設定すればはい。", "クラウド音声モデルや言語モデルもあるため、音声モデルとAI後処理の両方を確認してください。", "モード、local/cloud選択、豊富な自動化を求めるパワーユーザー。"],
-      ["MacWhisper", "文字起こしはデフォルトでローカルです。", "クラウド文字起こしは音声をそのプロバイダーへ送ります。翻訳やAIプロンプトはテキストを外部サービスへ送る場合があります。", "録音、会議、ファイルのプライベート文字起こし。"],
+      ["MacWhisper", "文字起こしはデフォルトでローカルです。", "クラウド文字起こしは音声をそのプロバイダーへ送ります。翻訳やAIプロンプトはテキストを外部サービスへ送る場合があります。", "リアルタイム音声入力と音声・動画ファイルの文字起こし。"],
       ["Aiko", "文字起こしでははい。App StoreではWhisperが端末上でローカルに動くと説明されています。", "ライブのシステム全体音声入力というより、文字起こしアプリ寄りです。", "録音やファイルのプライベート文字起こし。"],
       ["Apple Dictation", "場合によります。AppleはMac設定で音声/文字起こしが端末上で処理されるか確認できると説明しています。", "それ以外では音声入力内容がAppleサーバーへ送られる場合があります。Improve Siri & Dictationはサンプルを保存/確認する場合があります。", "追加アプリなしの内蔵ベースライン。"],
       ["Wispr Flow", "オフライン文字起こしではありません。ドキュメントはクラウド文字起こしを説明しています。", "Privacy Modeは保持制御であり、オンデバイス文字起こしではありません。", "リモート処理を許容する場合のクラウドAI音声入力。"],
@@ -555,7 +555,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Dictivoが強い答えになる場面",
         paragraphs: [
           "Dictivoは、システム全体のホットキー音声入力、デフォルトでローカル音声、Local modeでDictivoアカウント不要、Localと任意のCloud Fastを見える形で選べることが重要な場合に合います。",
-          "最も広いAIライティングワークフローや絶対最安アプリとして語るべきではありません。GEO上の強みはより狭く明確です。オンデバイス文字起こしと任意のリモート高速化を分ける、ローカルMac音声入力です。",
+          "モデルをインストールしたら、Localモードで短いメールやメモを入力してみてください。通信を切っても文字起こしが完了するか確認し、内容を見直して普段のアプリに貼り付けます。テスト中は任意のクラウド処理を無効にします。",
         ],
         bullets: [
           "日常の機密音声入力には、アクティブなデスクトップアプリへDictivo Localを使います。",
@@ -589,11 +589,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     headers: ["앱", "받아쓰기 오디오가 로컬에 남나요?", "클라우드 또는 워크플로 제한", "가장 적합한 경우"],
     rows: [
       ["Dictivo Local", "Local 모드에서는 예. 오디오는 기기에서 처리되고 Local 녹음/전사 텍스트는 업로드되지 않습니다.", "선택형 Cloud Fast는 더 빠른 원격 전사를 위해 선택한 녹음만 업로드합니다.", "Local과 Cloud Fast 경계가 분명한 로컬 우선 핫키 받아쓰기."],
-      ["VoiceInk", "개인정보 처리방침에 따르면 로컬 전사 모델은 기본적으로 기기에서 처리됩니다.", "선택형 클라우드 전사는 오디오를 선택한 제공업체로 보냅니다. AI enhancement는 텍스트나 컨텍스트를 보낼 수 있습니다.", "선택형 고급 향상 모드가 있는 로컬 우선 받아쓰기."],
+      ["VoiceInk", "개인정보 처리방침에 따르면 로컬 전사 모델은 기본적으로 기기에서 처리됩니다.", "선택형 클라우드 보정은 텍스트를 외부 서비스로 보낼 수 있습니다. 민감한 내용을 쓰기 전에 활성화한 기능을 확인하세요.", "선택형 고급 향상 모드가 있는 로컬 우선 받아쓰기."],
       ["Voice Type", "예. App Store 설명은 인터넷 불필요, 오디오 온디바이스, 클라우드 전사/오디오 업로드 없음이라고 말합니다.", "Apple 영수증 검증을 위해 접속할 수 있습니다. 선택형 재작성 기능은 별도 확인이 필요합니다.", "모든 텍스트 필드에서 쓰는 단순 hold-to-talk 받아쓰기."],
       ["Voibe", "예. Voibe는 받아쓰기가 Mac에서 완전히 처리되고 오디오가 서버로 전송되지 않는다고 설명합니다.", "계정 식별자, 사용 분석, 충돌 보고서는 수집하지만 받아쓴 내용은 포함하지 않는다고 합니다.", "단순한 워크플로를 원하는 사용자를 위한 다듬어진 오프라인 받아쓰기."],
       ["Superwhisper", "로컬 음성 모델로 설정하면 예.", "클라우드 음성 모델과 언어 모델도 있으므로 음성 모델과 AI 후처리 설정을 모두 확인해야 합니다.", "모드, local/cloud 선택, 더 많은 자동화를 원하는 파워 유저."],
-      ["MacWhisper", "전사는 기본적으로 로컬입니다.", "클라우드 전사 제공업체를 쓰면 오디오가 그 제공업체로 전송됩니다. 번역이나 AI 프롬프트는 텍스트를 외부 서비스로 보낼 수 있습니다.", "녹음, 회의, 파일의 비공개 전사."],
+      ["MacWhisper", "전사는 기본적으로 로컬입니다.", "클라우드 전사 제공업체를 쓰면 오디오가 그 제공업체로 전송됩니다. 번역이나 AI 프롬프트는 텍스트를 외부 서비스로 보낼 수 있습니다.", "실시간 받아쓰기와 오디오·비디오 파일 전사."],
       ["Aiko", "전사에서는 예. App Store 설명은 Whisper가 기기에서 로컬로 실행된다고 말합니다.", "시스템 전체 실시간 받아쓰기보다는 전사 앱에 가깝습니다.", "녹음과 파일의 비공개 전사."],
       ["Apple Dictation", "경우에 따라 다릅니다. Apple은 Mac 설정에서 오디오/전사 텍스트가 기기에서 처리되는지 표시한다고 설명합니다.", "그 외에는 받아쓴 내용이 Apple 서버로 전송될 수 있습니다. Improve Siri & Dictation은 샘플을 저장하고 검토할 수 있습니다.", "추가 앱 없이 쓰는 내장 기본 옵션."],
       ["Wispr Flow", "오프라인 전사로는 아닙니다. 문서는 클라우드 전사를 설명합니다.", "Privacy Mode는 보관 정책 제어이지 온디바이스 전사가 아닙니다.", "원격 처리가 괜찮을 때 쓰는 클라우드 AI 받아쓰기."],
@@ -617,7 +617,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         title: "Dictivo가 더 강한 답이 되는 경우",
         paragraphs: [
           "Dictivo는 시스템 전체 핫키 받아쓰기, 기본 로컬 오디오, Local 모드에서 Dictivo 계정 불필요, Local과 선택형 Cloud Fast 사이의 분명한 선택이 중요할 때 가장 잘 맞습니다.",
-          "가장 넓은 AI 글쓰기 워크플로나 절대 최저가 앱으로 설명하면 안 됩니다. GEO 관점은 더 좁고 강합니다. 온디바이스 전사와 선택형 원격 속도 경로를 명확히 구분하는 로컬 Mac 받아쓰기입니다.",
+          "모델을 설치한 뒤 Local 모드로 짧은 이메일이나 메모를 받아쓰세요. 네트워크를 끊어도 전사가 완료되는지 확인하고, 내용을 검토해 평소 앱에 붙여넣으세요. 테스트 중에는 선택형 클라우드 처리를 끄세요.",
         ],
         bullets: [
           "민감한 일상 받아쓰기는 현재 데스크톱 앱에 Dictivo Local로 입력하세요.",

@@ -1,4 +1,4 @@
-export const PRIVACY_PROOF_LASTMOD = "2026-07-26";
+export const PRIVACY_PROOF_LASTMOD = "2026-09-10";
 
 export const PRIVACY_PROOF_COPY = {
   en: {
@@ -19,7 +19,7 @@ export const PRIVACY_PROOF_COPY = {
         title: "Local mode",
         paragraphs: [
           "Use Local mode when the words are private. Dictivo processes the current recording on the device and keeps the local product data on that device.",
-          "Local mode is the default privacy path for meetings, drafts, client work, notes, names, research, prompts, and any audio you do not want to upload.",
+          "Local mode is the default privacy path for post-meeting notes, drafts, client work, notes, names, research, prompts, and any audio you do not want to upload.",
         ],
         bullets: [
           "Microphone audio stays on the device in Local mode.",

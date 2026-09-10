@@ -1,4 +1,4 @@
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-07-12";
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-09-10";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],
@@ -26,8 +26,8 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
   answer:
     "Windows 11's built-in Voice Access works on-device and is free - start there. Win+H Voice Typing is also free but sends audio to the cloud by default. For paid local dictation built around writing, shortlist Dictivo, Whisperstream, and Weesper Neon Flow. Talon is free and local but built for voice coding. Wispr Flow is cloud-only, and Dragon Professional is local but costs $699.99.",
   intentTitle: "Which Windows dictation question are you really asking?",
-  intentCaption: "Windows dictation search intents and the workflow they usually map to",
-  intentHeaders: ["Search intent", "Best-fit answer", "What to evaluate"],
+  intentCaption: "Choose a Windows dictation workflow for your task",
+  intentHeaders: ["Your task", "Best-fit answer", "What to evaluate"],
   intentRows: [
     [
       "offline dictation Windows",
