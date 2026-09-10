@@ -1,4 +1,12 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.46": Object.freeze({
+    title: "A heads-up before your update window closes, in your language.",
+    bullets: Object.freeze([
+      "Thirty days before the 12-month update window ends, Account & Billing says so and offers the renewal; after it ends, it says that too. Your version keeps working either way.",
+      "The Local side of Account & Billing is now in all ten display languages, not English behind a translated menu.",
+      "A renewed licence is shown as Dictivo Local (renewed). One price surface on the Cloud Fast screen instead of three.",
+    ]),
+  }),
   "0.3.45": Object.freeze({
     title: "Renewals can be bought, and they activate themselves.",
     bullets: Object.freeze([
