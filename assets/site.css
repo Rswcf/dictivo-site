@@ -666,6 +666,11 @@ main section[id] {
   object-fit: contain;
 }
 
+/* HTML video dimensions reserve space; CSS must scale both axes together. */
+.hero-film video {
+  height: auto;
+}
+
 .hero-video-poster[hidden],
 .hero-film video[hidden] {
   display: none;
@@ -3813,10 +3818,20 @@ main section[id] {
 .native-example img { display: block; width: 100%; height: auto; border: 1px solid var(--hairline); border-radius: 12px; }
 .native-example figcaption { margin-top: 12px; font-size: 12px; color: var(--muted); }
 
-.film-page { max-width: 1060px; }
-.film-page h1 { text-wrap: balance; }
+/* .doc-page centers its content with viewport-relative padding. Keep this
+   page full-width so that padding cannot consume a capped outer container. */
+.film-page {
+  width: 100%;
+  max-width: none;
+  padding-inline: max(20px, calc((100% - 1060px) / 2));
+  padding-top: clamp(112px, 14svh, 160px);
+}
+.film-page h1 {
+  font-size: clamp(38px, 5.4vw, 72px);
+  line-height: 1.05;
+  text-wrap: balance;
+}
 .film-watch { width: 100%; margin: 24px 0 18px; }
-.film-watch video { height: auto; }
 .film-chapters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 18px 0 28px; }
 .film-chapters a { padding: 12px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; line-height: 1.4; }
 .film-chapters a:hover { background: rgb(125 211 199 / 10%); }
