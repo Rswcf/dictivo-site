@@ -1,4 +1,4 @@
-export const FIRST_DICTATION_LASTMOD = "2026-09-10";
+export const FIRST_DICTATION_LASTMOD = "2026-09-11";
 export const FIRST_DICTATION_COPY = {
   en: {
     navLabel: "First dictation",

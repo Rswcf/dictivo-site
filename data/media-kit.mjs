@@ -1,4 +1,4 @@
-export const MEDIA_KIT_LASTMOD = "2026-09-10";
+export const MEDIA_KIT_LASTMOD = "2026-09-11";
 
 export const MEDIA_KIT_COPY = {
   navLabel: "Media kit",

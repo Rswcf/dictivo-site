@@ -25,6 +25,7 @@ import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
+import { NATIVE_DEMO } from "../data/native-demo.mjs";
 import {
   SPEECH_TO_TEXT_MAC_GUIDE_COPY,
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
@@ -2497,12 +2498,13 @@ function renderSchema(currentCode, t) {
     {
       "@context": "https://schema.org",
       "@type": "VideoObject",
-      name: "Dictivo product demo",
-      description: t.metaDescription,
-      thumbnailUrl: `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`,
-      uploadDate: "2026-05-21",
-      duration: "PT1M16S",
-      contentUrl: `${BASE_URL}/assets/dictivo-cinematic-demo.mp4`,
+      name: "Dictivo Local: native app walkthrough",
+      description: NATIVE_DEMO.summary.en,
+      inLanguage: "en",
+      thumbnailUrl: `${BASE_URL}${NATIVE_DEMO.poster}`,
+      uploadDate: "2026-09-11",
+      duration: "PT20S",
+      contentUrl: `${BASE_URL}${NATIVE_DEMO.video}`,
       embedUrl: `${pageUrl}#demo-video`,
     },
   ];
@@ -3344,6 +3346,19 @@ function firstDictationPath(code) {
   return `${code === "en" ? "" : `/${code}`}/guides/first-local-dictation/`;
 }
 
+function renderNativeExample(code = "en") {
+  const ja = code === "ja";
+  return `<section class="doc-section native-example" aria-labelledby="native-example-title">
+    <h2 id="native-example-title">${ja ? "実際のLocalの出力例" : "An actual Local result"}</h2>
+    <p>${html(NATIVE_DEMO.summary[code] || NATIVE_DEMO.summary.en)}</p>
+    <figure><a href="${NATIVE_DEMO.poster}"><img src="${NATIVE_DEMO.poster}" width="1161" height="768" loading="lazy" alt="${ja ? "Dictivo Localで英語のテスト文が表示された実際の画面" : "Actual Dictivo Local output of the English test sentence"}" /></a>
+    <figcaption>Dictivo 0.3.46 · macOS 26.3.1 · Apple M4 Pro / 48 GB · Large v3 · Balanced / Metal</figcaption></figure>
+    <p lang="en">“Please move our meeting to Thursday and send me the updated agenda.”</p>
+    <p>${ja ? "アプリ内の開始・停止ボタンを使用しました。この例は他のアプリへの自動貼り付けや、日本語の認識精度を示すものではありません。" : "The app’s Start and Stop buttons were used. This example does not demonstrate automatic paste into another app or establish accuracy for other voices or languages."}</p>
+    <p><a href="${NATIVE_DEMO.video}">${ja ? "20秒の手順映像（英語）" : "20-second walkthrough"}</a> · <a href="${NATIVE_DEMO.poster}" download>${ja ? "実際の画面をダウンロード" : "Download the actual screenshot"}</a> · <a href="${NATIVE_DEMO.notes}">${ja ? "テスト条件と制限（英語）" : "Test conditions and limitations"}</a></p>
+  </section>`;
+}
+
 function renderFirstDictationLink(code) {
   const copy = FIRST_DICTATION_COPY[code];
   return copy ? `<p class="first-dictation-link"><a href="${firstDictationPath(code)}">${html(copy.link)}</a></p>` : "";
@@ -3404,6 +3419,7 @@ function renderFirstDictationPage(code) {
         <p class="practice-status" role="status" aria-live="polite" data-practice-status data-cleared-message="${attr(c.cleared)}"></p>
       </section>
       <section class="doc-section" aria-labelledby="review-title"><h2 id="review-title">${html(c.successTitle)}</h2><p>${html(c.success)}</p></section>
+      ${renderNativeExample(code)}
       <section class="doc-section" aria-labelledby="fixes-title">
         <h2 id="fixes-title">${html(c.troubleTitle)}</h2>
         <div class="faq-grid">${c.fixes.map(([title, body]) => `<details class="faq-item"><summary><span class="faq-question">${html(title)}</span><span class="faq-toggle" aria-hidden="true">+</span></summary><div class="faq-answer"><p class="faq-answer-body">${html(body)}</p></div></details>`).join("\n")}</div>
@@ -4152,6 +4168,7 @@ function renderMediaKitPage() {
         <h2 id="media-kit-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
+      ${renderNativeExample("en")}
 
       <section class="doc-section" aria-labelledby="media-kit-facts">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -4303,12 +4320,13 @@ function renderHome(currentCode) {
 
           <figure class="hero-film" id="demo-video">
             <button class="hero-video-poster" type="button" aria-label="${attr(t.hero.play)}">
-              <img src="/assets/dictivo-demo-local-poster.jpg" alt="${attr(t.hero.posterAlt)}" width="1920" height="1080" />
+              <img src="${NATIVE_DEMO.poster}" alt="${attr(t.hero.posterAlt)}" width="1161" height="768" />
               <span class="hero-video-play">${html(t.hero.play)}</span>
             </button>
-            <video controls preload="none" poster="/assets/dictivo-demo-local-poster.jpg" playsinline hidden data-src="/assets/dictivo-cinematic-demo.mp4">
-              <track kind="captions" srclang="en" label="English" src="/assets/dictivo-cinematic-demo.en.vtt" default />
+            <video controls preload="none" poster="${NATIVE_DEMO.poster}" playsinline hidden data-src="${NATIVE_DEMO.video}">
+              <track kind="captions" srclang="en" label="English" src="${NATIVE_DEMO.captions}" default />
             </video>
+            <figcaption>${html(NATIVE_DEMO.summary[currentCode])} <a href="${mediaKitPath()}#native-example-title">Dictivo 0.3.46 · Large v3</a></figcaption>
           </figure>
 
           <div class="hero-support">
