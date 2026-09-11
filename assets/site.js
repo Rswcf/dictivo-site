@@ -303,13 +303,40 @@ const pageAttribution = readPageAttribution();
 
 // Carry only campaign metadata through a user-initiated internal navigation.
 // No visit id crosses pages; no cookie or browser storage is created. Keep the
-// static links clean for crawlers and leave checkout/external links untouched.
+// static links clean for crawlers. Checkout receives only a registered channel.
+function checkoutChannel(source) {
+  const value = String(source || "").toLowerCase();
+  const channels = ["google", "bing", "chatgpt", "perplexity", "claude", "gemini", "copilot", "reddit", "hackernews", "producthunt", "alternativeto", "setapp", "github", "x", "linkedin", "youtube", "tiktok", "instagram", "facebook", "threads", "newsletter", "email", "partner", "affiliate", "podcast", "directory", "qiita", "zenn", "note", "zhihu", "xiaohongshu", "bilibili", "wechat"];
+  if (channels.includes(value)) return value;
+  const hosts = {
+    "www.google.com": "google", "google.com": "google", "www.google.co.jp": "google",
+    "www.google.de": "google", "www.bing.com": "bing", "bing.com": "bing",
+    "chatgpt.com": "chatgpt", "chat.openai.com": "chatgpt", "www.perplexity.ai": "perplexity", "perplexity.ai": "perplexity",
+    "claude.ai": "claude", "gemini.google.com": "gemini", "copilot.microsoft.com": "copilot",
+    "www.reddit.com": "reddit", "reddit.com": "reddit", "old.reddit.com": "reddit",
+    "news.ycombinator.com": "hackernews", "hn": "hackernews", "producthunt.com": "producthunt", "www.producthunt.com": "producthunt",
+    "alternativeto.net": "alternativeto", "setapp.com": "setapp", "github.com": "github",
+    "twitter": "x", "twitter.com": "x", "x.com": "x", "t.co": "x",
+    "www.linkedin.com": "linkedin", "linkedin.com": "linkedin", "www.youtube.com": "youtube", "youtube.com": "youtube",
+    "qiita.com": "qiita", "zenn.dev": "zenn", "note.com": "note"
+  };
+  return Object.hasOwn(hosts, value) ? hosts[value] : null;
+}
+
 function carryCampaign(event) {
   if (event.defaultPrevented || !event.isTrusted) return;
   const link = event.target.closest?.("a[href]");
   if (!link || link.hasAttribute("download") || link.classList.contains("download-link")) return;
   const href = new URL(link.href, window.location.href);
   if (href.origin !== window.location.origin || !/^https?:$/.test(href.protocol)) return;
+  if (/^\/checkout\/(local|cloud-fast|local-renewal)\/?$/.test(href.pathname)) {
+    const channel = checkoutChannel(pageAttribution.source);
+    if (isPublicSite && channel && !href.searchParams.has("checkout[custom][channel]")) {
+      href.searchParams.set("checkout[custom][channel]", channel);
+      link.href = href.toString();
+    }
+    return;
+  }
   if (href.pathname === window.location.pathname || /^\/(checkout|download|downloads)\//.test(href.pathname)) return;
   if (!href.pathname.endsWith("/") && !href.pathname.endsWith(".html")) return;
   if (href.searchParams.has("utm_source") || pageAttribution.source === "direct") return;

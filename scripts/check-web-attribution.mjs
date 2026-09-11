@@ -76,11 +76,26 @@ assert.equal(organicNext.searchParams.get("utm_source"), "www.google.com");
 assert(!organicNext.href.includes("private"));
 assert.equal(loadPage(organicNext.href, organic.location.href).events[0].source, "www.google.com");
 
-for (const href of ["https://example.com/", "https://dictivo.app/checkout/local", "https://dictivo.app/download/mac", "https://dictivo.app/downloads.json", "mailto:support@dictivo.app", "https://dictivo.app/?utm_source=other#pricing"]) {
+for (const href of ["https://example.com/", "https://dictivo.app/download/mac", "https://dictivo.app/downloads.json", "mailto:support@dictivo.app", "https://dictivo.app/?utm_source=other#pricing"]) {
   const anchor = link(href);
   navigate(home, anchor);
   assert.equal(anchor.href, href, `Leave destination unchanged: ${href}`);
 }
+for (const product of ["local", "cloud-fast", "local-renewal"]) {
+  const checkout = navigate(home, link(`https://dictivo.app/checkout/${product}?checkout[custom][claim_nonce]=preserve&checkout[discount_code]=preserve`));
+  assert.equal(checkout.searchParams.get("checkout[custom][channel]"), "newsletter");
+  assert.equal(checkout.searchParams.get("checkout[custom][claim_nonce]"), "preserve");
+  assert.equal(checkout.searchParams.get("checkout[discount_code]"), "preserve");
+  assert.equal(checkout.searchParams.size, 3, "Send no raw UTM, search query, page id or practice text to checkout");
+}
+const googleCheckout = navigate(organic, link("https://dictivo.app/checkout/local"));
+assert.equal(googleCheckout.searchParams.get("checkout[custom][channel]"), "google");
+for (const source of ["direct", "buyer@example.com", "x".repeat(500), "constructor", "__proto__"]) {
+  const page = loadPage(`https://dictivo.app/?utm_source=${encodeURIComponent(source)}`);
+  assert.equal(navigate(page, link("https://dictivo.app/checkout/local")).search, "");
+}
+const previewCheckout = loadPage("https://preview.dictivo-app.pages.dev/?utm_source=reddit");
+assert.equal(navigate(previewCheckout, link("https://preview.dictivo-app.pages.dev/checkout/local")).search, "");
 const prevented = link("https://dictivo.app/about/");
 navigate(home, prevented, { defaultPrevented: true });
 assert.equal(prevented.href, "https://dictivo.app/about/");

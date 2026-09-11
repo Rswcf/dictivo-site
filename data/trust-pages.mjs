@@ -87,6 +87,7 @@ export const TRUST_PAGES = [
         title: "Purchases, licenses, and support",
         paragraphs: [
           "When you buy Dictivo, the checkout provider handles payment details, billing address, tax calculation, receipts, and payment security. Dictivo receives the information needed to issue and validate the license.",
+          "When you follow a recognized campaign or referral link, the website may pass a short source label, such as reddit or google, to checkout. We associate that label with payment events to understand which channels bring purchases. We do not pass dictation content, practice text, search queries, or website visit identifiers to checkout. This does not use cookies or browser storage; visits without a recognized source remain unattributed.",
           "If you email support, we use your message, email address, order reference, and related troubleshooting details only to answer the request and operate the customer relationship.",
         ],
         bullets: [
