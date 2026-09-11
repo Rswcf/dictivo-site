@@ -285,12 +285,19 @@ Required GitHub Actions secret:
 
 - `CLOUDFLARE_API_TOKEN` with Cloudflare Pages edit permission.
 - `CLOUDFLARE_ACCOUNT_ID` for the Cloudflare account that owns the Pages project.
-- `CLOUDFLARE_ZONE_ID` for the best-effort cache purge. If omitted, the purge
-  script falls back to resolving `dictivo.app` by name. Purge failure should be
-  repaired as operational hygiene, but fingerprinted CSS/JS paths prevent it
-  from serving stale application code after a deploy.
 - `DICTIVO_DESKTOP_TOKEN` is optional and only needed for manual/scheduled fallback syncs that must read the private
   desktop repo's GitHub Release API.
+
+Pages refreshes its deployment cache, and CSS/JS filenames include content hashes.
+The automatic zone-wide purge was removed on 2026-09-11 after repeated 401 responses;
+no extra zone permission is required for normal deployment. If stale content is actually
+observed, `scripts/purge-cloudflare-cache.mjs` remains a manual diagnostic action with
+a suitable zone token. See [Cloudflare's caching guidance](https://developers.cloudflare.com/pages/configuration/serving-pages/#caching-and-performance).
+
+IndexNow verifies that its ownership text file is publicly readable before submission.
+HTTP 200 means accepted and 202 means key validation pending; neither proves indexing.
+Other responses are reported as failures even though an indexing service outage does
+not roll back a successful website deployment.
 
 ## Download hosting
 

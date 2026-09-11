@@ -2246,7 +2246,6 @@ function assetTags() {
   return `
     <meta name="google-site-verification" content="${attr(GOOGLE_SITE_VERIFICATION)}" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="/assets/dictivo-demo-local-poster.jpg" />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
@@ -2267,7 +2266,7 @@ const OG_LOCALE_BY_HTML_LANG = {
 };
 
 function socialMeta({ title, description, url, htmlLang = "en", type = "website" }) {
-  const image = `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`;
+  const image = `${BASE_URL}${NATIVE_DEMO.poster}`;
   const ogLocale = OG_LOCALE_BY_HTML_LANG[htmlLang] || "en_US";
   return [
     `<meta property="og:site_name" content="Dictivo" />`,
@@ -2277,8 +2276,8 @@ function socialMeta({ title, description, url, htmlLang = "en", type = "website"
     `<meta property="og:type" content="${attr(type)}" />`,
     `<meta property="og:url" content="${attr(url)}" />`,
     `<meta property="og:image" content="${image}" />`,
-    `<meta property="og:image:width" content="1920" />`,
-    `<meta property="og:image:height" content="1080" />`,
+    `<meta property="og:image:width" content="1161" />`,
+    `<meta property="og:image:height" content="768" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${attr(title)}" />`,
     `<meta name="twitter:description" content="${attr(description)}" />`,
@@ -2466,8 +2465,8 @@ function renderSchema(currentCode, t) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
-      image: `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`,
-      screenshot: `${BASE_URL}/assets/ui/04-dictation-transcript.png`,
+      image: `${BASE_URL}${NATIVE_DEMO.poster}`,
+      screenshot: `${BASE_URL}${NATIVE_DEMO.poster}`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: pageUrl,
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
@@ -2592,8 +2591,8 @@ function renderCompareSchema(page, currentCode) {
       "@type": "SoftwareApplication",
       name: "Dictivo",
       applicationCategory: "BusinessApplication",
-      image: `${BASE_URL}/assets/dictivo-demo-local-poster.jpg`,
-      screenshot: `${BASE_URL}/assets/ui/04-dictation-transcript.png`,
+      image: `${BASE_URL}${NATIVE_DEMO.poster}`,
+      screenshot: `${BASE_URL}${NATIVE_DEMO.poster}`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
       url: BASE_URL,
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
@@ -4320,7 +4319,7 @@ function renderHome(currentCode) {
 
           <figure class="hero-film" id="demo-video">
             <button class="hero-video-poster" type="button" aria-label="${attr(t.hero.play)}">
-              <img src="${NATIVE_DEMO.poster}" alt="${attr(t.hero.posterAlt)}" width="1161" height="768" />
+              <img src="${NATIVE_DEMO.poster}" alt="${attr(t.hero.posterAlt)}" fetchpriority="high" width="1161" height="768" />
               <span class="hero-video-play">${html(t.hero.play)}</span>
             </button>
             <video controls preload="none" poster="${NATIVE_DEMO.poster}" playsinline hidden data-src="${NATIVE_DEMO.video}">
@@ -6029,6 +6028,7 @@ mkdirSync(outDir, { recursive: true });
 copyStatic("assets");
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
+copyFileSync(resolve(root, "a466589ed8677749e2b7fdd18c7ddcf6.txt"), resolve(outDir, "a466589ed8677749e2b7fdd18c7ddcf6.txt"));
 copyFileSync(resolve(root, "c5df5e411109537ea4eeadaf411f6618.txt"), resolve(outDir, "c5df5e411109537ea4eeadaf411f6618.txt"));
 copyFileSync(resolve(root, "BingSiteAuth.xml"), resolve(outDir, "BingSiteAuth.xml"));
 copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));
