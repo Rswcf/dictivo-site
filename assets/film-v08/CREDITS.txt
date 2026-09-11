@@ -1,0 +1,29 @@
+Dictivo — Keep your flow. (35 seconds, 2026-09-11)
+
+Human speech recordings
+Yamagishi, Junichi; Veaux, Christophe; MacDonald, Kirsten. (2019).
+CSTR VCTK Corpus: English Multi-speaker Corpus for CSTR Voice Cloning Toolkit
+(version 0.92). University of Edinburgh, Centre for Speech Technology Research.
+Copyright (c) 2019 Junichi Yamagishi.
+https://doi.org/10.7488/ds/2645
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+Full license: VCTK-license.txt in this directory.
+
+Recordings: p225_156_mic1.flac and p225_103_mic1.flac.
+Original human recordings, not synthesized speech or cloned voices.
+Changes: decoded to WAV, gain adjusted, gently compressed and mixed with music.
+No change to the spoken words, human voice speed or pitch. No endorsement.
+
+Music and brand narration are AI-generated, separate from the human recordings.
+Music: Lyria 2. Brand narration: Eleven v3, requested voice Aria.
+Motion graphics, 3D brand assets and editing: Dictivo marketing project.
+
+The displayed transcripts were produced by Local and Cloud Fast processing of
+these recordings. The film presents those results in a designed interface with
+shortened waits; it is not a continuous screen recording or a speed/comparative
+accuracy benchmark. Scene titles are illustrative. Local keeps dictation audio
+on-device after setup; Cloud Fast uploads the selected audio for transcription.
+
+Reuse with this attribution, the license link, change notice and no-endorsement
+notice included in the accompanying description or page.

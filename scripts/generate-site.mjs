@@ -26,6 +26,7 @@ import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
+import { PRODUCT_FILM, FILM_COPY, FILM_CHAPTERS } from "../data/product-film.mjs";
 import {
   SPEECH_TO_TEXT_MAC_GUIDE_COPY,
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
@@ -2265,8 +2266,8 @@ const OG_LOCALE_BY_HTML_LANG = {
   ko: "ko_KR",
 };
 
-function socialMeta({ title, description, url, htmlLang = "en", type = "website" }) {
-  const image = `${BASE_URL}${NATIVE_DEMO.poster}`;
+function socialMeta({ title, description, url, htmlLang = "en", type = "website", imagePath = NATIVE_DEMO.poster, imageWidth = 1161, imageHeight = 768 }) {
+  const image = `${BASE_URL}${imagePath}`;
   const ogLocale = OG_LOCALE_BY_HTML_LANG[htmlLang] || "en_US";
   return [
     `<meta property="og:site_name" content="Dictivo" />`,
@@ -2276,8 +2277,8 @@ function socialMeta({ title, description, url, htmlLang = "en", type = "website"
     `<meta property="og:type" content="${attr(type)}" />`,
     `<meta property="og:url" content="${attr(url)}" />`,
     `<meta property="og:image" content="${image}" />`,
-    `<meta property="og:image:width" content="1161" />`,
-    `<meta property="og:image:height" content="768" />`,
+    `<meta property="og:image:width" content="${imageWidth}" />`,
+    `<meta property="og:image:height" content="${imageHeight}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${attr(title)}" />`,
     `<meta name="twitter:description" content="${attr(description)}" />`,
@@ -2494,18 +2495,7 @@ function renderSchema(currentCode, t) {
       "@type": "FAQPage",
       mainEntity: faqEntities,
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "VideoObject",
-      name: "Dictivo Local: native app walkthrough",
-      description: NATIVE_DEMO.summary.en,
-      inLanguage: "en",
-      thumbnailUrl: `${BASE_URL}${NATIVE_DEMO.poster}`,
-      uploadDate: "2026-09-11",
-      duration: "PT20S",
-      contentUrl: `${BASE_URL}${NATIVE_DEMO.video}`,
-      embedUrl: `${pageUrl}#demo-video`,
-    },
+    productFilmSchema(),
   ];
 
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
@@ -4137,6 +4127,73 @@ ${copy.linkRows
           </div>`;
 }
 
+function productFilmSchema() {
+  return {
+    "@context": "https://schema.org", "@type": "VideoObject", "@id": `${BASE_URL}/demo/#film`,
+    name: PRODUCT_FILM.name, description: PRODUCT_FILM.description,
+    inLanguage: "en", thumbnailUrl: `${BASE_URL}${PRODUCT_FILM.poster}`,
+    uploadDate: PRODUCT_FILM.lastmod, duration: PRODUCT_FILM.duration,
+    contentUrl: `${BASE_URL}${PRODUCT_FILM.video}`, url: `${BASE_URL}${PRODUCT_FILM.path}`,
+    hasPart: FILM_CHAPTERS.map(c => ({ "@type": "Clip", name: c.title, startOffset: c.start, endOffset: c.end, url: `${BASE_URL}/demo/?t=${c.start}` })),
+  };
+}
+
+function productFilmTracks(code = "en") {
+  return `<track kind="captions" srclang="en" label="English" src="${PRODUCT_FILM.captions}"${code === "zh" ? "" : " default"} />
+    <track kind="subtitles" srclang="zh-CN" label="简体中文" src="${PRODUCT_FILM.chinese}"${code === "zh" ? " default" : ""} />`;
+}
+
+function renderProductFilmPage() {
+  const t = homeCopyForRender("en");
+  const title = "Watch Dictivo: Your Voice, On Your Device | 35-Second Demo";
+  const url = `${BASE_URL}${PRODUCT_FILM.path}`;
+  const schema = [productFilmSchema(), { "@context": "https://schema.org", "@type": "WebPage", url, name: title, description: PRODUCT_FILM.description, inLanguage: "en", mainEntity: { "@id": `${BASE_URL}/demo/#film` } }];
+  return `<!doctype html><html lang="en"><head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(title)}</title><meta name="description" content="${attr(PRODUCT_FILM.description)}" />
+    <meta name="theme-color" content="#0a1110" /><link rel="canonical" href="${url}" />
+    <link rel="alternate" hreflang="en" href="${url}" /><link rel="alternate" hreflang="x-default" href="${url}" />
+    ${socialMeta({ title, description: PRODUCT_FILM.description, url, imagePath: PRODUCT_FILM.poster, imageWidth: 1600, imageHeight: 900 })}
+    ${assetTags()}<script type="application/ld+json">${JSON.stringify(schema)}</script>
+  </head><body>
+    <a class="skip-link" href="#film">Watch the film</a>
+    ${renderHeader("en", t, { hrefForLocale: item => item.code === "en" ? PRODUCT_FILM.path : localePath(item.code) })}
+    <main class="doc-page film-page" id="film">
+      <span class="doc-eyebrow">Dictivo · 35-second product film</span>
+      <h1>Your voice. On your device.</h1>
+      <p class="doc-lede">Turn a thought into words. Keep your audio local. Choose Cloud Fast when it suits your work.</p>
+      <figure class="hero-film film-watch">
+        <video id="product-film" controls playsinline preload="none" poster="${PRODUCT_FILM.poster}" src="${PRODUCT_FILM.video}" width="1920" height="1080" aria-label="Dictivo — Keep your flow, 35-second product film">
+          ${productFilmTracks()}<p><a href="${PRODUCT_FILM.video}">Download the film</a></p>
+        </video>
+        <figcaption>English audio · English and Chinese subtitles · <a href="${PRODUCT_FILM.credits}">Human recordings: CSTR VCTK · CC BY 4.0</a></figcaption>
+      </figure>
+      <nav class="film-chapters" aria-label="Film chapters">${FILM_CHAPTERS.map(c => `<a href="?t=${c.start}" data-film-time="${c.start}"><span>${Math.floor(c.start / 60)}:${String(c.start % 60).padStart(2, "0")}</span> ${html(c.title)}</a>`).join("")}</nav>
+      <div class="compare-intro-actions">
+        <a class="button button-light download-link" href="${attr(downloadUrl("macos", "film_mac"))}"${downloadData("macos", "film_mac")}>${html(t.hero.download)}</a>
+        ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "film_windows"))}"${downloadData("windows", "film_windows")}>Download for Windows</a>` : ""}
+      </div>
+      <p class="compare-trial">${html(HOME_CONVERSION_COPY.en.trial)}</p>
+      <p><a href="/guides/first-local-dictation/">Try your first spoken draft</a> · <a href="/#pricing">See pricing</a></p>
+      <section class="doc-section" aria-labelledby="film-story"><h2 id="film-story">In the film</h2>
+        ${FILM_CHAPTERS.map(c => `<h3>${html(c.title)}</h3><p>${html(c.description)}</p>`).join("")}
+      </section>
+      <section class="doc-section" aria-labelledby="film-transcript"><h2 id="film-transcript">Spoken transcript</h2>
+        <ol class="film-transcript"><li><time>0:02</time> Say it.</li><li><time>0:04</time> I would like to see the figures for the second quarter.</li><li><time>0:09</time> Make it happen.</li><li><time>0:13</time> Your voice. On your device.</li><li><time>0:21</time> Everyone deserves to share in this success.</li><li><time>0:32</time> Keep your flow.</li></ol>
+      </section>
+      <section class="doc-section" aria-labelledby="film-details"><h2 id="film-details">About this demonstration</h2>
+        <p>The two dictation examples use original human recordings. Their displayed text comes from actual Local and Cloud Fast transcription. The film presents those results in a designed interface with shortened waits. Scene titles illustrate use cases; this is a product film, not a continuous screen recording or an accuracy comparison.</p>
+        <p>Local processes dictation audio on your computer after a model is installed. Cloud Fast uploads the recording you choose for cloud transcription. <a href="/privacy/where-dictation-audio-goes/">See how each mode handles audio</a>.</p>
+        <p>Human recordings: CSTR VCTK v0.92, Yamagishi, Veaux and MacDonald (2019), University of Edinburgh. © 2019 Junichi Yamagishi. <a href="https://doi.org/10.7488/ds/2645">Recording collection</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Decoded to WAV, gain adjusted, gently compressed and mixed with music. No change to the words, voice speed or pitch. No endorsement. Music and brand narration are AI-generated.</p>
+        <p><a href="${PRODUCT_FILM.credits}">Full film credits</a> · <a href="/media-kit/#native-example-title">Actual app captures and test conditions</a></p>
+      </section>
+      <section class="doc-section" aria-labelledby="film-downloads"><h2 id="film-downloads">Download the film</h2>
+        <p><a href="${PRODUCT_FILM.video}" download>1080p film · 3.7 MB</a> · <a href="${PRODUCT_FILM.master}" download>4K film · 10.2 MB</a> · <a href="${PRODUCT_FILM.captions}" download>English captions</a> · <a href="${PRODUCT_FILM.chinese}" download>Chinese subtitles</a></p>
+        <p>When sharing the film, include the <a href="${PRODUCT_FILM.credits}">recording attribution and license</a> in the accompanying description.</p>
+      </section>
+    </main>${renderFooterOnly("en")}</body></html>`;
+}
+
 function renderMediaKitPage() {
   const copy = MEDIA_KIT_COPY;
   const t = homeCopyForRender("en");
@@ -4167,6 +4224,7 @@ function renderMediaKitPage() {
         <h2 id="media-kit-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
+      <section class="doc-section" aria-labelledby="product-film-title"><h2 id="product-film-title">Product film: Keep your flow</h2><p>35 seconds. Local privacy, optional Cloud Fast, and real human dictation recordings.</p><p><a href="${PRODUCT_FILM.path}">Watch the film and read the transcript</a> · <a href="${PRODUCT_FILM.master}" download>Download 4K</a> · <a href="${PRODUCT_FILM.credits}">Film credits and reuse attribution</a></p></section>
       ${renderNativeExample("en")}
 
       <section class="doc-section" aria-labelledby="media-kit-facts">
@@ -4318,14 +4376,15 @@ function renderHome(currentCode) {
           </div>
 
           <figure class="hero-film" id="demo-video">
-            <button class="hero-video-poster" type="button" aria-label="${attr(t.hero.play)}">
-              <img src="${NATIVE_DEMO.poster}" alt="${attr(t.hero.posterAlt)}" fetchpriority="high" width="1161" height="768" />
-              <span class="hero-video-play">${html(t.hero.play)}</span>
+            <button class="hero-video-poster" type="button" hidden aria-label="${attr(FILM_COPY[currentCode].play)}">
+              <img src="${PRODUCT_FILM.poster}" alt="${attr(FILM_COPY[currentCode].alt)}" fetchpriority="high" width="1600" height="900" />
+              <span class="hero-video-play">${html(FILM_COPY[currentCode].play)}</span>
             </button>
-            <video controls preload="none" poster="${NATIVE_DEMO.poster}" playsinline hidden data-src="${NATIVE_DEMO.video}">
-              <track kind="captions" srclang="en" label="English" src="${NATIVE_DEMO.captions}" default />
+            <video controls preload="none" poster="${PRODUCT_FILM.poster}" playsinline src="${PRODUCT_FILM.video}" width="1920" height="1080" tabindex="0" aria-label="${attr(FILM_COPY[currentCode].play)}">
+              ${productFilmTracks(currentCode)}
+              <p><a href="${PRODUCT_FILM.video}">${html(FILM_COPY[currentCode].play)}</a></p>
             </video>
-            <figcaption>${html(NATIVE_DEMO.summary[currentCode])} <a href="${mediaKitPath()}#native-example-title">Dictivo 0.3.46 · Large v3</a></figcaption>
+            <figcaption>${html(FILM_COPY[currentCode].summary)} <a href="${PRODUCT_FILM.path}">${html(FILM_COPY[currentCode].link)}</a><br><a href="${PRODUCT_FILM.credits}">${html(FILM_COPY[currentCode].credit)}</a></figcaption>
           </figure>
 
           <div class="hero-support">
@@ -5172,6 +5231,7 @@ function renderLlmsTxt(currentCode = "en") {
     hasWindowsRelease && copy.windowsFacts ? [...copy.windowsFacts, ...copy.facts.slice(2)] : copy.facts;
   const pages = [
     [copy.pageLabels.home, localeUrl(currentCode)],
+    [FILM_COPY[currentCode].link, `${BASE_URL}${PRODUCT_FILM.path}`],
     [copy.pageLabels.pricing, `${localeUrl(currentCode)}#pricing`],
     [copy.pageLabels.privacy, `${localeUrl(currentCode)}#privacy`],
     [copy.pageLabels.cloudFast, `${localeUrl(currentCode)}#cloud-fast`],
@@ -5550,7 +5610,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${[release.updatedAt, HOME_CONVERSION_LASTMOD].sort().at(-1)}</lastmod>
+    <lastmod>${[release.updatedAt, HOME_CONVERSION_LASTMOD, PRODUCT_FILM.lastmod].sort().at(-1)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
@@ -5677,6 +5737,7 @@ ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
 ${offlineDictationWindowsGuideEntry}
 ${mediaKitEntry}
+  <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
     <loc>${BASE_URL}${firstDictationPath(code)}</loc>
     <lastmod>${FIRST_DICTATION_LASTMOD}</lastmod>
@@ -6049,6 +6110,7 @@ write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodG
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write("media-kit/index.html", renderMediaKitPage());
+write("demo/index.html", renderProductFilmPage());
 for (const code of Object.keys(FIRST_DICTATION_COPY)) write(`${firstDictationPath(code).slice(1)}index.html`, renderFirstDictationPage(code));
 
 for (const locale of LOCALES) {

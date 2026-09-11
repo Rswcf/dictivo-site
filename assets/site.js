@@ -1,10 +1,13 @@
 document.querySelectorAll(".hero-film").forEach((film) => {
   const posterButton = film.querySelector(".hero-video-poster");
-  const video = film.querySelector("video[data-src]");
+  const video = film.querySelector("video");
 
   if (!posterButton || !video) {
     return;
   }
+
+  posterButton.hidden = false;
+  video.hidden = true;
 
   posterButton.addEventListener("click", () => {
     if (!video.getAttribute("src")) {
@@ -391,4 +394,48 @@ if (reveals.length && !prefersReducedMotion && "IntersectionObserver" in window)
   reveals.forEach((el) => io.observe(el));
 } else {
   reveals.forEach((el) => el.classList.add("is-in"));
+}
+
+// The dedicated film page keeps a native player even when JavaScript is disabled.
+const productFilm = document.querySelector('#product-film');
+if (productFilm) {
+  let chapterRequest = 0;
+  async function seekFilm(seconds, play) {
+    const request = ++chapterRequest;
+    if (!Number.isFinite(seconds) || seconds < 0 || seconds >= 35) return;
+    try {
+      if (productFilm.readyState < 1) {
+        await new Promise((resolve, reject) => {
+          const cleanup = () => { productFilm.removeEventListener('loadedmetadata', ready); productFilm.removeEventListener('error', failed); };
+          const ready = () => { cleanup(); resolve(); };
+          const failed = () => { cleanup(); reject(new Error('Media unavailable')); };
+          productFilm.addEventListener('loadedmetadata', ready, { once: true });
+          productFilm.addEventListener('error', failed, { once: true });
+          productFilm.preload = 'metadata';
+          productFilm.load();
+        });
+      }
+      if (request !== chapterRequest) return;
+      productFilm.currentTime = Math.min(seconds, productFilm.duration - .05);
+      if (play) {
+        productFilm.focus({ preventScroll: true });
+        await productFilm.play();
+      }
+    } catch {
+      productFilm.focus({ preventScroll: true });
+    }
+  }
+  const initialTime = new URL(location.href).searchParams.get('t');
+  if (initialTime !== null) void seekFilm(Number(initialTime), false);
+  document.querySelectorAll('[data-film-time]').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const seconds = Number(link.dataset.filmTime);
+      const url = new URL(location.href); url.searchParams.set('t', String(seconds));
+      history.pushState(null, '', url);
+      void seekFilm(seconds, true);
+    });
+  });
+  window.addEventListener('popstate', () => void seekFilm(Number(new URL(location.href).searchParams.get('t') || 0), false));
 }

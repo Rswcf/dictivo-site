@@ -72,6 +72,9 @@ jobs:
       - name: Check website attribution
         run: node scripts/check-web-attribution.mjs
 
+      - name: Check product film delivery
+        run: node scripts/check-product-film.mjs
+
       - name: Fingerprint CSS and JavaScript assets
         run: node scripts/inject-asset-version.mjs
 

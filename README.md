@@ -268,10 +268,11 @@ node scripts/check-release-payload-sync.mjs
 node scripts/check-asset-version.mjs
 node scripts/check-public-output.mjs
 node scripts/check-web-attribution.mjs
+node scripts/check-product-film.mjs
 node scripts/inject-asset-version.mjs
 ```
 
-The seven check steps are blocking: any one of them fails the deploy before `dist/` reaches
+The eight check steps are blocking: any one of them fails the deploy before `dist/` reaches
 Cloudflare. `scripts/check-public-output.mjs` is the broadest of them - it scans every generated
 text file in `dist/` against a forbidden-content list, so vendor and implementation names must
 never reach public output.
@@ -457,3 +458,22 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 - Cloudflare Pages direct upload limits: https://developers.cloudflare.com/pages/get-started/direct-upload/
 - Cloudflare Pages redirects: https://developers.cloudflare.com/pages/configuration/redirects/
 - Cloudflare R2 public buckets and custom domains: https://developers.cloudflare.com/r2/buckets/public-buckets/
+
+## Product film
+
+`data/product-film.mjs` is the metadata and localization source for the 35-second
+film on all ten homepages and `/demo/`. The watch page includes native playback,
+English captions, Chinese subtitles, chapter URLs (`/demo/?t=12`), a spoken
+transcript, clear Local/Cloud audio boundaries, and recording attribution.
+Homepage playback uses a static video `src` with `preload="none"`; JavaScript
+enhances the poster button, while a native player remains usable without it.
+The 4K file is a download option, not the default player source.
+
+Retain the original native-app evidence at `/media-kit/#native-example-title`.
+The commercial film is a designed presentation of actual file transcriptions,
+not a replacement for continuous screen-capture evidence. Keep recording credits
+and CC BY 4.0 license links with every publication of the film.
+
+Run `node scripts/check-product-film.mjs` after generation. Test chapter links
+with a preview server that supports HTTP byte ranges (plain Python http.server
+does not); production must return 206 to valid video Range requests.
