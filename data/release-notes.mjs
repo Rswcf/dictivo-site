@@ -1,4 +1,12 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.47": Object.freeze({
+    title: "A clearer first dictation test, with time to finish speaking.",
+    bullets: Object.freeze([
+      "The first-run test now follows your chosen toggle or hold-to-talk shortcut instead of stopping after 2.5 seconds. A Stop test button and a 30-second limit keep you in control.",
+      "An empty transcript no longer counts as a successful test. Microphone, model and shortcut problems have separate recovery instructions.",
+      "Retrying, skipping or leaving the test now closes its microphone session, including when a permission request finishes late.",
+    ]),
+  }),
   "0.3.46": Object.freeze({
     title: "A heads-up before your update window closes, in your language.",
     bullets: Object.freeze([
