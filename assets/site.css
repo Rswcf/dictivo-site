@@ -3843,3 +3843,4 @@ main section[id] {
 
 .evidence-audio { display: block; width: 100%; max-width: 680px; margin: 24px 0; }
 #human-speech-example .compare-table { min-width: 640px; }
+.evidence-transcript { margin: 20px 0; padding: 4px 20px; border-left: 2px solid var(--hairline); }

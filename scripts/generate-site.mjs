@@ -3534,6 +3534,7 @@ ${BENCHMARK_METHOD_GUIDE_REFERENCES.map(
 
 function renderLocalSpeechEvidence() {
   const c = LOCAL_SPEECH_EVIDENCE;
+  const evidenceText = (name) => readFileSync(resolve(root, c.root.slice(1), name), "utf8").replace(/\s+/g, " ").trim();
   return `<section class="doc-section" id="human-speech-example" aria-labelledby="human-speech-title">
         <p class="doc-meta">Human speech · Measured ${html(c.lastmod)}</p>
         <h2 id="human-speech-title">${html(c.title)}</h2>
@@ -3545,6 +3546,9 @@ function renderLocalSpeechEvidence() {
         <p>${html(c.environment)}</p>
         ${renderBenchmarkMethodTable(c.caption, c.headers, c.rows)}
         <p>${html(c.result)}</p>
+        <h3>Actual output from both local models</h3>
+        <blockquote class="evidence-transcript"><p>${html(evidenceText("small-output.txt"))}</p></blockquote>
+        <details><summary>Compare with the reference text</summary><p>${html(evidenceText("reference.txt"))}</p></details>
         <p><a href="${c.root}/reference.txt">Read the reference</a> · <a href="${c.root}/small-output.txt">Small output</a> · <a href="${c.root}/turbo-output.txt">Turbo Q5 output</a></p>
         <p>${html(c.scope)}</p>
         <p><a href="${c.root}/evidence.zip" download>Download input, every run, hashes and reproduction steps (2.5 MB ZIP)</a> · <a href="${c.root}/results.json">Machine-readable results</a></p>
