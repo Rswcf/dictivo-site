@@ -23,6 +23,7 @@ import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
+import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
@@ -2724,7 +2725,7 @@ function renderCompareFaq(page, copy) {
   const faqs = localizedCompareFaqs(page, copy);
   return `<section class="compare-section compare-faq-section" id="faq" aria-labelledby="compare-faq-title">
             <p class="doc-meta">${html(copy.faqKicker)}</p>
-            <h2 id="compare-faq-title">${html(copy.faqTitle)}</h2>
+            <h2 id="compare-faq-title">${html(trustUiCopy(copy.locale || "en").faqTitle)}</h2>
             <div class="compare-faq-list">
 ${faqs
   .map(
@@ -2741,6 +2742,21 @@ ${faqs
   )
   .join("\n")}
             </div>
+          </section>`;
+}
+
+function renderCompareSources(page, currentCode) {
+  const copy = COMPARISON_EVIDENCE_COPY[currentCode];
+  return `<section class="compare-section" aria-labelledby="compare-sources-title">
+            <h2 id="compare-sources-title">${html(copy.title)}</h2>
+            <p>${html(copy.disclosure)}</p>
+            <ul class="compare-source-list">
+${page.sources.map(url => {
+  const kind = COMPARISON_SOURCE_KINDS[url];
+  if (!kind || !copy.kinds[kind]) throw new Error(`Missing comparison source label: ${currentCode} ${url}`);
+  return `              <li><a href="${attr(url)}">${html(page.competitor)} · ${html(copy.kinds[kind])}</a></li>`;
+}).join("\n")}
+            </ul>
           </section>`;
 }
 
@@ -2810,6 +2826,8 @@ function renderComparePage(page, currentCode = "en") {
       ${sections.map(renderCompareSection).join("\n\n      ")}
 
       ${renderCompareFaq(page, copy)}
+
+      ${renderCompareSources(page, currentCode)}
 
       ${renderCompareCta(page, currentCode, copy)}
     </main>
@@ -4132,7 +4150,7 @@ function productFilmSchema() {
     "@context": "https://schema.org", "@type": "VideoObject", "@id": `${BASE_URL}/demo/#film`,
     name: PRODUCT_FILM.name, description: PRODUCT_FILM.description,
     inLanguage: "en", thumbnailUrl: `${BASE_URL}${PRODUCT_FILM.poster}`,
-    uploadDate: PRODUCT_FILM.lastmod, duration: PRODUCT_FILM.duration,
+    uploadDate: PRODUCT_FILM.uploadedAt, duration: PRODUCT_FILM.duration,
     contentUrl: `${BASE_URL}${PRODUCT_FILM.video}`, url: `${BASE_URL}${PRODUCT_FILM.path}`,
     hasPart: FILM_CHAPTERS.map(c => ({ "@type": "Clip", name: c.title, startOffset: c.start, endOffset: c.end, url: `${BASE_URL}/demo/?t=${c.start}` })),
   };

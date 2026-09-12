@@ -1,4 +1,4 @@
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-10";
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-12";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
@@ -6,9 +6,15 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo Mac model guide", "https://dictivo.app/mac-model-guide/"],
   ["Dictivo audio path", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
   ["Dictivo privacy proof", "https://dictivo.app/privacy-proof/"],
-  ["Wispr Flow alternative", "https://dictivo.app/compare/wispr-flow-alternative/"],
-  ["Superwhisper alternative", "https://dictivo.app/compare/superwhisper-alternative/"],
-  ["MacWhisper alternative", "https://dictivo.app/compare/macwhisper-alternative/"],
+  ["Superwhisper local and cloud models", "https://superwhisper.com/models"],
+  ["Wispr Flow data controls", "https://wisprflow.ai/data-controls"],
+  ["MacWhisper dictation and file transcription", "https://www.macwhisper.com/"],
+  ["MacWhisper privacy and optional cloud features", "https://docs.macwhisper.com/article/52-keeping-transcriptions-private"],
+  ["VoiceInk privacy and optional cloud services", "https://tryvoiceink.com/privacy"],
+  ["Voice Type App Store listing", "https://apps.apple.com/us/app/voice-type-offline-dictation/id6736525125?mt=12"],
+  ["Voibe on-device and cloud modes", "https://www.getvoibe.com/security/"],
+  ["Aiko App Store listing", "https://apps.apple.com/ga/app/aiko/id1672085276?l=en-GB&platform=mac"],
+  ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
 ];
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
@@ -22,7 +28,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     "The best Mac speech-to-text app depends on what you are trying to replace: live typing, recorded-file transcription, cloud AI rewriting, or the built-in macOS dictation path.",
   answerTitle: "Short answer",
   answer:
-    "For private live dictation on Mac, start with Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, or Voibe. MacWhisper offers live dictation as well as file transcription; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow. For a free baseline, test Apple Dictation before paying for a dedicated app.",
+    "For private live dictation on Mac, start with Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, or Voibe in On-Device Mode. MacWhisper offers live dictation as well as file transcription; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow. For a free baseline, test Apple Dictation before paying for a dedicated app.",
   intentTitle: "Which type of speech-to-text app do you need?",
   intentCaption: "Mac speech-to-text workflows and the page or product category they usually map to",
   intentHeaders: ["Your task", "Best-fit workflow", "What to evaluate"],
@@ -84,7 +90,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     [
       "VoiceInk, Voice Type, and Voibe",
       "Local-first Mac dictation alternatives.",
-      "Each product has its own cloud, enhancement, analytics, and support boundaries.",
+      "Check each app’s mode and optional cloud features; Voibe uses cloud transcription on Intel Macs.",
       "Choose them when you want a narrower local dictation app and are comparing UX, price, and support style.",
     ],
     [
@@ -95,6 +101,15 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     ],
   ],
   sections: [
+    {
+      kicker: "How to use this guide",
+      title: "What this comparison does and does not measure",
+      paragraphs: [
+        "This guide is written by Dictivo. It groups products by task, processing location, platform fit, and purchase model using the public product documentation linked below. It is a shortlist, not a scored ranking or an independent accuracy benchmark.",
+        "For a useful trial, dictate the same short email and a paragraph from your own work in each app. Include names or specialist terms you use, and compare corrections, time from stopping to usable text, and whether insertion works in your usual app. Repeat with the local or cloud settings you would actually use.",
+        "The linked Dictivo benchmark documents one hardware and audio setup. It does not establish that Dictivo is faster or more accurate than every app listed here.",
+      ],
+    },
     {
       kicker: "Decision rule",
       title: "Start with workflow, not brand names",
@@ -153,7 +168,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
   faqs: [
     [
       "What is the best speech-to-text app for Mac?",
-      "For live private dictation, shortlist Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, and Voibe. MacWhisper supports both live dictation and audio/video files; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow.",
+      "For live private dictation, shortlist Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, and Voibe in On-Device Mode. MacWhisper supports both live dictation and audio/video files; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow.",
     ],
     [
       "What is the best dictation app for Mac?",
@@ -181,7 +196,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     ["Offline dictation guide", "Compare which Mac dictation apps can keep audio local.", "https://dictivo.app/guides/offline-dictation-on-mac/"],
     ["Wispr Flow alternative", "Compare local-first Mac dictation with a cloud AI voice workflow.", "https://dictivo.app/compare/wispr-flow-alternative/"],
     ["Superwhisper alternative", "Compare two local-capable dictation workflows by focus and price.", "https://dictivo.app/compare/superwhisper-alternative/"],
-    ["MacWhisper alternative", "Compare live dictation with file transcription.", "https://dictivo.app/compare/macwhisper-alternative/"],
+    ["MacWhisper alternative", "Compare dictation workflows and support for recorded files.", "https://dictivo.app/compare/macwhisper-alternative/"],
     ["Benchmark method", "See how Dictivo maps local model fit and real-time factor.", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],
   ],
   referencesTitle: "Evidence links",

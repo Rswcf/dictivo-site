@@ -39,20 +39,13 @@ const forbiddenContent = [
   /scripts\/generate-site/i,
   /data\/compare-pages/i,
   /tmp\//i,
-  /fuentes/i,
-  /fontes/i,
-  /fonti/i,
-  /bronnen/i,
-  /Quellen/i,
   /事实核对/,
-  /来源/,
-  /核对/,
-  /ソース/,
-  /출처/,
   /公開コード/,
   /公开代码/,
   /공개 코드/,
 ];
+// Ordinary translated words for sources are allowed: readers need visible
+// primary references. Keep bans on internal implementation/process copy above.
 // downloads.json may be named on technical surfaces (llms.txt, security page)
 // but stays banned in marketing copy.
 const downloadsJsonPattern = /downloads\.json/i;
@@ -62,7 +55,6 @@ const forbiddenCompareContent = [
   /May 25, 2026/i,
   /facts re-?checked/i,
   /事实核对/,
-  /核对/,
 ];
 const staleWindowsHomeContent = [
   /Windows version coming later/i,

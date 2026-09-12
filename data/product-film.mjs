@@ -1,6 +1,8 @@
 export const PRODUCT_FILM = {
   path: "/demo/",
-  lastmod: "2026-09-11",
+  lastmod: "2026-09-12",
+  // First successful production deployment, GitHub Actions run 34593761455.
+  uploadedAt: "2026-09-11T11:24:06Z",
   name: "Dictivo — Keep your flow",
   description: "Watch Dictivo turn a spoken draft into text. Local keeps audio on your device; Cloud Fast is there when you choose it. A 35-second product film with human dictation recordings.",
   video: "/assets/film-v08/dictivo-film-1080p.mp4",

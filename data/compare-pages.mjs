@@ -3,7 +3,7 @@ import { LOCAL_THREE_YEAR_PRICE } from "./local-offer.mjs";
 export const COMPARE_LAST_UPDATED = {
   // `label` is no longer rendered; the stamp is formatted per locale from `iso`.
   label: "September 2026",
-  iso: "2026-09-10",
+  iso: "2026-09-12",
 };
 
 const dictivoRows = {
@@ -159,7 +159,7 @@ export const COMPARE_PAGES = [
     sources: [
       "https://wisprflow.ai/pricing",
       "https://wisprflow.ai/data-controls",
-      "https://docs.wisprflow.ai/articles/3147443438-security-overview",
+      "https://wisprflow.ai/privacy",
     ],
   },
   {
@@ -299,8 +299,8 @@ export const COMPARE_PAGES = [
     related: ["wispr-flow-alternative", "macwhisper-alternative"],
     sources: [
       "https://superwhisper.com/",
-      "https://superwhisper.com/docs/get-started/sw-pro",
-      "https://superwhisper.com/docs/getting-started",
+      "https://superwhisper.com/docs/billing/plans",
+      "https://superwhisper.com/docs/get-started/introduction",
       "https://superwhisper.com/models",
     ],
   },
@@ -421,6 +421,7 @@ export const COMPARE_PAGES = [
     related: ["superwhisper-alternative", "voiceink-alternative"],
     sources: [
       "https://www.macwhisper.com/",
+      "https://docs.macwhisper.com/article/52-keeping-transcriptions-private",
     ],
   },
   {
@@ -538,6 +539,7 @@ export const COMPARE_PAGES = [
     related: ["superwhisper-alternative", "macwhisper-alternative"],
     sources: [
       "https://tryvoiceink.com/",
+      "https://tryvoiceink.com/privacy",
       "https://apps.apple.com/us/app/voiceink-ai-dictation/id6751431158?platform=mac",
     ],
   },
@@ -692,11 +694,11 @@ export const COMPARE_PAGES = [
         kicker: "Where it wins",
         title: "What Dragon Professional is great at",
         paragraphs: [
-          "Dragon has earned its position over three decades, and pretending otherwise would be dishonest. Dragon Professional v16 processes speech locally, handles specialized legal and medical vocabulary better than general-purpose models, and offers hands-free command-and-control of the entire PC that accessibility users depend on.",
+          "Dragon Professional v16 combines local speech recognition with custom vocabulary and voice commands for controlling a Windows PC. These features matter when your workflow depends on established commands or a vocabulary you have built over time.",
           "For enterprises, Dragon offers managed voice profiles, custom vocabularies and macros shared across teams, healthcare integrations, and hardware like PowerMic. If your work lives in one of those categories, Dragon or its cloud editions remain the benchmark, and the $699.99 license can be worth every dollar.",
         ],
         bullets: [
-          "Strongest specialized vocabulary support: legal, medical, law enforcement.",
+          "Custom vocabulary for the terminology used in your work.",
           "Deep hands-free command-and-control and custom voice macros.",
           "Local on-device processing in the desktop edition, including file transcription.",
           "Enterprise deployment: managed profiles, integrations, dedicated hardware.",
@@ -707,7 +709,7 @@ export const COMPARE_PAGES = [
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo is not a Dragon replacement for radiologists or trial lawyers. It is the alternative for the much larger group Dragon no longer serves: people who want to talk instead of type in everyday writing - email, documents, notes, chat - without a $699.99 license, a voice profile, or an 8 GB enterprise install.",
-          "Modern local speech models changed the trade-off Dragon was built around. Dictivo's Whisper-grade models need no training: install, pick a model matched to your hardware, hold a hotkey, and speak into any app. Accuracy on general writing is competitive out of the box.",
+          "Dictivo does not require a trained voice profile: install, pick a model matched to your hardware, hold a hotkey, and dictate into your writing app. Test your own names, accent, and terminology during the trial; this page does not establish comparative accuracy against Dragon.",
           "There is also the platform question. Dragon has not shipped a native Mac desktop product since 2018. Dictivo runs the same local dictation workflow on macOS and Windows x64.",
         ],
         bullets: [
@@ -768,10 +770,10 @@ export const COMPARE_PAGES = [
     ],
     faqs: [
       ["Is Dragon NaturallySpeaking still available?", "Partly, and the consumer side keeps shrinking. Dragon Home was discontinued in 2023, Dragon for Mac in 2018, and Dragon Anywhere Mobile stopped being sold on 1 July 2026. What remains is Dragon Professional v16 for Windows at $699.99, plus enterprise offerings like Dragon Medical One."],
-      ["What is the best cheap Dragon alternative?", "For everyday dictation, compare modern local tools: Dictivo is $29 once and train-free on Mac and Windows. Windows 11 users can also try the free built-in Voice Access. For specialized legal or medical vocabulary, Dragon Professional remains the strongest option."],
+      ["What is the best cheap Dragon alternative?", "For everyday dictation, compare modern local tools: Dictivo is $29 once and does not require voice-profile training on Mac or Windows. Windows 11 users can also try built-in Voice Access. If you depend on Dragon commands or custom vocabulary, test those requirements before switching."],
       ["Does Dragon work on Mac?", "No. Nuance discontinued Dragon Professional Individual for Mac in October 2018 and has not shipped a native Mac desktop product since. Dictivo runs its local dictation workflow on both macOS and Windows x64."],
       ["Do I need to train Dictivo like Dragon?", "No. Dictivo uses modern Whisper-grade local models that work without a voice profile. Dragon builds accuracy through profile and vocabulary training, which pays off for specialized terminology but adds setup and maintenance."],
-      ["Is Dictivo as accurate as Dragon?", "For general everyday writing, modern local models are competitive without any training. For specialized legal or medical vocabulary and custom terminology, a trained Dragon Professional profile still has the edge. Choose by workload, not by brand."],
+      ["Is Dictivo as accurate as Dragon?", "We have not published a controlled accuracy comparison between Dictivo and Dragon. Try the same recordings and work tasks in both, using the vocabulary and settings you would normally use, and compare the corrections required."],
       ["Does Dragon run offline like Dictivo?", "Yes - this is a real similarity. Dragon Professional v16 processes speech locally and works offline after activation. The differences are price, platforms, and training, not the local processing itself."],
       ["What happened to Dragon Home?", "Nuance discontinued the roughly $150 Dragon Home edition in 2023 without a consumer replacement. The official upgrade path is Dragon Professional at $699.99, which is why many former Home users switch to modern lower-cost local dictation tools."],
     ],
@@ -780,8 +782,6 @@ export const COMPARE_PAGES = [
       "https://dragon.nuance.com/en-us/dragon-professional",
       "https://dragon.nuance.com/shared/data-sheets/ds-dragon-professional-v16-en-us.pdf",
       "https://apps.apple.com/us/app/dragon-anywhere/id1024652126",
-      "https://www.dictationstore.com/products/dragon-professional-v16",
-      "https://texttospeech.live/blog/nuance-dragon-home-15",
     ],
   },
 ];

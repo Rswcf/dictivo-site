@@ -11,6 +11,8 @@ for (const code of Object.keys(FILM_COPY)) {
   const all = [...page.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => JSON.parse(m[1]));
   const schema = all.find(s => s['@type'] === 'VideoObject');
   assert.equal(schema.duration, 'PT35S');
+  assert.equal(schema.uploadDate, film.uploadedAt);
+  assert(/T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/.test(schema.uploadDate), 'Video uploadDate needs a time and timezone');
   assert.equal(schema.contentUrl, `https://dictivo.app${film.video}`);
   assert.equal(schema.thumbnailUrl, `https://dictivo.app${film.poster}`);
   assert(!schema.embedUrl, 'The watch page is not a separate embeddable player');
