@@ -12,14 +12,14 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
   navLabel: "Mac dictation benchmark method",
   metaTitle: "Mac Dictation Benchmarks: Apple Silicon Whisper Results",
   metaDescription:
-    "How Dictivo benchmarks local Mac dictation speed: measured Whisper real-time factors on Apple Silicon, Metal vs CPU, from Small to Large v3.",
+    "Listen to a 25-second human speech sample and inspect Dictivo's local-engine outputs, measured Mac runtimes, test conditions and reproduction files.",
   eyebrow: "Benchmark method",
   title: "How Dictivo benchmarks local dictation on Mac",
   lede:
-    "Dictivo does not guess which local speech model a Mac should run. It uses a local calibration path, model download state, hardware capacity, and real-time factor to choose practical dictation tiers.",
+    "Listen to the input, read the output, and reproduce the published local-engine runs. Dictivo also uses a short calibration to help choose models for your Mac.",
   answerTitle: "Short answer",
   answer:
-    "Dictivo benchmarks local dictation with a bundled 5-second speech clip, records the measured real-time factor, and maps the result to Fast, Medium, and Quality local model tiers. This page documents the method and publishes measured results for real machines, starting with an Apple M4 Pro: with the Metal engine, Large v3 Turbo Q5 reaches RTF 0.21 on the 5-second calibration clip. This is a short-clip result, not a measured time for one minute of speech. A separate 25-second human-speech example below includes the audio, actual outputs and full run records.",
+    "The published runs use one Apple M4 Pro with 48 GB memory. A 25-second human-read English example includes the input, model outputs and run records. Separate five-second calibration results explain model selection. These are engine measurements, not full-app latency or a comparison with other dictation apps.",
   summaryTitle: "What the benchmark measures",
   summaryRows: [
     ["Input", "A bundled 5-second speech clip used for local calibration."],
@@ -97,7 +97,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
       kicker: "Scope",
       title: "What this method proves, and what it does not prove",
       paragraphs: [
-        "The current method proves local runtime fit for Dictivo's own Local mode tiers. It does not claim that one Mac model is always better than another for every app, every audio input, or every language.",
+        "The calibration helps estimate which Local model tiers may fit a Mac. Model predictions are not measurements of every model or recording; the published tables identify the runs that were actually measured. Results do not establish a best Mac for every app, audio input or language.",
         "Dictivo publishes hardware-specific numbers only for machines that were actually measured with the documented method. The table above covers an Apple M4 Pro; other Macs are added as they are measured, never predicted.",
       ],
       bullets: [
