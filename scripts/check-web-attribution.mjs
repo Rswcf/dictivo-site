@@ -90,6 +90,18 @@ for (const product of ["local", "cloud-fast", "local-renewal"]) {
 }
 const googleCheckout = navigate(organic, link("https://dictivo.app/checkout/local"));
 assert.equal(googleCheckout.searchParams.get("checkout[custom][channel]"), "google");
+const paidSearch = loadPage("https://dictivo.app/ja/?utm_source=google_ads&utm_medium=cpc&utm_campaign=budget30_ja_mac_202609&utm_content=local_sentence");
+const paidNext = navigate(paidSearch, link("https://dictivo.app/ja/guides/first-local-dictation/"));
+const paidGuide = loadPage(paidNext.href, paidSearch.location.href);
+assert.equal(paidGuide.events[0].source, "google_ads");
+assert.equal(paidGuide.events[0].medium, "cpc");
+const paidCheckout = navigate(paidGuide, link("https://dictivo.app/checkout/local"));
+assert.equal(paidCheckout.searchParams.get("checkout[custom][channel]"), "google_ads");
+assert.equal(paidCheckout.searchParams.size, 1, "Paid checkout still receives only a registered channel label");
+const paidDownload = link("https://api.dictivo.app/download/mac?version=0.3.47", true);
+paidGuide.context.sendDownloadClick(paidDownload);
+assert.equal(paidGuide.events.at(-1).source, "google_ads");
+assert.equal(paidGuide.events.at(-1).campaign, "budget30_ja_mac_202609");
 for (const source of ["direct", "buyer@example.com", "x".repeat(500), "constructor", "__proto__"]) {
   const page = loadPage(`https://dictivo.app/?utm_source=${encodeURIComponent(source)}`);
   assert.equal(navigate(page, link("https://dictivo.app/checkout/local")).search, "");

@@ -109,7 +109,7 @@ const pageAttribution = readPageAttribution();
 // static links clean for crawlers. Checkout receives only a registered channel.
 function checkoutChannel(source) {
   const value = String(source || "").toLowerCase();
-  const channels = ["google", "bing", "chatgpt", "perplexity", "claude", "gemini", "copilot", "reddit", "hackernews", "producthunt", "alternativeto", "setapp", "github", "x", "linkedin", "youtube", "tiktok", "instagram", "facebook", "threads", "newsletter", "email", "partner", "affiliate", "podcast", "directory", "qiita", "zenn", "note", "zhihu", "xiaohongshu", "bilibili", "wechat"];
+  const channels = ["google", "google_ads", "bing", "chatgpt", "perplexity", "claude", "gemini", "copilot", "reddit", "hackernews", "producthunt", "alternativeto", "setapp", "github", "x", "linkedin", "youtube", "tiktok", "instagram", "facebook", "threads", "newsletter", "email", "partner", "affiliate", "podcast", "directory", "qiita", "zenn", "note", "zhihu", "xiaohongshu", "bilibili", "wechat"];
   if (channels.includes(value)) return value;
   const hosts = {
     "www.google.com": "google", "google.com": "google", "www.google.co.jp": "google",
