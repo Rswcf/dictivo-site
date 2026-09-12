@@ -1,4 +1,4 @@
-export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-09-10";
+export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-09-12";
 
 export const BENCHMARK_METHOD_GUIDE_REFERENCES = [
   ["Dictivo Mac model guide", "https://dictivo.app/mac-model-guide/"],
@@ -19,7 +19,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     "Dictivo does not guess which local speech model a Mac should run. It uses a local calibration path, model download state, hardware capacity, and real-time factor to choose practical dictation tiers.",
   answerTitle: "Short answer",
   answer:
-    "Dictivo benchmarks local dictation with a bundled 5-second speech clip, records the measured real-time factor, and maps the result to Fast, Medium, and Quality local model tiers. This page documents the method and publishes measured results for real machines, starting with an Apple M4 Pro: with the Metal engine, Large v3 Turbo Q5 reaches RTF 0.21 on the 5-second calibration clip. This is a short-clip result, not a measured time for one minute of speech.",
+    "Dictivo benchmarks local dictation with a bundled 5-second speech clip, records the measured real-time factor, and maps the result to Fast, Medium, and Quality local model tiers. This page documents the method and publishes measured results for real machines, starting with an Apple M4 Pro: with the Metal engine, Large v3 Turbo Q5 reaches RTF 0.21 on the 5-second calibration clip. This is a short-clip result, not a measured time for one minute of speech. A separate 25-second human-speech example below includes the audio, actual outputs and full run records.",
   summaryTitle: "What the benchmark measures",
   summaryRows: [
     ["Input", "A bundled 5-second speech clip used for local calibration."],
@@ -73,7 +73,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     ],
     bullets: [
       "Tiny shows no GPU gain because process start and model load dominate its runtime.",
-      "Large v3, the highest-quality local model, is comfortably interactive on Metal (RTF 0.41) while the CPU-only path made it borderline (RTF 0.81).",
+      "On this 5-second clip, Large v3 measured RTF 0.41 on Metal and 0.81 with the GPU disabled. These calibration results do not establish full-app responsiveness.",
       "One machine is published so far. Results vary with thermal state and background load; numbers for other Macs are added only after they are measured with this exact method.",
     ],
     submitNote:

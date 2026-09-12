@@ -127,7 +127,7 @@
           <li><strong>Model downloads</strong> — Local model files download when you choose or re-run local setup.</li>
           <li><strong>Cloud Fast transcription</strong> — only after you select Cloud Fast and record audio.</li>
           <li><strong>Anonymous usage statistics</strong> — off by default. Only if you turn on “Share anonymous usage statistics” in Settings does the app send metadata-only events (which step of setup was reached, whether microphone access was granted, dictation duration and word count). No audio, no transcript text, no file or app names. You can turn it off again at any time.</li>
-          <li><strong>Trial activation count</strong> — a single ping when the free trial produces its first result, carrying a hashed device ID, the platform, and the app version, so trials can be counted. It is sent once per install, contains no audio, text, or personal data, and is independent of the usage-statistics setting.</li>
+          <li><strong>Trial milestones</strong> — independent of the usage-statistics setting, the Local trial reports its start and the first Local transcript successfully copied or pasted to api.dictivo.app. Reports contain a hashed device identifier, platform, app version, trial-start time and a capability flag; the success report adds its time. Failed deliveries may retry. Neither report contains audio or transcript text.</li>
         </ul>
         <p>
           That list is the whole desktop network surface. Dictivo does not use third-party ads, third-party

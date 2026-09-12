@@ -3840,3 +3840,6 @@ main section[id] {
 .film-transcript li { margin-bottom: 14px; }
 .film-transcript time { font-variant-numeric: tabular-nums; margin-right: 12px; color: var(--muted); }
 @media (max-width: 640px) { .film-chapters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.evidence-audio { display: block; width: 100%; max-width: 680px; margin: 24px 0; }
+#human-speech-example .compare-table { min-width: 640px; }

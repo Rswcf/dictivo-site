@@ -23,11 +23,9 @@ const forbiddenContent = [
   /GitHub Release/i,
   /Lemon Squeezy/i,
   /request metadata/i,
-  /machine-readable/i,
   /client-side analytics/i,
   /provider-facing/i,
   /provider details/i,
-  /whisper\.cpp/i,
   /closed-source/i,
   /public-code/i,
   /source-auditable/i,
@@ -50,6 +48,10 @@ const forbiddenContent = [
 // but stays banned in marketing copy.
 const downloadsJsonPattern = /downloads\.json/i;
 const downloadsJsonExemptFiles = /(^|\/)llms\.txt$|^security\.html$|^security\/index\.html$/;
+// The reproducible benchmark needs the engine name/version and data links.
+// Keep these implementation terms out of general marketing surfaces.
+const benchmarkTerms = [/machine-readable/i, /whisper\.cpp/i];
+const benchmarkEvidenceFile = "guides/mac-dictation-benchmark-method/index.html";
 const forbiddenCompareContent = [
   /as of May 25, 2026/i,
   /May 25, 2026/i,
@@ -201,7 +203,7 @@ for (const file of listFiles()) {
   }
   if (!textExtensions.has(extension(file))) continue;
   const body = readFileSync(resolve(publicRoot, file), "utf8");
-  for (const pattern of forbiddenContent) {
+  for (const pattern of [...forbiddenContent, ...(file === benchmarkEvidenceFile ? [] : benchmarkTerms)]) {
     if (pattern.test(body)) {
       failures.push(`${file}: matched ${pattern}`);
     }

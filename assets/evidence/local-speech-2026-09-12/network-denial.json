@@ -1,0 +1,94 @@
+{
+  "scope": "Installed CLI only, not full application, microphone, helpers or app IPC. One non-timing-verification run per model.",
+  "profile": "(version 1)\n(allow default)\n(deny network*)\n",
+  "controls": [
+    {
+      "name": "allowed",
+      "exit_code": 0,
+      "outcome": "Connection succeeded"
+    },
+    {
+      "name": "denied",
+      "exit_code": 1,
+      "outcome": "Operation not permitted (network denied)"
+    }
+  ],
+  "runs": [
+    {
+      "model": "small",
+      "started_at": "2026-09-12T11:50:51.532290+00:00",
+      "command": [
+        "sandbox-exec",
+        "-f",
+        "deny-network.sb",
+        "$ENGINE",
+        "-m",
+        "$MODEL",
+        "-f",
+        "sample.wav",
+        "-l",
+        "auto",
+        "-otxt",
+        "-of",
+        "$OUTPUT_STEM",
+        "-np",
+        "-nt",
+        "--temperature",
+        "0",
+        "--suppress-nst",
+        "-bo",
+        "3",
+        "-bs",
+        "3",
+        "-mc",
+        "160",
+        "-sow",
+        "-ml",
+        "80"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.068992666027043,
+      "transcript": "Please call Stella. Ask her to bring these things with her from the store. Six\n spoons of fresh snow peas, five thick slabs of blue cheese and maybe a snack\n for her brother Bob. We also need a small plastic snake and a big toy frog for\n the kids. She can scoop these things into three red bags and we will go meet\n her Wednesday at the train station.",
+      "matches_unrestricted_sample": true,
+      "comparison": "Exact text-file content after trimming leading/trailing whitespace; internal line breaks retained."
+    },
+    {
+      "model": "large-v3-turbo-q5_0",
+      "started_at": "2026-09-12T11:50:52.601674+00:00",
+      "command": [
+        "sandbox-exec",
+        "-f",
+        "deny-network.sb",
+        "$ENGINE",
+        "-m",
+        "$MODEL",
+        "-f",
+        "sample.wav",
+        "-l",
+        "auto",
+        "-otxt",
+        "-of",
+        "$OUTPUT_STEM",
+        "-np",
+        "-nt",
+        "--temperature",
+        "0",
+        "--suppress-nst",
+        "-bo",
+        "3",
+        "-bs",
+        "3",
+        "-mc",
+        "160",
+        "-sow",
+        "-ml",
+        "80"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.074220084003173,
+      "transcript": "Please call Stella. Ask her to bring these things with her from the store. Six\n spoons of fresh snow peas, five thick slabs of blue cheese and maybe a snack\n for her brother Bob. We also need a small plastic snake and a big toy frog for\n the kids. She can scoop these things into three red bags and we will go meet\n her Wednesday at the train station.",
+      "matches_unrestricted_sample": true,
+      "comparison": "Exact text-file content after trimming leading/trailing whitespace; internal line breaks retained."
+    }
+  ]
+}

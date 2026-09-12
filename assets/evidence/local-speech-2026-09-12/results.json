@@ -1,0 +1,48 @@
+{
+  "duration_seconds": 25.3123125,
+  "reference_words": 69,
+  "models": [
+    {
+      "model": "small",
+      "runs_seconds": [
+        1.06238579103956,
+        1.0622816249961033,
+        1.0544460419914685
+      ],
+      "median_seconds": 1.0622816249961033,
+      "min_seconds": 1.0544460419914685,
+      "max_seconds": 1.06238579103956,
+      "median_real_time_factor": 0.04196699234793752,
+      "outputs_identical": true,
+      "transcript": "Please call Stella. Ask her to bring these things with her from the store. Six spoons of fresh snow peas, five thick slabs of blue cheese and maybe a snack for her brother Bob. We also need a small plastic snake and a big toy frog for the kids. She can scoop these things into three red bags and we will go meet her Wednesday at the train station.",
+      "word_error_analysis": {
+        "reference_words": 69,
+        "hypothesis_words": 69,
+        "errors": 0,
+        "wer": 0.0,
+        "alignment_errors": []
+      }
+    },
+    {
+      "model": "large-v3-turbo-q5_0",
+      "runs_seconds": [
+        2.0665857500280254,
+        2.066285541979596,
+        2.0683904589968733
+      ],
+      "median_seconds": 2.0665857500280254,
+      "min_seconds": 2.066285541979596,
+      "max_seconds": 2.0683904589968733,
+      "median_real_time_factor": 0.08164349859492392,
+      "outputs_identical": true,
+      "transcript": "Please call Stella. Ask her to bring these things with her from the store. Six spoons of fresh snow peas, five thick slabs of blue cheese and maybe a snack for her brother Bob. We also need a small plastic snake and a big toy frog for the kids. She can scoop these things into three red bags and we will go meet her Wednesday at the train station.",
+      "word_error_analysis": {
+        "reference_words": 69,
+        "hypothesis_words": 69,
+        "errors": 0,
+        "wer": 0.0,
+        "alignment_errors": []
+      }
+    }
+  ]
+}

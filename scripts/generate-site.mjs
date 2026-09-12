@@ -26,6 +26,8 @@ import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
+import { LOCAL_SPEECH_EVIDENCE } from "../data/local-speech-evidence.mjs";
+import { localizedComparisonSections, localizedComparisonFaqs } from "../data/comparison-decision-locales.mjs";
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
 import { PRODUCT_FILM, FILM_COPY, FILM_CHAPTERS } from "../data/product-film.mjs";
 import {
@@ -2554,22 +2556,12 @@ function platformUnavailableCopy(code) {
 
 function localizedCompareSections(page, copy) {
   if (copy === COMPARE_I18N.en) return page.sections;
-  return copy.sections.map((section) => ({
-    ...section,
-    title: fillCompareTemplate(section.title, page),
-    paragraphs: localizedTemplateList(section.paragraphs || [], page),
-    bullets: localizedTemplateList(section.bullets || [], page),
-    cards: section.cards?.map((card) => ({
-      ...card,
-      title: fillCompareTemplate(card.title, page),
-      items: localizedTemplateList(card.items, page),
-    })),
-  }));
+  return localizedComparisonSections(page, copy.locale);
 }
 
 function localizedCompareFaqs(page, copy) {
   if (copy === COMPARE_I18N.en) return page.faqs;
-  return localizedTemplateList(copy.faqs, page);
+  return localizedComparisonFaqs(page, copy.locale);
 }
 
 function renderCompareSchema(page, currentCode) {
@@ -3186,7 +3178,6 @@ function renderOfflineGuideSchema(currentCode = "en") {
       description: copy.metaDescription,
       url: offlineDictationGuideUrl(currentCode),
       inLanguage: localeByCode(currentCode).htmlLang,
-      datePublished: OFFLINE_DICTATION_GUIDE_LASTMOD,
       dateModified: OFFLINE_DICTATION_GUIDE_LASTMOD,
       mainEntityOfPage: offlineDictationGuideUrl(currentCode),
       publisher: {
@@ -3452,7 +3443,6 @@ function renderBenchmarkMethodSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "en",
-      datePublished: BENCHMARK_METHOD_GUIDE_LASTMOD,
       dateModified: BENCHMARK_METHOD_GUIDE_LASTMOD,
       mainEntityOfPage: pageUrl,
       publisher: {
@@ -3526,7 +3516,7 @@ function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
         <p class="doc-meta">Evidence</p>
         <h2 id="${attr(`${sourceId}-benchmark-method-title`)}">How Dictivo decides local model fit</h2>
         <p>Dictivo's Mac model recommendations are backed by a local calibration method that measures real-time factor and maps the result to Fast, Medium, and Quality local model tiers.</p>
-        <p><a href="${attr(benchmarkMethodGuidePath())}">Read the Mac dictation benchmark method</a>.</p>
+        <p><a href="${attr(benchmarkMethodGuidePath())}">Read the Mac dictation benchmark method</a> or <a href="${attr(benchmarkMethodGuidePath())}#human-speech-example">hear the 25-second human-speech sample and inspect its actual output</a>.</p>
       </section>`;
 }
 
@@ -3539,6 +3529,32 @@ ${BENCHMARK_METHOD_GUIDE_REFERENCES.map(
   ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
 ).join("\n")}
         </ul>
+      </section>`;
+}
+
+function renderLocalSpeechEvidence() {
+  const c = LOCAL_SPEECH_EVIDENCE;
+  return `<section class="doc-section" id="human-speech-example" aria-labelledby="human-speech-title">
+        <p class="doc-meta">Human speech · Measured ${html(c.lastmod)}</p>
+        <h2 id="human-speech-title">${html(c.title)}</h2>
+        <p>${html(c.description)}</p>
+        <audio class="evidence-audio" controls preload="none" aria-label="Human-read English benchmark input, five recordings joined">
+          <source src="${c.root}/sample.wav" type="audio/wav" />
+          <a href="${c.root}/sample.wav">Download the input audio</a>
+        </audio>
+        <p>${html(c.environment)}</p>
+        ${renderBenchmarkMethodTable(c.caption, c.headers, c.rows)}
+        <p>${html(c.result)}</p>
+        <p><a href="${c.root}/reference.txt">Read the reference</a> · <a href="${c.root}/small-output.txt">Small output</a> · <a href="${c.root}/turbo-output.txt">Turbo Q5 output</a></p>
+        <p>${html(c.scope)}</p>
+        <p><a href="${c.root}/evidence.zip" download>Download input, every run, hashes and reproduction steps (2.5 MB ZIP)</a> · <a href="${c.root}/results.json">Machine-readable results</a></p>
+        <p>Source: Junichi Yamagishi, Christophe Veaux and Kirsten MacDonald (2019), <a href="https://doi.org/10.7488/ds/2645">CSTR VCTK Corpus v0.92</a>, University of Edinburgh. Recordings p225_001–005, resampled and joined as described above. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. No endorsement by the speaker, authors or university is implied.</p>
+      </section>
+      <section class="doc-section" id="network-denial" aria-labelledby="network-denial-title">
+        <h2 id="network-denial-title">${html(c.networkTitle)}</h2>
+        <p>${html(c.networkResult)}</p>
+        <p>${html(c.networkScope)}</p>
+        <p><a href="${c.root}/network-denial.json">Read the control and model results</a> · <a href="${c.root}/deny-network.sb">Sandbox profile</a> · <a href="/privacy/local-dictation-network-test/">Full-app network test procedure</a></p>
       </section>`;
 }
 
@@ -3573,6 +3589,8 @@ function renderBenchmarkMethodGuidePage() {
         <h2 id="benchmark-method-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
+
+      ${renderLocalSpeechEvidence()}
 
       <section class="doc-section" aria-labelledby="benchmark-method-summary">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -3651,7 +3669,6 @@ function renderSpeechToTextMacGuideSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "en",
-      datePublished: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
       dateModified: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
       mainEntityOfPage: pageUrl,
       publisher: {
@@ -3839,7 +3856,6 @@ function renderOfflineDictationWindowsGuideSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "en",
-      datePublished: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
       dateModified: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
       mainEntityOfPage: pageUrl,
       publisher: {
@@ -5871,7 +5887,7 @@ function renderChangelog() {
           <li>Onboarding now includes a hotkey step with a real test dictation, plus recovery when the shortcut you picked is already taken by another app.</li>
           <li>A persistent alert appears if the dictation hotkey stops being available, instead of dictation silently doing nothing.</li>
           <li>The 14-day full Local trial now starts when you begin setup rather than at first launch, and the days remaining stay visible.</li>
-          <li>Starting the trial sends a one-time anonymous activation ping (hashed device ID, platform, app version) so trials can be counted. It never includes audio, text, or personal data, and it is separate from the opt-in usage statistics setting. See <a href="/privacy/">the Privacy Policy</a>.</li>
+          <li>This release introduced a metadata-only trial-start report, separate from opt-in usage statistics. Current versions also report the first Local transcript successfully copied or pasted. Reports contain no audio or transcript text; see the current fields and retry behavior in the <a href="/privacy/">Privacy Policy</a>.</li>
         </ul>
       </section>
 

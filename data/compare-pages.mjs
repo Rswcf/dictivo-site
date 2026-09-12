@@ -401,7 +401,7 @@ export const COMPARE_PAGES = [
             title: "Choose Dictivo if",
             items: [
               "You want a MacWhisper alternative for real-time dictation.",
-              "You want to dictate into any app instead of managing audio files.",
+              "You want to dictate into your writing apps, with support verified during the trial.",
               "You care about local history, dictionary terms, snippets, and active-app workflow.",
               "You want a full 14-day trial of every local model before buying.",
             ],
@@ -427,18 +427,18 @@ export const COMPARE_PAGES = [
   {
     slug: "voiceink-alternative",
     competitor: "VoiceInk",
-    title: "VoiceInk Alternative: Polished Local Dictation",
+    title: "VoiceInk Alternative: Local Setup, Features and Cost",
     metaDescription:
-      "Compare VoiceInk and Dictivo for local Mac dictation. VoiceInk is cheaper; Dictivo focuses on polished UX, hardware-aware setup, and support.",
-    h1: "VoiceInk alternative: polished local dictation with a simpler support path",
+      "Compare VoiceInk and Dictivo for local Mac dictation: model setup, device support, optional cloud processing, license costs and update terms.",
+    h1: "VoiceInk alternative: compare local setup, features and cost",
     eyebrow: "Compare alternatives",
     primaryKeyword: "voiceink alternative",
     intro: [
       "VoiceInk is a strong choice if you want a low-cost indie Mac dictation app, local transcription, and a low one-time price with lifetime updates.",
-      "Dictivo is the VoiceInk alternative for users who will pay a little more for a calmer commercial UX, hardware-aware model setup, a no-account Local path, and direct indie support.",
+      "Dictivo offers hardware-aware model setup, a Local path without a Dictivo account, and optional Cloud Fast. Compare those features and the update terms with VoiceInk before deciding.",
     ],
     quickTake: [
-      ["Best for", "Polished commercial local workflow", "Lowest-cost indie Mac dictation"],
+      ["Best for", "Guided local model setup", "Mac dictation with lifetime updates"],
       [`3-year cost`, `$29 to ${LOCAL_THREE_YEAR_PRICE} depending on update renewals`, `$25, $39, or $49 current lifetime offers`],
       ["Privacy model", "Local mode first", "Local processing with optional cloud enhancement"],
     ],
@@ -472,13 +472,13 @@ export const COMPARE_PAGES = [
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo does not win this on price. Dictivo Local is $29 once and includes the first year of updates, with an optional $24/year renewal after that. VoiceInk's current Solo offer is $25 once and advertises lifetime updates, so over enough years VoiceInk is the cheaper way to stay current. Choose on the Local versus Cloud Fast boundary, guided setup, and support - not on a few dollars.",
-          "Dictivo's argument is polish and predictability. The app is shaped around a guided local setup, hardware-aware model selection, a clear Local versus Cloud Fast boundary, local history, dictionary terms, snippets, and a commercial support channel. It is for people who would rather pay a little more than tinker when dictation becomes part of daily work.",
+          "Dictivo's argument is polish and predictability. The app is shaped around a guided local setup, hardware-aware model selection, a clear Local versus Cloud Fast boundary, local history, dictionary terms, snippets, and a commercial support channel. It is for people who would rather use guided model setup when dictation becomes part of daily work.",
           "Dictivo's privacy promise is the product workflow: Local mode keeps microphone audio, transcripts, history, dictionary terms, snippets, and settings on the customer's device, with no Dictivo account required for Local dictation.",
         ],
         bullets: [
-          "More guided Local setup for non-tinkerers.",
+          "Guided Local setup with hardware-aware model tiers.",
           "Hardware-aware model tier recommendations.",
-          "Clearer separation between private Local mode and optional Cloud Fast.",
+          "A visible choice between Local mode and optional Cloud Fast.",
           "Commercial support and update cadence around a paid product.",
         ],
       },
@@ -486,12 +486,12 @@ export const COMPARE_PAGES = [
         kicker: "Privacy",
         title: "Privacy: local processing without pretending price is the only factor",
         paragraphs: [
-          "Both VoiceInk and Dictivo can keep dictation local. VoiceInk's site says processing is offline and that voice data stays on the Mac. Dictivo Local follows the same local-first expectation.",
-          "The difference is how much product structure you want around that private workflow. VoiceInk appeals to users who prioritize the lowest lifetime pricing. Dictivo appeals to users who want a more packaged commercial app, a support channel, and a sharper distinction between local work and optional cloud speed.",
+          "Both VoiceInk and Dictivo offer local dictation. VoiceInk also documents optional cloud transcription and AI processing, so check both recognition and text-processing settings. Dictivo Local keeps dictation audio and text on-device; choosing Cloud Fast sends the selected recording for remote transcription.",
+          "Compare the settings you will actually use: local model, optional cloud services, text cleanup and device support. Dictivo provides hardware-aware local model setup and an explicit Local / Cloud Fast choice.",
         ],
         bullets: [
-          "Use VoiceInk if you want the lowest-cost local Mac dictation path.",
-          "Use Dictivo if you want a more polished commercial product around local dictation.",
+          "Consider VoiceInk if its device tier and included lifetime updates fit your needs.",
+          "Use Dictivo if you want guided local model setup and a separate optional Cloud Fast mode.",
           "Do not buy Dictivo because someone told you VoiceInk is unsafe. That is not the argument.",
         ],
       },
@@ -501,7 +501,7 @@ export const COMPARE_PAGES = [
         paragraphs: [
           "VoiceInk currently lists $25 for Solo, $39 for Personal, and $49 for Extended, with lifetime updates. Those tiers differ by device count, not by core feature access. The page also advertises a Try Free path and 14-day money-back guarantee.",
           `Dictivo Local is $29 once. If you keep optional update renewals active for years two and three, the three-year total is ${LOCAL_THREE_YEAR_PRICE}. Without renewals, it is a $29 purchase for the version you bought.`,
-          "VoiceInk is the lower-price option. Dictivo is the option for users who value a more controlled onboarding experience, hardware-aware model setup, and a direct paid-product support relationship.",
+          "Compare the tier for your device count and whether future updates are included. In Dictivo, guided setup recommends local models based on your hardware; use the trial to check that workflow before buying.",
         ],
       },
       {
@@ -511,8 +511,8 @@ export const COMPARE_PAGES = [
           {
             title: "Choose VoiceInk if",
             items: [
-              "You want the lowest price for local Mac dictation.",
-              "You prefer the lowest-cost indie option.",
+              "Its license tier fits the number of Macs you use.",
+              "You prefer its purchase terms and included future updates.",
               "You are comfortable with Apple Silicon and macOS 14.4 or later requirements.",
               "You want lifetime updates included in the purchase.",
             ],
@@ -520,10 +520,10 @@ export const COMPARE_PAGES = [
           {
             title: "Choose Dictivo if",
             items: [
-              "You want a VoiceInk alternative with more commercial polish.",
+              "You want guided setup and a choice of local model tiers.",
               "You care about guided setup and hardware-aware local model tiers.",
               "You want no Dictivo account for Local dictation.",
-              "You are willing to pay more for support, update discipline, and a clearer product boundary.",
+              "You prefer a license for the purchased version, with optional renewals for future updates.",
             ],
           },
         ],
@@ -531,10 +531,10 @@ export const COMPARE_PAGES = [
     ],
     faqs: [
       ["Is VoiceInk really free?", "VoiceInk's site has a Try Free path and paid lifetime tiers. The current paid offers are $25, $39, and $49, depending on device count."],
-      ["VoiceInk vs Dictivo: which is more accurate?", "Both use local AI speech models, so accuracy depends on the model, microphone, accent, and hardware. Dictivo's advantage is a polished local workflow and hardware-aware setup."],
+      ["VoiceInk vs Dictivo: which is more accurate?", "Both offer local speech models. Accuracy depends on the model, microphone, accent and language. We have not published a controlled head-to-head accuracy test; compare the same recording and count corrections."],
       ["How does Dictivo protect local work?", "Use Local mode for private dictation. Audio, transcripts, history, dictionary terms, snippets, and settings stay on the customer's device."],
       ["Does VoiceInk run on Windows?", "VoiceInk's official site lists Apple Silicon Macs and macOS 14.4 or later. Dictivo is publicly available for both macOS and Windows x64."],
-      ["Which app is more polished?", "That is subjective. VoiceInk is strong for price. Dictivo is built as a more packaged paid product with guided setup, Local versus Cloud Fast separation, and support expectations."],
+      ["How should I compare the everyday workflow?", "Try setup, a short message, a longer paragraph and a correction in the app where you usually write. Compare hotkey reliability, insertion, model selection and recovery from errors. These tasks are more useful than a general claim about polish."],
     ],
     related: ["superwhisper-alternative", "macwhisper-alternative"],
     sources: [
@@ -546,15 +546,15 @@ export const COMPARE_PAGES = [
   {
     slug: "macos-dictation-alternative",
     competitor: "macOS Dictation",
-    title: "A macOS Dictation Alternative with Whisper Accuracy",
+    title: "A macOS Dictation Alternative with Local Model Choice",
     metaDescription:
       "Need a macOS Dictation alternative? Dictivo adds Whisper-grade local dictation, history, dictionary, snippets, and a private local workflow.",
-    h1: "A macOS Dictation alternative with Whisper-grade local accuracy",
+    h1: "A macOS Dictation alternative with local model choice",
     eyebrow: "Compare alternatives",
     primaryKeyword: "macos dictation alternative",
     intro: [
       "macOS Dictation is free, already installed, and good enough for quick sentences. If that is all you need, you should use it.",
-      "Dictivo is the macOS Dictation alternative for people who dictate seriously and want stronger local models, local history, dictionary terms, snippets, and consistent hotkey behavior across daily writing apps.",
+      "Dictivo adds a choice of local Whisper models, local history, dictionary terms, snippets, and configurable hotkeys to daily writing apps.",
     ],
     quickTake: [
       ["Best for", "Daily private Mac dictation", "Free occasional dictation"],
@@ -591,11 +591,11 @@ export const COMPARE_PAGES = [
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo is for the point where built-in dictation stops feeling like enough. Serious dictation is not just speech recognition. It is model choice, local history, correction loops, a personal dictionary, snippets, visible privacy mode, and a product surface designed for repeated daily use.",
-          "Dictivo Local uses stronger local transcription models for daily writing. The app guides setup based on hardware, then keeps transcripts, dictionary terms, snippets, and local settings on the device. That creates a repeatable workflow for people who dictate long emails, support replies, notes, prompts, documentation, or first drafts every day.",
+          "Dictivo Local lets you choose among local Whisper models for daily writing. The app guides setup based on hardware, then keeps transcripts, dictionary terms, snippets, and local settings on the device. That creates a repeatable workflow for people who dictate long emails, support replies, notes, prompts, documentation, or first drafts every day.",
           "The productivity layer matters as much as the model. Built-in dictation gives you text. Dictivo gives you a workbench around that text: history when a paste fails, dictionary terms for names and jargon, snippets for repeated phrasing, and a clear Local versus Cloud Fast mode boundary.",
         ],
         bullets: [
-          "Whisper-grade local model path for higher-accuracy dictation.",
+          "Selectable local Whisper models; compare correction needs using your own speech.",
           "Local history, dictionary, and snippets.",
           "Hardware-aware model setup instead of hidden system behavior.",
           "Visible privacy boundary for Local mode and optional Cloud Fast.",
@@ -649,7 +649,7 @@ export const COMPARE_PAGES = [
     ],
     faqs: [
       ["Is Apple Dictation private?", "It depends on your Mac, language, and settings. Apple says Keyboard settings indicate whether audio and transcripts are processed on-device and not sent to Siri servers; otherwise dictated content is sent to servers for processing."],
-      ["Is there a more accurate dictation app for Mac?", "Dictivo uses stronger local transcription models. For many users, larger local models are more accurate than built-in dictation, especially for longer text, jargon, names, and mixed phrasing."],
+      ["Is there a more accurate dictation app for Mac?", "Accuracy depends on the speaker, language, microphone, model and text. We have not published a controlled accuracy comparison with Apple Dictation. Try the same paragraph in both, including names or specialist terms, and count the corrections before choosing."],
       ["Does macOS Dictation work offline?", "Apple says Keyboard settings can indicate whether an internet connection is needed. Offline availability depends on the device, language, and current system behavior."],
       ["What is the best offline dictation app for Mac?", "If you want a paid, local-first workflow with hotkey dictation, local history, dictionary terms, snippets, and a clear privacy boundary, Dictivo is built for that job."],
       ["Is Dictivo free?", "Dictivo has a tiny free local tier and a 14-day full Local trial with every local model unlocked. Dictivo Local is $29 once if you decide to buy."],
@@ -671,7 +671,7 @@ export const COMPARE_PAGES = [
     eyebrow: "Compare alternatives",
     primaryKeyword: "dragon naturallyspeaking alternative",
     intro: [
-      "Dragon Professional remains a serious product if you dictate specialized legal or medical vocabulary all day, need deep hands-free command of your PC, or deploy dictation across an enterprise. Its desktop engine runs locally, and decades of vocabulary work show.",
+      "Dragon Professional v16 combines local Windows speech recognition, custom vocabulary and commands for controlling a PC. If you rely on those commands or have a vocabulary built over time, include them in your comparison.",
       "Dictivo is the Dragon alternative for everyone that price no longer serves: everyday writers, ex-Dragon Home users, and Mac users Dragon left behind in 2018. Local dictation on macOS and Windows, no voice training, $29 once.",
     ],
     quickTake: [
@@ -695,42 +695,42 @@ export const COMPARE_PAGES = [
         title: "What Dragon Professional is great at",
         paragraphs: [
           "Dragon Professional v16 combines local speech recognition with custom vocabulary and voice commands for controlling a Windows PC. These features matter when your workflow depends on established commands or a vocabulary you have built over time.",
-          "For enterprises, Dragon offers managed voice profiles, custom vocabularies and macros shared across teams, healthcare integrations, and hardware like PowerMic. If your work lives in one of those categories, Dragon or its cloud editions remain the benchmark, and the $699.99 license can be worth every dollar.",
+          "Check the exact Dragon edition your organization uses. Professional desktop, Medical One and other cloud offerings have different workflows and processing locations; features of one edition should not be assumed to exist in another.",
         ],
         bullets: [
           "Custom vocabulary for the terminology used in your work.",
           "Deep hands-free command-and-control and custom voice macros.",
           "Local on-device processing in the desktop edition, including file transcription.",
-          "Enterprise deployment: managed profiles, integrations, dedicated hardware.",
+          "Check required commands, custom vocabulary and edition-specific deployment options.",
         ],
       },
       {
         kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
-          "Dictivo is not a Dragon replacement for radiologists or trial lawyers. It is the alternative for the much larger group Dragon no longer serves: people who want to talk instead of type in everyday writing - email, documents, notes, chat - without a $699.99 license, a voice profile, or an 8 GB enterprise install.",
+          "Dictivo focuses on typing into emails, documents, notes and chat using a hotkey. It does not provide a feature-for-feature replacement for specialized Dragon workflows or full hands-free PC control.",
           "Dictivo does not require a trained voice profile: install, pick a model matched to your hardware, hold a hotkey, and dictate into your writing app. Test your own names, accent, and terminology during the trial; this page does not establish comparative accuracy against Dragon.",
-          "There is also the platform question. Dragon has not shipped a native Mac desktop product since 2018. Dictivo runs the same local dictation workflow on macOS and Windows x64.",
+          "There is also the platform question. Dragon has not shipped a native Mac desktop product since 2018. Dictivo provides public installers for macOS and Windows x64. Test input and insertion in the apps you use on each platform.",
         ],
         bullets: [
           "$29 once instead of $699.99 - about 1/24 of the Dragon Professional license.",
           "No voice training or profile maintenance.",
           "Runs on macOS and Windows; Dragon desktop is Windows-only.",
-          "Hotkey-driven dictation into any app, with local history, dictionary, and snippets.",
+          "Hotkey-driven dictation into supported text fields, with local history, dictionary, and snippets.",
         ],
       },
       {
         kicker: "Migration",
         title: "Dragon Home is gone - what former users actually need",
         paragraphs: [
-          "Nuance discontinued Dragon Home, the roughly $150 consumer edition, in 2023, and discontinued Dragon for Mac back in 2018. The official upgrade path for a home user today is Dragon Professional at $699.99 - a 4-5x price jump for people who never needed enterprise features.",
-          "Since Microsoft acquired Nuance in 2022, Dragon's momentum has moved into healthcare and Microsoft 365 integrations rather than consumer desktop software. That is a reasonable business decision, and it is also why former Dragon Home users are looking at modern local dictation tools.",
+          "Nuance discontinued Dragon Home, the roughly $150 consumer edition, in 2023, and discontinued Dragon for Mac back in 2018. Dragon Professional v16 is a currently sold Windows desktop option at $699.99. Check your own license terms and any available upgrade offers separately.",
+          "Before switching, list the tasks you used in Dragon Home: text entry, corrections, commands and any saved vocabulary. A lower price does not establish that another app supports the whole workflow.",
           "If what you used Dragon Home for was everyday dictation - not custom legal vocabularies or full hands-free control - a train-free local tool like Dictivo covers that job at the price class Dragon Home used to occupy.",
         ],
         bullets: [
           "Dragon Home: discontinued 2023, no consumer replacement.",
           "Dragon for Mac: discontinued 2018, no native Mac product since.",
-          "Official path for home users is the $699.99 Professional license.",
+          "Dragon Professional v16 is a currently sold Windows desktop option.",
           "Dictivo covers the everyday-dictation job at $29 once.",
         ],
       },
@@ -750,9 +750,9 @@ export const COMPARE_PAGES = [
           {
             title: "Choose Dragon Professional if",
             items: [
-              "You dictate specialized legal, medical, or law-enforcement vocabulary daily.",
+              "You depend on custom vocabulary already configured in Dragon Professional.",
               "You need full hands-free command-and-control of your PC, or rely on it for accessibility.",
-              "Your organization deploys managed profiles, shared vocabularies, or PowerMic hardware.",
+              "Your organization requires specific Dragon commands or deployment features.",
               "You have years of custom Dragon macros and vocabulary investment.",
             ],
           },
@@ -771,11 +771,11 @@ export const COMPARE_PAGES = [
     faqs: [
       ["Is Dragon NaturallySpeaking still available?", "Partly, and the consumer side keeps shrinking. Dragon Home was discontinued in 2023, Dragon for Mac in 2018, and Dragon Anywhere Mobile stopped being sold on 1 July 2026. What remains is Dragon Professional v16 for Windows at $699.99, plus enterprise offerings like Dragon Medical One."],
       ["What is the best cheap Dragon alternative?", "For everyday dictation, compare modern local tools: Dictivo is $29 once and does not require voice-profile training on Mac or Windows. Windows 11 users can also try built-in Voice Access. If you depend on Dragon commands or custom vocabulary, test those requirements before switching."],
-      ["Does Dragon work on Mac?", "No. Nuance discontinued Dragon Professional Individual for Mac in October 2018 and has not shipped a native Mac desktop product since. Dictivo runs its local dictation workflow on both macOS and Windows x64."],
+      ["Does Dragon work on Mac?", "No. Nuance discontinued Dragon Professional Individual for Mac in October 2018 and has not shipped a native Mac desktop product since. Dictivo provides public installers for macOS and Windows x64; test your required text fields and hotkeys on your platform."],
       ["Do I need to train Dictivo like Dragon?", "No. Dictivo uses modern Whisper-grade local models that work without a voice profile. Dragon builds accuracy through profile and vocabulary training, which pays off for specialized terminology but adds setup and maintenance."],
       ["Is Dictivo as accurate as Dragon?", "We have not published a controlled accuracy comparison between Dictivo and Dragon. Try the same recordings and work tasks in both, using the vocabulary and settings you would normally use, and compare the corrections required."],
       ["Does Dragon run offline like Dictivo?", "Yes - this is a real similarity. Dragon Professional v16 processes speech locally and works offline after activation. The differences are price, platforms, and training, not the local processing itself."],
-      ["What happened to Dragon Home?", "Nuance discontinued the roughly $150 Dragon Home edition in 2023 without a consumer replacement. The official upgrade path is Dragon Professional at $699.99, which is why many former Home users switch to modern lower-cost local dictation tools."],
+      ["What happened to Dragon Home?", "Nuance discontinued the roughly $150 Dragon Home edition in 2023 without a consumer replacement. Dragon Professional v16 is currently sold at $699.99. Compare the tasks and license terms you need before choosing a replacement."],
     ],
     related: ["wispr-flow-alternative", "macos-dictation-alternative"],
     sources: [
