@@ -1,5 +1,17 @@
 # Dictivo site
 
+## Verified deployment and pending changes — 2026-09-13
+
+Last verified production website commit: `4a47aa0` (September 12). The full crawl
+checked 144 sitemap pages across ten locales; the 35-second commercial film and
+Safari English/Chinese subtitle follow-up are verified. The 20-second screenshot
+sequence and human-speech CLI benchmark remain separate supporting evidence.
+
+Local commit `ce4c818` adds explicit `google_ads` checkout attribution. The paired
+API commit `3e5e45f` is also local only; Cloudflare authentication timed out, so
+neither was deployed. Deploy the API first, then this site and verify live assets.
+This README update does not imply the pending source is live or an ad campaign exists.
+
 This repository is the static website for `dictivo.app`. It is intentionally separate from the Dictivo desktop app
 repository. The current positioning is **private dictation first**: Local mode is the default product, while Cloud
 Fast is an optional speed mode for users who accept cloud transcription upload.
@@ -195,16 +207,13 @@ As of 2026-08-01 the file is still unfilled and `/impressum/` returns 404.
 
 The deploy workflow runs this over every text file in `dist/` and fails the build on a match.
 
-It enforces a forbidden-content list of vendor and implementation names that must never appear in
-public output — the payment provider's name, `whisper.cpp`, `Cloudflare`, `R2`, `GitHub Release`,
-`client-side analytics`, `machine-readable`, `api token`, repository paths such as
-`scripts/generate-site` and `data/compare-pages`, and the localized words for "sources" and
-"fact-checked" in every shipped language.
-
-This list is deliberate. The public site describes what the product does, not what it is built on,
-and not how this repository is wired. If a new page trips the check, rewrite the page. Do not widen
-the list without a decision that the name genuinely belongs in public copy. (`downloads.json` is
-the one narrow exemption: it may be named on `llms.txt` and the security page, nowhere else.)
+The exact patterns and file exceptions in `scripts/check-public-output.mjs` are authoritative.
+General marketing copy excludes internal infrastructure, repository paths and process terminology.
+Ordinary localized words for sources and visible primary references are allowed. The reproducible
+benchmark HTML at `guides/mac-dictation-benchmark-method/index.html` specifically permits
+`whisper.cpp` and `machine-readable`; this exception does not apply to general marketing pages.
+`downloads.json` may be named on `llms.txt` and the security page, not general marketing surfaces.
+A validation failure should be assessed against the actual pattern and the page's purpose.
 
 The same script also asserts that the required trust, GEO and localized pages exist, that no
 `data/`, `scripts/`, `tmp/` or `.github/` path is published, that `assets/site.js` still carries
@@ -277,8 +286,8 @@ node scripts/inject-asset-version.mjs
 
 The eight check steps are blocking: any one of them fails the deploy before `dist/` reaches
 Cloudflare. `scripts/check-public-output.mjs` is the broadest of them - it scans every generated
-text file in `dist/` against a forbidden-content list, so vendor and implementation names must
-never reach public output.
+text file in `dist/` against the defined patterns and explicit evidence-page exceptions.
+Visible sources are supported; internal process details remain excluded from marketing copy.
 
 That keeps the homepage, localized pages, comparison pages, `downloads.json`, `_redirects`, `sitemap.xml`, and changelog aligned with
 the latest stable desktop release. The final step copies `site.css` and
@@ -366,8 +375,8 @@ version instead of silently redefining `web-linked-v1`.
 
 A user-initiated internal navigation carries the current UTM campaign fields in its target
 URL. Without UTMs, the external referrer host becomes the source. Static HTML links remain
-canonical and clean; checkout, file downloads, external links, and existing destination
-campaigns are left alone. No visitor id is carried between pages and no browser storage
+canonical and clean; file downloads, external links and existing destination campaigns
+are left alone. Checkout uses the separate registered-channel handling below. No visitor id is carried between pages and no browser storage
 is used. Direct visits remain direct. Opening a fresh URL independently or using an
 unhandled navigation path may lose attribution; this is not cross-session tracking.
 
@@ -376,6 +385,12 @@ Download clicks and redirects now inherit this page's source, medium, campaign, 
 installer. This corrects the former generic `site` attribution, so channel totals before
 and after the change need that context. The `web-linked-v1` per-page join contract is
 unchanged. No install-to-payment join is introduced by this change.
+
+Checkout links carry only an allowed `checkout[custom][channel]` label, alongside any
+pre-existing functional checkout parameters. Raw UTM values, search text and page ids
+are not copied to checkout. The signed billing webhook records coarse channel attribution;
+App/cross-device orders can remain unknown. Explicit `google_ads` separation from `google`
+is implemented in the local pending commits noted above, not yet verified in production.
 
 Local and Pages-preview hosts do not emit page or click beacons to production. The
 built-in Node check `node scripts/check-web-attribution.mjs` exercises campaign handoff,
