@@ -84,4 +84,8 @@ test("?lang= saves the choice and returns to the clean URL for everyone", () => 
   });
   assert.deepEqual(decide("/?lang=xx", { country: "DE" }), { action: "redirect", location: "/", reason: "lang:invalid" });
   assert.equal(decide("/zh-hant/?lang=zh-hant", { headers: { "user-agent": "Twitterbot/1.0" } }).setCookie, "zh-hant");
+  // English-only pages have no hreflang group but still carry the language menu.
+  assert.deepEqual(decide("/english-only/?lang=en", { headers: { "sec-fetch-site": "same-origin" } }), {
+    action: "redirect", location: "/english-only/", setCookie: "en", reason: "lang:en",
+  });
 });

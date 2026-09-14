@@ -26,6 +26,14 @@ async function expect(name, pending, assertions) {
   }
 }
 
+// Right after `wrangler pages deploy`, the custom domain can briefly serve the previous deployment.
+for (let attempt = 1; attempt <= 12; attempt++) {
+  const probe = await visit("/de/").catch(() => null);
+  if (probe?.headers.has("x-dictivo-locale-route")) break;
+  console.log(`Waiting for the language routing deployment (attempt ${attempt}/12)…`);
+  await new Promise((done) => setTimeout(done, 10_000));
+}
+
 const escape = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const status = (r, code) => r.status !== code && `status ${r.status} != ${code}`;
 const header = (r, name, pattern) => !pattern.test(r.headers.get(name) || "") && `${name}=${r.headers.get(name)} !~ ${pattern}`;
@@ -46,6 +54,7 @@ await expect("saved choice redirects English entry", visit("/", { headers: { coo
 await expect("saved English choice stays", visit("/", { headers: { cookie: "dictivo_lang=en" } }), (r) => [status(r, 200), route(r, "cookie:en"), noPrompt(r)]);
 await expect("deep page follows saved choice", visit("/compare/wispr-flow-alternative/?utm_source=x", { method: "HEAD", headers: { cookie: "dictivo_lang=ja" } }), (r) => [status(r, 302), location(r, "/ja/compare/wispr-flow-alternative/?utm_source=x")]);
 await expect("?lang= stores choice", visit("/zh-hant/?lang=zh-hant&utm_source=x"), (r) => [status(r, 302), location(r, "/zh-hant/?utm_source=x"), header(r, "set-cookie", /^dictivo_lang=zh-hant;.*HttpOnly/)]);
+await expect("?lang= works on English-only pages", visit("/guides/mac-dictation-benchmark-method/?lang=en", { headers: { "sec-fetch-site": "same-origin" } }), (r) => [status(r, 302), location(r, "/guides/mac-dictation-benchmark-method/"), header(r, "set-cookie", /^dictivo_lang=en;/)]);
 await expect("crawler is never redirected", visit("/", { headers: { cookie: "dictivo_lang=fr", "user-agent": GOOGLEBOT } }), (r) => [status(r, 200), route(r, "automated"), noPrompt(r)]);
 await expect("internal click is never redirected", visit("/", { headers: { cookie: "dictivo_lang=fr", "sec-fetch-site": "same-origin" } }), (r) => [status(r, 200), route(r, "internal")]);
 await expect("checkout stays a static redirect", visit("/checkout/local"), (r) => [status(r, 302), header(r, "location", /^https:\/\/dictivo\.lemonsqueezy\.com\//), r.headers.has("x-dictivo-locale-route") && "Function ran on checkout"]);
