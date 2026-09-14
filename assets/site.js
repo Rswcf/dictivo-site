@@ -439,3 +439,31 @@ if (productFilm) {
   });
   window.addEventListener('popstate', () => void seekFilm(Number(new URL(location.href).searchParams.get('t') || 0), false));
 }
+
+// Prices arrive rendered for the page language's home country. Once the visitor's own
+// country is known, show its tax treatment instead: the checkout charges the same way.
+const priceElements = document.querySelectorAll("[data-price-cents]");
+if (priceElements.length > 0 && typeof DictivoPrice !== "undefined") void showVisitorPrices(priceElements);
+
+async function visitorBillingCountry() {
+  const previewCountry = new URLSearchParams(window.location.search).get("price_country");
+  if (!isPublicSite && /^[A-Z]{2}$/.test(previewCountry || "")) return previewCountry;
+  try {
+    const response = await fetch("/cdn-cgi/trace", { cache: "no-store" });
+    const country = response.ok ? /^loc=([A-Z]{2})$/m.exec(await response.text())?.[1] : undefined;
+    return country && country !== "XX" && country !== "T1" ? country : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+async function showVisitorPrices(elements) {
+  const country = await visitorBillingCountry();
+  if (!country) return;
+  const lang = document.documentElement.lang;
+  for (const element of elements) {
+    if (element.dataset.priceCountry === country) continue;
+    element.textContent = DictivoPrice.formatPrice({ cents: Number(element.dataset.priceCents), form: element.dataset.priceForm, lang, country });
+    element.dataset.priceCountry = country;
+  }
+}
