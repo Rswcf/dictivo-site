@@ -379,6 +379,48 @@ built-in Node check `node scripts/check-web-attribution.mjs` exercises campaign 
 independent page ids, click/redirect parity, referrer query removal, navigation exclusions,
 and preview isolation. It runs in deployment CI.
 
+## Language routing (2026-09-14)
+
+`functions/_middleware.js` is the site's only Pages Function. It decides, per request, whether a
+visitor who arrives on an English page should see a translation. The decision lives in
+`lib/locale-routing/` and is covered by `npm test`.
+
+- **Only English addresses are routed.** URLs that already name a language (`/de/`, `/zh-hant/` …)
+  are explicit choices and are never redirected. In-site clicks, prefetches, crawlers, link previews
+  and scripted clients are never redirected either.
+- **Order of preference:** a saved choice (`dictivo_lang` cookie) → the visitor's country → English.
+  Countries map to languages in `lib/locale-routing/countries.mjs`; countries outside the site
+  languages, and pages without that translation, stay English. Multilingual countries (CH, BE, LU,
+  CA with Quebec, CM, PR, SG) use the browser's language among their own languages.
+- **EU/EEA visitors outside Germany are asked, not redirected.** The Geo-blocking Regulation
+  (EU) 2018/302 Art. 3 forbids location-based redirects without explicit consent; Germany is a purely
+  internal situation for this German business. Those visitors get a prompt in their language
+  (`lib/locale-routing/suggestion.mjs`); accepting or staying in English saves the choice.
+- **Remembering a choice:** language-menu links, homepage language pills and the prompt carry
+  `?lang=<code>`. The middleware sets `dictivo_lang` (HttpOnly, SameSite=Lax, one year, language code
+  only) and redirects to the clean URL. The Privacy Policy's "Website language" section discloses this.
+- **Route map:** `generate-site.mjs` reads the hreflang tags of the finished pages and writes
+  `lib/locale-routing/generated/routes.json` (bundled into the Function, gitignored) and
+  `dist/_routes.json`. `_routes.json` only sends localized page paths to the Function, so
+  `/checkout/*`, `/download/*`, `/downloads/*` and `/assets/*` keep their `_redirects` and headers and
+  cost no Function requests (the free plan allows 100,000 per day).
+- **Live checks:** `node scripts/check-locale-routing-live.mjs https://dictivo.app` runs after every
+  deploy. On a preview deployment add `--country-override`: the middleware honors
+  `x-dictivo-test-country` / `x-dictivo-test-region` only on `*.dictivo-app.pages.dev` and localhost,
+  which lets the full country matrix run from one place.
+
+To change a country's language, edit `COUNTRIES_BY_LOCALE` or `MULTILINGUAL_COUNTRIES` and run
+`npm test`; the exhaustive test walks every English page against every country.
+
+## Traditional Chinese (`/zh-hant/`)
+
+Taiwan, Hong Kong and Macau get Traditional Chinese pages. They are not translated separately:
+`generate-site.mjs` converts every `zh` copy entry with OpenCC (`cn → twp`, Taiwan standard with
+software terms) through `scripts/lib/hant.mjs`. Edit the Simplified `zh` copy and both pages update.
+When a conversion reads wrong in context, add a `[pattern, replacement]` pair to `HANT_FIXES` with a
+test in `tests/hant.test.mjs`; `tests/zh-hant-output.test.mjs` fails if any Simplified character is
+left on a zh-hant page. The film uses a converted `captions.zh-Hant.vtt` generated at build time.
+
 ## Local checkout
 
 The Dictivo Local pricing CTA points to `/checkout/local`, so the Lemon Squeezy one-time checkout URL can be swapped

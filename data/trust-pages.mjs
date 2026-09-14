@@ -85,6 +85,17 @@ export const TRUST_PAGES = [
         ],
       },
       {
+        title: "Website language",
+        paragraphs: [
+          "When you open an English address on dictivo.app, the website may show you the same page in your local language, based on the country your connection appears to come from. That country is used only for this request and is not stored. Visitors from Germany and from outside the European Economic Area are taken to their language directly; visitors from other EEA countries stay on the English page and are asked first.",
+          "If you choose a language in the language menu or in that prompt, the website sets a cookie named dictivo_lang that contains only that language code, so later visits keep your choice. It lasts up to one year, contains no identifier, and is not used for analytics or advertising. Clearing your browser's cookies removes it.",
+        ],
+        bullets: [
+          "Addresses that already name a language, such as /de/ or /zh-hant/, are never redirected.",
+          "Search engines and link previews always see the page they requested.",
+        ],
+      },
+      {
         title: "Purchases, licenses, and support",
         paragraphs: [
           "When you buy Dictivo, the checkout provider handles payment details, billing address, tax calculation, receipts, and payment security. Dictivo receives the information needed to issue and validate the license.",
@@ -1400,6 +1411,9 @@ for (const page of TRUST_PAGES.filter((p) => ["privacy", "privacy/where-dictatio
   page.lastModified = TRIAL_MILESTONE_LASTMOD;
   for (const localized of Object.values(page.locales || {})) localized.lastModified = TRIAL_MILESTONE_LASTMOD;
 }
+
+// The Privacy Policy gained the website-language section on 2026-09-14.
+TRUST_PAGES.find((page) => page.slug === "privacy").lastModified = "2026-09-14";
 
 // Link the procedure to a separately scoped, reproducible engine-only observation.
 networkTestPage.relatedLinks.push({
