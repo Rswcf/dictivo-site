@@ -43,7 +43,7 @@ import {
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
-import { browserPriceScript, resolvePriceTokens } from "./lib/price-tokens.mjs";
+import { browserPriceScript, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
 import { LOCAL_OFFER } from "../data/local-offer.mjs";
 
@@ -2451,13 +2451,20 @@ function renderTier(tier, index) {
   const buttonClass = `${index === 1 ? "button button-dark" : "button button-secondary"}${index === 0 ? " download-link" : ""}`;
   const href = tier.href || (index === 0 ? downloadUrl("macos", "pricing_free") : index === 1 ? "/checkout/local" : "/checkout/cloud-fast");
   const data = tier.dataAttr ?? (index === 0 ? downloadData("macos", "pricing_free") : index === 1 ? " data-local-checkout" : " data-cloud-fast-checkout");
+  const price = index === 1 ? "local" : index === 2 ? "cloudFast" : null;
   return `<article class="${classes}" role="listitem" data-od-id="${index === 0 ? "tier-free" : index === 1 ? "tier-local" : "tier-cloud-fast"}">
               <h3 class="tier-name">${html(tier.name)}</h3>
               <p class="tier-sub">${html(tier.sub)}</p>
-              <p class="tier-price">${tier.was ? `<s class="tier-price-was">${html(tier.was)}</s>` : ""}${html(tier.price)}<small>${html(tier.small)}</small></p>
+              <p class="tier-price">${tier.was ? `<s class="tier-price-was">${html(tier.was)}</s>` : ""}${price ? priceToken(price, "main") : html(tier.price)}<small>${html(tier.small)}</small></p>
+              <p class="tier-tax">${price ? priceToken(price, "note") : ""}</p>
               ${renderList(tier.features)}
               <a class="${buttonClass}" href="${attr(href)}"${data}>${html(tier.button)}</a>
             </article>`;
+}
+
+// Structured-data prices are net; the checkout adds tax for the billing country.
+function netPriceSpecification(amount) {
+  return { "@type": "PriceSpecification", price: schemaPrice(amount), priceCurrency: "USD", valueAddedTaxIncluded: false };
 }
 
 function renderSchema(currentCode, t) {
@@ -2494,17 +2501,25 @@ function renderSchema(currentCode, t) {
       description: t.metaDescription,
       offers: [
         { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Dictivo Local", price: "29", priceCurrency: "USD", priceValidUntil: LOCAL_OFFER.introPriceUntil },
+        {
+          "@type": "Offer",
+          name: "Dictivo Local",
+          price: schemaPrice("local"),
+          priceCurrency: "USD",
+          priceValidUntil: LOCAL_OFFER.introPriceUntil,
+          priceSpecification: netPriceSpecification("local"),
+        },
         {
           "@type": "Offer",
           name: "Cloud Fast",
-          price: "6.99",
+          price: schemaPrice("cloudFast"),
           priceCurrency: "USD",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
-            price: "6.99",
+            price: schemaPrice("cloudFast"),
             priceCurrency: "USD",
             billingDuration: "P1M",
+            valueAddedTaxIncluded: false,
           },
         },
       ],
@@ -2606,9 +2621,10 @@ function renderCompareSchema(page, currentCode) {
       offers: {
         "@type": "Offer",
         name: "Dictivo Local",
-        price: "29",
+        price: schemaPrice("local"),
         priceCurrency: "USD",
         priceValidUntil: LOCAL_OFFER.introPriceUntil,
+        priceSpecification: netPriceSpecification("local"),
       },
     },
     {
@@ -4089,8 +4105,27 @@ function renderMediaKitSchema() {
         description: copy.answer,
         offers: [
           { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
-          { "@type": "Offer", name: "Dictivo Local", price: "29", priceCurrency: "USD", priceValidUntil: LOCAL_OFFER.introPriceUntil },
-          { "@type": "Offer", name: "Cloud Fast", price: "6.99", priceCurrency: "USD" },
+          {
+            "@type": "Offer",
+            name: "Dictivo Local",
+            price: schemaPrice("local"),
+            priceCurrency: "USD",
+            priceValidUntil: LOCAL_OFFER.introPriceUntil,
+            priceSpecification: netPriceSpecification("local"),
+          },
+          {
+            "@type": "Offer",
+            name: "Cloud Fast",
+            price: schemaPrice("cloudFast"),
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: schemaPrice("cloudFast"),
+              priceCurrency: "USD",
+              billingDuration: "P1M",
+              valueAddedTaxIncluded: false,
+            },
+          },
         ],
       },
     },

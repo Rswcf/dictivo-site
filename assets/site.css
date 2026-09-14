@@ -1714,9 +1714,10 @@ main section[id] {
 
 .tier-price {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   font-family: var(--display);
   font-size: clamp(36px, 4.6vw, 52px);
   font-weight: 850;
@@ -1731,6 +1732,15 @@ main section[id] {
   font-weight: 500;
   color: var(--muted);
   letter-spacing: 0;
+}
+
+/* Tax treatment for the buyer's country; kept one line tall on the free tier so cards align. */
+.tier-tax {
+  min-height: 1.45em;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .tier-price-was {
