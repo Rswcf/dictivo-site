@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFileSync, statSync } from 'node:fs';
-import { PRODUCT_FILM as film, FILM_COPY } from '../data/product-film.mjs';
+import { PRODUCT_FILM as film } from '../data/product-film.mjs';
+import { LOCALES } from '../data/site-content.mjs';
 const root = new URL('../dist/', import.meta.url);
 const get = path => readFileSync(new URL(path.replace(/^\//, ''), root), 'utf8');
-for (const code of Object.keys(FILM_COPY)) {
+for (const { code } of LOCALES) {
   const page = get(code === 'en' ? 'index.html' : `${code}/index.html`);
   const video = page.match(/<video\b[^>]*>/)?.[0];
   assert(video?.includes(`src="${film.video}"`), `${code}: video must have a static src`);
@@ -17,7 +18,7 @@ for (const code of Object.keys(FILM_COPY)) {
   assert.equal(schema.thumbnailUrl, `https://dictivo.app${film.poster}`);
   assert(!schema.embedUrl, 'The watch page is not a separate embeddable player');
   assert(page.includes(`href="${film.path}"`));
-  assert(page.includes(film.captions) && page.includes(film.chinese) && page.includes(film.credits));
+  assert(page.includes(film.captions) && page.includes(film.chinese) && page.includes(film.chineseTraditional) && page.includes(film.credits));
 }
 const page = get('demo/index.html');
 assert.equal((page.match(/<h1\b/g) || []).length, 1);
@@ -29,9 +30,9 @@ assert(page.includes('CC BY 4.0') && page.includes('No endorsement'));
 assert(get('sitemap.xml').includes('<loc>https://dictivo.app/demo/</loc>'));
 assert(get('media-kit/index.html').includes('id="native-example-title"'));
 assert(get('media-kit/index.html').includes('href="/demo/"'));
-for (const path of [film.video, film.master, film.poster, film.captions, film.chinese, film.credits]) {
+for (const path of [film.video, film.master, film.poster, film.captions, film.chinese, film.chineseTraditional, film.credits]) {
   const size = statSync(new URL(path.slice(1), root)).size;
   assert(size > 0 && size < 25 * 1024 * 1024, `${path}: file missing or above Pages limit`);
 }
 assert(get(film.captions).includes('Your voice. On your device.'));
-console.log('Product film: 10 homepages, native fallback, captions, privacy scope, credits, watch-page metadata, sitemap and asset limits passed.');
+console.log(`Product film: ${LOCALES.length} homepages, native fallback, captions, privacy scope, credits, watch-page metadata, sitemap and asset limits passed.`);

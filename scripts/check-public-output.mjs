@@ -2,6 +2,7 @@ import { COMPARE_LAST_UPDATED } from "../data/compare-pages.mjs";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { LOCALES } from "../data/site-content.mjs";
+import { toHant } from "./lib/hant.mjs";
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 
@@ -14,7 +15,7 @@ const hasWindowsRelease = release.publicWindowsDownloads === true && hasWindowsA
 const tombstoneRoots = ["data/", "scripts/", "tmp/", ".github/"];
 const tombstoneFiles = new Set([".gitignore", "README.md", "wrangler.toml"]);
 const textExtensions = new Set([".html", ".js", ".css", ".vtt", ".xml", ".txt", ".json"]);
-const forbiddenContent = [
+const forbiddenContentSource = [
   /sources checked/i,
   /source links/i,
   /source section/i,
@@ -52,13 +53,13 @@ const downloadsJsonExemptFiles = /(^|\/)llms\.txt$|^security\.html$|^security\/i
 // Keep these implementation terms out of general marketing surfaces.
 const benchmarkTerms = [/machine-readable/i, /whisper\.cpp/i];
 const benchmarkEvidenceFile = "guides/mac-dictation-benchmark-method/index.html";
-const forbiddenCompareContent = [
+const forbiddenCompareContentSource = [
   /as of May 25, 2026/i,
   /May 25, 2026/i,
   /facts re-?checked/i,
   /事实核对/,
 ];
-const staleWindowsHomeContent = [
+const staleWindowsHomeContentSource = [
   /Windows version coming later/i,
   /Not yet\. Dictivo is available/i,
   /Mac is available now\. Windows/i,
@@ -83,7 +84,7 @@ const staleWindowsHomeContent = [
   /Windows 버전은 나중에 제공/,
   /아직은 아닙니다\. Dictivo/,
 ];
-const publicWindowsLaunchContent = [
+const publicWindowsLaunchContentSource = [
   /Mac and Windows x64 are available now/i,
   /Mac and Windows public beta/i,
   /Download for Windows/i,
@@ -101,7 +102,7 @@ const publicWindowsLaunchContent = [
   /Windows x64 공개 베타/,
   /Windows용 다운로드/,
 ];
-const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html"];
+const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html", "zh-hant/index.html"];
 const requiredTrustFiles = ["privacy.html", "terms.html", "refund.html", "contact.html", "about.html"];
 const requiredLocalizedTrustFiles = TRUST_PAGES.filter((page) => page.locales).flatMap((page) =>
   LOCALES.filter((locale) => locale.code !== "en").map((locale) => `${locale.code}/${page.slug}/index.html`),
@@ -129,6 +130,7 @@ const requiredGeoFiles = [
   "zh/llms.txt",
   "ja/llms.txt",
   "ko/llms.txt",
+  "zh-hant/llms.txt",
   "privacy-proof/index.html",
   "de/privacy-proof/index.html",
   "fr/privacy-proof/index.html",
@@ -139,6 +141,7 @@ const requiredGeoFiles = [
   "zh/privacy-proof/index.html",
   "ja/privacy-proof/index.html",
   "ko/privacy-proof/index.html",
+  "zh-hant/privacy-proof/index.html",
   "guides/offline-dictation-on-mac/index.html",
   "de/guides/offline-dictation-on-mac/index.html",
   "fr/guides/offline-dictation-on-mac/index.html",
@@ -149,10 +152,25 @@ const requiredGeoFiles = [
   "zh/guides/offline-dictation-on-mac/index.html",
   "ja/guides/offline-dictation-on-mac/index.html",
   "ko/guides/offline-dictation-on-mac/index.html",
+  "zh-hant/guides/offline-dictation-on-mac/index.html",
   "guides/mac-dictation-benchmark-method/index.html",
   "guides/best-speech-to-text-apps-for-mac/index.html",
   "media-kit/index.html",
 ];
+
+// Traditional Chinese pages are converted from Simplified copy, so guard both scripts.
+function withHantTwins(patterns) {
+  const twins = patterns
+    .filter((pattern) => /[\u4e00-\u9fff]/.test(pattern.source))
+    .map((pattern) => new RegExp(toHant(pattern.source), pattern.flags))
+    .filter((twin) => !patterns.some((pattern) => pattern.source === twin.source));
+  return [...patterns, ...twins];
+}
+
+const forbiddenContent = withHantTwins(forbiddenContentSource);
+const forbiddenCompareContent = withHantTwins(forbiddenCompareContentSource);
+const staleWindowsHomeContent = withHantTwins(staleWindowsHomeContentSource);
+const publicWindowsLaunchContent = withHantTwins(publicWindowsLaunchContentSource);
 
 function extension(file) {
   const index = file.lastIndexOf(".");
