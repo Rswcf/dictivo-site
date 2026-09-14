@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCALES } from "../../data/site-content.mjs";
-import { STATIC_EXCLUDES, buildLocaleRoutes, buildRoutesConfig } from "../../lib/locale-routing/build-routes.mjs";
+import { STATIC_EXCLUDES, buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../../lib/locale-routing/build-routes.mjs";
 import { localeForCountry, requiresConsent } from "../../lib/locale-routing/countries.mjs";
 import { COOKIE_NAME, decideLocaleRoute } from "../../lib/locale-routing/decide.mjs";
 
@@ -48,14 +48,17 @@ test("the map covers every translated page in all 11 locales", () => {
 });
 
 test("_routes.json sends every mapped page, and nothing static, to the Function", () => {
-  assert.deepEqual(config, buildRoutesConfig(routes));
+  const choicePaths = languageChoicePaths(`${root}dist`);
+  assert.deepEqual(config, buildRoutesConfig(routes, choicePaths));
   assert.ok(!config.include.includes("/*"));
   for (const rule of STATIC_EXCLUDES) assert.ok(config.exclude.includes(rule), rule);
   assert.ok(config.include.length + config.exclude.length <= 100);
   for (const path of Object.keys(routes.pages)) assert.ok(routedToFunction(path), path);
+  assert.ok(choicePaths.length >= LOCALES.length, `${choicePaths.length} language choice paths`);
+  for (const path of choicePaths) assert.ok(routedToFunction(path), `language choice ${path}`);
   for (const path of ["/checkout/local", "/checkout/cloud-fast", "/checkout/local-renewal", "/download/mac",
     "/downloads/Dictivo-macOS-universal.dmg", "/assets/site.css", "/cloud-fast", "/downloads.json", "/sitemap.xml",
-    "/de/llms.txt"]) assert.ok(!routedToFunction(path), path);
+    "/de/llms.txt", "/about/"]) assert.ok(!routedToFunction(path), path);
   assert.match(readFileSync(`${root}dist/_redirects`, "utf8"), /^\/checkout\/local https:\/\/\S+ 302$/m);
 });
 
