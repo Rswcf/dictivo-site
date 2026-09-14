@@ -62,7 +62,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
     [
       "Dictivo Local",
       "Yes in Local mode. Audio is processed on the device; optional Cloud Fast uploads only recordings you select.",
-      "$29 once with 12 months of updates, then optional $24/year renewal. Tiny free tier and a 14-day full Local trial.",
+      "{{price.local.inline}} once with 12 months of updates, then optional renewal at {{price.renewal.inline}} a year. Tiny free tier and a 14-day full Local trial.",
       "Everyday private dictation into any app, with the same local workflow on Windows and macOS.",
     ],
     [
@@ -134,12 +134,12 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       paragraphs: [
         "Dictivo brings the same local-first workflow to Windows that it runs on macOS: hold a hotkey, speak, and the text lands in the active app. Local mode processes audio on the device, and the app keeps history, dictionary terms, and snippets locally. Optional Cloud Fast is a separate mode that uploads only recordings you choose.",
         "One honest caveat: the Windows installer is not yet Authenticode-signed, so SmartScreen may show an unknown-publisher notice during setup. SHA-256 checksums are published for verification, and signing is on the roadmap.",
-        "The free Tiny tier and the 14-day full Local trial work the same on Windows as on Mac, so you can test the whole local workflow before paying $29.",
+        "The free Tiny tier and the 14-day full Local trial work the same on Windows as on Mac, so you can test the whole local workflow before paying {{price.local.inline}}.",
       ],
       bullets: [
         "Same hotkey-driven local dictation on Windows and macOS.",
         "Local mode keeps audio, transcripts, history, and dictionary on the PC.",
-        "Free Tiny tier plus a 14-day full Local trial before the $29 purchase.",
+        "Free Tiny tier plus a 14-day full Local trial before buying Local ({{price.local.inline}}).",
         "SmartScreen may warn during install until code signing lands; checksums are published.",
       ],
     },
@@ -174,9 +174,9 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
   faqs: [
     ["Does Windows have built-in offline dictation?", "Yes. Voice Access, built into Windows 11 22H2 and later, downloads a speech model once and then works on-device, including offline. The older Win+H Voice Typing path is cloud-based by default and needs an internet connection."],
     ["Is Windows Voice Typing (Win+H) private?", "Win+H uses Microsoft's cloud-based speech services by default, so dictation audio is sent to the cloud for processing. If on-device processing matters, use Voice Access or a local third-party dictation app."],
-    ["What is the best offline dictation software for Windows?", "Start free with Voice Access. For a dedicated local writing workflow, compare Dictivo ($29 once), Whisperstream ($29 once), JesType, and Weesper Neon Flow. For voice coding and hands-free control, Talon is free and local."],
+    ["What is the best offline dictation software for Windows?", "Start free with Voice Access. For a dedicated local writing workflow, compare Dictivo ({{price.local.inline}} once), Whisperstream ($29 once), JesType, and Weesper Neon Flow. For voice coding and hands-free control, Talon is free and local."],
     ["Does Dictivo work offline on Windows?", "Yes. In Local mode, Dictivo processes dictation on the PC after the local model is installed, and transcripts, history, and dictionary terms stay on the device. The installer is not yet Authenticode-signed, so SmartScreen may show a notice during setup."],
-    ["Is there a local Dragon alternative for Windows?", "Yes. Dragon Professional itself processes locally but costs $699.99 and relies on voice-profile training. Modern train-free local tools like Dictivo ($29 once) cover everyday dictation; Dragon keeps the edge for specialized legal and medical vocabulary."],
+    ["Is there a local Dragon alternative for Windows?", "Yes. Dragon Professional itself processes locally but costs $699.99 and relies on voice-profile training. Modern train-free local tools like Dictivo ({{price.local.inline}} once) cover everyday dictation; Dragon keeps the edge for specialized legal and medical vocabulary."],
     ["How can I check that a dictation app is really local?", "Dictate while watching the app's network activity in Resource Monitor or a firewall log: local processing should produce no upload during speech. Dictivo publishes an open network test and an audio-path page so you can run this check yourself."],
   ],
   relatedTitle: "Related Dictivo pages",

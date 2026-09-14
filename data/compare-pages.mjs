@@ -1,5 +1,3 @@
-import { LOCAL_THREE_YEAR_PRICE } from "./local-offer.mjs";
-
 export const COMPARE_LAST_UPDATED = {
   // `label` is no longer rendered; the stamp is formatted per locale from `iso`.
   label: "September 2026",
@@ -12,7 +10,7 @@ const dictivoRows = {
   trains: "Never in Local mode.",
   offline: "Yes in Local mode after the local model is installed.",
   account: "No Dictivo account for Local dictation.",
-  pricing: "$29 once, 12 months of updates, then optional $24/year update renewal.",
+  pricing: "{{price.local.inline}} once, 12 months of updates, then optional update renewal at {{price.renewal.inline}} a year.",
   trial: "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
   platforms: "Public downloads are available for macOS and Windows x64.",
   boundary:
@@ -25,7 +23,7 @@ export const COMPARE_PAGES = [
     competitor: "Wispr Flow",
     title: "Wispr Flow Alternative: Local, Buy-Once Dictation (2026)",
     metaDescription:
-      "Want a Wispr Flow alternative that runs on-device for a one-time price? Dictivo does Whisper-grade dictation locally for $29 once. Compare here.",
+      "Want a Wispr Flow alternative that runs on-device for a one-time price? Dictivo does Whisper-grade dictation locally, bought once. Compare here.",
     h1: "Wispr Flow alternative: local dictation when cloud is the wrong default",
     eyebrow: "Compare alternatives",
     primaryKeyword: "wispr flow alternative",
@@ -35,7 +33,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Offline Mac dictation with optional speed", "Cloud AI polish across devices"],
-      [`3-year cost`, `${LOCAL_THREE_YEAR_PRICE} with two optional update renewals`, `$432 on the annual Pro plan`],
+      [`3-year cost`, `{{price.threeYear.inline}} with two optional update renewals`, `$432 on the annual Pro plan`],
       ["Privacy model", "Local architecture first", "Cloud service with privacy controls"],
     ],
     rows: [
@@ -69,7 +67,7 @@ export const COMPARE_PAGES = [
         paragraphs: [
           "Dictivo starts from a different product promise: local dictation should be the default, not a privacy mode you enable after signup. In Local mode, speech recognition runs on your device, history stays on your device, and the dictionary and snippets that make dictation useful are local files rather than cloud profile data.",
           "That difference matters when your spoken words include private drafts, unreleased product plans, journal notes, or code and customer names you would not paste into a random web form. For those workflows, a privacy policy is useful, but not as useful as removing the upload path from the normal workflow.",
-          `Dictivo is also buy-once. The $29 Local license includes 12 months of updates. Keeping update access active for years two and three brings a three-year total to ${LOCAL_THREE_YEAR_PRICE}; skipping renewal keeps the version you bought. The point is simple: local compute should not require a permanent monthly meter for every user.`,
+          `Dictivo is also buy-once. The Local license ({{price.local.inline}}) includes 12 months of updates. Keeping update access active for years two and three brings a three-year total to {{price.threeYear.inline}}; skipping renewal keeps the version you bought. The point is simple: local compute should not require a permanent monthly meter for every user.`,
         ],
         bullets: [
           "Local mode keeps everyday speech recognition on your device.",
@@ -90,7 +88,7 @@ export const COMPARE_PAGES = [
           "Choose Dictivo when the deciding criterion is local Mac dictation, not the broadest AI writing workflow.",
           "Use Local mode for sensitive speech and keep the recording on the device.",
           "Use optional Cloud Fast only for low-sensitivity recordings where speed matters more than a fully local path.",
-          "Use the $29 Local license when you want a buy-once desktop tool instead of a recurring cloud dictation subscription.",
+          "Use the Local license ({{price.local.inline}}) when you want a buy-once desktop tool instead of a recurring cloud dictation subscription.",
         ],
       },
       {
@@ -112,12 +110,12 @@ export const COMPARE_PAGES = [
         title: "Cost over time: Dictivo Local vs Wispr Flow Pro",
         paragraphs: [
           "Wispr Flow's public Pro pricing is $15 per user per month, or $12 per user per month when billed annually. The annual price works out to $144 per year and $432 over three years. Monthly billing would be $540 over the same period.",
-          `Dictivo Local is $29 once. If you keep the optional $24 yearly update renewal active for years two and three, the three-year total is ${LOCAL_THREE_YEAR_PRICE}. If you do not need new updates after the first year, the version you bought remains yours.`,
+          `Dictivo Local is {{price.local.inline}} once. If you keep the optional yearly update renewal ({{price.renewal.inline}}) active for years two and three, the three-year total is {{price.threeYear.inline}}. If you do not need new updates after the first year, the version you bought remains yours.`,
           "That does not make Flow overpriced for everyone. Flow includes cloud compute, multi-platform sync, AI rewriting, and team features. The question is whether those recurring cloud features are the reason you are buying dictation. If the job is private desktop voice typing, Dictivo is intentionally simpler and cheaper.",
         ],
         bullets: [
-          "One year: Dictivo Local is $29 once; Wispr Flow Pro annual billing is $144 per user.",
-          `Three years: Dictivo Local is ${LOCAL_THREE_YEAR_PRICE} with two optional update renewals; Wispr Flow Pro annual billing is $432.`,
+          "One year: Dictivo Local is {{price.local.inline}} once; Wispr Flow Pro annual billing is $144 per user.",
+          `Three years: Dictivo Local is {{price.threeYear.inline}} with two optional update renewals; Wispr Flow Pro annual billing is $432.`,
           "Best interpretation: Dictivo is the lower long-term-cost option for local desktop dictation, not a replacement for every Flow cloud feature.",
         ],
       },
@@ -139,7 +137,7 @@ export const COMPARE_PAGES = [
             items: [
               "You want a Wispr Flow alternative that works locally by default.",
               "You dictate sensitive words and prefer no upload path in the normal workflow.",
-              "You want a $29 one-time license rather than another monthly subscription.",
+              "You want a one-time license ({{price.local.inline}}) rather than another monthly subscription.",
               "You mainly need desktop hotkey dictation into the app you are already using.",
             ],
           },
@@ -152,7 +150,7 @@ export const COMPARE_PAGES = [
       ["Is there an offline alternative to Wispr Flow?", "Yes. Dictivo Local is an offline Wispr Flow alternative for macOS and Windows. Local mode runs speech recognition on-device after the model is installed, so you can dictate without sending audio to a transcription server."],
       ["Does Wispr Flow work without internet?", "Wispr Flow's own Data Controls page says transcription always occurs on the cloud, so it is not a fully offline dictation app. It has privacy and retention controls, but the transcription path is still remote."],
       ["Is Wispr Flow private?", "Wispr Flow offers data-sharing and cloud-storage controls. These affect use and retention of data; transcription still takes place in the cloud. Dictivo Local processes dictation on the device."],
-      [`What is the cheapest Wispr Flow alternative?`, `For a local desktop workflow, Dictivo is $29 once, or ${LOCAL_THREE_YEAR_PRICE} over three years if you keep optional update renewals active. Flow Pro is $144 per year on annual billing.`],
+      [`What is the cheapest Wispr Flow alternative?`, `For a local desktop workflow, Dictivo is {{price.local.inline}} once, or {{price.threeYear.inline}} over three years if you keep optional update renewals active. Flow Pro is $144 per year on annual billing.`],
       ["Can I dictate into any app like Wispr Flow?", "Dictivo is built for global hotkey dictation into the active desktop app. Press the shortcut, speak, and send the transcript back into your current workflow."],
     ],
     related: ["superwhisper-alternative", "macos-dictation-alternative"],
@@ -165,10 +163,10 @@ export const COMPARE_PAGES = [
   {
     slug: "superwhisper-alternative",
     competitor: "Superwhisper",
-    title: "Superwhisper Alternative: Same Local Privacy, $29 Once",
+    title: "Superwhisper Alternative: Same Local Privacy, Lower One-Time Price",
     metaDescription:
-      "Looking for a Superwhisper alternative? Dictivo runs Whisper on-device too, with a lower $29 one-time desktop license and no account for Local mode.",
-    h1: "Superwhisper alternative: local desktop dictation for $29 once",
+      "Looking for a Superwhisper alternative? Dictivo runs Whisper on-device too, with a lower one-time desktop license and no account for Local mode.",
+    h1: "Superwhisper alternative: local desktop dictation, bought once",
     eyebrow: "Compare alternatives",
     primaryKeyword: "superwhisper alternative",
     intro: [
@@ -177,7 +175,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Lower long-term-cost local desktop dictation", "Power users who want modes and many models"],
-      [`3-year cost`, `${LOCAL_THREE_YEAR_PRICE} with optional update renewals`, `$249.99 lifetime or $254.97 on annual Pro`],
+      [`3-year cost`, `{{price.threeYear.inline}} with optional update renewals`, `$249.99 lifetime or $254.97 on annual Pro`],
       ["Privacy model", "Local mode first", "Local models plus optional cloud models"],
     ],
     rows: [
@@ -211,7 +209,7 @@ export const COMPARE_PAGES = [
         paragraphs: [
           "This comparison is not a privacy takedown. Superwhisper and Dictivo both understand why local dictation matters. When Superwhisper uses local models, audio stays on the device. Dictivo does not need to pretend otherwise.",
           "Dictivo competes on focus and price. It is built around desktop hotkey dictation, hardware-aware local model selection, local history, dictionary terms, snippets, and a clear separation between Local mode and the optional Cloud Fast path. There is less to configure before you get useful private dictation.",
-          "The cost difference is the practical wedge. Dictivo Local is $29 once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime. If you want a powerful mode system across multiple platforms, that may be worth it. If you want local desktop dictation without the larger price commitment, Dictivo is the smaller buy.",
+          "The cost difference is the practical wedge. Dictivo Local is {{price.local.inline}} once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime. If you want a powerful mode system across multiple platforms, that may be worth it. If you want local desktop dictation without the larger price commitment, Dictivo is the smaller buy.",
         ],
         bullets: [
           "Lower one-time entry price for the paid local desktop workflow.",
@@ -228,7 +226,7 @@ export const COMPARE_PAGES = [
           "Try both apps with the same short email or note, using a local model on the same computer. Compare setup effort, the time until text is ready, and the corrections you need before pasting. Choose the workflow you will actually use every day.",
         ],
         bullets: [
-          "Choose Dictivo when you want a $29 one-time Local license instead of a higher lifetime price or ongoing Pro subscription.",
+          "Choose Dictivo when you want a one-time Local license ({{price.local.inline}}) instead of a higher lifetime price or ongoing Pro subscription.",
           "Choose Dictivo when local Mac dictation is the main job and advanced mode tuning is not the purchase driver.",
           "Choose Dictivo when you want no Dictivo account for Local dictation.",
           "Choose Dictivo when the Local versus Cloud Fast boundary should be obvious to non-technical users.",
@@ -252,13 +250,13 @@ export const COMPARE_PAGES = [
         title: "Cost over time: Dictivo Local vs Superwhisper Pro",
         paragraphs: [
           "Superwhisper's docs list Pro at $8.49/month, $84.99/year, or $249.99 once. Three years of annual Pro is $254.97. The lifetime license is $249.99. Monthly Pro for three full years would be $305.64.",
-          `Dictivo Local is $29 once. If you keep optional update access active for years two and three, the three-year total is ${LOCAL_THREE_YEAR_PRICE}. That is less than half of Superwhisper lifetime and less than half of three years of Superwhisper annual Pro.`,
+          `Dictivo Local is {{price.local.inline}} once. If you keep optional update access active for years two and three, the three-year total is {{price.threeYear.inline}}. That is less than half of Superwhisper lifetime and less than half of three years of Superwhisper annual Pro.`,
           "The honest catch is that Superwhisper Pro includes more than a simple local desktop hotkey workflow. If you need the broader model catalog and mature mode system, the higher price has a rationale. If the purchase decision is mostly local dictation privacy and cost, Dictivo is easier to justify.",
         ],
         bullets: [
-          "One year: Dictivo Local is $29 once; Superwhisper Pro annual is $84.99.",
-          `Three years: Dictivo Local is ${LOCAL_THREE_YEAR_PRICE} with optional update renewals; Superwhisper annual Pro is $254.97.`,
-          "Lifetime comparison: Dictivo Local is $29 for the version you buy; Superwhisper lifetime Pro is listed at $249.99.",
+          "One year: Dictivo Local is {{price.local.inline}} once; Superwhisper Pro annual is $84.99.",
+          `Three years: Dictivo Local is {{price.threeYear.inline}} with optional update renewals; Superwhisper annual Pro is $254.97.`,
+          "Lifetime comparison: Dictivo Local is {{price.local.inline}} for the version you buy; Superwhisper lifetime Pro is listed at $249.99.",
           "Best interpretation: Dictivo is a lower long-term-cost paid local dictation alternative, not the absolute cheapest app in the market.",
         ],
       },
@@ -280,7 +278,7 @@ export const COMPARE_PAGES = [
             items: [
               "You want a cheaper Superwhisper alternative for local desktop dictation.",
               "You prefer a simpler local-first workflow with fewer model decisions.",
-              "A $29 one-time license is a better match than a subscription or high lifetime price.",
+              "A one-time license ({{price.local.inline}}) is a better match than a subscription or high lifetime price.",
               "You want no Dictivo account for Local dictation.",
             ],
           },
@@ -290,7 +288,7 @@ export const COMPARE_PAGES = [
     faqs: [
       ["What are the best Superwhisper alternatives?", "For local-capable Mac dictation, compare Dictivo Local, VoiceInk, Voice Type, Voibe, and MacWhisper depending on whether the job is live dictation or file transcription."],
       ["Is Dictivo a super whisper alternative?", "Yes, for users searching for a simpler paid local desktop dictation workflow. Dictivo is not a one-to-one replacement for Superwhisper's full mode ecosystem."],
-      ["Is there a cheaper alternative to Superwhisper?", "Yes. Dictivo Local is $29 once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime."],
+      ["Is there a cheaper alternative to Superwhisper?", "Yes. Dictivo Local is {{price.local.inline}} once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime."],
       ["Is Superwhisper a subscription?", "Superwhisper Pro has monthly and annual subscriptions, and it also offers a lifetime purchase. The plans include the same Pro features but differ by billing frequency."],
       ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and iPad. Dictivo is also publicly available for both macOS and Windows x64."],
       ["Is Dictivo as accurate as Superwhisper?", "Both products can use Whisper-family local models, so raw accuracy depends on the model size, microphone, accent, and hardware. Dictivo's edge is not a magic model; it is the lower-cost local workflow and hardware-aware setup."],
@@ -319,7 +317,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Focused hotkey dictation", "Dictation plus file and batch transcription"],
-      [`3-year cost`, `${LOCAL_THREE_YEAR_PRICE} with optional update renewals`, `€64 once for Pro, lifetime updates included`],
+      [`3-year cost`, `{{price.threeYear.inline}} with optional update renewals`, `€64 once for Pro, lifetime updates included`],
       ["Workflow", "Speak, review, and paste", "Dictate live or transcribe audio/video files"],
     ],
     rows: [
@@ -380,7 +378,7 @@ export const COMPARE_PAGES = [
         title: "Pricing compared",
         paragraphs: [
           "MacWhisper's public site lists MacWhisper Pro at €64 once, with lifetime updates included. A free tier covers the smaller Whisper models.",
-          `The two priced differently rather than one being plainly cheaper. Dictivo Local is $29 once for the first year of updates, or ${LOCAL_THREE_YEAR_PRICE} over three years if you keep optional renewals active. MacWhisper Pro is a single €64 payment with lifetime updates, and the two products use different currencies. Compare the final checkout amounts in your currency and decide how many years of updates you need.`,
+          `The two priced differently rather than one being plainly cheaper. Dictivo Local is {{price.local.inline}} once for the first year of updates, or {{price.threeYear.inline}} over three years if you keep optional renewals active. MacWhisper Pro is a single €64 payment with lifetime updates, and the two products use different currencies. Compare the final checkout amounts in your currency and decide how many years of updates you need.`,
           "Buy MacWhisper if your main job is transcribing recordings. Buy Dictivo if your main job is replacing typing with private hotkey dictation into the apps where you already work.",
         ],
       },
@@ -415,7 +413,7 @@ export const COMPARE_PAGES = [
       ["Does MacWhisper do real-time dictation?", "Yes. MacWhisper advertises real-time system-wide dictation with Whisper. Its most visible workflow is still file and meeting transcription, while Dictivo is built solely around hotkey dictation into the active app."],
       ["What is the best app to dictate into any app on Mac?", "If your goal is live voice typing into the current app, Dictivo is designed for that workflow: press the hotkey, speak, and return text to the active field."],
       ["MacWhisper vs dictation apps: what is the difference?", "Both MacWhisper and Dictivo provide live dictation. MacWhisper also handles file imports, speaker labels, and exports. Test the live workflow in your usual app, including corrections and pasting, before deciding."],
-      ["Is Dictivo a one-time purchase like MacWhisper?", "Yes. Dictivo Local is $29 once with 12 months of updates, then an optional $24/year update renewal. The version you buy remains usable."],
+      ["Is Dictivo a one-time purchase like MacWhisper?", "Yes. Dictivo Local is {{price.local.inline}} once with 12 months of updates, then an optional update renewal at {{price.renewal.inline}} a year. The version you buy remains usable."],
       ["Can Dictivo transcribe files too?", "Dictivo is focused on live dictation, not batch file transcription. If file transcription is the main job, MacWhisper may be the better choice."],
     ],
     related: ["superwhisper-alternative", "voiceink-alternative"],
@@ -439,7 +437,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Guided local model setup", "Mac dictation with lifetime updates"],
-      [`3-year cost`, `$29 to ${LOCAL_THREE_YEAR_PRICE} depending on update renewals`, `$25, $39, or $49 current lifetime offers`],
+      [`3-year cost`, `{{price.local.inline}} to {{price.threeYear.inline}} depending on update renewals`, `$25, $39, or $49 current lifetime offers`],
       ["Privacy model", "Local mode first", "Local processing with optional cloud enhancement"],
     ],
     rows: [
@@ -471,7 +469,7 @@ export const COMPARE_PAGES = [
         kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
-          "Dictivo does not win this on price. Dictivo Local is $29 once and includes the first year of updates, with an optional $24/year renewal after that. VoiceInk's current Solo offer is $25 once and advertises lifetime updates, so over enough years VoiceInk is the cheaper way to stay current. Choose on the Local versus Cloud Fast boundary, guided setup, and support - not on a few dollars.",
+          "Dictivo does not win this on price. Dictivo Local is {{price.local.inline}} once and includes the first year of updates, with an optional renewal at {{price.renewal.inline}} a year after that. VoiceInk's current Solo offer is $25 once and advertises lifetime updates, so over enough years VoiceInk is the cheaper way to stay current. Choose on the Local versus Cloud Fast boundary, guided setup, and support - not on a few dollars.",
           "Dictivo's argument is polish and predictability. The app is shaped around a guided local setup, hardware-aware model selection, a clear Local versus Cloud Fast boundary, local history, dictionary terms, snippets, and a commercial support channel. It is for people who would rather use guided model setup when dictation becomes part of daily work.",
           "Dictivo's privacy promise is the product workflow: Local mode keeps microphone audio, transcripts, history, dictionary terms, snippets, and settings on the customer's device, with no Dictivo account required for Local dictation.",
         ],
@@ -500,7 +498,7 @@ export const COMPARE_PAGES = [
         title: "Pricing compared",
         paragraphs: [
           "VoiceInk currently lists $25 for Solo, $39 for Personal, and $49 for Extended, with lifetime updates. Those tiers differ by device count, not by core feature access. The page also advertises a Try Free path and 14-day money-back guarantee.",
-          `Dictivo Local is $29 once. If you keep optional update renewals active for years two and three, the three-year total is ${LOCAL_THREE_YEAR_PRICE}. Without renewals, it is a $29 purchase for the version you bought.`,
+          `Dictivo Local is {{price.local.inline}} once. If you keep optional update renewals active for years two and three, the three-year total is {{price.threeYear.inline}}. Without renewals, it is a one-time {{price.local.inline}} purchase for the version you bought.`,
           "Compare the tier for your device count and whether future updates are included. In Dictivo, guided setup recommends local models based on your hardware; use the trial to check that workflow before buying.",
         ],
       },
@@ -558,7 +556,7 @@ export const COMPARE_PAGES = [
     ],
     quickTake: [
       ["Best for", "Daily private Mac dictation", "Free occasional dictation"],
-      [`3-year cost`, `$29 to ${LOCAL_THREE_YEAR_PRICE} depending on update renewals`, `Free with macOS`],
+      [`3-year cost`, `{{price.local.inline}} to {{price.threeYear.inline}} depending on update renewals`, `Free with macOS`],
       ["Workflow", "Dedicated dictation product layer", "Built-in system feature"],
     ],
     rows: [
@@ -618,7 +616,7 @@ export const COMPARE_PAGES = [
         kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
-          `There is no price battle with Apple. macOS Dictation is included with your Mac. Dictivo Local is $29 once, with an optional $24/year update renewal after the first 12 months. Three years with update renewals active is ${LOCAL_THREE_YEAR_PRICE}.`,
+          `There is no price battle with Apple. macOS Dictation is included with your Mac. Dictivo Local is {{price.local.inline}} once, with an optional update renewal at {{price.renewal.inline}} a year after the first 12 months. Three years with update renewals active is {{price.threeYear.inline}}.`,
           "That means Dictivo has to earn the purchase on workflow, accuracy, and trust, not on being cheaper. If you dictate one sentence a week, use Apple. If dictation is becoming a daily input method, a dedicated local app can pay for itself quickly in saved correction time and reduced friction.",
         ],
       },
@@ -652,7 +650,7 @@ export const COMPARE_PAGES = [
       ["Is there a more accurate dictation app for Mac?", "Accuracy depends on the speaker, language, microphone, model and text. We have not published a controlled accuracy comparison with Apple Dictation. Try the same paragraph in both, including names or specialist terms, and count the corrections before choosing."],
       ["Does macOS Dictation work offline?", "Apple says Keyboard settings can indicate whether an internet connection is needed. Offline availability depends on the device, language, and current system behavior."],
       ["What is the best offline dictation app for Mac?", "If you want a paid, local-first workflow with hotkey dictation, local history, dictionary terms, snippets, and a clear privacy boundary, Dictivo is built for that job."],
-      ["Is Dictivo free?", "Dictivo has a tiny free local tier and a 14-day full Local trial with every local model unlocked. Dictivo Local is $29 once if you decide to buy."],
+      ["Is Dictivo free?", "Dictivo has a tiny free local tier and a 14-day full Local trial with every local model unlocked. Dictivo Local is {{price.local.inline}} once if you decide to buy."],
     ],
     related: ["wispr-flow-alternative", "voiceink-alternative"],
     sources: [
@@ -664,19 +662,19 @@ export const COMPARE_PAGES = [
   {
     slug: "dragon-alternative",
     competitor: "Dragon Professional",
-    title: "Dragon Alternative: Local Dictation at $29, Not $699 (2026)",
+    title: "Dragon Alternative: Local Dictation Without the $699 License (2026)",
     metaDescription:
-      "Dragon Home is discontinued and Dragon Professional costs $699.99. Dictivo is the Dragon alternative for everyday dictation: local, train-free, $29 once.",
+      "Dragon Home is discontinued and Dragon Professional costs $699.99. Dictivo is the Dragon alternative for everyday dictation: local, train-free, bought once.",
     h1: "Dragon alternative: everyday local dictation without the enterprise price",
     eyebrow: "Compare alternatives",
     primaryKeyword: "dragon naturallyspeaking alternative",
     intro: [
       "Dragon Professional v16 combines local Windows speech recognition, custom vocabulary and commands for controlling a PC. If you rely on those commands or have a vocabulary built over time, include them in your comparison.",
-      "Dictivo is the Dragon alternative for everyone that price no longer serves: everyday writers, ex-Dragon Home users, and Mac users Dragon left behind in 2018. Local dictation on macOS and Windows, no voice training, $29 once.",
+      "Dictivo is the Dragon alternative for everyone that price no longer serves: everyday writers, ex-Dragon Home users, and Mac users Dragon left behind in 2018. Local dictation on macOS and Windows, no voice training, {{price.local.inline}} once.",
     ],
     quickTake: [
       ["Best for", "Everyday local dictation on Mac and Windows", "Specialized vocabularies and hands-free PC control"],
-      ["Up-front cost", "$29 once, optional $24/year update renewal", "$699.99 one-time for Dragon Professional v16"],
+      ["Up-front cost", "{{price.local.inline}} once, optional update renewal at {{price.renewal.inline}} a year", "$699.99 one-time for Dragon Professional v16"],
       ["Setup", "No voice training; dictate in minutes", "Voice profile and vocabulary training pay off over time"],
     ],
     rows: [
@@ -713,7 +711,7 @@ export const COMPARE_PAGES = [
           "There is also the platform question. Dragon has not shipped a native Mac desktop product since 2018. Dictivo provides public installers for macOS and Windows x64. Test input and insertion in the apps you use on each platform.",
         ],
         bullets: [
-          "$29 once instead of $699.99 - about 1/24 of the Dragon Professional license.",
+          "{{price.local.inline}} once instead of $699.99 - about 1/24 of the Dragon Professional license.",
           "No voice training or profile maintenance.",
           "Runs on macOS and Windows; Dragon desktop is Windows-only.",
           "Hotkey-driven dictation into supported text fields, with local history, dictionary, and snippets.",
@@ -731,7 +729,7 @@ export const COMPARE_PAGES = [
           "Dragon Home: discontinued 2023, no consumer replacement.",
           "Dragon for Mac: discontinued 2018, no native Mac product since.",
           "Dragon Professional v16 is a currently sold Windows desktop option.",
-          "Dictivo covers the everyday-dictation job at $29 once.",
+          "Dictivo covers the everyday-dictation job at {{price.local.inline}} once.",
         ],
       },
       {
@@ -739,7 +737,7 @@ export const COMPARE_PAGES = [
         title: "Pricing compared",
         paragraphs: [
           "Dragon Professional v16 is $699.99 as a one-time perpetual license. Dragon Anywhere Mobile is no longer on sale: as of 1 July 2026 new subscriptions cannot be bought and existing ones cannot be renewed. Dragon Medical One remains, enterprise-priced per user per month.",
-          `Dictivo Local is $29 once with 12 months of updates. Keeping optional update renewals active for two more years brings the three-year total to ${LOCAL_THREE_YEAR_PRICE}. Without renewals, the version you bought keeps working.`,
+          `Dictivo Local is {{price.local.inline}} once with 12 months of updates. Keeping optional update renewals active for two more years brings the three-year total to {{price.threeYear.inline}}. Without renewals, the version you bought keeps working.`,
           "The honest framing: if specialized vocabulary accuracy or hands-free control earns you money or independence every day, Dragon's price can be rational. If you want private, local, everyday dictation, you are paying for capabilities you will not use.",
         ],
       },
@@ -762,7 +760,7 @@ export const COMPARE_PAGES = [
               "You want everyday dictation - email, documents, notes - without a $699.99 license.",
               "You used Dragon Home and the Professional upgrade path is not worth it for you.",
               "You work on a Mac, where Dragon has had no native product since 2018.",
-              "You want train-free local dictation running in minutes, at $29 once.",
+              "You want train-free local dictation running in minutes, at {{price.local.inline}} once.",
             ],
           },
         ],
@@ -770,7 +768,7 @@ export const COMPARE_PAGES = [
     ],
     faqs: [
       ["Is Dragon NaturallySpeaking still available?", "Partly, and the consumer side keeps shrinking. Dragon Home was discontinued in 2023, Dragon for Mac in 2018, and Dragon Anywhere Mobile stopped being sold on 1 July 2026. What remains is Dragon Professional v16 for Windows at $699.99, plus enterprise offerings like Dragon Medical One."],
-      ["What is the best cheap Dragon alternative?", "For everyday dictation, compare modern local tools: Dictivo is $29 once and does not require voice-profile training on Mac or Windows. Windows 11 users can also try built-in Voice Access. If you depend on Dragon commands or custom vocabulary, test those requirements before switching."],
+      ["What is the best cheap Dragon alternative?", "For everyday dictation, compare modern local tools: Dictivo is {{price.local.inline}} once and does not require voice-profile training on Mac or Windows. Windows 11 users can also try built-in Voice Access. If you depend on Dragon commands or custom vocabulary, test those requirements before switching."],
       ["Does Dragon work on Mac?", "No. Nuance discontinued Dragon Professional Individual for Mac in October 2018 and has not shipped a native Mac desktop product since. Dictivo provides public installers for macOS and Windows x64; test your required text fields and hotkeys on your platform."],
       ["Do I need to train Dictivo like Dragon?", "No. Dictivo uses modern Whisper-grade local models that work without a voice profile. Dragon builds accuracy through profile and vocabulary training, which pays off for specialized terminology but adds setup and maintenance."],
       ["Is Dictivo as accurate as Dragon?", "We have not published a controlled accuracy comparison between Dictivo and Dragon. Try the same recordings and work tasks in both, using the vocabulary and settings you would normally use, and compare the corrections required."],

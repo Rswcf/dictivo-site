@@ -15,8 +15,6 @@ export const LOCAL_OFFER = Object.freeze({
 // Cloud Fast, per month.
 export const CLOUD_FAST_MONTHLY_PRICE = 6.99;
 
-export const LOCAL_THREE_YEAR_PRICE =`$${LOCAL_OFFER.price + 2 * LOCAL_OFFER.updateRenewal}`;
-
 const DATE_LOCALES = { en: "en-GB", de: "de-DE", fr: "fr-FR", es: "es-ES", it: "it-IT", nl: "nl-NL", pt: "pt-BR", zh: "zh-CN", ja: "ja-JP", ko: "ko-KR" };
 
 // "31 October 2026", "1. November 2026", "1er novembre 2026", "2026年10月31日" …

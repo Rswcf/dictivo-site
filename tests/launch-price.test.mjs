@@ -43,7 +43,7 @@ test("every homepage dates the introductory price and states the regular price",
     const dateLocale = locale.code === "zh-hant" ? "zh" : locale.code;
     assert.ok(html.includes(offerDate(LOCAL_OFFER.introPriceUntil, dateLocale)), `${locale.code}: missing introductory end date`);
     assert.ok(html.includes(offerDate(LOCAL_OFFER.regularPriceFrom, dateLocale)), `${locale.code}: missing regular price date`);
-    assert.match(html, /\$49/, `${locale.code}: missing regular price`);
+    assert.match(html, /data-price-cents="4900"/, `${locale.code}: missing regular price`);
     assert.match(html, /"priceValidUntil":\s*"2026-10-31"/, `${locale.code}: missing priceValidUntil`);
   }
 });

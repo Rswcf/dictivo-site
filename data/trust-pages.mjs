@@ -1239,8 +1239,9 @@ export const TRUST_PAGES = [
           "After the included update window ends, the version you already installed remains usable. Renewing the update window is optional and is only needed for future app updates and new local models.",
         ],
         bullets: [
-          "Dictivo Local is currently $29 once.",
-          "Optional future update renewal is currently $24 per year.",
+          "Dictivo Local is currently {{price.local.inline}} once.",
+          "Optional future update renewal is currently {{price.renewal.inline}} per year.",
+          "Prices exclude sales tax and VAT. Where tax applies, it is calculated from your billing country and shown at checkout before you pay.",
           "Cloud Fast is a separate optional monthly subscription.",
         ],
       },

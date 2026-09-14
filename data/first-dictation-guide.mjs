@@ -38,7 +38,7 @@ export const FIRST_DICTATION_COPY = {
       ["You bought on the website before installing", "Use Enter your license key during setup, or open Account & Billing in Dictivo. Copy the key from your purchase receipt. An existing purchase does not require another payment."],
     ],
     nextTitle: "Try the workflow you would pay for",
-    next: "Use Local for one real email, note or AI prompt during the trial. Check whether the result saves editing time on your own hardware. A Local purchase is $29 once, includes 12 months of updates and supports up to 3 personal devices; future update renewal is optional.",
+    next: "Use Local for one real email, note or AI prompt during the trial. Check whether the result saves editing time on your own hardware. A Local purchase is {{price.local.inline}} once, includes 12 months of updates and supports up to 3 personal devices; future update renewal is optional.",
     pricing: "See purchase terms", models: "Choose a Mac model", offline: "Compare offline Mac options",
   },
   ja: {
@@ -78,7 +78,7 @@ export const FIRST_DICTATION_COPY = {
       ["インストール前にウェブサイトで購入した", "初期設定の「Enter your license key」、またはアプリのAccount & Billingから、購入メールにあるキーを入力します。購入済みなら再度支払う必要はありません。"],
     ],
     nextTitle: "普段の作業で価値を確かめる",
-    next: "体験期間中に、メール、メモ、AIへの指示を一つLocalで入力し、自分の端末で編集の手間が減るか確かめてください。Localは買い切り29米ドルで、12か月の更新と個人用端末3台までの利用を含みます。その後の更新延長は任意です。",
+    next: "体験期間中に、メール、メモ、AIへの指示を一つLocalで入力し、自分の端末で編集の手間が減るか確かめてください。Localは買い切り{{price.local.inline}}で、12か月の更新と個人用端末3台までの利用を含みます。その後の更新延長は任意です。",
     pricing: "購入条件を見る", models: "Macのモデル選び", offline: "オフライン音声入力を比較",
   },
 };
