@@ -43,6 +43,7 @@ import {
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
+import { buildLocaleRoutes, buildRoutesConfig } from "../lib/locale-routing/build-routes.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
@@ -2388,11 +2389,18 @@ function trustHreflangTags(page, currentCode = "en") {
   return alternates.join("\n    ");
 }
 
+// Language choices carry ?lang= so the site can remember them; the Pages middleware
+// stores the choice and redirects to the clean URL.
+function languageChoiceHref(href, code) {
+  const [path, hash] = href.split("#");
+  return `${path}${path.includes("?") ? "&" : "?"}lang=${encodeURIComponent(code)}${hash ? `#${hash}` : ""}`;
+}
+
 function renderLanguageMenu(currentCode, t, hrefForLocale = (locale) => locale.path) {
   const current = localeByCode(currentCode);
   const links = LOCALES.map((locale) => {
     const active = locale.code === currentCode ? ' aria-current="page"' : "";
-    return `<a href="${attr(hrefForLocale(locale))}" lang="${attr(locale.htmlLang)}" hreflang="${attr(locale.htmlLang)}"${active}>
+    return `<a href="${attr(languageChoiceHref(hrefForLocale(locale), locale.code))}" lang="${attr(locale.htmlLang)}" hreflang="${attr(locale.htmlLang)}"${active}>
               <span>${html(locale.nativeName)}</span>
               <small>${html(locale.name)}</small>
             </a>`;
@@ -4390,7 +4398,7 @@ function renderHome(currentCode) {
   const conversion = HOME_CONVERSION_COPY[currentCode];
 
   const languagePills = LOCALES.map(
-    (item) => `<a href="${attr(item.path)}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
+    (item) => `<a href="${attr(languageChoiceHref(item.path, item.code))}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
   ).join("\n                ");
 
   return `<!doctype html>
@@ -6212,3 +6220,9 @@ for (const page of TRUST_PAGES) {
   }
 }
 write("404.html", renderNotFound());
+
+// Locale routing reads the finished pages, so it runs after every HTML file is written.
+const localeRoutes = buildLocaleRoutes({ distDir: outDir, locales: LOCALES });
+mkdirSync(resolve(root, "lib/locale-routing/generated"), { recursive: true });
+writeFileSync(resolve(root, "lib/locale-routing/generated/routes.json"), `${JSON.stringify(localeRoutes)}\n`);
+write("_routes.json", `${JSON.stringify(buildRoutesConfig(localeRoutes), null, 2)}\n`);
