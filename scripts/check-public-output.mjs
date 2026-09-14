@@ -6,6 +6,7 @@ import { toHant } from "./lib/hant.mjs";
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { LOCAL_OFFER, introPriceExpired } from "../data/local-offer.mjs";
+import { TAX_VERIFIED_ON } from "../data/price-display.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
@@ -227,6 +228,9 @@ for (const file of listFiles()) {
       failures.push(`${file}: matched ${pattern}`);
     }
   }
+  if (body.includes("{{price.")) {
+    failures.push(`${file}: unresolved price placeholder`);
+  }
   if (!downloadsJsonExemptFiles.test(file) && downloadsJsonPattern.test(body)) {
     failures.push(`${file}: matched ${downloadsJsonPattern} (allowed only on llms.txt and the security page)`);
   }
@@ -266,6 +270,11 @@ verifyReleaseNotes();
 // The pricing copy promises $49 from LOCAL_OFFER.regularPriceFrom: the daily deploy fails until that is true.
 if (introPriceExpired()) {
   failures.push(`data/local-offer.mjs: the introductory price ended on ${LOCAL_OFFER.introPriceUntil}; raise the Lemon Squeezy Local price to $${LOCAL_OFFER.regularPrice}, then update the offer and pricing copy`);
+}
+
+// Pages show tax-inclusive totals computed from this table, so it must match what the checkout adds.
+if ((Date.now() - Date.parse(`${TAX_VERIFIED_ON}T00:00:00Z`)) / 86_400_000 > 183) {
+  failures.push(`data/price-display.mjs: tax rates were last checked against the checkout on ${TAX_VERIFIED_ON}; open Local checkouts prefilled with checkout[billing_address][country] for the listed countries, update TAX_RATES and NO_TAX_COUNTRIES, then TAX_VERIFIED_ON`);
 }
 
 if (failures.length > 0) {

@@ -8,6 +8,11 @@ Current public pricing copy:
 
 - Dictivo Local: `$29` introductory price until 2026-10-31, `$49` from 2026-11-01 (`data/local-offer.mjs`; raise the Lemon Squeezy price first, the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `$24/year` renewal for future updates.
 - Dictivo Cloud Fast: `$6.99/month`, 1,500 minutes/month, standalone or alongside Local.
+- All prices exclude tax; the checkout adds the billing country's tax. Pages show each buyer's treatment from
+  `data/price-display.mjs`: the tax-inclusive total where consumer law requires it (EU, UK, CH, JP, KR, TW, AU, …), the
+  net price elsewhere. Copy writes prices as `{{price.<amount>.<form>}}` placeholders, never as figures; titles and meta
+  descriptions carry no price. Rates were checked on prefilled checkouts on `TAX_VERIFIED_ON`, and the deploy check
+  fails six months later until they are re-checked. Preview a country with `?price_country=GB` (not on dictivo.app).
 
 ## Local preview
 
