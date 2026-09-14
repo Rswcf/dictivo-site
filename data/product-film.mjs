@@ -10,6 +10,7 @@ export const PRODUCT_FILM = {
   poster: "/assets/film-v08/poster.jpg",
   captions: "/assets/film-v08/captions.en.vtt",
   chinese: "/assets/film-v08/captions.zh-CN.vtt",
+  chineseTraditional: "/assets/film-v08/captions.zh-Hant.vtt",
   credits: "/assets/film-v08/CREDITS.txt",
   duration: "PT35S",
 };

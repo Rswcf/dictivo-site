@@ -42,6 +42,7 @@ import {
 } from "../data/offline-dictation-windows-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
+import { HANT, addHant, toHant } from "./lib/hant.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
@@ -2241,8 +2242,12 @@ function applyCompareDesktopCopy(value, code) {
   return value;
 }
 
+let hantCompareCopy = null;
+
 function compareCopy(code) {
   if (code === "en") return COMPARE_I18N.en;
+  // Simplified desktop replacements run before conversion.
+  if (code === HANT) return (hantCompareCopy ??= { ...toHant(compareCopy("zh")), locale: HANT });
   return applyCompareDesktopCopy({ ...compactCompareLocale(COMPARE_I18N[code] || {}), locale: code }, code);
 }
 
@@ -2265,6 +2270,7 @@ const OG_LOCALE_BY_HTML_LANG = {
   nl: "nl_NL",
   pt: "pt_PT",
   "zh-Hans": "zh_CN",
+  "zh-Hant": "zh_TW",
   ja: "ja_JP",
   ko: "ko_KR",
 };
@@ -2533,7 +2539,11 @@ function localizedCompareRows(page, copy) {
     dictivo: row.label === "Platforms" && !hasWindowsRelease
       ? platformUnavailableCopy(copy.locale)
       : copy === COMPARE_I18N.en ? row.dictivo : copy.dictivoRows[row.label] || row.dictivo,
-    competitor: copy === COMPARE_I18N.en ? row.competitor : localizedCompetitorFact(page, row, copy.locale),
+    competitor: copy === COMPARE_I18N.en
+      ? row.competitor
+      : copy.locale === HANT
+        ? toHant(localizedCompetitorFact(page, row, "zh"))
+        : localizedCompetitorFact(page, row, copy.locale),
   }));
 }
 
@@ -2550,17 +2560,19 @@ function platformUnavailableCopy(code) {
     ja: "macOS 版は利用できます。Windows x64 のダウンロードは一時的に利用できません。",
     ko: "macOS 버전을 사용할 수 있습니다. Windows x64 다운로드는 일시적으로 사용할 수 없습니다.",
   };
-  return copy[code] || copy.en;
+  return copy[code] || (code === HANT ? toHant(copy.zh) : copy.en);
 }
 
 
 function localizedCompareSections(page, copy) {
   if (copy === COMPARE_I18N.en) return page.sections;
+  if (copy.locale === HANT) return toHant(localizedComparisonSections(page, "zh"));
   return localizedComparisonSections(page, copy.locale);
 }
 
 function localizedCompareFaqs(page, copy) {
   if (copy === COMPARE_I18N.en) return page.faqs;
+  if (copy.locale === HANT) return toHant(localizedComparisonFaqs(page, "zh"));
   return localizedComparisonFaqs(page, copy.locale);
 }
 
@@ -2931,19 +2943,23 @@ function fillMacAdvisorTemplate(template, values) {
 
 function macMemoryLabel(id, currentCode = "en") {
   if (id === "unknown") {
+    const labels = {
+      en: "I'm not sure",
+      de: "Ich bin nicht sicher",
+      fr: "Je ne suis pas sûr",
+      es: "No estoy seguro",
+      it: "Non sono sicuro",
+      nl: "Ik weet het niet",
+      pt: "Não tenho certeza",
+      zh: "不确定",
+      ja: "分からない",
+      ko: "잘 모르겠음",
+    };
     return (
-      {
-        en: "I'm not sure",
-        de: "Ich bin nicht sicher",
-        fr: "Je ne suis pas sûr",
-        es: "No estoy seguro",
-        it: "Non sono sicuro",
-        nl: "Ik weet het niet",
-        pt: "Não tenho certeza",
-        zh: "不确定",
-        ja: "分からない",
-        ko: "잘 모르겠음",
-      }[currentCode] || MAC_ADVISOR_MEMORY.find((item) => item.id === id)?.label || id
+      labels[currentCode] ||
+      (currentCode === HANT ? toHant(labels.zh) : undefined) ||
+      MAC_ADVISOR_MEMORY.find((item) => item.id === id)?.label ||
+      id
     );
   }
   return MAC_ADVISOR_MEMORY.find((item) => item.id === id)?.label || id;
@@ -4177,8 +4193,11 @@ function productFilmSchema() {
 }
 
 function productFilmTracks(code = "en") {
-  return `<track kind="captions" srclang="en" label="English" src="${PRODUCT_FILM.captions}"${code === "zh" ? "" : " default"} />
-    <track kind="subtitles" srclang="zh-CN" label="简体中文" src="${PRODUCT_FILM.chinese}"${code === "zh" ? " default" : ""} />`;
+  const selected = code === "zh" ? "zh-CN" : code === HANT ? "zh-Hant" : "en";
+  const isDefault = (lang) => (selected === lang ? " default" : "");
+  return `<track kind="captions" srclang="en" label="English" src="${PRODUCT_FILM.captions}"${isDefault("en")} />
+    <track kind="subtitles" srclang="zh-CN" label="简体中文" src="${PRODUCT_FILM.chinese}"${isDefault("zh-CN")} />
+    <track kind="subtitles" srclang="zh-Hant" label="繁體中文" src="${PRODUCT_FILM.chineseTraditional}"${isDefault("zh-Hant")} />`;
 }
 
 function renderProductFilmPage() {
@@ -6122,9 +6141,19 @@ function writeLegacyPrivateTombstones() {
   }
 }
 
+// Traditional Chinese (zh-hant) is derived from the Simplified copy at build time.
+// Only zh entries pass through OpenCC, so Japanese Kanji copy is never converted.
+for (const map of [
+  HOME_COPY, HOME_CONVERSION_COPY, FILM_COPY, COMPARISON_EVIDENCE_COPY, MAC_ADVISOR_COPY,
+  OFFLINE_DICTATION_GUIDE_COPY, PRIVACY_PROOF_COPY, NATIVE_DEMO.summary, WINDOWS_DOWNLOAD_COPY,
+  WINDOWS_HOME_COPY, WINDOWS_UNAVAILABLE_HOME_COPY, SEO_HOME_COPY, TRUST_UI, LLMS_LABELS,
+]) addHant(map);
+for (const page of TRUST_PAGES) if (page.locales?.zh) page.locales[HANT] = toHant(page.locales.zh);
+
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 copyStatic("assets");
+write(PRODUCT_FILM.chineseTraditional.slice(1), toHant(readFileSync(resolve(root, PRODUCT_FILM.chinese.slice(1)), "utf8")));
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
 copyFileSync(resolve(root, "a466589ed8677749e2b7fdd18c7ddcf6.txt"), resolve(outDir, "a466589ed8677749e2b7fdd18c7ddcf6.txt"));
