@@ -6,7 +6,7 @@ Fast is an optional speed mode for users who accept cloud transcription upload.
 
 Current public pricing copy:
 
-- Dictivo Local: `$29` launch price (regular `$49`) one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `$24/year` renewal for future updates.
+- Dictivo Local: `$29` introductory price until 2026-10-31, `$49` from 2026-11-01 (`data/local-offer.mjs`; raise the Lemon Squeezy price first, the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `$24/year` renewal for future updates.
 - Dictivo Cloud Fast: `$6.99/month`, 1,500 minutes/month, standalone or alongside Local.
 
 ## Local preview

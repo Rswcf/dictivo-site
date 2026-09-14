@@ -1,8 +1,11 @@
-// Commercial terms shared by comparison calculations. Keep the launch offer
-// separate from the regular price; renewing updates is always optional.
+// Commercial terms shared by the pricing copy and comparison calculations. Keep the
+// introductory offer separate from the regular price; renewing updates is always optional.
+// On regularPriceFrom, raise the Lemon Squeezy price first, then update this file and the copy.
 export const LOCAL_OFFER = Object.freeze({
   price: 29,
   regularPrice: 49,
+  introPriceUntil: "2026-10-31",
+  regularPriceFrom: "2026-11-01",
   updateRenewal: 24,
   includedUpdateMonths: 12,
   trialDays: 14,
@@ -10,3 +13,22 @@ export const LOCAL_OFFER = Object.freeze({
 });
 
 export const LOCAL_THREE_YEAR_PRICE = `$${LOCAL_OFFER.price + 2 * LOCAL_OFFER.updateRenewal}`;
+
+const DATE_LOCALES = { en: "en-GB", de: "de-DE", fr: "fr-FR", es: "es-ES", it: "it-IT", nl: "nl-NL", pt: "pt-BR", zh: "zh-CN", ja: "ja-JP", ko: "ko-KR" };
+
+// "31 October 2026", "1. November 2026", "1er novembre 2026", "2026年10月31日" …
+export function offerDate(isoDate, locale) {
+  if (!DATE_LOCALES[locale]) throw new Error(`offerDate: no date format for ${locale}`);
+  const date = new Date(`${isoDate}T00:00:00Z`);
+  const text = new Intl.DateTimeFormat(DATE_LOCALES[locale], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(date);
+  if (date.getUTCDate() !== 1) return text;
+  if (locale === "fr") return text.replace(/^1 /, "1er ");
+  if (locale === "it" || locale === "pt") return text.replace(/^1 /, "1º ");
+  return text;
+}
+
+// The copy promises the regular price from regularPriceFrom, so a build after
+// introPriceUntil must not keep advertising the introductory price.
+export function introPriceExpired(today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(new Date())) {
+  return Boolean(LOCAL_OFFER.introPriceUntil) && today > LOCAL_OFFER.introPriceUntil;
+}

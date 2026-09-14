@@ -1,4 +1,9 @@
+import { LOCAL_OFFER, offerDate } from "./local-offer.mjs";
+
 export const BASE_URL = "https://dictivo.app";
+
+const introUntil = (locale) => offerDate(LOCAL_OFFER.introPriceUntil, locale);
+const regularFrom = (locale) => offerDate(LOCAL_OFFER.regularPriceFrom, locale);
 
 export const LOCALES = [
   { code: "en", htmlLang: "en", name: "English", nativeName: "English", path: "/" },
@@ -91,7 +96,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Start free. Pay once if it fits.",
-      body: "Try every local model free for 14 days, with 10 Cloud Fast minutes included. Subscription dictation apps run $85-$180 every year - Dictivo Local is $29 once during launch.",
+      body: `Try every local model free for 14 days, with 10 Cloud Fast minutes included. Subscription dictation apps run $85-$180 every year - Dictivo Local is $29 once until ${introUntil("en")}.`,
       tiers: [
         {
           name: "Free Local",
@@ -111,8 +116,7 @@ export const HOME_COPY = {
           name: "Dictivo Local",
           sub: "Own every local model - pay once, keep it forever.",
           price: "$29",
-          was: "$49",
-          small: "one-time · launch price",
+          small: `one-time · introductory price until ${introUntil("en")}`,
           features: [
             "Every local model unlocked after the trial",
             "Perpetual license - the app never stops working",
@@ -138,7 +142,7 @@ export const HOME_COPY = {
           button: "Add Cloud Fast",
         },
       ],
-      footnote: "Launch pricing during the public beta - regular price $49. Mac is available now; Windows is in validation before public release.",
+      footnote: `Introductory price $29 until ${introUntil("en")}; $49 from ${regularFrom("en")}. Mac is available now; Windows is in validation before public release.`,
       checkoutTitle: "Secure checkout opens in a new tab.",
       checkoutBody:
         "After purchase, return to Dictivo and activate Local with your license email. Every purchase has a 14-day no-questions refund. If checkout does not open, email support@dictivo.app.",
@@ -213,7 +217,7 @@ export const HOME_COPY = {
         ],
         [
           "Is this a subscription?",
-          "No. Dictivo Local is $29 once during launch (regular price $49). The license is perpetual: the version you buy keeps working forever. After 12 months of included updates you can optionally renew for $24/year - or keep using what you have. Cloud Fast is a separate, optional add-on at $6.99/month.",
+          `No. Dictivo Local is $29 once until ${introUntil("en")}, then $49 from ${regularFrom("en")}. The license is perpetual: the version you buy keeps working forever. After 12 months of included updates you can optionally renew for $24/year - or keep using what you have. Cloud Fast is a separate, optional add-on at $6.99/month.`,
         ],
         [
           "How can I verify that Local mode uploads nothing?",
@@ -298,7 +302,7 @@ export const HOME_COPY = {
       body: "Testen Sie Dictivo mit dem kleinen lokalen Modell. Kaufen Sie Local für stärkeres privates Diktieren oder ergänzen Sie Cloud Fast, wenn Geschwindigkeit den Upload wert ist.",
       tiers: [
         { name: "Free Local", sub: "Testen Sie den privaten Ablauf auf Ihrem Mac.", price: "Kostenlos", small: "lokale Stufe", features: ["Lokales Diktieren auf Ihrem Gerät", "Kleines On-Device-Modell enthalten", "Globaler Hotkey und lokaler Verlauf", "Größere lokale Modelle benötigen Dictivo Local", "Kein Cloud-Upload im lokalen Modus"], button: "Für Mac herunterladen" },
-        { name: "Dictivo Local", sub: "Größere lokale Modelle und 12 Monate Updates freischalten.", price: "$29", was: "$49", small: "einmalig · Aktionspreis", features: ["Dauerlizenz für die gekaufte Version", "12 Monate Updates und neue lokale Modelle", "Auf bis zu 3 persönlichen Geräten nutzbar", "$24/Jahr optionale Verlängerung für künftige Updates", "14 Tage Erstattung ohne Fragen"], button: "Local kaufen" },
+        { name: "Dictivo Local", sub: "Größere lokale Modelle und 12 Monate Updates freischalten.", price: "$29", small: `einmalig · Einführungspreis bis ${introUntil("de")}`, features: ["Dauerlizenz für die gekaufte Version", "12 Monate Updates und neue lokale Modelle", "Auf bis zu 3 persönlichen Geräten nutzbar", "$24/Jahr optionale Verlängerung für künftige Updates", "14 Tage Erstattung ohne Fragen"], button: "Local kaufen" },
         { name: "Cloud Fast", sub: "Schnelle Cloud-Transkription für ausgewählte Aufnahmen.", price: "$6.99", small: "pro Monat", features: ["1.500 Transkriptionsminuten pro Monat", "Eigenständig oder zusammen mit Dictivo Local", "Ein klarer Cloud Fast Schalter in der App", "Lädt nur ausgewählte Aufnahmen hoch", "Lokales Wörterbuch und Snippets greifen nach der Rückgabe des Textes"], button: "Cloud Fast hinzufügen" },
       ],
       footnote: "Mac ist jetzt verfügbar. Windows folgt später.",
@@ -394,7 +398,7 @@ export const HOME_COPY = {
       body: "Essayez Dictivo avec le petit modèle local. Achetez Local pour une dictée privée plus forte, ou ajoutez Cloud Fast quand la vitesse justifie l'envoi.",
       tiers: [
         { name: "Free Local", sub: "Essayez le flux privé sur votre Mac.", price: "Gratuit", small: "niveau local", features: ["Dictée locale sur votre appareil", "Petit modèle embarqué inclus", "Raccourci global et historique local", "Les modèles locaux plus grands nécessitent Dictivo Local", "Aucun envoi cloud en mode Local"], button: "Télécharger pour Mac" },
-        { name: "Dictivo Local", sub: "Débloquez les modèles locaux plus grands et 12 mois de mises à jour.", price: "$29", was: "$49", small: "paiement unique · prix de lancement", features: ["Licence perpétuelle pour la version achetée", "12 mois de mises à jour et nouveaux modèles locaux", "Jusqu'à 3 appareils personnels", "Renouvellement optionnel à $24/an", "Remboursement 14 jours, sans question"], button: "Acheter Local" },
+        { name: "Dictivo Local", sub: "Débloquez les modèles locaux plus grands et 12 mois de mises à jour.", price: "$29", small: `paiement unique · prix de lancement jusqu'au ${introUntil("fr")}`, features: ["Licence perpétuelle pour la version achetée", "12 mois de mises à jour et nouveaux modèles locaux", "Jusqu'à 3 appareils personnels", "Renouvellement optionnel à $24/an", "Remboursement 14 jours, sans question"], button: "Acheter Local" },
         { name: "Cloud Fast", sub: "Ajoutez une transcription cloud rapide pour certains enregistrements.", price: "$6.99", small: "par mois", features: ["1 500 minutes de transcription par mois", "Seul ou avec Dictivo Local", "Un simple bouton Cloud Fast dans l'app", "N'envoie que les enregistrements choisis", "Dictionnaire local et extraits s'appliquent après le retour du texte"], button: "Ajouter Cloud Fast" },
       ],
       footnote: "Mac est disponible maintenant. Windows arrive plus tard.",
@@ -490,7 +494,7 @@ export const HOME_COPY = {
       body: "Prueba Dictivo con el modelo local pequeño. Compra Local para dictado privado más potente o añade Cloud Fast cuando la velocidad valga la subida.",
       tiers: [
         { name: "Free Local", sub: "Prueba el flujo privado en tu Mac.", price: "Gratis", small: "nivel local", features: ["Dictado local en tu dispositivo", "Modelo pequeño en el dispositivo incluido", "Atajo global e historial local", "Los modelos locales grandes requieren Dictivo Local", "Sin subida a la nube en modo Local"], button: "Descargar para Mac" },
-        { name: "Dictivo Local", sub: "Desbloquea modelos locales grandes y 12 meses de actualizaciones.", price: "$29", was: "$49", small: "pago único · precio de lanzamiento", features: ["Licencia perpetua para la versión comprada", "12 meses de actualizaciones y nuevos modelos locales", "Uso en hasta 3 dispositivos personales", "Renovación opcional de $24/año", "Reembolso de 14 días, sin preguntas"], button: "Comprar Local" },
+        { name: "Dictivo Local", sub: "Desbloquea modelos locales grandes y 12 meses de actualizaciones.", price: "$29", small: `pago único · precio de lanzamiento hasta el ${introUntil("es")}`, features: ["Licencia perpetua para la versión comprada", "12 meses de actualizaciones y nuevos modelos locales", "Uso en hasta 3 dispositivos personales", "Renovación opcional de $24/año", "Reembolso de 14 días, sin preguntas"], button: "Comprar Local" },
         { name: "Cloud Fast", sub: "Añade transcripción cloud rápida para grabaciones seleccionadas.", price: "$6.99", small: "al mes", features: ["1.500 minutos de transcripción al mes", "Solo o junto a Dictivo Local", "Un simple interruptor Cloud Fast en la app", "Sube solo las grabaciones que eliges", "Diccionario local y fragmentos se aplican al volver el texto"], button: "Añadir Cloud Fast" },
       ],
       footnote: "Mac está disponible ahora. Windows llegará más adelante.",
@@ -966,8 +970,7 @@ const details = {
           name: "Dictivo Local",
           sub: "Sblocca modelli locali più grandi e 12 mesi di aggiornamenti.",
           price: "$29",
-          was: "$49",
-          small: "una tantum · prezzo di lancio",
+          small: `una tantum · prezzo di lancio fino al ${introUntil("it")}`,
           features: [
             "Licenza perpetua per la versione acquistata",
             "12 mesi di aggiornamenti e nuovi modelli locali",
@@ -1042,7 +1045,7 @@ const details = {
     pricing: {
       tiers: [
         { name: "Free Local", sub: "Probeer de privacygerichte workflow op je Mac.", price: "Gratis", small: "lokale laag", features: ["Lokaal dicteren op je apparaat", "Klein on-device model inbegrepen", "Globale sneltoets en lokale geschiedenis", "Grotere lokale modellen vereisen Dictivo Local", "Geen cloud-upload in Local-modus"], button: "Download voor Mac" },
-        { name: "Dictivo Local", sub: "Ontgrendel grotere lokale modellen en 12 maanden updates.", price: "$29", was: "$49", small: "eenmalig · introductieprijs", features: ["Permanente licentie voor de gekochte versie", "12 maanden updates en nieuwe lokale modellen", "Gebruik op maximaal 3 persoonlijke apparaten", "Optionele verlenging van $24/jaar voor toekomstige updates", "14 dagen terugbetaling, zonder vragen"], button: "Local kopen" },
+        { name: "Dictivo Local", sub: "Ontgrendel grotere lokale modellen en 12 maanden updates.", price: "$29", small: `eenmalig · introductieprijs t/m ${introUntil("nl")}`, features: ["Permanente licentie voor de gekochte versie", "12 maanden updates en nieuwe lokale modellen", "Gebruik op maximaal 3 persoonlijke apparaten", "Optionele verlenging van $24/jaar voor toekomstige updates", "14 dagen terugbetaling, zonder vragen"], button: "Local kopen" },
         { name: "Cloud Fast", sub: "Voeg snelle cloud-transcriptie toe voor gekozen opnames.", price: "$6.99", small: "per maand", features: ["1.500 transcriptieminuten per maand", "Los of naast Dictivo Local", "Een eenvoudige Cloud Fast-schakelaar in de app", "Uploadt alleen opnames die je kiest", "Lokaal woordenboek en snippets worden toegepast nadat tekst terugkomt"], button: "Cloud Fast toevoegen" },
       ],
       checkoutTitle: "Veilig afrekenen opent in een nieuw tabblad.",
@@ -1095,7 +1098,7 @@ const details = {
     pricing: {
       tiers: [
         { name: "Free Local", sub: "Teste o fluxo privado no seu Mac.", price: "Grátis", small: "plano local", features: ["Ditado local no seu dispositivo", "Modelo pequeno no dispositivo incluído", "Atalho global e histórico local", "Modelos locais maiores exigem Dictivo Local", "Sem envio para nuvem no modo Local"], button: "Baixar para Mac" },
-        { name: "Dictivo Local", sub: "Desbloqueie modelos locais maiores e 12 meses de atualizações.", price: "$29", was: "$49", small: "pagamento único · preço de lançamento", features: ["Licença perpétua para a versão comprada", "12 meses de atualizações e novos modelos locais", "Use em até 3 dispositivos pessoais", "Renovação opcional de $24/ano para futuras atualizações", "Reembolso de 14 dias, sem perguntas"], button: "Comprar Local" },
+        { name: "Dictivo Local", sub: "Desbloqueie modelos locais maiores e 12 meses de atualizações.", price: "$29", small: `pagamento único · preço de lançamento até ${introUntil("pt")}`, features: ["Licença perpétua para a versão comprada", "12 meses de atualizações e novos modelos locais", "Use em até 3 dispositivos pessoais", "Renovação opcional de $24/ano para futuras atualizações", "Reembolso de 14 dias, sem perguntas"], button: "Comprar Local" },
         { name: "Cloud Fast", sub: "Adicione transcrição em nuvem rápida para gravações escolhidas.", price: "$6.99", small: "por mês", features: ["1.500 minutos de transcrição por mês", "Separado ou junto com Dictivo Local", "Um interruptor Cloud Fast simples no app", "Envia apenas gravações escolhidas", "Dicionário local e snippets ainda se aplicam quando o texto retorna"], button: "Adicionar Cloud Fast" },
       ],
       checkoutTitle: "O checkout seguro abre em uma nova aba.",
@@ -1151,7 +1154,7 @@ const asiaDetails = {
     pricing: {
       tiers: [
         { name: "Free Local", sub: "在 Mac 上试用隐私优先的流程。", price: "免费", small: "本地档", features: ["在本设备上本地听写", "包含轻量设备端模型", "全局快捷键和本地历史记录", "更大的本地模型需要 Dictivo Local", "本地模式不会上传到云端"], button: "下载 Mac 版" },
-        { name: "Dictivo Local", sub: "解锁更大的本地模型和 12 个月更新。", price: "$29", was: "$49", small: "一次买断 · 限时启动价", features: ["购买版本的永久许可证", "12 个月更新和新的本地模型", "最多可在 3 台个人设备使用", "未来更新可选 $24/年续订", "14 天无理由退款"], button: "购买 Local" },
+        { name: "Dictivo Local", sub: "解锁更大的本地模型和 12 个月更新。", price: "$29", small: `一次买断 · 启动价截至 ${introUntil("zh")}`, features: ["购买版本的永久许可证", "12 个月更新和新的本地模型", "最多可在 3 台个人设备使用", "未来更新可选 $24/年续订", "14 天无理由退款"], button: "购买 Local" },
         { name: "Cloud Fast", sub: "为所选录音添加快速云端转录。", price: "$6.99", small: "每月", features: ["每月 1,500 分钟转录", "可单独使用，也可搭配 Dictivo Local", "应用内一个清晰的 Cloud Fast 开关", "只上传你选择的录音", "文本返回后仍会应用本地词典和片段"], button: "添加 Cloud Fast" },
       ],
       checkoutTitle: "安全购买页面会在新标签页打开。",
@@ -1204,7 +1207,7 @@ const asiaDetails = {
     pricing: {
       tiers: [
         { name: "Free Local", sub: "Mac でプライバシー重視の流れを試せます。", price: "無料", small: "ローカル枠", features: ["デバイス上でのローカル音声入力", "小型オンデバイスモデルを含む", "グローバルショートカットとローカル履歴", "より大きなローカルモデルには Dictivo Local が必要", "Local モードではクラウドアップロードなし"], button: "Mac 版をダウンロード" },
-        { name: "Dictivo Local", sub: "より大きなローカルモデルと 12 か月のアップデートを利用できます。", price: "$29", was: "$49", small: "買い切り · ローンチ価格", features: ["購入したバージョンの永続ライセンス", "12 か月のアップデートと新しいローカルモデル", "個人用デバイス最大 3 台で利用可能", "将来の更新は任意で $24/年", "14 日間返金、理由は不要"], button: "Local を購入" },
+        { name: "Dictivo Local", sub: "より大きなローカルモデルと 12 か月のアップデートを利用できます。", price: "$29", small: `買い切り · ${introUntil("ja")}までのローンチ価格`, features: ["購入したバージョンの永続ライセンス", "12 か月のアップデートと新しいローカルモデル", "個人用デバイス最大 3 台で利用可能", "将来の更新は任意で $24/年", "14 日間返金、理由は不要"], button: "Local を購入" },
         { name: "Cloud Fast", sub: "選択した録音に高速クラウド文字起こしを追加します。", price: "$6.99", small: "月額", features: ["月 1,500 分の文字起こし", "単体でも Dictivo Local と併用でも利用可能", "アプリ内のシンプルな Cloud Fast スイッチ", "選択した録音だけをアップロード", "テキストが戻った後もローカル辞書とスニペットを適用"], button: "Cloud Fast を追加" },
       ],
       checkoutTitle: "安全な購入ページが新しいタブで開きます。",
@@ -1257,7 +1260,7 @@ const asiaDetails = {
     pricing: {
       tiers: [
         { name: "Free Local", sub: "Mac에서 개인정보 우선 흐름을 사용해 보세요.", price: "무료", small: "로컬 플랜", features: ["기기에서 로컬 받아쓰기", "작은 온디바이스 모델 포함", "전역 단축키와 로컬 기록", "더 큰 로컬 모델은 Dictivo Local 필요", "Local 모드에서는 클라우드 업로드 없음"], button: "Mac용 다운로드" },
-        { name: "Dictivo Local", sub: "더 큰 로컬 모델과 12개월 업데이트를 잠금 해제합니다.", price: "$29", was: "$49", small: "일회성 · 런칭 특가", features: ["구매한 버전의 영구 라이선스", "12개월 업데이트와 새 로컬 모델", "개인 기기 최대 3대에서 사용", "향후 업데이트는 선택적으로 $24/년 갱신", "14일 환불, 질문 없음"], button: "Local 구매" },
+        { name: "Dictivo Local", sub: "더 큰 로컬 모델과 12개월 업데이트를 잠금 해제합니다.", price: "$29", small: `일회성 · ${introUntil("ko")}까지 런칭 가격`, features: ["구매한 버전의 영구 라이선스", "12개월 업데이트와 새 로컬 모델", "개인 기기 최대 3대에서 사용", "향후 업데이트는 선택적으로 $24/년 갱신", "14일 환불, 질문 없음"], button: "Local 구매" },
         { name: "Cloud Fast", sub: "선택한 녹음에 빠른 클라우드 전사를 추가합니다.", price: "$6.99", small: "월", features: ["월 1,500분 전사", "단독 또는 Dictivo Local과 함께 사용", "앱 안의 단순한 Cloud Fast 스위치", "선택한 녹음만 업로드", "텍스트가 돌아온 뒤에도 로컬 사전과 스니펫 적용"], button: "Cloud Fast 추가" },
       ],
       checkoutTitle: "안전한 결제 페이지가 새 탭에서 열립니다.",
@@ -1401,7 +1404,7 @@ for (const [localeCode, copy] of Object.entries(LAUNCH_OFFER_COPY)) {
 const L10N_PARITY = {
   de: {
     faq: [
-      ["Ist das ein Abo?", "Nein. Dictivo Local kostet einmalig $29 zum Aktionspreis (regulär $49). Die Lizenz gilt dauerhaft: Die gekaufte Version läuft unbegrenzt weiter. Die ersten 12 Monate Updates sind enthalten; danach können Sie optional für $24/Jahr verlängern - oder einfach mit Ihrer Version weiterarbeiten. Cloud Fast ist ein separates, optionales Add-on für $6.99/Monat."],
+      ["Ist das ein Abo?", `Nein. Dictivo Local kostet bis zum ${introUntil("de")} einmalig $29, ab dem ${regularFrom("de")} $49. Die Lizenz gilt dauerhaft: Die gekaufte Version läuft unbegrenzt weiter. Die ersten 12 Monate Updates sind enthalten; danach können Sie optional für $24/Jahr verlängern - oder einfach mit Ihrer Version weiterarbeiten. Cloud Fast ist ein separates, optionales Add-on für $6.99/Monat.`],
       ["Wie kann ich prüfen, dass der lokale Modus nichts hochlädt?", "Führen Sie den offenen Netzwerktest durch: Starten Sie einen Netzwerkmonitor Ihres Systems, diktieren Sie im lokalen Modus und achten Sie auf ausgehenden Datenverkehr. Die Schritt-für-Schritt-Anleitung steht auf den Seiten zum Datenschutznachweis."],
       ["Was, wenn es nicht in meinen Workflow passt?", "Für jeden Kauf gibt es 14 Tage Erstattung ohne Fragen, und Tiny Local bleibt so oder so dauerhaft gratis."],
     ],
@@ -1415,7 +1418,7 @@ const L10N_PARITY = {
   },
   fr: {
     faq: [
-      ["Est-ce un abonnement?", "Non. Dictivo Local est un paiement unique de $29 pendant le lancement (prix normal $49). La licence est perpétuelle : la version achetée continue de fonctionner indéfiniment. Après 12 mois de mises à jour incluses, vous pouvez renouveler pour $24/an - ou simplement continuer avec ce que vous avez. Cloud Fast est une option séparée à $6.99/mois."],
+      ["Est-ce un abonnement?", `Non. Dictivo Local est un paiement unique de $29 jusqu'au ${introUntil("fr")}, puis de $49 à partir du ${regularFrom("fr")}. La licence est perpétuelle : la version achetée continue de fonctionner indéfiniment. Après 12 mois de mises à jour incluses, vous pouvez renouveler pour $24/an - ou simplement continuer avec ce que vous avez. Cloud Fast est une option séparée à $6.99/mois.`],
       ["Comment vérifier que le mode Local n'envoie rien?", "Faites le test réseau vous-même : lancez un moniteur réseau, dictez en mode Local et surveillez le trafic sortant. Le guide pas à pas se trouve sur nos pages de preuve de confidentialité."],
       ["Et si cela ne convient pas à mon workflow?", "Chaque achat bénéficie d'un remboursement 14 jours, sans question, et Tiny Local reste gratuit à vie dans tous les cas."],
     ],
@@ -1429,7 +1432,7 @@ const L10N_PARITY = {
   },
   es: {
     faq: [
-      ["¿Es una suscripción?", "No. Dictivo Local cuesta $29 una sola vez durante el lanzamiento (precio normal $49). La licencia es perpetua: la versión que compras sigue funcionando para siempre. Después de los 12 meses de actualizaciones incluidas puedes renovar opcionalmente por $24/año - o seguir usando lo que ya tienes. Cloud Fast es un complemento opcional aparte, por $6.99/mes."],
+      ["¿Es una suscripción?", `No. Dictivo Local cuesta $29 una sola vez hasta el ${introUntil("es")} y $49 a partir del ${regularFrom("es")}. La licencia es perpetua: la versión que compras sigue funcionando para siempre. Después de los 12 meses de actualizaciones incluidas puedes renovar opcionalmente por $24/año - o seguir usando lo que ya tienes. Cloud Fast es un complemento opcional aparte, por $6.99/mes.`],
       ["¿Cómo puedo comprobar que el modo Local no sube nada?", "Haz la prueba de red: abre un monitor de red, dicta en modo Local y comprueba si hay tráfico saliente. La guía paso a paso está en las páginas de prueba de privacidad."],
       ["¿Y si no encaja con mi flujo?", "Cada compra tiene un reembolso de 14 días, sin preguntas, y Tiny Local sigue siendo gratis para siempre en cualquier caso."],
     ],
@@ -1443,7 +1446,7 @@ const L10N_PARITY = {
   },
   it: {
     faq: [
-      ["È un abbonamento?", "No. Dictivo Local costa $29 una tantum durante il lancio (prezzo regolare $49). La licenza è perpetua: la versione che acquisti continua a funzionare per sempre. Dopo i 12 mesi di aggiornamenti inclusi puoi rinnovare a $24/anno, oppure continuare a usare quello che hai. Cloud Fast è un componente aggiuntivo separato e opzionale a $6.99/mese."],
+      ["È un abbonamento?", `No. Dictivo Local costa $29 una tantum fino al ${introUntil("it")}, poi $49 dal ${regularFrom("it")}. La licenza è perpetua: la versione che acquisti continua a funzionare per sempre. Dopo i 12 mesi di aggiornamenti inclusi puoi rinnovare a $24/anno, oppure continuare a usare quello che hai. Cloud Fast è un componente aggiuntivo separato e opzionale a $6.99/mese.`],
       ["Come posso verificare che la modalità Local non carichi nulla?", "Esegui il test di rete aperto: avvia un monitor di rete, detta in modalità Local e controlla il traffico in uscita. La guida passo passo è nelle pagine Prova privacy."],
       ["E se non si adatta al mio flusso?", "Ogni acquisto prevede un rimborso entro 14 giorni, senza domande, e in ogni caso Tiny Local resta gratis per sempre."],
     ],
@@ -1457,7 +1460,7 @@ const L10N_PARITY = {
   },
   nl: {
     faq: [
-      ["Is dit een abonnement?", "Nee. Dictivo Local kost eenmalig $29 als introductieprijs (reguliere prijs $49). De licentie is permanent: de versie die je koopt blijft altijd werken. Na de 12 maanden inbegrepen updates kun je optioneel verlengen voor $24/jaar - of gewoon verder met wat je hebt. Cloud Fast is een aparte, optionele add-on van $6.99 per maand."],
+      ["Is dit een abonnement?", `Nee. Dictivo Local kost eenmalig $29 tot en met ${introUntil("nl")} en $49 vanaf ${regularFrom("nl")}. De licentie is permanent: de versie die je koopt blijft altijd werken. Na de 12 maanden inbegrepen updates kun je optioneel verlengen voor $24/jaar - of gewoon verder met wat je hebt. Cloud Fast is een aparte, optionele add-on van $6.99 per maand.`],
       ["Hoe controleer ik dat Local-modus niets uploadt?", "Voer de open netwerktest uit: start een netwerkmonitor op je systeem, dicteer in Local-modus en let op uitgaand verkeer. De stapsgewijze uitleg staat op de privacybewijspagina's."],
       ["Wat als het niet bij mijn workflow past?", "Bij elke aankoop geldt een terugbetaling binnen 14 dagen, zonder vragen - en Tiny Local blijft hoe dan ook altijd gratis."],
     ],
@@ -1471,7 +1474,7 @@ const L10N_PARITY = {
   },
   pt: {
     faq: [
-      ["Isso é uma assinatura?", "Não. Dictivo Local custa $29 uma vez durante o lançamento (preço normal $49). A licença é perpétua: a versão que você comprar continua funcionando para sempre. Depois dos 12 meses de atualizações incluídas, você pode renovar por $24/ano se quiser - ou continuar com o que já tem. O Cloud Fast é um complemento opcional à parte, por $6.99/mês."],
+      ["Isso é uma assinatura?", `Não. Dictivo Local custa $29 uma vez até ${introUntil("pt")} e $49 a partir de ${regularFrom("pt")}. A licença é perpétua: a versão que você comprar continua funcionando para sempre. Depois dos 12 meses de atualizações incluídas, você pode renovar por $24/ano se quiser - ou continuar com o que já tem. O Cloud Fast é um complemento opcional à parte, por $6.99/mês.`],
       ["Como posso verificar que o modo Local não envia nada?", "Faça o teste de rede aberto: abra um monitor de rede do sistema, dite no modo Local e observe se aparece algum tráfego de saída. O guia passo a passo está nas páginas de prova de privacidade."],
       ["E se não se encaixar no meu fluxo?", "Toda compra tem reembolso de 14 dias, sem perguntas - e, de qualquer forma, o ditado Tiny Local fica grátis para sempre."],
     ],
@@ -1485,7 +1488,7 @@ const L10N_PARITY = {
   },
   zh: {
     faq: [
-      ["这是订阅制吗？", "不是。Dictivo Local 启动价 $29 一次买断（常规价 $49）。许可证永久有效：你买到的那个版本可以一直用下去。包含的 12 个月更新期结束后，可以选择 $24/年续订，也可以继续使用手上的版本。 Cloud Fast 是单独的可选附加服务，$6.99/月。"],
+      ["这是订阅制吗？", `不是。Dictivo Local 截至 ${introUntil("zh")} 一次买断 $29，${regularFrom("zh")} 起为 $49。许可证永久有效：你买到的那个版本可以一直用下去。包含的 12 个月更新期结束后，可以选择 $24/年续订，也可以继续使用手上的版本。 Cloud Fast 是单独的可选附加服务，$6.99/月。`],
       ["我怎么验证本地模式确实没有上传？", "运行公开网络测试：打开系统网络监控工具，用本地模式听写，观察有没有对外流量。隐私证明页面上有分步指南。"],
       ["如果不适合我的工作流怎么办？", "每笔购买都有 14 天无理由退款；无论如何，Tiny Local 听写都永久免费。"],
     ],
@@ -1499,7 +1502,7 @@ const L10N_PARITY = {
   },
   ja: {
     faq: [
-      ["これはサブスクリプションですか？", "いいえ。Dictivo Local はローンチ期間中 $29 の買い切りです（通常価格 $49）。ライセンスは永続で、購入したバージョンはずっと使い続けられます。12 か月のアップデート期間が終わったあとは、アップデートを受け取り続けたい場合のみ任意で $24/年で更新できます。更新しない場合も、手元のバージョンはそのまま使えます。 Cloud Fast は別売りのオプション（$6.99/月）です。"],
+      ["これはサブスクリプションですか？", `いいえ。Dictivo Local は ${introUntil("ja")}まで $29 の買い切りで、${regularFrom("ja")}より $49 に改定予定です。ライセンスは永続で、購入したバージョンはずっと使い続けられます。12 か月のアップデート期間が終わったあとは、アップデートを受け取り続けたい場合のみ任意で $24/年で更新できます。更新しない場合も、手元のバージョンはそのまま使えます。 Cloud Fast は別売りのオプション（$6.99/月）です。`],
       ["Local モードが何もアップロードしていないことを、どうすれば確認できますか？", "公開ネットワークテストを実行してください。Little Snitch や LuLu などのネットワークモニターを起動し、Local モードで音声入力して、音声が外部に送信されないことを確認するだけです。手順はプライバシー証明ページで順を追って説明しています。"],
       ["ワークフローに合わなかった場合はどうなりますか？", "購入にはすべて 14 日間の返金保証が付き、理由は問いません。合わなかった場合でも、Tiny Local は永久無料のまま使えます。"],
     ],
@@ -1513,7 +1516,7 @@ const L10N_PARITY = {
   },
   ko: {
     faq: [
-      ["구독인가요?", "아니요. Dictivo Local은 런칭 기간 동안 $29 한 번 결제이며 정가는 $49입니다. 라이선스는 영구적이라 구매한 버전은 계속 사용할 수 있습니다. 포함된 12개월 업데이트 기간이 끝난 뒤에는 원하면 $24/년으로 갱신하거나, 쓰던 버전을 그대로 사용하면 됩니다. Cloud Fast는 별도의 선택 사항으로 월 $6.99입니다."],
+      ["구독인가요?", `아니요. Dictivo Local은 ${introUntil("ko")}까지 $29 한 번 결제이며, ${regularFrom("ko")}부터 $49입니다. 라이선스는 영구적이라 구매한 버전은 계속 사용할 수 있습니다. 포함된 12개월 업데이트 기간이 끝난 뒤에는 원하면 $24/년으로 갱신하거나, 쓰던 버전을 그대로 사용하면 됩니다. Cloud Fast는 별도의 선택 사항으로 월 $6.99입니다.`],
       ["Local 모드가 아무것도 업로드하지 않는지 어떻게 확인하나요?", "공개 네트워크 테스트를 해 보세요. 시스템 네트워크 모니터를 켜고 Local 모드로 받아쓰기한 뒤 외부로 나가는 트래픽이 있는지 확인하면 됩니다. 단계별 안내는 개인정보 증명 페이지에 있습니다."],
       ["내 워크플로에 맞지 않으면 어떻게 하나요?", "모든 구매에는 이유를 묻지 않는 14일 환불이 적용되며, 어떤 경우에도 Tiny Local 받아쓰기는 영구 무료로 유지됩니다."],
     ],

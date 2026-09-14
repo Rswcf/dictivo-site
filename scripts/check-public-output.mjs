@@ -5,6 +5,7 @@ import { LOCALES } from "../data/site-content.mjs";
 import { toHant } from "./lib/hant.mjs";
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
+import { LOCAL_OFFER, introPriceExpired } from "../data/local-offer.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
@@ -261,6 +262,11 @@ for (const file of listFiles()) {
 verifyAnalyticsInstrumentation();
 verifyWindowsDownloads();
 verifyReleaseNotes();
+
+// The pricing copy promises $49 from LOCAL_OFFER.regularPriceFrom: the daily deploy fails until that is true.
+if (introPriceExpired()) {
+  failures.push(`data/local-offer.mjs: the introductory price ended on ${LOCAL_OFFER.introPriceUntil}; raise the Lemon Squeezy Local price to $${LOCAL_OFFER.regularPrice}, then update the offer and pricing copy`);
+}
 
 if (failures.length > 0) {
   fail(`Public output check failed:\n${failures.map((line) => `  - ${line}`).join("\n")}`);
