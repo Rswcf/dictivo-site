@@ -20,7 +20,7 @@ import {
   OFFLINE_DICTATION_GUIDE_REFERENCES,
 } from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
-import { releaseNotesFor } from "../data/release-notes.mjs";
+import { earlierReleaseNotes, releaseNotesFor } from "../data/release-notes.mjs";
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
@@ -45,7 +45,7 @@ import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
 import { priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
-import { LOCAL_OFFER } from "../data/local-offer.mjs";
+import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
@@ -5705,6 +5705,11 @@ function renderPrivacyProofPage(currentCode = "en") {
 `;
 }
 
+// ISO dates compare correctly as strings.
+function latestDate(...dates) {
+  return dates.filter(Boolean).sort().at(-1);
+}
+
 function renderSitemap() {
   const alternates = LOCALES.map(
     (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localeUrl(locale.code)}" />`,
@@ -5713,7 +5718,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${[release.updatedAt, HOME_CONVERSION_LASTMOD, PRODUCT_FILM.lastmod].sort().at(-1)}</lastmod>
+    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
@@ -5774,14 +5779,14 @@ ${offlineGuideXDefault}
   </url>`;
   const offlineDictationWindowsGuideEntry = `  <url>
     <loc>${offlineDictationWindowsGuideUrl()}</loc>
-    <lastmod>${OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD}</lastmod>
+    <lastmod>${latestDate(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD, PRICING_LASTMOD)}</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="${offlineDictationWindowsGuideUrl()}" />
     <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
   const mediaKitEntry = `  <url>
     <loc>${mediaKitUrl()}</loc>
-    <lastmod>${MEDIA_KIT_LASTMOD}</lastmod>
+    <lastmod>${latestDate(MEDIA_KIT_LASTMOD, PRICING_LASTMOD)}</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="${mediaKitUrl()}" />
     <xhtml:link rel="alternate" hreflang="x-default" href="${mediaKitUrl()}" />
     <priority>0.75</priority>
@@ -5793,7 +5798,7 @@ ${offlineGuideXDefault}
     const compareXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedCompareUrl("en", slug)}" />`;
     return `  <url>
     <loc>${localizedCompareUrl(code, slug)}</loc>
-    <lastmod>${COMPARE_LAST_UPDATED.iso}</lastmod>
+    <lastmod>${latestDate(COMPARE_LAST_UPDATED.iso, PRICING_LASTMOD)}</lastmod>
 ${compareAlternates}
 ${compareXDefault}
     <priority>${priority}</priority>
@@ -5843,7 +5848,7 @@ ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
     <loc>${BASE_URL}${firstDictationPath(code)}</loc>
-    <lastmod>${FIRST_DICTATION_LASTMOD}</lastmod>
+    <lastmod>${latestDate(FIRST_DICTATION_LASTMOD, PRICING_LASTMOD)}</lastmod>
 ${Object.keys(FIRST_DICTATION_COPY).map(alt => `    <xhtml:link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n")}
     <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
   </url>`).join("\n")}
@@ -5919,6 +5924,17 @@ function renderChangelog() {
           ${currentNotes.bullets.map((bullet) => `<li>${html(bullet)}</li>`).join("\n          ")}
         </ul>
       </section>
+${earlierReleaseNotes(release.version).map((notes) => {
+    const anchor = `release-${notes.version.replaceAll(".", "-")}`;
+    return `
+      <section class="doc-section" id="${notes.version}" aria-labelledby="${anchor}">
+        <p class="release-line"><span class="release-tag">v${notes.version}</span><span class="release-status">Public beta</span><time class="release-date" datetime="${notes.date}">${html(formatEnglishDate(notes.date))}</time></p>
+        <h2 id="${anchor}">${html(notes.title)}</h2>
+        <ul>
+          ${notes.bullets.map((bullet) => `<li>${html(bullet)}</li>`).join("\n          ")}
+        </ul>
+      </section>`;
+  }).join("\n")}
 
       <section class="doc-section" id="0.3.37" aria-labelledby="release-0-3-37">
         <p class="release-line"><span class="release-tag">v0.3.37</span><span class="release-status">Public beta</span><time class="release-date" datetime="2026-07-25">July 25, 2026</time></p>
@@ -6203,6 +6219,8 @@ write(PRODUCT_FILM.chineseTraditional.slice(1), toHant(readFileSync(resolve(root
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
 copyFileSync(resolve(root, "a466589ed8677749e2b7fdd18c7ddcf6.txt"), resolve(outDir, "a466589ed8677749e2b7fdd18c7ddcf6.txt"));
+// The first IndexNow key (2026-07-08). Kept published while search-engine ownership of the
+// current key (a466589…) is unresolved; remove only after IndexNow accepts submissions again.
 copyFileSync(resolve(root, "c5df5e411109537ea4eeadaf411f6618.txt"), resolve(outDir, "c5df5e411109537ea4eeadaf411f6618.txt"));
 copyFileSync(resolve(root, "BingSiteAuth.xml"), resolve(outDir, "BingSiteAuth.xml"));
 copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));

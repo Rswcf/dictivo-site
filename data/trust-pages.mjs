@@ -8,7 +8,9 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * privacy policy, terms, or refund policy with no date gives a reader no way to
  * tell which version they agreed to.
  */
-const LEGAL_LASTMOD = "2026-09-16";
+const LEGAL_LASTMOD = "2026-08-01";
+// The terms changed with the tax-inclusive price statement.
+const TERMS_LASTMOD = "2026-09-16";
 
 /**
  * The formal withdrawal notice can only name a trader once the Impressum data
@@ -1230,7 +1232,7 @@ export const TRUST_PAGES = [
       "The practical terms for using Dictivo, including Local, Cloud Fast, licenses, updates, refunds, and support.",
     lede:
       "These terms are written for customers, not lawyers. They describe what you can expect when you download, buy, and use Dictivo.",
-    lastModified: LEGAL_LASTMOD,
+    lastModified: TERMS_LASTMOD,
     sections: [
       {
         title: "License to use Dictivo",

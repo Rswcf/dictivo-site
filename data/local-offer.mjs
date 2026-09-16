@@ -15,6 +15,10 @@ export const LOCAL_OFFER = Object.freeze({
 // Cloud Fast, per month.
 export const CLOUD_FAST_MONTHLY_PRICE = 8.99;
 
+// The last day any displayed Dictivo price or its tax wording changed. Pages that show a
+// price report at least this date in the sitemap, so search engines recrawl them.
+export const PRICING_LASTMOD = "2026-09-16";
+
 const DATE_LOCALES = { en: "en-GB", de: "de-DE", fr: "fr-FR", es: "es-ES", it: "it-IT", nl: "nl-NL", pt: "pt-BR", zh: "zh-CN", ja: "ja-JP", ko: "ko-KR" };
 
 // "31 October 2026", "1. November 2026", "1er novembre 2026", "2026年10月31日" …

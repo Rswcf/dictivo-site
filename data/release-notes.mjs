@@ -1,5 +1,14 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.48": Object.freeze({
+    date: "2026-09-16",
+    title: "Cloud Fast now quotes its current price.",
+    bullets: Object.freeze([
+      "When Cloud Fast needs a subscription, the message now shows the current monthly price from the Dictivo service instead of a price built into the app, so a price change never needs an app update.",
+      "Prices on dictivo.app and in the app include tax, whichever country you buy from.",
+    ]),
+  }),
   "0.3.47": Object.freeze({
+    date: "2026-09-11",
     title: "A clearer first dictation test, with time to finish speaking.",
     bullets: Object.freeze([
       "The first-run test now follows your chosen toggle or hold-to-talk shortcut instead of stopping after 2.5 seconds. A Stop test button and a 30-second limit keep you in control.",
@@ -8,6 +17,7 @@ export const RELEASE_NOTES = Object.freeze({
     ]),
   }),
   "0.3.46": Object.freeze({
+    date: "2026-09-10",
     title: "A heads-up before your update window closes, in your language.",
     bullets: Object.freeze([
       "Thirty days before the 12-month update window ends, Account & Billing says so and offers the renewal; after it ends, it says that too. Your version keeps working either way.",
@@ -16,13 +26,15 @@ export const RELEASE_NOTES = Object.freeze({
     ]),
   }),
   "0.3.45": Object.freeze({
+    date: "2026-09-09",
     title: "Renewals can be bought, and they activate themselves.",
     bullets: Object.freeze([
-      "The $24/year renewal exists now. When your update window has ended, Renew opens the checkout and the new key extends the window on this device automatically.",
+      "The yearly update renewal can be bought now. When your update window has ended, Renew opens the checkout and the new key extends the window on this device automatically.",
       "A renewal or replacement key that arrives by email can be entered under Account & Billing without removing the saved licence first.",
     ]),
   }),
   "0.3.44": Object.freeze({
+    date: "2026-09-09",
     title: "Buying Dictivo Local now finishes inside the app.",
     bullets: Object.freeze([
       "A Dictivo Local purchase activates on this device by itself once the checkout completes, the way a Cloud Fast subscription already did. The emailed key still works as a fallback.",
@@ -32,6 +44,7 @@ export const RELEASE_NOTES = Object.freeze({
     ]),
   }),
   "0.3.43": Object.freeze({
+    date: "2026-09-08",
     title: "A lapsed subscription can be bought again from inside the app.",
     bullets: Object.freeze([
       "When a Cloud Fast subscription lapses, Dictivo now says so plainly and offers \"Subscribe again\"; the new checkout activates on this device automatically.",
@@ -40,6 +53,7 @@ export const RELEASE_NOTES = Object.freeze({
     ]),
   }),
   "0.3.40": Object.freeze({
+    date: "2026-08-21",
     title: "Hotkeys recover on their own, and the free tiers stop running out in silence.",
     bullets: Object.freeze([
       "A dictation shortcut that failed to register used to stay broken until you restarted Dictivo. It now retries by itself, tries again whenever you come back to the window, and offers a Try again button.",
@@ -49,6 +63,7 @@ export const RELEASE_NOTES = Object.freeze({
     ]),
   }),
   "0.3.39": Object.freeze({
+    date: "2026-08-18",
     title: "Reliable Windows hotkeys and more resilient Cloud Fast transcription.",
     bullets: Object.freeze([
       "Fixed a Windows issue that could report every global shortcut as unavailable and prevent dictation from starting, especially when another Dictivo process or overlapping shortcut registration was involved.",
@@ -58,6 +73,23 @@ export const RELEASE_NOTES = Object.freeze({
     ]),
   }),
 });
+
+// Public release dates are the GitHub release publication days.
+const versionParts = (version) => version.split(".").map(Number);
+const olderThan = (a, b) => {
+  const [left, right] = [versionParts(a), versionParts(b)];
+  const index = left.findIndex((part, i) => part !== right[i]);
+  return index >= 0 && left[index] < right[index];
+};
+
+// Notes for releases before the current one, newest first. The current release is
+// rendered separately by releaseNotesFor so it carries the download line.
+export function earlierReleaseNotes(currentVersion) {
+  return Object.entries(RELEASE_NOTES)
+    .filter(([version]) => olderThan(version, currentVersion))
+    .sort(([a], [b]) => (olderThan(a, b) ? 1 : -1))
+    .map(([version, notes]) => ({ version, date: notes.date, title: notes.title, bullets: [...notes.bullets] }));
+}
 
 export function releaseNotesFor(version, hasWindowsRelease) {
   const known = RELEASE_NOTES[version];
