@@ -10,7 +10,6 @@ const files = (dir) => readdirSync(dir).flatMap((name) => {
   return statSync(path).isDirectory() ? files(path) : [path];
 });
 const htmlFiles = () => files(dist).filter((path) => path.endsWith(".html"));
-const span = (cents, form, country) => `<span class="price" data-price-cents="${cents}" data-price-form="${form}" data-price-country="${country}">`;
 const walk = (value, visit) => {
   if (Array.isArray(value)) value.forEach((item) => walk(item, visit));
   else if (value && typeof value === "object") {
@@ -18,34 +17,35 @@ const walk = (value, visit) => {
     Object.values(value).forEach((item) => walk(item, visit));
   }
 };
+const nbsp = (text) => text.replaceAll("_", " ");
 
-// Home country, Local card figure, Cloud Fast card figure (static HTML, before site.js runs).
+// Local figure, Cloud Fast figure, tax note — as rendered in the static HTML.
 const HOME_PRICES = {
-  en: ["US", "$29", "$6.99"],
-  de: ["DE", "34,51 US$", "8,32 US$"],
-  fr: ["FR", "34,80 $ US", "8,39 $ US"],
-  es: ["ES", "35,09 US$", "8,46 US$"],
-  it: ["IT", "35,38 US$", "8,53 US$"],
-  nl: ["NL", "US$ 35,09", "US$ 8,46"],
-  pt: ["BR", "US$ 29", "US$ 6,99"],
-  zh: ["CN", "US$29", "US$6.99"],
-  "zh-hant": ["TW", "US$30.45", "US$7.34"],
-  ja: ["JP", "US$31.90", "US$7.69"],
-  ko: ["KR", "US$31.90", "US$7.69"],
+  en: ["US$29", "US$8.99", "tax included"],
+  de: ["29_US$", "8,99_US$", "inkl. MwSt."],
+  fr: ["29_$_US", "8,99_$_US", "TTC"],
+  es: ["29_US$", "8,99_US$", "IVA incluido"],
+  it: ["29_US$", "8,99_US$", "IVA inclusa"],
+  nl: ["US$_29", "US$_8,99", "incl. btw"],
+  pt: ["US$_29", "US$_8,99", "impostos incluídos"],
+  zh: ["US$29", "US$8.99", "含税"],
+  "zh-hant": ["US$29", "US$8.99", "含稅"],
+  ja: ["US$29", "US$8.99", "税込"],
+  ko: ["US$29", "US$8.99", "부가세 포함"],
 };
 
-test("pricing cards show the home country's figure and tax line", () => {
+test("pricing cards show one figure and a tax-included note in every language", () => {
   for (const locale of LOCALES) {
-    const [country, local, cloudFast] = HOME_PRICES[locale.code];
+    const [local, cloudFast, note] = HOME_PRICES[locale.code].map(nbsp);
     const html = readFileSync(`${dist}${locale.path.slice(1)}index.html`, "utf8");
-    assert.ok(html.includes(`<p class="tier-price">${span(2900, "main", country)}${local}</span><small>`), `${locale.code}: Local card`);
-    assert.ok(html.includes(`<p class="tier-price">${span(699, "main", country)}${cloudFast}</span><small>`), `${locale.code}: Cloud Fast card`);
-    assert.ok(html.includes(`<p class="tier-tax">${span(2900, "note", country)}`), `${locale.code}: Local tax line`);
-    assert.ok(html.includes(`<p class="tier-tax">${span(699, "note", country)}`), `${locale.code}: Cloud Fast tax line`);
+    assert.ok(html.includes(`<p class="tier-price"><span class="price">${local}</span><small>`), `${locale.code}: Local card`);
+    assert.ok(html.includes(`<p class="tier-price"><span class="price">${cloudFast}</span><small>`), `${locale.code}: Cloud Fast card`);
+    assert.equal((html.match(new RegExp(`<p class="tier-tax"><span class="price">${note}</span>`, "g")) || []).length, 2, `${locale.code}: tax notes`);
+    assert.doesNotMatch(html, /data-price-|\{\{price\./, locale.code);
   }
 });
 
-test("paid offers in structured data are marked as excluding tax", () => {
+test("paid offers in structured data are marked as including tax", () => {
   let offers = 0;
   for (const file of htmlFiles()) {
     for (const [, json] of readFileSync(file, "utf8").matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
@@ -53,8 +53,9 @@ test("paid offers in structured data are marked as excluding tax", () => {
         if (node["@type"] !== "Offer" || !["Dictivo Local", "Cloud Fast"].includes(node.name)) return;
         offers += 1;
         assert.equal(node.priceCurrency, "USD", file);
-        assert.equal(node.priceSpecification?.valueAddedTaxIncluded, false, `${file}: ${node.name}`);
+        assert.equal(node.priceSpecification?.valueAddedTaxIncluded, true, `${file}: ${node.name}`);
         assert.equal(node.priceSpecification?.price, node.price, `${file}: ${node.name}`);
+        if (node.name === "Cloud Fast") assert.equal(node.price, "8.99", file);
       });
     }
   }
@@ -63,10 +64,10 @@ test("paid offers in structured data are marked as excluding tax", () => {
 
 const withoutPrices = (html) => html
   .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "")
-  .replace(/<span class="price"[^>]*>[^<]*<\/span>/g, "");
-const DICTIVO_FIGURE = /\$(?:29|24|49|77)(?!\d)(?![.,]\d)|\$6\.99|29米ドル/g;
+  .replace(/<span class="price">[^<]*<\/span>/g, "");
+const DICTIVO_FIGURE = /\$(?:29|24|49|77)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|29米ドル/g;
 
-test("every Dictivo price on the site follows the reader's tax treatment", () => {
+test("every Dictivo price on the site comes from a placeholder", () => {
   for (const file of htmlFiles()) {
     const text = withoutPrices(readFileSync(file, "utf8"));
     for (const match of text.matchAll(DICTIVO_FIGURE)) {
@@ -77,26 +78,34 @@ test("every Dictivo price on the site follows the reader's tax treatment", () =>
   }
 });
 
-test("German prices never end a sentence", () => {
-  // "inkl. MwSt." already ends in a full stop; other countries' wording does not.
-  for (const file of htmlFiles().filter((path) => path.startsWith(`${dist}de/`))) {
-    assert.doesNotMatch(readFileSync(file, "utf8"), /data-price-form="inline"[^>]*>[^<]*<\/span>\./, file);
-  }
-});
-
 test("titles, meta descriptions and llms.txt carry no Dictivo price", () => {
   for (const file of htmlFiles()) {
     const html = readFileSync(file, "utf8");
     const head = html.slice(0, html.search(/<body[\s>]/)).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "");
-    assert.doesNotMatch(head, /\$(?:29|24|77)(?!\d)(?![.,]\d)|\$6\.99|US\$|29米ドル/, file);
+    assert.doesNotMatch(head, /\$(?:29|24|77)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|29米ドル/, file);
   }
   for (const file of files(dist).filter((path) => path.endsWith("llms.txt"))) {
-    assert.doesNotMatch(readFileSync(file, "utf8"), /\$(?:29|24)(?!\d)|\$6\.99/, file);
+    assert.doesNotMatch(readFileSync(file, "utf8"), /\$(?:29|24)(?!\d)|\$(?:6|8)\.99|US\$/, file);
   }
 });
 
-test("the terms say prices exclude tax", () => {
-  assert.match(readFileSync(`${dist}terms/index.html`, "utf8"), /Prices exclude sales tax and VAT/);
+test("German prices never end a sentence", () => {
+  // "inkl. MwSt." already ends in a full stop.
+  for (const file of htmlFiles().filter((path) => path.startsWith(`${dist}de/`))) {
+    assert.doesNotMatch(readFileSync(file, "utf8"), /inkl\. MwSt\.<\/span>\./, file);
+  }
+});
+
+test("the terms say prices include tax and are in US dollars", () => {
+  const terms = readFileSync(`${dist}terms/index.html`, "utf8");
+  assert.match(terms, /Prices include applicable sales tax and VAT/);
+  assert.match(terms, /refunds are issued in US dollars/);
+  assert.match(terms, /datetime="2026-09-16"/);
+});
+
+test("the old country machinery is gone from the public site", () => {
+  const js = readFileSync(`${dist}assets/site.js`, "utf8");
+  assert.doesNotMatch(js, /cdn-cgi\/trace|DictivoPrice|price_country|showVisitorPrices/);
 });
 
 test("no price placeholder reaches the public site", () => {

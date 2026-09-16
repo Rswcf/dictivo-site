@@ -4,15 +4,13 @@ This repository is the static website for `dictivo.app`. It is intentionally sep
 repository. The current positioning is **private dictation first**: Local mode is the default product, while Cloud
 Fast is an optional speed mode for users who accept cloud transcription upload.
 
-Current public pricing copy:
+Current public pricing copy (all prices are tax-inclusive totals in US dollars; the checkout deducts the buyer's tax from the total):
 
-- Dictivo Local: `$29` introductory price until 2026-10-31, `$49` from 2026-11-01 (`data/local-offer.mjs`; raise the Lemon Squeezy price first, the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `$24/year` renewal for future updates.
-- Dictivo Cloud Fast: `$6.99/month`, 1,500 minutes/month, standalone or alongside Local.
-- All prices exclude tax; the checkout adds the billing country's tax. Pages show each buyer's treatment from
-  `data/price-display.mjs`: the tax-inclusive total where consumer law requires it (EU, UK, CH, JP, KR, TW, AU, …), the
-  net price elsewhere. Copy writes prices as `{{price.<amount>.<form>}}` placeholders, never as figures; titles and meta
-  descriptions carry no price. Rates were checked on prefilled checkouts on `TAX_VERIFIED_ON`, and the deploy check
-  fails six months later until they are re-checked. Preview a country with `?price_country=GB` (not on dictivo.app).
+- Dictivo Local: `US$29` introductory price until 2026-10-31, `US$49` from 2026-11-01 (`data/local-offer.mjs`; raise the Lemon Squeezy price first, the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `US$24/year` renewal for future updates.
+- Dictivo Cloud Fast: `US$8.99/month` (`CLOUD_FAST_MONTHLY_PRICE` in `data/local-offer.mjs`), 1,500 minutes/month, standalone or alongside Local.
+- Copy writes prices as `{{price.<amount>.<form>}}` placeholders, never as figures; `data/price-display.mjs` renders them
+  per page language with a "tax included" note (`inkl. MwSt.`, `税込`, …). Titles, meta descriptions and `llms.txt` carry
+  no price; the build refuses a placeholder there.
 
 ## Local preview
 

@@ -8,7 +8,7 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * privacy policy, terms, or refund policy with no date gives a reader no way to
  * tell which version they agreed to.
  */
-const LEGAL_LASTMOD = "2026-08-01";
+const LEGAL_LASTMOD = "2026-09-16";
 
 /**
  * The formal withdrawal notice can only name a trader once the Impressum data
@@ -1241,7 +1241,7 @@ export const TRUST_PAGES = [
         bullets: [
           "Dictivo Local is currently {{price.local.inline}} once.",
           "Optional future update renewal is currently {{price.renewal.inline}} per year.",
-          "Prices exclude sales tax and VAT. Where tax applies, it is calculated from your billing country and shown at checkout before you pay.",
+          "Prices include applicable sales tax and VAT; the amount shown is what you pay. Prices are in US dollars and refunds are issued in US dollars.",
           "Cloud Fast is a separate optional monthly subscription.",
         ],
       },
