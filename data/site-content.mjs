@@ -19,8 +19,10 @@ export const LOCALES = [
   { code: "ko", htmlLang: "ko", name: "Korean", nativeName: "한국어", path: "/ko/" },
 ];
 
-const westernLanguages = "Deutsch, Français, Español, Italiano, Nederlands, Português";
-const asianLanguages = "简体中文, 日本語, 한국어";
+// Language lists in the copy follow LOCALES, so a new locale cannot be left out.
+const nativeNames = (codes) => codes.map((code) => LOCALES.find((locale) => locale.code === code).nativeName).join(", ");
+const westernLanguages = nativeNames(["de", "fr", "es", "it", "nl", "pt"]);
+const asianLanguages = nativeNames(["zh", "zh-hant", "ja", "ko"]);
 
 export const HOME_COPY = {
   en: {
