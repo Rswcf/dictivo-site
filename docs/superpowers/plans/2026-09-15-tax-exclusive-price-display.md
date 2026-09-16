@@ -63,6 +63,8 @@
 
 **Rollout order:** site live → founder signs in to the store dashboard → store "Tax-inclusive pricing" OFF (explicit founder confirmation at that moment) → prefilled checkout verification. Never the reverse.
 
+**Accepted residual:** crawlers that render JavaScript from US addresses see US-treatment prices in the visible text while the page's FAQ JSON-LD carries the home country's figures. Do not "fix" this by suppressing the visitor override; the static HTML and JSON-LD stay consistent for non-rendering crawlers.
+
 ---
 
 ### Task 1: Price display module
@@ -314,3 +316,9 @@
 - [ ] **Step 5: Record the outcome** in memory and the pricing brief.
 
 **Rollback:** turn the store setting back on, then revert the site merge commit. Setting back on first keeps charges at or below what the site shows.
+
+## Outcome (2026-09-15)
+
+- Tasks 1–6 landed as commits bc0d206 … 7c4c536; Task 7 preview `feat-tax-exclusive-price-display` verified, then pushed to `main` at 02:44 UTC and deployed.
+- Task 8: the founder switched the store setting off themselves (~02:30 UTC); the checkout began adding tax about ten minutes later. Prefilled checkouts with a postcode matched the formatter to the cent: DE 34.51, FI 36.40 (half-up confirmed), CH 31.35, GB 34.80, JP 31.90, AU 31.90, SG 31.61, KR 31.90, TW 30.45, CA-QC 33.34, CA-ON 32.77, BR 29.00 (no tax), Cloud Fast DE 8.32. No rounding change was needed.
+- Note for the verification script: the checkout only shows a tax line after a postcode is entered; the country prefill alone renders the subtotal.
