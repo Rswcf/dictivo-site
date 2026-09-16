@@ -1,6 +1,7 @@
 // Commercial terms shared by the pricing copy and comparison calculations. Keep the
 // introductory offer separate from the regular price; renewing updates is always optional.
-// On regularPriceFrom, raise the Lemon Squeezy price first, then update this file and the copy.
+// On regularPriceFrom, update this file, the copy and the API first, and raise the store price last
+// (runbook: docs/release/2026-11-01-local-price-rise-runbook.zh-CN.md in the desktop repository).
 export const LOCAL_OFFER = Object.freeze({
   price: 29,
   regularPrice: 49,

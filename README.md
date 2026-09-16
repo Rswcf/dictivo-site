@@ -1,16 +1,11 @@
 # Dictivo site
 
-## Verified deployment and pending changes — 2026-09-13
+## Deployment status — 2026-09-17
 
-Last verified production website commit: `4a47aa0` (September 12). The full crawl
-checked 144 sitemap pages across ten locales; the 35-second commercial film and
-Safari English/Chinese subtitle follow-up are verified. The 20-second screenshot
-sequence and human-speech CLI benchmark remain separate supporting evidence.
-
-Local commit `ce4c818` adds explicit `google_ads` checkout attribution. The paired
-API commit `3e5e45f` is also local only; Cloudflare authentication timed out, so
-neither was deployed. Deploy the API first, then this site and verify live assets.
-This README update does not imply the pending source is live or an ad campaign exists.
+Production runs `main`. The eleven-locale site (Traditional Chinese added 2026-09-14) serves 157
+sitemap pages. The explicit `google_ads` checkout attribution and its paired API change were
+deployed on 2026-09-16; that does not imply an ad campaign is running. Flat tax-inclusive pricing
+went live the same day (see below).
 
 This repository is the static website for `dictivo.app`. It is intentionally separate from the Dictivo desktop app
 repository. The current positioning is **private dictation first**: Local mode is the default product, while Cloud
@@ -18,7 +13,7 @@ Fast is an optional speed mode for users who accept cloud transcription upload.
 
 Current public pricing copy (all prices are tax-inclusive totals in US dollars; the checkout deducts the buyer's tax from the total):
 
-- Dictivo Local: `US$29` introductory price until 2026-10-31, `US$49` from 2026-11-01 (`data/local-offer.mjs`; raise the Lemon Squeezy price first, the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `US$24/year` renewal for future updates.
+- Dictivo Local: `US$29` introductory price until 2026-10-31, `US$49` from 2026-11-01 (`data/local-offer.mjs`; follow `docs/release/2026-11-01-local-price-rise-runbook.zh-CN.md` in the desktop repository: site and API first, store price last; the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `US$24/year` renewal for future updates.
 - Dictivo Cloud Fast: `US$8.99/month` (`CLOUD_FAST_MONTHLY_PRICE` in `data/local-offer.mjs`), 1,500 minutes/month, standalone or alongside Local.
 - Copy writes prices as `{{price.<amount>.<form>}}` placeholders, never as figures; `data/price-display.mjs` renders them
   per page language with a "tax included" note (`inkl. MwSt.`, `税込`, …). Titles, meta descriptions and `llms.txt` carry
@@ -103,7 +98,7 @@ Keep examples labeled as practice text, never as measured recognition results.
 
 ### `WINDOWS_HOME_COPY` is the stage that surprises people
 
-It lives in `scripts/generate-site.mjs`, has an entry for all ten locales, and while Windows is
+It lives in `scripts/generate-site.mjs`, has an entry for all eleven locales (Traditional Chinese is converted from Simplified), and while Windows is
 public it rewrites: `metaTitle`, `metaDescription`, the nav download label, the hero eyebrow, hero
 title and hero Windows note, the privacy section title, the free tier's subtitle, button, `href`
 and data attribute, the pricing footnote, the downloads kicker, title and body, the signed-section
@@ -115,7 +110,7 @@ is public they are dead source, not live copy. Do not delete them either: they a
 site reverts to when `hasWindowsRelease` goes false.
 
 `WINDOWS_UNAVAILABLE_HOME_COPY` then corrects the fallback's hero note, pricing
-footnote, and Windows FAQ answer in all ten locales to say that Windows x64 is
+footnote, and Windows FAQ answer in all eleven locales to say that Windows x64 is
 supported but downloads are temporarily unavailable. This distinction matters:
 a missing artifact is an availability incident, not a return to pre-launch validation.
 
@@ -139,7 +134,7 @@ That one boolean is read throughout `scripts/generate-site.mjs` and
 `scripts/check-public-output.mjs`. When it goes false the site switches to a guarded
 Mac-download-only state:
 
-- the whole `WINDOWS_HOME_COPY` layer stops applying, on all ten homepages at once;
+- the whole `WINDOWS_HOME_COPY` layer stops applying, on all eleven homepages at once;
 - the hero Windows button and the Windows download card disappear, and the download grid switches
   from `multi` to `single`;
 - `/download/windows`, `/download/windows-msi` and the two `/downloads/Dictivo-Windows-x64.*`
@@ -201,7 +196,7 @@ entry, and the formal withdrawal notice that names and addresses the trader. Not
 editing. Empty `phone`, `vatId` or `contentResponsible` values omit their sections rather than
 rendering blank ones; only a `FILL_IN` prefix holds the gate closed.
 
-As of 2026-08-01 the file is still unfilled and `/impressum/` returns 404.
+As of 2026-09-17 the file is still unfilled (deliberately deferred) and `/impressum/` returns 404.
 
 ### `scripts/check-public-output.mjs`
 
@@ -338,17 +333,10 @@ DICTIVO_DOWNLOAD_API_BASE_URL=http://localhost:8787 node scripts/generate-site.m
 
 The machine-readable website release manifest lives at `/downloads.json` and lists only public artifacts.
 
-Manual R2 uploads, when needed outside the desktop release workflow, can be run with:
-
-```sh
-SOURCE_DIR=/tmp/dictivo-r2-upload scripts/upload-downloads.sh
-```
-
-The script creates the `dictivo-downloads` bucket if needed, connects `downloads.dictivo.app`, and uploads installer
-objects with long-lived cache headers. It uploads macOS by default; set `INCLUDE_WINDOWS=1` only when the release
-directory contains the matching Windows EXE and MSI from the same desktop release. The macOS DMG is Developer ID
-signed and notarized; the Windows EXE and MSI are not Authenticode-signed, and the site's Windows download card
-carries a SmartScreen note saying so.
+Installers are uploaded to R2 (`downloads.dictivo.app/v<version>/`) by the desktop repository's
+`release-desktop.yml`, which then dispatches the release payload to this site. There is no manual upload script
+here any more. The macOS DMG is Developer ID signed and notarized; the Windows EXE and MSI are not
+Authenticode-signed, and the site's Windows download card carries a SmartScreen note saying so.
 
 ## Website analytics
 
@@ -522,7 +510,7 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 ## Product film
 
 `data/product-film.mjs` is the metadata and localization source for the 35-second
-film on all ten homepages and `/demo/`. The watch page includes native playback,
+film on all eleven homepages and `/demo/`. The watch page includes native playback,
 English captions, Chinese subtitles, chapter URLs (`/demo/?t=12`), a spoken
 transcript, clear Local/Cloud audio boundaries, and recording attribution.
 Homepage playback uses a static video `src` with `preload="none"`; JavaScript

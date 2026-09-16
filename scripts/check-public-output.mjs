@@ -268,7 +268,7 @@ verifyReleaseNotes();
 
 // The pricing copy promises $49 from LOCAL_OFFER.regularPriceFrom: the daily deploy fails until that is true.
 if (introPriceExpired()) {
-  failures.push(`data/local-offer.mjs: the introductory price ended on ${LOCAL_OFFER.introPriceUntil}; raise the Lemon Squeezy Local price to $${LOCAL_OFFER.regularPrice}, then update the offer and pricing copy`);
+  failures.push(`data/local-offer.mjs: the introductory price ended on ${LOCAL_OFFER.introPriceUntil}; ship the regular price of $${LOCAL_OFFER.regularPrice} in the offer and pricing copy (then raise the store price)`);
 }
 
 if (failures.length > 0) {
