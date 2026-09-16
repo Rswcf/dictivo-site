@@ -1,10 +1,8 @@
-import { readFileSync } from "node:fs";
 import { CLOUD_FAST_MONTHLY_PRICE, LOCAL_OFFER } from "../../data/local-offer.mjs";
-import { PRICE_HOME_COUNTRY, formatPrice, priceLanguage } from "../../data/price-display.mjs";
+import { formatPrice, priceLanguage } from "../../data/price-display.mjs";
 
-// Net prices in US cents. Copy writes {{price.<amount>.<form>}}; write() turns each one into
-// a span rendered for the page language's home country, and site.js re-renders it for the
-// visitor's billing country.
+// Prices in US cents. Copy writes {{price.<amount>.<form>}}; write() renders each one for
+// the page language. Every buyer pays the same tax-inclusive total.
 export const PRICE_AMOUNTS = Object.freeze({
   local: LOCAL_OFFER.price * 100,
   regular: LOCAL_OFFER.regularPrice * 100,
@@ -23,7 +21,7 @@ export function priceToken(amount, form) {
   return `{{price.${amount}.${form}}}`;
 }
 
-// Structured-data price strings ("29", "6.99"), always before tax.
+// Structured-data price strings ("29", "8.99"): the tax-inclusive totals buyers pay.
 export function schemaPrice(amount) {
   if (!Object.hasOwn(PRICE_AMOUNTS, amount)) throw new Error(`Unknown price amount "${amount}"`);
   const cents = PRICE_AMOUNTS[amount];
@@ -36,10 +34,9 @@ export function resolvePriceTokens(path, body) {
   const lang = /<html lang="([^"]+)"/.exec(body)?.[1];
   if (!lang) throw new Error(`${path}: a page with prices needs <html lang>`);
   const language = priceLanguage(lang);
-  const country = PRICE_HOME_COUNTRY[language];
   const text = (amount, form) => {
     if (!Object.hasOwn(PRICE_AMOUNTS, amount)) throw new Error(`${path}: unknown price amount "${amount}"`);
-    return formatPrice({ cents: PRICE_AMOUNTS[amount], form, lang: language, country });
+    return formatPrice({ cents: PRICE_AMOUNTS[amount], form, lang: language });
   };
 
   // Replacer functions throughout: prices contain "$", which replacement strings would interpret.
@@ -47,21 +44,10 @@ export function resolvePriceTokens(path, body) {
     `${open}${json.replace(TOKEN, (_token, amount, form) => JSON.stringify(text(amount, form)).slice(1, -1))}${close}`);
   const bodyStart = html.search(/<body[\s>]/);
   if (bodyStart < 0 || html.slice(0, bodyStart).includes("{{price.")) {
-    throw new Error(`${path}: titles and meta tags must not contain prices; they cannot follow the visitor's country`);
+    throw new Error(`${path}: titles and meta tags must not contain prices`);
   }
   if (/<[^<>]*\{\{price\./.test(html)) throw new Error(`${path}: a price placeholder is inside an HTML tag`);
-  return html.replace(TOKEN, (_token, amount, form) => {
-    const formatted = text(amount, form);
-    return `<span class="price" data-price-cents="${PRICE_AMOUNTS[amount]}" data-price-form="${form}" data-price-country="${country}">${escapeHtml(formatted)}</span>`;
-  });
-}
-
-// data/price-display.mjs as a classic script defining DictivoPrice, prepended to site.js.
-export function browserPriceScript() {
-  const source = readFileSync(new URL("../../data/price-display.mjs", import.meta.url), "utf8");
-  if (/^\s*import\s/m.test(source)) throw new Error("data/price-display.mjs must not import anything: it ships inside site.js");
-  const exported = [...source.matchAll(/^export (?:const|function) (\w+)/gm)].map((match) => match[1]);
-  return `const DictivoPrice = (() => {\n"use strict";\n${source.replace(/^export /gm, "")}\nreturn { ${exported.join(", ")} };\n})();\n`;
+  return html.replace(TOKEN, (_token, amount, form) => `<span class="price">${escapeHtml(text(amount, form))}</span>`);
 }
 
 function escapeHtml(value) {

@@ -43,7 +43,7 @@ import {
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
-import { browserPriceScript, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
+import { priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
 import { LOCAL_OFFER } from "../data/local-offer.mjs";
 
@@ -2462,9 +2462,9 @@ function renderTier(tier, index) {
             </article>`;
 }
 
-// Structured-data prices are net; the checkout adds tax for the billing country.
-function netPriceSpecification(amount) {
-  return { "@type": "PriceSpecification", price: schemaPrice(amount), priceCurrency: "USD", valueAddedTaxIncluded: false };
+// Structured-data prices are the tax-inclusive totals buyers pay.
+function inclusivePriceSpecification(amount) {
+  return { "@type": "PriceSpecification", price: schemaPrice(amount), priceCurrency: "USD", valueAddedTaxIncluded: true };
 }
 
 function renderSchema(currentCode, t) {
@@ -2507,7 +2507,7 @@ function renderSchema(currentCode, t) {
           price: schemaPrice("local"),
           priceCurrency: "USD",
           priceValidUntil: LOCAL_OFFER.introPriceUntil,
-          priceSpecification: netPriceSpecification("local"),
+          priceSpecification: inclusivePriceSpecification("local"),
         },
         {
           "@type": "Offer",
@@ -2519,7 +2519,7 @@ function renderSchema(currentCode, t) {
             price: schemaPrice("cloudFast"),
             priceCurrency: "USD",
             billingDuration: "P1M",
-            valueAddedTaxIncluded: false,
+            valueAddedTaxIncluded: true,
           },
         },
       ],
@@ -2624,7 +2624,7 @@ function renderCompareSchema(page, currentCode) {
         price: schemaPrice("local"),
         priceCurrency: "USD",
         priceValidUntil: LOCAL_OFFER.introPriceUntil,
-        priceSpecification: netPriceSpecification("local"),
+        priceSpecification: inclusivePriceSpecification("local"),
       },
     },
     {
@@ -4111,7 +4111,7 @@ function renderMediaKitSchema() {
             price: schemaPrice("local"),
             priceCurrency: "USD",
             priceValidUntil: LOCAL_OFFER.introPriceUntil,
-            priceSpecification: netPriceSpecification("local"),
+            priceSpecification: inclusivePriceSpecification("local"),
           },
           {
             "@type": "Offer",
@@ -4123,7 +4123,7 @@ function renderMediaKitSchema() {
               price: schemaPrice("cloudFast"),
               priceCurrency: "USD",
               billingDuration: "P1M",
-              valueAddedTaxIncluded: false,
+              valueAddedTaxIncluded: true,
             },
           },
         ],
@@ -6199,8 +6199,6 @@ for (const page of TRUST_PAGES) if (page.locales?.zh) page.locales[HANT] = toHan
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 copyStatic("assets");
-// site.js re-renders prices for the visitor's country with the formatter the build uses.
-writeFileSync(resolve(outDir, "assets/site.js"), `${browserPriceScript()}\n${readFileSync(resolve(root, "assets/site.js"), "utf8")}`);
 write(PRODUCT_FILM.chineseTraditional.slice(1), toHant(readFileSync(resolve(root, PRODUCT_FILM.chinese.slice(1)), "utf8")));
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
