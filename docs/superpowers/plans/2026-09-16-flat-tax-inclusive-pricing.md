@@ -554,3 +554,10 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 - [ ] **Step 3:** Record the outcome at the end of this plan and in `docs/superpowers/plans/2026-09-16-roadmap.md` (strike the items this pivot removes: app tax display, privacy country-lookup disclosure, tax-table re-verification, Googlebot residual; keep the 2026-11-01 runbook).
 
 **Rollback:** the site can be reverted by `git revert` of Tasks 1–3 (the checkout total is unaffected). If the Cloud Fast store price must come back down, lower it in the dashboard first, then revert the API constant, then the site — the reverse of the rollout, which keeps every shown price at or above the charged price.
+
+## Outcome (2026-09-16)
+
+- Tasks 1–4: site commits 9a8dc5d, b717a94, 9cb5998 pushed to `main` at 03:23 UTC; preview and production verified (cards, notes, bundle, terms, routing).
+- Tasks 5–8: 033 `main` c69b9e6 (API 8.99, app message from the served price, docs, 0.3.48 bump) pushed; API deployed (worker version 905ec999, entitlement serves `priceUsdMonthly: "8.99"`); `v0.3.48` released at 05:23 UTC — installer digests match across GitHub, downloads.dictivo.app and the site's `downloads.json`; updater manifest lists darwin-aarch64, darwin-x86_64, windows-x86_64.
+- Task 9: the store's Cloud Fast price was changed to US$8.99 at 15:55 UTC in the founder's dashboard session. Prefilled checkouts with a postcode: Cloud Fast DE 8.99 (VAT 19 % included, 1.44), JP 8.99 (JCT 10 %, 0.82), US 8.99; Local DE 29.00 (4.63 VAT included), JP 29.00, US 29.00, BR 29.00 (no tax); Renewal DE 24.00 (3.83 VAT included). The product's tax category is "Software as a service (SaaS) – personal use".
+- Residual: clients still on ≤0.3.47 show "$6.99/month" in one blocked-state message until they auto-update.
