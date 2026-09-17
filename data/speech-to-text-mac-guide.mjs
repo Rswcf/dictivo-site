@@ -1,4 +1,4 @@
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-12";
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-18";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
@@ -29,6 +29,9 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
   answerTitle: "Short answer",
   answer:
     "For private live dictation on Mac, start with Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, or Voibe in On-Device Mode. MacWhisper offers live dictation as well as file transcription; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow. For a free baseline, test Apple Dictation before paying for a dedicated app.",
+  trialNote: "Trying Dictivo? All Local models are free to try for 14 days, without a card or Dictivo account. Install a model first, then test a short draft in the app you actually use.",
+  trialLink: "Set up your first local dictation and practice",
+  compareLink: "Compare the apps",
   intentTitle: "Which type of speech-to-text app do you need?",
   intentCaption: "Mac speech-to-text workflows and the page or product category they usually map to",
   intentHeaders: ["Your task", "Best-fit workflow", "What to evaluate"],
@@ -163,6 +166,21 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
         "Local processing alone does not establish suitability for a regulated workflow.",
       ],
     },
+    {
+      kicker: "Try before buying",
+      title: "How to test speech-to-text on your Mac",
+      paragraphs: [
+        "Start with one real task: a reply in Mail, a note, or a prompt in an AI assistant. Use the same short passage in each app so that you can compare the correction effort fairly.",
+        "For Dictivo, download the desktop app, choose Local, and install a model. Use the default Command–Shift–Space shortcut, speak your draft, then review and paste it into your target app. The first-use guide below includes a practice field and permission troubleshooting.",
+        "Once the model is installed, try another Local recording with the internet disconnected. This tests offline transcription on your machine; it is not a full privacy audit. If you paste text into an online service, that service receives the text even though Dictivo transcribed the audio locally.",
+      ],
+      bullets: [
+        "Compare the time to usable text, including your corrections, rather than only the transcription animation.",
+        "Check your everyday language, names, punctuation, and the apps in which you will use the result.",
+        "Use Local when audio must stay on the device. Optional Cloud Fast sends audio for remote transcription; test it separately with non-sensitive content.",
+        "Buy only after the workflow works on your own Mac. A file-import or meeting-recording workflow may call for a different tool.",
+      ],
+    },
   ],
   faqTitle: "Mac speech-to-text questions",
   faqs: [
@@ -193,6 +211,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
   ],
   relatedTitle: "Related Dictivo pages",
   relatedRows: [
+    ["First local dictation", "Install a model, practice a draft, and fix common setup problems before buying.", "https://dictivo.app/guides/first-local-dictation/"],
     ["Offline dictation guide", "Compare which Mac dictation apps can keep audio local.", "https://dictivo.app/guides/offline-dictation-on-mac/"],
     ["Wispr Flow alternative", "Compare local-first Mac dictation with a cloud AI voice workflow.", "https://dictivo.app/compare/wispr-flow-alternative/"],
     ["Superwhisper alternative", "Compare two local-capable dictation workflows by focus and price.", "https://dictivo.app/compare/superwhisper-alternative/"],

@@ -1,5 +1,6 @@
 // Outcome and trial details sit together above the first download buttons.
 export const HOME_CONVERSION_LASTMOD = "2026-09-10";
+export const HOME_CONVERSION_LOCALE_LASTMOD = { zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
 export const HOME_CONVERSION_COPY = {
   en: {
     title: "Speak your next draft.", emphasis: "Keep your audio local.",
@@ -51,7 +52,7 @@ export const HOME_CONVERSION_COPY = {
   },
   pt: {
     title: "Dite o seu próximo rascunho.", emphasis: "Mantenha o áudio local.",
-    lede: "Pressione o atalho, fale e cole o texto no aplicativo que está usando. Dite e-mails, notas e prompts de IA no seu dispositivo.",
+    lede: "Pressione o atalho, fale e cole o texto no aplicativo que está usando. Use digitação por voz para escrever e-mails, notas e prompts de IA no seu dispositivo.",
     trial: "Experimente todos os modelos locais grátis por 14 dias. Sem cartão nem conta Dictivo.",
     steps: ["Pressione o atalho", "Fale no modo Local", "Revise e cole"],
     offer: "{{price.local.inline}} uma única vez se gostar. Inclui 12 meses de atualizações; renovação opcional.",
@@ -59,7 +60,7 @@ export const HOME_CONVERSION_COPY = {
   },
   zh: {
     title: "把下一段草稿说出来。", emphasis: "音频留在本机。",
-    lede: "按下快捷键，说出内容，再粘贴到正在使用的应用。用本机听写起草邮件、笔记和 AI 提示词。",
+    lede: "按下快捷键，说出内容，再粘贴到正在使用的应用。用本地语音输入起草邮件、笔记和 AI 提示词。",
     trial: "全部本地模型免费试用 14 天，无需银行卡或 Dictivo 账号。",
     steps: ["按下快捷键", "在 Local 模式下说话", "检查文字并粘贴"],
     offer: "适合再买，{{price.local.inline}} 一次买断。包含 12 个月更新，之后可选续更。",
@@ -75,7 +76,7 @@ export const HOME_CONVERSION_COPY = {
   },
   ko: {
     title: "다음 초안은 말로 쓰세요.", emphasis: "음성은 기기에 남깁니다.",
-    lede: "단축키를 누르고 말한 뒤, 사용 중인 앱에 붙여넣으세요. 이메일, 메모, AI 프롬프트를 기기에서 받아씁니다.",
+    lede: "단축키를 누르고 말한 뒤, 사용 중인 앱에 붙여넣으세요. 기기에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요.",
     trial: "모든 로컬 모델을 14일 무료 체험하세요. 카드나 Dictivo 계정이 필요 없습니다.",
     steps: ["단축키 누르기", "Local 모드로 말하기", "확인하고 붙여넣기"],
     offer: "마음에 들면 {{price.local.inline}} 일회 구매. 12개월 업데이트 포함, 이후 갱신은 선택입니다.",

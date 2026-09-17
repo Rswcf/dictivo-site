@@ -24,7 +24,7 @@ import { earlierReleaseNotes, releaseNotesFor } from "../data/release-notes.mjs"
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
-import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD } from "../data/home-conversion.mjs";
+import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
 import { LOCAL_SPEECH_EVIDENCE } from "../data/local-speech-evidence.mjs";
 import { localizedComparisonSections, localizedComparisonFaqs } from "../data/comparison-decision-locales.mjs";
@@ -313,9 +313,9 @@ const WINDOWS_HOME_COPY = {
       "Dictivo typt wat je zegt in elke Mac- of Windows-app. In lokale modus blijft audio op je apparaat. Eenmalig kopen, voor altijd van jou.",
   },
   pt: {
-    metaTitle: "App de ditado offline para Mac e Windows - compra única | Dictivo",
+    metaTitle: "Digitação por voz offline para Mac e Windows | Dictivo",
     navDownload: "Downloads",
-    heroEyebrow: "Ditado privado para Mac e Windows",
+    heroEyebrow: "Digitação por voz privada para Mac e Windows",
     heroTitle: "Ditado que fica no seu computador.",
     heroNote: "Mac e Windows x64 estão disponíveis agora.",
     privacyTitle: "Suas palavras privadas ficam no seu dispositivo.",
@@ -334,12 +334,12 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "Sim. O Dictivo está disponível para macOS e Windows x64.",
     footerBeta: "Mac e Windows - 2026",
     metaDescription:
-      "O Dictivo digita o que você dita em qualquer app do Mac ou Windows. No modo local, o áudio fica no seu dispositivo. Uma compra e é seu para sempre.",
+      "Transforme voz em texto no Mac e Windows. Use digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 14 dias.",
   },
   zh: {
-    metaTitle: "Mac 和 Windows 离线听写软件 - 一次买断 | Dictivo",
+    metaTitle: "Mac 和 Windows 离线语音输入软件 - 语音转文字 | Dictivo",
     navDownload: "下载",
-    heroEyebrow: "Mac 与 Windows 私密听写",
+    heroEyebrow: "Mac 与 Windows 本地语音输入",
     heroTitle: "听写内容不离开你的电脑。",
     heroNote: "Mac 与 Windows x64 现已可用。",
     privacyTitle: "你的私密内容留在本设备上。",
@@ -358,7 +358,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "可以。Dictivo 已支持 macOS 与 Windows x64。",
     footerBeta: "Mac 与 Windows - 2026",
     metaDescription:
-      "Dictivo 一键把语音转成文字，输入到 Mac 或 Windows 的任意应用。本地模式下音频不离开设备，可自行用网络测试验证。一次买断，永久使用。",
+      "用 Dictivo 在 Mac 和 Windows 上把语音转成文字，起草邮件、笔记和 AI 提示词。Local 模式在本机处理音频，安装模型后可离线语音输入。全部本地模型免费试用 14 天，无需账号或银行卡。",
   },
   ja: {
     metaTitle: "Mac・Windows 対応オフライン音声入力アプリ - 買い切り | Dictivo",
@@ -385,9 +385,9 @@ const WINDOWS_HOME_COPY = {
       "Dictivo はホットキーひとつで Mac や Windows のどのアプリにも音声をテキスト入力。ローカルモードでは音声が端末の外に出ません。買い切り、サブスクなし。",
   },
   ko: {
-    metaTitle: "Mac·Windows 오프라인 받아쓰기 앱 - 한 번 결제 | Dictivo",
+    metaTitle: "Mac·Windows 음성 텍스트 변환 · 오프라인 음성 입력 | Dictivo",
     navDownload: "다운로드",
-    heroEyebrow: "Mac·Windows 비공개 받아쓰기",
+    heroEyebrow: "Mac·Windows 오프라인 음성 입력",
     heroTitle: "받아쓰기가 내 컴퓨터 안에만 머뭅니다.",
     heroNote: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
     privacyTitle: "내 비공개 말은 기기에 남습니다.",
@@ -406,7 +406,7 @@ const WINDOWS_HOME_COPY = {
     faqAnswer: "예. Dictivo는 macOS와 Windows x64에서 사용할 수 있습니다.",
     footerBeta: "Mac 및 Windows - 2026",
     metaDescription:
-      "Dictivo는 단축키 하나로 Mac과 Windows의 모든 앱에 음성을 텍스트로 입력합니다. 로컬 모드에서는 오디오가 기기를 떠나지 않습니다. 한 번 결제, 영구 사용.",
+      "Mac과 Windows에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요. Local 모드는 기기에서 음성을 처리합니다. 모든 로컬 모델을 14일 무료로 체험하세요.",
   },
 };
 
@@ -479,21 +479,21 @@ const SEO_HOME_COPY = {
     footerPrivacyProof: "Privacybewijs",
   },
   pt: {
-    metaTitle: "Dictivo - Ditado privado para Mac. Uma compra e é seu para sempre",
+    metaTitle: "Digitação por voz offline para Mac | Dictivo",
     metaDescription:
       "Pressione um atalho e o Dictivo digita o que você fala em qualquer app do Mac. O modo Local mantém o áudio no seu aparelho, verificável com um teste de rede aberto. Uma compra, e é seu para sempre. Cloud Fast opcional quando a velocidade importa.",
     heroTitle: "Ditado que fica no seu Mac.",
     heroEmphasis: "Compre uma vez, é seu.",
-    heroEyebrow: "App de ditado privado para Mac",
+    heroEyebrow: "Digitação por voz privada para Mac",
     footerPrivacyProof: "Prova de privacidade",
   },
   zh: {
-    metaTitle: "Dictivo - 私密 Mac 听写，一次买断，永久使用",
+    metaTitle: "Mac 离线语音输入软件 - 语音转文字 | Dictivo",
     metaDescription:
       "按下快捷键，Dictivo 把你说的话直接打进任何 Mac 应用。Local 模式音频不离开设备，可用公开网络测试自行验证。一次买断，永久使用。需要速度时可选 Cloud Fast。",
     heroTitle: "听写，不出你的 Mac。",
     heroEmphasis: "一次买断，永久使用。",
-    heroEyebrow: "私密 Mac 听写应用",
+    heroEyebrow: "Mac 本地语音输入软件",
     footerPrivacyProof: "隐私证明",
   },
   ja: {
@@ -506,12 +506,12 @@ const SEO_HOME_COPY = {
     footerPrivacyProof: "プライバシー証明",
   },
   ko: {
-    metaTitle: "Dictivo - 프라이빗 Mac 받아쓰기. 일회 구매, 영구 사용",
+    metaTitle: "Mac 음성 텍스트 변환 · 오프라인 음성 입력 | Dictivo",
     metaDescription:
       "단축키를 누르고 말하면 Dictivo가 어떤 Mac 앱에든 텍스트를 입력합니다. Local 모드는 오디오를 기기에 보관하며 공개 네트워크 테스트로 직접 확인할 수 있습니다. 일회 구매, 영구 사용. 속도가 중요할 때는 Cloud Fast를 선택하세요.",
     heroTitle: "오디오가 Mac을 떠나지 않는 받아쓰기.",
     heroEmphasis: "일회 구매, 영구 사용.",
-    heroEyebrow: "프라이빗 Mac 받아쓰기 앱",
+    heroEyebrow: "Mac 오프라인 음성 입력 앱",
     footerPrivacyProof: "개인정보 증명",
   },
 };
@@ -3845,6 +3845,8 @@ function renderSpeechToTextMacGuidePage() {
         <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="speech-to-text-mac-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
+        <p>${html(copy.trialNote)}</p>
+        <p><a href="${attr(firstDictationPath("en"))}">${html(copy.trialLink)}</a> · <a href="#speech-to-text-mac-apps">${html(copy.compareLink)}</a></p>
       </section>
 
       <section class="doc-section" aria-labelledby="speech-to-text-mac-intents">
@@ -5718,7 +5720,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LOCALE_LASTMOD[locale.code] || HOME_CONVERSION_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>

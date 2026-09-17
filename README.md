@@ -19,6 +19,20 @@ Current public pricing copy (all prices are tax-inclusive totals in US dollars; 
   per page language with a "tax included" note (`inkl. MwSt.`, `税込`, …). Titles, meta descriptions and `llms.txt` carry
   no price; the build refuses a placeholder there.
 
+## SEO iteration — 2026-09-18
+
+Chinese (including Traditional), Korean and Portuguese homepage metadata and introductory
+copy now describe voice input / voice-to-text in local terminology. This is an intent-alignment
+experiment, not evidence of higher keyword volume. The existing Mac shortlist guide now links
+readers directly to first-use practice and explains a repeatable trial, including the boundary
+between local audio processing and pasting text into an online service. Its existing section
+anchors remain stable. Homepage sitemap dates advance only for the four changed locales via
+`HOME_CONVERSION_LOCALE_LASTMOD`; pricing and release dates remain independent.
+
+Validation: 70 existing tests; public-output, attribution, film, checkout-route/live-checkout,
+release-payload and asset checks. Computer Use verified the new practice link, all four changed
+homepages at 390px, and the guide at 390px and 1440px. No ranking or revenue lift is claimed.
+
 ## Local preview
 
 From the repository root:
