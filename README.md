@@ -33,6 +33,21 @@ Validation: 70 existing tests; public-output, attribution, film, checkout-route/
 release-payload and asset checks. Computer Use verified the new practice link, all four changed
 homepages at 390px, and the guide at 390px and 1440px. No ranking or revenue lift is claimed.
 
+## SEO comparison follow-up — 2026-09-18
+
+The English Superwhisper and MacWhisper comparisons now distinguish free access from paid
+plans, local speech recognition from later text processing, and hotkey dictation from file
+transcription. Each includes a practical switching checklist without claiming an accuracy win.
+Superwhisper platform facts include Android in all eleven locales. Other localized decision
+copy is unchanged. Comparison dates are scoped by page and locale; unrelated pages are not
+marked freshly reviewed. The checked-in release manifest is synchronized to public v0.3.48.
+
+Validation: 71 tests, the normal public-output and release checks, live checkout rendering,
+22 localized comparison HTML checks, and Computer Use at 390px and 1440px. The English FAQ
+and first-dictation navigation were exercised. This is website QA, not a native-app accuracy
+benchmark or evidence of a traffic increase. The desktop repo's September 18 batch-2 audit
+records deployment verification, keyword data limits and external directory follow-up.
+
 ## Local preview
 
 From the repository root:

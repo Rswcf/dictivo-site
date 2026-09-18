@@ -1,6 +1,6 @@
 import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import { COMPARE_HUB, COMPARE_LAST_UPDATED, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
+import { COMPARE_HUB, compareLastUpdated, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
 import {
   BENCHMARK_METHOD_GUIDE_COPY,
   BENCHMARK_METHOD_GUIDE_LASTMOD,
@@ -2836,7 +2836,7 @@ function renderComparePage(page, currentCode = "en") {
     <main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
-        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(COMPARE_LAST_UPDATED.iso)}">${html(formatLocalizedMonth(COMPARE_LAST_UPDATED.iso, currentCode))}</time></p>
+        <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(compareLastUpdated(page, currentCode))}">${html(formatLocalizedMonth(compareLastUpdated(page, currentCode), currentCode))}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
         <div class="compare-intro-actions">
@@ -5800,7 +5800,7 @@ ${offlineGuideXDefault}
     const compareXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedCompareUrl("en", slug)}" />`;
     return `  <url>
     <loc>${localizedCompareUrl(code, slug)}</loc>
-    <lastmod>${latestDate(COMPARE_LAST_UPDATED.iso, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(compareLastUpdated(COMPARE_PAGES.find((page) => page.slug === slug), code), PRICING_LASTMOD)}</lastmod>
 ${compareAlternates}
 ${compareXDefault}
     <priority>${priority}</priority>

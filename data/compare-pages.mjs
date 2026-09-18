@@ -4,6 +4,10 @@ export const COMPARE_LAST_UPDATED = {
   iso: "2026-09-12",
 };
 
+export function compareLastUpdated(page, code) {
+  return page?.lastUpdated?.[code] || page?.lastUpdated?.all || COMPARE_LAST_UPDATED.iso;
+}
+
 const dictivoRows = {
   processing:
     "Local mode runs on your device. Optional Cloud Fast is separate and only used when you select it.",
@@ -162,20 +166,21 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "superwhisper-alternative",
+    lastUpdated: { all: "2026-09-18" },
     competitor: "Superwhisper",
-    title: "Superwhisper Alternative: Same Local Privacy, Lower One-Time Price",
+    title: "Superwhisper Alternative: Local Dictation & Pricing | Dictivo",
     metaDescription:
-      "Looking for a Superwhisper alternative? Dictivo runs Whisper on-device too, with a lower one-time desktop license and no account for Local mode.",
+      "Compare Dictivo with Superwhisper for local dictation, free access, Pro pricing, privacy settings and switching. Test your everyday workflow before buying.",
     h1: "Superwhisper alternative: local desktop dictation, bought once",
     eyebrow: "Compare alternatives",
     primaryKeyword: "superwhisper alternative",
     intro: [
-      "Superwhisper is a mature local and cloud dictation app with a refined mode system, a large community, and documented support across Mac, Windows, iPhone, and iPad.",
-      "Dictivo is the Superwhisper alternative for desktop users who want the same local-privacy idea in a simpler, lower-priced, buy-once workflow.",
-    ],
+      "Dictivo is an alternative to Superwhisper for hotkey dictation on Mac and Windows. Both offer local speech processing. Choose based on the writing workflow, platforms and license you actually need.",
+      "Start with Superwhisper's free local dictation if it meets your needs. Compare its paid Pro plans with Dictivo Local when you need paid features; a lower purchase price alone is not a reason to leave a setup that already works."
+],
     quickTake: [
-      ["Best for", "Lower long-term-cost local desktop dictation", "Power users who want modes and many models"],
-      [`3-year cost`, `{{price.threeYear.inline}} with optional update renewals`, `$249.99 lifetime or $254.97 on annual Pro`],
+      ["Best for", "Paid local desktop workflow", "Modes, model choice and mobile access"],
+      [`3-year cost`, `{{price.threeYear.inline}} with optional update renewals`, `Pro: $249.99 lifetime or $254.97 over three annual payments`],
       ["Privacy model", "Local mode first", "Local models plus optional cloud models"],
     ],
     rows: [
@@ -184,115 +189,65 @@ export const COMPARE_PAGES = [
       { label: "Works fully offline", dictivo: dictivoRows.offline, competitor: "Yes with local models." },
       { label: "Account required", dictivo: dictivoRows.account, competitor: "Pro features require a license; activate it in the app." },
       { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$8.49/month, $84.99/year, or $249.99 lifetime for Pro." },
-      { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free tier plus a 3,000-word Pro trial, as advertised on the homepage. Confirm the model allowance in your app version." },
-      { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Mac, Windows, iPhone, and iPad." },
+      { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free local dictation plus a 3,000-word Pro trial. Confirm the model allowance in your app version." },
+      { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Mac, Windows, iPhone, and Android." },
       { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Local model options with optional cloud model routing." },
     ],
     sections: [
       {
-        kicker: "Where it wins",
-        title: "What Superwhisper is great at",
-        paragraphs: [
-          "Superwhisper is not the easy target in this category. It popularized a serious mode-based workflow for AI voice typing, and its current documentation is unusually explicit about local models, cloud models, platform licensing, and Pro pricing.",
-          "If you already live inside Superwhisper's mode ecosystem and have tuned it for email, code, notes, and app-specific workflows, there may be no urgent reason to switch. Mature defaults and community muscle are valuable.",
-        ],
-        bullets: [
-          "A mature mode system for shaping the final output.",
-          "Broad model catalog across local speech models, cloud speech models, and language models.",
-          "Documented cross-platform activation for Mac, Windows, iPhone, and iPad.",
-          "Free voice-to-text entry tier, with a Pro trial for evaluating advanced features.",
-        ],
+            "kicker": "Choose by task",
+            "title": "Keep your modes, or try a focused desktop workflow",
+            "paragraphs": [
+                  "Superwhisper combines dictation with configurable modes and local or cloud models. Keep it on your shortlist if you rely on those modes or need mobile access alongside desktop use.",
+                  "Dictivo focuses on recording with a hotkey, reviewing the transcript and returning it to the active app. Local history, dictionary terms and snippets support repeated writing. The 14-day full Local trial lets you check whether those tools fit your actual work."
+            ]
       },
       {
-        kicker: "Dictivo difference",
-        title: "Where Dictivo is different",
-        paragraphs: [
-          "This comparison is not a privacy takedown. Superwhisper and Dictivo both understand why local dictation matters. When Superwhisper uses local models, audio stays on the device. Dictivo does not need to pretend otherwise.",
-          "Dictivo competes on focus and price. It is built around desktop hotkey dictation, hardware-aware local model selection, local history, dictionary terms, snippets, and a clear separation between Local mode and the optional Cloud Fast path. There is less to configure before you get useful private dictation.",
-          "The cost difference is the practical wedge. Dictivo Local is {{price.local.inline}} once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime. If you want a powerful mode system across multiple platforms, that may be worth it. If you want local desktop dictation without the larger price commitment, Dictivo is the smaller buy.",
-        ],
-        bullets: [
-          "Lower one-time entry price for the paid local desktop workflow.",
-          "No Dictivo account required for Local dictation.",
-          "Hardware-aware model setup aimed at avoiding manual model guesswork.",
-          "A simpler privacy story: Local is the default path, Cloud Fast is visibly optional.",
-        ],
-      },
-      {
-        kicker: "Better fit",
-        title: "When Dictivo is the better Superwhisper alternative",
-        paragraphs: [
-          "Dictivo should not be positioned as the absolute cheapest Mac dictation app. Free and very low-cost tools exist. The stronger claim is more precise: Dictivo is a lower long-term-cost Superwhisper alternative when you want paid local desktop dictation, a one-time license, and a simpler local/cloud boundary.",
-          "Try both apps with the same short email or note, using a local model on the same computer. Compare setup effort, the time until text is ready, and the corrections you need before pasting. Choose the workflow you will actually use every day.",
-        ],
-        bullets: [
-          "Choose Dictivo when you want a one-time Local license ({{price.local.inline}}) instead of a higher lifetime price or ongoing Pro subscription.",
-          "Choose Dictivo when local Mac dictation is the main job and advanced mode tuning is not the purchase driver.",
-          "Choose Dictivo when you want no Dictivo account for Local dictation.",
-          "Choose Dictivo when the Local versus Cloud Fast boundary should be obvious to non-technical users.",
-        ],
-      },
-      {
-        kicker: "Privacy",
-        title: "Privacy is a tie when both tools run local",
-        paragraphs: [
-          "For sensitive desktop dictation, the fair comparison is local mode against local mode. In that case, both products can keep audio on the machine. Superwhisper's model page says on-device models run locally and do not need internet. Dictivo Local is designed around the same basic privacy expectation.",
-          "The difference is not whether Superwhisper can be private. It can. The difference is product shape. Superwhisper exposes a larger model and mode universe, including cloud options. Dictivo keeps the everyday decision simpler: use Local for private work, and use Cloud Fast only when you deliberately choose speed over local-only processing.",
-        ],
-        bullets: [
-          "Use either product's local model path for sensitive speech.",
-          "Do not treat cloud model polish as equivalent to offline dictation.",
-          "Choose based on workflow complexity, price, and platform needs rather than invented privacy superiority.",
-        ],
-      },
-      {
-        kicker: "Pricing",
-        title: "Cost over time: Dictivo Local vs Superwhisper Pro",
-        paragraphs: [
-          "Superwhisper's docs list Pro at $8.49/month, $84.99/year, or $249.99 once. Three years of annual Pro is $254.97. The lifetime license is $249.99. Monthly Pro for three full years would be $305.64.",
-          `Dictivo Local is {{price.local.inline}} once. If you keep optional update access active for years two and three, the three-year total is {{price.threeYear.inline}}. That is less than half of Superwhisper lifetime and less than half of three years of Superwhisper annual Pro.`,
-          "The honest catch is that Superwhisper Pro includes more than a simple local desktop hotkey workflow. If you need the broader model catalog and mature mode system, the higher price has a rationale. If the purchase decision is mostly local dictation privacy and cost, Dictivo is easier to justify.",
-        ],
-        bullets: [
-          "One year: Dictivo Local is {{price.local.inline}} once; Superwhisper Pro annual is $84.99.",
-          `Three years: Dictivo Local is {{price.threeYear.inline}} with optional update renewals; Superwhisper annual Pro is $254.97.`,
-          "Lifetime comparison: Dictivo Local is {{price.local.inline}} for the version you buy; Superwhisper lifetime Pro is listed at $249.99.",
-          "Best interpretation: Dictivo is a lower long-term-cost paid local dictation alternative, not the absolute cheapest app in the market.",
-        ],
-      },
-      {
-        kicker: "Decision",
-        title: "Who should choose which",
-        cards: [
-          {
-            title: "Choose Superwhisper if",
-            items: [
-              "You want the most mature mode ecosystem in this local-dictation category.",
-              "You need Mac, Windows, iPhone, and iPad under one Pro license.",
-              "You like switching among many local and cloud speech models.",
-              "The $249.99 lifetime price is acceptable for a tool you will tune deeply.",
+            "kicker": "Privacy",
+            "title": "Local audio is only one part of the privacy decision",
+            "paragraphs": [
+                  "Both products can recognize speech locally after downloading a model. In Superwhisper, check the speech model and any language-model processing used by your selected mode: local recognition does not establish that every later step is local.",
+                  "In Dictivo, use Local when audio must remain on your device. Cloud Fast sends the selected recording to servers for transcription; choose it deliberately when cloud processing is acceptable. Text pasted into a cloud-based writing app follows that app's own data handling."
             ],
-          },
-          {
-            title: "Choose Dictivo if",
-            items: [
-              "You want a cheaper Superwhisper alternative for local desktop dictation.",
-              "You prefer a simpler local-first workflow with fewer model decisions.",
-              "A one-time license ({{price.local.inline}}) is a better match than a subscription or high lifetime price.",
-              "You want no Dictivo account for Local dictation.",
-            ],
-          },
-        ],
+            "bullets": [
+                  "Check where speech recognition runs.",
+                  "Check whether any rewriting step sends text elsewhere.",
+                  "Check the destination app before pasting sensitive text."
+            ]
       },
-    ],
+      {
+            "kicker": "Pricing",
+            "title": "Compare the free tier before comparing paid licenses",
+            "paragraphs": [
+                  "Superwhisper offers free local dictation and a 3,000-word Pro trial. Its billing and model pages describe the free model allowance differently, so confirm access to your chosen model in the installed app.",
+                  "Pro is listed at $8.49/month, $84.99/year or $249.99 lifetime. Three annual payments total $254.97. These are paid-tier comparisons, not the cost of using its free tier.",
+                  "Dictivo Local is {{price.local.inline}} once, including 12 months of updates. Keeping optional update access for years two and three totals {{price.threeYear.inline}}. Declining renewal does not disable the version you already own. Tiny remains free after the full Local trial.",
+                  "The plans cover different features and update terms. Check current checkout totals, supported devices and the models you need before deciding."
+            ]
+      },
+      {
+            "kicker": "Switching checklist",
+            "title": "Try the same task before moving your workflow",
+            "paragraphs": [
+                  "This is a suggested evaluation, not a completed accuracy benchmark. Use non-sensitive sample text and keep your existing setup until the replacement works."
+            ],
+            "bullets": [
+                  "List the modes, shortcuts and custom terms you use; do not assume they import into Dictivo.",
+                  "Choose different hotkeys so the apps do not record at the same time.",
+                  "Use the same computer, microphone and short email. Record the model names and whether cloud rewriting is enabled.",
+                  "Compare time until usable text, corrections and successful pasting in your usual app.",
+                  "Repeat a task with names or specialist terms. Buy only if the change saves work for you."
+            ]
+      }
+],
     faqs: [
       ["What are the best Superwhisper alternatives?", "For local-capable Mac dictation, compare Dictivo Local, VoiceInk, Voice Type, Voibe, and MacWhisper depending on whether the job is live dictation or file transcription."],
       ["Is Dictivo a super whisper alternative?", "Yes, for users searching for a simpler paid local desktop dictation workflow. Dictivo is not a one-to-one replacement for Superwhisper's full mode ecosystem."],
-      ["Is there a cheaper alternative to Superwhisper?", "Yes. Dictivo Local is {{price.local.inline}} once. Superwhisper Pro is listed at $8.49/month, $84.99/year, or $249.99 lifetime."],
+      ["Is there a cheaper alternative to Superwhisper?", "For paid tiers, Dictivo Local has a lower initial purchase price. Superwhisper also has free local dictation, so first check whether that already meets your needs. Compare update terms and required features, not just sticker prices."],
       ["Is Superwhisper a subscription?", "Superwhisper Pro has monthly and annual subscriptions, and it also offers a lifetime purchase. The plans include the same Pro features but differ by billing frequency."],
-      ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and iPad. Dictivo is also publicly available for both macOS and Windows x64."],
-      ["Is Dictivo as accurate as Superwhisper?", "Both products can use Whisper-family local models, so raw accuracy depends on the model size, microphone, accent, and hardware. Dictivo's edge is not a magic model; it is the lower-cost local workflow and hardware-aware setup."],
-      ["Can I try before buying?", "Dictivo offers a 14-day full Local trial with every local model unlocked. Superwhisper advertises a 3,000-word Pro trial. Its homepage and documentation differ on free local-model access, so check the installed version before relying on that allowance."],
+      ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and Android. Dictivo is also publicly available for both macOS and Windows x64."],
+      ["Is Dictivo as accurate as Superwhisper?", "This page does not establish an accuracy winner. Model, language, microphone, accent and optional rewriting all affect results. Try the same everyday task in both apps and compare corrections and time until the text is usable."],
+      ["Can I try before buying?", "Dictivo offers a 14-day full Local trial with every local model unlocked. Superwhisper advertises a 3,000-word Pro trial. Its billing and model pages differ on free local-model access, so check the installed version before relying on that allowance."],
     ],
     related: ["wispr-flow-alternative", "macwhisper-alternative"],
     sources: [
@@ -304,17 +259,18 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macwhisper-alternative",
+    lastUpdated: { en: "2026-09-18" },
     competitor: "MacWhisper",
-    title: "MacWhisper Alternative for Real-Time Dictation",
+    title: "MacWhisper Alternative: Dictation, Files & Privacy | Dictivo",
     metaDescription:
       "Compare Dictivo and MacWhisper for local dictation, file transcription, setup, and update costs. Both offer dictation; MacWhisper also handles recordings.",
-    h1: "MacWhisper alternative for real-time Mac dictation",
+    h1: "MacWhisper alternative for everyday voice typing",
     eyebrow: "Compare alternatives",
     primaryKeyword: "macwhisper alternative",
     intro: [
-      "MacWhisper offers system-wide real-time dictation as well as audio and video file transcription, batch jobs, subtitles, and podcast workflows.",
-      "Dictivo is the MacWhisper alternative for people who want to dictate into the active app in real time: press a hotkey, speak, and send the text where they were already working.",
-    ],
+      "MacWhisper and Dictivo both support dictation into other apps. MacWhisper also handles existing recordings, batch transcription and subtitles; those file workflows are not replaced by Dictivo's hotkey dictation.",
+      "Try Dictivo if your main task is writing emails, notes or prompts by voice: press a hotkey, record, then review and paste the transcript. Compare that complete task in both apps before switching."
+],
     quickTake: [
       ["Best for", "Focused hotkey dictation", "Dictation plus file and batch transcription"],
       [`3-year cost`, `{{price.threeYear.inline}} with optional update renewals`, `€64 once for Pro, lifetime updates included`],
@@ -332,87 +288,61 @@ export const COMPARE_PAGES = [
     ],
     sections: [
       {
-        kicker: "Where it wins",
-        title: "What MacWhisper is great at",
-        paragraphs: [
-          "MacWhisper is one of the easiest tools to recommend for file transcription on Mac. Drop in a recording, choose a model, and turn long audio or video into text. The product page leads with that file-first workflow for a reason.",
-          "For journalists, researchers, podcasters, students, and teams that already have recordings, MacWhisper may be the better tool. Its export formats, batch transcription, YouTube support, speaker recognition, and subtitle workflow are not side quests; they are the product.",
-        ],
-        bullets: [
-          "Audio and video file transcription.",
-          "Batch processing and subtitle/export workflows in Pro.",
-          "Free local models for casual use.",
-          "One payment for Pro, with lifetime updates rather than a renewal window.",
-        ],
-      },
-      {
-        kicker: "Dictivo difference",
-        title: "Where Dictivo is different",
-        paragraphs: [
-          "Dictivo is not trying to be a batch transcription workstation. It is built for the moment when your cursor is already in Mail, Linear, Slack, Notion, Xcode, Cursor, a browser field, or a support tool, and typing is the slow part.",
-          "That changes the product details. Dictivo cares about the global hotkey, the active app, the transcript returning to your workflow, local history for recent dictations, and dictionary/snippet behavior that improves repeated phrases. The recording is not a file you manage later; it is a temporary input to get text into the place you were already working.",
-          "MacWhisper markets real-time, system-wide dictation as its own feature, with automatic spelling and grammar improvement, so it would be wrong to treat dictation as an afterthought there. The honest distinction is emphasis: MacWhisper leads with what it does to files you bring it, and Dictivo is built around the moment you would otherwise be typing.",
-        ],
-        bullets: [
-          "Hold a hotkey and dictate into the current app.",
-          "Local mode keeps everyday dictation on the device.",
-          "Dictionary and snippets are built around repeated real-time writing.",
-          "Hardware-aware local model setup reduces setup friction.",
-        ],
-      },
-      {
-        kicker: "Privacy",
-        title: "Privacy: both can be local, but the workflow differs",
-        paragraphs: [
-          "MacWhisper's local transcription story is strong. Its site says audio does not leave your device by default, and the free tier includes local Whisper models. For file transcription, that is exactly the privacy boundary many users want.",
-          "Dictivo makes the same local-processing bet for live dictation. The difference is not whether MacWhisper can be private; it can. The difference is where privacy is needed. If the sensitive material is a recorded interview, a lecture file, or a podcast episode, MacWhisper fits. If the sensitive material is what you are about to type into an email, case note, ticket, or prompt, Dictivo is aimed at that live moment.",
-        ],
-        bullets: [
-          "Use MacWhisper when the input already exists as a file.",
-          "Use Dictivo when the input is your live voice and the destination is the active app.",
-          "Use either product's local model path when privacy matters.",
-        ],
-      },
-      {
-        kicker: "Pricing",
-        title: "Pricing compared",
-        paragraphs: [
-          "MacWhisper's public site lists MacWhisper Pro at €64 once, with lifetime updates included. A free tier covers the smaller Whisper models.",
-          `The two priced differently rather than one being plainly cheaper. Dictivo Local is {{price.local.inline}} once for the first year of updates, or {{price.threeYear.inline}} over three years if you keep optional renewals active. MacWhisper Pro is a single €64 payment with lifetime updates, and the two products use different currencies. Compare the final checkout amounts in your currency and decide how many years of updates you need.`,
-          "Buy MacWhisper if your main job is transcribing recordings. Buy Dictivo if your main job is replacing typing with private hotkey dictation into the apps where you already work.",
-        ],
-      },
-      {
-        kicker: "Decision",
-        title: "Who should choose which",
-        cards: [
-          {
-            title: "Choose MacWhisper if",
-            items: [
-              "You transcribe existing audio or video files.",
-              "You need subtitles, exports, speaker recognition, or batch workflows.",
-              "Lifetime updates for one payment suit you better than a renewal window.",
-              "You do not need a dedicated hotkey-first writing surface.",
+            "kicker": "Choose by task",
+            "title": "Dictation and file transcription are different jobs",
+            "paragraphs": [
+                  "MacWhisper offers system-wide dictation as well as audio and video transcription. If you need batch jobs, speaker labels or subtitles, evaluate those features directly; a short voice-typing demo does not test them.",
+                  "Dictivo concentrates on hotkey recording and returning text to your writing app, with local history, dictionary terms and snippets. It is worth trying when these everyday writing tools matter more to you than managing recordings."
             ],
-          },
-          {
-            title: "Choose Dictivo if",
-            items: [
-              "You want a MacWhisper alternative for real-time dictation.",
-              "You want to dictate into your writing apps, with support verified during the trial.",
-              "You care about local history, dictionary terms, snippets, and active-app workflow.",
-              "You want a full 14-day trial of every local model before buying.",
-            ],
-          },
-        ],
+            "bullets": [
+                  "Both are candidates for dictating into apps.",
+                  "Keep MacWhisper in the comparison when existing files are part of your work.",
+                  "Check Dictivo on each destination app during the trial; compatibility matters more than a feature label."
+            ]
       },
-    ],
+      {
+            "kicker": "Privacy",
+            "title": "Check both audio processing and optional text processing",
+            "paragraphs": [
+                  "MacWhisper documents local transcription by default. Its optional cloud transcription sends audio to a provider; translation and AI prompts may send text elsewhere. Local AI through Ollama or LM Studio is a separate option.",
+                  "Dictivo Local processes speech on your computer after the model is installed. Optional Cloud Fast sends the selected recording to servers. Either way, the app you paste into may sync text to its own cloud."
+            ],
+            "bullets": [
+                  "For sensitive speech, select local recognition and check any additional AI steps.",
+                  "Do not infer that text stays local just because the speech model does.",
+                  "Test with non-sensitive material while setting up a new workflow."
+            ]
+      },
+      {
+            "kicker": "Pricing",
+            "title": "Compare update terms as well as the purchase price",
+            "paragraphs": [
+                  "MacWhisper lists Pro at €64 once with lifetime updates and also offers a free version.",
+                  "Dictivo Local is {{price.local.inline}} once with 12 months of updates. Two optional annual renewals bring a three-year total to {{price.threeYear.inline}}; the version you own remains usable if you stop renewing. Tiny is free after the 14-day full Local trial.",
+                  "Different currencies and update terms make a blanket cheaper claim misleading. Compare the final checkout amounts in your currency and decide which features and updates you expect to use."
+            ]
+      },
+      {
+            "kicker": "Switching checklist",
+            "title": "Run a writing trial without losing your file workflow",
+            "paragraphs": [
+                  "This is a suggested trial, not evidence that one app is faster or more accurate. Keep your current recordings and exports while testing."
+            ],
+            "bullets": [
+                  "Use different hotkeys and the same microphone. Install the local models before comparing.",
+                  "Dictate one email and one prompt into your normal apps. Include a name or term you often correct.",
+                  "Record the model, waiting time, corrections and whether the text lands in the right field.",
+                  "If you also transcribe files, test a representative file separately in MacWhisper. Do not assume Dictivo replaces batch imports or subtitles.",
+                  "Choose after repeating your everyday work, not after a single clean sentence."
+            ]
+      }
+],
     faqs: [
-      ["What are the best MacWhisper alternatives?", "For live dictation into the active Mac app, compare Dictivo Local, Superwhisper, VoiceInk, Voice Type, and Voibe. For file transcription, MacWhisper may remain the better fit."],
-      ["Is Dictivo a Whisper app alternative?", "Yes, if the user means a Whisper-based or Whisper-style Mac dictation app for live voice typing. It is not a generic alternative for every Whisper transcription workflow."],
+      ["What are the best MacWhisper alternatives?", "For hotkey dictation into the active Mac app, compare Dictivo Local, Superwhisper, VoiceInk, Voice Type, and Voibe. For file transcription, MacWhisper may remain the better fit."],
+      ["Is Dictivo a Whisper app alternative?", "Yes, if the user means a Whisper-based or Whisper-style Mac dictation app for voice typing. It is not a generic alternative for every Whisper transcription workflow."],
       ["Does MacWhisper do real-time dictation?", "Yes. MacWhisper advertises real-time system-wide dictation with Whisper. Its most visible workflow is still file and meeting transcription, while Dictivo is built solely around hotkey dictation into the active app."],
-      ["What is the best app to dictate into any app on Mac?", "If your goal is live voice typing into the current app, Dictivo is designed for that workflow: press the hotkey, speak, and return text to the active field."],
-      ["MacWhisper vs dictation apps: what is the difference?", "Both MacWhisper and Dictivo provide live dictation. MacWhisper also handles file imports, speaker labels, and exports. Test the live workflow in your usual app, including corrections and pasting, before deciding."],
+      ["What is the best app to dictate into any app on Mac?", "If your goal is voice typing into the current app, Dictivo is designed for that workflow: press the hotkey, speak, and return text to the active field."],
+      ["MacWhisper vs dictation apps: what is the difference?", "Both MacWhisper and Dictivo provide dictation into apps. MacWhisper also handles file imports, speaker labels, and exports. Test the writing workflow in your usual app, including corrections and pasting, before deciding."],
       ["Is Dictivo a one-time purchase like MacWhisper?", "Yes. Dictivo Local is {{price.local.inline}} once with 12 months of updates, then an optional update renewal at {{price.renewal.inline}} a year. The version you buy remains usable."],
       ["Can Dictivo transcribe files too?", "Dictivo is focused on live dictation, not batch file transcription. If file transcription is the main job, MacWhisper may be the better choice."],
     ],

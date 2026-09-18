@@ -1,4 +1,4 @@
-import { COMPARE_LAST_UPDATED } from "../data/compare-pages.mjs";
+import { COMPARE_PAGES, compareLastUpdated } from "../data/compare-pages.mjs";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { LOCALES } from "../data/site-content.mjs";
@@ -242,8 +242,11 @@ for (const file of listFiles()) {
     if (isCompareSpokePage(file) && !/class="compare-updated"/.test(body)) {
       failures.push(`${file}: missing visible comparison update marker`);
     }
-    if (isCompareSpokePage(file) && !body.includes(`datetime="${COMPARE_LAST_UPDATED.iso}"`)) {
-      failures.push(`${file}: missing comparison update date`);
+    if (isCompareSpokePage(file)) {
+      const [prefix, rest] = file.split("compare/");
+      const page = COMPARE_PAGES.find((page) => page.slug === rest.split("/")[0]);
+      const expected = compareLastUpdated(page, prefix.replace(/\/$/, "") || "en");
+      if (!body.includes(`datetime="${expected}"`)) failures.push(`${file}: missing comparison update date ${expected}`);
     }
   }
   if (hasWindowsRelease && homeFiles.includes(file)) {
