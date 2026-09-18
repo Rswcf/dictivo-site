@@ -16,7 +16,7 @@ import {
 } from "../data/mac-model-advisor.mjs";
 import {
   OFFLINE_DICTATION_GUIDE_COPY,
-  OFFLINE_DICTATION_GUIDE_LASTMOD,
+  offlineDictationGuideLastmod,
   OFFLINE_DICTATION_GUIDE_REFERENCES,
 } from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
@@ -25,7 +25,7 @@ import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD } from "../data/home-conversion.mjs";
-import { FIRST_DICTATION_COPY, FIRST_DICTATION_LASTMOD } from "../data/first-dictation-guide.mjs";
+import { FIRST_DICTATION_COPY, firstDictationLastmod } from "../data/first-dictation-guide.mjs";
 import { LOCAL_SPEECH_EVIDENCE } from "../data/local-speech-evidence.mjs";
 import { localizedComparisonSections, localizedComparisonFaqs } from "../data/comparison-decision-locales.mjs";
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
@@ -2452,14 +2452,14 @@ function renderTier(tier, index) {
   const href = tier.href || (index === 0 ? downloadUrl("macos", "pricing_free") : index === 1 ? "/checkout/local" : "/checkout/cloud-fast");
   const data = tier.dataAttr ?? (index === 0 ? downloadData("macos", "pricing_free") : index === 1 ? " data-local-checkout" : " data-cloud-fast-checkout");
   const price = index === 1 ? "local" : index === 2 ? "cloudFast" : null;
-  return `<article class="${classes}" role="listitem" data-od-id="${index === 0 ? "tier-free" : index === 1 ? "tier-local" : "tier-cloud-fast"}">
+  return `<div class="${classes}" role="listitem" data-od-id="${index === 0 ? "tier-free" : index === 1 ? "tier-local" : "tier-cloud-fast"}">
               <h3 class="tier-name">${html(tier.name)}</h3>
               <p class="tier-sub">${html(tier.sub)}</p>
               <p class="tier-price">${tier.was ? `<s class="tier-price-was">${html(tier.was)}</s>` : ""}${price ? priceToken(price, "main") : html(tier.price)}<small>${html(tier.small)}</small></p>
               <p class="tier-tax">${price ? priceToken(price, "note") : ""}</p>
               ${renderList(tier.features)}
               <a class="${buttonClass}" href="${attr(href)}"${data}>${html(tier.button)}</a>
-            </article>`;
+            </div>`;
 }
 
 // Structured-data prices are the tax-inclusive totals buyers pay.
@@ -3221,7 +3221,7 @@ function renderOfflineGuideSchema(currentCode = "en") {
       description: copy.metaDescription,
       url: offlineDictationGuideUrl(currentCode),
       inLanguage: localeByCode(currentCode).htmlLang,
-      dateModified: OFFLINE_DICTATION_GUIDE_LASTMOD,
+      dateModified: offlineDictationGuideLastmod(currentCode),
       mainEntityOfPage: offlineDictationGuideUrl(currentCode),
       publisher: {
         "@type": "Organization",
@@ -3335,8 +3335,9 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
-      <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(OFFLINE_DICTATION_GUIDE_LASTMOD)}">${html(formatLocalizedDate(OFFLINE_DICTATION_GUIDE_LASTMOD, currentCode))}</time></p>
+      <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(offlineDictationGuideLastmod(currentCode))}">${html(formatLocalizedDate(offlineDictationGuideLastmod(currentCode), currentCode))}</time></p>
       ${renderFirstDictationLink(currentCode)}
+      ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
 
       <section class="doc-section" aria-labelledby="offline-guide-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -3412,7 +3413,7 @@ function renderFirstDictationPage(code) {
   const alternates = Object.keys(FIRST_DICTATION_COPY).map(alt => `<link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n");
   const schema = {
     "@context": "https://schema.org", "@type": "WebPage", name: c.metaTitle,
-    description: c.metaDescription, url, inLanguage: code, dateModified: FIRST_DICTATION_LASTMOD,
+    description: c.metaDescription, url, inLanguage: code, dateModified: firstDictationLastmod(code),
     isPartOf: { "@type": "WebSite", name: "Dictivo", url: BASE_URL },
   };
   return `<!doctype html>
@@ -4482,7 +4483,7 @@ function renderHome(currentCode) {
 
           <figure class="hero-film" id="demo-video">
             <button class="hero-video-poster" type="button" hidden aria-label="${attr(FILM_COPY[currentCode].play)}">
-              <img src="${PRODUCT_FILM.poster}" alt="${attr(FILM_COPY[currentCode].alt)}" fetchpriority="high" width="1600" height="900" />
+              <img src="${PRODUCT_FILM.poster}" srcset="/assets/film-v08/poster-800.webp 800w, ${PRODUCT_FILM.poster} 1600w" sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 52vw, 720px" alt="${attr(FILM_COPY[currentCode].alt)}" fetchpriority="high" width="1600" height="900" />
               <span class="hero-video-play">${html(FILM_COPY[currentCode].play)}</span>
             </button>
             <video controls preload="none" poster="${PRODUCT_FILM.poster}" playsinline src="${PRODUCT_FILM.video}" width="1920" height="1080" tabindex="0" aria-label="${attr(FILM_COPY[currentCode].play)}">
@@ -5365,11 +5366,11 @@ ${summaryText}
 
 ## ${copy.pagesTitle}
 
-${pages.map(([label, url]) => `- ${label}: ${url}`).join("\n")}
+${pages.map(([label, url]) => `- [${label}](${url})`).join("\n")}
 
 ## ${copy.pageLabels.compare}
 
-${comparisonPages.map(([label, url]) => `- ${label}: ${url}`).join("\n")}
+${comparisonPages.map(([label, url]) => `- [${label}](${url})`).join("\n")}
 
 ## ${copy.audiencesTitle}
 
@@ -5759,7 +5760,7 @@ ${privacyProofXDefault}
   const offlineGuideEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${offlineDictationGuideUrl(locale.code)}</loc>
-    <lastmod>${OFFLINE_DICTATION_GUIDE_LASTMOD}</lastmod>
+    <lastmod>${offlineDictationGuideLastmod(locale.code)}</lastmod>
 ${offlineGuideAlternates}
 ${offlineGuideXDefault}
     <priority>${locale.code === "en" ? "0.85" : "0.8"}</priority>
@@ -5850,7 +5851,7 @@ ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
     <loc>${BASE_URL}${firstDictationPath(code)}</loc>
-    <lastmod>${latestDate(FIRST_DICTATION_LASTMOD, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(firstDictationLastmod(code), PRICING_LASTMOD)}</lastmod>
 ${Object.keys(FIRST_DICTATION_COPY).map(alt => `    <xhtml:link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n")}
     <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
   </url>`).join("\n")}

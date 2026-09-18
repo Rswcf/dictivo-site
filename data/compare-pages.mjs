@@ -23,146 +23,154 @@ const dictivoRows = {
 
 export const COMPARE_PAGES = [
   {
-    slug: "wispr-flow-alternative",
-    competitor: "Wispr Flow",
-    title: "Wispr Flow Alternative: Local, Buy-Once Dictation (2026)",
-    metaDescription:
-      "Want a Wispr Flow alternative that runs on-device for a one-time price? Dictivo does Whisper-grade dictation locally, bought once. Compare here.",
-    h1: "Wispr Flow alternative: local dictation when cloud is the wrong default",
-    eyebrow: "Compare alternatives",
-    primaryKeyword: "wispr flow alternative",
-    intro: [
-      "Wispr Flow is a strong choice if you want fast cloud dictation, polished rewriting, team controls, and support across Mac, Windows, iPhone, and Android.",
-      "Dictivo is the Wispr Flow alternative for people who like voice typing but do not want everyday speech, client notes, draft emails, or private thoughts to leave the device by default.",
+    "slug": "wispr-flow-alternative",
+    "competitor": "Wispr Flow",
+    "title": "Wispr Flow Alternative: Offline Dictation & Pricing | Dictivo",
+    "metaDescription": "Compare Dictivo and Wispr Flow for offline dictation, free access, privacy and paid plans. Try your everyday Mac or Windows workflow before switching.",
+    "h1": "Wispr Flow alternative for offline dictation on Mac and Windows",
+    "eyebrow": "Compare alternatives",
+    "primaryKeyword": "wispr flow alternative",
+    "intro": [
+      "Dictivo Local is an alternative to Wispr Flow when you want desktop dictation to work without uploading audio. After installing a model, Local recognition runs on your computer. Cloud Fast is a separate, optional remote service.",
+      "Keep Wispr Flow on your shortlist if mobile dictation, cloud editing or team features matter most. Start with the free options in both products; compare paid plans only when you need what they add."
     ],
-    quickTake: [
-      ["Best for", "Offline Mac dictation with optional speed", "Cloud AI polish across devices"],
-      [`3-year cost`, `{{price.threeYear.inline}} with two optional update renewals`, `$432 on the annual Pro plan`],
-      ["Privacy model", "Local architecture first", "Cloud service with privacy controls"],
+    "quickTake": [
+      [
+        "Best for",
+        "Offline desktop hotkey dictation",
+        "Cloud voice typing across desktop and mobile"
+      ],
+      [
+        "Paid plan, 3 years",
+        "{{price.threeYear.inline}} with two optional update renewals",
+        "Pro: $432 with annual billing; Free also available"
+      ],
+      [
+        "Privacy model",
+        "Local architecture first",
+        "Cloud service with privacy controls"
+      ]
     ],
-    rows: [
-      { label: "Processing location", dictivo: dictivoRows.processing, competitor: "Cloud. Wispr's Data Controls page says transcription always occurs on the cloud." },
-      { label: "Trains AI on your voice", dictivo: dictivoRows.trains, competitor: "Model-improvement sharing is optional. Cloud Storage is a separate setting; transcription still runs remotely." },
-      { label: "Works fully offline", dictivo: dictivoRows.offline, competitor: "No. The core transcription path is cloud-based." },
-      { label: "Account required", dictivo: dictivoRows.account, competitor: "Yes. Flow is account-based." },
-      { label: "Pricing model", dictivo: dictivoRows.pricing, competitor: "$15/user/month monthly or $12/user/month billed annually for Pro, as listed on Wispr Flow pricing." },
-      { label: "Free tier / trial", dictivo: dictivoRows.trial, competitor: "Free tier: 2,000 words/week on desktop, 1,000/week on iPhone, and unlimited Android dictation." },
-      { label: "Platforms", dictivo: dictivoRows.platforms, competitor: "Mac, Windows, iPhone, and Android." },
-      { label: "Privacy boundary", dictivo: dictivoRows.boundary, competitor: "Cloud transcription service. Data-sharing and storage controls affect data handling; transcription still runs remotely." },
+    "rows": [
+      {
+        "label": "Processing location",
+        "dictivo": "Local mode runs on your device. Optional Cloud Fast is separate and only used when you select it.",
+        "competitor": "Cloud. Wispr's Data Controls page says transcription always occurs on the cloud."
+      },
+      {
+        "label": "Trains AI on your voice",
+        "dictivo": "Never in Local mode.",
+        "competitor": "Model-improvement sharing is optional. Cloud Storage is a separate setting; transcription still runs remotely."
+      },
+      {
+        "label": "Works fully offline",
+        "dictivo": "Yes in Local mode after the local model is installed.",
+        "competitor": "No. The core transcription path is cloud-based."
+      },
+      {
+        "label": "Account required",
+        "dictivo": "No Dictivo account for Local dictation.",
+        "competitor": "Yes. Flow is account-based."
+      },
+      {
+        "label": "Pricing model",
+        "dictivo": "{{price.local.inline}} once, 12 months of updates, then optional update renewal at {{price.renewal.inline}} a year.",
+        "competitor": "$15/user/month monthly or $12/user/month billed annually for Pro, as listed on Wispr Flow pricing."
+      },
+      {
+        "label": "Free tier / trial",
+        "dictivo": "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
+        "competitor": "Free tier: 2,000 words/week on desktop and 1,000/week on mobile, according to the current pricing page."
+      },
+      {
+        "label": "Platforms",
+        "dictivo": "Public downloads are available for macOS and Windows x64.",
+        "competitor": "Mac, Windows, iPhone, and Android."
+      },
+      {
+        "label": "Privacy boundary",
+        "dictivo": "Local mode keeps transcripts, history, dictionary terms, snippets, and settings on your device. No Dictivo account is required for Local dictation.",
+        "competitor": "Cloud transcription service. Data-sharing and storage controls affect data handling; transcription still runs remotely."
+      }
     ],
-    sections: [
+    "sections": [
       {
-        kicker: "Where it wins",
-        title: "What Wispr Flow is great at",
-        paragraphs: [
-          "Wispr Flow deserves credit for making cloud dictation feel fast and polished. The product is built for people who want to talk naturally, get cleanup and formatting, and move between devices without thinking about model setup.",
-          "If you write across desktop and mobile all day, need team billing, or want cloud AI to reshape raw speech into cleaner output, Flow is a serious product. Its command mode, shared dictionary features, and broad platform coverage are real advantages.",
-        ],
-        bullets: [
-          "Cross-platform availability across desktop and mobile.",
-          "Fast cloud transcription with automatic cleanup and command-style editing.",
-          "Team features, shared dictionary options, and enterprise privacy controls.",
-          "A free entry tier with weekly desktop and iPhone word allowances.",
-        ],
+        "kicker": "Choose by task",
+        "title": "Keep your cloud workflow, or move everyday dictation on-device",
+        "paragraphs": [
+          "Flow supports desktop and mobile input, with cloud editing and team features. Those are reasons to keep it if your current setup works. Dictivo focuses on a desktop shortcut, a local transcript and insertion into the app where you write.",
+          "Try Dictivo with an email, note or AI prompt you write repeatedly. The 14-day full Local trial includes every local model and needs no card or Dictivo account. Check recognition, correction effort and insertion on your own computer."
+        ]
       },
       {
-        kicker: "Dictivo difference",
-        title: "Where Dictivo is different",
-        paragraphs: [
-          "Dictivo starts from a different product promise: local dictation should be the default, not a privacy mode you enable after signup. In Local mode, speech recognition runs on your device, history stays on your device, and the dictionary and snippets that make dictation useful are local files rather than cloud profile data.",
-          "That difference matters when your spoken words include private drafts, unreleased product plans, journal notes, or code and customer names you would not paste into a random web form. For those workflows, a privacy policy is useful, but not as useful as removing the upload path from the normal workflow.",
-          `Dictivo is also buy-once. The Local license ({{price.local.inline}}) includes 12 months of updates. Keeping update access active for years two and three brings a three-year total to {{price.threeYear.inline}}; skipping renewal keeps the version you bought. The point is simple: local compute should not require a permanent monthly meter for every user.`,
-        ],
-        bullets: [
-          "Local mode keeps everyday speech recognition on your device.",
-          "No Dictivo account is required for Local dictation.",
-          "Hardware-aware setup helps pick local model tiers for the computer in front of you.",
-          "Dictionary, snippets, transcript history, and local settings stay on the machine.",
-          "Cloud Fast exists only as an optional speed path for low-sensitivity recordings.",
-        ],
+        "kicker": "Privacy",
+        "title": "Processing, sharing and storage are separate choices",
+        "paragraphs": [
+          "Wispr says transcription is processed in the cloud. Its controls for model-improvement sharing and cloud history storage are separate. Turning off sharing does not make recognition local.",
+          "In Dictivo Local, speech recognition takes place on your device after model installation. Cloud Fast uploads the selected recording for remote transcription. Choose that mode only when cloud processing is acceptable for the task.",
+          "Also check where the finished text goes. Pasting a locally transcribed draft into an online writing service gives that service the text. Local recognition does not change the destination app’s data handling."
+        ]
       },
       {
-        kicker: "Offline alternative",
-        title: "When Dictivo is the better Wispr Flow alternative",
-        paragraphs: [
-          "If the question is 'Which app most closely replaces Wispr Flow's full cloud AI workflow?', the answer may be another broad AI voice product. If the question is 'Which Wispr Flow alternative keeps Mac dictation audio offline?', Dictivo is the narrower fit.",
-          "Dictivo is not trying to match every Flow feature. It is built for the purchase case where local audio, desktop hotkey dictation, one-time ownership, and a visible Local versus Cloud Fast boundary matter more than mobile sync or cloud rewriting.",
-        ],
-        bullets: [
-          "Choose Dictivo when the deciding criterion is local Mac dictation, not the broadest AI writing workflow.",
-          "Use Local mode for sensitive speech and keep the recording on the device.",
-          "Use optional Cloud Fast only for low-sensitivity recordings where speed matters more than a fully local path.",
-          "Use the Local license ({{price.local.inline}}) when you want a buy-once desktop tool instead of a recurring cloud dictation subscription.",
-        ],
+        "kicker": "Free and paid",
+        "title": "Compare the plan you would actually use",
+        "paragraphs": [
+          "Flow has a free plan with weekly word allowances. Dictivo includes Tiny free forever and a 14-day trial of all Local models. If a free option meets your needs, a paid comparison alone is not a reason to switch.",
+          "Flow Pro lists $15 per user per month, or $12 per month billed annually. Three years at the annual rate is $432, assuming unchanged pricing.",
+          "Dictivo Local is {{price.local.inline}} once, including 12 months of updates and up to 3 personal devices. Two optional {{price.renewal.inline}} update renewals bring the three-year total to {{price.threeYear.inline}}. Without renewal, you keep using your purchased version. Optional Cloud Fast is separate.",
+          "These paid plans do different jobs. Compare their features and billing terms, then test your workflow before paying."
+        ]
       },
       {
-        kicker: "Privacy",
-        title: "Privacy: architecture vs policy",
-        paragraphs: [
-          "Wispr Flow separates permission to improve its models from Dictation Cloud Storage. The former Privacy Mode is now the model-improvement sharing setting; enterprise accounts have sharing disabled. Review storage and sharing independently before using sensitive material.",
-          "The remaining difference is architectural. Wispr's own Data Controls page says transcription always occurs on the cloud. Even when retention is disabled, the audio still has to travel to remote infrastructure for processing. That may be fine for a sales reply or a casual note. It is a harder fit for work where the safest path is no upload at all.",
-          "Check Data and Privacy in the app before recording: model-improvement sharing, cloud storage, and context awareness are separate choices. The current Data Controls page describes those choices; none turns cloud transcription into an offline workflow.",
-        ],
-        bullets: [
-          "Choose policy controls when cloud features are worth the upload.",
-          "Choose local architecture when the safer state is that audio never leaves the machine.",
-          "Use Dictivo Local for sensitive dictation and reserve optional Cloud Fast for low-sensitivity work.",
-        ],
-      },
-      {
-        kicker: "Pricing",
-        title: "Cost over time: Dictivo Local vs Wispr Flow Pro",
-        paragraphs: [
-          "Wispr Flow's public Pro pricing is $15 per user per month, or $12 per user per month when billed annually. The annual price works out to $144 per year and $432 over three years. Monthly billing would be $540 over the same period.",
-          `Dictivo Local is {{price.local.inline}} once. If you keep the optional yearly update renewal ({{price.renewal.inline}}) active for years two and three, the three-year total is {{price.threeYear.inline}}. If you do not need new updates after the first year, the version you bought remains yours.`,
-          "That does not make Flow overpriced for everyone. Flow includes cloud compute, multi-platform sync, AI rewriting, and team features. The question is whether those recurring cloud features are the reason you are buying dictation. If the job is private desktop voice typing, Dictivo is intentionally simpler and cheaper.",
-        ],
-        bullets: [
-          "One year: Dictivo Local is {{price.local.inline}} once; Wispr Flow Pro annual billing is $144 per user.",
-          `Three years: Dictivo Local is {{price.threeYear.inline}} with two optional update renewals; Wispr Flow Pro annual billing is $432.`,
-          "Best interpretation: Dictivo is the lower long-term-cost option for local desktop dictation, not a replacement for every Flow cloud feature.",
-        ],
-      },
-      {
-        kicker: "Decision",
-        title: "Who should choose which",
-        cards: [
-          {
-            title: "Choose Wispr Flow if",
-            items: [
-              "You want the most polished cloud AI dictation workflow.",
-              "You need Mac, Windows, iPhone, and Android today.",
-              "Your organization accepts cloud transcription with retention controls.",
-              "Command mode, team management, and mobile voice typing are central to the purchase.",
-            ],
-          },
-          {
-            title: "Choose Dictivo if",
-            items: [
-              "You want a Wispr Flow alternative that works locally by default.",
-              "You dictate sensitive words and prefer no upload path in the normal workflow.",
-              "You want a one-time license ({{price.local.inline}}) rather than another monthly subscription.",
-              "You mainly need desktop hotkey dictation into the app you are already using.",
-            ],
-          },
-        ],
-      },
+        "kicker": "Switching checklist",
+        "title": "Test a small part of your day before replacing Flow",
+        "bullets": [
+          "Install a Local model while online, then use Local for a short recording without an internet connection.",
+          "Test the shortcut in the apps you actually use. Confirm whether you prefer toggle recording or hold-to-talk, and check microphone and Accessibility permissions on Mac.",
+          "Use the same passage in both products, including your usual names and specialist terms. Count the corrections and time needed to get usable text.",
+          "Check what you would lose: mobile use, cloud editing or team features may matter more than a one-time desktop purchase.",
+          "Keep your existing setup until Dictivo works for your repeated task. Review relevant billing terms before changing a subscription."
+        ]
+      }
     ],
-    faqs: [
-      ["What are the best Wispr Flow alternatives?", "For cloud AI voice typing, compare other cloud voice products first. For a local-first Mac dictation alternative, compare Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, and Voibe."],
-      ["Is Dictivo a Wispr alternative or a Whisper Flow alternative?", "Dictivo is an option for local desktop dictation. Flow may be a better fit when mobile input, cloud rewriting, or team features are central to your work."],
-      ["Is there an offline alternative to Wispr Flow?", "Yes. Dictivo Local is an offline Wispr Flow alternative for macOS and Windows. Local mode runs speech recognition on-device after the model is installed, so you can dictate without sending audio to a transcription server."],
-      ["Does Wispr Flow work without internet?", "Wispr Flow's own Data Controls page says transcription always occurs on the cloud, so it is not a fully offline dictation app. It has privacy and retention controls, but the transcription path is still remote."],
-      ["Is Wispr Flow private?", "Wispr Flow offers data-sharing and cloud-storage controls. These affect use and retention of data; transcription still takes place in the cloud. Dictivo Local processes dictation on the device."],
-      [`What is the cheapest Wispr Flow alternative?`, `For a local desktop workflow, Dictivo is {{price.local.inline}} once, or {{price.threeYear.inline}} over three years if you keep optional update renewals active. Flow Pro is $144 per year on annual billing.`],
-      ["Can I dictate into any app like Wispr Flow?", "Dictivo is built for global hotkey dictation into the active desktop app. Press the shortcut, speak, and send the transcript back into your current workflow."],
+    "faqs": [
+      [
+        "Which Wispr Flow alternative should I try?",
+        "Choose by task: Dictivo Local for offline desktop hotkey dictation; local models in Superwhisper for configurable workflows; MacWhisper if you also transcribe recorded files. Compare each app on your hardware rather than treating this as an accuracy ranking."
+      ],
+      [
+        "Is there a free Wispr Flow alternative?",
+        "Start with built-in Apple Dictation on Mac or Windows voice typing for a no-extra-purchase baseline. Their processing requirements differ. Dictivo offers Tiny free forever and a 14-day full Local trial. Flow itself has a free tier; check its current weekly allowance before buying a paid plan."
+      ],
+      [
+        "Does Wispr Flow work offline?",
+        "Wispr’s Data Controls page describes cloud transcription. Its sharing and storage controls do not turn that into on-device processing. Dictivo Local works offline after installing a model."
+      ],
+      [
+        "Can I use Dictivo on Mac and Windows?",
+        "Public Dictivo downloads are available for macOS and Windows x64. Try the hotkey and text insertion in your actual apps during the trial. Dictivo does not provide a mobile replacement for Flow."
+      ],
+      [
+        "Does Dictivo keep all processing local?",
+        "Local speech recognition runs on your device. Cloud Fast is optional and sends selected audio for remote transcription. Text inserted into another app follows that app’s own data handling."
+      ],
+      [
+        "Do I need a subscription for Dictivo Local?",
+        "No. Local is {{price.local.inline}} once with 12 months of updates. Future update renewal is optional at {{price.renewal.inline}} a year; the purchased version remains usable without renewal. Cloud Fast is a separate subscription."
+      ]
     ],
-    related: ["superwhisper-alternative", "macos-dictation-alternative"],
-    sources: [
+    "related": [
+      "superwhisper-alternative",
+      "macos-dictation-alternative"
+    ],
+    "sources": [
       "https://wisprflow.ai/pricing",
       "https://wisprflow.ai/data-controls",
-      "https://wisprflow.ai/privacy",
+      "https://wisprflow.ai/privacy"
     ],
+    "lastUpdated": {
+      "all": "2026-09-18"
+    }
   },
   {
     slug: "superwhisper-alternative",

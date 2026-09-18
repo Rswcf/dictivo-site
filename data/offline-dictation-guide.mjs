@@ -1,4 +1,8 @@
-export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-12";
+export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-18";
+
+export function offlineDictationGuideLastmod(code) {
+  return OFFLINE_DICTATION_GUIDE_COPY[code]?.lastUpdated || OFFLINE_DICTATION_GUIDE_LASTMOD;
+}
 
 export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Dictivo benchmark method", "https://dictivo.app/guides/mac-dictation-benchmark-method/"],
@@ -38,7 +42,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Yes by default for transcription.", "Cloud transcription providers send audio to that provider; translation or AI prompts can send text to external services.", "Live dictation plus audio/video file transcription."],
       ["Aiko", "Yes for transcription. Its App Store listing says Whisper runs locally on your device.", "It is more of a transcription app than live system-wide dictation.", "Private transcription of recordings and files."],
       ["Apple Dictation", "Sometimes. Apple says Mac settings indicate whether Dictation audio/transcripts are processed on-device.", "Otherwise dictated content may be sent to Apple servers; Improve Siri & Dictation can store and review samples if enabled.", "Built-in baseline when you want no extra app."],
-      ["Wispr Flow", "No for offline transcription. Its docs describe transcription as cloud-based.", "Privacy Mode is a retention control, not on-device transcription.", "Cloud AI dictation when remote processing is acceptable."],
+      ["Wispr Flow", "No for offline transcription. Its docs describe transcription as cloud-based.", "Model-improvement sharing and cloud storage have separate controls; transcription still runs in the cloud.", "Cloud AI dictation when remote processing is acceptable."],
     ],
     sections: [
       {
@@ -71,7 +75,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Offline dictation questions",
     faqs: [
       ["What is the best offline dictation app for Mac?", "For everyday system-wide dictation, compare Dictivo Local, VoiceInk, Voice Type, and Voibe (On-Device Mode) first. Superwhisper is also a good local-capable option if you configure local models."],
-      ["Is Wispr Flow an offline dictation app?", "No. Wispr Flow's public docs describe transcription as cloud-based. Its Privacy Mode changes retention, not where transcription occurs."],
+      ["Is Wispr Flow an offline dictation app?", "No. Wispr Flow's public docs describe transcription as cloud-based. Its Model-improvement sharing and cloud storage have separate controls; transcription still runs in the cloud."],
       ["Is Dictivo fully offline?", "Dictivo Local mode keeps dictation audio on the device after the local model is installed. The app can still use the network for updates, license or billing actions, support, and optional Cloud Fast."],
       ["Which apps handle recorded files?", "MacWhisper supports dictation and files; Aiko transcribes recordings."],
     ],
@@ -100,7 +104,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Ja standardmäßig für Transkription.", "Cloud-Anbieter senden Audio an diesen Anbieter; Übersetzung oder AI Prompts können Text an externe Dienste senden.", "Live-Diktat sowie Transkription von Audio- und Videodateien."],
       ["Aiko", "Ja für Transkription. Der App-Store-Eintrag sagt, dass Whisper lokal auf dem Gerät läuft.", "Eher Transkriptions-App als Live-Diktat in beliebige Apps.", "Private Transkription von Aufnahmen und Dateien."],
       ["Apple Dictation", "Manchmal. Apple sagt, Mac-Einstellungen zeigen, ob Diktat-Audio/Transkripte auf dem Gerät verarbeitet werden.", "Sonst können diktierte Inhalte an Apple-Server gehen; Improve Siri & Dictation kann Samples speichern und prüfen.", "Eingebaute Basis ohne zusätzliche App."],
-      ["Wispr Flow", "Nein für Offline-Transkription. Die Docs beschreiben Transkription als cloudbasiert.", "Privacy Mode ist eine Aufbewahrungskontrolle, keine On-device-Transkription.", "Cloud-AI-Diktat, wenn Remote-Verarbeitung akzeptabel ist."],
+      ["Wispr Flow", "Nein für Offline-Transkription. Die Docs beschreiben Transkription als cloudbasiert.", "Datenfreigabe zur Modellverbesserung und Cloud-Speicherung werden getrennt eingestellt; die Transkription bleibt in der Cloud.", "Cloud-AI-Diktat, wenn Remote-Verarbeitung akzeptabel ist."],
     ],
     sections: [
       {
@@ -133,7 +137,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Fragen zu Offline-Diktat",
     faqs: [
       ["Was ist die beste Offline-Diktat-App für Mac?", "Für systemweites Alltagsdiktat zuerst Dictivo Local, VoiceInk, Voice Type und Voibe (lokaler Modus) vergleichen. Superwhisper ist ebenfalls lokal möglich, wenn lokale Modelle gewählt werden."],
-      ["Ist Wispr Flow eine Offline-Diktat-App?", "Nein. Die öffentlichen Wispr-Flow-Docs beschreiben Transkription als cloudbasiert. Privacy Mode ändert die Aufbewahrung, nicht den Verarbeitungsort."],
+      ["Ist Wispr Flow eine Offline-Diktat-App?", "Nein. Die öffentlichen Wispr-Flow-Docs beschreiben Transkription als cloudbasiert. Datenfreigabe zur Modellverbesserung und Cloud-Speicherung werden getrennt eingestellt; die Transkription bleibt in der Cloud."],
       ["Ist Dictivo vollständig offline?", "Dictivo Local Mode hält Diktat-Audio nach Installation des lokalen Modells auf dem Gerät. Die App kann trotzdem Netzwerk für Updates, Lizenz/Zahlung, Support und optional Cloud Fast nutzen."],
       ["Welche Apps verarbeiten aufgenommene Dateien?", "MacWhisper unterstützt Diktat und Dateien; Aiko transkribiert Aufnahmen."],
     ],
@@ -162,7 +166,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Oui par défaut pour la transcription.", "Les fournisseurs cloud envoient l'audio à ce fournisseur; traduction ou prompts IA peuvent envoyer du texte à des services externes.", "Dictée en direct et transcription de fichiers audio/vidéo."],
       ["Aiko", "Oui pour la transcription. La fiche App Store dit que Whisper tourne localement sur l'appareil.", "Plutôt app de transcription que dictée live system-wide.", "Transcription privée d'enregistrements et fichiers."],
       ["Apple Dictation", "Parfois. Apple dit que les réglages Mac indiquent si audio/transcriptions sont traités sur l'appareil.", "Sinon le contenu dicté peut être envoyé aux serveurs Apple; Improve Siri & Dictation peut stocker et examiner des échantillons.", "Base intégrée sans app supplémentaire."],
-      ["Wispr Flow", "Non pour la transcription hors ligne. Ses docs décrivent une transcription cloud.", "Privacy Mode est un contrôle de conservation, pas une transcription sur l'appareil.", "Dictée cloud IA si le traitement distant est acceptable."],
+      ["Wispr Flow", "Non pour la transcription hors ligne. Ses docs décrivent une transcription cloud.", "Le partage pour améliorer les modèles et le stockage cloud ont des réglages distincts ; la transcription reste dans le cloud.", "Dictée cloud IA si le traitement distant est acceptable."],
     ],
     sections: [
       {
@@ -195,7 +199,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Questions sur la dictée hors ligne",
     faqs: [
       ["Quelle est la meilleure app de dictée hors ligne pour Mac ?", "Pour la dictée quotidienne system-wide, comparez d'abord Dictivo Local, VoiceInk, Voice Type et Voibe (mode local). Superwhisper est aussi local-capable si vous configurez des modèles locaux."],
-      ["Wispr Flow est-il une app de dictée hors ligne ?", "Non. Les docs publiques de Wispr Flow décrivent une transcription cloud. Privacy Mode change la conservation, pas le lieu de transcription."],
+      ["Wispr Flow est-il une app de dictée hors ligne ?", "Non. Les docs publiques de Wispr Flow décrivent une transcription cloud. Le partage pour améliorer les modèles et le stockage cloud ont des réglages distincts ; la transcription reste dans le cloud."],
       ["Dictivo est-il entièrement hors ligne ?", "Le mode Local de Dictivo garde l'audio dicté sur l'appareil après installation du modèle local. L'app peut encore utiliser le réseau pour mises à jour, licence/paiement, support et Cloud Fast optionnel."],
       ["Quelles applications traitent les fichiers enregistrés ?", "MacWhisper gère la dictée et les fichiers ; Aiko transcrit les enregistrements."],
     ],
@@ -224,7 +228,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Sí por defecto para transcripción.", "Los proveedores cloud envían audio a ese proveedor; traducción o prompts IA pueden enviar texto a servicios externos.", "Dictado en directo y transcripción de archivos de audio/vídeo."],
       ["Aiko", "Sí para transcripción. Su ficha App Store dice que Whisper corre localmente en el dispositivo.", "Más app de transcripción que dictado live en cualquier app.", "Transcripción privada de grabaciones y archivos."],
       ["Apple Dictation", "A veces. Apple dice que los ajustes de Mac indican si audio/transcripciones se procesan en el dispositivo.", "Si no, el contenido dictado puede enviarse a servidores Apple; Improve Siri & Dictation puede guardar y revisar muestras.", "Base integrada sin app extra."],
-      ["Wispr Flow", "No para transcripción offline. Sus docs describen transcripción en la nube.", "Privacy Mode controla retención, no transcripción on-device.", "Dictado cloud con IA cuando el procesamiento remoto es aceptable."],
+      ["Wispr Flow", "No para transcripción offline. Sus docs describen transcripción en la nube.", "Compartir datos para mejorar modelos y almacenar en la nube son ajustes distintos; la transcripción sigue en la nube.", "Dictado cloud con IA cuando el procesamiento remoto es aceptable."],
     ],
     sections: [
       {
@@ -257,7 +261,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Preguntas de dictado offline",
     faqs: [
       ["¿Cuál es la mejor app de dictado offline para Mac?", "Para dictado diario en todo el sistema, compara primero Dictivo Local, VoiceInk, Voice Type y Voibe (modo local). Superwhisper también puede ser local si configuras modelos locales."],
-      ["¿Wispr Flow es una app de dictado offline?", "No. Las docs públicas de Wispr Flow describen transcripción cloud. Privacy Mode cambia la retención, no dónde ocurre la transcripción."],
+      ["¿Wispr Flow es una app de dictado offline?", "No. Las docs públicas de Wispr Flow describen transcripción cloud. Compartir datos para mejorar modelos y almacenar en la nube son ajustes distintos; la transcripción sigue en la nube."],
       ["¿Dictivo es totalmente offline?", "El modo Local de Dictivo mantiene el audio de dictado en el dispositivo tras instalar el modelo local. La app aún puede usar red para actualizaciones, licencia/pago, soporte y Cloud Fast opcional."],
       ["¿Qué aplicaciones procesan archivos grabados?", "MacWhisper admite dictado y archivos; Aiko transcribe grabaciones."],
     ],
@@ -286,7 +290,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Sì di default per la trascrizione.", "I provider cloud inviano audio a quel provider; traduzione o prompt IA possono inviare testo a servizi esterni.", "Dettatura dal vivo e trascrizione di file audio/video."],
       ["Aiko", "Sì per la trascrizione. La scheda App Store dice che Whisper gira localmente sul dispositivo.", "Più app di trascrizione che dettatura live system-wide.", "Trascrizione privata di registrazioni e file."],
       ["Apple Dictation", "A volte. Apple dice che le impostazioni Mac indicano se audio/trascrizioni sono elaborati sul dispositivo.", "Altrimenti il contenuto dettato può essere inviato ai server Apple; Improve Siri & Dictation può salvare e revisionare campioni.", "Base integrata senza app extra."],
-      ["Wispr Flow", "No per trascrizione offline. I documenti descrivono trascrizione cloud.", "Privacy Mode è un controllo di conservazione, non trascrizione on-device.", "Dettatura cloud IA quando il remoto è accettabile."],
+      ["Wispr Flow", "No per trascrizione offline. I documenti descrivono trascrizione cloud.", "La condivisione per migliorare i modelli e lo spazio cloud hanno impostazioni separate; la trascrizione resta nel cloud.", "Dettatura cloud IA quando il remoto è accettabile."],
     ],
     sections: [
       {
@@ -319,7 +323,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Domande sulla dettatura offline",
     faqs: [
       ["Qual è la migliore app di dettatura offline per Mac?", "Per dettatura quotidiana system-wide confronta prima Dictivo Local, VoiceInk, Voice Type e Voibe (modalità locale). Superwhisper può essere locale se configuri modelli locali."],
-      ["Wispr Flow è un'app di dettatura offline?", "No. I documenti pubblici di Wispr Flow descrivono trascrizione cloud. Privacy Mode cambia la conservazione, non il luogo di trascrizione."],
+      ["Wispr Flow è un'app di dettatura offline?", "No. I documenti pubblici di Wispr Flow descrivono trascrizione cloud. La condivisione per migliorare i modelli e lo spazio cloud hanno impostazioni separate; la trascrizione resta nel cloud."],
       ["Dictivo è completamente offline?", "La modalità Local di Dictivo mantiene l'audio sul dispositivo dopo l'installazione del modello locale. L'app può comunque usare rete per aggiornamenti, licenza/pagamento, supporto e Cloud Fast opzionale."],
       ["Quali app elaborano i file registrati?", "MacWhisper supporta dettatura e file; Aiko trascrive registrazioni."],
     ],
@@ -348,7 +352,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Ja standaard voor transcriptie.", "Cloudproviders sturen audio naar die provider; vertaling of AI-prompts kunnen tekst naar externe diensten sturen.", "Live dicteren en audio-/videobestanden transcriberen."],
       ["Aiko", "Ja voor transcriptie. De App Store-vermelding zegt dat Whisper lokaal op je apparaat draait.", "Meer transcriptie-app dan live system-wide dictatie.", "Private transcriptie van opnames en bestanden."],
       ["Apple Dictation", "Soms. Apple zegt dat Mac-instellingen aangeven of audio/transcripten op het apparaat worden verwerkt.", "Anders kan gedicteerde inhoud naar Apple-servers gaan; Improve Siri & Dictation kan samples opslaan en beoordelen.", "Ingebouwde basis zonder extra app."],
-      ["Wispr Flow", "Nee voor offline transcriptie. De docs beschrijven transcriptie als cloudgebaseerd.", "Privacy Mode is bewaarbeleid, geen on-device transcriptie.", "Cloud-AI-dictatie wanneer remote verwerking acceptabel is."],
+      ["Wispr Flow", "Nee voor offline transcriptie. De docs beschrijven transcriptie als cloudgebaseerd.", "Gegevens delen voor modelverbetering en cloudopslag hebben aparte instellingen; transcriptie blijft in de cloud.", "Cloud-AI-dictatie wanneer remote verwerking acceptabel is."],
     ],
     sections: [
       {
@@ -381,7 +385,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Vragen over offline dictatie",
     faqs: [
       ["Wat is de beste offline dicteerapp voor Mac?", "Voor dagelijkse system-wide dictatie vergelijk je eerst Dictivo Local, VoiceInk, Voice Type en Voibe (lokale modus). Superwhisper is ook lokaal mogelijk als je lokale modellen instelt."],
-      ["Is Wispr Flow een offline dicteerapp?", "Nee. De publieke docs van Wispr Flow beschrijven cloudtranscriptie. Privacy Mode verandert bewaarbeleid, niet waar transcriptie plaatsvindt."],
+      ["Is Wispr Flow een offline dicteerapp?", "Nee. De publieke docs van Wispr Flow beschrijven cloudtranscriptie. Gegevens delen voor modelverbetering en cloudopslag hebben aparte instellingen; transcriptie blijft in de cloud."],
       ["Is Dictivo volledig offline?", "Dictivo Local mode houdt dicteeraudio op het apparaat nadat het lokale model is geïnstalleerd. De app kan nog netwerk gebruiken voor updates, licentie/betaling, support en optionele Cloud Fast."],
       ["Welke apps verwerken opgenomen bestanden?", "MacWhisper ondersteunt dictatie en bestanden; Aiko transcribeert opnames."],
     ],
@@ -410,7 +414,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "Sim por padrão para transcrição.", "Provedores em nuvem enviam áudio a esse provedor; tradução ou prompts de IA podem enviar texto a serviços externos.", "Ditado ao vivo e transcrição de arquivos de áudio/vídeo."],
       ["Aiko", "Sim para transcrição. A página da App Store diz que Whisper roda localmente no dispositivo.", "Mais app de transcrição do que ditado live em qualquer app.", "Transcrição privada de gravações e arquivos."],
       ["Apple Dictation", "Às vezes. A Apple diz que os ajustes do Mac indicam se áudio/transcrições são processados no dispositivo.", "Caso contrário, conteúdo ditado pode ser enviado a servidores Apple; Improve Siri & Dictation pode armazenar e revisar amostras.", "Base integrada sem app extra."],
-      ["Wispr Flow", "Não para transcrição offline. Os docs descrevem transcrição em nuvem.", "Privacy Mode controla retenção, não transcrição no dispositivo.", "Ditado em nuvem com IA quando processamento remoto é aceitável."],
+      ["Wispr Flow", "Não para transcrição offline. Os docs descrevem transcrição em nuvem.", "O compartilhamento para melhorar modelos e o armazenamento na nuvem têm controles separados; a transcrição continua na nuvem.", "Ditado em nuvem com IA quando processamento remoto é aceitável."],
     ],
     sections: [
       {
@@ -443,7 +447,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "Perguntas sobre ditado offline",
     faqs: [
       ["Qual é o melhor app de ditado offline para Mac?", "Para ditado diário no sistema, compare primeiro Dictivo Local, VoiceInk, Voice Type e Voibe (modo local). Superwhisper também pode ser local se você configurar modelos locais."],
-      ["Wispr Flow é um app de ditado offline?", "Não. Os docs públicos do Wispr Flow descrevem transcrição em nuvem. Privacy Mode muda retenção, não onde a transcrição ocorre."],
+      ["Wispr Flow é um app de ditado offline?", "Não. Os docs públicos do Wispr Flow descrevem transcrição em nuvem. O compartilhamento para melhorar modelos e o armazenamento na nuvem têm controles separados; a transcrição continua na nuvem."],
       ["Dictivo é totalmente offline?", "O modo Local do Dictivo mantém o áudio no dispositivo após instalar o modelo local. O app ainda pode usar rede para atualizações, licença/pagamento, suporte e Cloud Fast opcional."],
       ["Que aplicações processam ficheiros gravados?", "MacWhisper suporta ditado e ficheiros; Aiko transcreve gravações."],
     ],
@@ -472,7 +476,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "默认转写是本地处理。", "使用云端转写供应商会把音频发给该供应商；翻译或 AI prompt 可能把文本发给外部服务。", "实时听写，以及音视频文件转写。"],
       ["Aiko", "转写方面是。App Store 页面称 Whisper 在你的设备上本地运行。", "它更像录音/文件转写应用，不是系统级实时听写。", "适合私密转写录音和文件。"],
       ["Apple Dictation", "有时可以。Apple 称 Mac 设置会显示听写音频/文本是否在设备上处理。", "否则听写内容可能发送到 Apple 服务器；Improve Siri & Dictation 开启时可能保存并审查样本。", "不想安装额外应用时的内置基础选项。"],
-      ["Wispr Flow", "离线转写方面不是。其文档描述为云端转写。", "Privacy Mode 是保留策略控制，不是设备端转写。", "当你接受远程处理时的云端 AI 听写。"],
+      ["Wispr Flow", "离线转写方面不是。其文档描述为云端转写。", "用于改进模型的数据共享与云端存储分别设置；语音识别仍在云端进行。", "当你接受远程处理时的云端 AI 听写。"],
     ],
     sections: [
       {
@@ -505,73 +509,164 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "离线听写问题",
     faqs: [
       ["Mac 上最好的离线听写应用是什么？", "如果是日常系统级听写，先比较 Dictivo Local、VoiceInk、Voice Type 和 Voibe (本地模式)。Superwhisper 在配置本地模型时也是可本地处理的选择。"],
-      ["Wispr Flow 是离线听写应用吗？", "不是。Wispr Flow 的公开文档描述的是云端转写。Privacy Mode 改变的是保留策略，不是转写发生的位置。"],
+      ["Wispr Flow 是离线听写应用吗？", "不是。Wispr Flow 的公开文档描述的是云端转写。用于改进模型的数据共享与云端存储分别设置；语音识别仍在云端进行。"],
       ["Dictivo 是完全离线的吗？", "Dictivo Local 模式在本地模型安装后会把听写音频留在设备上。应用仍可能为了更新、许可证/支付、支持和可选 Cloud Fast 使用网络。"],
       ["哪些应用支持转录录音文件？", "MacWhisper 支持听写和文件转录；Aiko 转录录音。"],
     ],
     referenceTitle: "参考资料",
   },
   ja: {
-    navLabel: "Mac オフライン音声入力",
-    metaTitle: "Mac向けオフライン音声入力アプリ: ローカル音声比較",
-    metaDescription:
-      "Dictivo Local、VoiceInk、Voice Type、Voibe、Superwhisper、MacWhisper、Aiko、Apple Dictation、Wispr Flow など、音声をローカルまたはオフラインで扱えるMac音声入力アプリを比較します。",
-    eyebrow: "オフライン音声入力ガイド",
-    title: "どのMac音声入力アプリが音声をローカルに保つのか？",
-    lede:
-      "音声入力の音声がどこで処理されるかを判断したいときのガイドです。ローカル/オフライン音声入力と、保持制御のあるクラウド文字起こしを分けて見ます。",
-    answerTitle: "短い答え",
-    answer:
-      "日常的なシステム全体のMac音声入力で音声をローカルに保ちたいなら、Dictivo Local、VoiceInk、Voice Type、Voibe (ローカルモード) を候補にします。Superwhisper もローカル音声モデルを選べばローカル運用できます。MacWhisperは音声入力とファイルの両方に対応し、Aikoは録音を扱います。Wispr Flow は公開ドキュメントがクラウド文字起こしを説明しているため、オフライン候補ではありません。",
-    tableCaption: "音声入力の音声がローカルに残るかでMac音声入力アプリを比較",
-    headers: ["アプリ", "音声はローカルに残るか？", "クラウド/ワークフローの注意点", "向いている用途"],
-    rows: [
-      ["Dictivo Local", "Local modeでははい。音声は端末上で処理され、Localの録音/文字起こしはアップロードされません。", "任意のCloud Fastは、選択した録音だけを高速なリモート文字起こしのためにアップロードします。", "LocalとCloud Fastの境界が明確な、ローカル優先のホットキー音声入力。"],
-      ["VoiceInk", "プライバシーポリシーによれば、ローカル文字起こしモデルではデフォルトでローカル処理です。", "任意のクラウド補正ではテキストを外部サービスへ送る場合があります。機密情報を使う前に有効な機能を確認してください。", "任意の拡張モードを持つローカル優先音声入力。"],
-      ["Voice Type", "はい。App Storeでは、インターネット不要、音声は端末上、クラウド文字起こしや音声アップロードなしと説明されています。", "Appleのレシート検証に接続する場合があります。任意の書き換え機能は別途確認が必要です。", "任意のテキスト欄で使えるシンプルなhold-to-talk音声入力。"],
-      ["Voibe", "ローカルモードのみ。Intel Macではクラウド文字起こしを使用します。", "アカウントID、利用分析、クラッシュレポートは収集しますが、音声入力内容は含まれないとしています。", "シンプルなワークフローの洗練されたオフライン音声入力。"],
-      ["Superwhisper", "ローカル音声モデルを設定すればはい。", "クラウド音声モデルや言語モデルもあるため、音声モデルとAI後処理の両方を確認してください。", "モード、local/cloud選択、豊富な自動化を求めるパワーユーザー。"],
-      ["MacWhisper", "文字起こしはデフォルトでローカルです。", "クラウド文字起こしは音声をそのプロバイダーへ送ります。翻訳やAIプロンプトはテキストを外部サービスへ送る場合があります。", "リアルタイム音声入力と音声・動画ファイルの文字起こし。"],
-      ["Aiko", "文字起こしでははい。App StoreではWhisperが端末上でローカルに動くと説明されています。", "ライブのシステム全体音声入力というより、文字起こしアプリ寄りです。", "録音やファイルのプライベート文字起こし。"],
-      ["Apple Dictation", "場合によります。AppleはMac設定で音声/文字起こしが端末上で処理されるか確認できると説明しています。", "それ以外では音声入力内容がAppleサーバーへ送られる場合があります。Improve Siri & Dictationはサンプルを保存/確認する場合があります。", "追加アプリなしの内蔵ベースライン。"],
-      ["Wispr Flow", "オフライン文字起こしではありません。ドキュメントはクラウド文字起こしを説明しています。", "Privacy Modeは保持制御であり、オンデバイス文字起こしではありません。", "リモート処理を許容する場合のクラウドAI音声入力。"],
+    "navLabel": "Mac オフライン音声入力",
+    "metaTitle": "Macのオフライン音声入力：設定・ショートカット・アプリ比較",
+    "metaDescription": "Macで音声入力を始める設定とショートカット、入力できないときの確認方法を紹介。標準機能とローカルアプリを比較し、日本語の短い文章で試せます。",
+    "eyebrow": "オフライン音声入力ガイド",
+    "title": "Macでオフライン音声入力を始めるには",
+    "lede": "Macの音声入力は、標準機能から試す方法と、ローカルモデルを使うアプリを導入する方法があります。まず設定とショートカットを確認し、音声の処理場所や普段の作業に合うかで選びましょう。",
+    "answerTitle": "短い答え",
+    "answer": "日常的なシステム全体のMac音声入力で音声をローカルに保ちたいなら、Dictivo Local、VoiceInk、Voice Type、Voibe (ローカルモード) を候補にします。Superwhisper もローカル音声モデルを選べばローカル運用できます。MacWhisperは音声入力とファイルの両方に対応し、Aikoは録音を扱います。Wispr Flow は公開ドキュメントがクラウド文字起こしを説明しているため、オフライン候補ではありません。",
+    "tableCaption": "音声入力の音声がローカルに残るかでMac音声入力アプリを比較",
+    "headers": [
+      "アプリ",
+      "音声はローカルに残るか？",
+      "クラウド/ワークフローの注意点",
+      "向いている用途"
     ],
-    sections: [
+    "rows": [
+      [
+        "Dictivo Local",
+        "Local modeでははい。音声は端末上で処理され、Localの録音/文字起こしはアップロードされません。",
+        "任意のCloud Fastは、選択した録音だけを高速なリモート文字起こしのためにアップロードします。",
+        "LocalとCloud Fastの境界が明確な、ローカル優先のホットキー音声入力。"
+      ],
+      [
+        "VoiceInk",
+        "プライバシーポリシーによれば、ローカル文字起こしモデルではデフォルトでローカル処理です。",
+        "任意のクラウド補正ではテキストを外部サービスへ送る場合があります。機密情報を使う前に有効な機能を確認してください。",
+        "任意の拡張モードを持つローカル優先音声入力。"
+      ],
+      [
+        "Voice Type",
+        "はい。App Storeでは、インターネット不要、音声は端末上、クラウド文字起こしや音声アップロードなしと説明されています。",
+        "Appleのレシート検証に接続する場合があります。任意の書き換え機能は別途確認が必要です。",
+        "任意のテキスト欄で使えるシンプルなhold-to-talk音声入力。"
+      ],
+      [
+        "Voibe",
+        "ローカルモードのみ。Intel Macではクラウド文字起こしを使用します。",
+        "アカウントID、利用分析、クラッシュレポートは収集しますが、音声入力内容は含まれないとしています。",
+        "シンプルなワークフローの洗練されたオフライン音声入力。"
+      ],
+      [
+        "Superwhisper",
+        "ローカル音声モデルを設定すればはい。",
+        "クラウド音声モデルや言語モデルもあるため、音声モデルとAI後処理の両方を確認してください。",
+        "モード、local/cloud選択、豊富な自動化を求めるパワーユーザー。"
+      ],
+      [
+        "MacWhisper",
+        "文字起こしはデフォルトでローカルです。",
+        "クラウド文字起こしは音声をそのプロバイダーへ送ります。翻訳やAIプロンプトはテキストを外部サービスへ送る場合があります。",
+        "リアルタイム音声入力と音声・動画ファイルの文字起こし。"
+      ],
+      [
+        "Aiko",
+        "文字起こしでははい。App StoreではWhisperが端末上でローカルに動くと説明されています。",
+        "ライブのシステム全体音声入力というより、文字起こしアプリ寄りです。",
+        "録音やファイルのプライベート文字起こし。"
+      ],
+      [
+        "Apple Dictation",
+        "場合によります。AppleはMac設定で音声/文字起こしが端末上で処理されるか確認できると説明しています。",
+        "それ以外では音声入力内容がAppleサーバーへ送られる場合があります。Improve Siri & Dictationはサンプルを保存/確認する場合があります。",
+        "追加アプリなしの内蔵ベースライン。"
+      ],
+      [
+        "Wispr Flow",
+        "オフライン文字起こしではありません。ドキュメントはクラウド文字起こしを説明しています。",
+        "モデル改善への共有とクラウド保存は別の設定です。どちらを変更しても音声認識はクラウドで行われます。",
+        "リモート処理を許容する場合のクラウドAI音声入力。"
+      ]
+    ],
+    "sections": [
       {
-        kicker: "判断基準",
-        title: "ローカル音声とゼロ保持を混同しない",
-        paragraphs: [
+        "kicker": "まずは標準機能",
+        "title": "Mac標準の音声入力を設定する",
+        "paragraphs": [
+          "「システム設定」→「キーボード」→「音声入力」で機能を有効にし、使う言語とマイクを確認します。同じ画面の「ショートカット」で開始・停止のキーを確認してください。Fnキーを2回押す設定は選択肢の一つで、すべてのMacの初期設定とは限りません。",
+          "メモなどの入力欄をクリックし、設定したキー、または「編集」→「音声入力を開始」で短い文章を話します。オフライン処理の可否は機種・言語・設定によるため、設定画面に表示される音声の処理方法を確認してください。標準機能で必要な作業ができれば、追加のアプリを購入する必要はありません。"
+        ]
+      },
+      {
+        "kicker": "判断基準",
+        "title": "ローカル音声とゼロ保持を混同しない",
+        "paragraphs": [
           "ローカル/オフライン音声入力アプリは、音声認識の処理経路を端末上に保ちます。ゼロ保持のクラウド音声入力でも、処理のために音声をアップロードしてから破棄する場合があります。どちらも成立し得ますが、答えるプライバシーの問いが異なります。",
-          "音声が機密ならローカルモデル経路を選びます。速度、モバイル同期、クラウド書き換えが重要なら、強い保持制御を持つクラウド製品も選択肢です。",
+          "音声が機密ならローカルモデル経路を選びます。速度、モバイル同期、クラウド書き換えが重要なら、強い保持制御を持つクラウド製品も選択肢です。"
         ],
-        bullets: [
+        "bullets": [
           "ローカル/オフラインとは、モデル導入後に音声がMac上で処理されることです。",
           "ゼロ保持とは、リモート処理後にデータを保存しないとベンダーが説明することです。",
-          "個人メモ、顧客業務、日記、下書き、機密会議では、アップロード経路がない状態が安全な初期値です。",
-        ],
+          "個人メモ、顧客業務、日記、下書き、機密会議では、アップロード経路がない状態が安全な初期値です。"
+        ]
       },
       {
-        kicker: "Dictivoの適合",
-        title: "Dictivoが強い答えになる場面",
-        paragraphs: [
+        "kicker": "Dictivoの適合",
+        "title": "Dictivoが強い答えになる場面",
+        "paragraphs": [
           "Dictivoは、システム全体のホットキー音声入力、デフォルトでローカル音声、Local modeでDictivoアカウント不要、Localと任意のCloud Fastを見える形で選べることが重要な場合に合います。",
-          "モデルをインストールしたら、Localモードで短いメールやメモを入力してみてください。通信を切っても文字起こしが完了するか確認し、内容を見直して普段のアプリに貼り付けます。テスト中は任意のクラウド処理を無効にします。",
+          "モデルをインストールしたら、Localモードで短いメールやメモを入力してみてください。通信を切っても文字起こしが完了するか確認し、内容を見直して普段のアプリに貼り付けます。テスト中は任意のクラウド処理を無効にします。"
         ],
-        bullets: [
+        "bullets": [
           "日常の機密音声入力には、アクティブなデスクトップアプリへDictivo Localを使います。",
           "Cloud Fastは、低機密の選択録音で速度が重要なときだけ使います。",
-          "継続的なクラウド音声入力より一回払いのLocalライセンスを選びたい場合にDictivoが合います。",
-        ],
+          "継続的なクラウド音声入力より一回払いのLocalライセンスを選びたい場合にDictivoが合います。"
+        ]
       },
+      {
+        "kicker": "実際に試す",
+        "title": "Dictivoで日本語をオフライン入力する手順",
+        "paragraphs": [
+          "Dictivoをインストールし、「Set up Local」からモデルを取得します。初回ダウンロードにはネット接続が必要です。14日間はすべてのLocalモデルを試せます。カードやDictivoアカウントは不要です。",
+          "Macの初期ショートカットはCmd+Shift+Spaceです。これはDictivoのキー設定であり、Mac標準の音声入力とは別です。Localを選び、入力欄をクリックしてから録音を開始・停止します。押している間だけ録音する設定なら、キーを離すと停止します。",
+          "「明日の打ち合わせは午後3時です。資料を田中さんに送ってください。」など短い文章で、人名・数字・句読点を確認します。この例文は練習用で、測定済みの日本語認識結果ではありません。モデル取得後に通信を切った状態でも試し、普段のアプリに貼り付くか確かめてください。"
+        ]
+      },
+      {
+        "kicker": "うまくいかないとき",
+        "title": "Macで音声入力できないときの切り分け",
+        "bullets": [
+          "何も始まらない：標準の音声入力とDictivoのどちらを起動したいか確認し、それぞれの設定でショートカットを確認します。別アプリとのキーの重複も確認してください。",
+          "録音できても文字が出ない：選択したマイク、マイク権限、入力音量、話す言語を確認します。DictivoではLocalモデルの取得が完了しているかも確認します。",
+          "Dictivo内には文字があるが貼り付かない：入力先を先にクリックし、Macのアクセシビリティ権限を確認します。Copyでコピーして手動で貼り付ける方法もあります。",
+          "録音ファイルを文字起こししたい：ライブ音声入力とは別の用途です。MacWhisperやAikoなど、ファイルを扱うアプリの入出力形式を確認してください。"
+        ]
+      }
     ],
-    faqTitle: "オフライン音声入力の質問",
-    faqs: [
-      ["Macで最適なオフライン音声入力アプリは？", "日常的なシステム全体の音声入力なら、まずDictivo Local、VoiceInk、Voice Type、Voibe (ローカルモード)を比較します。Superwhisperもローカルモデルを設定すればローカル運用できます。"],
-      ["Wispr Flowはオフライン音声入力アプリですか？", "いいえ。Wispr Flowの公開ドキュメントはクラウド文字起こしを説明しています。Privacy Modeは保持を変えるもので、処理場所を端末上にするものではありません。"],
-      ["Dictivoは完全にオフラインですか？", "Dictivo Local modeはローカルモデル導入後、音声入力の音声を端末上に保ちます。ただしアプリは更新、ライセンス/支払い、サポート、任意のCloud Fastでネットワークを使う場合があります。"],
-      ["録音ファイルに対応するアプリは？", "MacWhisperは音声入力とファイルに対応し、Aikoは録音を文字起こしします。"],
+    "faqTitle": "オフライン音声入力の質問",
+    "faqs": [
+      [
+        "Macで最適なオフライン音声入力アプリは？",
+        "日常的なシステム全体の音声入力なら、まずDictivo Local、VoiceInk、Voice Type、Voibe (ローカルモード)を比較します。Superwhisperもローカルモデルを設定すればローカル運用できます。"
+      ],
+      [
+        "Wispr Flowはオフライン音声入力アプリですか？",
+        "いいえ。Wispr Flowはクラウドで音声認識を行います。モデル改善への共有とクラウド保存の設定は、処理場所をMac内に変更するものではありません。"
+      ],
+      [
+        "Dictivoは完全にオフラインですか？",
+        "Dictivo Local modeはローカルモデル導入後、音声入力の音声を端末上に保ちます。ただしアプリは更新、ライセンス/支払い、サポート、任意のCloud Fastでネットワークを使う場合があります。"
+      ],
+      [
+        "録音ファイルに対応するアプリは？",
+        "MacWhisperは音声入力とファイルに対応し、Aikoは録音を文字起こしします。"
+      ],
+      [
+        "Macの音声入力のショートカットは？",
+        "標準機能は「システム設定」→「キーボード」→「音声入力」で確認・変更できます。DictivoのMac版の初期値はCmd+Shift+Spaceです。両者は別の設定なので、利用する機能のキーを確認してください。"
+      ]
     ],
-    referenceTitle: "参考資料",
+    "referenceTitle": "参考資料",
+    "lastUpdated": "2026-09-18"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",
@@ -596,7 +691,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["MacWhisper", "전사는 기본적으로 로컬입니다.", "클라우드 전사 제공업체를 쓰면 오디오가 그 제공업체로 전송됩니다. 번역이나 AI 프롬프트는 텍스트를 외부 서비스로 보낼 수 있습니다.", "실시간 받아쓰기와 오디오·비디오 파일 전사."],
       ["Aiko", "전사에서는 예. App Store 설명은 Whisper가 기기에서 로컬로 실행된다고 말합니다.", "시스템 전체 실시간 받아쓰기보다는 전사 앱에 가깝습니다.", "녹음과 파일의 비공개 전사."],
       ["Apple Dictation", "경우에 따라 다릅니다. Apple은 Mac 설정에서 오디오/전사 텍스트가 기기에서 처리되는지 표시한다고 설명합니다.", "그 외에는 받아쓴 내용이 Apple 서버로 전송될 수 있습니다. Improve Siri & Dictation은 샘플을 저장하고 검토할 수 있습니다.", "추가 앱 없이 쓰는 내장 기본 옵션."],
-      ["Wispr Flow", "오프라인 전사로는 아닙니다. 문서는 클라우드 전사를 설명합니다.", "Privacy Mode는 보관 정책 제어이지 온디바이스 전사가 아닙니다.", "원격 처리가 괜찮을 때 쓰는 클라우드 AI 받아쓰기."],
+      ["Wispr Flow", "오프라인 전사로는 아닙니다. 문서는 클라우드 전사를 설명합니다.", "모델 개선을 위한 데이터 공유와 클라우드 저장은 별도 설정이며, 전사는 계속 클라우드에서 처리합니다.", "원격 처리가 괜찮을 때 쓰는 클라우드 AI 받아쓰기."],
     ],
     sections: [
       {
@@ -629,7 +724,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     faqTitle: "오프라인 받아쓰기 질문",
     faqs: [
       ["Mac에서 가장 좋은 오프라인 받아쓰기 앱은 무엇인가요?", "일상적인 시스템 전체 받아쓰기라면 Dictivo Local, VoiceInk, Voice Type, Voibe (로컬 모드)를 먼저 비교하세요. Superwhisper도 로컬 모델을 설정하면 로컬 선택지가 됩니다."],
-      ["Wispr Flow는 오프라인 받아쓰기 앱인가요?", "아니요. Wispr Flow의 공개 문서는 클라우드 전사를 설명합니다. Privacy Mode는 보관 정책을 바꾸는 것이지 전사 위치를 기기로 바꾸는 것이 아닙니다."],
+      ["Wispr Flow는 오프라인 받아쓰기 앱인가요?", "아니요. Wispr Flow의 공개 문서는 클라우드 전사를 설명합니다. 모델 개선을 위한 데이터 공유와 클라우드 저장은 별도 설정이며, 전사는 계속 클라우드에서 처리합니다."],
       ["Dictivo는 완전히 오프라인인가요?", "Dictivo Local 모드는 로컬 모델 설치 후 받아쓰기 오디오를 기기에 둡니다. 앱은 업데이트, 라이선스/결제, 지원, 선택형 Cloud Fast를 위해 네트워크를 사용할 수 있습니다."],
       ["녹음 파일을 처리하는 앱은 무엇인가요?", "MacWhisper는 받아쓰기와 파일을 지원하며, Aiko는 녹음을 전사합니다."],
     ],

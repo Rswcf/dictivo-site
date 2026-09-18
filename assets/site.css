@@ -750,6 +750,13 @@ main section[id] {
   letter-spacing: 0.04em;
 }
 
+.hero-film figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 0;
+}
+
 .hero-figure {
   margin: 0;
   display: flex;

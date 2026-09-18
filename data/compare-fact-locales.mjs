@@ -12,7 +12,7 @@ const keys = [
 const translations = {
   de: [
     "Die Spracherkennung läuft in der Cloud.", "Modelltraining durch Datenfreigabe ist optional; Cloud-Speicherung wird separat eingestellt.", "Nein, die Spracherkennung braucht eine Internetverbindung.", "Ja, ein Konto ist erforderlich.",
-    "Pro: {0} pro Person/Monat oder {1} pro Person/Monat bei jährlicher Abrechnung.", "Kostenlos: {0} Wörter/Woche am Desktop, {1} am iPhone; unbegrenzt auf Android.", "Mac, Windows, iPhone, Android.", "Datenschutzregeln ändern Speicherung und Nutzung; die Spracherkennung bleibt in der Cloud.",
+    "Pro: {0} pro Person/Monat oder {1} pro Person/Monat bei jährlicher Abrechnung.", "Kostenlos: {0} Wörter/Woche am Desktop und {1} auf Mobilgeräten.", "Mac, Windows, iPhone, Android.", "Datenschutzregeln ändern Speicherung und Nutzung; die Spracherkennung bleibt in der Cloud.",
     "Lokale Modelle laufen auf dem Gerät; Cloud-Modelle sind optional.", "Lokales Audio bleibt auf dem Gerät. Für optionale Cloud- und KI-Funktionen gelten eigene Datenregeln.", "Ja, mit installiertem lokalen Modell.", "Bezahlte Funktionen werden mit einer Lizenz in der App aktiviert.",
     "Pro: {0}/Monat, {1}/Jahr oder {2} als Einmalkauf.", "Kostenloser Einstieg und Pro-Test für {0} Wörter. Prüfen Sie die verfügbaren Modelle in Ihrer App-Version.", "Mac, Windows, iPhone, Android.",
     "Kein Konto für die lokale Kernfunktion.", "Pro: einmal {0}, lebenslange Updates inklusive.", "Kostenloser Download mit Tiny, Base und Small.", "Lokale Transkription und systemweites Diktat; Cloud- und KI-Integrationen sind optional.",
@@ -22,7 +22,7 @@ const translations = {
   ],
   fr: [
     "La reconnaissance vocale s'effectue dans le cloud.", "Le partage pour améliorer les modèles est facultatif ; le stockage cloud se règle séparément.", "Non, la reconnaissance vocale nécessite Internet.", "Oui, un compte est nécessaire.",
-    "Pro : {0}/personne/mois, ou {1}/personne/mois avec facturation annuelle.", "Gratuit : {0} mots/semaine sur ordinateur, {1} sur iPhone ; illimité sur Android.", "Mac, Windows, iPhone, Android.", "Les réglages contrôlent l'utilisation et la conservation des données ; la transcription reste dans le cloud.",
+    "Pro : {0}/personne/mois, ou {1}/personne/mois avec facturation annuelle.", "Gratuit : {0} mots/semaine sur ordinateur et {1} sur mobile.", "Mac, Windows, iPhone, Android.", "Les réglages contrôlent l'utilisation et la conservation des données ; la transcription reste dans le cloud.",
     "Les modèles locaux tournent sur l'appareil ; les modèles cloud sont facultatifs.", "L'audio local reste sur l'appareil. Les fonctions cloud et IA facultatives ont leurs propres règles de traitement.", "Oui, avec un modèle local installé.", "Les fonctions payantes s'activent avec une licence dans l'app.",
     "Pro : {0}/mois, {1}/an ou {2} en un achat.", "Offre gratuite et essai Pro de {0} mots. Vérifiez les modèles disponibles dans votre version.", "Mac, Windows, iPhone, Android.",
     "Aucun compte pour les fonctions locales de base.", "Pro : {0} en un achat, mises à jour à vie incluses.", "Téléchargement gratuit avec Tiny, Base et Small.", "Transcription locale et dictée dans les apps ; intégrations cloud et IA facultatives.",
@@ -32,7 +32,7 @@ const translations = {
   ],
   es: [
     "El reconocimiento de voz se realiza en la nube.", "Compartir datos para mejorar modelos es opcional; el almacenamiento en la nube se configura por separado.", "No, el reconocimiento de voz necesita Internet.", "Sí, requiere una cuenta.",
-    "Pro: {0}/persona/mes, o {1}/persona/mes con facturación anual.", "Gratis: {0} palabras/semana en escritorio, {1} en iPhone; ilimitadas en Android.", "Mac, Windows, iPhone, Android.", "Los controles regulan el uso y la conservación de datos; la transcripción sigue en la nube.",
+    "Pro: {0}/persona/mes, o {1}/persona/mes con facturación anual.", "Gratis: {0} palabras/semana en escritorio y {1} en móvil.", "Mac, Windows, iPhone, Android.", "Los controles regulan el uso y la conservación de datos; la transcripción sigue en la nube.",
     "Los modelos locales se ejecutan en el dispositivo; los modelos de nube son opcionales.", "El audio local permanece en el dispositivo. Las funciones opcionales de nube e IA tienen sus propias condiciones de datos.", "Sí, con un modelo local instalado.", "Las funciones de pago se activan con una licencia en la app.",
     "Pro: {0}/mes, {1}/año o {2} en un único pago.", "Plan gratuito y prueba Pro de {0} palabras. Comprueba los modelos disponibles en tu versión.", "Mac, Windows, iPhone, Android.",
     "Sin cuenta para las funciones locales básicas.", "Pro: {0} en un único pago, con actualizaciones de por vida.", "Descarga gratuita con Tiny, Base y Small.", "Transcripción local y dictado en las apps; integraciones opcionales de nube e IA.",
@@ -42,7 +42,7 @@ const translations = {
   ],
   it: [
     "Il riconoscimento vocale avviene nel cloud.", "La condivisione per migliorare i modelli è facoltativa; l'archiviazione cloud si imposta separatamente.", "No, il riconoscimento vocale richiede Internet.", "Sì, serve un account.",
-    "Pro: {0}/persona/mese, oppure {1}/persona/mese con fatturazione annuale.", "Gratis: {0} parole/settimana su desktop, {1} su iPhone; illimitate su Android.", "Mac, Windows, iPhone, Android.", "Le impostazioni regolano uso e conservazione dei dati; la trascrizione resta nel cloud.",
+    "Pro: {0}/persona/mese, oppure {1}/persona/mese con fatturazione annuale.", "Gratis: {0} parole/settimana su desktop e {1} su dispositivi mobili.", "Mac, Windows, iPhone, Android.", "Le impostazioni regolano uso e conservazione dei dati; la trascrizione resta nel cloud.",
     "I modelli locali funzionano sul dispositivo; i modelli cloud sono facoltativi.", "L'audio locale resta sul dispositivo. Le funzioni cloud e IA facoltative hanno proprie regole sui dati.", "Sì, con un modello locale installato.", "Le funzioni a pagamento si attivano con una licenza nell'app.",
     "Pro: {0}/mese, {1}/anno oppure {2} con acquisto unico.", "Piano gratuito e prova Pro di {0} parole. Controlla i modelli disponibili nella tua versione.", "Mac, Windows, iPhone, Android.",
     "Nessun account per le funzioni locali di base.", "Pro: {0} una sola volta, aggiornamenti a vita inclusi.", "Download gratuito con Tiny, Base e Small.", "Trascrizione locale e dettatura nelle app; integrazioni cloud e IA facoltative.",
@@ -52,7 +52,7 @@ const translations = {
   ],
   nl: [
     "Spraakherkenning gebeurt in de cloud.", "Gegevens delen om modellen te verbeteren is optioneel; cloudopslag heeft een aparte instelling.", "Nee, spraakherkenning vereist internet.", "Ja, een account is vereist.",
-    "Pro: {0}/persoon/maand, of {1}/persoon/maand bij jaarlijkse betaling.", "Gratis: {0} woorden/week op desktop, {1} op iPhone; onbeperkt op Android.", "Mac, Windows, iPhone, Android.", "Instellingen bepalen gebruik en bewaring van gegevens; transcriptie blijft in de cloud.",
+    "Pro: {0}/persoon/maand, of {1}/persoon/maand bij jaarlijkse betaling.", "Gratis: {0} woorden/week op desktop en {1} op mobiel.", "Mac, Windows, iPhone, Android.", "Instellingen bepalen gebruik en bewaring van gegevens; transcriptie blijft in de cloud.",
     "Lokale modellen draaien op het apparaat; cloudmodellen zijn optioneel.", "Lokale audio blijft op het apparaat. Optionele cloud- en AI-functies hebben eigen gegevensvoorwaarden.", "Ja, met een geïnstalleerd lokaal model.", "Betaalde functies activeer je met een licentie in de app.",
     "Pro: {0}/maand, {1}/jaar of eenmalig {2}.", "Gratis versie en Pro-proef voor {0} woorden. Controleer de beschikbare modellen in jouw appversie.", "Mac, Windows, iPhone, Android.",
     "Geen account voor de lokale basisfuncties.", "Pro: eenmalig {0}, inclusief levenslange updates.", "Gratis download met Tiny, Base en Small.", "Lokale transcriptie en dicteren in apps; cloud- en AI-integraties zijn optioneel.",
@@ -62,7 +62,7 @@ const translations = {
   ],
   pt: [
     "O reconhecimento de voz ocorre na nuvem.", "Compartilhar dados para melhorar modelos é opcional; o armazenamento na nuvem é configurado separadamente.", "Não, o reconhecimento de voz precisa de Internet.", "Sim, exige conta.",
-    "Pro: {0}/pessoa/mês, ou {1}/pessoa/mês com cobrança anual.", "Grátis: {0} palavras/semana no computador, {1} no iPhone; ilimitadas no Android.", "Mac, Windows, iPhone, Android.", "Os controles regulam uso e retenção dos dados; a transcrição continua na nuvem.",
+    "Pro: {0}/pessoa/mês, ou {1}/pessoa/mês com cobrança anual.", "Grátis: {0} palavras/semana no computador e {1} no celular.", "Mac, Windows, iPhone, Android.", "Os controles regulam uso e retenção dos dados; a transcrição continua na nuvem.",
     "Modelos locais rodam no dispositivo; modelos de nuvem são opcionais.", "O áudio local fica no dispositivo. Funções opcionais de nuvem e IA têm suas próprias regras de dados.", "Sim, com um modelo local instalado.", "Funções pagas são ativadas com uma licença no aplicativo.",
     "Pro: {0}/mês, {1}/ano ou {2} em compra única.", "Plano gratuito e teste Pro de {0} palavras. Confira os modelos disponíveis na sua versão.", "Mac, Windows, iPhone, Android.",
     "Sem conta para as funções locais básicas.", "Pro: {0} uma única vez, com atualizações vitalícias.", "Download gratuito com Tiny, Base e Small.", "Transcrição local e ditado nos aplicativos; integrações de nuvem e IA são opcionais.",
@@ -72,7 +72,7 @@ const translations = {
   ],
   zh: [
     "语音识别在云端进行。", "用于改进模型的数据共享可选；云端存储是单独的设置。", "不支持，语音识别需要联网。", "需要账号。",
-    "Pro：按月付费为每人每月 {0}；按年付费折合每人每月 {1}。", "免费额度：桌面端每周 {0} 词，iPhone 每周 {1} 词；Android 不限词数。", "Mac、Windows、iPhone、Android。", "设置控制数据使用和保留；语音识别仍在云端。",
+    "Pro：按月付费为每人每月 {0}；按年付费折合每人每月 {1}。", "免费额度：桌面端每周 {0} 词，移动端每周 {1} 词。", "Mac、Windows、iPhone、Android。", "设置控制数据使用和保留；语音识别仍在云端。",
     "本地模型在设备上运行，也可选择云端模型。", "本地识别的音频留在设备上；可选云端与 AI 功能有各自的数据处理规则。", "安装本地模型后支持。", "付费功能需要在应用中激活许可证。",
     "Pro：每月 {0}、每年 {1}，或 {2} 一次购买。", "提供免费档和 {0} 词 Pro 试用；免费模型范围请以所安装版本为准。", "Mac、Windows、iPhone、Android。",
     "核心本地功能无需账号。", "Pro：{0} 一次购买，包含终身更新。", "可免费下载，包含 Tiny、Base、Small 模型。", "支持本地转写和系统级听写；云端与 AI 集成可选。",
@@ -82,7 +82,7 @@ const translations = {
   ],
   ja: [
     "音声認識はクラウドで処理されます。", "モデル改善へのデータ共有は任意です。クラウド保存は別の設定です。", "いいえ。音声認識にはインターネットが必要です。", "アカウントが必要です。",
-    "Pro：月払いは1人あたり月額{0}、年払いは月額換算{1}。", "無料枠：デスクトップは週{0}語、iPhoneは週{1}語。Androidは無制限。", "Mac、Windows、iPhone、Android。", "設定でデータの利用・保存を管理できますが、音声認識はクラウドのままです。",
+    "Pro：月払いは1人あたり月額{0}、年払いは月額換算{1}。", "無料：デスクトップは週{0}語、モバイルは週{1}語。", "Mac、Windows、iPhone、Android。", "設定でデータの利用・保存を管理できますが、音声認識はクラウドのままです。",
     "ローカルモデルはデバイス上で動作し、クラウドモデルも選べます。", "ローカル認識の音声はデバイス内に残ります。任意のクラウド・AI機能には個別のデータ条件があります。", "ローカルモデルのインストール後は利用できます。", "有料機能はアプリでライセンスを有効化します。",
     "Pro：月額{0}、年額{1}、または{2}の買い切り。", "無料プランと{0}語のPro体験があります。無料で使えるモデルはインストールした版で確認してください。", "Mac、Windows、iPhone、Android。",
     "基本のローカル機能にアカウントは不要です。", "Pro：{0}の買い切り。無期限のアップデート付き。", "Tiny、Base、Smallを含む無料ダウンロードがあります。", "ローカル文字起こしとシステム全体の音声入力に対応。クラウド・AI連携は任意です。",
@@ -92,7 +92,7 @@ const translations = {
   ],
   ko: [
     "음성 인식은 클라우드에서 처리합니다.", "모델 개선을 위한 데이터 공유는 선택 사항이며, 클라우드 저장은 별도 설정입니다.", "아니요. 음성 인식에 인터넷이 필요합니다.", "계정이 필요합니다.",
-    "Pro: 월 결제는 1인당 월 {0}, 연 결제는 월 환산 {1}입니다.", "무료 한도: 데스크톱 주 {0}단어, iPhone 주 {1}단어. Android는 무제한입니다.", "Mac, Windows, iPhone, Android.", "설정은 데이터 사용과 보관을 제어하지만 음성 인식은 계속 클라우드에서 처리합니다.",
+    "Pro: 월 결제는 1인당 월 {0}, 연 결제는 월 환산 {1}입니다.", "무료 한도: 데스크톱 주 {0}단어, 모바일 주 {1}단어.", "Mac, Windows, iPhone, Android.", "설정은 데이터 사용과 보관을 제어하지만 음성 인식은 계속 클라우드에서 처리합니다.",
     "로컬 모델은 기기에서 실행하며 클라우드 모델도 선택할 수 있습니다.", "로컬 인식 음성은 기기에 남습니다. 선택형 클라우드·AI 기능에는 별도 데이터 조건이 적용됩니다.", "로컬 모델 설치 후 가능합니다.", "유료 기능은 앱에서 라이선스를 활성화합니다.",
     "Pro: 월 {0}, 연 {1}, 또는 {2} 일회 구매.", "무료 요금제와 {0}단어 Pro 체험을 제공합니다. 무료 모델 범위는 설치한 버전에서 확인하세요.", "Mac, Windows, iPhone, Android.",
     "기본 로컬 기능에는 계정이 필요 없습니다.", "Pro: {0} 일회 구매, 평생 업데이트 포함.", "Tiny, Base, Small 모델을 포함한 무료 다운로드.", "로컬 전사와 시스템 전체 받아쓰기를 지원하며 클라우드·AI 연동은 선택 사항입니다.",
