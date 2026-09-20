@@ -48,6 +48,19 @@ and first-dictation navigation were exercised. This is website QA, not a native-
 benchmark or evidence of a traffic increase. The desktop repo's September 18 batch-2 audit
 records deployment verification, keyword data limits and external directory follow-up.
 
+## IndexNow ownership recovery — 2026-09-20
+
+`scripts/submit-indexnow.mjs` uses the official Yandex participant endpoint. The existing
+public key verified there with HTTP 200 on September 20; Bing's direct endpoint still
+returned ownership-validation 403. No key rotation or Cloudflare security change was needed.
+[IndexNow participants share submissions](https://www.indexnow.org/faq), so the script sends
+one request to one endpoint. This is not confirmation of Bing processing or search indexing.
+
+The script checks the public key file before submitting and records the provider, URL count
+and HTTP status in the Actions summary. HTTP 202 means verification is pending; rejection
+fails the workflow. Submission runs after deployment, so a failed notification does not mean
+the production site was rolled back. The current full-sitemap submission behavior is unchanged.
+
 ## Local preview
 
 From the repository root:

@@ -94,5 +94,6 @@ jobs:
         run: node scripts/check-locale-routing-live.mjs https://dictivo.app
 
       - name: Submit sitemap URLs to IndexNow
-        continue-on-error: true
+        # A rejection must remain visible as a failed step. The site has already
+        # deployed at this point; submission failure does not roll it back.
         run: node scripts/submit-indexnow.mjs
