@@ -1,4 +1,13 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.49": Object.freeze({
+    date: "2026-09-20",
+    title: "Meet 13 animated companions, each with a personality of their own.",
+    bullets: Object.freeze([
+      "Choose from six visual styles, including soft cartoons, pixel characters, minimal design, storybook illustration, handmade textures and people. Your companion reacts as you listen, process and finish a dictation.",
+      "Set built-in motion to Quiet, Natural, Lively or Still. System reduced-motion preferences are respected, and offscreen companions pause their animation.",
+      "Your custom image stays available under My image. Existing uploads and choices are preserved, images keep their full proportions, and animated GIFs retain their own animation. Switching to a built-in companion does not delete your upload.",
+    ]),
+  }),
   "0.3.48": Object.freeze({
     date: "2026-09-16",
     title: "Cloud Fast now quotes its current price.",
