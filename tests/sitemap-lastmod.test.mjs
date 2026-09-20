@@ -14,9 +14,9 @@ test("pages that show a price report a sitemap date no older than the last price
     priced += 1;
     assert.ok(lastmod >= PRICING_LASTMOD, `${loc}: sitemap lastmod ${lastmod} is older than ${PRICING_LASTMOD}`);
   }
-  // 11 homepages, 66 comparison pages plus the English hub, the Windows guide, two
-  // first-dictation guides, the media kit and the terms.
-  assert.ok(priced >= 11 + 66 + 1 + 5, `only ${priced} priced pages found in the sitemap`);
+  // 11 homepages, 66 comparison pages, the Windows guide, two first-dictation
+  // guides, the media kit and the terms. Hubs link to pricing without quoting it.
+  assert.ok(priced >= 11 + 66 + 5, `only ${priced} priced pages found in the sitemap`);
 });
 
 
@@ -25,6 +25,7 @@ test("comparison refresh is scoped to changed pages and languages", () => {
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   const locales = ["", "de/", "fr/", "es/", "it/", "nl/", "pt/", "zh/", "zh-hant/", "ja/", "ko/"];
   for (const locale of locales) {
+    assert.equal(dates.get(`/${locale}compare/`), "2026-09-20");
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
     assert.equal(dates.get(superPath), "2026-09-18");

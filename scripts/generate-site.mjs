@@ -1,6 +1,7 @@
 import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, compareLastUpdated, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
+import { COMPARE_HUB_GUIDANCE, COMPARE_HUB_GUIDANCE_LASTMOD } from "../data/compare-hub-guidance.mjs";
 import {
   BENCHMARK_METHOD_GUIDE_COPY,
   BENCHMARK_METHOD_GUIDE_LASTMOD,
@@ -2898,6 +2899,7 @@ function renderCompareHub(currentCode = "en") {
   const locale = localeByCode(currentCode);
   const t = homeCopyForRender(currentCode);
   const copy = compareCopy(currentCode);
+  const guidance = COMPARE_HUB_GUIDANCE[currentCode];
   const canonical = localizedCompareUrl(currentCode);
   return `<!doctype html>
 <html lang="${attr(locale.htmlLang)}">
@@ -2925,12 +2927,21 @@ function renderCompareHub(currentCode = "en") {
       <section class="compare-hub-grid" aria-label="${attr(copy.hubGridLabel)}">
 ${COMPARE_PAGES.map(
   (page) => `        <article class="compare-hub-card">
-          <span>${html(page.primaryKeyword)}</span>
+          <span>${html(guidance.cards[page.slug].label)}</span>
           <h2>${html(currentCode === "en" ? `${page.competitor} alternative` : fillCompareTemplate(copy.cardTitle, page))}</h2>
-          <p>${html(currentCode === "en" ? page.intro[1] : fillCompareTemplate(copy.pageMeta, page))}</p>
+          <p>${html(guidance.cards[page.slug].summary)}</p>
           <a class="button-link" href="${attr(localizedComparePath(currentCode, page.slug))}">${html(fillCompareTemplate(copy.cardCta, page))}</a>
         </article>`,
 ).join("\n")}
+      </section>
+      <section class="compare-cta" aria-labelledby="compare-trial-title">
+        <h2 id="compare-trial-title">${html(guidance.title)}</h2>
+        <p>${html(guidance.body)}</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="${attr(`${localePath(currentCode)}#downloads`)}">${html(guidance.download)}</a>
+          <a class="button button-outline" href="${attr(`${localePath(currentCode)}#pricing`)}">${html(guidance.pricing)}</a>
+        </div>
+        ${renderFirstDictationLink(currentCode)}
       </section>
     </main>
     ${renderFooterOnly(currentCode)}
@@ -5801,7 +5812,7 @@ ${offlineGuideXDefault}
     const compareXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedCompareUrl("en", slug)}" />`;
     return `  <url>
     <loc>${localizedCompareUrl(code, slug)}</loc>
-    <lastmod>${latestDate(compareLastUpdated(COMPARE_PAGES.find((page) => page.slug === slug), code), PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(slug ? compareLastUpdated(COMPARE_PAGES.find((page) => page.slug === slug), code) : COMPARE_HUB_GUIDANCE_LASTMOD, PRICING_LASTMOD)}</lastmod>
 ${compareAlternates}
 ${compareXDefault}
     <priority>${priority}</priority>
