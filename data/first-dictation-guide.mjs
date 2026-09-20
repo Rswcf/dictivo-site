@@ -1,8 +1,11 @@
+import { FIRST_DICTATION_LOCALES } from "./first-dictation-locales.mjs";
+
 export const FIRST_DICTATION_LASTMOD = "2026-09-11";
 export function firstDictationLastmod(code) {
   return FIRST_DICTATION_COPY[code]?.lastUpdated || FIRST_DICTATION_LASTMOD;
 }
 export const FIRST_DICTATION_COPY = {
+  ...FIRST_DICTATION_LOCALES,
   en: {
     navLabel: "First dictation",
     metaTitle: "Your First Local Dictation: Setup, Practice & Fixes | Dictivo",

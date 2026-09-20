@@ -3419,23 +3419,24 @@ function renderFirstDictationLink(code) {
 
 function renderFirstDictationPage(code) {
   const c = FIRST_DICTATION_COPY[code];
+  const locale = localeByCode(code);
   const t = homeCopyForRender(code);
   const url = `${BASE_URL}${firstDictationPath(code)}`;
-  const alternates = Object.keys(FIRST_DICTATION_COPY).map(alt => `<link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n");
+  const alternates = Object.keys(FIRST_DICTATION_COPY).map(alt => `<link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n");
   const schema = {
     "@context": "https://schema.org", "@type": "WebPage", name: c.metaTitle,
-    description: c.metaDescription, url, inLanguage: code, dateModified: firstDictationLastmod(code),
+    description: c.metaDescription, url, inLanguage: locale.htmlLang, dateModified: firstDictationLastmod(code),
     isPartOf: { "@type": "WebSite", name: "Dictivo", url: BASE_URL },
   };
   return `<!doctype html>
-<html lang="${code}">
+<html lang="${locale.htmlLang}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${html(c.metaTitle)}</title>
     <meta name="description" content="${attr(c.metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: c.metaTitle, description: c.metaDescription, url, htmlLang: code, type: "article" })}
+    ${socialMeta({ title: c.metaTitle, description: c.metaDescription, url, htmlLang: locale.htmlLang, type: "article" })}
     ${alternates}
     <link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
     <link rel="canonical" href="${url}" />
@@ -3472,7 +3473,7 @@ function renderFirstDictationPage(code) {
         <p class="practice-status" role="status" aria-live="polite" data-practice-status data-cleared-message="${attr(c.cleared)}"></p>
       </section>
       <section class="doc-section" aria-labelledby="review-title"><h2 id="review-title">${html(c.successTitle)}</h2><p>${html(c.success)}</p></section>
-      ${renderNativeExample(code)}
+      ${code === "en" || code === "ja" ? renderNativeExample(code) : ""}
       <section class="doc-section" aria-labelledby="fixes-title">
         <h2 id="fixes-title">${html(c.troubleTitle)}</h2>
         <div class="faq-grid">${c.fixes.map(([title, body]) => `<details class="faq-item"><summary><span class="faq-question">${html(title)}</span><span class="faq-toggle" aria-hidden="true">+</span></summary><div class="faq-answer"><p class="faq-answer-body">${html(body)}</p></div></details>`).join("\n")}</div>
@@ -5863,7 +5864,7 @@ ${mediaKitEntry}
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
     <loc>${BASE_URL}${firstDictationPath(code)}</loc>
     <lastmod>${latestDate(firstDictationLastmod(code), PRICING_LASTMOD)}</lastmod>
-${Object.keys(FIRST_DICTATION_COPY).map(alt => `    <xhtml:link rel="alternate" hreflang="${alt}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n")}
+${Object.keys(FIRST_DICTATION_COPY).map(alt => `    <xhtml:link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n")}
     <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
   </url>`).join("\n")}
 ${compareEntries}
