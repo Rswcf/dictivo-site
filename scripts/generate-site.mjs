@@ -2,6 +2,7 @@ import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync,
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, compareLastUpdated, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
 import { COMPARE_HUB_GUIDANCE, COMPARE_HUB_GUIDANCE_LASTMOD } from "../data/compare-hub-guidance.mjs";
+import { COMPARE_SELECTION_GUIDES } from "../data/compare-selection-guides.mjs";
 import {
   BENCHMARK_METHOD_GUIDE_COPY,
   BENCHMARK_METHOD_GUIDE_LASTMOD,
@@ -2869,8 +2870,28 @@ function renderComparePage(page, currentCode = "en") {
 `;
 }
 
+function compareHubCopy(currentCode) {
+  return { ...compareCopy(currentCode), ...COMPARE_SELECTION_GUIDES[currentCode] };
+}
+
+function renderCompareSelectionGuide(currentCode) {
+  const guide = COMPARE_SELECTION_GUIDES[currentCode];
+  if (!guide) return "";
+  return `<section class="compare-section" id="choose-dictation" aria-labelledby="choose-dictation-title">
+        <h2 id="choose-dictation-title">${html(guide.title)}</h2>
+        <ol class="compare-selection-steps">
+${guide.steps.map(([title, body]) => `          <li><h3>${html(title)}</h3><p>${html(body)}</p></li>`).join("\n")}
+        </ol>
+        <p>${html(guide.limits)}</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="${attr(firstDictationPath(currentCode))}">${html(guide.practice)}</a>
+          <a class="button button-outline" href="#compare-apps">${html(guide.compare)}</a>
+        </div>
+      </section>`;
+}
+
 function renderCompareHubSchema(currentCode) {
-  const copy = compareCopy(currentCode);
+  const copy = compareHubCopy(currentCode);
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -2898,7 +2919,7 @@ function renderCompareHubSchema(currentCode) {
 function renderCompareHub(currentCode = "en") {
   const locale = localeByCode(currentCode);
   const t = homeCopyForRender(currentCode);
-  const copy = compareCopy(currentCode);
+  const copy = compareHubCopy(currentCode);
   const guidance = COMPARE_HUB_GUIDANCE[currentCode];
   const canonical = localizedCompareUrl(currentCode);
   return `<!doctype html>
@@ -2921,10 +2942,14 @@ function renderCompareHub(currentCode = "en") {
       <section class="compare-hero" aria-labelledby="compare-hub-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.hubEyebrow)}</span>
         <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
-        <p class="doc-lede">${html(copy.hubLede)}</p>
+        <p class="doc-lede">${html(copy.hubLede)}</p>${COMPARE_SELECTION_GUIDES[currentCode] ? `
+        <div class="hero-actions">
+          <a class="button button-light" href="${attr(firstDictationPath(currentCode))}">${html(copy.practice)}</a>
+          <a class="button button-outline" href="#compare-apps">${html(copy.compare)}</a>
+        </div>` : ""}
       </section>
 
-      <section class="compare-hub-grid" aria-label="${attr(copy.hubGridLabel)}">
+      ${COMPARE_SELECTION_GUIDES[currentCode] ? `${renderCompareSelectionGuide(currentCode)}\n      ` : ""}<section class="compare-hub-grid"${COMPARE_SELECTION_GUIDES[currentCode] ? ' id="compare-apps"' : ""} aria-label="${attr(copy.hubGridLabel)}">
 ${COMPARE_PAGES.map(
   (page) => `        <article class="compare-hub-card">
           <span>${html(guidance.cards[page.slug].label)}</span>

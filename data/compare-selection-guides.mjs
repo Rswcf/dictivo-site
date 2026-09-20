@@ -1,0 +1,55 @@
+// Scoped to markets with retained query and SERP evidence (2026-09-20).
+// These guides help choose a task, not rank products by unmeasured accuracy.
+export const COMPARE_SELECTION_GUIDES = {
+  fr: {
+    hubMetaTitle: "Logiciel de dictée vocale pour Mac et Windows : choisir | Dictivo",
+    hubMetaDescription: "Choisissez un logiciel de dictée vocale selon votre usage : saisie en direct, traitement local ou cloud, essai et plateformes. Comparez les alternatives à Dictivo.",
+    hubH1: "Quel logiciel de dictée vocale choisir sur Mac ou Windows ?",
+    hubLede: "Partez de votre tâche de rédaction, puis comparez les outils. Voici les points à vérifier avant de choisir Dictivo ou une autre application de dictée.",
+    title: "Cinq points à vérifier avant de choisir",
+    steps: [
+      ["Dicter en direct ou transcrire un fichier ?", "Dictivo transforme votre dictée au microphone en texte à insérer dans votre application. Il n’importe pas de fichiers audio enregistrés. Pour une réunion déjà enregistrée, cherchez un outil de transcription de fichiers."],
+      ["La dictée intégrée suffit-elle ?", "Essayez d’abord la fonction de dictée de votre système ou de votre application. Si elle répond à votre besoin, gardez-la. Une autre application mérite un essai si vous cherchez un choix de modèles ou un historique local ; elle ne répare pas une panne de la dictée intégrée."],
+      ["Où votre audio est-il traité ?", "Avec Dictivo Local, téléchargez d’abord un modèle ; la reconnaissance vocale s’exécute ensuite sur votre ordinateur. Cloud Fast est une option distincte qui envoie l’audio vers le cloud. Le texte collé dans un service en ligne suit les règles de ce service."],
+      ["Sur quel appareil allez-vous écrire ?", "Dictivo est disponible sur macOS et Windows x64. Consultez la configuration requise dans la rubrique Téléchargements et testez les raccourcis ainsi que l’insertion du texte dans votre application habituelle. Dictivo ne propose pas d’application iOS ou Android."],
+      ["Quel résultat obtenez-vous pendant l’essai ?", "Dictez un court e-mail avec des noms propres et de la ponctuation. Relisez-le, corrigez-le et comparez le temps nécessaire avec votre méthode habituelle. L’essai de tous les modèles Local dure 14 jours ; continuer à utiliser Local nécessite ensuite un achat. Cloud Fast a son propre abonnement."],
+    ],
+    limits: "Pour un usage médical ou juridique spécialisé, vérifiez séparément les exigences de confidentialité, de terminologie et d’intégration. Cette comparaison ne garantit ni une validation clinique ni la conformité de votre activité.",
+    practice: "Essayer une première dictée",
+    compare: "Comparer les applications",
+  },
+  ja: {
+    hubMetaTitle: "音声入力ソフトの選び方：Mac・Windowsで比較 | Dictivo",
+    hubMetaDescription: "音声入力ソフトを用途、対応OS、ローカル処理、試用条件で比較。録音の文字起こしや読み上げとの違いを確認し、普段の作業でDictivoを試せます。",
+    hubH1: "音声入力ソフトの選び方：Mac・Windowsで確認すること",
+    hubLede: "普段どんな文章を書くかを出発点に、必要な機能を確認しましょう。Dictivoや他の音声入力アプリを選ぶ前に、次の点を比べてください。",
+    title: "選ぶ前に確認したい5つのこと",
+    steps: [
+      ["音声入力・文字起こし・読み上げを分ける", "Dictivoはマイクに話した内容を文字にして、文章作成に使うアプリです。録音済みの音声ファイルの取り込みや、文章の音声読み上げには対応していません。録音を処理したい場合は、ファイルの文字起こしに対応したツールを選んでください。"],
+      ["OSやアプリの標準機能で足りるか", "まず標準の音声入力を試し、必要な文章が書けるか確認しましょう。モデルの選択やローカル履歴が必要なら、別のアプリを試す理由になります。DictivoはOS標準の音声入力の不具合を修復するツールではありません。"],
+      ["音声をどこで処理するか", "Dictivo Localは、モデルをダウンロードした後、パソコン内で音声認識を行います。任意で使うCloud Fastは音声をクラウドに送信します。認識した文字をオンラインサービスに貼り付けた後の扱いは、そのサービスの方針に従います。"],
+      ["使う端末とアプリを確認する", "DictivoはmacOSとWindows x64向けです。ダウンロード欄で動作環境を確認し、普段のアプリでショートカットと文字の挿入を試してください。iOS・Androidアプリは提供していません。"],
+      ["無料の範囲と実際の修正量を確かめる", "固有名詞や句読点を含む短いメールを話し、読み直して修正してください。いつもの書き方と比べ、完成までの手間を確認しましょう。すべてのLocalモデルを14日間試せますが、その後もLocalを使うには購入が必要です。Cloud Fastは別のサブスクリプションです。"],
+    ],
+    limits: "医療や法律などの専門業務では、機密情報の扱い、専門用語、既存システムとの連携を別途確認してください。この比較は、臨床での有効性や業務上の法令遵守を保証するものではありません。",
+    practice: "最初の一文を試す",
+    compare: "アプリごとの比較を見る",
+  },
+  de: {
+    hubMetaTitle: "Diktiersoftware für Mac und Windows auswählen | Dictivo",
+    hubMetaDescription: "Diktiersoftware nach Aufgabe, Plattform, lokaler Verarbeitung und Testbedingungen auswählen. Vergleichen Sie Dictivo mit anderen Diktier-Tools für Ihren Schreiballtag.",
+    hubH1: "Diktiersoftware auswählen: Spracheingabe auf Mac und Windows",
+    hubLede: "Gehen Sie von Ihrer Schreibaufgabe aus. Prüfen Sie diese Fragen, bevor Sie Dictivo oder ein anderes Diktierprogramm wählen, und vergleichen Sie anschließend die passenden Anwendungen.",
+    title: "Fünf Fragen vor der Entscheidung",
+    steps: [
+      ["Live diktieren oder eine Aufnahme transkribieren?", "Dictivo wandelt Ihre Diktate vom Mikrofon in Text zum Einfügen in Ihre App um. Bereits aufgenommene Audiodateien lassen sich nicht importieren. Für vorhandene Aufnahmen benötigen Sie ein Programm zur Dateitranskription."],
+      ["Reicht die integrierte Diktierfunktion?", "Probieren Sie zunächst die Funktion Ihres Betriebssystems oder Ihrer Schreib-App. Wenn sie Ihre Aufgabe erfüllt, können Sie dabei bleiben. Modellauswahl oder ein lokaler Verlauf können Gründe sein, eine andere App zu testen. Dictivo behebt keine Fehler der integrierten Diktierfunktion."],
+      ["Wo wird die Sprache verarbeitet?", "Für Dictivo Local laden Sie zuerst ein Modell herunter; danach läuft die Spracherkennung auf Ihrem Computer. Das optionale Cloud Fast überträgt Audio in die Cloud. Wenn Sie den erkannten Text in einen Onlinedienst einfügen, gelten für diesen Text dessen Regeln."],
+      ["Passen Gerät und Schreib-App?", "Dictivo ist für macOS und Windows x64 verfügbar. Prüfen Sie die Systemanforderungen bei den Downloads und testen Sie Tastenkürzel sowie das Einfügen in Ihrer gewohnten App. Eine iOS- oder Android-App bietet Dictivo nicht an."],
+      ["Wie viel Nacharbeit bleibt im Test?", "Diktieren Sie eine kurze E-Mail mit Eigennamen und Satzzeichen. Lesen und korrigieren Sie den Text und vergleichen Sie den Aufwand mit Ihrer bisherigen Methode. Alle Local-Modelle sind 14 Tage testbar; danach ist für die weitere Nutzung von Local ein Kauf erforderlich. Cloud Fast hat ein separates Abonnement."],
+    ],
+    limits: "Für medizinische oder juristische Fachabläufe müssen Sie Datenschutz, Fachbegriffe und Integrationen gesondert prüfen. Dieser Vergleich bestätigt weder eine klinische Validierung noch die Einhaltung Ihrer beruflichen Anforderungen.",
+    practice: "Die erste Diktieraufgabe ausprobieren",
+    compare: "Anwendungen vergleichen",
+  },
+};
