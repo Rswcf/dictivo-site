@@ -3915,3 +3915,15 @@ main section[id] {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+/* Trial actions remain readable inside long comparison guides. */
+.guide-trial {
+  border: 1px solid rgb(125 211 199 / 28%);
+  border-radius: 16px;
+  background: rgb(125 211 199 / 7%);
+  padding: clamp(20px, 4vw, 36px);
+}
+.guide-trial .compare-intro-actions { margin-top: 20px; }
+.guide-trial .button { white-space: normal; text-align: center; }
+
+.guide-trial .guide-trial-note { font-size: 0.9rem; line-height: 1.6; }

@@ -3322,6 +3322,24 @@ ${OFFLINE_DICTATION_GUIDE_REFERENCES.map(
       </section>`;
 }
 
+// Keep a platform-specific trial action beside the decision table, without new tracking.
+function renderGuideTrial(code, platform, source) {
+  if (platform === "windows" && !hasWindowsRelease) return "";
+  const c = COMPARE_HUB_GUIDANCE[code];
+  const t = homeCopyForRender(code);
+  const button = platform === "windows" ? windowsDownloadCopy(code).exeButton : t.hero.download;
+  return `<section class="doc-section guide-trial" data-guide-trial aria-labelledby="guide-trial-title">
+        <h2 id="guide-trial-title">${html(c.title)}</h2>
+        <p>${html(c.body)}</p>
+        <div class="compare-intro-actions">
+          <a class="button button-light download-link" href="${attr(downloadUrl(platform, source))}"${downloadData(platform, source)}>${html(button)}</a>
+          <a class="button button-outline" href="${attr(localePath(code, "#pricing"))}">${html(c.pricing)}</a>
+        </div>
+        ${renderFirstDictationLink(code)}
+        ${platform === "windows" ? `<p class="guide-trial-note">Windows x64. The installer is not yet code-signed; verify the download source before deciding whether to proceed.</p>` : ""}
+      </section>`;
+}
+
 function renderOfflineDictationGuidePage(currentCode = "en") {
   const locale = localeByCode(currentCode);
   const t = homeCopyForRender(currentCode);
@@ -3361,6 +3379,8 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
         <h2 id="offline-guide-table">${html(copy.tableCaption)}</h2>
         ${renderOfflineGuideTable(copy)}
       </section>
+
+      ${renderGuideTrial(currentCode, "macos", "offline_guide_mac")}
 
       ${copy.sections.map(renderOfflineGuideSection).join("\n\n      ")}
 
@@ -3874,6 +3894,8 @@ function renderSpeechToTextMacGuidePage() {
         ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows)}
       </section>
 
+      ${renderGuideTrial("en", "macos", "speech_guide_mac")}
+
       ${copy.sections.map(renderSpeechToTextMacGuideSection).join("\n\n      ")}
 
       <section class="doc-section" aria-labelledby="speech-to-text-mac-faq">
@@ -4060,6 +4082,8 @@ function renderOfflineDictationWindowsGuidePage() {
         <h2 id="offline-dictation-windows-apps">${html(copy.appTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows)}
       </section>
+
+      ${renderGuideTrial("en", "windows", "offline_guide_windows")}
 
       ${copy.sections.map(renderOfflineDictationWindowsGuideSection).join("\n\n      ")}
 

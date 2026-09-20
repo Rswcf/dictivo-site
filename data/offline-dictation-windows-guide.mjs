@@ -1,4 +1,4 @@
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-09-10";
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-09-20";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],

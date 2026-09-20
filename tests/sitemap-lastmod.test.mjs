@@ -39,12 +39,12 @@ test("comparison refresh is scoped to changed pages and languages", () => {
   }
 });
 
-test("Guide dates distinguish translated fact changes from Japanese-only setup changes", () => {
+test("Guide dates reflect scoped trial improvements without redating unchanged setup guides", () => {
   const sitemap = readFileSync(`${dist}sitemap.xml`, "utf8");
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   for (const [path, date] of [
-    ["/ja/guides/offline-dictation-on-mac/", "2026-09-18"],
-    ["/guides/offline-dictation-on-mac/", "2026-09-18"],
+    ["/ja/guides/offline-dictation-on-mac/", "2026-09-20"],
+    ["/guides/offline-dictation-on-mac/", "2026-09-20"],
     ["/ja/guides/first-local-dictation/", "2026-09-18"],
     ["/guides/first-local-dictation/", "2026-09-11"],
   ]) {

@@ -1,4 +1,4 @@
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-18";
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-20";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],

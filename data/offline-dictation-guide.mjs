@@ -1,4 +1,4 @@
-export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-18";
+export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-20";
 
 export function offlineDictationGuideLastmod(code) {
   return OFFLINE_DICTATION_GUIDE_COPY[code]?.lastUpdated || OFFLINE_DICTATION_GUIDE_LASTMOD;
@@ -666,7 +666,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ]
     ],
     "referenceTitle": "参考資料",
-    "lastUpdated": "2026-09-18"
+    "lastUpdated": "2026-09-20"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",
