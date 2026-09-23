@@ -6,7 +6,7 @@ export const RELEASE_NOTES = Object.freeze({
       "On Mac, swipe between desktops or into a full-screen app and the floating companion comes along, including full-screen apps you open later. Clicking it leaves the keyboard with the app you are typing in.",
       "The companion reopens where you last dragged it. Before, it went back to where the drag started.",
       "On Mac, clicks on the transparent space around the animated companion reach the window underneath, and its long-press menu closes when you move the pointer away or start recording.",
-      "Your own image now stays inside the companion's circle. Photos fill it; cut-outs with a transparent background fit inside whole.",
+      "Your own image now stays inside the round avatar frame. Photos fill it; cut-outs with a transparent background fit inside whole.",
     ]),
   }),
   "0.3.49": Object.freeze({
