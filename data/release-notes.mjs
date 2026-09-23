@@ -1,4 +1,14 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.50": Object.freeze({
+    date: "2026-09-23",
+    title: "Your companion now follows you to every desktop and full-screen app.",
+    bullets: Object.freeze([
+      "On Mac, swipe between desktops or into a full-screen app and the floating companion comes along, including full-screen apps you open later. Clicking it leaves the keyboard with the app you are typing in.",
+      "The companion reopens where you last dragged it. Before, it went back to where the drag started.",
+      "On Mac, clicks on the transparent space around the animated companion reach the window underneath, and its long-press menu closes when you move the pointer away or start recording.",
+      "Your own image now stays inside the companion's circle. Photos fill it; cut-outs with a transparent background fit inside whole.",
+    ]),
+  }),
   "0.3.49": Object.freeze({
     date: "2026-09-20",
     title: "Meet 13 animated companions, each with a personality of their own.",
