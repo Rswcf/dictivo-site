@@ -1411,9 +1411,13 @@ for (const [locale, method] of Object.entries(NETWORK_TEST_METHOD)) {
 }
 
 // Keep dates aligned with the corrected disclosure, including localized pages.
+// The network-test page moves forward on its own when its method changes.
 for (const page of TRUST_PAGES.filter((p) => ["privacy", "privacy/where-dictation-audio-goes", "privacy/local-dictation-network-test"].includes(p.slug))) {
-  page.lastModified = TRIAL_MILESTONE_LASTMOD;
-  for (const localized of Object.values(page.locales || {})) localized.lastModified = TRIAL_MILESTONE_LASTMOD;
+  const stamp = page.slug === "privacy/local-dictation-network-test" && NETWORK_TEST_LASTMOD > TRIAL_MILESTONE_LASTMOD
+    ? NETWORK_TEST_LASTMOD
+    : TRIAL_MILESTONE_LASTMOD;
+  page.lastModified = stamp;
+  for (const localized of Object.values(page.locales || {})) localized.lastModified = stamp;
 }
 
 // The Privacy Policy gained the website-language section on 2026-09-14.
