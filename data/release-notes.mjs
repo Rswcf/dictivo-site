@@ -1,4 +1,18 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.51": Object.freeze({
+    date: "2026-09-26",
+    title: "Lock Cloud Fast, so a stray click never sends a recording to the cloud.",
+    bullets: Object.freeze([
+      "New in Settings, Privacy: Lock Cloud Fast. While it is locked, Cloud Fast cannot be selected and no recording you start is uploaded. A Cloud Fast recording already in progress finishes as it began. Unlock it any time in the same place.",
+      "The first time you choose Cloud Fast, Dictivo asks first and says where the audio goes. Nothing switches to Cloud Fast by itself any more: an activation link only fills in the key.",
+      "The companion, the menu bar or tray and the main window show which engine the current recording uses, and which one the next recording will use.",
+      "Settings, Privacy now says in plain words what leaves this computer, lists every connection Dictivo makes, and shows where your data is stored on this device.",
+      "Trial reports, purchase confirmation and optional usage statistics now go to app.dictivo.app. Cloud Fast stays on api.dictivo.app.",
+      "On Windows, Buy and Subscribe open the checkout in your browser again. Before, they could open the Documents folder instead.",
+      "On Windows 11 24H2 and later, Dictivo reads the memory size of your computer again, so its model recommendation fits your hardware. If the speed choice under the microphone is missing after the update, choose Re-run setup once in Settings, Engine.",
+      "Shorter lock messages, a tidier Privacy page, and German that addresses you formally throughout.",
+    ]),
+  }),
   "0.3.50": Object.freeze({
     date: "2026-09-23",
     title: "Your companion now follows you to every desktop and full-screen app.",
