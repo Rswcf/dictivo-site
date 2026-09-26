@@ -6007,7 +6007,7 @@ ${earlierReleaseNotes(release.version).map((notes) => {
           <li>No changes to how dictation works. Nothing was added, removed, or moved.</li>
           <li>Fixed a gap in the opt-in anonymous usage statistics: one onboarding milestone was dropped before you were asked for consent, so the onboarding funnel was reported incomplete. If you never opted in, nothing was sent before and nothing is sent now.</li>
         </ul>
-        <p><em>Correction (September 24, 2026):</em> “nothing is sent” above applies to usage statistics only. Independent of the usage-statistics setting, the Local trial reports its start and its first successful transcript to Dictivo — a hashed device identifier, platform, app version and timestamps, never audio or text. See <a href="/security/#network-traffic">Security › What actually crosses the network</a>.</p>
+        <p><em>Correction (September 26, 2026):</em> “nothing is sent” above applies to usage statistics only. Independent of the usage-statistics setting, the Local trial reports its start and its first successful transcript to Dictivo — a hashed device identifier, platform, app version and timestamps, never audio or text. See <a href="/security/#network-traffic">Security › What actually crosses the network</a>.</p>
       </section>
 
       <section class="doc-section" id="0.3.36" aria-labelledby="release-0-3-36">
@@ -6017,7 +6017,7 @@ ${earlierReleaseNotes(release.version).map((notes) => {
           <li>No changes to how dictation works.</li>
           <li>For people who turned on anonymous usage statistics, events now carry the app version they came from, so a problem introduced by one release can be told apart from a problem that was always there. If you never turned usage statistics on, nothing is sent.</li>
         </ul>
-        <p><em>Correction (September 24, 2026):</em> “nothing is sent” above applies to usage statistics only. Independent of the usage-statistics setting, the Local trial reports its start and its first successful transcript to Dictivo — a hashed device identifier, platform, app version and timestamps, never audio or text. See <a href="/security/#network-traffic">Security › What actually crosses the network</a>.</p>
+        <p><em>Correction (September 26, 2026):</em> “nothing is sent” above applies to usage statistics only. Independent of the usage-statistics setting, the Local trial reports its start and its first successful transcript to Dictivo — a hashed device identifier, platform, app version and timestamps, never audio or text. See <a href="/security/#network-traffic">Security › What actually crosses the network</a>.</p>
       </section>
 
       <section class="doc-section" id="0.3.35" aria-labelledby="release-0-3-35">

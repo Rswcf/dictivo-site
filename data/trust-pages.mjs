@@ -9,8 +9,8 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * tell which version they agreed to.
  */
 const LEGAL_LASTMOD = "2026-08-01";
-// The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-24).
-const TERMS_LASTMOD = "2026-09-24";
+// The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-26).
+const TERMS_LASTMOD = "2026-09-26";
 
 /**
  * The formal withdrawal notice can only name a trader once the Impressum data
@@ -74,9 +74,9 @@ export const TRUST_PAGES = [
         ],
       },
       {
-        title: "Anonymous usage statistics",
+        title: "Usage statistics",
         paragraphs: [
-          "Dictivo can send anonymous, metadata-only usage statistics so setup problems and dead ends can be found. This is off by default. Nothing is sent unless you turn on \"Share anonymous usage statistics\" in Settings, and you can turn it off again at any time. The events describe what happened, not what you said: which setup step was reached, whether microphone access was granted or denied, how long a dictation ran, and how many words it produced. They never include audio, transcript text, file names, or application names.",
+          "Dictivo can send metadata-only usage statistics so setup problems and dead ends can be found. This is off by default. Nothing is sent unless you turn on \"Share usage statistics\" in Settings (called \"Share anonymous usage statistics\" before version 0.3.51), and you can turn it off again at any time. Each event carries a hashed device identifier that does not name you. The events describe what happened, not what you said: which setup step was reached, whether microphone access was granted or denied, how long a dictation ran, and how many words it produced. They never include audio, transcript text, file names, or application names.",
           TRIAL_MILESTONE_COPY.en.trial,
           "Both go to Dictivo's own endpoint. There is no third-party analytics or advertising SDK in the desktop app. The website records anonymous, cookieless page views and download clicks for the same purpose.",
         ],
@@ -180,7 +180,7 @@ export const TRUST_PAGES = [
         metaDescription:
           "Eine direkte Antwort darauf, was mit Diktat-Audio in Dictivo Local mode und im optionalen Cloud Fast mode passiert.",
         lede:
-          "Dictivo hat zwei getrennte Verarbeitungswege. Local mode behält Diktat-Audio auf deinem Gerät. Cloud Fast ist optional und sendet nur die Aufnahme, die du für schnellere entfernte Transkription auswählst.",
+          "Dictivo hat zwei getrennte Verarbeitungswege. Local mode behält Diktat-Audio auf Ihrem Gerät. Cloud Fast ist optional und sendet nur die Aufnahme, die Sie für schnellere entfernte Transkription auswählen.",
         relatedLinks: [
           { label: "Local mode Netzwerktest ausführen", href: "/privacy/local-dictation-network-test/" },
           { label: "Vollständige Privacy Policy lesen", href: "/privacy/" },
@@ -190,8 +190,8 @@ export const TRUST_PAGES = [
           {
             title: "Kurze Antwort",
             paragraphs: [
-              "In Local mode sendet Dictivo dein Diktat-Audio nicht an einen Transkriptionsserver. Die App verarbeitet die Aufnahme auf dem Gerät und behält Transkript, lokalen Verlauf, Wörterbuchbegriffe, Textbausteine, Einstellungen und lokale Modellauswahl dort.",
-              "In Cloud Fast mode sendet Dictivo die ausgewählte Aufnahme für schnellere Transkription. Nutze Cloud Fast nur, wenn Geschwindigkeit wichtiger ist als eine vollständig lokale Verarbeitung dieser Aufnahme.",
+              "In Local mode sendet Dictivo Ihr Diktat-Audio nicht an einen Transkriptionsserver. Die App verarbeitet die Aufnahme auf dem Gerät und behält Transkript, lokalen Verlauf, Wörterbuchbegriffe, Textbausteine, Einstellungen und lokale Modellauswahl dort.",
+              "In Cloud Fast mode sendet Dictivo die ausgewählte Aufnahme für schnellere Transkription. Nutzen Sie Cloud Fast nur, wenn Geschwindigkeit wichtiger ist als eine vollständig lokale Verarbeitung dieser Aufnahme.",
             ],
             bullets: [
               "Local mode ist der private Standardweg für sensible Diktate.",
@@ -202,20 +202,20 @@ export const TRUST_PAGES = [
           {
             title: "Was auf dem Gerät bleibt",
             paragraphs: [
-              "Lokale Transkripte, Diktatverlauf, Wörterbuchbegriffe, Textbausteine, lokale Einstellungen und installierte lokale Modelle bleiben auf dem Mac, auf dem du Dictivo nutzt. Lokales Diktat erfordert kein Dictivo-Konto.",
+              "Lokale Transkripte, Diktatverlauf, Wörterbuchbegriffe, Textbausteine, lokale Einstellungen und installierte lokale Modelle bleiben auf dem Gerät, auf dem Sie Dictivo nutzen. Lokales Diktat erfordert kein Dictivo-Konto.",
               "Das ist wichtig für tägliche Arbeitstexte: Namen, Kundendetails, Recherchenotizen, Prompts, Entwürfe, Supportantworten, lokal erlaubte medizinische Notizen, lokal erlaubte rechtliche Notizen und unfertige Gedanken, die nicht automatisch Cloud-Transkriptionsdaten werden sollen.",
             ],
             bullets: [
-              "Nutze Local mode für private Entwürfe und sensible Notizen.",
-              "Lösche lokalen Verlauf in der App, wenn du frühere Transkripte nicht behalten möchtest.",
-              "Stimme Betriebssystem- und Gerätesicherheit mit deinen eigenen Compliance-Anforderungen ab.",
+              "Nutzen Sie Local mode für private Entwürfe und sensible Notizen.",
+              "Löschen Sie den lokalen Verlauf in der App, wenn Sie frühere Transkripte nicht behalten möchten.",
+              "Stimmen Sie Betriebssystem- und Gerätesicherheit mit Ihren eigenen Compliance-Anforderungen ab.",
             ],
           },
           {
             title: "Was das Netzwerk nutzen kann",
             paragraphs: [
               trialNetworkCopy("de"),
-              "Wenn du die Grenze selbst prüfen möchtest, führe ein Local-Diktat mit geöffnetem Netzwerkmonitor aus und vergleiche es danach mit einem Cloud Fast Diktat. Die beiden Tests sollten nicht gleich aussehen.",
+              "Wenn Sie die Grenze selbst prüfen möchten, führen Sie ein Local-Diktat mit geöffnetem Netzwerkmonitor aus und vergleichen Sie es danach mit einem Cloud Fast Diktat. Die beiden Tests sollten nicht gleich aussehen.",
             ],
             bullets: [
               "Netzwerkaktivität bedeutet nicht automatisch, dass Local-Audio hochgeladen wurde.",
@@ -225,10 +225,10 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Sendet Dictivo Audio in die Cloud?", "Nur wenn du Cloud Fast nutzt. Local mode ist so ausgelegt, dass Diktat-Audio auf dem Gerät bleibt."],
+          ["Sendet Dictivo Audio in die Cloud?", "Nur wenn Sie Cloud Fast nutzen. Local mode ist so ausgelegt, dass Diktat-Audio auf dem Gerät bleibt."],
           ["Braucht Local mode ein Dictivo-Konto?", "Nein. Lokales Diktat erfordert kein Dictivo-Konto."],
-          ["Werden Transkripte auf Dictivo-Servern gespeichert?", "Lokale Transkripte bleiben auf dem Gerät. Cloud Fast gibt das Transkript für die Aufnahme zurück, die du entfernt verarbeiten wolltest."],
-          ["Welchen Modus sollte ich für sensible Diktate nutzen?", "Nutze Local mode, wenn die Aufnahme sensible, private, regulierte oder unfertige Arbeitstexte enthält."],
+          ["Werden Transkripte auf Dictivo-Servern gespeichert?", "Lokale Transkripte bleiben auf dem Gerät. Cloud Fast gibt das Transkript für die Aufnahme zurück, die Sie entfernt verarbeiten wollten."],
+          ["Welchen Modus sollte ich für sensible Diktate nutzen?", "Nutzen Sie Local mode, wenn die Aufnahme sensible, private, regulierte oder unfertige Arbeitstexte enthält."],
         ],
       },
       fr: {
@@ -753,13 +753,13 @@ export const TRUST_PAGES = [
     ],
     locales: {
       de: {
-        title: "So prüfst du Dictivo Local mode mit einem Netzwerkmonitor",
+        title: "So prüfen Sie Dictivo Local mode mit einem Netzwerkmonitor",
         eyebrow: "Datenschutznachweis",
         metaTitle: "Dictivo Local Netzwerktest · Datenschutznachweis",
         metaDescription:
           "Eine praktische Netzwerkmonitor-Checkliste, um zu prüfen, dass Dictivo Local mode Diktat-Audio auf dem Gerät behält.",
         lede:
-          "Dictivo Local mode ist so ausgelegt, dass Mikrofon-Audio auf deinem Gerät verarbeitet wird. Diese Seite erklärt, wie du diese Grenze mit einem Netzwerkmonitor prüfst, bevor du Dictivo für sensible Diktate nutzt.",
+          "Dictivo Local mode ist so ausgelegt, dass Mikrofon-Audio auf Ihrem Gerät verarbeitet wird. Diese Seite erklärt, wie Sie diese Grenze mit einem Netzwerkmonitor prüfen, bevor Sie Dictivo für sensible Diktate nutzen.",
         relatedLinks: [
           { label: "Wohin Diktat-Audio geht", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Privacy Policy lesen", href: "/privacy/" },
@@ -769,18 +769,18 @@ export const TRUST_PAGES = [
           {
             title: "Kurze Antwort",
             paragraphs: [
-              "In Local mode sollte Dictivo kein Mikrofon-Audio und keine Transkripte an einen Transkriptionsdienst hochladen. Netzwerkaktivität, die du trotzdem sehen kannst, gehört zu Produktvorgängen wie Updates, Lizenzaktionen, Downloads, Support oder optionalem Cloud Fast.",
+              "In Local mode sollte Dictivo kein Mikrofon-Audio und keine Transkripte an einen Transkriptionsdienst hochladen. Netzwerkaktivität, die Sie trotzdem sehen können, gehört zu Produktvorgängen wie Updates, Lizenzaktionen, Downloads, Support oder optionalem Cloud Fast.",
             ],
           },
           {
-            title: "Was du testen solltest",
+            title: "Was Sie testen sollten",
             paragraphs: [
-              "Nutze einen Netzwerkmonitor wie Little Snitch, LuLu, ein Router-Protokoll oder ein Packet-Capture-Werkzeug. Starte Dictivo, bleibe in Local mode, nimm einen kurzen Testsatz auf, warte auf das Transkript und prüfe, ob während dieses Local-Diktats eine neue entfernte Verbindung geöffnet wurde.",
-              "Wiederhole denselben Test danach mit Cloud Fast. Dieser zweite Test sollte anders aussehen, weil Cloud Fast die ausgewählte Aufnahme für entfernte Transkription sendet.",
+              "Nutzen Sie einen Netzwerkmonitor wie Little Snitch, LuLu, ein Router-Protokoll oder ein Packet-Capture-Werkzeug. Starten Sie Dictivo, bleiben Sie in Local mode, nehmen Sie einen kurzen Testsatz auf, warten Sie auf das Transkript und prüfen Sie, ob während dieses Local-Diktats eine neue entfernte Verbindung geöffnet wurde.",
+              "Wiederholen Sie denselben Test danach mit Cloud Fast. Dieser zweite Test sollte anders aussehen, weil Cloud Fast die ausgewählte Aufnahme für entfernte Transkription sendet.",
             ],
             bullets: [
-              "Local mode: aufnehmen, transkribieren und einfügen, während du Upload-Aktivität beobachtest.",
-              "Cloud Fast mode: eine entfernte Transkriptionsanfrage ist zu erwarten, weil du den schnellen Weg gewählt hast.",
+              "Local mode: aufnehmen, transkribieren und einfügen, während Sie Upload-Aktivität beobachten.",
+              "Cloud Fast mode: eine entfernte Transkriptionsanfrage ist zu erwarten, weil Sie den schnellen Weg gewählt haben.",
               "Modell-Downloads und Update-Prüfungen sind getrennt vom Upload-Verhalten beim Diktieren.",
             ],
           },
@@ -791,9 +791,9 @@ export const TRUST_PAGES = [
               trialNetworkCopy("de"),
             ],
             bullets: [
-              "Nutze Local mode für sensibles Audio.",
-              "Nutze Cloud Fast nur für Aufnahmen, die du entfernt verarbeiten möchtest.",
-              "Schreibe an support@dictivo.app, wenn Local mode nicht zu dieser Seite passt.",
+              "Nutzen Sie Local mode für sensibles Audio.",
+              "Nutzen Sie Cloud Fast nur für Aufnahmen, die Sie entfernt verarbeiten möchten.",
+              "Schreiben Sie an support@dictivo.app, wenn Local mode nicht zu dieser Seite passt.",
             ],
           },
         ],
@@ -801,7 +801,7 @@ export const TRUST_PAGES = [
           ["Lädt Dictivo Local mode Audio hoch?", "Nein. Local mode ist so ausgelegt, dass Diktat-Audio zur Transkription auf dem Gerät bleibt."],
           ["Warum kann Dictivo trotzdem das Netzwerk nutzen?", trialNetworkCopy("de")],
           ["Sollte Cloud Fast Netzwerkaktivität zeigen?", "Ja. Cloud Fast ist der optionale Schnellmodus, der die ausgewählte Aufnahme für entfernte Transkription sendet."],
-          ["Was tun, wenn Local-Diktat eine unerwartete Verbindung öffnet?", "Notiere Zeitstempel, App-Version, Betriebssystem und Zielhost und schreibe an support@dictivo.app, damit die Abweichung geprüft werden kann."],
+          ["Was tun, wenn Local-Diktat eine unerwartete Verbindung öffnet?", "Notieren Sie Zeitstempel, App-Version, Betriebssystem und Zielhost und schreiben Sie an support@dictivo.app, damit die Abweichung geprüft werden kann."],
         ],
       },
       fr: {
@@ -1420,8 +1420,9 @@ for (const page of TRUST_PAGES.filter((p) => ["privacy", "privacy/where-dictatio
   for (const localized of Object.values(page.locales || {})) localized.lastModified = stamp;
 }
 
-// The Privacy Policy gained the website-language section on 2026-09-14.
-TRUST_PAGES.find((page) => page.slug === "privacy").lastModified = "2026-09-14";
+// The Privacy Policy gained the website-language section on 2026-09-14, and the
+// renamed statistics setting and the app.dictivo.app trial host on 2026-09-26.
+TRUST_PAGES.find((page) => page.slug === "privacy").lastModified = "2026-09-26";
 
 // Link the procedure to a separately scoped, reproducible engine-only observation.
 networkTestPage.relatedLinks.push({

@@ -148,8 +148,8 @@
           Local dictation, automatic update checks and your licences are unchanged while locked. Cloud Fast licence
           and status checks (for example activating, refreshing or signing out a Cloud Fast licence) may still
           contact the Cloud Fast service, but they never send a recording. You unlock it yourself in Settings ›
-          Privacy, after the same explanation. The companion, the tray menu and the workbench all show the locked
-          state.
+          Privacy, after the same explanation. The companion, the menu bar or tray menu and the main window all
+          show the locked state.
         </p>
       </section>
 
@@ -182,7 +182,7 @@
               </tr>
               <tr>
                 <th scope="row">app.dictivo.app</th>
-                <td>Trial start; the first Local trial transcription you paste or copy; anonymous statistics only if you opt in; purchase claims after you start a checkout, until the licence arrives; Local price and renewal information when that screen opens</td>
+                <td>Trial start; the first Local trial transcription you paste or copy; usage statistics only if you opt in; purchase claims after you start a checkout, until the licence arrives; Local price and renewal information when that screen opens</td>
                 <td>Hashed device id, platform, app version, timestamps; a one-time checkout nonce (the reply carries the licence key and product family); statistics events carry operational metadata — never content</td>
                 <td>Unchanged</td>
                 <td>Yes; paste the licence key manually after buying</td>
@@ -223,7 +223,7 @@
           connections.
         </p>
         <ul>
-          <li><strong>Anonymous usage statistics</strong> — off by default. Only if you turn on “Share anonymous usage statistics” in Settings does the app send metadata-only events (which step of setup was reached, whether microphone access was granted, dictation duration and word count). No audio, no transcript text, no file or app names. You can turn it off again at any time.</li>
+          <li><strong>Usage statistics</strong> — off by default. Only if you turn on “Share usage statistics” in Settings (“Share anonymous usage statistics” before 0.3.51) does the app send metadata-only events (which step of setup was reached, whether microphone access was granted, dictation duration and word count), each with a hashed device identifier that does not name you. No audio, no transcript text, no file or app names. You can turn it off again at any time.</li>
           <li><strong>Trial milestones</strong> — independent of the usage-statistics setting, the Local trial reports its start and the first Local transcript successfully copied or pasted to app.dictivo.app (api.dictivo.app in versions before 0.3.51). Reports contain a hashed device identifier, platform, app version, trial-start time and a capability flag; the success report adds its time. Failed deliveries may retry. Neither report contains audio or transcript text.</li>
         </ul>
         <p>

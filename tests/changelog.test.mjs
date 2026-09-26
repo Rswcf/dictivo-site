@@ -34,7 +34,7 @@ test("the changelog shows every written release note in order", () => {
 test("v0.3.36 and v0.3.37 carry the trial-milestone correction (M11)", () => {
   const flat = (text) => text.replace(/\s+/g, " ");
   const changelog = readFileSync(`${dist}changelog/index.html`, "utf8");
-  const correction = "Correction (September 24, 2026):";
+  const correction = "Correction (September 26, 2026):";
   for (const version of ["0.3.37", "0.3.36"]) {
     const start = changelog.indexOf(`id="${version}"`);
     const end = changelog.indexOf("</section>", start);
