@@ -102,11 +102,13 @@
 
       <section class="doc-section" aria-labelledby="cloud-fast-boundary">
         <p class="doc-meta">Cloud Fast boundary</p>
-        <h2 id="cloud-fast-boundary">Only Cloud Fast uploads a recording.</h2>
+        <h2 id="cloud-fast-boundary">Cloud Fast uploads only recordings started while it is selected.</h2>
         <p>
-          Cloud Fast is an optional speed path and the only engine that uploads. A recording Cloud Fast
-          transcribes is sent for faster transcription; Local transcribes on this device, and a recording it
-          transcribes never leaves it.
+          Cloud Fast is an optional speed path and the only engine that uploads. A recording is bound to the
+          engine it started with: a recording started while Cloud Fast is selected is sent for faster
+          transcription, and a recording started while Local is selected, or while Cloud Fast is locked, is
+          transcribed on this device. A recording started in Local finishes in Local; changing the selection
+          during a recording only affects the next one.
         </p>
         <ul>
           <li><strong>Used in Cloud Fast</strong> — the recording audio needed to return the transcript, its duration and language.</li>
@@ -126,8 +128,28 @@
           currently in use under Settings › Privacy › Where Cloud Fast audio goes.
         </p>
         <p>
-          Dictivo does not offer a data processing agreement. If your work requires one, use Local: it transcribes
-          on this device, and a recording it transcribes never leaves it.
+          Dictivo does not offer a data processing agreement. If your work requires one, use Local and lock Cloud
+          Fast: Local transcribes on this device, and a recording it transcribes never leaves it.
+        </p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="lock-cloud-fast">
+        <p class="doc-meta">Lock Cloud Fast</p>
+        <h2 id="lock-cloud-fast">Lock Cloud Fast when a stray click must not upload anything.</h2>
+        <p>
+          From version 0.3.51, Settings › Privacy has a <strong>Lock Cloud Fast</strong> switch. While it is on,
+          Cloud Fast is greyed out everywhere: no click, link or purchase can switch recordings to it, and every
+          recording you start is transcribed on this device. No recording started while Cloud Fast is locked is
+          ever uploaded. A recording already in progress when you lock finishes with the engine it started with:
+          a Cloud Fast recording that was being recorded or transcribed at that moment is still uploaded, and the
+          next recording is Local.
+        </p>
+        <p>
+          Local dictation, automatic update checks and your licences are unchanged while locked. Cloud Fast licence
+          and status checks (for example activating, refreshing or signing out a Cloud Fast licence) may still
+          contact the Cloud Fast service, but they never send a recording. You unlock it yourself in Settings ›
+          Privacy, after the same explanation. The companion, the tray menu and the workbench all show the locked
+          state.
         </p>
       </section>
 
@@ -146,6 +168,7 @@
                 <th scope="col">Host</th>
                 <th scope="col">When</th>
                 <th scope="col">Carries</th>
+                <th scope="col">While Cloud Fast is locked</th>
                 <th scope="col">Safe to block?</th>
               </tr>
             </thead>
@@ -154,38 +177,54 @@
                 <th scope="row">downloads.dictivo.app</th>
                 <td>Update manifest (<code>/latest.json</code>) about 5 s after launch and every 24 h; model downloads you start</td>
                 <td>The updater component's name and version as its user agent; the installer you download is platform-specific</td>
+                <td>Unchanged</td>
                 <td>Yes; no update checks and no model downloads from this mirror (fallback: huggingface.co; offline model import exists)</td>
               </tr>
               <tr>
-                <th scope="row">api.dictivo.app</th>
-                <td>Trial start; the first Local trial transcription you paste or copy; anonymous statistics only if you opt in; purchase claims after you start a checkout, until the licence arrives; and Cloud Fast: entitlement, session, transcription, device sign-out</td>
-                <td>Hashed device id, platform, app version, timestamps; a one-time checkout nonce (the reply carries the licence key and product family); statistics events carry operational metadata — never content. Cloud Fast adds the recording, its duration and language, and session and device identifiers (licence key, instance id, device id and label)</td>
-                <td>Yes, if you never use Cloud Fast; paste the licence key manually after buying</td>
+                <th scope="row">app.dictivo.app</th>
+                <td>Trial start; the first Local trial transcription you paste or copy; anonymous statistics only if you opt in; purchase claims after you start a checkout, until the licence arrives; Local price and renewal information when that screen opens</td>
+                <td>Hashed device id, platform, app version, timestamps; a one-time checkout nonce (the reply carries the licence key and product family); statistics events carry operational metadata — never content</td>
+                <td>Unchanged</td>
+                <td>Yes; paste the licence key manually after buying</td>
               </tr>
               <tr>
-                <th scope="row">Licence service (third-party merchant; its hostname is shown by Run check under Settings › Account &amp; Billing)</th>
+                <th scope="row">api.dictivo.app</th>
+                <td>Only Cloud Fast: entitlement, session, transcription, device sign-out. Versions before 0.3.51 also use it for trial reports, statistics and purchase claims</td>
+                <td>The recording, its duration, language, audio format and the output style you chose; session and device identifiers (licence key, instance id, device id and label, platform, app version)</td>
+                <td>Recordings started while locked are not uploaded. A Cloud Fast recording already in progress when you lock finishes as Cloud Fast, and Cloud Fast licence or status checks may still contact this service.</td>
+                <td>Yes, if you never use Cloud Fast</td>
+              </tr>
+              <tr>
+                <th scope="row">Licence service (third-party merchant; hostname in Settings › Privacy › Connections)</th>
                 <td>When you activate, refresh or remove a licence; once after a reinstall restores a licence</td>
                 <td>Licence key, machine name</td>
+                <td>Unchanged</td>
                 <td>Except during activation</td>
               </tr>
               <tr>
                 <th scope="row">huggingface.co (model mirror fallback)</th>
                 <td>Only if downloads.dictivo.app fails</td>
                 <td>A plain download request; no Dictivo licence or installation id is added</td>
+                <td>Unchanged</td>
                 <td>Yes</td>
               </tr>
               <tr>
                 <th scope="row">Run check (Settings › Account & Billing)</th>
-                <td>Only when you click it: probes the update host, the Cloud Fast service and the licence service</td>
+                <td>Only when you click it: probes the update host, app.dictivo.app, the Cloud Fast service and the licence service</td>
                 <td>Nothing beyond the probe requests</td>
+                <td>Unchanged</td>
                 <td>—</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <p>
+          Links you click in the app — checkout, billing, the website — open in your browser and are not app
+          connections.
+        </p>
         <ul>
           <li><strong>Anonymous usage statistics</strong> — off by default. Only if you turn on “Share anonymous usage statistics” in Settings does the app send metadata-only events (which step of setup was reached, whether microphone access was granted, dictation duration and word count). No audio, no transcript text, no file or app names. You can turn it off again at any time.</li>
-          <li><strong>Trial milestones</strong> — independent of the usage-statistics setting, the Local trial reports its start and the first Local transcript successfully copied or pasted. Reports contain a hashed device identifier, platform, app version, trial-start time and a capability flag; the success report adds its time. Failed deliveries may retry. Neither report contains audio or transcript text.</li>
+          <li><strong>Trial milestones</strong> — independent of the usage-statistics setting, the Local trial reports its start and the first Local transcript successfully copied or pasted to app.dictivo.app (api.dictivo.app in versions before 0.3.51). Reports contain a hashed device identifier, platform, app version, trial-start time and a capability flag; the success report adds its time. Failed deliveries may retry. Neither report contains audio or transcript text.</li>
         </ul>
         <p>
           That table is the whole desktop network surface. Dictivo does not use third-party ads, third-party
@@ -225,7 +264,7 @@
           to acknowledge within two business days and to ship a fix or mitigation as quickly as the severity warrants.
         </p>
         <p>
-          Last reviewed <time datetime="2026-09-24">September&nbsp;24,&nbsp;2026</time>.
+          Last reviewed <time datetime="2026-09-26">September&nbsp;26,&nbsp;2026</time>.
         </p>
       </section>
     </main>

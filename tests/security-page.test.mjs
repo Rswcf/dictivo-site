@@ -23,10 +23,10 @@ test("the host table lists every desktop host with when and what it carries (M10
   const heading = html.indexOf('<h2 id="network-traffic">');
   const table = html.indexOf('<table class="compare-table">');
   assert.ok(heading > 0 && table > heading, "the host table must sit inside the Network traffic section");
-  for (const host of ["downloads.dictivo.app", "api.dictivo.app", "huggingface.co", "Licence service", "Run check"]) {
+  for (const host of ["downloads.dictivo.app", "app.dictivo.app", "api.dictivo.app", "Licence service", "huggingface.co", "Run check"]) {
     assert.ok(html.includes(`<th scope="row">${host}`), `${host} row missing`);
   }
-  for (const header of ["Host", "When", "Carries", "Safe to block?"]) {
+  for (const header of ["Host", "When", "Carries", "While Cloud Fast is locked", "Safe to block?"]) {
     assert.ok(html.includes(`<th scope="col">${header}</th>`), `${header} column missing`);
   }
 });
@@ -54,4 +54,18 @@ test("the security page carries the review date of this change", () => {
   const reviewed = page().match(/Last reviewed <time datetime="(\d{4}-\d{2}-\d{2})"/);
   assert.ok(reviewed, "review date missing");
   assert.ok(reviewed[1] >= "2026-09-24", `review date ${reviewed[1]} predates the change`);
+});
+
+test("the strong statement and the lock paragraph are back, in their narrow form (M10, Push B)", () => {
+  const html = page();
+  assert.ok(html.includes("Cloud Fast uploads only recordings started while it is selected."), "start-anchored heading missing");
+  assert.ok(html.includes("a recording started while Local is selected, or while Cloud Fast is locked, is transcribed on this device"), "start anchoring missing");
+  assert.ok(html.includes("A recording started in Local finishes in Local; changing the selection during a recording only affects the next one."), "strong statement missing");
+  assert.ok(html.includes('id="lock-cloud-fast"'), "lock section missing");
+  assert.ok(html.includes("No recording started while Cloud Fast is locked is ever uploaded."), "narrow promise missing");
+  assert.ok(html.includes("a Cloud Fast recording that was being recorded or transcribed at that moment is still uploaded, and the next recording is Local"), "in-flight exception missing");
+  assert.ok(html.includes("Recordings started while locked are not uploaded. A Cloud Fast recording already in progress when you lock finishes as Cloud Fast, and Cloud Fast licence or status checks may still contact this service"), "locked-column sentence missing");
+  assert.ok(html.includes("Versions before 0.3.51 also use it for trial reports, statistics and purchase claims"), "api row history missing");
+  assert.ok(html.includes("use Local and lock Cloud Fast"), "no-DPA sentence not updated");
+  assert.doesNotMatch(html, /never contacts|does not contact|zero connections|only you can unlock/i);
 });
