@@ -633,13 +633,17 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       },
       {
         "kicker": "うまくいかないとき",
-        "title": "Macで音声入力できないときの切り分け",
+        "title": "Dictivoで入力できないとき",
         "bullets": [
-          "何も始まらない：標準の音声入力とDictivoのどちらを起動したいか確認し、それぞれの設定でショートカットを確認します。別アプリとのキーの重複も確認してください。",
+          "何も始まらない：Dictivoのショートカット（Macの初期設定はCmd+Shift+Space）が、標準の音声入力や別のアプリのキーと重なっていないか確認します。",
           "録音できても文字が出ない：選択したマイク、マイク権限、入力音量、話す言語を確認します。DictivoではLocalモデルの取得が完了しているかも確認します。",
           "Dictivo内には文字があるが貼り付かない：入力先を先にクリックし、Macのアクセシビリティ権限を確認します。Copyでコピーして手動で貼り付ける方法もあります。",
           "録音ファイルを文字起こししたい：ライブ音声入力とは別の用途です。MacWhisperやAikoなど、ファイルを扱うアプリの入出力形式を確認してください。"
-        ]
+        ],
+        "link": {
+          "label": "Mac標準の音声入力が反応しない・途中で止まるときは、症状別の直し方へ",
+          "href": "/ja/guides/mac-dictation-not-working/"
+        }
       }
     ],
     "faqTitle": "オフライン音声入力の質問",
@@ -666,7 +670,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ]
     ],
     "referenceTitle": "参考資料",
-    "lastUpdated": "2026-09-20"
+    "lastUpdated": "2026-09-26"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",

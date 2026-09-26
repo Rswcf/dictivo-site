@@ -3361,6 +3361,7 @@ function renderOfflineGuideSection(section, index) {
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${renderDocBullets(section.bullets)}
+        ${section.link ? `<p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
       </section>`;
 }
 
@@ -3420,7 +3421,7 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(offlineDictationGuideLastmod(currentCode))}">${html(formatLocalizedDate(offlineDictationGuideLastmod(currentCode), currentCode))}</time></p>
       ${renderFirstDictationLink(currentCode)}
-      ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
+      ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">Dictivoで入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
 
       <section class="doc-section" aria-labelledby="offline-guide-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>

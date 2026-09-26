@@ -2,12 +2,13 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCALES } from "../data/site-content.mjs";
+import { offlineDictationGuideLastmod } from "../data/offline-dictation-guide.mjs";
 
 const read = path => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
 const cases = [
-  ...LOCALES.map(l => [l.path.slice(1) + "guides/offline-dictation-on-mac/", l.path, "macos", "offline_guide_mac"]),
-  ["guides/best-speech-to-text-apps-for-mac/", "/", "macos", "speech_guide_mac"],
-  ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows"],
+  ...LOCALES.map(l => [l.path.slice(1) + "guides/offline-dictation-on-mac/", l.path, "macos", "offline_guide_mac", offlineDictationGuideLastmod(l.code)]),
+  ["guides/best-speech-to-text-apps-for-mac/", "/", "macos", "speech_guide_mac", "2026-09-20"],
+  ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows", "2026-09-20"],
 ];
 
 test("comparison guide readers can download the right platform and reach localized setup and terms", () => {
@@ -34,10 +35,10 @@ test("comparison guide readers can download the right platform and reach localiz
 
 test("all changed guides agree on visible, structured and sitemap modification dates", () => {
   const sitemap = read("sitemap.xml");
-  for (const [path] of cases) {
+  for (const [path, , , , date] of cases) {
     const page = read(`${path}index.html`);
-    assert.ok(page.includes('datetime="2026-09-20"'), path);
-    assert.ok(page.includes('"dateModified":"2026-09-20"'), path);
-    assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${path}</loc>\\s*<lastmod>2026-09-20</lastmod>`), path);
+    assert.ok(page.includes(`datetime="${date}"`), path);
+    assert.ok(page.includes(`"dateModified":"${date}"`), path);
+    assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${path}</loc>\\s*<lastmod>${date}</lastmod>`), path);
   }
 });
