@@ -1,7 +1,8 @@
 # Japanese "Mac dictation not working" guide — design
 
 Date: 2026-09-26. Status: design approved by the founder in chat; the founder is running the
-field test in parallel. Evidence (search data, SERP sample, Bing results) lives in the desktop
+field test in parallel. The founder also confirmed it as the only new page allowed during the
+six-week acquisition plan that started the same day; every other change goes to existing pages. Evidence (search data, SERP sample, Bing results) lives in the desktop
 repository's `docs/research/2026-09-26-seo-traffic/`, not here, because this repository is public.
 
 ## Goal
