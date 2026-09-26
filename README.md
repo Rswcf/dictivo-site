@@ -138,6 +138,17 @@ examples preserves user input; clearing empties and focuses the field; pagehide
 clears it before leaving. Page-view/download analytics contain metadata only.
 Keep examples labeled as practice text, never as measured recognition results.
 
+### Japanese troubleshooting guide
+
+`data/ja-mac-dictation-troubleshooting.mjs` supplies `/ja/guides/mac-dictation-not-working/`,
+a Japanese-only page for built-in macOS dictation that does not work. It has no translations:
+the head carries a self `hreflang="ja"` and no `x-default`, and the language menu sends other
+languages to their homepages. Every statement must come from the Apple or Google Japanese help
+pages in its reference list, or from `fieldTest`, which holds results measured on an actual Mac
+and renders nothing while it is `null`. Dictivo appears only in the closing section, labelled as
+this site's product. The Japanese offline guide's troubleshooting section is Dictivo-specific
+and links here, so the two pages do not target the same heading.
+
 ### `WINDOWS_HOME_COPY` is the stage that surprises people
 
 It lives in `scripts/generate-site.mjs`, has an entry for all eleven locales (Traditional Chinese is converted from Simplified), and while Windows is
@@ -270,6 +281,7 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD` | `data/offline-dictation-windows-guide.mjs` | visible stamp + sitemap for `/guides/offline-dictation-on-windows/` |
 | `BENCHMARK_METHOD_GUIDE_LASTMOD` | `data/benchmark-method-guide.mjs` | visible stamp + sitemap for `/guides/mac-dictation-benchmark-method/` |
 | `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/speech-to-text-mac-guide.mjs` | visible stamp + sitemap for `/guides/best-speech-to-text-apps-for-mac/` |
+| `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
 | `COMPARE_LAST_UPDATED` | `data/compare-pages.mjs` | visible stamp + sitemap for every `/compare/` page, and a build gate |

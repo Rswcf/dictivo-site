@@ -2561,6 +2561,14 @@ main section[id] {
   text-transform: uppercase;
 }
 
+/* Tested-environment line: readable sentence case, unlike the mono .doc-meta stamp. */
+.doc-environment {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 .doc-section p,
 .doc-section li {
   color: var(--muted);

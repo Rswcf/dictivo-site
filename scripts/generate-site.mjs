@@ -4584,7 +4584,7 @@ function renderJaMacDictationTroubleshootingPage() {
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy(code).lastUpdated)} <time datetime="${attr(JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD)}">${html(formatLocalizedDate(JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD, code))}</time></p>
-      <p class="doc-meta">${html(copy.environmentLabel)}：${html(copy.environment)}</p>
+      <p class="doc-environment">${html(copy.environmentLabel)}：${html(copy.environment)}</p>
 
       <section class="doc-section" aria-labelledby="ja-troubleshooting-answer">
         <h2 id="ja-troubleshooting-answer">${html(copy.answerTitle)}</h2>
