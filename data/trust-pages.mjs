@@ -9,8 +9,8 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * tell which version they agreed to.
  */
 const LEGAL_LASTMOD = "2026-08-01";
-// The terms changed with the tax-inclusive price statement.
-const TERMS_LASTMOD = "2026-09-16";
+// The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-24).
+const TERMS_LASTMOD = "2026-09-24";
 
 /**
  * The formal withdrawal notice can only name a trader once the Impressum data
@@ -1238,6 +1238,7 @@ export const TRUST_PAGES = [
         title: "License to use Dictivo",
         paragraphs: [
           "Dictivo Local is sold as a personal desktop license. Buying Local unlocks the paid local models and includes 12 months of app updates and new local models.",
+          "The Local license may be used for personal, professional and commercial work.",
           "After the included update window ends, the version you already installed remains usable. Renewing the update window is optional and is only needed for future app updates and new local models.",
         ],
         bullets: [

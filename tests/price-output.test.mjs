@@ -100,7 +100,7 @@ test("the terms say prices include tax and are in US dollars", () => {
   const terms = readFileSync(`${dist}terms/index.html`, "utf8");
   assert.match(terms, /Prices include applicable sales tax and VAT/);
   assert.match(terms, /refunds are issued in US dollars/);
-  assert.match(terms, /datetime="2026-09-16"/);
+  assert.match(terms, /datetime="2026-09-24"/);
 });
 
 test("the old country machinery is gone from the public site", () => {
