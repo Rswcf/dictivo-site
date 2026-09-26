@@ -42,6 +42,11 @@ import {
   OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
   OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES,
 } from "../data/offline-dictation-windows-guide.mjs";
+import {
+  JA_MAC_DICTATION_TROUBLESHOOTING_COPY,
+  JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
+  JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES,
+} from "../data/ja-mac-dictation-troubleshooting.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
@@ -760,6 +765,14 @@ function offlineDictationWindowsGuidePath() {
 
 function offlineDictationWindowsGuideUrl() {
   return absoluteUrl(offlineDictationWindowsGuidePath());
+}
+
+function jaMacDictationTroubleshootingPath() {
+  return "/ja/guides/mac-dictation-not-working/";
+}
+
+function jaMacDictationTroubleshootingUrl() {
+  return absoluteUrl(jaMacDictationTroubleshootingPath());
 }
 
 function mediaKitPath() {
@@ -2363,6 +2376,15 @@ function offlineDictationWindowsGuideHreflangTags() {
   ].join("\n    ");
 }
 
+// Japanese only: no x-default, so the page is not offered to readers of other languages.
+function jaMacDictationTroubleshootingHeadTags() {
+  const url = jaMacDictationTroubleshootingUrl();
+  return [
+    `<link rel="alternate" hreflang="ja" href="${attr(url)}" />`,
+    `<link rel="canonical" href="${attr(url)}" />`,
+  ].join("\n    ");
+}
+
 function mediaKitHreflangTags() {
   const url = mediaKitUrl();
   return [
@@ -3323,6 +3345,13 @@ function renderDocBullets(items) {
   return `<ul>
 ${items.map((item) => `            <li>${html(item)}</li>`).join("\n")}
           </ul>`;
+}
+
+function renderDocSteps(items) {
+  if (!items?.length) return "";
+  return `<ol>
+${items.map((item) => `            <li>${html(item)}</li>`).join("\n")}
+          </ol>`;
 }
 
 function renderOfflineGuideSection(section, index) {
@@ -4463,6 +4492,158 @@ function renderMediaKitPage() {
 `;
 }
 
+function renderJaMacDictationTroubleshootingSchema() {
+  const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
+  const pageUrl = jaMacDictationTroubleshootingUrl();
+  const organization = { "@type": "Organization", name: "Dictivo", url: BASE_URL };
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: copy.title,
+      description: copy.metaDescription,
+      url: pageUrl,
+      inLanguage: "ja",
+      dateModified: JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
+      mainEntityOfPage: pageUrl,
+      publisher: organization,
+      author: organization,
+      about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: "ja",
+      mainEntity: copy.faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Dictivo", item: localeUrl("ja") },
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderJaTroubleshootingSection(section, index) {
+  const id = `ja-troubleshooting-section-${index + 1}`;
+  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+        <p class="doc-meta">${html(section.kicker)}</p>
+        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${renderDocSteps(section.steps)}
+        ${(section.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+      </section>`;
+}
+
+// Results from an actual Mac. The section exists only once those results do.
+function renderJaTroubleshootingFieldTest(copy) {
+  const fieldTest = copy.fieldTest;
+  if (!fieldTest) return "";
+  return `<section class="doc-section" aria-labelledby="ja-troubleshooting-field-test">
+        <p class="doc-meta">${html(fieldTest.kicker)}</p>
+        <h2 id="ja-troubleshooting-field-test">${html(fieldTest.title)}</h2>
+        <p>${html(fieldTest.environment)}</p>
+        ${renderBenchmarkMethodTable(fieldTest.caption, fieldTest.headers, fieldTest.rows)}
+        ${(fieldTest.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+      </section>`;
+}
+
+function renderJaMacDictationTroubleshootingPage() {
+  const code = "ja";
+  const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
+  const t = homeCopyForRender(code);
+  const url = jaMacDictationTroubleshootingUrl();
+  const path = jaMacDictationTroubleshootingPath();
+  return `<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: "ja", type: "article" })}
+    ${jaMacDictationTroubleshootingHeadTags()}
+    ${assetTags()}
+    ${renderJaMacDictationTroubleshootingSchema()}
+  </head>
+  <body>
+    <a class="skip-link" href="#ja-mac-dictation-troubleshooting">${html(copy.navLabel)}</a>
+    ${renderHeader(code, t, { hrefForLocale: (item) => (item.code === code ? path : localePath(item.code)) })}
+    <main class="doc-page offline-guide-page" id="ja-mac-dictation-troubleshooting">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy(code).lastUpdated)} <time datetime="${attr(JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD)}">${html(formatLocalizedDate(JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD, code))}</time></p>
+      <p class="doc-meta">${html(copy.environmentLabel)}：${html(copy.environment)}</p>
+
+      <section class="doc-section" aria-labelledby="ja-troubleshooting-answer">
+        <h2 id="ja-troubleshooting-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <nav class="doc-section" aria-label="${attr(copy.tocLabel)}">
+        <p class="doc-meta">${html(copy.tocLabel)}</p>
+        <ol>
+${copy.sections.map((section, index) => `          <li><a href="#ja-troubleshooting-section-${index + 1}-title">${html(section.title)}</a></li>`).join("\n")}
+        </ol>
+      </nav>
+
+      ${copy.sections.map(renderJaTroubleshootingSection).join("\n\n      ")}
+
+      ${renderJaTroubleshootingFieldTest(copy)}
+
+      <section class="doc-section" aria-labelledby="ja-troubleshooting-dictivo">
+        <p class="doc-meta">${html(copy.dictivo.kicker)}</p>
+        <h2 id="ja-troubleshooting-dictivo">${html(copy.dictivo.title)}</h2>
+        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+      </section>
+
+      ${renderGuideTrial(code, "macos", "ja_troubleshooting_mac")}
+
+      <section class="doc-section" aria-labelledby="ja-troubleshooting-faq">
+        <h2 id="ja-troubleshooting-faq">${html(copy.faqTitle)}</h2>
+        <div class="faq-grid">
+          ${copy.faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>
+      </section>
+
+      <section class="doc-section" aria-labelledby="ja-troubleshooting-references">
+        <h2 id="ja-troubleshooting-references">${html(copy.referencesTitle)}</h2>
+        <ul class="compare-source-list">
+${JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES.map(
+  ([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`,
+).join("\n")}
+        </ul>
+      </section>
+    </main>
+    ${renderFooterOnly(code)}
+  </body>
+</html>
+`;
+}
+
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const links = [
@@ -4471,6 +4652,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
     `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
+    currentCode === "ja" ? `<a href="${attr(jaMacDictationTroubleshootingPath())}">${html(JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
@@ -5410,6 +5592,7 @@ function renderLlmsTxt(currentCode = "en") {
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
+    ...(currentCode === "ja" ? [[JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel, jaMacDictationTroubleshootingUrl()]] : []),
     [ui.footer.audioPath, localizedTrustUrl(currentCode, "privacy/where-dictation-audio-goes")],
     [ui.footer.networkTest, localizedTrustUrl(currentCode, "privacy/local-dictation-network-test")],
     [copy.pageLabels.compare, localizedCompareUrl(currentCode)],
@@ -5848,6 +6031,12 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const jaMacDictationTroubleshootingEntry = `  <url>
+    <loc>${jaMacDictationTroubleshootingUrl()}</loc>
+    <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="${jaMacDictationTroubleshootingUrl()}" />
+    <priority>0.8</priority>
+  </url>`;
   const mediaKitEntry = `  <url>
     <loc>${mediaKitUrl()}</loc>
     <lastmod>${latestDate(MEDIA_KIT_LASTMOD, PRICING_LASTMOD)}</lastmod>
@@ -5908,6 +6097,7 @@ ${offlineGuideEntries}
 ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
 ${offlineDictationWindowsGuideEntry}
+${jaMacDictationTroubleshootingEntry}
 ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
@@ -6306,6 +6496,7 @@ for (const locale of LOCALES) {
 write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
+write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write("media-kit/index.html", renderMediaKitPage());
 write("demo/index.html", renderProductFilmPage());
 for (const code of Object.keys(FIRST_DICTATION_COPY)) write(`${firstDictationPath(code).slice(1)}index.html`, renderFirstDictationPage(code));
