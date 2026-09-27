@@ -1,4 +1,18 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.52": Object.freeze({
+    date: "2026-09-27",
+    title: "Start at login, and your clipboard comes back after pasting.",
+    bullets: Object.freeze([
+      "Dictivo can start when you log in, in the background and without opening its window, so your dictation shortcut works without opening Dictivo first. New installs ask during setup. After this update, turn it on in Settings, General.",
+      "After Dictivo pastes a transcript for you, what you had copied before goes back on the clipboard a moment later, and the companion says whether the transcript was pasted, copied or kept in Dictivo. Transcripts stay out of Windows clipboard history and cloud clipboard.",
+      "Choose your microphone in Settings or during setup, and test it with a three-second recording. If it is not connected, Dictivo uses the default microphone and tells you.",
+      "Choose the language you speak, or keep automatic detection. With a language chosen, Local dictation also uses the words in your Dictionary to catch names and terms.",
+      "Choose how long History keeps transcripts in Settings, Privacy: the last 100, 30 days, or not at all. Deleted transcripts are erased from the history file on this computer, not just hidden.",
+      "History now keeps your last 100 transcripts unless you choose otherwise. The first time this version starts, older transcripts are deleted and cannot be recovered. History already showed only the last 100.",
+      "On Mac, clicking Dictivo in the Dock opens its window again after you closed it. On Windows, automatic paste no longer gives up on slower computers. More of Settings appears in your display language.",
+      "On Windows, if you later install an update by running its installer yourself, turn Start at login back on in Settings, General. Updates from inside the app keep it.",
+    ]),
+  }),
   "0.3.51": Object.freeze({
     date: "2026-09-26",
     title: "Lock Cloud Fast, so a stray click never sends a recording to the cloud.",
