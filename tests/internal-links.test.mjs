@@ -23,3 +23,14 @@ test("the benchmark guide body points readers to the first-dictation practice", 
   const body = main(read("guides/mac-dictation-benchmark-method/index.html"));
   assert.ok(body.includes('href="/guides/first-local-dictation/"'));
 });
+
+test("the English Dragon comparison answers what happened to MacSpeech Dictate, dated for English only", () => {
+  const en = read("compare/dragon-alternative/index.html");
+  assert.ok(en.includes("What happened to MacSpeech Dictate?"));
+  const faq = [...en.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .flatMap(([, body]) => JSON.parse(body))
+    .find((item) => item["@type"] === "FAQPage");
+  assert.ok(faq.mainEntity.some((q) => q.name === "What happened to MacSpeech Dictate?"));
+  assert.ok(en.includes('datetime="2026-09-29"'));
+  assert.ok(read("de/compare/dragon-alternative/index.html").includes('datetime="2026-09-12"'));
+});

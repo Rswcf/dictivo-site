@@ -712,6 +712,7 @@ export const COMPARE_PAGES = [
       ["Is Dictivo as accurate as Dragon?", "We have not published a controlled accuracy comparison between Dictivo and Dragon. Try the same recordings and work tasks in both, using the vocabulary and settings you would normally use, and compare the corrections required."],
       ["Does Dragon run offline like Dictivo?", "Yes - this is a real similarity. Dragon Professional v16 processes speech locally and works offline after activation. The differences are price, platforms, and training, not the local processing itself."],
       ["What happened to Dragon Home?", "Nuance discontinued the roughly $150 Dragon Home edition in 2023 without a consumer replacement. Dragon Professional v16 is currently sold at $699.99. Compare the tasks and license terms you need before choosing a replacement."],
+      ["What happened to MacSpeech Dictate?", "MacSpeech Dictate launched in 2008 on Nuance's Dragon engine. Nuance bought MacSpeech in February 2010 and renamed the product Dragon Dictate for Mac with version 2.0 that September. Its last Mac edition, Dragon Professional Individual for Mac, was discontinued on October 22, 2018; perpetual licenses keep working but receive no updates. Dragon vocabularies and voice commands do not move to other apps, so add your key terms to the new app's dictionary."],
     ],
     related: ["wispr-flow-alternative", "macos-dictation-alternative"],
     sources: [
@@ -719,6 +720,7 @@ export const COMPARE_PAGES = [
       "https://dragon.nuance.com/shared/data-sheets/ds-dragon-professional-v16-en-us.pdf",
       "https://apps.apple.com/us/app/dragon-anywhere/id1024652126",
     ],
+    lastUpdated: { en: "2026-09-29" },
   },
 ];
 
