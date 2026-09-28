@@ -34,3 +34,15 @@ test("the English Dragon comparison answers what happened to MacSpeech Dictate, 
   assert.ok(en.includes('datetime="2026-09-29"'));
   assert.ok(read("de/compare/dragon-alternative/index.html").includes('datetime="2026-09-12"'));
 });
+
+test("each homepage's comparison teaser links to its own offline dictation guide", () => {
+  for (const [home, guide, label] of [
+    ["de/index.html", "/de/guides/offline-dictation-on-mac/", "Offline-Diktat für Mac"],
+    ["ja/index.html", "/ja/guides/offline-dictation-on-mac/", "Mac オフライン音声入力"],
+    ["index.html", "/guides/offline-dictation-on-mac/", "Offline Mac dictation"],
+  ]) {
+    const html = read(home);
+    const teaser = html.split('id="compare-teaser-title"')[1].split("</section>")[0];
+    assert.match(teaser, new RegExp(`<a href="${guide}">[\\s\\S]*?<strong>${label}</strong>`), home);
+  }
+});

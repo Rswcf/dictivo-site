@@ -3013,6 +3013,10 @@ ${COMPARE_NAV_LINKS.map(
               <strong>${html(currentCode === "en" ? link.title : fillCompareTemplate(copy.footerAlternative, { competitor: link.competitor }))}</strong>
             </a>`,
 ).join("\n")}
+            <a href="${attr(offlineDictationGuidePath(currentCode))}">
+              <span>${html(offlineDictationGuideCopy(currentCode).eyebrow)}</span>
+              <strong>${html(offlineDictationGuideCopy(currentCode).navLabel)}</strong>
+            </a>
           </div>
         </div>
       </section>`;
