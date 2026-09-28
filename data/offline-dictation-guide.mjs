@@ -57,6 +57,10 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
           "Zero retention means the vendor says the remote service does not store data after processing.",
           "For private notes, client work, journals, drafts, or confidential meetings, the safer default is no upload path.",
         ],
+        link: {
+          label: "Moving off cloud transcription? Compare a local workflow with Wispr Flow",
+          href: "/compare/wispr-flow-alternative/",
+        },
       },
       {
         kicker: "Dictivo fit",

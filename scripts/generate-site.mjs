@@ -3718,6 +3718,7 @@ function renderBenchmarkMethodGuidePage() {
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(BENCHMARK_METHOD_GUIDE_LASTMOD)}">${html(formatLocalizedDate(BENCHMARK_METHOD_GUIDE_LASTMOD, "en"))}</time></p>
+      ${renderFirstDictationLink("en")}
 
       <section class="doc-section" aria-labelledby="benchmark-method-answer">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
@@ -3879,9 +3880,9 @@ function renderSpeechToTextMacRelated(copy) {
 ${copy.relatedRows
   .map(
     ([label, description, url]) => `              <tr>
-                <th scope="row">${html(label)}</th>
+                <th scope="row"><a href="${attr(url)}">${html(label)}</a></th>
                 <td>${html(description)}</td>
-                <td><a href="${attr(url)}">${html(url)}</a></td>
+                <td>${html(url.replace(BASE_URL, ""))}</td>
               </tr>`,
   )
   .join("\n")}
@@ -4070,9 +4071,9 @@ function renderOfflineDictationWindowsRelated(copy) {
 ${copy.relatedRows
   .map(
     ([label, description, url]) => `              <tr>
-                <th scope="row">${html(label)}</th>
+                <th scope="row"><a href="${attr(url)}">${html(label)}</a></th>
                 <td>${html(description)}</td>
-                <td><a href="${attr(url)}">${html(url)}</a></td>
+                <td>${html(url.replace(BASE_URL, ""))}</td>
               </tr>`,
   )
   .join("\n")}
