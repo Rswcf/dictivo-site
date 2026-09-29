@@ -2890,6 +2890,19 @@ main section[id] {
   width: 25%;
 }
 
+/* The six-column price tables fit the 880px column on desktop, so "Checked on" is not hidden behind a scroll. */
+@media (min-width: 1100px) {
+  .offline-guide-page .compare-table:has(thead th:nth-child(6)) {
+    min-width: 0;
+  }
+
+  .offline-guide-page .compare-table:has(thead th:nth-child(6)) :is(th, td) {
+    width: auto;
+    padding: 14px 12px;
+    font-size: 13px;
+  }
+}
+
 .compare-bullets {
   display: grid;
   gap: 0;
