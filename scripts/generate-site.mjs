@@ -5784,6 +5784,7 @@ function renderNotFound() {
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
+    <script src="/assets/site.js?v=local" defer></script>
   </head>
   <body>
     ${renderHeader("en", homeCopyForRender("en"))}
@@ -6237,6 +6238,7 @@ function renderChangelog() {
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
+    <script src="/assets/site.js?v=local" defer></script>
     <script type="application/ld+json">${JSON.stringify([
       {
         "@context": "https://schema.org",
