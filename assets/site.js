@@ -86,6 +86,10 @@ const analyticsInstrumentationVersion = "web-linked-v1";
 const analyticsVisitId = createAnalyticsVisitId();
 const isPublicSite = ["dictivo.app", "www.dictivo.app"].includes(window.location.hostname);
 
+// Beacons and download-link decoration happen only on the public site. Local
+// and preview hosts keep their static links and send nothing.
+const analyticsEnabled = isPublicSite;
+
 function campaignValue(value) {
   return String(value || "").replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, 120) || undefined;
 }
@@ -165,7 +169,7 @@ function pageViewPayload() {
 }
 
 function sendPageView() {
-  if (!isPublicSite) return;
+  if (!analyticsEnabled) return;
   const endpoint = "https://api.dictivo.app/v1/analytics/page-view";
   const body = JSON.stringify(pageViewPayload());
 
@@ -213,6 +217,8 @@ function downloadEventPayload(link) {
 }
 
 function sendDownloadClick(link) {
+  if (!analyticsEnabled) return;
+
   let href;
   try {
     href = new URL(link.href, window.location.href);
@@ -234,8 +240,6 @@ function sendDownloadClick(link) {
   }
   href.searchParams.set("instrumentationVersion", analyticsInstrumentationVersion);
   link.href = href.toString();
-
-  if (!isPublicSite) return;
 
   const endpoint = new URL("/v1/analytics/download-events", href.origin).toString();
   const body = JSON.stringify(downloadEventPayload(link));

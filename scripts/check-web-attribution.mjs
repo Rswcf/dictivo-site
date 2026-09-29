@@ -123,6 +123,13 @@ direct.context.sendDownloadClick(directDownload);
 assert.equal(direct.events.at(-1).source, "direct");
 assert.equal(direct.events.at(-1).campaign, undefined);
 
-for (const host of ["127.0.0.1:4173", "preview.dictivo-app.pages.dev"]) assert.equal(loadPage(`https://${host}/`).events.length, 0, "Preview views must not reach production analytics");
+for (const host of ["127.0.0.1:4173", "localhost:4173", "preview.dictivo-app.pages.dev"]) {
+  const preview = loadPage(`https://${host}/`);
+  assert.equal(preview.events.length, 0, "Preview views must not reach production analytics");
+  const staticLink = link("https://api.dictivo.app/download/mac?version=0.3.46", true);
+  preview.context.sendDownloadClick(staticLink);
+  assert.equal(staticLink.href, "https://api.dictivo.app/download/mac?version=0.3.46", "Preview download links must stay static");
+  assert.equal(preview.events.length, 0, "Preview download clicks must not reach production analytics");
+}
 assert(!/\b(localStorage|sessionStorage)\s*[.\[]|document\.cookie\s*=/.test(analytics), "No persistent browser tracking");
 console.log("Web attribution checks passed: campaign handoff, fresh page ids, CTA/redirect parity, referrer privacy, navigation exclusions, and preview isolation.");
