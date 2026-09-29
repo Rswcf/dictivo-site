@@ -55,7 +55,9 @@ test("the Privacy Policy and /security/ explain the dictivo-self opt-out flag, a
     assert.ok(text.includes("dictivo-self"), `${path}: the flag name is missing`);
     assert.ok(text.includes("dictivo.app/?self=1"), `${path}: the /?self=1 address is missing`);
     assert.ok(text.includes("/?self=0 removes the flag"), `${path}: the /?self=0 sentence is missing`);
-    assert.ok(readFileSync(`${dist}${path}`, "utf8").includes('datetime="2026-09-29"'), `${path}: the page date did not move with this change`);
+    const dated = readFileSync(`${dist}${path}`, "utf8").replace(/\s+/g, " ").match(/Last (?:updated|reviewed) <time datetime="(\d{4}-\d{2}-\d{2})"/);
+    assert.ok(dated, `${path}: the page date is missing`);
+    assert.ok(dated[1] >= "2026-09-29", `${path}: the page date is older than the flag sentence`);
   }
   assert.ok(readFileSync(`${dist}assets/site.js`, "utf8").includes('"dictivo-self"'), "dist/assets/site.js does not name the dictivo-self flag");
 });

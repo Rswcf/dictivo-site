@@ -183,6 +183,7 @@ test("storage that is missing or throws counts as not excluded, and the rest of 
     const link = downloadLink();
     page.context.sendDownloadClick(link);
     assert.equal(new URL(link.href).searchParams.get("visitId"), page.events[0].visitId, `${name}: the download link was not decorated`);
+    // Documents intent: the script finished loading and registered its click handler.
     assert.equal(typeof page.handlers.click, "function", `${name}: the click handler was not registered, so an exception escaped`);
   }
 });
