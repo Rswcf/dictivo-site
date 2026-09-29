@@ -1,4 +1,4 @@
-export const NETWORK_TEST_LASTMOD = "2026-09-26";
+export const NETWORK_TEST_LASTMOD = "2026-09-29";
 
 // Observation, offline check, and limits of the evidence. These are instructions,
 // not a claim that a new independent measurement was performed.

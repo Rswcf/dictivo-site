@@ -700,13 +700,13 @@ export const TRUST_PAGES = [
   {
     slug: "privacy/local-dictation-network-test",
     navLabel: "Local network test",
-    title: "How to verify Dictivo Local mode with a network monitor",
+    title: "How to check with a network monitor whether a dictation app uploads audio: the Dictivo Local example",
     eyebrow: "Privacy proof",
     metaTitle: "Dictivo Local Network Test · Privacy Proof",
     metaDescription:
       "A practical network-monitor checklist for verifying that Dictivo Local mode keeps dictation audio on the device.",
     lede:
-      "Dictivo Local mode is designed so microphone audio is processed on your device. This page explains how to verify that boundary with a network monitor before using Dictivo for sensitive dictation.",
+      "To check whether any dictation app uploads your audio, watch its network traffic while you dictate, then repeat the test with the network blocked. This page gives that procedure with Dictivo Local mode as the worked example, so you can verify the boundary before using any app for sensitive dictation.",
     lastModified: "2026-07-26",
     relatedLinks: [
       { label: "Where dictation audio goes", href: "/privacy/where-dictation-audio-goes/" },
@@ -717,7 +717,8 @@ export const TRUST_PAGES = [
       {
         title: "Short answer",
         paragraphs: [
-          "In Local mode, Dictivo should not upload microphone audio or transcripts to a transcription service. Network activity you may still see is for product operations such as app updates, license actions, downloads, support, or optional Cloud Fast when you choose that mode.",
+          "Watch the dictation app and its helper processes with a per-app network monitor while you dictate a short, non-sensitive phrase, and note the hosts it contacts and the bytes it sends. Then block its network access and dictate again: transcription that still completes offline ran on the device. After you reconnect, keep watching for delayed uploads. The same test works for any dictation app.",
+          "The Dictivo example: In Local mode, Dictivo does not send your dictation audio to a transcription server. Network activity you may still see is for product operations such as app updates, license actions, downloads, support, or optional Cloud Fast when you choose that mode.",
         ],
       },
       {
@@ -733,9 +734,20 @@ export const TRUST_PAGES = [
         ],
       },
       {
+        title: "Tools you can use",
+        paragraphs: ["Any tool that shows network activity per process works for this test. Pick one for your operating system:"],
+        bullets: [
+          "A per-app firewall or network monitor for macOS, such as Little Snitch or LuLu: shows which process opens which connection and can block an app's access.",
+          "Built into macOS: nettop in Terminal and the Network tab of Activity Monitor show bytes sent and received per process.",
+          "Packet capture, such as Wireshark: shows destinations, timing and sizes; the contents of encrypted traffic stay unreadable.",
+          "Windows: the Network tab of Resource Monitor shows each process's connections and bytes sent.",
+          "A router log can confirm the same destinations from outside the computer.",
+        ],
+      },
+      {
         title: "Expected network surface",
         paragraphs: [
-          "Dictivo does not promise that the desktop app never uses the network. The privacy claim is narrower and more useful: Local dictation should not send the recording or transcript to a transcription server.",
+          "Dictivo does not promise that the desktop app never uses the network. The privacy claim is narrower and more useful: Local dictation does not send the recording or transcript to a transcription server.",
           trialNetworkCopy("en"),
         ],
         bullets: [
@@ -746,20 +758,21 @@ export const TRUST_PAGES = [
       },
     ],
     faqs: [
-      ["Does Dictivo Local mode upload audio?", "No. Local mode is designed to keep dictation audio on the device for transcription."],
+      ["How can I check whether a dictation app uploads my audio?", "Watch the app with a per-app network monitor while you dictate a short, non-sensitive phrase, then repeat with its network access blocked. Transcription that still completes offline ran on the device; after you reconnect, keep watching for delayed uploads."],
+      ["Does Dictivo Local mode upload audio?", "No. In Local mode, Dictivo does not send your dictation audio to a transcription server."],
       ["Why might I still see Dictivo use the network?", trialNetworkCopy("en")],
       ["Should Cloud Fast show network activity?", "Yes. Cloud Fast is the optional speed mode that sends the selected recording for remote transcription."],
       ["What should I do if a Local dictation opens an unexpected connection?", "Record the timestamp, app version, operating system, and destination host, then email support@dictivo.app so the discrepancy can be investigated."],
     ],
     locales: {
       de: {
-        title: "So prüfen Sie Dictivo Local mode mit einem Netzwerkmonitor",
+        title: "So prüfen Sie mit einem Netzwerkmonitor, ob eine Diktier-App Audio hochlädt: das Beispiel Dictivo Local",
         eyebrow: "Datenschutznachweis",
         metaTitle: "Dictivo Local Netzwerktest · Datenschutznachweis",
         metaDescription:
           "Eine praktische Netzwerkmonitor-Checkliste, um zu prüfen, dass Dictivo Local mode Diktat-Audio auf dem Gerät behält.",
         lede:
-          "Dictivo Local mode ist so ausgelegt, dass Mikrofon-Audio auf Ihrem Gerät verarbeitet wird. Diese Seite erklärt, wie Sie diese Grenze mit einem Netzwerkmonitor prüfen, bevor Sie Dictivo für sensible Diktate nutzen.",
+          "Ob eine Diktier-App Ihr Audio hochlädt, prüfen Sie, indem Sie ihren Netzwerkverkehr während des Diktierens beobachten und den Test mit blockiertem Netzwerk wiederholen. Diese Seite beschreibt das Vorgehen am Beispiel von Dictivo Local mode, damit Sie die Grenze prüfen können, bevor Sie eine App für sensible Diktate nutzen.",
         relatedLinks: [
           { label: "Wohin Diktat-Audio geht", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Privacy Policy lesen", href: "/privacy/" },
@@ -769,7 +782,8 @@ export const TRUST_PAGES = [
           {
             title: "Kurze Antwort",
             paragraphs: [
-              "In Local mode sollte Dictivo kein Mikrofon-Audio und keine Transkripte an einen Transkriptionsdienst hochladen. Netzwerkaktivität, die Sie trotzdem sehen können, gehört zu Produktvorgängen wie Updates, Lizenzaktionen, Downloads, Support oder optionalem Cloud Fast.",
+              "Beobachten Sie die Diktier-App und ihre Hilfsprozesse mit einem Netzwerkmonitor pro App, während Sie einen kurzen, unverfänglichen Satz diktieren, und notieren Sie Zielhosts und gesendete Bytes. Blockieren Sie dann den Netzwerkzugriff und diktieren Sie erneut: Eine Transkription, die offline fertig wird, lief auf dem Gerät. Beobachten Sie nach dem Wiederverbinden weiter, ob verzögert gesendet wird. Derselbe Test funktioniert mit jeder Diktier-App.",
+              "Das Beispiel Dictivo: In Local mode sendet Dictivo Ihr Diktat-Audio nicht an einen Transkriptionsserver. Netzwerkaktivität, die Sie trotzdem sehen können, gehört zu Produktvorgängen wie Updates, Lizenzaktionen, Downloads, Support oder optionalem Cloud Fast.",
             ],
           },
           {
@@ -785,9 +799,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "Werkzeuge für den Test",
+            paragraphs: ["Jedes Werkzeug, das Netzwerkaktivität pro Prozess zeigt, eignet sich. Wählen Sie eines für Ihr Betriebssystem:"],
+            bullets: [
+              "Firewall oder Netzwerkmonitor pro App für macOS, etwa Little Snitch oder LuLu: zeigt, welcher Prozess welche Verbindung öffnet, und kann den Zugriff einer App blockieren.",
+              "In macOS enthalten: nettop im Terminal und der Bereich „Netzwerk“ der Aktivitätsanzeige zeigen gesendete und empfangene Bytes pro Prozess.",
+              "Paketmitschnitt, etwa mit Wireshark: zeigt Ziele, Zeitpunkte und Größen; der Inhalt verschlüsselten Verkehrs bleibt unlesbar.",
+              "Windows: Der Tab „Netzwerk“ der Ressourcenüberwachung zeigt Verbindungen und gesendete Bytes pro Prozess.",
+              "Ein Router-Protokoll bestätigt dieselben Ziele von außerhalb des Computers.",
+            ],
+          },
+          {
             title: "Erwartete Netzwerkfläche",
             paragraphs: [
-              "Dictivo verspricht nicht, dass die Desktop-App niemals Netzwerk nutzt. Die Datenschutzbehauptung ist enger und nützlicher: Local-Diktat sollte die Aufnahme oder das Transkript nicht an einen Transkriptionsserver senden.",
+              "Dictivo verspricht nicht, dass die Desktop-App niemals Netzwerk nutzt. Die Datenschutzbehauptung ist enger und nützlicher: Local-Diktat sendet die Aufnahme oder das Transkript nicht an einen Transkriptionsserver.",
               trialNetworkCopy("de"),
             ],
             bullets: [
@@ -798,20 +823,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Lädt Dictivo Local mode Audio hoch?", "Nein. Local mode ist so ausgelegt, dass Diktat-Audio zur Transkription auf dem Gerät bleibt."],
+          ["Wie prüfe ich, ob eine Diktier-App mein Audio hochlädt?", "Beobachten Sie die App mit einem Netzwerkmonitor pro App, während Sie einen kurzen, unverfänglichen Satz diktieren, und wiederholen Sie den Test mit blockiertem Netzwerk. Eine Transkription, die offline fertig wird, lief auf dem Gerät; beobachten Sie nach dem Wiederverbinden weiter, ob verzögert gesendet wird."],
+          ["Lädt Dictivo Local mode Audio hoch?", "Nein. In Local mode sendet Dictivo Ihr Diktat-Audio nicht an einen Transkriptionsserver."],
           ["Warum kann Dictivo trotzdem das Netzwerk nutzen?", trialNetworkCopy("de")],
           ["Sollte Cloud Fast Netzwerkaktivität zeigen?", "Ja. Cloud Fast ist der optionale Schnellmodus, der die ausgewählte Aufnahme für entfernte Transkription sendet."],
           ["Was tun, wenn Local-Diktat eine unerwartete Verbindung öffnet?", "Notieren Sie Zeitstempel, App-Version, Betriebssystem und Zielhost und schreiben Sie an support@dictivo.app, damit die Abweichung geprüft werden kann."],
         ],
       },
       fr: {
-        title: "Comment vérifier le mode Local de Dictivo avec un moniteur réseau",
+        title: "Comment vérifier avec un moniteur réseau si une app de dictée envoie l'audio : l'exemple de Dictivo Local",
         eyebrow: "Preuve de confidentialité",
         metaTitle: "Test réseau Dictivo Local · Preuve de confidentialité",
         metaDescription:
           "Une checklist pratique pour vérifier avec un moniteur réseau que le mode Local de Dictivo garde l'audio sur l'appareil.",
         lede:
-          "Le mode Local de Dictivo est conçu pour traiter l'audio du microphone sur votre appareil. Cette page explique comment vérifier cette limite avec un moniteur réseau avant d'utiliser Dictivo pour une dictée sensible.",
+          "Pour savoir si une app de dictée envoie votre audio, surveillez son trafic réseau pendant la dictée, puis refaites le test avec le réseau bloqué. Cette page décrit la méthode avec le mode Local de Dictivo comme exemple, pour vérifier cette limite avant d'utiliser une app pour une dictée sensible.",
         relatedLinks: [
           { label: "Où va l'audio de dictée", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Lire la Privacy Policy", href: "/privacy/" },
@@ -821,7 +847,8 @@ export const TRUST_PAGES = [
           {
             title: "Réponse courte",
             paragraphs: [
-              "En mode Local, Dictivo ne devrait pas téléverser l'audio du microphone ni les transcripts vers un service de transcription. L'activité réseau que vous pouvez encore voir concerne des opérations produit comme les mises à jour, les licences, les téléchargements, le support ou Cloud Fast optionnel.",
+              "Surveillez l'app de dictée et ses processus auxiliaires avec un moniteur réseau par app pendant que vous dictez une courte phrase non sensible, et notez les destinations et les octets envoyés. Bloquez ensuite son accès réseau et dictez à nouveau : une transcription qui aboutit hors ligne a été faite sur l'appareil. Après la reconnexion, continuez à observer tout envoi différé. Le même test fonctionne avec n'importe quelle app de dictée.",
+              "L'exemple de Dictivo : en mode Local, Dictivo n'envoie pas votre audio de dictée à un serveur de transcription. L'activité réseau que vous pouvez encore voir concerne des opérations produit comme les mises à jour, les licences, les téléchargements, le support ou Cloud Fast optionnel.",
             ],
           },
           {
@@ -837,9 +864,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "Outils utilisables",
+            paragraphs: ["Tout outil qui affiche l'activité réseau par processus convient. Choisissez-en un pour votre système :"],
+            bullets: [
+              "Pare-feu ou moniteur réseau par app pour macOS, comme Little Snitch ou LuLu : indique quel processus ouvre quelle connexion et peut bloquer l'accès d'une app.",
+              "Intégré à macOS : nettop dans le Terminal et l'onglet Réseau du Moniteur d'activité affichent les octets envoyés et reçus par processus.",
+              "Capture de paquets, par exemple avec Wireshark : montre destinations, horaires et tailles ; le contenu du trafic chiffré reste illisible.",
+              "Windows : l'onglet Réseau du Moniteur de ressources affiche les connexions et les octets envoyés par processus.",
+              "Un journal du routeur confirme les mêmes destinations depuis l'extérieur de l'ordinateur.",
+            ],
+          },
+          {
             title: "Surface réseau attendue",
             paragraphs: [
-              "Dictivo ne promet pas que l'app de bureau n'utilise jamais le réseau. La promesse de confidentialité est plus précise : la dictée Local ne devrait pas envoyer l'enregistrement ou le transcript à un serveur de transcription.",
+              "Dictivo ne promet pas que l'app de bureau n'utilise jamais le réseau. La promesse de confidentialité est plus précise : la dictée Local n'envoie pas l'enregistrement ni le transcript à un serveur de transcription.",
               trialNetworkCopy("fr"),
             ],
             bullets: [
@@ -850,20 +888,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Le mode Local de Dictivo téléverse-t-il l'audio ?", "Non. Le mode Local est conçu pour garder l'audio de dictée sur l'appareil pour la transcription."],
+          ["Comment vérifier si une app de dictée envoie mon audio ?", "Surveillez l'app avec un moniteur réseau par app pendant une courte dictée non sensible, puis refaites le test avec le réseau bloqué. Une transcription qui aboutit hors ligne a été faite sur l'appareil ; après la reconnexion, observez tout envoi différé."],
+          ["Le mode Local de Dictivo téléverse-t-il l'audio ?", "Non. En mode Local, Dictivo n'envoie pas votre audio de dictée à un serveur de transcription."],
           ["Pourquoi Dictivo peut-il quand même utiliser le réseau ?", trialNetworkCopy("fr")],
           ["Cloud Fast doit-il montrer une activité réseau ?", "Oui. Cloud Fast est le mode rapide optionnel qui envoie l'enregistrement sélectionné pour transcription distante."],
           ["Que faire si une dictée Local ouvre une connexion inattendue ?", "Notez l'heure, la version de l'app, le système et l'hôte distant, puis écrivez à support@dictivo.app pour investigation."],
         ],
       },
       es: {
-        title: "Cómo verificar el modo Local de Dictivo con un monitor de red",
+        title: "Cómo comprobar con un monitor de red si una app de dictado sube el audio: el ejemplo de Dictivo Local",
         eyebrow: "Prueba de privacidad",
         metaTitle: "Prueba de red de Dictivo Local · Privacidad",
         metaDescription:
           "Una checklist práctica para verificar con un monitor de red que el modo Local de Dictivo mantiene el audio en el dispositivo.",
         lede:
-          "El modo Local de Dictivo está diseñado para procesar el audio del micrófono en tu dispositivo. Esta página explica cómo verificar ese límite con un monitor de red antes de usar Dictivo para dictado sensible.",
+          "Para saber si una app de dictado sube tu audio, observa su tráfico de red mientras dictas y repite la prueba con la red bloqueada. Esta página explica el procedimiento con el modo Local de Dictivo como ejemplo, para que verifiques ese límite antes de usar una app para dictado sensible.",
         relatedLinks: [
           { label: "A dónde va el audio de dictado", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Leer la Privacy Policy", href: "/privacy/" },
@@ -873,7 +912,8 @@ export const TRUST_PAGES = [
           {
             title: "Respuesta corta",
             paragraphs: [
-              "En modo Local, Dictivo no debería subir audio del micrófono ni transcripciones a un servicio de transcripción. La actividad de red que todavía puedes ver suele corresponder a operaciones del producto como actualizaciones, licencias, descargas, soporte o Cloud Fast opcional.",
+              "Observa la app de dictado y sus procesos auxiliares con un monitor de red por app mientras dictas una frase breve sin datos sensibles, y anota los destinos y los bytes enviados. Después bloquea su acceso a la red y dicta de nuevo: una transcripción que termina sin conexión se hizo en el dispositivo. Tras reconectar, sigue observando posibles envíos posteriores. La misma prueba sirve para cualquier app de dictado.",
+              "El ejemplo de Dictivo: en modo Local, Dictivo no envía tu audio de dictado a un servidor de transcripción. La actividad de red que todavía puedes ver suele corresponder a operaciones del producto como actualizaciones, licencias, descargas, soporte o Cloud Fast opcional.",
             ],
           },
           {
@@ -889,9 +929,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "Herramientas que puedes usar",
+            paragraphs: ["Sirve cualquier herramienta que muestre la actividad de red por proceso. Elige una para tu sistema:"],
+            bullets: [
+              "Cortafuegos o monitor de red por app para macOS, como Little Snitch o LuLu: muestra qué proceso abre cada conexión y puede bloquear el acceso de una app.",
+              "Integrado en macOS: nettop en Terminal y la pestaña Red del Monitor de Actividad muestran los bytes enviados y recibidos por proceso.",
+              "Captura de paquetes, por ejemplo con Wireshark: muestra destinos, momentos y tamaños; el contenido del tráfico cifrado no se puede leer.",
+              "Windows: la pestaña Red del Monitor de recursos muestra las conexiones y los bytes enviados por proceso.",
+              "Un registro del router confirma los mismos destinos desde fuera del ordenador.",
+            ],
+          },
+          {
             title: "Superficie de red esperada",
             paragraphs: [
-              "Dictivo no promete que la app de escritorio nunca use la red. La afirmación de privacidad es más estrecha y útil: el dictado Local no debería enviar la grabación ni la transcripción a un servidor de transcripción.",
+              "Dictivo no promete que la app de escritorio nunca use la red. La afirmación de privacidad es más estrecha y útil: el dictado Local no envía la grabación ni la transcripción a un servidor de transcripción.",
               trialNetworkCopy("es"),
             ],
             bullets: [
@@ -902,20 +953,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["¿El modo Local de Dictivo sube audio?", "No. El modo Local está diseñado para mantener el audio de dictado en el dispositivo para la transcripción."],
+          ["¿Cómo compruebo si una app de dictado sube mi audio?", "Observa la app con un monitor de red por app durante un dictado breve sin datos sensibles y repite la prueba con la red bloqueada. Una transcripción que termina sin conexión se hizo en el dispositivo; tras reconectar, observa posibles envíos posteriores."],
+          ["¿El modo Local de Dictivo sube audio?", "No. En modo Local, Dictivo no envía tu audio de dictado a un servidor de transcripción."],
           ["¿Por qué Dictivo podría usar la red?", trialNetworkCopy("es")],
           ["¿Cloud Fast debería mostrar actividad de red?", "Sí. Cloud Fast es el modo rápido opcional que envía la grabación seleccionada para transcripción remota."],
           ["¿Qué hago si un dictado Local abre una conexión inesperada?", "Registra la hora, versión de la app, sistema operativo y host de destino, y escribe a support@dictivo.app para investigarlo."],
         ],
       },
       it: {
-        title: "Come verificare Dictivo Local mode con un monitor di rete",
+        title: "Come verificare con un monitor di rete se un'app di dettatura carica l'audio: l'esempio di Dictivo Local",
         eyebrow: "Prova privacy",
         metaTitle: "Test rete Dictivo Local · Prova privacy",
         metaDescription:
           "Una checklist pratica per verificare con un monitor di rete che Dictivo Local mode mantenga l'audio sul dispositivo.",
         lede:
-          "Dictivo Local mode è progettato per elaborare l'audio del microfono sul dispositivo. Questa pagina spiega come verificare questo confine con un monitor di rete prima di usare Dictivo per dettature sensibili.",
+          "Per sapere se un'app di dettatura carica il tuo audio, osserva il suo traffico di rete mentre detti, poi ripeti la prova con la rete bloccata. Questa pagina descrive la procedura con Dictivo Local mode come esempio, così puoi verificare questo confine prima di usare un'app per dettature sensibili.",
         relatedLinks: [
           { label: "Dove va l'audio della dettatura", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Leggi la Privacy Policy", href: "/privacy/" },
@@ -925,7 +977,8 @@ export const TRUST_PAGES = [
           {
             title: "Risposta breve",
             paragraphs: [
-              "In Local mode, Dictivo non dovrebbe caricare audio del microfono o trascrizioni verso un servizio di trascrizione. L'attività di rete che puoi ancora vedere riguarda operazioni del prodotto come aggiornamenti, licenze, download, supporto o Cloud Fast opzionale.",
+              "Osserva l'app di dettatura e i suoi processi ausiliari con un monitor di rete per app mentre detti una breve frase non sensibile, e annota destinazioni e byte inviati. Poi blocca il suo accesso alla rete e detta di nuovo: una trascrizione che si completa offline è avvenuta sul dispositivo. Dopo la riconnessione continua a osservare eventuali invii ritardati. La stessa prova funziona con qualsiasi app di dettatura.",
+              "L'esempio di Dictivo: in Local mode, Dictivo non invia l'audio della dettatura a un server di trascrizione. L'attività di rete che puoi ancora vedere riguarda operazioni del prodotto come aggiornamenti, licenze, download, supporto o Cloud Fast opzionale.",
             ],
           },
           {
@@ -941,9 +994,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "Strumenti utilizzabili",
+            paragraphs: ["Va bene qualsiasi strumento che mostri l'attività di rete per processo. Scegline uno per il tuo sistema:"],
+            bullets: [
+              "Firewall o monitor di rete per app su macOS, come Little Snitch o LuLu: mostra quale processo apre ogni connessione e può bloccare l'accesso di un'app.",
+              "Incluso in macOS: nettop nel Terminale e la scheda Rete di Monitoraggio Attività mostrano i byte inviati e ricevuti per processo.",
+              "Cattura dei pacchetti, ad esempio con Wireshark: mostra destinazioni, tempi e dimensioni; il contenuto del traffico cifrato resta illeggibile.",
+              "Windows: la scheda Rete di Monitoraggio risorse mostra connessioni e byte inviati per processo.",
+              "Un log del router conferma le stesse destinazioni dall'esterno del computer.",
+            ],
+          },
+          {
             title: "Superficie di rete prevista",
             paragraphs: [
-              "Dictivo non promette che l'app desktop non usi mai la rete. La promessa privacy è più precisa: la dettatura Local non dovrebbe inviare registrazione o trascrizione a un server di trascrizione.",
+              "Dictivo non promette che l'app desktop non usi mai la rete. La promessa privacy è più precisa: la dettatura Local non invia registrazione o trascrizione a un server di trascrizione.",
               trialNetworkCopy("it"),
             ],
             bullets: [
@@ -954,20 +1018,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Dictivo Local mode carica audio?", "No. Local mode è progettato per mantenere l'audio della dettatura sul dispositivo per la trascrizione."],
+          ["Come verifico se un'app di dettatura carica il mio audio?", "Osserva l'app con un monitor di rete per app durante una breve dettatura non sensibile, poi ripeti la prova con la rete bloccata. Una trascrizione che si completa offline è avvenuta sul dispositivo; dopo la riconnessione osserva eventuali invii ritardati."],
+          ["Dictivo Local mode carica audio?", "No. In Local mode, Dictivo non invia l'audio della dettatura a un server di trascrizione."],
           ["Perché Dictivo potrebbe usare la rete?", trialNetworkCopy("it")],
           ["Cloud Fast dovrebbe mostrare attività di rete?", "Sì. Cloud Fast è la modalità veloce opzionale che invia la registrazione selezionata per trascrizione remota."],
           ["Cosa fare se una dettatura Local apre una connessione inattesa?", "Registra orario, versione app, sistema operativo e host di destinazione, poi scrivi a support@dictivo.app per la verifica."],
         ],
       },
       nl: {
-        title: "Dictivo Local mode controleren met een netwerkmonitor",
+        title: "Met een netwerkmonitor controleren of een dicteerapp audio uploadt: het voorbeeld Dictivo Local",
         eyebrow: "Privacybewijs",
         metaTitle: "Dictivo Local netwerktest · Privacybewijs",
         metaDescription:
           "Een praktische checklist om met een netwerkmonitor te controleren dat Dictivo Local mode dicteeraudio op het apparaat houdt.",
         lede:
-          "Dictivo Local mode is ontworpen om microfoonaudio op je apparaat te verwerken. Deze pagina legt uit hoe je die grens controleert met een netwerkmonitor voordat je Dictivo gebruikt voor gevoelige dictatie.",
+          "Of een dicteerapp je audio uploadt, controleer je door het netwerkverkeer te volgen terwijl je dicteert en de test te herhalen met geblokkeerd netwerk. Deze pagina beschrijft die werkwijze met Dictivo Local mode als voorbeeld, zodat je die grens kunt controleren voordat je een app gebruikt voor gevoelige dictatie.",
         relatedLinks: [
           { label: "Waar dicteeraudio naartoe gaat", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Lees de Privacy Policy", href: "/privacy/" },
@@ -977,7 +1042,8 @@ export const TRUST_PAGES = [
           {
             title: "Kort antwoord",
             paragraphs: [
-              "In Local mode zou Dictivo geen microfoonaudio of transcripten naar een transcriptiedienst moeten uploaden. Netwerkactiviteit die je toch ziet, kan horen bij productacties zoals updates, licenties, downloads, support of optionele Cloud Fast.",
+              "Volg de dicteerapp en de hulpprocessen met een netwerkmonitor per app terwijl je een korte zin zonder gevoelige informatie dicteert, en noteer bestemmingen en verzonden bytes. Blokkeer daarna de netwerktoegang en dicteer opnieuw: een transcriptie die offline klaar is, gebeurde op het apparaat. Let na het herstellen van de verbinding op later verkeer. Dezelfde test werkt voor elke dicteerapp.",
+              "Het voorbeeld Dictivo: in Local mode stuurt Dictivo je dicteeraudio niet naar een transcriptieserver. Netwerkactiviteit die je toch ziet, kan horen bij productacties zoals updates, licenties, downloads, support of optionele Cloud Fast.",
             ],
           },
           {
@@ -993,9 +1059,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "Hulpmiddelen die je kunt gebruiken",
+            paragraphs: ["Elk hulpmiddel dat netwerkactiviteit per proces toont, is geschikt. Kies er een voor je besturingssysteem:"],
+            bullets: [
+              "Firewall of netwerkmonitor per app voor macOS, zoals Little Snitch of LuLu: toont welk proces welke verbinding opent en kan de toegang van een app blokkeren.",
+              "Ingebouwd in macOS: nettop in Terminal en het tabblad Netwerk van Activiteitenweergave tonen verzonden en ontvangen bytes per proces.",
+              "Pakketopname, bijvoorbeeld met Wireshark: toont bestemmingen, tijdstippen en groottes; de inhoud van versleuteld verkeer blijft onleesbaar.",
+              "Windows: het tabblad Netwerk van Broncontrole toont verbindingen en verzonden bytes per proces.",
+              "Een routerlog bevestigt dezelfde bestemmingen van buiten de computer.",
+            ],
+          },
+          {
             title: "Verwacht netwerkoppervlak",
             paragraphs: [
-              "Dictivo belooft niet dat de desktopapp nooit het netwerk gebruikt. De privacyclaim is smaller en nuttiger: Local dictation zou de opname of het transcript niet naar een transcriptieserver moeten sturen.",
+              "Dictivo belooft niet dat de desktopapp nooit het netwerk gebruikt. De privacyclaim is smaller en nuttiger: Local dictation stuurt de opname of het transcript niet naar een transcriptieserver.",
               trialNetworkCopy("nl"),
             ],
             bullets: [
@@ -1006,20 +1083,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Uploadt Dictivo Local mode audio?", "Nee. Local mode is ontworpen om dicteeraudio op het apparaat te houden voor transcriptie."],
+          ["Hoe controleer ik of een dicteerapp mijn audio uploadt?", "Volg de app met een netwerkmonitor per app tijdens een kort dictaat zonder gevoelige informatie en herhaal de test met geblokkeerd netwerk. Een transcriptie die offline klaar is, gebeurde op het apparaat; let na het herstellen van de verbinding op later verkeer."],
+          ["Uploadt Dictivo Local mode audio?", "Nee. In Local mode stuurt Dictivo je dicteeraudio niet naar een transcriptieserver."],
           ["Waarom kan Dictivo toch het netwerk gebruiken?", trialNetworkCopy("nl")],
           ["Moet Cloud Fast netwerkactiviteit tonen?", "Ja. Cloud Fast is de optionele snelle modus die de geselecteerde opname verstuurt voor externe transcriptie."],
           ["Wat als een Local dictaat een onverwachte verbinding opent?", "Noteer tijdstip, appversie, besturingssysteem en doelhost, en mail support@dictivo.app zodat het verschil onderzocht kan worden."],
         ],
       },
       pt: {
-        title: "Como verificar o modo Local do Dictivo com um monitor de rede",
+        title: "Como verificar com um monitor de rede se um app de ditado envia o áudio: o exemplo do Dictivo Local",
         eyebrow: "Prova de privacidade",
         metaTitle: "Teste de rede do Dictivo Local · Prova de privacidade",
         metaDescription:
           "Uma checklist prática para verificar com um monitor de rede que o modo Local do Dictivo mantém o áudio no dispositivo.",
         lede:
-          "O modo Local do Dictivo foi projetado para processar o áudio do microfone no seu dispositivo. Esta página explica como verificar esse limite com um monitor de rede antes de usar o Dictivo para ditado sensível.",
+          "Para saber se um app de ditado envia seu áudio, observe o tráfego de rede dele enquanto você dita e repita o teste com a rede bloqueada. Esta página descreve o procedimento com o modo Local do Dictivo como exemplo, para você verificar esse limite antes de usar um app para ditado sensível.",
         relatedLinks: [
           { label: "Para onde vai o áudio do ditado", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Ler a Privacy Policy", href: "/privacy/" },
@@ -1029,7 +1107,8 @@ export const TRUST_PAGES = [
           {
             title: "Resposta curta",
             paragraphs: [
-              "No modo Local, o Dictivo não deve enviar áudio do microfone nem transcrições para um serviço de transcrição. A atividade de rede que você ainda pode ver costuma estar ligada a operações do produto, como atualizações, licenças, downloads, suporte ou Cloud Fast opcional.",
+              "Observe o app de ditado e seus processos auxiliares com um monitor de rede por app enquanto você dita uma frase curta sem dados sensíveis, e anote os destinos e os bytes enviados. Depois bloqueie o acesso dele à rede e dite de novo: uma transcrição que termina offline foi feita no dispositivo. Após reconectar, continue observando envios atrasados. O mesmo teste funciona com qualquer app de ditado.",
+              "O exemplo do Dictivo: no modo Local, o Dictivo não envia seu áudio de ditado para um servidor de transcrição. A atividade de rede que você ainda pode ver costuma estar ligada a operações do produto, como atualizações, licenças, downloads, suporte ou Cloud Fast opcional.",
             ],
           },
           {
@@ -1045,9 +1124,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "Ferramentas que você pode usar",
+            paragraphs: ["Serve qualquer ferramenta que mostre a atividade de rede por processo. Escolha uma para o seu sistema:"],
+            bullets: [
+              "Firewall ou monitor de rede por app no macOS, como Little Snitch ou LuLu: mostra qual processo abre cada conexão e pode bloquear o acesso de um app.",
+              "Integrado ao macOS: nettop no Terminal e a aba Rede do Monitor de Atividade mostram os bytes enviados e recebidos por processo.",
+              "Captura de pacotes, por exemplo com o Wireshark: mostra destinos, horários e tamanhos; o conteúdo do tráfego criptografado continua ilegível.",
+              "Windows: a aba Rede do Monitor de Recursos mostra as conexões e os bytes enviados por processo.",
+              "Um log do roteador confirma os mesmos destinos de fora do computador.",
+            ],
+          },
+          {
             title: "Superfície de rede esperada",
             paragraphs: [
-              "O Dictivo não promete que o app desktop nunca use a rede. A promessa de privacidade é mais específica e útil: o ditado Local não deve enviar a gravação ou a transcrição para um servidor de transcrição.",
+              "O Dictivo não promete que o app desktop nunca use a rede. A promessa de privacidade é mais específica e útil: o ditado Local não envia a gravação nem a transcrição para um servidor de transcrição.",
               trialNetworkCopy("pt"),
             ],
             bullets: [
@@ -1058,20 +1148,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["O modo Local do Dictivo envia áudio?", "Não. O modo Local foi projetado para manter o áudio do ditado no dispositivo para transcrição."],
+          ["Como verifico se um app de ditado envia meu áudio?", "Observe o app com um monitor de rede por app durante um ditado curto sem dados sensíveis e repita o teste com a rede bloqueada. Uma transcrição que termina offline foi feita no dispositivo; após reconectar, observe envios atrasados."],
+          ["O modo Local do Dictivo envia áudio?", "Não. No modo Local, o Dictivo não envia seu áudio de ditado para um servidor de transcrição."],
           ["Por que o Dictivo ainda pode usar a rede?", trialNetworkCopy("pt")],
           ["O Cloud Fast deve mostrar atividade de rede?", "Sim. O Cloud Fast é o modo rápido opcional que envia a gravação selecionada para transcrição remota."],
           ["O que fazer se um ditado Local abrir uma conexão inesperada?", "Registre horário, versão do app, sistema operacional e host de destino, e escreva para support@dictivo.app para investigação."],
         ],
       },
       zh: {
-        title: "如何用网络监控工具验证 Dictivo Local 模式",
+        title: "如何用网络监控工具检查听写应用是否上传音频：以 Dictivo Local 为例",
         eyebrow: "隐私证明",
         metaTitle: "Dictivo Local 网络测试 · 隐私证明",
         metaDescription:
           "一份实用的网络监控检查清单，用来验证 Dictivo Local 模式是否把听写音频留在设备上。",
         lede:
-          "Dictivo Local 模式的设计目标是在你的设备上处理麦克风音频。本页说明在使用 Dictivo 处理敏感听写前，如何用网络监控工具验证这条边界。",
+          "要判断任何一款听写应用是否上传你的音频，可以在听写时观察它的网络流量，再在断网状态下重复测试。本页以 Dictivo Local 模式为例说明具体步骤，方便你在用任何应用处理敏感听写前先核实这条边界。",
         relatedLinks: [
           { label: "听写音频会发送到哪里", href: "/privacy/where-dictation-audio-goes/" },
           { label: "阅读 Privacy Policy", href: "/privacy/" },
@@ -1081,7 +1172,8 @@ export const TRUST_PAGES = [
           {
             title: "简短回答",
             paragraphs: [
-              "在 Local 模式下，Dictivo 不应把麦克风音频或转写文本上传到转写服务。你仍可能看到的网络活动，通常来自更新、许可证、下载、支持请求或可选 Cloud Fast 等产品操作。",
+              "用按应用显示流量的网络监控工具观察听写应用及其辅助进程，同时口述一句不含敏感信息的短句，记录它连接的主机和发送的字节数。然后禁止它联网并再次听写：断网后仍能完成的转写是在设备上完成的。恢复网络后继续观察是否有延迟发送。同样的测试适用于任何听写应用。",
+              "以 Dictivo 为例：在 Local 模式下，Dictivo 不会把你的听写音频发送到转写服务器。你仍可能看到的网络活动，通常来自更新、许可证、下载、支持请求或可选 Cloud Fast 等产品操作。",
             ],
           },
           {
@@ -1097,9 +1189,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "可以使用的工具",
+            paragraphs: ["任何能按进程显示网络活动的工具都可以。按你的操作系统选择一种："],
+            bullets: [
+              "macOS 上按应用工作的防火墙或网络监控工具，例如 Little Snitch 或 LuLu：显示哪个进程建立了哪条连接，并可阻止某个应用联网。",
+              "macOS 自带：终端里的 nettop 和“活动监视器”的“网络”标签页会按进程显示发送和接收的字节数。",
+              "抓包工具，例如 Wireshark：显示目标地址、时间和数据量；加密流量的内容仍无法读取。",
+              "Windows：“资源监视器”的“网络”标签页会按进程显示连接和发送的字节数。",
+              "路由器日志可以从电脑外部确认同样的目标地址。",
+            ],
+          },
+          {
             title: "预期的网络范围",
             paragraphs: [
-              "Dictivo 并不承诺桌面应用永远不使用网络。更准确也更有用的隐私声明是：Local 听写不应把录音或转写文本发送到转写服务器。",
+              "Dictivo 并不承诺桌面应用永远不使用网络。更准确也更有用的隐私声明是：Local 听写不会把录音或转写文本发送到转写服务器。",
               trialNetworkCopy("zh"),
             ],
             bullets: [
@@ -1110,20 +1213,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Dictivo Local 模式会上传音频吗？", "不会。Local 模式的设计目标是把听写音频留在设备上完成转写。"],
+          ["如何检查听写应用是否上传我的音频？", "用按应用显示流量的网络监控工具观察应用，口述一句不含敏感信息的短句，再在断网状态下重复测试。断网后仍能完成的转写是在设备上完成的；恢复网络后继续观察是否有延迟发送。"],
+          ["Dictivo Local 模式会上传音频吗？", "不会。在 Local 模式下，Dictivo 不会把你的听写音频发送到转写服务器。"],
           ["为什么我仍可能看到 Dictivo 使用网络？", trialNetworkCopy("zh")],
           ["Cloud Fast 应该出现网络活动吗？", "应该。Cloud Fast 是可选加速模式，会发送你选中的录音进行远程转写。"],
           ["如果 Local 听写打开了意外连接怎么办？", "记录时间戳、应用版本、操作系统和目标主机，然后发送到 support@dictivo.app 以便调查。"],
         ],
       },
       ja: {
-        title: "ネットワークモニターで Dictivo Local モードを確認する方法",
+        title: "ネットワークモニターで音声入力アプリが音声をアップロードしていないか確認する方法（Dictivo Local の例）",
         eyebrow: "プライバシー証明",
         metaTitle: "Dictivo Local ネットワークテスト · プライバシー証明",
         metaDescription:
           "Dictivo Local モードが音声入力の音声をデバイス上に保持することを、ネットワークモニターで確認するための実用的なチェックリストです。",
         lede:
-          "Dictivo Local モードは、マイク音声をデバイス上で処理するように設計されています。このページでは、機密性の高い音声入力に Dictivo を使う前に、ネットワークモニターでその境界を確認する方法を説明します。",
+          "音声入力アプリが音声をアップロードしていないかは、入力中のネットワーク通信を観察し、通信を遮断した状態でもう一度試すことで確認できます。このページでは Dictivo Local モードを例に手順を説明します。機密性の高い音声入力にアプリを使う前に、その境界を確認してください。",
         relatedLinks: [
           { label: "音声入力データの行き先", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Privacy Policy を読む", href: "/privacy/" },
@@ -1133,7 +1237,8 @@ export const TRUST_PAGES = [
           {
             title: "短い回答",
             paragraphs: [
-              "Local モードでは、Dictivo はマイク音声や transcript を文字起こしサービスへアップロードしないはずです。表示される可能性のあるネットワーク活動は、アップデート、ライセンス、ダウンロード、サポート、任意の Cloud Fast などの製品操作に関係します。",
+              "アプリごとの通信を表示できるネットワークモニターで、音声入力アプリと補助プロセスを観察しながら機密情報を含まない短文を入力し、接続先と送信バイト数を記録します。次に通信を遮断してもう一度入力します。オフラインでも完了する文字起こしは端末上で処理されています。通信を戻した後も、遅れて送信されないか観察を続けてください。同じテストはどの音声入力アプリにも使えます。",
+              "Dictivo の例：Local モードでは、Dictivo は音声入力の音声を文字起こしサーバーへ送信しません。表示される可能性のあるネットワーク活動は、アップデート、ライセンス、ダウンロード、サポート、任意の Cloud Fast などの製品操作に関係します。",
             ],
           },
           {
@@ -1149,9 +1254,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "使えるツール",
+            paragraphs: ["プロセスごとのネットワーク活動を表示できるツールなら使えます。OS に合わせて選んでください。"],
+            bullets: [
+              "macOS のアプリ単位のファイアウォールやネットワークモニター（Little Snitch、LuLu など）：どのプロセスがどの接続を開いたかを表示し、アプリの通信を遮断できます。",
+              "macOS 標準：ターミナルの nettop と「アクティビティモニタ」の「ネットワーク」タブで、プロセスごとの送受信バイト数を確認できます。",
+              "パケットキャプチャ（Wireshark など）：接続先、タイミング、サイズを確認できます。暗号化された通信の内容は読めません。",
+              "Windows：「リソースモニター」の「ネットワーク」タブで、プロセスごとの接続と送信バイト数を確認できます。",
+              "ルーターのログで、同じ接続先をコンピューターの外側から確認できます。",
+            ],
+          },
+          {
             title: "想定されるネットワーク範囲",
             paragraphs: [
-              "Dictivo はデスクトップアプリが一切ネットワークを使わないとは約束していません。プライバシーの主張はより狭く実用的です。Local 音声入力は録音や transcript を文字起こしサーバーへ送信しないはずです。",
+              "Dictivo はデスクトップアプリが一切ネットワークを使わないとは約束していません。プライバシーの主張はより狭く実用的です。Local 音声入力は録音や transcript を文字起こしサーバーへ送信しません。",
               trialNetworkCopy("ja"),
             ],
             bullets: [
@@ -1162,20 +1278,21 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Dictivo Local モードは音声をアップロードしますか？", "いいえ。Local モードは音声入力の音声をデバイス上に保持して文字起こしする設計です。"],
+          ["音声入力アプリが音声をアップロードしていないか、どう確認できますか？", "アプリごとの通信を表示できるネットワークモニターで、機密情報を含まない短い入力中のアプリを観察し、通信を遮断した状態でもう一度試します。オフラインでも完了する文字起こしは端末上で処理されています。通信を戻した後も、遅れた送信がないか観察してください。"],
+          ["Dictivo Local モードは音声をアップロードしますか？", "いいえ。Local モードでは、Dictivo は音声入力の音声を文字起こしサーバーへ送信しません。"],
           ["なぜ Dictivo がネットワークを使うことがありますか？", trialNetworkCopy("ja")],
           ["Cloud Fast ではネットワーク活動が出るべきですか？", "はい。Cloud Fast は選択した録音をリモート文字起こしへ送る任意の高速モードです。"],
           ["Local 音声入力で予期しない接続が開いたら？", "時刻、アプリ版、OS、接続先ホストを記録し、support@dictivo.app へ送って調査を依頼してください。"],
         ],
       },
       ko: {
-        title: "네트워크 모니터로 Dictivo Local 모드 확인하기",
+        title: "네트워크 모니터로 받아쓰기 앱이 오디오를 업로드하는지 확인하기: Dictivo Local 예시",
         eyebrow: "개인정보 증명",
         metaTitle: "Dictivo Local 네트워크 테스트 · 개인정보 증명",
         metaDescription:
           "Dictivo Local 모드가 받아쓰기 오디오를 기기에 유지하는지 네트워크 모니터로 확인하는 실용적인 체크리스트입니다.",
         lede:
-          "Dictivo Local 모드는 마이크 오디오를 기기에서 처리하도록 설계되었습니다. 이 페이지는 민감한 받아쓰기에 Dictivo를 사용하기 전에 네트워크 모니터로 그 경계를 확인하는 방법을 설명합니다.",
+          "받아쓰기 앱이 오디오를 업로드하는지는 받아쓰는 동안 네트워크 트래픽을 관찰하고, 네트워크를 차단한 상태에서 다시 테스트해 확인할 수 있습니다. 이 페이지는 Dictivo Local 모드를 예로 그 절차를 설명하므로, 민감한 받아쓰기에 앱을 사용하기 전에 그 경계를 확인할 수 있습니다.",
         relatedLinks: [
           { label: "받아쓰기 오디오 처리 위치", href: "/privacy/where-dictation-audio-goes/" },
           { label: "Privacy Policy 읽기", href: "/privacy/" },
@@ -1185,7 +1302,8 @@ export const TRUST_PAGES = [
           {
             title: "짧은 답변",
             paragraphs: [
-              "Local 모드에서 Dictivo는 마이크 오디오나 transcript를 전사 서비스로 업로드하지 않아야 합니다. 그래도 보일 수 있는 네트워크 활동은 업데이트, 라이선스, 다운로드, 지원 또는 선택형 Cloud Fast 같은 제품 작업과 관련될 수 있습니다.",
+              "앱별 트래픽을 보여 주는 네트워크 모니터로 받아쓰기 앱과 보조 프로세스를 관찰하면서 민감하지 않은 짧은 문장을 받아쓰고, 목적지와 송신 바이트를 기록하세요. 그런 다음 네트워크 접근을 차단하고 다시 받아쓰세요. 오프라인에서도 완료되는 전사는 기기에서 처리된 것입니다. 연결을 복원한 뒤에도 지연 전송이 있는지 계속 관찰하세요. 같은 테스트는 모든 받아쓰기 앱에 쓸 수 있습니다.",
+              "Dictivo 예시: Local 모드에서 Dictivo는 받아쓰기 오디오를 전사 서버로 보내지 않습니다. 그래도 보일 수 있는 네트워크 활동은 업데이트, 라이선스, 다운로드, 지원 또는 선택형 Cloud Fast 같은 제품 작업과 관련될 수 있습니다.",
             ],
           },
           {
@@ -1201,9 +1319,20 @@ export const TRUST_PAGES = [
             ],
           },
           {
+            title: "사용할 수 있는 도구",
+            paragraphs: ["프로세스별 네트워크 활동을 보여 주는 도구라면 무엇이든 됩니다. 운영체제에 맞게 고르세요."],
+            bullets: [
+              "macOS용 앱별 방화벽 또는 네트워크 모니터(예: Little Snitch, LuLu): 어떤 프로세스가 어떤 연결을 여는지 보여 주고 앱의 네트워크 접근을 차단할 수 있습니다.",
+              "macOS 기본 도구: 터미널의 nettop과 '활성 상태 보기'의 '네트워크' 탭에서 프로세스별 송수신 바이트를 볼 수 있습니다.",
+              "패킷 캡처(예: Wireshark): 목적지, 시점, 크기를 보여 주며 암호화된 트래픽의 내용은 읽을 수 없습니다.",
+              "Windows: '리소스 모니터'의 '네트워크' 탭에서 프로세스별 연결과 송신 바이트를 볼 수 있습니다.",
+              "라우터 로그로 같은 목적지를 컴퓨터 바깥에서 확인할 수 있습니다.",
+            ],
+          },
+          {
             title: "예상되는 네트워크 범위",
             paragraphs: [
-              "Dictivo는 데스크톱 앱이 네트워크를 전혀 쓰지 않는다고 약속하지 않습니다. 개인정보 주장은 더 좁고 실용적입니다. Local 받아쓰기는 녹음이나 transcript를 전사 서버로 보내지 않아야 합니다.",
+              "Dictivo는 데스크톱 앱이 네트워크를 전혀 쓰지 않는다고 약속하지 않습니다. 개인정보 주장은 더 좁고 실용적입니다. Local 받아쓰기는 녹음이나 transcript를 전사 서버로 보내지 않습니다.",
               trialNetworkCopy("ko"),
             ],
             bullets: [
@@ -1214,7 +1343,8 @@ export const TRUST_PAGES = [
           },
         ],
         faqs: [
-          ["Dictivo Local 모드는 오디오를 업로드하나요?", "아니요. Local 모드는 받아쓰기 오디오를 기기에 유지해 전사하도록 설계되었습니다."],
+          ["받아쓰기 앱이 내 오디오를 업로드하는지 어떻게 확인하나요?", "앱별 트래픽을 보여 주는 네트워크 모니터로 민감하지 않은 짧은 받아쓰기 중인 앱을 관찰하고, 네트워크를 차단한 상태에서 다시 테스트하세요. 오프라인에서도 완료되는 전사는 기기에서 처리된 것이며, 연결을 복원한 뒤에도 지연 전송이 있는지 관찰하세요."],
+          ["Dictivo Local 모드는 오디오를 업로드하나요?", "아니요. Local 모드에서 Dictivo는 받아쓰기 오디오를 전사 서버로 보내지 않습니다."],
           ["왜 Dictivo가 네트워크를 사용할 수 있나요?", trialNetworkCopy("ko")],
           ["Cloud Fast는 네트워크 활동을 보여야 하나요?", "네. Cloud Fast는 선택한 녹음을 원격 전사로 보내는 선택형 빠른 모드입니다."],
           ["Local 받아쓰기가 예상치 못한 연결을 열면 어떻게 하나요?", "시각, 앱 버전, 운영체제, 대상 호스트를 기록한 뒤 support@dictivo.app으로 보내 조사를 요청하세요."],
