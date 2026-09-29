@@ -103,3 +103,86 @@ test("without sendBeacon the public site falls back to fetch and preview hosts s
   assert.deepEqual(page.fetched.map((request) => request.event), ["page_view", "download_cta_clicked"]);
   assert.equal(page.events.length, 0);
 });
+
+test("/?self=1 stores the dictivo-self flag and stops page views, download decoration and download clicks", () => {
+  const storage = memoryStorage();
+  const page = loadPage("https://dictivo.app/?self=1", { storage });
+  assert.equal(storage.getItem("dictivo-self"), "1");
+  assert.deepEqual(storage.keys(), ["dictivo-self"], "only the flag is stored");
+  const link = downloadLink();
+  page.context.sendDownloadClick(link);
+  assert.equal(link.href, DOWNLOAD);
+  assert.equal(page.events.length, 0);
+  assert.equal(page.fetched.length, 0);
+  assert.equal(page.location.search, "?self=1", "the address is not rewritten");
+});
+
+test("the flag keeps excluding later visits without the parameter, and /?self=0 removes it", () => {
+  const storage = memoryStorage({ "dictivo-self": "1" });
+  const later = loadPage("https://dictivo.app/about/", { storage });
+  const link = downloadLink();
+  later.context.sendDownloadClick(link);
+  assert.equal(later.events.length, 0);
+  assert.equal(link.href, DOWNLOAD);
+
+  const reset = loadPage("https://dictivo.app/?self=0", { storage });
+  assert.equal(storage.getItem("dictivo-self"), null);
+  assert.equal(reset.events.length, 1, "the page that removes the flag is counted again");
+  assert.equal(reset.events[0].event, "page_view");
+
+  const afterwards = loadPage("https://dictivo.app/", { storage });
+  assert.equal(afterwards.events.length, 1);
+  assert.deepEqual(storage.keys(), [], "nothing else was stored");
+});
+
+test("a page without the flag stores nothing at all", () => {
+  const storage = memoryStorage();
+  const page = loadPage("https://dictivo.app/?utm_source=newsletter", { storage });
+  page.context.sendDownloadClick(downloadLink());
+  assert.equal(page.events.length, 2);
+  assert.deepEqual(storage.keys(), []);
+});
+
+test("/?self=1 keeps campaign carry-over and the checkout channel working", () => {
+  const storage = memoryStorage();
+  const page = loadPage("https://dictivo.app/ja/?utm_source=newsletter&utm_medium=email&self=1", { storage });
+  assert.equal(storage.getItem("dictivo-self"), "1");
+  assert.equal(page.events.length, 0);
+  const guide = click(page, pageLink("https://dictivo.app/ja/guides/first-local-dictation/"));
+  assert.equal(guide.searchParams.get("utm_source"), "newsletter");
+  assert.equal(guide.searchParams.get("utm_medium"), "email");
+  assert.equal(guide.searchParams.has("self"), false, "the flag parameter is not carried to other pages");
+  assert.equal(guide.searchParams.has("visitId"), false);
+  const checkout = click(page, pageLink("https://dictivo.app/checkout/local"));
+  assert.equal(checkout.searchParams.get("checkout[custom][channel]"), "newsletter");
+});
+
+test("other self values leave the flag as it was", () => {
+  for (const value of ["", "true", "01", "2", "yes", "1%20"]) {
+    const empty = memoryStorage();
+    const counted = loadPage(`https://dictivo.app/?self=${value}`, { storage: empty });
+    assert.equal(empty.getItem("dictivo-self"), null, `self=${value}: the flag was set`);
+    assert.equal(counted.events.length, 1, `self=${value}: the page view was not sent`);
+    const flagged = memoryStorage({ "dictivo-self": "1" });
+    const excluded = loadPage(`https://dictivo.app/?self=${value}`, { storage: flagged });
+    assert.equal(flagged.getItem("dictivo-self"), "1", `self=${value}: the flag was removed`);
+    assert.equal(excluded.events.length, 0, `self=${value}: a beacon was sent`);
+  }
+});
+
+test("storage that is missing or throws counts as not excluded, and the rest of the script still runs", () => {
+  const cases = [
+    ["no storage object", {}],
+    ["storage access throws", { storageBlocked: true }],
+    ["setItem throws", { storage: { getItem: () => null, setItem: () => { throw new Error("QuotaExceededError"); }, removeItem: () => {} } }],
+    ["getItem throws", { storage: { getItem: () => { throw new Error("SecurityError"); }, setItem: () => {}, removeItem: () => {} } }],
+  ];
+  for (const [name, options] of cases) {
+    const page = loadPage("https://dictivo.app/?self=1", options);
+    assert.equal(page.events.length, 1, `${name}: the page view was not sent`);
+    const link = downloadLink();
+    page.context.sendDownloadClick(link);
+    assert.equal(new URL(link.href).searchParams.get("visitId"), page.events[0].visitId, `${name}: the download link was not decorated`);
+    assert.equal(typeof page.handlers.click, "function", `${name}: the click handler was not registered, so an exception escaped`);
+  }
+});

@@ -86,9 +86,32 @@ const analyticsInstrumentationVersion = "web-linked-v1";
 const analyticsVisitId = createAnalyticsVisitId();
 const isPublicSite = ["dictivo.app", "www.dictivo.app"].includes(window.location.hostname);
 
-// Beacons and download-link decoration happen only on the public site. Local
-// and preview hosts keep their static links and send nothing.
-const analyticsEnabled = isPublicSite;
+// A visitor can exclude their own browser: /?self=1 stores a single flag named
+// dictivo-self in local storage, /?self=0 removes it, and any other value leaves
+// it alone. While the flag is set this browser sends no page views or download
+// clicks and keeps download links static. Storage that is missing or throws
+// (blocked cookies, private browsing) counts as not excluded. The address is not
+// rewritten and nothing else is ever stored.
+function readSelfExclusion() {
+  const requested = new URLSearchParams(window.location.search).get("self");
+  try {
+    if (requested === "1") window.localStorage.setItem("dictivo-self", "1");
+    else if (requested === "0") window.localStorage.removeItem("dictivo-self");
+  } catch {
+    // Storage is unavailable; the flag cannot change.
+  }
+  try {
+    return window.localStorage.getItem("dictivo-self") === "1";
+  } catch {
+    return false;
+  }
+}
+
+const selfExcluded = readSelfExclusion();
+// Beacons and download-link decoration happen only on the public site and only
+// for browsers that did not exclude themselves. Local and preview hosts keep
+// their static links and send nothing.
+const analyticsEnabled = isPublicSite && !selfExcluded;
 
 function campaignValue(value) {
   return String(value || "").replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, 120) || undefined;
@@ -109,8 +132,9 @@ function readPageAttribution() {
 const pageAttribution = readPageAttribution();
 
 // Carry only campaign metadata through a user-initiated internal navigation.
-// No visit id crosses pages; no cookie or browser storage is created. Keep the
-// static links clean for crawlers. Checkout receives only a registered channel.
+// No visit id crosses pages and no cookie is created; the only browser storage
+// is the dictivo-self opt-out flag. Keep the static links clean for crawlers.
+// Checkout receives only a registered channel.
 function checkoutChannel(source) {
   const value = String(source || "").toLowerCase();
   const channels = ["google", "google_ads", "bing", "chatgpt", "perplexity", "claude", "gemini", "copilot", "reddit", "hackernews", "producthunt", "alternativeto", "setapp", "github", "x", "linkedin", "youtube", "tiktok", "instagram", "facebook", "threads", "newsletter", "email", "partner", "affiliate", "podcast", "directory", "qiita", "zenn", "note", "zhihu", "xiaohongshu", "bilibili", "wechat"];
