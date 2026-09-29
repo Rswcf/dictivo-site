@@ -266,8 +266,8 @@ A validation failure should be assessed against the actual pattern and the page'
 The same script also asserts that the required trust, GEO and localized pages exist, that no
 `data/`, `scripts/`, `tmp/` or `.github/` path is published, that `assets/site.js` still carries
 the `web-linked-v1` analytics contract, that `changelog/index.html`, `security/index.html` and
-`404.html` load `assets/site.js` outside any HTML comment, that `site.js` reads the `dictivo-self`
-flag and the `?self=` parameter and still declares `analyticsEnabled` as
+`404.html` reference `assets/site.js` outside any HTML comment, that `site.js` reads the
+`dictivo-self` flag and the `?self=` parameter and still declares `analyticsEnabled` as
 `isPublicSite && !selfExcluded`, that `sendDownloadClick` and `sendPageView` both open with
 `if (!analyticsEnabled) return;`, so nothing is sent and no download link is decorated first,
 and the Windows launch consistency rules above.
@@ -450,8 +450,10 @@ is implemented in the local pending commits noted above, not yet verified in pro
 `analyticsEnabled = isPublicSite && !selfExcluded` gates everything the script sends.
 `sendPageView` and `sendDownloadClick` return before doing anything when it is false, so local
 and Pages-preview hosts neither send page or click beacons nor rewrite download links: their
-static `/download/*` links stay exactly as generated. `carryCampaign` and the checkout channel
-label are not gated.
+static `/download/*` links stay exactly as generated. Neither `carryCampaign` nor the checkout
+channel label reads `analyticsEnabled`: campaign carry-over runs on every host, and the checkout
+label is still added on the public site only (its own `isPublicSite` check), whether or not the
+browser is excluded.
 
 Opening `/?self=1` on the public site stores one flag, `localStorage["dictivo-self"] = "1"`, and
 `/?self=0` removes it; any other value leaves it alone. While the flag is set that browser sends
@@ -467,9 +469,10 @@ they send the same page-load event and nothing more.
 The built-in Node check `node scripts/check-web-attribution.mjs` exercises campaign handoff,
 independent page ids, click/redirect parity, referrer query removal, navigation exclusions,
 preview isolation (static preview download links included) and that the `dictivo-self` flag is
-the script's only browser storage. `npm test` adds `tests/site-analytics-gate.test.mjs` (the gate,
-the fetch fallback, the flag and storage failures) and `tests/site-script.test.mjs` (the three
-pages carry the shared script line). Both run in deployment CI.
+the script's only browser storage. `npm test` also runs `tests/site-analytics-gate.test.mjs`
+(the gate, the fetch fallback, the flag and storage failures) and `tests/site-script.test.mjs`
+(the three pages carry the shared script line). The check and `npm test` both run in
+deployment CI.
 
 ## Language routing (2026-09-14)
 
