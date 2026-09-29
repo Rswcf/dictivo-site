@@ -48,3 +48,14 @@ test("German pages address the reader as Sie", () => {
     assert.equal(informal, null, `${path.slice(dist.length)} uses du-forms: ${informal?.join(", ")}`);
   }
 });
+
+test("the Privacy Policy and /security/ explain the dictivo-self opt-out flag, and the served site.js reads it", () => {
+  for (const path of ["privacy/index.html", "security/index.html"]) {
+    const text = visibleText(`${dist}${path}`);
+    assert.ok(text.includes("dictivo-self"), `${path}: the flag name is missing`);
+    assert.ok(text.includes("dictivo.app/?self=1"), `${path}: the /?self=1 address is missing`);
+    assert.ok(text.includes("/?self=0 removes the flag"), `${path}: the /?self=0 sentence is missing`);
+    assert.ok(readFileSync(`${dist}${path}`, "utf8").includes('datetime="2026-09-29"'), `${path}: the page date did not move with this change`);
+  }
+  assert.ok(readFileSync(`${dist}assets/site.js`, "utf8").includes('"dictivo-self"'), "dist/assets/site.js does not name the dictivo-self flag");
+});
