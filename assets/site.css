@@ -2552,6 +2552,8 @@ main section[id] {
 .doc-meta {
   display: inline-flex;
   align-items: center;
+  /* Flex drops the space between the label and its <time>; restore it. */
+  column-gap: 0.35em;
   margin: 0 0 16px;
   color: var(--muted);
   font-family: var(--mono);
