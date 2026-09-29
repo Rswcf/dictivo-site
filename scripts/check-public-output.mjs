@@ -356,7 +356,7 @@ function verifyAnalyticsInstrumentation() {
   } else if (downloadClick.indexOf(gate) > downloadClick.indexOf(decorate)) {
     failures.push("assets/site.js: sendDownloadClick decorates the link before checking analyticsEnabled");
   } else if (!bodyBeginsWith(downloadClick, gate)) {
-    failures.push(`assets/site.js: the first statement of sendDownloadClick must be ${JSON.stringify(gate)}`);
+    failures.push(`assets/site.js: sendDownloadClick must open with ${JSON.stringify(gate)} (nothing, not even a comment, may come before it)`);
   }
   const pageView = topLevelFunction(siteJs, "sendPageView");
   if (!pageView) {
@@ -364,7 +364,7 @@ function verifyAnalyticsInstrumentation() {
   } else if (!pageView.includes(gate)) {
     failures.push(`assets/site.js: sendPageView must contain ${JSON.stringify(gate)}`);
   } else if (!bodyBeginsWith(pageView, gate)) {
-    failures.push(`assets/site.js: the first statement of sendPageView must be ${JSON.stringify(gate)}`);
+    failures.push(`assets/site.js: sendPageView must open with ${JSON.stringify(gate)} (nothing, not even a comment, may come before it)`);
   }
 }
 

@@ -137,5 +137,8 @@ for (const host of ["127.0.0.1:4173", "localhost:4173", "preview.dictivo-app.pag
 const selfFlagAccess = /window\.localStorage\.(?:getItem\("dictivo-self"\)|setItem\("dictivo-self", "1"\)|removeItem\("dictivo-self"\))/;
 assert(selfFlagAccess.test(analytics), "The dictivo-self opt-out flag must be read from local storage");
 const withoutSelfFlag = script.replace(new RegExp(selfFlagAccess.source, "g"), "");
-assert(!/\b(localStorage|sessionStorage)\s*[.\[]|document\.cookie\s*=/.test(withoutSelfFlag), "No persistent browser tracking beyond the dictivo-self opt-out flag");
+// Forbidden forms: Web Storage and the Cache API by dot, bracket or quoted name,
+// IndexedDB, the Cookie Store API, and cookie writes, compound assignment included.
+const forbiddenStorage = /\b(?:localStorage|sessionStorage|caches)\s*[.\[]|\[\s*["'`](?:localStorage|sessionStorage|caches)["'`]\s*\]|\bindexedDB\b|\bcookieStore\b|document(?:\.cookie|\[\s*["'`]cookie["'`]\s*\])\s*\+?=/;
+assert(!forbiddenStorage.test(withoutSelfFlag), "No persistent browser tracking beyond the dictivo-self opt-out flag");
 console.log("Web attribution checks passed: campaign handoff, fresh page ids, CTA/redirect parity, referrer privacy, navigation exclusions, preview isolation, and the opt-out flag.");
