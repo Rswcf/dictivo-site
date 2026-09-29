@@ -125,7 +125,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       "Dictivo Local": guideLocalPrice("de"),
       Voibe: "Voibe Dictation: Listenpreis $9.90 pro Monat (am Prüfdatum auf $7.50 reduziert angezeigt), $75 pro Jahr oder einmalig $149 für lebenslangen Zugang.",
       "Voice Type": "7 Tage kostenlos, danach einmalig $19.99 für lebenslangen Zugang (In-App-Kauf im App Store).",
-      Aiko: "Mac App Store (USA): $24.",
+      Aiko: "Mac App Store: $24 (US-Preis).",
     },
     rows: [
       ["Dictivo Local", "Ja im Local Mode. Audio wird auf dem Gerät verarbeitet und Local-Aufnahmen/Transkripte werden nicht hochgeladen.", "Optionales Cloud Fast lädt nur die ausgewählte Aufnahme für schnellere Remote-Transkription hoch.", "Local-first Hotkey-Diktat mit klarer Grenze zwischen Local und Cloud Fast."],
@@ -505,7 +505,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       "Dictivo Local": guideLocalPrice("zh"),
       Voibe: "Voibe Dictation：标价每月 $9.90（核对日显示折扣价 $7.50）、每年 $75，或 $149 一次性购买终身使用。",
       "Voice Type": "免费试用 7 天，之后 $19.99 一次性购买终身使用（App Store 应用内购买）。",
-      Aiko: "美国 Mac App Store 售价 $24。",
+      Aiko: "美国 Mac App Store：$24。",
     },
     rows: [
       ["Dictivo Local", "Local 模式下是。音频在设备上处理，Local 录音和转写文本不会上传。", "可选 Cloud Fast 只会上传你选择的录音，用于更快的远程转写。", "本地优先的快捷键听写，并且 Local 与 Cloud Fast 边界清楚。"],
