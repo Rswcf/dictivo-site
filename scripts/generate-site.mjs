@@ -53,7 +53,8 @@ import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
 import { priceText, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
-import { LOCAL_OFFER, offerDate, PRICING_LASTMOD } from "../data/local-offer.mjs";
+import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
+import { llmsLocalPriceLine, localOfferNodes } from "../data/local-offer-copy.mjs";
 import { firstPublished } from "../data/first-published.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -2493,27 +2494,10 @@ function inclusivePriceSpecification(amount) {
   return { "@type": "PriceSpecification", price: schemaPrice(amount), priceCurrency: "USD", valueAddedTaxIncluded: true };
 }
 
-// Dictivo Local at the introductory price until introPriceUntil, and at the regular price
-// from regularPriceFrom, so the structured data never ends on an expired offer.
+// Dictivo Local Offers from data/local-offer-copy.mjs: introductory and regular while the
+// introductory offer runs, one undated Offer after the rollover.
 function localOffers() {
-  return [
-    {
-      "@type": "Offer",
-      name: "Dictivo Local",
-      price: schemaPrice("local"),
-      priceCurrency: "USD",
-      priceValidUntil: LOCAL_OFFER.introPriceUntil,
-      priceSpecification: inclusivePriceSpecification("local"),
-    },
-    {
-      "@type": "Offer",
-      name: "Dictivo Local",
-      price: schemaPrice("regular"),
-      priceCurrency: "USD",
-      priceValidFrom: LOCAL_OFFER.regularPriceFrom,
-      priceSpecification: inclusivePriceSpecification("regular"),
-    },
-  ];
+  return localOfferNodes();
 }
 
 // One Organization per page. Every publisher and author refers to it by @id.
@@ -5651,7 +5635,7 @@ function renderLlmsEnglishFacts() {
   const price = (amount) => priceText(amount, "en");
   const offline = offlineDictationGuideCopy("en").navLabel;
   const prices = [
-    `Dictivo Local: ${price("local")} once until ${offerDate(LOCAL_OFFER.introPriceUntil, "en")} (introductory price), then ${price("regular")} once from ${offerDate(LOCAL_OFFER.regularPriceFrom, "en")}. Prices are in US dollars, tax included.`,
+    llmsLocalPriceLine(),
     `The Local license is perpetual for the version you buy, includes ${LOCAL_OFFER.includedUpdateMonths} months of updates and new local models, and covers up to ${LOCAL_OFFER.personalDevices} personal devices.`,
     `Update renewal after the first year is optional at ${price("renewal")} a year; without it, the purchased version keeps working.`,
     `Free: the Tiny local model is free forever, and new installs include a ${LOCAL_OFFER.trialDays}-day full Local trial with every local model, without a card or Dictivo account.`,

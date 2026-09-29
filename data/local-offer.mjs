@@ -33,6 +33,14 @@ export function offerDate(isoDate, locale) {
   return text;
 }
 
+// The introductory offer is on while both dates are set and the two prices differ. The
+// 2026-11-01 runbook clears the dates; every sentence and Offer built through
+// data/local-offer-copy.mjs then states the regular price alone. This reads the constant
+// only, never today's date.
+export function introOfferActive(offer = LOCAL_OFFER) {
+  return Boolean(offer.introPriceUntil && offer.regularPriceFrom && offer.price !== offer.regularPrice);
+}
+
 // The copy promises the regular price from regularPriceFrom, so a build after
 // introPriceUntil must not keep advertising the introductory price.
 export function introPriceExpired(today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(new Date())) {

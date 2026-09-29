@@ -1,9 +1,8 @@
-import { LOCAL_OFFER, offerDate } from "./local-offer.mjs";
+import { mediaKitLocalFacts } from "./local-offer-copy.mjs";
 
 export const MEDIA_KIT_LASTMOD = "2026-09-29";
 
-const introUntil = offerDate(LOCAL_OFFER.introPriceUntil, "en");
-const regularFrom = offerDate(LOCAL_OFFER.regularPriceFrom, "en");
+const localFacts = mediaKitLocalFacts();
 
 export const MEDIA_KIT_COPY = {
   navLabel: "Media kit",
@@ -28,7 +27,7 @@ export const MEDIA_KIT_COPY = {
     ["Local mode", "Processes dictation audio on the device and does not require a Dictivo account."],
     ["Cloud Fast", "Optional speed mode that uploads only the selected recording for remote transcription."],
     ["Free path", "Tiny Local dictation is free forever. New installs include a 14-day full Local trial."],
-    ["Paid Local", `{{price.local.inline}} once at the introductory price until ${introUntil}; {{price.regular.inline}} once from ${regularFrom}. Both include ${LOCAL_OFFER.includedUpdateMonths} months of updates. Update renewal ({{price.renewal.inline}} a year) is optional after the first year.`],
+    ["Paid Local", localFacts.paidLocal],
     ["Cloud Fast price", "{{price.cloudFast.inline}} a month for optional Cloud Fast minutes."],
     ["Support", "support@dictivo.app"],
   ],
@@ -58,7 +57,7 @@ export const MEDIA_KIT_COPY = {
     ["Use", "Local mode keeps dictation audio on the device", "Avoid", "Dictivo never uses the network"],
     ["Use", "Optional Cloud Fast uploads selected recordings", "Avoid", "Cloud Fast has the same privacy boundary as Local mode"],
     ["Use", "publicly available for macOS and Windows x64", "Avoid", "Mac-only app"],
-    ["Use", `One-time Local license ({{price.local.inline}} until ${introUntil}, then {{price.regular.inline}})`, "Avoid", "Free unlimited full product"],
+    ["Use", localFacts.licenseClaim, "Avoid", "Free unlimited full product"],
     ["Use", "Benchmark method documented", "Avoid", "Unpublished M-series speed claims"],
     ["Use", "Private-first workflow for sensitive drafts", "Avoid", "HIPAA, legal, medical, or compliance-ready without review"],
   ],
