@@ -318,6 +318,7 @@ function verifyAnalyticsInstrumentation() {
   // Every published page loads the same client: generated pages through
   // assetTags(), these three through their own <head>. Before fingerprinting the
   // reference is /assets/site.js?v=…, afterwards /assets/site.<fingerprint>.js.
+  // A tag inside an HTML comment loads nothing, so comments are removed first.
   const scriptReference = /\/assets\/site\.js\?v=|\/assets\/site\.[0-9a-f]{12}\.js/;
   for (const file of ["changelog/index.html", "security/index.html", "404.html"]) {
     const path = resolve(publicRoot, file);
@@ -325,7 +326,8 @@ function verifyAnalyticsInstrumentation() {
       failures.push(`${file}: page is missing, so it cannot load assets/site.js`);
       continue;
     }
-    if (!scriptReference.test(readFileSync(path, "utf8"))) failures.push(`${file}: does not load assets/site.js`);
+    const html = readFileSync(path, "utf8").replace(/<!--[\s\S]*?-->/g, "");
+    if (!scriptReference.test(html)) failures.push(`${file}: does not load assets/site.js`);
   }
 
   // The visitor's opt-out flag: read from local storage, set or cleared from ?self=.
@@ -333,18 +335,36 @@ function verifyAnalyticsInstrumentation() {
     if (!pattern.test(siteJs)) failures.push(`assets/site.js: missing self-exclusion handling ${pattern}`);
   }
 
+  // The flag is honoured, not only read: analyticsEnabled combines it with the
+  // public host. The declaration has to be a line of its own, so a commented-out
+  // copy does not count.
+  const enabled = "const analyticsEnabled = isPublicSite && !selfExcluded;";
+  if (!siteJs.split("\n").some((line) => line.trimEnd() === enabled)) {
+    failures.push(`assets/site.js: analyticsEnabled must be declared on its own line as ${JSON.stringify(enabled)}`);
+  }
+
   // The gate comes first: a non-public host or an excluded browser must neither
-  // decorate the download link nor send a beacon.
+  // decorate the download link nor send a beacon. Both function bodies open with
+  // the gate itself, so a comment above it, or one that quotes it, fails the check.
   const gate = "if (!analyticsEnabled) return;";
   const decorate = 'searchParams.set("visitId"';
   const downloadClick = topLevelFunction(siteJs, "sendDownloadClick");
-  if (!downloadClick.includes(gate) || !downloadClick.includes(decorate)) {
+  if (!downloadClick) {
+    failures.push("assets/site.js: cannot find the top-level function sendDownloadClick declaration");
+  } else if (!downloadClick.includes(gate) || !downloadClick.includes(decorate)) {
     failures.push(`assets/site.js: sendDownloadClick must contain both ${JSON.stringify(gate)} and ${JSON.stringify(decorate)}`);
   } else if (downloadClick.indexOf(gate) > downloadClick.indexOf(decorate)) {
     failures.push("assets/site.js: sendDownloadClick decorates the link before checking analyticsEnabled");
+  } else if (!bodyBeginsWith(downloadClick, gate)) {
+    failures.push(`assets/site.js: the first statement of sendDownloadClick must be ${JSON.stringify(gate)}`);
   }
-  if (!topLevelFunction(siteJs, "sendPageView").includes(gate)) {
+  const pageView = topLevelFunction(siteJs, "sendPageView");
+  if (!pageView) {
+    failures.push("assets/site.js: cannot find the top-level function sendPageView declaration");
+  } else if (!pageView.includes(gate)) {
     failures.push(`assets/site.js: sendPageView must contain ${JSON.stringify(gate)}`);
+  } else if (!bodyBeginsWith(pageView, gate)) {
+    failures.push(`assets/site.js: the first statement of sendPageView must be ${JSON.stringify(gate)}`);
   }
 }
 
@@ -354,6 +374,12 @@ function topLevelFunction(source, name) {
   if (start === -1) return "";
   const next = source.indexOf("\nfunction ", start + 1);
   return source.slice(start, next === -1 ? source.length : next);
+}
+
+// Whether a declaration from topLevelFunction() opens its body with `statement`:
+// only whitespace may sit between the opening brace and the statement.
+function bodyBeginsWith(declaration, statement) {
+  return declaration.slice(declaration.indexOf("{") + 1).trimStart().startsWith(statement);
 }
 
 function verifyTombstone(file) {
