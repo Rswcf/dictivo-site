@@ -314,6 +314,46 @@ function verifyAnalyticsInstrumentation() {
   for (const pattern of requiredPatterns) {
     if (!pattern.test(siteJs)) failures.push(`assets/site.js: missing current analytics contract ${pattern}`);
   }
+
+  // Every published page loads the same client: generated pages through
+  // assetTags(), these three through their own <head>. Before fingerprinting the
+  // reference is /assets/site.js?v=…, afterwards /assets/site.<fingerprint>.js.
+  const scriptReference = /\/assets\/site\.js\?v=|\/assets\/site\.[0-9a-f]{12}\.js/;
+  for (const file of ["changelog/index.html", "security/index.html", "404.html"]) {
+    const path = resolve(publicRoot, file);
+    if (!existsSync(path)) {
+      failures.push(`${file}: page is missing, so it cannot load assets/site.js`);
+      continue;
+    }
+    if (!scriptReference.test(readFileSync(path, "utf8"))) failures.push(`${file}: does not load assets/site.js`);
+  }
+
+  // The visitor's opt-out flag: read from local storage, set or cleared from ?self=.
+  for (const pattern of [/localStorage\.getItem\(["']dictivo-self["']\)/, /searchParams\.get\(["']self["']\)|\.get\(["']self["']\)/]) {
+    if (!pattern.test(siteJs)) failures.push(`assets/site.js: missing self-exclusion handling ${pattern}`);
+  }
+
+  // The gate comes first: a non-public host or an excluded browser must neither
+  // decorate the download link nor send a beacon.
+  const gate = "if (!analyticsEnabled) return;";
+  const decorate = 'searchParams.set("visitId"';
+  const downloadClick = topLevelFunction(siteJs, "sendDownloadClick");
+  if (!downloadClick.includes(gate) || !downloadClick.includes(decorate)) {
+    failures.push(`assets/site.js: sendDownloadClick must contain both ${JSON.stringify(gate)} and ${JSON.stringify(decorate)}`);
+  } else if (downloadClick.indexOf(gate) > downloadClick.indexOf(decorate)) {
+    failures.push("assets/site.js: sendDownloadClick decorates the link before checking analyticsEnabled");
+  }
+  if (!topLevelFunction(siteJs, "sendPageView").includes(gate)) {
+    failures.push(`assets/site.js: sendPageView must contain ${JSON.stringify(gate)}`);
+  }
+}
+
+// The text from `function <name>(` at column 0 up to the next top-level function declaration.
+function topLevelFunction(source, name) {
+  const start = source.indexOf(`\nfunction ${name}(`);
+  if (start === -1) return "";
+  const next = source.indexOf("\nfunction ", start + 1);
+  return source.slice(start, next === -1 ? source.length : next);
 }
 
 function verifyTombstone(file) {
