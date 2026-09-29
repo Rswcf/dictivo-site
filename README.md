@@ -290,6 +290,10 @@ The two `/privacy/` sub-pages carry their own inline `lastModified` values in
 `data/trust-pages.mjs`. Pages with no date of their own fall back to `release.updatedAt` from
 `data/release.json`, which moves on every desktop release.
 
+schema.org `datePublished` on guides, comparison pages and the two `/privacy/` sub-pages comes
+from `data/first-published.mjs`: the first commit that published each route (Traditional Chinese
+pages from 2026-09-14). Those dates never move.
+
 ## Cloudflare Pages
 
 - Project name: `dictivo-app`

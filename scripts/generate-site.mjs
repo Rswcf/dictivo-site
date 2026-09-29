@@ -53,6 +53,7 @@ import { HANT, addHant, toHant } from "./lib/hant.mjs";
 import { priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
+import { firstPublished } from "../data/first-published.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
@@ -2491,6 +2492,59 @@ function inclusivePriceSpecification(amount) {
   return { "@type": "PriceSpecification", price: schemaPrice(amount), priceCurrency: "USD", valueAddedTaxIncluded: true };
 }
 
+// Dictivo Local at the introductory price until introPriceUntil, and at the regular price
+// from regularPriceFrom, so the structured data never ends on an expired offer.
+function localOffers() {
+  return [
+    {
+      "@type": "Offer",
+      name: "Dictivo Local",
+      price: schemaPrice("local"),
+      priceCurrency: "USD",
+      priceValidUntil: LOCAL_OFFER.introPriceUntil,
+      priceSpecification: inclusivePriceSpecification("local"),
+    },
+    {
+      "@type": "Offer",
+      name: "Dictivo Local",
+      price: schemaPrice("regular"),
+      priceCurrency: "USD",
+      priceValidFrom: LOCAL_OFFER.regularPriceFrom,
+      priceSpecification: inclusivePriceSpecification("regular"),
+    },
+  ];
+}
+
+// One Organization per page. Every publisher and author refers to it by @id.
+// sameAs lists only brand profiles the founder has confirmed as Dictivo's own.
+const ORGANIZATION_ID = `${BASE_URL}/#org`;
+const ORGANIZATION_REF = Object.freeze({ "@id": ORGANIZATION_ID });
+
+function organizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": ORGANIZATION_ID,
+    name: "Dictivo",
+    url: `${BASE_URL}/`,
+    email: "support@dictivo.app",
+    // No raster logo exists in assets/ yet; the SVG mark is the only brand image.
+    logo: `${BASE_URL}/assets/favicon.svg`,
+    sameAs: ["https://www.producthunt.com/products/dictivo", "https://trustmrr.com/startup/dictivo"],
+  };
+}
+
+// datePublished is the route's first commit; a Traditional Chinese page can be first
+// published after the content it converts was last reviewed, so dateModified never precedes it.
+function publicationDates(route, code, modified) {
+  const datePublished = firstPublished(route, code);
+  return { datePublished, dateModified: modified > datePublished ? modified : datePublished };
+}
+
+function homeBreadcrumb(code) {
+  return { "@type": "ListItem", position: 1, name: llmsCopy(code).pageLabels.home, item: localeUrl(code) };
+}
+
 function renderSchema(currentCode, t) {
   const pageUrl = localeUrl(currentCode);
   const faqEntities = t.faq.items.map(([question, answer]) => ({
@@ -2503,14 +2557,7 @@ function renderSchema(currentCode, t) {
   }));
 
   const schema = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Dictivo",
-      url: BASE_URL,
-      email: "support@dictivo.app",
-      logo: `${BASE_URL}/assets/favicon.svg`,
-    },
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
@@ -2523,16 +2570,10 @@ function renderSchema(currentCode, t) {
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
       softwareVersion: release.version,
       description: t.metaDescription,
+      publisher: ORGANIZATION_REF,
       offers: [
         { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
-        {
-          "@type": "Offer",
-          name: "Dictivo Local",
-          price: schemaPrice("local"),
-          priceCurrency: "USD",
-          priceValidUntil: LOCAL_OFFER.introPriceUntil,
-          priceSpecification: inclusivePriceSpecification("local"),
-        },
+        ...localOffers(),
         {
           "@type": "Offer",
           name: "Cloud Fast",
@@ -2629,7 +2670,20 @@ function renderCompareSchema(page, currentCode) {
   const copy = compareCopy(currentCode);
   const pageUrl = localizedCompareUrl(currentCode, page.slug);
   const faqs = localizedCompareFaqs(page, copy);
+  const locale = localeByCode(currentCode);
   const schema = [
+    organizationSchema(),
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: currentCode === "en" ? page.title : localizedCompareTitle(page, copy),
+      description: localizedCompareMeta(page, copy),
+      url: pageUrl,
+      inLanguage: locale.htmlLang,
+      ...publicationDates(`compare/${page.slug}`, currentCode, compareLastUpdated(page, currentCode)),
+      publisher: ORGANIZATION_REF,
+      isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
+    },
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
@@ -2638,18 +2692,13 @@ function renderCompareSchema(page, currentCode) {
       image: `${BASE_URL}${NATIVE_DEMO.poster}`,
       screenshot: `${BASE_URL}${NATIVE_DEMO.poster}`,
       operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
-      url: BASE_URL,
+      url: localeUrl(currentCode),
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
       softwareVersion: release.version,
-      description: localizedCompareMeta(page, copy),
-      offers: {
-        "@type": "Offer",
-        name: "Dictivo Local",
-        price: schemaPrice("local"),
-        priceCurrency: "USD",
-        priceValidUntil: LOCAL_OFFER.introPriceUntil,
-        priceSpecification: inclusivePriceSpecification("local"),
-      },
+      // The same product description as the homepage, not a summary of this comparison.
+      description: homeCopyForRender(currentCode).metaDescription,
+      publisher: ORGANIZATION_REF,
+      offers: localOffers(),
     },
     {
       "@context": "https://schema.org",
@@ -2667,7 +2716,7 @@ function renderCompareSchema(page, currentCode) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        homeBreadcrumb(currentCode),
         { "@type": "ListItem", position: 2, name: copy.compareFooter, item: localizedCompareUrl(currentCode) },
         { "@type": "ListItem", position: 3, name: fillCompareTemplate(copy.footerAlternative, page), item: pageUrl },
       ],
@@ -2930,7 +2979,7 @@ function renderCompareHubSchema(currentCode) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+      homeBreadcrumb(currentCode),
       { "@type": "ListItem", position: 2, name: copy.hubEyebrow, item: localizedCompareUrl(currentCode) },
     ],
   };
@@ -3184,7 +3233,7 @@ function renderMacGuideSchema(currentCode = "en") {
       isPartOf: {
         "@type": "WebSite",
         name: "Dictivo",
-        url: BASE_URL,
+        url: `${BASE_URL}/`,
       },
     },
     {
@@ -3200,7 +3249,7 @@ function renderMacGuideSchema(currentCode = "en") {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        homeBreadcrumb(currentCode),
         { "@type": "ListItem", position: 2, name: copy.pageMetaTitle, item: macGuideUrl(currentCode) },
       ],
     },
@@ -3276,6 +3325,7 @@ function offlineDictationGuideCopy(currentCode = "en") {
 function renderOfflineGuideSchema(currentCode = "en") {
   const copy = offlineDictationGuideCopy(currentCode);
   const schema = [
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
@@ -3283,18 +3333,10 @@ function renderOfflineGuideSchema(currentCode = "en") {
       description: copy.metaDescription,
       url: offlineDictationGuideUrl(currentCode),
       inLanguage: localeByCode(currentCode).htmlLang,
-      dateModified: offlineDictationGuideLastmod(currentCode),
+      ...publicationDates("guides/offline-dictation-on-mac", currentCode, offlineDictationGuideLastmod(currentCode)),
       mainEntityOfPage: offlineDictationGuideUrl(currentCode),
-      publisher: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
-      author: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
+      publisher: ORGANIZATION_REF,
+      author: ORGANIZATION_REF,
       about: ["offline dictation", "local dictation", "Mac dictation privacy"],
     },
     {
@@ -3311,7 +3353,7 @@ function renderOfflineGuideSchema(currentCode = "en") {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        homeBreadcrumb(currentCode),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: offlineDictationGuideUrl(currentCode) },
       ],
     },
@@ -3504,8 +3546,9 @@ function renderFirstDictationPage(code) {
   const alternates = Object.keys(FIRST_DICTATION_COPY).map(alt => `<link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n");
   const schema = {
     "@context": "https://schema.org", "@type": "WebPage", name: c.metaTitle,
-    description: c.metaDescription, url, inLanguage: locale.htmlLang, dateModified: firstDictationLastmod(code),
-    isPartOf: { "@type": "WebSite", name: "Dictivo", url: BASE_URL },
+    description: c.metaDescription, url, inLanguage: locale.htmlLang,
+    ...publicationDates("guides/first-local-dictation", code, firstDictationLastmod(code)),
+    isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
   };
   return `<!doctype html>
 <html lang="${locale.htmlLang}">
@@ -3571,6 +3614,7 @@ function renderBenchmarkMethodSchema() {
   const copy = BENCHMARK_METHOD_GUIDE_COPY;
   const pageUrl = benchmarkMethodGuideUrl();
   const schema = [
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
@@ -3578,18 +3622,10 @@ function renderBenchmarkMethodSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "en",
-      dateModified: BENCHMARK_METHOD_GUIDE_LASTMOD,
+      ...publicationDates("guides/mac-dictation-benchmark-method", "en", BENCHMARK_METHOD_GUIDE_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
-      author: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
+      publisher: ORGANIZATION_REF,
+      author: ORGANIZATION_REF,
       about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
     },
     {
@@ -3606,7 +3642,7 @@ function renderBenchmarkMethodSchema() {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        homeBreadcrumb("en"),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
       ],
     },
@@ -3802,6 +3838,7 @@ function renderSpeechToTextMacGuideSchema() {
   const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
   const pageUrl = speechToTextMacGuideUrl();
   const schema = [
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
@@ -3809,18 +3846,10 @@ function renderSpeechToTextMacGuideSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "en",
-      dateModified: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+      ...publicationDates("guides/best-speech-to-text-apps-for-mac", "en", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
-      author: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
+      publisher: ORGANIZATION_REF,
+      author: ORGANIZATION_REF,
       about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
     },
     {
@@ -3848,7 +3877,7 @@ function renderSpeechToTextMacGuideSchema() {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        homeBreadcrumb("en"),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
       ],
     },
@@ -3993,6 +4022,7 @@ function renderOfflineDictationWindowsGuideSchema() {
   const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
   const pageUrl = offlineDictationWindowsGuideUrl();
   const schema = [
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
@@ -4000,18 +4030,10 @@ function renderOfflineDictationWindowsGuideSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "en",
-      dateModified: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
+      ...publicationDates("guides/offline-dictation-on-windows", "en", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
-      author: {
-        "@type": "Organization",
-        name: "Dictivo",
-        url: BASE_URL,
-      },
+      publisher: ORGANIZATION_REF,
+      author: ORGANIZATION_REF,
       about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
     },
     {
@@ -4039,7 +4061,7 @@ function renderOfflineDictationWindowsGuideSchema() {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        homeBreadcrumb("en"),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
       ],
     },
@@ -4182,6 +4204,7 @@ function renderMediaKitSchema() {
   const copy = MEDIA_KIT_COPY;
   const pageUrl = mediaKitUrl();
   const schema = [
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "AboutPage",
@@ -4193,25 +4216,19 @@ function renderMediaKitSchema() {
       isPartOf: {
         "@type": "WebSite",
         name: "Dictivo",
-        url: BASE_URL,
+        url: `${BASE_URL}/`,
       },
       about: {
         "@type": "SoftwareApplication",
         name: "Dictivo",
         applicationCategory: "BusinessApplication",
         operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
-        url: BASE_URL,
+        url: `${BASE_URL}/`,
         description: copy.answer,
+        publisher: ORGANIZATION_REF,
         offers: [
           { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
-          {
-            "@type": "Offer",
-            name: "Dictivo Local",
-            price: schemaPrice("local"),
-            priceCurrency: "USD",
-            priceValidUntil: LOCAL_OFFER.introPriceUntil,
-            priceSpecification: inclusivePriceSpecification("local"),
-          },
+          ...localOffers(),
           {
             "@type": "Offer",
             name: "Cloud Fast",
@@ -4242,7 +4259,7 @@ function renderMediaKitSchema() {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        homeBreadcrumb("en"),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
       ],
     },
@@ -4501,8 +4518,8 @@ function renderMediaKitPage() {
 function renderJaMacDictationTroubleshootingSchema() {
   const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
   const pageUrl = jaMacDictationTroubleshootingUrl();
-  const organization = { "@type": "Organization", name: "Dictivo", url: BASE_URL };
   const schema = [
+    organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
@@ -4510,10 +4527,10 @@ function renderJaMacDictationTroubleshootingSchema() {
       description: copy.metaDescription,
       url: pageUrl,
       inLanguage: "ja",
-      dateModified: JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
+      ...publicationDates("guides/mac-dictation-not-working", "ja", JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: organization,
-      author: organization,
+      publisher: ORGANIZATION_REF,
+      author: ORGANIZATION_REF,
       about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
     },
     {
@@ -4530,7 +4547,7 @@ function renderJaMacDictationTroubleshootingSchema() {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Dictivo", item: localeUrl("ja") },
+        homeBreadcrumb("ja"),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
       ],
     },
@@ -5431,7 +5448,7 @@ const LLMS_LABELS = {
     audiencesTitle: "Para quem e o Dictivo",
     factsTitle: "Fatos principais",
     pageLabels: {
-      home: "Inicio",
+      home: "Início",
       pricing: "Precos",
       privacy: "Privacidade",
       cloudFast: "Cloud Fast",
@@ -5726,19 +5743,15 @@ function renderTrustPage(sourcePage, currentCode = "en") {
       isPartOf: {
         "@type": "WebSite",
         name: "Dictivo",
-        url: BASE_URL,
+        url: `${BASE_URL}/`,
       },
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Dictivo",
-      url: BASE_URL,
-      email: "support@dictivo.app",
-      logo: `${BASE_URL}/assets/favicon.svg`,
-    },
+    organizationSchema(),
   ];
   if (page.lastModified) schema[0].dateModified = page.lastModified;
+  if (["privacy/where-dictation-audio-goes", "privacy/local-dictation-network-test"].includes(sourcePage.slug)) {
+    Object.assign(schema[0], publicationDates(sourcePage.slug, currentCode, page.lastModified));
+  }
   if (page.faqs?.length) {
     schema.push({
       "@context": "https://schema.org",
@@ -5850,7 +5863,7 @@ function renderPrivacyProofSchema(currentCode, copy) {
       isPartOf: {
         "@type": "WebSite",
         name: "Dictivo",
-        url: BASE_URL,
+        url: `${BASE_URL}/`,
       },
       about: [
         "local dictation",
@@ -5876,7 +5889,7 @@ function renderPrivacyProofSchema(currentCode, copy) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: localeUrl(currentCode) },
+        homeBreadcrumb(currentCode),
         { "@type": "ListItem", position: 2, name: copy.navLabel, item: privacyProofUrl(currentCode) },
       ],
     },
@@ -6153,13 +6166,13 @@ function renderChangelog() {
         url: `${BASE_URL}/changelog/`,
         inLanguage: "en",
         dateModified: release.updatedAt,
-        isPartOf: { "@type": "WebSite", name: "Dictivo", url: BASE_URL },
+        isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
       },
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+          homeBreadcrumb("en"),
           { "@type": "ListItem", position: 2, name: "Changelog", item: `${BASE_URL}/changelog/` },
         ],
       },
