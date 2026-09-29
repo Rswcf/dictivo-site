@@ -131,10 +131,11 @@ for (const host of ["127.0.0.1:4173", "localhost:4173", "preview.dictivo-app.pag
   assert.equal(staticLink.href, "https://api.dictivo.app/download/mac?version=0.3.46", "Preview download links must stay static");
   assert.equal(preview.events.length, 0, "Preview download clicks must not reach production analytics");
 }
-// The one thing the script keeps in browser storage is the visitor's own
-// opt-out flag; every other storage or cookie access stays forbidden.
+// The one thing site.js keeps in browser storage is the visitor's own opt-out
+// flag; every other storage or cookie access stays forbidden. This covers the
+// whole file, not only the analytics section that loadPage() runs.
 const selfFlagAccess = /window\.localStorage\.(?:getItem\("dictivo-self"\)|setItem\("dictivo-self", "1"\)|removeItem\("dictivo-self"\))/;
 assert(selfFlagAccess.test(analytics), "The dictivo-self opt-out flag must be read from local storage");
-const withoutSelfFlag = analytics.replace(new RegExp(selfFlagAccess.source, "g"), "");
+const withoutSelfFlag = script.replace(new RegExp(selfFlagAccess.source, "g"), "");
 assert(!/\b(localStorage|sessionStorage)\s*[.\[]|document\.cookie\s*=/.test(withoutSelfFlag), "No persistent browser tracking beyond the dictivo-self opt-out flag");
 console.log("Web attribution checks passed: campaign handoff, fresh page ids, CTA/redirect parity, referrer privacy, navigation exclusions, preview isolation, and the opt-out flag.");
