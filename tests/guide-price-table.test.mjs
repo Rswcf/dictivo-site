@@ -59,7 +59,9 @@ test("offline guides with a price column show a price, a purchase model and a ch
     const cell = (app) => text(body.find((row) => row[0] === app)[4]);
     assert.match(cell("VoiceInk"), /\$25.*\$39.*\$49/, code);
     assert.match(cell("Voice Type"), /\$19\.99/, code);
-    assert.match(cell("Voibe"), /\$7\.50.*\$75.*\$149/, code);
+    // Voibe showed $7.50 beside a struck-through $9.90: state the list price, then the discount.
+    assert.match(cell("Voibe"), /\$9\.90.*\$7\.50.*\$75.*\$149/, code);
+    assert.match(cell("Voibe"), /discount|reduziert|折扣|割引/, code);
     assert.match(cell("Aiko"), /\$24/, code);
     assert.match(cell("Superwhisper"), /\$8\.49.*\$84\.99.*\$249\.99/, code);
     assert.match(cell("MacWhisper"), /€64/, code);

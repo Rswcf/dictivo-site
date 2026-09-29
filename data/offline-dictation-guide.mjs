@@ -53,7 +53,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     purchaseModels: { once: "One-time purchase", subscription: "Subscription", both: "Subscription or one-time", included: "Included with macOS" },
     prices: {
       "Dictivo Local": `{{price.local.inline}} once until ${until("en")}, then {{price.regular.inline}} from ${from("en")}. Includes ${months} months of updates; optional renewal at {{price.renewal.inline}} a year.`,
-      Voibe: "Voibe Dictation: $7.50 a month, $75 a year, or $149 once for lifetime access.",
+      Voibe: "Voibe Dictation: $9.90 a month list price (shown discounted to $7.50 on the checked date), $75 a year, or $149 once for lifetime access.",
       "Voice Type": "Free for 7 days, then $19.99 once for lifetime access (App Store in-app purchase).",
       Aiko: "US Mac App Store: $24.",
     },
@@ -127,7 +127,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     purchaseModels: { once: "Einmalkauf", subscription: "Abo", both: "Abo oder Einmalkauf", included: "In macOS enthalten" },
     prices: {
       "Dictivo Local": `Bis zum ${until("de")} einmalig {{price.local.inline}}, ab dem ${from("de")} einmalig {{price.regular.inline}}, jeweils mit ${months} Monaten Updates; danach optionale Verlängerung für {{price.renewal.inline}} pro Jahr.`,
-      Voibe: "Voibe Dictation: $7.50 pro Monat, $75 pro Jahr oder einmalig $149 für lebenslangen Zugang.",
+      Voibe: "Voibe Dictation: Listenpreis $9.90 pro Monat (am Prüfdatum auf $7.50 reduziert angezeigt), $75 pro Jahr oder einmalig $149 für lebenslangen Zugang.",
       "Voice Type": "7 Tage kostenlos, danach einmalig $19.99 für lebenslangen Zugang (In-App-Kauf im App Store).",
       Aiko: "Mac App Store (USA): $24.",
     },
@@ -507,7 +507,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     purchaseModels: { once: "一次性购买", subscription: "订阅", both: "订阅或一次性购买", included: "macOS 自带" },
     prices: {
       "Dictivo Local": `截至 ${until("zh")} 为 {{price.local.inline}}，${from("zh")} 起为 {{price.regular.inline}}；含 ${months} 个月更新，之后可选每年 {{price.renewal.inline}} 续订。`,
-      Voibe: "Voibe Dictation：每月 $7.50、每年 $75，或 $149 一次性购买终身使用。",
+      Voibe: "Voibe Dictation：标价每月 $9.90（核对日显示折扣价 $7.50）、每年 $75，或 $149 一次性购买终身使用。",
       "Voice Type": "免费试用 7 天，之后 $19.99 一次性购买终身使用（App Store 应用内购买）。",
       Aiko: "美国 Mac App Store 售价 $24。",
     },
@@ -573,7 +573,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     "purchaseModels": { "once": "買い切り", "subscription": "サブスク", "both": "サブスク／買い切り", "included": "macOSに付属" },
     "prices": {
       "Dictivo Local": `${until("ja")}まで{{price.local.inline}}、${from("ja")}より{{price.regular.inline}}。${months}か月のアップデート付きで、以降の更新は任意で年{{price.renewal.inline}}。`,
-      "Voibe": "Voibe Dictation：月額$7.50、年額$75、または$149でライフタイム利用。",
+      "Voibe": "Voibe Dictation：通常価格は月額$9.90（確認日には割引価格$7.50と表示）、年額$75、または$149でライフタイム利用。",
       "Voice Type": "7日間無料、その後$19.99で永続利用（App Storeのアプリ内課金）。",
       "Aiko": "米国Mac App Store：$24。"
     },
