@@ -265,7 +265,12 @@ A validation failure should be assessed against the actual pattern and the page'
 
 The same script also asserts that the required trust, GEO and localized pages exist, that no
 `data/`, `scripts/`, `tmp/` or `.github/` path is published, that `assets/site.js` still carries
-the `web-linked-v1` analytics contract, and the Windows launch consistency rules above.
+the `web-linked-v1` analytics contract, that `changelog/index.html`, `security/index.html` and
+`404.html` load `assets/site.js` outside any HTML comment, that `site.js` reads the `dictivo-self`
+flag and the `?self=` parameter and still declares `analyticsEnabled` as
+`isPublicSite && !selfExcluded`, that `sendDownloadClick` and `sendPageView` both open with
+`if (!analyticsEnabled) return;`, so nothing is sent and no download link is decorated first,
+and the Windows launch consistency rules above.
 
 ### Last-updated constants
 
@@ -422,9 +427,11 @@ version instead of silently redefining `web-linked-v1`.
 A user-initiated internal navigation carries the current UTM campaign fields in its target
 URL. Without UTMs, the external referrer host becomes the source. Static HTML links remain
 canonical and clean; file downloads, external links and existing destination campaigns
-are left alone. Checkout uses the separate registered-channel handling below. No visitor id is carried between pages and no browser storage
-is used. Direct visits remain direct. Opening a fresh URL independently or using an
-unhandled navigation path may lose attribution; this is not cross-session tracking.
+are left alone. Checkout uses the separate registered-channel handling below. No visitor id
+is carried between pages, and the only browser storage the script touches is the
+`dictivo-self` opt-out flag described below. Direct visits remain direct. Opening a fresh
+URL independently or using an unhandled navigation path may lose attribution; this is not
+cross-session tracking.
 
 Download clicks and redirects now inherit this page's source, medium, campaign, and term.
 `content` still identifies the download button; `releaseVersion` still identifies the
@@ -438,10 +445,31 @@ are not copied to checkout. The signed billing webhook records coarse channel at
 App/cross-device orders can remain unknown. Explicit `google_ads` separation from `google`
 is implemented in the local pending commits noted above, not yet verified in production.
 
-Local and Pages-preview hosts do not emit page or click beacons to production. The
-built-in Node check `node scripts/check-web-attribution.mjs` exercises campaign handoff,
+### Host gate and self-exclusion (2026-09-29)
+
+`analyticsEnabled = isPublicSite && !selfExcluded` gates everything the script sends.
+`sendPageView` and `sendDownloadClick` return before doing anything when it is false, so local
+and Pages-preview hosts neither send page or click beacons nor rewrite download links: their
+static `/download/*` links stay exactly as generated. `carryCampaign` and the checkout channel
+label are not gated.
+
+Opening `/?self=1` on the public site stores one flag, `localStorage["dictivo-self"] = "1"`, and
+`/?self=0` removes it; any other value leaves it alone. While the flag is set that browser sends
+no page views or download clicks and keeps download links static. Every storage access is wrapped
+in try/catch, so a browser with storage blocked or throwing counts as not excluded. The address is
+not rewritten, the flag never travels with a link, and nothing else is stored. Storage is per
+origin; `www.dictivo.app` redirects to `dictivo.app` with the query intact, so the flag always
+lands on `dictivo.app`. `/privacy/` and `/security/` describe the flag.
+
+`/changelog/`, `/security/` and the 404 page load `assets/site.js` like every generated page, so
+they send the same page-load event and nothing more.
+
+The built-in Node check `node scripts/check-web-attribution.mjs` exercises campaign handoff,
 independent page ids, click/redirect parity, referrer query removal, navigation exclusions,
-and preview isolation. It runs in deployment CI.
+preview isolation (static preview download links included) and that the `dictivo-self` flag is
+the script's only browser storage. `npm test` adds `tests/site-analytics-gate.test.mjs` (the gate,
+the fetch fallback, the flag and storage failures) and `tests/site-script.test.mjs` (the three
+pages carry the shared script line). Both run in deployment CI.
 
 ## Language routing (2026-09-14)
 
