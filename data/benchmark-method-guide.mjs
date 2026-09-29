@@ -1,4 +1,4 @@
-export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-09-12";
+export const BENCHMARK_METHOD_GUIDE_LASTMOD = "2026-09-29";
 
 export const BENCHMARK_METHOD_GUIDE_REFERENCES = [
   ["Dictivo Mac model guide", "https://dictivo.app/mac-model-guide/"],
@@ -19,7 +19,7 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     "Listen to the input, read the output, and reproduce the published local-engine runs. Dictivo also uses a short calibration to help choose models for your Mac.",
   answerTitle: "Short answer",
   answer:
-    "The published runs use one Apple M4 Pro with 48 GB memory. A 25-second human-read English example includes the input, model outputs and run records. Separate five-second calibration results explain model selection. These are engine measurements, not full-app latency or a comparison with other dictation apps.",
+    "On an Apple M4 Pro, Large v3 Turbo Q5 transcribed a 25.3-second human-read English sample in a median 2.067 s, including process startup and model loading, with 0 of 69 normalized word errors on this sample. The published runs use one Apple M4 Pro with 48 GB memory. A 25-second human-read English example includes the input, model outputs and run records. Separate five-second calibration results explain model selection. These are engine measurements, not full-app latency or a comparison with other dictation apps.",
   summaryTitle: "What the benchmark measures",
   summaryRows: [
     ["Input", "A bundled 5-second speech clip used for local calibration."],
