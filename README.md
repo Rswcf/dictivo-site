@@ -331,6 +331,7 @@ Every deploy runs, in this order:
 ```sh
 node scripts/sync-latest-release.mjs
 node scripts/generate-site.mjs
+npm test
 node scripts/check-cloud-fast-checkout.mjs
 node scripts/check-local-checkout.mjs
 node scripts/check-checkout-live.mjs
@@ -342,7 +343,7 @@ node scripts/check-product-film.mjs
 node scripts/inject-asset-version.mjs
 ```
 
-The eight check steps are blocking: any one of them fails the deploy before `dist/` reaches
+The nine check steps are blocking: any one of them fails the deploy before `dist/` reaches
 Cloudflare. `scripts/check-public-output.mjs` is the broadest of them - it scans every generated
 text file in `dist/` against the defined patterns and explicit evidence-page exceptions.
 Visible sources are supported; internal process details remain excluded from marketing copy.
