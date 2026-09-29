@@ -186,3 +186,61 @@ test("storage that is missing or throws counts as not excluded, and the rest of 
     assert.equal(typeof page.handlers.click, "function", `${name}: the click handler was not registered, so an exception escaped`);
   }
 });
+
+// The whole script, the way a browser runs it on a page: unlike the analytics slice above, this
+// reaches the code after it, such as the lookup of the element an address's anchor names. Like a
+// browser, querySelector throws for an id selector that is not a CSS identifier; an identifier
+// cannot start with a digit (or a hyphen and a digit), so "#0.3.48" is not a valid selector.
+const ID_SELECTOR = /^#(?:-?[A-Za-z_]|--)[\w-]*$/;
+
+function loadWholePage(url, { sections = [], links = [] } = {}) {
+  const events = [];
+  const location = new URL(url);
+  const byId = new Map(sections.map((section) => [section.id, section]));
+  class IntersectionObserver { observe() {} unobserve() {} }
+  const context = vm.createContext({
+    URL, URLSearchParams, IntersectionObserver, location,
+    crypto: { randomUUID, getRandomValues: webcrypto.getRandomValues.bind(webcrypto) },
+    window: { location, IntersectionObserver },
+    document: {
+      referrer: "", documentElement: { lang: "en" },
+      addEventListener: () => {},
+      getElementById: (id) => byId.get(id) ?? null,
+      querySelector: (selector) => {
+        if (!selector.startsWith("#")) return null;
+        if (!ID_SELECTOR.test(selector)) throw new DOMException(`'${selector}' is not a valid selector.`, "SyntaxError");
+        return byId.get(selector.slice(1)) ?? null;
+      },
+      querySelectorAll: (selector) => ({ "a.download-link": links, ".reveal": sections })[selector] ?? [],
+    },
+    navigator: { sendBeacon: (endpoint, body) => { events.push({ endpoint, ...JSON.parse(body) }); return true; } },
+    fetch: () => Promise.resolve({ ok: true }),
+  });
+  vm.runInContext(script, context);
+  return { events };
+}
+
+function revealSection(id) {
+  const classes = new Set(["reveal"]);
+  return { id, classes, classList: { contains: (name) => classes.has(name), add: (name) => classes.add(name) } };
+}
+
+test("an anchor that starts with a digit, like the changelog's #0.3.48, lets the whole script run, and a download click is still decorated and sent", () => {
+  // An ordinary id keeps working, and a malformed escape names no section.
+  for (const [hash, named] of [["#0.3.48", "0.3.48"], ["#release-0-3-48", "release-0-3-48"], ["#%E4", null]]) {
+    const sections = [revealSection("0.3.48"), revealSection("release-0-3-48")];
+    const listeners = {};
+    const link = Object.assign(downloadLink(), { addEventListener: (name, listener) => { listeners[name] = listener; } });
+    let page;
+    assert.doesNotThrow(() => { page = loadWholePage(`https://dictivo.app/changelog/${hash}`, { sections, links: [link] }); }, `${hash}: site.js threw while loading`);
+    for (const section of sections) {
+      assert.equal(section.classes.has("is-in"), section.id === named, `${hash}: section ${section.id} ${section.id === named ? "is not" : "is"} shown at once`);
+    }
+    assert.equal(typeof listeners.click, "function", `${hash}: the download link has no click listener`);
+    listeners.click();
+    const href = new URL(link.href);
+    assert.equal(href.searchParams.get("visitId"), page.events[0].visitId, `${hash}: the download link was not decorated`);
+    assert.equal(href.searchParams.get("instrumentationVersion"), "web-linked-v1", `${hash}: the download link was not decorated`);
+    assert.deepEqual(page.events.map((event) => event.event), ["page_view", "download_cta_clicked"], `${hash}: the page view and the download click`);
+  }
+});

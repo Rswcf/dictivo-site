@@ -401,7 +401,14 @@ document.querySelectorAll("[data-mac-advisor]").forEach(initMacAdvisor);
 
 const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 const reveals = document.querySelectorAll(".reveal");
-const initialAnchorTarget = location.hash ? document.querySelector(location.hash) : null;
+// Find the anchor's element by id: as a selector, an id that starts with a digit,
+// like the changelog's #0.3.48, would throw and stop the rest of this script.
+let initialAnchorTarget = null;
+try {
+  initialAnchorTarget = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+} catch {
+  // A malformed escape such as #%E4 names no element.
+}
 
 if (initialAnchorTarget?.classList.contains("reveal")) {
   initialAnchorTarget.classList.add("is-in");
