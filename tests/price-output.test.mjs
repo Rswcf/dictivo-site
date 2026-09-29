@@ -71,9 +71,9 @@ test("every Dictivo price on the site comes from a placeholder", () => {
   for (const file of htmlFiles()) {
     const text = withoutPrices(readFileSync(file, "utf8"));
     for (const match of text.matchAll(DICTIVO_FIGURE)) {
-      // Whisperstream ($29) and VoiceInk ($25 / $39 / $49) share figures with Dictivo.
+      // Whisperstream ($29), VoiceInk ($25 / $39 / $49) and Aiko on the App Store ($24) share figures with Dictivo.
       const before = text.slice(Math.max(0, match.index - 300), match.index);
-      assert.match(before, /Whisperstream|VoiceInk|\$25|\$39/, `${file}: unconverted "${match[0]}" after "…${before.slice(-50)}"`);
+      assert.match(before, /Whisperstream|VoiceInk|\$25|\$39|Aiko|App Store/, `${file}: unconverted "${match[0]}" after "…${before.slice(-50)}"`);
     }
   }
 });

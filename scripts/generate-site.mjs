@@ -20,6 +20,7 @@ import {
   OFFLINE_DICTATION_GUIDE_COPY,
   offlineDictationGuideLastmod,
   OFFLINE_DICTATION_GUIDE_REFERENCES,
+  OFFLINE_GUIDE_PRICES_CHECKED,
 } from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
 import { earlierReleaseNotes, releaseNotesFor } from "../data/release-notes.mjs";
@@ -3361,13 +3362,54 @@ function renderOfflineGuideSchema(currentCode = "en") {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
-function renderOfflineGuideTable(copy) {
+// Where each app's price comes from. Apps with a comparison page reuse that page's "Pricing model"
+// row (localized through its fact templates), so a price is maintained in one place; the others
+// come from the guide's own copy, read on the vendor's page on OFFLINE_GUIDE_PRICES_CHECKED.
+const GUIDE_PRICE_SOURCES = {
+  "Dictivo Local": { model: "once" },
+  VoiceInk: { model: "once", compare: "voiceink-alternative" },
+  "Voice Type": { model: "once" },
+  Voibe: { model: "both" },
+  Superwhisper: { model: "both", compare: "superwhisper-alternative" },
+  MacWhisper: { model: "once", compare: "macwhisper-alternative" },
+  Aiko: { model: "once" },
+  "Apple Dictation": { model: "included", compare: "macos-dictation-alternative" },
+  "Wispr Flow": { model: "subscription", compare: "wispr-flow-alternative" },
+};
+
+function guidePriceText(app, code) {
+  const source = GUIDE_PRICE_SOURCES[app];
+  if (!source) throw new Error(`No price source for ${app}`);
+  if (!source.compare) {
+    const text = offlineDictationGuideCopy(code).prices?.[app];
+    if (!text) throw new Error(`No ${code} price copy for ${app}`);
+    return text;
+  }
+  const page = COMPARE_PAGES.find((item) => item.slug === source.compare);
+  const row = page.rows.find((item) => item.label === "Pricing model");
+  if (code === "en") return row.competitor;
+  return code === HANT ? toHant(localizedCompetitorFact(page, row, "zh")) : localizedCompetitorFact(page, row, code);
+}
+
+function guidePriceCell(app, code) {
+  const { model } = GUIDE_PRICE_SOURCES[app] || {};
+  const text = html(guidePriceText(app, code));
+  return model === "included" ? text : `<strong>${html(offlineDictationGuideCopy(code).purchaseModels[model])}</strong><br />${text}`;
+}
+
+function guideCheckedCell(code) {
+  return `<time datetime="${attr(OFFLINE_GUIDE_PRICES_CHECKED)}">${html(formatLocalizedDate(OFFLINE_GUIDE_PRICES_CHECKED, code))}</time>`;
+}
+
+function renderOfflineGuideTable(copy, code) {
+  const priced = Boolean(copy.priceHeaders);
+  const headers = priced ? [...copy.headers, ...copy.priceHeaders] : copy.headers;
   return `<div class="compare-table-wrap">
             <table class="compare-table">
               <caption>${html(copy.tableCaption)}</caption>
               <thead>
                 <tr>
-                  ${copy.headers.map((item) => `<th scope="col">${html(item)}</th>`).join("\n                  ")}
+                  ${headers.map((item) => `<th scope="col">${html(item)}</th>`).join("\n                  ")}
                 </tr>
               </thead>
               <tbody>
@@ -3377,7 +3419,9 @@ ${copy.rows
                   <th scope="row">${html(app)}</th>
                   <td>${html(localAudio)}</td>
                   <td>${html(caveat)}</td>
-                  <td>${html(bestFit)}</td>
+                  <td>${html(bestFit)}</td>${priced ? `
+                  <td>${guidePriceCell(app, code)}</td>
+                  <td>${guideCheckedCell(code)}</td>` : ""}
                 </tr>`,
   )
   .join("\n")}
@@ -3466,19 +3510,19 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(offlineDictationGuideLastmod(currentCode))}">${html(formatLocalizedDate(offlineDictationGuideLastmod(currentCode), currentCode))}</time></p>
-      ${renderFirstDictationLink(currentCode)}
-      ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">Dictivoで入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
 
       <section class="doc-section" aria-labelledby="offline-guide-answer">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="offline-guide-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
 
+      ${renderFirstDictationLink(currentCode)}
+      ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">Dictivoで入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
+
       <section class="doc-section" aria-labelledby="offline-guide-table">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="offline-guide-table">${html(copy.tableCaption)}</h2>
-        ${renderOfflineGuideTable(copy)}
+        ${renderOfflineGuideTable(copy, currentCode)}
       </section>
 
       ${renderGuideTrial(currentCode, "macos", "offline_guide_mac")}
@@ -3663,7 +3707,7 @@ function renderBenchmarkMethodTable(caption, headers, rows) {
 ${rows
   .map(
     (row) => `                <tr>
-                  ${row.map((cell, index) => (index === 0 ? `<th scope="row">${html(cell)}</th>` : `<td>${html(cell)}</td>`)).join("\n                  ")}
+                  ${row.map((cell, index) => (index === 0 ? `<th scope="row">${html(cell)}</th>` : `<td>${typeof cell === "object" ? cell.html : html(cell)}</td>`)).join("\n                  ")}
                 </tr>`,
   )
   .join("\n")}
@@ -3885,6 +3929,14 @@ function renderSpeechToTextMacGuideSchema() {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
+// The shortlist groups three local apps in one row; price each of them by name.
+function speechToTextPriceCell(option) {
+  if (GUIDE_PRICE_SOURCES[option]) return guidePriceCell(option, "en");
+  const apps = option.replace(/,? and /, ", ").split(", ");
+  if (!apps.every((app) => GUIDE_PRICE_SOURCES[app])) throw new Error(`No price source for ${option}`);
+  return apps.map((app) => `<strong>${html(app)}</strong> (${html(OFFLINE_DICTATION_GUIDE_COPY.en.purchaseModels[GUIDE_PRICE_SOURCES[app].model])}): ${html(guidePriceText(app, "en"))}`).join("<br />");
+}
+
 function renderSpeechToTextMacGuideSection(section, index) {
   const id = `speech-to-text-mac-section-${index + 1}`;
   return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
@@ -3964,7 +4016,6 @@ function renderSpeechToTextMacGuidePage() {
       <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD)}">${html(formatLocalizedDate(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD, "en"))}</time></p>
 
       <section class="doc-section" aria-labelledby="speech-to-text-mac-answer">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="speech-to-text-mac-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
         <p>${html(copy.trialNote)}</p>
@@ -3980,7 +4031,7 @@ function renderSpeechToTextMacGuidePage() {
       <section class="doc-section" aria-labelledby="speech-to-text-mac-apps">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="speech-to-text-mac-apps">${html(copy.appTitle)}</h2>
-        ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows)}
+        ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows.map((row) => [...row, { html: speechToTextPriceCell(row[0]) }, { html: guideCheckedCell("en") }]))}
       </section>
 
       ${renderGuideTrial("en", "macos", "speech_guide_mac")}

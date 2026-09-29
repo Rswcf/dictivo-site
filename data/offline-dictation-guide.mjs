@@ -1,4 +1,15 @@
-export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-20";
+import { LOCAL_OFFER, offerDate } from "./local-offer.mjs";
+
+export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-29";
+
+// Every price in the comparison table was read on the vendor's own pricing page or App Store
+// listing on this date (Superwhisper, MacWhisper, Wispr Flow and VoiceInk figures come from the
+// comparison pages and were re-read the same day). Never copy a price from a third-party list.
+export const OFFLINE_GUIDE_PRICES_CHECKED = "2026-09-29";
+
+const until = (locale) => offerDate(LOCAL_OFFER.introPriceUntil, locale);
+const from = (locale) => offerDate(LOCAL_OFFER.regularPriceFrom, locale);
+const months = LOCAL_OFFER.includedUpdateMonths;
 
 export function offlineDictationGuideLastmod(code) {
   return OFFLINE_DICTATION_GUIDE_COPY[code]?.lastUpdated || OFFLINE_DICTATION_GUIDE_LASTMOD;
@@ -9,12 +20,17 @@ export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Dictivo audio path", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
   ["Dictivo privacy proof", "https://dictivo.app/privacy-proof/"],
   ["VoiceInk privacy policy", "https://tryvoiceink.com/privacy"],
-  ["Voice Type App Store listing", "https://apps.apple.com/us/app/voice-type-local-dictation/id6736525125?mt=12"],
+  ["Voice Type App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/voice-type-offline-dictation/id6736525125?mt=12"],
+  ["VoiceInk pricing, checked 2026-09-29", "https://tryvoiceink.com/pricing"],
   ["Voibe security", "https://www.getvoibe.com/security/"],
+  ["Voibe pricing, checked 2026-09-29", "https://www.getvoibe.com/pricing/"],
   ["Superwhisper models", "https://superwhisper.com/models"],
+  ["Superwhisper plans, checked 2026-09-29", "https://superwhisper.com/docs/billing/plans"],
+  ["MacWhisper pricing, checked 2026-09-29", "https://www.macwhisper.com/"],
   ["MacWhisper privacy support", "https://macwhisper.helpscoutdocs.com/article/52-keeping-transcriptions-private"],
-  ["Aiko App Store listing", "https://apps.apple.com/ga/app/aiko/id1672085276?l=en-GB&platform=mac"],
+  ["Aiko US App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/aiko/id1672085276?platform=mac"],
   ["Wispr Flow data controls", "https://wisprflow.ai/data-controls"],
+  ["Wispr Flow pricing, checked 2026-09-29", "https://wisprflow.ai/pricing"],
   ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
 ];
 
@@ -30,9 +46,17 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       "Use this guide when the deciding factor is where dictation audio is processed. It separates local/offline dictation from cloud transcription with retention controls.",
     answerTitle: "Short answer",
     answer:
-      "For everyday system-wide Mac dictation with local audio, shortlist Dictivo Local, VoiceInk, Voice Type, and Voibe (On-Device Mode). Superwhisper can also be local if configured with local voice models. MacWhisper supports both dictation and files; Aiko handles recordings. Wispr Flow is not an offline dictation pick because its public docs say transcription occurs in the cloud.",
+      "For system-wide Mac dictation that keeps audio on the device, choose Dictivo Local for hotkey dictation with a clear Local vs Cloud Fast boundary, VoiceInk for local-first dictation with optional enhancement modes, Voice Type for simple hold-to-talk dictation in any text field, or Voibe in On-Device Mode for a polished, simple workflow (Intel Macs use cloud transcription). Superwhisper suits power users who want modes and automation, and keeps audio local only with local voice models selected. MacWhisper suits live dictation plus audio and video files; Aiko suits private transcription of recordings. Apple Dictation is the free built-in baseline; your Mac settings show whether it processes on the device. Wispr Flow is not an offline pick: its public docs say transcription occurs in the cloud. Dictivo Local, VoiceInk, Voice Type, MacWhisper Pro and Aiko are one-time purchases; Superwhisper and Voibe offer subscriptions or a one-time lifetime licence; Wispr Flow Pro is a subscription.",
     tableCaption: "Mac dictation apps compared by whether dictation audio stays local",
     headers: ["App", "Does dictation audio stay local?", "Cloud or workflow caveat", "Best fit"],
+    priceHeaders: ["Price / purchase model", "Checked on"],
+    purchaseModels: { once: "One-time purchase", subscription: "Subscription", both: "Subscription or one-time", included: "Included with macOS" },
+    prices: {
+      "Dictivo Local": `{{price.local.inline}} once until ${until("en")}, then {{price.regular.inline}} from ${from("en")}. Includes ${months} months of updates; optional renewal at {{price.renewal.inline}} a year.`,
+      Voibe: "Voibe Dictation: $7.50 a month, $75 a year, or $149 once for lifetime access.",
+      "Voice Type": "Free for 7 days, then $19.99 once for lifetime access (App Store in-app purchase).",
+      Aiko: "US Mac App Store: $24.",
+    },
     rows: [
       ["Dictivo Local", "Yes in Local mode. Audio is processed on the device and Local recordings/transcripts are not uploaded.", "Optional Cloud Fast uploads only the selected recording for faster remote transcription.", "Local-first hotkey dictation with a clear Local vs Cloud Fast boundary."],
       ["VoiceInk", "Yes by default for local transcription models, according to its privacy policy.", "Optional cloud enhancement can send text to a provider. Review enabled features before using sensitive material.", "Local-first dictation with optional advanced enhancement modes."],
@@ -96,9 +120,17 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       "Dieser Guide hilft, wenn der Verarbeitungsort des Diktat-Audios entscheidend ist. Er trennt lokales/offline Diktat von Cloud-Transkription mit Aufbewahrungskontrollen.",
     answerTitle: "Kurzantwort",
     answer:
-      "Für systemweites Mac-Diktat mit lokalem Audio gehören Dictivo Local, VoiceInk, Voice Type und Voibe (lokaler Modus) auf die Shortlist. Superwhisper kann ebenfalls lokal sein, wenn lokale Sprachmodelle gewählt werden. MacWhisper unterstützt Diktat und Dateien; Aiko verarbeitet Aufnahmen. Wispr Flow ist keine Offline-Diktat-Empfehlung, weil die öffentlichen Docs Cloud-Transkription beschreiben.",
+      "Für systemweites Mac-Diktat, bei dem das Audio auf dem Gerät bleibt, wählen Sie Dictivo Local für Hotkey-Diktat mit klarer Grenze zwischen Local und Cloud Fast, VoiceInk für Local-first-Diktat mit optionalen Erweiterungsmodi, Voice Type für einfaches Hold-to-talk-Diktat in jedem Textfeld oder Voibe im On-Device-Modus für einen einfachen, polierten Ablauf (Intel-Macs nutzen Cloud-Transkription). Superwhisper passt zu Power-Usern mit Modi und Automatisierung und hält Audio nur mit lokalen Sprachmodellen lokal. MacWhisper passt zu Live-Diktat plus Audio- und Videodateien; Aiko zur privaten Transkription von Aufnahmen. Apple Dictation ist die kostenlose eingebaute Basis; die Mac-Einstellungen zeigen, ob auf dem Gerät verarbeitet wird. Wispr Flow ist keine Offline-Wahl: Die öffentlichen Docs beschreiben Cloud-Transkription. Dictivo Local, VoiceInk, Voice Type, MacWhisper Pro und Aiko sind Einmalkäufe; Superwhisper und Voibe bieten Abos oder eine einmalige Lifetime-Lizenz; Wispr Flow Pro ist ein Abo.",
     tableCaption: "Mac-Diktat-Apps danach verglichen, ob Diktat-Audio lokal bleibt",
     headers: ["App", "Bleibt Diktat-Audio lokal?", "Cloud- oder Workflow-Einschränkung", "Beste Eignung"],
+    priceHeaders: ["Preis / Kaufmodell", "Geprüft am"],
+    purchaseModels: { once: "Einmalkauf", subscription: "Abo", both: "Abo oder Einmalkauf", included: "In macOS enthalten" },
+    prices: {
+      "Dictivo Local": `Bis zum ${until("de")} einmalig {{price.local.inline}}, ab dem ${from("de")} einmalig {{price.regular.inline}}, jeweils mit ${months} Monaten Updates; danach optionale Verlängerung für {{price.renewal.inline}} pro Jahr.`,
+      Voibe: "Voibe Dictation: $7.50 pro Monat, $75 pro Jahr oder einmalig $149 für lebenslangen Zugang.",
+      "Voice Type": "7 Tage kostenlos, danach einmalig $19.99 für lebenslangen Zugang (In-App-Kauf im App Store).",
+      Aiko: "Mac App Store (USA): $24.",
+    },
     rows: [
       ["Dictivo Local", "Ja im Local Mode. Audio wird auf dem Gerät verarbeitet und Local-Aufnahmen/Transkripte werden nicht hochgeladen.", "Optionales Cloud Fast lädt nur die ausgewählte Aufnahme für schnellere Remote-Transkription hoch.", "Local-first Hotkey-Diktat mit klarer Grenze zwischen Local und Cloud Fast."],
       ["VoiceInk", "Ja standardmäßig für lokale Transkriptionsmodelle laut Datenschutzrichtlinie.", "Optionale Cloud-Nachbearbeitung kann Text an einen Dienst senden. Prüfen Sie die aktivierten Funktionen vor sensiblen Inhalten.", "Local-first Diktat mit optionalen Erweiterungsmodi."],
@@ -468,9 +500,17 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       "当你最关心“听写音频在哪里处理”时，用这页做判断。它区分本地/离线听写，以及带保留策略控制的云端转写。",
     answerTitle: "简短答案",
     answer:
-      "如果你要日常系统级 Mac 听写并希望音频本地处理，优先看 Dictivo Local、VoiceInk、Voice Type 和 Voibe (本地模式)。Superwhisper 在选择本地语音模型时也可以本地处理。MacWhisper 支持听写和文件转录；Aiko 用于录音转录。Wispr Flow 不适合作为离线听写选择，因为其公开文档描述的是云端转写。",
+      "如果要在 Mac 上做系统级听写并让音频留在设备上：需要快捷键听写且 Local 与 Cloud Fast 边界清楚，选 Dictivo Local；要本地优先并带可选增强模式，选 VoiceInk；要在任何文本框里简单地按住说话，选 Voice Type；要简单精致的流程，选本地模式下的 Voibe（Intel Mac 使用云端转录）。Superwhisper 适合想要模式和自动化的高级用户，只有选择本地语音模型时音频才留在本地。MacWhisper 适合实时听写加音视频文件转写；Aiko 适合私密转写录音。Apple Dictation 是免费的内置基础选项，是否在设备上处理以 Mac 设置中的显示为准。Wispr Flow 不适合作为离线选择，因为其公开文档描述的是云端转写。Dictivo Local、VoiceInk、Voice Type、MacWhisper Pro 和 Aiko 是一次性购买；Superwhisper 和 Voibe 提供订阅或一次性终身许可；Wispr Flow Pro 是订阅。",
     tableCaption: "按听写音频是否留在本地对比 Mac 听写应用",
     headers: ["应用", "听写音频是否留在本地？", "云端或工作流注意点", "最适合"],
+    priceHeaders: ["价格 / 购买方式", "核对日期"],
+    purchaseModels: { once: "一次性购买", subscription: "订阅", both: "订阅或一次性购买", included: "macOS 自带" },
+    prices: {
+      "Dictivo Local": `截至 ${until("zh")} 为 {{price.local.inline}}，${from("zh")} 起为 {{price.regular.inline}}；含 ${months} 个月更新，之后可选每年 {{price.renewal.inline}} 续订。`,
+      Voibe: "Voibe Dictation：每月 $7.50、每年 $75，或 $149 一次性购买终身使用。",
+      "Voice Type": "免费试用 7 天，之后 $19.99 一次性购买终身使用（App Store 应用内购买）。",
+      Aiko: "美国 Mac App Store 售价 $24。",
+    },
     rows: [
       ["Dictivo Local", "Local 模式下是。音频在设备上处理，Local 录音和转写文本不会上传。", "可选 Cloud Fast 只会上传你选择的录音，用于更快的远程转写。", "本地优先的快捷键听写，并且 Local 与 Cloud Fast 边界清楚。"],
       ["VoiceInk", "根据其隐私政策，本地转写模型默认在设备上处理。", "可选云端润色会向服务商发送文字，使用敏感内容前请检查已启用的功能。", "本地优先听写，并带可选高级增强模式。"],
@@ -527,8 +567,16 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     "title": "Macでオフライン音声入力を始めるには",
     "lede": "Macの音声入力は、標準機能から試す方法と、ローカルモデルを使うアプリを導入する方法があります。まず設定とショートカットを確認し、音声の処理場所や普段の作業に合うかで選びましょう。",
     "answerTitle": "短い答え",
-    "answer": "日常的なシステム全体のMac音声入力で音声をローカルに保ちたいなら、Dictivo Local、VoiceInk、Voice Type、Voibe (ローカルモード) を候補にします。Superwhisper もローカル音声モデルを選べばローカル運用できます。MacWhisperは音声入力とファイルの両方に対応し、Aikoは録音を扱います。Wispr Flow は公開ドキュメントがクラウド文字起こしを説明しているため、オフライン候補ではありません。",
+    "answer": "音声を端末内に保つシステム全体のMac音声入力なら、LocalとCloud Fastの境界が明確なホットキー音声入力にはDictivo Local、任意の拡張モード付きのローカル優先音声入力にはVoiceInk、任意のテキスト欄でのシンプルなhold-to-talkにはVoice Type、シンプルで洗練されたワークフローにはローカルモードのVoibe（Intel Macではクラウド文字起こし）を選びます。Superwhisperはモードや自動化を求めるパワーユーザー向けで、ローカル音声モデルを選んだ場合のみ音声をローカルに保ちます。MacWhisperはリアルタイム音声入力と音声・動画ファイルの両方、Aikoは録音のプライベートな文字起こしに向いています。Apple Dictationは追加費用のない内蔵ベースラインで、端末上で処理されるかはMacの設定で確認できます。Wispr Flowは公開ドキュメントがクラウド文字起こしを説明しているため、オフライン候補ではありません。Dictivo Local、VoiceInk、Voice Type、MacWhisper Pro、Aikoは買い切り、SuperwhisperとVoibeはサブスクか買い切りのライフタイム、Wispr Flow Proはサブスクです。",
     "tableCaption": "音声入力の音声がローカルに残るかでMac音声入力アプリを比較",
+    "priceHeaders": ["価格（買い切り／サブスク）", "確認日"],
+    "purchaseModels": { "once": "買い切り", "subscription": "サブスク", "both": "サブスク／買い切り", "included": "macOSに付属" },
+    "prices": {
+      "Dictivo Local": `${until("ja")}まで{{price.local.inline}}、${from("ja")}より{{price.regular.inline}}。${months}か月のアップデート付きで、以降の更新は任意で年{{price.renewal.inline}}。`,
+      "Voibe": "Voibe Dictation：月額$7.50、年額$75、または$149でライフタイム利用。",
+      "Voice Type": "7日間無料、その後$19.99で永続利用（App Storeのアプリ内課金）。",
+      "Aiko": "米国Mac App Store：$24。"
+    },
     "headers": [
       "アプリ",
       "音声はローカルに残るか？",
@@ -674,7 +722,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ]
     ],
     "referenceTitle": "参考資料",
-    "lastUpdated": "2026-09-26"
+    "lastUpdated": "2026-09-29"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",

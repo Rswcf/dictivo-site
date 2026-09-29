@@ -1,4 +1,4 @@
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-20";
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-29";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
@@ -7,13 +7,17 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo audio path", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
   ["Dictivo privacy proof", "https://dictivo.app/privacy-proof/"],
   ["Superwhisper local and cloud models", "https://superwhisper.com/models"],
+  ["Superwhisper plans, checked 2026-09-29", "https://superwhisper.com/docs/billing/plans"],
   ["Wispr Flow data controls", "https://wisprflow.ai/data-controls"],
-  ["MacWhisper dictation and file transcription", "https://www.macwhisper.com/"],
+  ["Wispr Flow pricing, checked 2026-09-29", "https://wisprflow.ai/pricing"],
+  ["MacWhisper dictation, file transcription and pricing, checked 2026-09-29", "https://www.macwhisper.com/"],
   ["MacWhisper privacy and optional cloud features", "https://docs.macwhisper.com/article/52-keeping-transcriptions-private"],
   ["VoiceInk privacy and optional cloud services", "https://tryvoiceink.com/privacy"],
-  ["Voice Type App Store listing", "https://apps.apple.com/us/app/voice-type-offline-dictation/id6736525125?mt=12"],
+  ["VoiceInk pricing, checked 2026-09-29", "https://tryvoiceink.com/pricing"],
+  ["Voice Type App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/voice-type-offline-dictation/id6736525125?mt=12"],
   ["Voibe on-device and cloud modes", "https://www.getvoibe.com/security/"],
-  ["Aiko App Store listing", "https://apps.apple.com/ga/app/aiko/id1672085276?l=en-GB&platform=mac"],
+  ["Voibe pricing, checked 2026-09-29", "https://www.getvoibe.com/pricing/"],
+  ["Aiko US App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/aiko/id1672085276?platform=mac"],
   ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
 ];
 
@@ -25,7 +29,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
   "title": "Best speech-to-text apps for Mac by workflow",
   "lede": "The best Mac speech-to-text app depends on what you are trying to replace: live typing, recorded-file transcription, cloud AI rewriting, or the built-in macOS dictation path.",
   "answerTitle": "Short answer",
-  "answer": "For private live dictation on Mac, start with Dictivo Local, Superwhisper local models, VoiceInk, Voice Type, or Voibe in On-Device Mode. MacWhisper offers live dictation as well as file transcription; Aiko is another option for recordings. For cloud AI voice typing across devices, compare Wispr Flow. For a free baseline, test Apple Dictation before paying for a dedicated app.",
+  "answer": "For private live dictation on Mac, choose Dictivo Local for everyday hotkey voice typing with local-first privacy and a one-time licence, Superwhisper with local models when you want configurable modes and model choice, or VoiceInk, Voice Type or Voibe in On-Device Mode for a narrower local dictation app. Choose MacWhisper when you want live dictation and audio or video file transcription in one app; Aiko is another option for recordings. Choose Wispr Flow for cloud AI voice typing across devices, not for keeping audio local. Test Apple Dictation first as the free built-in baseline before paying for a dedicated app.",
   "trialNote": "Trying Dictivo? All Local models are free to try for 14 days, without a card or Dictivo account. Install a model first, then test a short draft in the app you actually use.",
   "trialLink": "Set up your first local dictation and practice",
   "compareLink": "Compare the apps",
@@ -69,7 +73,9 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
     "Option",
     "Best fit",
     "Privacy or platform caveat",
-    "When to choose it"
+    "When to choose it",
+    "Price / purchase model",
+    "Checked on"
   ],
   "appRows": [
     [
