@@ -51,9 +51,9 @@ import {
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
-import { priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
+import { priceText, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
-import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
+import { LOCAL_OFFER, offerDate, PRICING_LASTMOD } from "../data/local-offer.mjs";
 import { firstPublished } from "../data/first-published.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -5645,6 +5645,51 @@ function llmsCopy(currentCode = "en") {
   return LLMS_LABELS[currentCode] || LLMS_LABELS.en;
 }
 
+// English only: prices and license terms from LOCAL_OFFER, one sentence per mode, and the
+// questions this site is tracked on in AI answers, each mapped to the English page that answers it.
+function renderLlmsEnglishFacts() {
+  const price = (amount) => priceText(amount, "en");
+  const offline = offlineDictationGuideCopy("en").navLabel;
+  const prices = [
+    `Dictivo Local: ${price("local")} once until ${offerDate(LOCAL_OFFER.introPriceUntil, "en")} (introductory price), then ${price("regular")} once from ${offerDate(LOCAL_OFFER.regularPriceFrom, "en")}. Prices are in US dollars, tax included.`,
+    `The Local license is perpetual for the version you buy, includes ${LOCAL_OFFER.includedUpdateMonths} months of updates and new local models, and covers up to ${LOCAL_OFFER.personalDevices} personal devices.`,
+    `Update renewal after the first year is optional at ${price("renewal")} a year; without it, the purchased version keeps working.`,
+    `Free: the Tiny local model is free forever, and new installs include a ${LOCAL_OFFER.trialDays}-day full Local trial with every local model, without a card or Dictivo account.`,
+    "Purchases have a 14-day no-questions refund.",
+    `Cloud Fast is a separate, optional add-on at ${price("cloudFast")} a month.`,
+  ];
+  const modes = [
+    "Local: after a local model is installed, dictation audio is transcribed on the device, and Dictivo does not send Local dictation audio to a transcription server.",
+    "Cloud Fast: an optional speed mode that uploads only the selected recording for remote transcription.",
+  ];
+  const questions = [
+    ["Which Mac dictation apps work offline and keep recordings on the device?", offline, offlineDictationGuideUrl("en")],
+    ["Which Mac dictation apps are one-time purchases, and what do they cost?", `${offline}: price table`, `${offlineDictationGuideUrl("en")}#offline-guide-table`],
+    ["Which Mac dictation apps process speech locally in Japanese, German or Chinese?", `${offline} (each language's llms.txt lists its translated guide)`, offlineDictationGuideUrl("en")],
+    ["Which Windows dictation apps transcribe locally without uploading recordings?", OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
+    ["Which speech-to-text app fits my Mac workflow?", SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel, speechToTextMacGuideUrl()],
+    ["What is a local alternative to Wispr Flow?", "Wispr Flow alternative", localizedCompareUrl("en", "wispr-flow-alternative")],
+    ["Is there a one-time-purchase alternative to Superwhisper or MacWhisper?", "Superwhisper alternative", localizedCompareUrl("en", "superwhisper-alternative"), ["MacWhisper alternative", localizedCompareUrl("en", "macwhisper-alternative")]],
+    ["How can I check whether a dictation app sends my audio to a server?", "Network test", localizedTrustUrl("en", "privacy/local-dictation-network-test")],
+    ["Does Dictivo upload my audio, and what is the difference between Local and Cloud Fast?", "Audio path", localizedTrustUrl("en", "privacy/where-dictation-audio-goes")],
+    ["What does Dictivo Local cost, and what happens after the included updates end?", "Pricing", `${localeUrl("en")}#pricing`],
+    ["What has Dictivo actually measured in its Mac dictation benchmark?", BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
+  ];
+  return `
+## Prices and license
+
+${prices.map((item) => `- ${item}`).join("\n")}
+
+## Local and Cloud Fast
+
+${modes.map((item) => `- ${item}`).join("\n")}
+
+## Questions and the pages that answer them
+
+${questions.map(([question, label, url, extra]) => `- ${question} → [${label}](${url})${extra ? `, [${extra[0]}](${extra[1]})` : ""}`).join("\n")}
+`;
+}
+
 function renderLlmsTxt(currentCode = "en") {
   const copy = llmsCopy(currentCode);
   const compare = compareCopy(currentCode);
@@ -5697,7 +5742,7 @@ ${copy.audiences.map((item) => `- ${item}`).join("\n")}
 ## ${copy.factsTitle}
 
 ${factsList.map((item) => `- ${item}`).join("\n")}
-`;
+${currentCode === "en" ? renderLlmsEnglishFacts() : ""}`;
 }
 
 function renderRedirects() {

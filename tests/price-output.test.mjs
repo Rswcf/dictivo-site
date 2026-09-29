@@ -78,13 +78,18 @@ test("every Dictivo price on the site comes from a placeholder", () => {
   }
 });
 
-test("titles, meta descriptions and llms.txt carry no Dictivo price", () => {
+test("titles and meta descriptions carry no Dictivo price; only the English llms.txt does, from the offer terms", () => {
   for (const file of htmlFiles()) {
     const html = readFileSync(file, "utf8");
     const head = html.slice(0, html.search(/<body[\s>]/)).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "");
     assert.doesNotMatch(head, /\$(?:29|24|77)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|29米ドル/, file);
   }
-  for (const file of files(dist).filter((path) => path.endsWith("llms.txt"))) {
+  // Every buyer pays the same tax-inclusive US-dollar total, so the English llms.txt may quote it.
+  // Its figures must be the formatted LOCAL_OFFER amounts; the localized files still quote none.
+  const english = `${dist}llms.txt`;
+  const figures = [...readFileSync(english, "utf8").matchAll(/US\$[\d.]+/g)].map(([figure]) => figure);
+  assert.deepEqual([...new Set(figures)].sort(), ["US$24", "US$29", "US$49", "US$8.99"], english);
+  for (const file of files(dist).filter((path) => path.endsWith("llms.txt") && path !== english)) {
     assert.doesNotMatch(readFileSync(file, "utf8"), /\$(?:29|24)(?!\d)|\$(?:6|8)\.99|US\$/, file);
   }
 });

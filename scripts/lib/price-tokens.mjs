@@ -28,6 +28,13 @@ export function schemaPrice(amount) {
   return cents % 100 === 0 ? String(cents / 100) : (cents / 100).toFixed(2);
 }
 
+// Plain-text prices for text files such as llms.txt, worded as a page in that language shows them.
+// Placeholders stay HTML-only; this reads the same amounts, so the figures cannot drift.
+export function priceText(amount, lang = "en", form = "inline") {
+  if (!Object.hasOwn(PRICE_AMOUNTS, amount)) throw new Error(`Unknown price amount "${amount}"`);
+  return formatPrice({ cents: PRICE_AMOUNTS[amount], form, lang });
+}
+
 export function resolvePriceTokens(path, body) {
   if (!body.includes("{{price.")) return body;
   if (!path.endsWith(".html")) throw new Error(`${path}: prices can only be placed in HTML pages`);
