@@ -52,14 +52,37 @@ records deployment verification, keyword data limits and external directory foll
 
 `scripts/submit-indexnow.mjs` uses the official Yandex participant endpoint. The existing
 public key verified there with HTTP 200 on September 20; Bing's direct endpoint still
-returned ownership-validation 403. No key rotation or Cloudflare security change was needed.
+returned ownership-validation 403 at the time (fixed on October 3, below). No key rotation
+or Cloudflare security change was needed.
 [IndexNow participants share submissions](https://www.indexnow.org/faq), so the script sends
 one request to one endpoint. This is not confirmation of Bing processing or search indexing.
 
 The script checks the public key file before submitting and records the provider, URL count
 and HTTP status in the Actions summary. HTTP 202 means verification is pending; rejection
 fails the workflow. Submission runs after deployment, so a failed notification does not mean
-the production site was rolled back. The current full-sitemap submission behavior is unchanged.
+the production site was rolled back. Every deploy submitted the full sitemap until October 3.
+
+## IndexNow changed URLs only — 2026-10-03
+
+Bing's direct endpoint accepts the current key again: Microsoft support closed ticket
+UCM000007493994 as fixed, and one direct POST on October 3 returned HTTP 200. Production
+stays on the Yandex participant endpoint, which has worked since September 20 and shares
+submissions with Bing. The first key file (`c5df5e…`, July 8) is no longer published.
+
+Each deploy now sends only the sitemap URLs it adds, re-dates or removes, as the
+[IndexNow protocol](https://www.indexnow.org/documentation) asks. The workflow saves the live
+`sitemap.xml` just before deploying; afterwards `scripts/submit-indexnow.mjs` compares each
+URL's `<lastmod>` with that copy (`INDEXNOW_PREVIOUS_SITEMAP`). A run with no change, such as
+the daily 03:17 UTC run, sends nothing and says "IndexNow submitted no URLs" in the Actions
+summary. Limits of this rule:
+
+- A page whose content changes without a new sitemap date is not sent. Search engines read
+  the same date, so it has to move with the content anyway.
+- Two changes to one page on the same day share a date, so only the first is sent.
+- If the live sitemap cannot be read, every URL is sent.
+- If submission fails after a successful deploy, the next run does not retry those URLs.
+  To resend, run `node scripts/generate-site.mjs && node scripts/submit-indexnow.mjs`
+  locally; without `INDEXNOW_PREVIOUS_SITEMAP` it sends every URL.
 
 ## Local preview
 
@@ -366,8 +389,9 @@ no extra zone permission is required for normal deployment. If stale content is 
 observed, `scripts/purge-cloudflare-cache.mjs` remains a manual diagnostic action with
 a suitable zone token. See [Cloudflare's caching guidance](https://developers.cloudflare.com/pages/configuration/serving-pages/#caching-and-performance).
 
-IndexNow verifies that its ownership text file is publicly readable before submission.
-HTTP 200 means accepted and 202 means key validation pending; neither proves indexing.
+IndexNow verifies that its ownership text file is publicly readable before submission,
+and sends only URLs changed since the live sitemap saved before deployment (see
+"IndexNow changed URLs only" above). HTTP 200 means accepted and 202 means key validation pending; neither proves indexing.
 Other responses are reported as failures even though an indexing service outage does
 not roll back a successful website deployment.
 

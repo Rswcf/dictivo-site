@@ -84,6 +84,13 @@ jobs:
       - name: Fingerprint CSS and JavaScript assets
         run: node scripts/inject-asset-version.mjs
 
+      - name: Save the live sitemap for IndexNow
+        # IndexNow then submits only URLs this deployment adds, re-dates or removes.
+        # If the live sitemap cannot be read, it submits every URL; the deploy goes on.
+        run: |
+          curl -fsS --max-time 20 https://dictivo.app/sitemap.xml -o "$RUNNER_TEMP/live-sitemap.xml" \
+            || { rm -f "$RUNNER_TEMP/live-sitemap.xml"; echo "::warning::Could not read the live sitemap; IndexNow will submit every URL."; }
+
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -93,7 +100,9 @@ jobs:
       - name: Check live language routing
         run: node scripts/check-locale-routing-live.mjs https://dictivo.app
 
-      - name: Submit sitemap URLs to IndexNow
+      - name: Submit changed sitemap URLs to IndexNow
         # A rejection must remain visible as a failed step. The site has already
         # deployed at this point; submission failure does not roll it back.
+        env:
+          INDEXNOW_PREVIOUS_SITEMAP: ${{ runner.temp }}/live-sitemap.xml
         run: node scripts/submit-indexnow.mjs
