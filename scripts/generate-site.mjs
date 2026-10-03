@@ -6576,9 +6576,6 @@ write(PRODUCT_FILM.chineseTraditional.slice(1), toHant(readFileSync(resolve(root
 copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
 copyFileSync(resolve(root, "a466589ed8677749e2b7fdd18c7ddcf6.txt"), resolve(outDir, "a466589ed8677749e2b7fdd18c7ddcf6.txt"));
-// The first IndexNow key (2026-07-08). Kept published while search-engine ownership of the
-// current key (a466589…) is unresolved; remove only after IndexNow accepts submissions again.
-copyFileSync(resolve(root, "c5df5e411109537ea4eeadaf411f6618.txt"), resolve(outDir, "c5df5e411109537ea4eeadaf411f6618.txt"));
 copyFileSync(resolve(root, "BingSiteAuth.xml"), resolve(outDir, "BingSiteAuth.xml"));
 copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));
 write("security/index.html", readFileSync(resolve(root, "security.html"), "utf8"));
