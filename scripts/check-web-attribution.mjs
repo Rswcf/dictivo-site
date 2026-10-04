@@ -90,6 +90,25 @@ for (const product of ["local", "cloud-fast", "local-renewal"]) {
 }
 const googleCheckout = navigate(organic, link("https://dictivo.app/checkout/local"));
 assert.equal(googleCheckout.searchParams.get("checkout[custom][channel]"), "google");
+for (const [host, channel] of [
+  ["www.saashub.com", "directory"], ["saashub.com", "directory"],
+  ["trustmrr.com", "directory"], ["www.trustmrr.com", "directory"],
+]) {
+  const entry = loadPage("https://dictivo.app/compare/macwhisper-alternative/", `https://${host}/?q=private-query`);
+  const follow = navigate(entry, link("https://dictivo.app/"));
+  const pricing = loadPage(follow.href, entry.location.href);
+  assert.equal(pricing.events[0].source, host, "Keep the exact source in website aggregates");
+  for (const product of ["local", "cloud-fast", "local-renewal"]) {
+    const checkout = navigate(pricing, link(`https://dictivo.app/checkout/${product}?checkout[custom][claim_nonce]=preserve`));
+    assert.equal(checkout.searchParams.get("checkout[custom][channel]"), channel, `${host}: preserve the registered channel across navigation`);
+    assert.equal(checkout.searchParams.get("checkout[custom][claim_nonce]"), "preserve");
+    assert.equal(checkout.searchParams.size, 2, "Checkout receives no query, page id or raw source");
+  }
+}
+for (const host of ["duckduckgo.com.example.org", "search.yahoo.co.jp.example.org", "saashub.com.example.org", "trustmrr.com.example.org"]) {
+  const entry = loadPage("https://dictivo.app/", `https://${host}/`);
+  assert.equal(navigate(entry, link("https://dictivo.app/checkout/local")).search, "", "Do not classify unregistered lookalike domains");
+}
 const paidSearch = loadPage("https://dictivo.app/ja/?utm_source=google_ads&utm_medium=cpc&utm_campaign=budget30_ja_mac_202609&utm_content=local_sentence");
 const paidNext = navigate(paidSearch, link("https://dictivo.app/ja/guides/first-local-dictation/"));
 const paidGuide = loadPage(paidNext.href, paidSearch.location.href);

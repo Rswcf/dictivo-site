@@ -147,6 +147,7 @@ function checkoutChannel(source) {
     "www.reddit.com": "reddit", "reddit.com": "reddit", "old.reddit.com": "reddit",
     "news.ycombinator.com": "hackernews", "hn": "hackernews", "producthunt.com": "producthunt", "www.producthunt.com": "producthunt",
     "alternativeto.net": "alternativeto", "setapp.com": "setapp", "github.com": "github",
+    "saashub.com": "directory", "www.saashub.com": "directory", "trustmrr.com": "directory", "www.trustmrr.com": "directory",
     "twitter": "x", "twitter.com": "x", "x.com": "x", "t.co": "x",
     "www.linkedin.com": "linkedin", "linkedin.com": "linkedin", "www.youtube.com": "youtube", "youtube.com": "youtube",
     "qiita.com": "qiita", "zenn.dev": "zenn", "note.com": "note"

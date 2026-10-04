@@ -1,5 +1,13 @@
 # Dictivo site
 
+## Directory checkout attribution — 2026-10-05
+
+SaaSHub and TrustMRR referrer hosts now map to the existing `directory` billing channel.
+Website events retain the exact referrer host; checkout receives only the registered channel
+label, with existing checkout parameters preserved. This closes a channel handoff gap without
+adding browser identifiers, changing page content dates, or reconstructing historical orders.
+The attribution check covers internal navigation, all three checkout routes and lookalike domains.
+
 ## SEO/AEO content maintenance — 2026-10-04
 
 The German MacWhisper comparison now leads with the live-dictation versus file-transcription
