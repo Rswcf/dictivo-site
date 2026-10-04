@@ -27,7 +27,7 @@ import { earlierReleaseNotes, releaseNotesFor } from "../data/release-notes.mjs"
 import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
-import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD } from "../data/home-conversion.mjs";
+import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD, HOME_SHARED_CONTENT_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, firstDictationLastmod } from "../data/first-dictation-guide.mjs";
 import { LOCAL_SPEECH_EVIDENCE } from "../data/local-speech-evidence.mjs";
 import { localizedComparisonSections, localizedComparisonFaqs } from "../data/comparison-decision-locales.mjs";
@@ -2586,15 +2586,15 @@ function renderSchema(currentCode, t) {
 }
 
 function localizedCompareTitle(page, copy) {
-  return fillCompareTemplate(copy.pageTitle, page);
+  return page.localizedCopy?.[copy.locale]?.title || fillCompareTemplate(copy.pageTitle, page);
 }
 
 function localizedCompareMeta(page, copy) {
-  return fillCompareTemplate(copy.pageMeta, page);
+  return page.localizedCopy?.[copy.locale]?.metaDescription || fillCompareTemplate(copy.pageMeta, page);
 }
 
 function localizedCompareH1(page, copy) {
-  return fillCompareTemplate(copy.pageH1, page);
+  return page.localizedCopy?.[copy.locale]?.h1 || fillCompareTemplate(copy.pageH1, page);
 }
 
 function localizedTemplateList(items, page) {
@@ -2873,7 +2873,7 @@ function renderComparePage(page, currentCode = "en") {
   const title = currentCode === "en" ? page.title : localizedCompareTitle(page, copy);
   const metaDescription = currentCode === "en" ? page.metaDescription : localizedCompareMeta(page, copy);
   const h1 = currentCode === "en" ? page.h1 : localizedCompareH1(page, copy);
-  const intro = currentCode === "en" ? page.intro : localizedTemplateList(copy.intro, page);
+  const intro = currentCode === "en" ? page.intro : page.localizedCopy?.[currentCode]?.intro || localizedTemplateList(copy.intro, page);
   const sections = localizedCompareSections(page, copy);
   return `<!doctype html>
 <html lang="${attr(locale.htmlLang)}">
@@ -6057,6 +6057,14 @@ function latestDate(...dates) {
   return dates.filter(Boolean).sort().at(-1);
 }
 
+function compareHubLastmod(code) {
+  // The hub embeds page-specific titles and descriptions from these overrides.
+  const localizedDates = COMPARE_PAGES
+    .filter((page) => page.localizedCopy?.[code])
+    .map((page) => compareLastUpdated(page, code));
+  return latestDate(COMPARE_HUB_GUIDANCE_LASTMOD, ...localizedDates);
+}
+
 function renderSitemap() {
   const alternates = LOCALES.map(
     (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localeUrl(locale.code)}" />`,
@@ -6065,7 +6073,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LOCALE_LASTMOD[locale.code] || HOME_CONVERSION_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD[locale.code], HOME_SHARED_CONTENT_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
@@ -6151,7 +6159,7 @@ ${offlineGuideXDefault}
     const compareXDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedCompareUrl("en", slug)}" />`;
     return `  <url>
     <loc>${localizedCompareUrl(code, slug)}</loc>
-    <lastmod>${latestDate(slug ? compareLastUpdated(COMPARE_PAGES.find((page) => page.slug === slug), code) : COMPARE_HUB_GUIDANCE_LASTMOD, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(slug ? compareLastUpdated(COMPARE_PAGES.find((page) => page.slug === slug), code) : compareHubLastmod(code), PRICING_LASTMOD)}</lastmod>
 ${compareAlternates}
 ${compareXDefault}
     <priority>${priority}</priority>

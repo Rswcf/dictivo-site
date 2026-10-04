@@ -1,8 +1,9 @@
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-09-20";
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-04";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],
   ["Microsoft: set up Voice Access", "https://support.microsoft.com/en-us/topic/set-up-voice-access-9fc44e29-12bf-4d86-bc4e-e9bb69df9a0e"],
+  ["Microsoft: Voice Access dictation mode and settings, checked 2026-10-04", "https://support.microsoft.com/en-us/accessibility/windows/voice-access/get-started-with-voice-access"],
   ["Whisperstream", "https://whisperstream.io/"],
   ["JesType", "https://jestype.com/"],
   ["Talon Voice documentation", "https://talonvoice.com/docs/"],
@@ -120,7 +121,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       title: "Voice Access vs Win+H: the two built-ins are not the same",
       paragraphs: [
         "Windows ships two free dictation paths, and they differ on exactly the question this guide is about. Voice Typing (Win+H) uses Microsoft's cloud-based speech services: audio goes to the cloud, and it needs an internet connection. Voice Access, added in Windows 11 22H2, downloads a speech model once and then works on-device, including offline.",
-        "If you want free and local, the answer is Voice Access, not Win+H. The trade-off is that Voice Access is designed first as an accessibility and PC-control tool; dictation is one part of it, and the writing workflow is more basic than dedicated dictation apps.",
+        "For a free on-device option, start with Voice Access. It supports both PC control and a dictation-only mode, which treats speech as text rather than commands. Check its Languages menu and download the speech pack you need before going offline. Microsoft's current guidance also lists Fluid dictation for English on Copilot+ PCs; that feature is not available on every Windows PC.",
       ],
       bullets: [
         "Win+H Voice Typing: free, cloud-based by default, needs internet.",

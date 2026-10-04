@@ -1,6 +1,9 @@
 // Outcome and trial details sit together above the first download buttons.
 export const HOME_CONVERSION_LASTMOD = "2026-09-10";
 export const HOME_CONVERSION_LOCALE_LASTMOD = { zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
+// Each homepage gained a contextual offline-guide link on this date (d78a233).
+// Track shared body edits independently of the hero copy and desktop releases.
+export const HOME_SHARED_CONTENT_LASTMOD = "2026-09-29";
 export const HOME_CONVERSION_COPY = {
   en: {
     title: "Speak your next draft.", emphasis: "Keep your audio local.",

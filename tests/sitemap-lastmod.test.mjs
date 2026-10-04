@@ -2,8 +2,22 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { PRICING_LASTMOD } from "../data/local-offer.mjs";
+import { LOCALES } from "../data/site-content.mjs";
+import { HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD, HOME_SHARED_CONTENT_LASTMOD } from "../data/home-conversion.mjs";
 
 const dist = new URL("../dist/", import.meta.url).pathname;
+
+test("homepage sitemap dates include shared body edits and both global and locale copy changes", () => {
+  const sitemap = readFileSync(`${dist}sitemap.xml`, "utf8");
+  const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+  for (const locale of LOCALES) {
+    const body = readFileSync(`${dist}${locale.path.slice(1)}index.html`, "utf8");
+    assert.ok(body.includes(`href="${locale.path}guides/offline-dictation-on-mac/"`), locale.code);
+    for (const date of [HOME_SHARED_CONTENT_LASTMOD, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD[locale.code]].filter(Boolean)) {
+      assert.ok(dates.get(locale.path) >= date, `${locale.path}: sitemap date must include ${date}`);
+    }
+  }
+});
 
 test("pages that show a price report a sitemap date no older than the last price change", () => {
   const sitemap = readFileSync(`${dist}sitemap.xml`, "utf8");
@@ -25,11 +39,12 @@ test("comparison refresh is scoped to changed pages and languages", () => {
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   const locales = ["", "de/", "fr/", "es/", "it/", "nl/", "pt/", "zh/", "zh-hant/", "ja/", "ko/"];
   for (const locale of locales) {
-    assert.equal(dates.get(`/${locale}compare/`), "2026-09-20");
+    assert.equal(dates.get(`/${locale}compare/`), locale === "de/" ? "2026-10-04" : "2026-09-20");
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
     assert.equal(dates.get(superPath), "2026-09-18");
-    assert.equal(dates.get(macPath), locale ? PRICING_LASTMOD > "2026-09-12" ? PRICING_LASTMOD : "2026-09-12" : "2026-09-18");
+    const macDate = locale === "de/" ? "2026-10-04" : locale ? "2026-09-12" : "2026-09-18";
+    assert.equal(dates.get(macPath), PRICING_LASTMOD > macDate ? PRICING_LASTMOD : macDate);
     assert.equal(dates.get(`/${locale}compare/voiceink-alternative/`), PRICING_LASTMOD > "2026-09-12" ? PRICING_LASTMOD : "2026-09-12");
     for (const path of [superPath, macPath]) {
       const body = readFileSync(`${dist}${path.slice(1)}index.html`, "utf8");

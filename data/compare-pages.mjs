@@ -267,7 +267,18 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macwhisper-alternative",
-    lastUpdated: { en: "2026-09-18" },
+    lastUpdated: { en: "2026-09-18", de: "2026-10-04" },
+    localizedCopy: {
+      de: {
+        title: "MacWhisper-Alternative: Diktat, Dateien und Kosten | Dictivo",
+        metaDescription: "MacWhisper und Dictivo im Vergleich: Diktat in Apps, Dateitranskription, Offline-Modus und Lizenzkosten. Wann passt Dictivo auf Mac oder Windows?",
+        h1: "MacWhisper-Alternative für Diktat auf Mac und Windows",
+        intro: [
+          "Für Hotkey-Diktat in E-Mails, Notizen und Prompts auf Mac oder Windows kommt Dictivo als MacWhisper-Alternative infrage. MacWhisper unterstützt ebenfalls Diktat in Apps und zusätzlich Dateitranskription, Stapelverarbeitung und Untertitel.",
+          "Dictivo ersetzt diese Dateifunktionen nicht. Beide bieten lokale Spracherkennung; entscheidend sind der Eingabeablauf, die benötigten Funktionen und die Lizenzbedingungen.",
+        ],
+      },
+    },
     competitor: "MacWhisper",
     title: "MacWhisper Alternative: Dictation, Files & Privacy | Dictivo",
     metaDescription:

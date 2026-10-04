@@ -3,12 +3,13 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCALES } from "../data/site-content.mjs";
 import { offlineDictationGuideLastmod } from "../data/offline-dictation-guide.mjs";
+import { OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD } from "../data/offline-dictation-windows-guide.mjs";
 
 const read = path => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
 const cases = [
   ...LOCALES.map(l => [l.path.slice(1) + "guides/offline-dictation-on-mac/", l.path, "macos", "offline_guide_mac", offlineDictationGuideLastmod(l.code)]),
   ["guides/best-speech-to-text-apps-for-mac/", "/", "macos", "speech_guide_mac", "2026-09-29"],
-  ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows", "2026-09-20"],
+  ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD],
 ];
 
 test("comparison guide readers can download the right platform and reach localized setup and terms", () => {

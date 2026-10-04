@@ -1,5 +1,22 @@
 # Dictivo site
 
+## SEO/AEO content maintenance — 2026-10-04
+
+The German MacWhisper comparison now leads with the live-dictation versus file-transcription
+decision and names both desktop platforms in its title and opening. The Windows offline guide
+describes Voice Access dictation mode and its hardware-specific Fluid dictation support with a
+Microsoft source. Other comparison locales and the September 29 English Mac guide are unchanged.
+
+Homepage sitemap dates now include `HOME_SHARED_CONTENT_LASTMOD`, recording the September 29
+contextual guide links independently of release and hero-copy dates. Global and locale copy dates
+both participate in the maximum. Comparison hubs also include dates of page-specific localized
+title/description overrides that they embed. Keep these dates tied to actual content edits.
+
+The release manifest is synchronized to v0.3.52, already in production. Validation: 148 tests,
+public-output, attribution, checkout, release-payload, asset and product-film checks. Publication
+and search-engine processing must be verified separately; these edits do not establish a traffic
+or conversion increase.
+
 ## Deployment status — 2026-09-17
 
 Production runs `main`. The eleven-locale site (Traditional Chinese added 2026-09-14) serves 157
