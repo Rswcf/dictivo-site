@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { firstPublished } from "../data/first-published.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD, introOfferActive, offerDate } from "../data/local-offer.mjs";
+import { INTRO_OFFER, REGULAR_OFFER } from "./helpers/offer-states.mjs";
 import { DRAGON_PRICING_CHECKED, DRAGON_PRICING_LASTMOD, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
@@ -21,9 +22,6 @@ const withoutPrices = (html) => html.replace(/<span class="price">[^<]*<\/span>/
 const count = (value, token) => value.split(token).length - 1;
 const expectedLastmod = DRAGON_PRICING_LASTMOD > PRICING_LASTMOD ? DRAGON_PRICING_LASTMOD : PRICING_LASTMOD;
 
-// data/local-offer.mjs as the 2026-11-01 runbook (step 1) leaves it.
-const AFTER = Object.freeze({ ...LOCAL_OFFER, price: 49, regularPrice: 49, introPriceUntil: null, regularPriceFrom: null });
-const INTRO = Object.freeze({ ...LOCAL_OFFER, price: 29, regularPrice: 49, introPriceUntil: "2026-10-31", regularPriceFrom: "2026-11-01" });
 
 test("the Dragon pricing page is a self-canonical English-only page", () => {
   const html = page();
@@ -106,7 +104,7 @@ test("the Dictivo price comes from the Local offer, dated only while the introdu
 
 test("the Dictivo sentence states one undated price after the 1 November rollover", () => {
   for (const windows of [true, false]) {
-    const after = dragonPricingCopy({ windows, offer: AFTER });
+    const after = dragonPricingCopy({ windows, offer: REGULAR_OFFER });
     const sentence = after.dictivo.paragraphs.join(" ");
     assert.equal(count(sentence, "{{price.local.inline}}"), 1, sentence);
     assert.equal(count(sentence, "{{price.regular."), 0, sentence);
@@ -114,13 +112,13 @@ test("the Dictivo sentence states one undated price after the 1 November rollove
     assert.doesNotMatch(sentence, /2026|until|from 1 November|introductory/, sentence);
     assert.doesNotMatch(sentence, /undefined|null|NaN|Invalid Date/, sentence);
 
-    const before = dragonPricingCopy({ windows, offer: INTRO }).dictivo.paragraphs.join(" ");
+    const before = dragonPricingCopy({ windows, offer: INTRO_OFFER }).dictivo.paragraphs.join(" ");
     assert.equal(count(before, "{{price.local.inline}}"), 1, before);
     assert.equal(count(before, "{{price.regular.inline}}"), 1, before);
-    assert.ok(before.includes(offerDate(INTRO.introPriceUntil, "en")) && before.includes(offerDate(INTRO.regularPriceFrom, "en")), before);
+    assert.ok(before.includes(offerDate(INTRO_OFFER.introPriceUntil, "en")) && before.includes(offerDate(INTRO_OFFER.regularPriceFrom, "en")), before);
 
     // Only the Dictivo section quotes a Dictivo price, and no copy writes one literally.
-    for (const copy of [after, dragonPricingCopy({ windows, offer: INTRO })]) {
+    for (const copy of [after, dragonPricingCopy({ windows, offer: INTRO_OFFER })]) {
       const { dictivo, ...rest } = copy;
       assert.ok(!JSON.stringify(rest).includes("{{price."), "price placeholders outside the Dictivo section");
       assert.doesNotMatch(JSON.stringify(copy), /US\$|\$29\b|\$49\b|\$24\b/);
