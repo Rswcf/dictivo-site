@@ -59,3 +59,8 @@ test("English pages link to the pricing page; other languages keep the homepage 
   assert.ok(de.includes('href="/de/#pricing"'));
   assert.ok(!de.includes("/pricing/"));
 });
+
+test("the macOS Dictation comparison is dated for English only after gaining the troubleshooting link", () => {
+  assert.ok(read("compare/macos-dictation-alternative/index.html").includes('datetime="2026-10-09"'));
+  assert.ok(!read("de/compare/macos-dictation-alternative/index.html").includes('datetime="2026-10-09"'));
+});

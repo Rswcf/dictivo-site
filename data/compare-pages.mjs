@@ -492,6 +492,8 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macos-dictation-alternative",
+    // 2026-10-09: the English page links the Mac dictation troubleshooting guide.
+    lastUpdated: { en: "2026-10-09" },
     competitor: "macOS Dictation",
     title: "A macOS Dictation Alternative with Local Model Choice",
     metaDescription:
@@ -532,6 +534,7 @@ export const COMPARE_PAGES = [
           "Simple keyboard shortcut and microphone key behavior.",
           "No separate vendor relationship for basic dictation.",
         ],
+        link: { label: "If built-in Dictation is not working, check these settings first", href: "/guides/mac-dictation-not-working/" },
       },
       {
         kicker: "Dictivo difference",

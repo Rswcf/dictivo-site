@@ -122,3 +122,17 @@ test("English readers reach the guide, and its trial panel attributes downloads 
   assert.ok(read("llms.txt").includes(url));
   assert.match(read("sitemap.xml"), new RegExp(`<loc>${url.replaceAll(".", "\\.")}</loc>\\s*<lastmod>${MAC_DICTATION_NOT_WORKING_LASTMOD}</lastmod>`));
 });
+
+test("the Mac speech-to-text guide and the macOS Dictation comparison link to the guide in English only", () => {
+  const anchor = new RegExp(`<a href="(?:https://dictivo\\.app)?${path}">[^<]+</a>`);
+  for (const entry of ["guides/best-speech-to-text-apps-for-mac/index.html", "compare/macos-dictation-alternative/index.html"]) {
+    assert.match(read(entry).split("<main")[1].split("</main>")[0], anchor, entry);
+  }
+  const compare = read("compare/macos-dictation-alternative/index.html");
+  const strengths = between(compare, 'id="compare-section-1"', "</section>");
+  assert.ok(strengths.includes(`<a href="${path}">If built-in Dictation is not working, check these settings first</a>`), "link sits in the strengths section");
+  for (const locale of ["de", "ja", "zh-hant"]) {
+    // The Japanese footer links the Japanese guide; no localized comparison links the English one.
+    assert.ok(!read(`${locale}/compare/macos-dictation-alternative/index.html`).includes(`href="${path}"`), `${locale} comparison`);
+  }
+});

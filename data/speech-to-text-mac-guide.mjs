@@ -1,4 +1,5 @@
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-09-29";
+// 2026-10-09: Related pages gained the Mac dictation troubleshooting guide.
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-10-09";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
@@ -269,6 +270,11 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
       "Benchmark method",
       "See how Dictivo maps local model fit and real-time factor.",
       "https://dictivo.app/guides/mac-dictation-benchmark-method/"
+    ],
+    [
+      "Mac dictation not working",
+      "Check built-in macOS Dictation settings symptom by symptom, following Apple's help.",
+      "https://dictivo.app/guides/mac-dictation-not-working/"
     ]
   ],
   "referencesTitle": "Evidence links"

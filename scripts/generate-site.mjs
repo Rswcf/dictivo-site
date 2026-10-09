@@ -2783,12 +2783,16 @@ ${section.cards
             </div>`
     : "";
 
+  // An optional link to a related guide (English sections only; localized sections are built
+  // without one in data/comparison-decision-locales.mjs).
+  const link = section.link ? `\n            <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : "";
+
   return `<section class="compare-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
             <p class="doc-meta">${html(section.kicker)}</p>
             <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
             ${paragraphs}
             ${bullets}
-            ${cards}
+            ${cards}${link}
           </section>`;
 }
 
