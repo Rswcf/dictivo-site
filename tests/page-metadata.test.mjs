@@ -9,6 +9,7 @@ const PAGES = [
   ["guides/mac-dictation-not-working/index.html", "https://dictivo.app/guides/mac-dictation-not-working/"],
   ["guides/mac-dictation-shortcut/index.html", "https://dictivo.app/guides/mac-dictation-shortcut/"],
   ["guides/dragon-pricing/index.html", "https://dictivo.app/guides/dragon-pricing/"],
+  ["guides/wispr-flow-pricing/index.html", "https://dictivo.app/guides/wispr-flow-pricing/"],
 ];
 
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");

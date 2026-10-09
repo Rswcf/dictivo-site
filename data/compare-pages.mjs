@@ -119,7 +119,8 @@ export const COMPARE_PAGES = [
           "Flow Pro lists $15 per user per month, or $12 per month billed annually. Three years at the annual rate is $432, assuming unchanged pricing.",
           "Dictivo Local is {{price.local.inline}} once, including 12 months of updates and up to 3 personal devices. Two optional {{price.renewal.inline}} update renewals bring the three-year total to {{price.threeYear.inline}}. Without renewal, you keep using your purchased version. Optional Cloud Fast is separate.",
           "These paid plans do different jobs. Compare their features and billing terms, then test your workflow before paying."
-        ]
+        ],
+        "link": { "label": "Wispr Flow pricing: every plan, limit and discount, with sources", "href": "/guides/wispr-flow-pricing/" }
       },
       {
         "kicker": "Switching checklist",
@@ -168,8 +169,10 @@ export const COMPARE_PAGES = [
       "https://wisprflow.ai/data-controls",
       "https://wisprflow.ai/privacy"
     ],
+    // 2026-10-09: English prices and limits re-checked against wisprflow.ai; links the pricing page.
     "lastUpdated": {
-      "all": "2026-09-18"
+      "all": "2026-09-18",
+      "en": "2026-10-09"
     }
   },
   {

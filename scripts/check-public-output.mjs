@@ -159,6 +159,7 @@ const requiredGeoFiles = [
   "guides/mac-dictation-not-working/index.html",
   "guides/mac-dictation-shortcut/index.html",
   "guides/dragon-pricing/index.html",
+  "guides/wispr-flow-pricing/index.html",
   "ja/guides/mac-dictation-not-working/index.html",
   "media-kit/index.html",
   "pricing/index.html",
