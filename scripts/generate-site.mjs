@@ -5742,6 +5742,10 @@ function renderRedirects() {
 /.github/* /404.html 404
 /cloud-fast /#cloud-fast 302
 /cloud-fast.html /#cloud-fast 302
+/pricing /#pricing 302
+/pricing/ /#pricing 302
+/download /#downloads 302
+/download/ /#downloads 302
 /download/mac ${macDownloadRedirect} 302
 /download/windows ${windowsExeUrl} 302
 /download/windows-msi ${windowsMsiUrl} 302

@@ -62,6 +62,22 @@ test("_routes.json sends every mapped page, and nothing static, to the Function"
   assert.match(readFileSync(`${root}dist/_redirects`, "utf8"), /^\/checkout\/local https:\/\/\S+ 302$/m);
 });
 
+// Pages applies _redirects only to requests the Function does not take, so these
+// shortcuts must stay out of _routes.json. A visitor redirected to /#pricing may then
+// be sent on to a translated homepage; the browser keeps the fragment, and every
+// homepage carries both section ids.
+test("/pricing and /download lead to the homepage sections", () => {
+  const redirects = readFileSync(`${root}dist/_redirects`, "utf8");
+  for (const [path, target] of [["/pricing", "/#pricing"], ["/pricing/", "/#pricing"], ["/download", "/#downloads"], ["/download/", "/#downloads"]]) {
+    assert.ok(redirects.split("\n").includes(`${path} ${target} 302`), `${path} → ${target}`);
+    assert.ok(!routedToFunction(path), path);
+  }
+  for (const locale of LOCALES) {
+    const html = readFileSync(`${root}dist${locale.path}index.html`, "utf8");
+    for (const id of ["pricing", "downloads"]) assert.ok(html.includes(` id="${id}"`), `${locale.code}: #${id}`);
+  }
+});
+
 test("entry decisions land on a translation of the same page, prompt in the EU, and never loop", () => {
   const englishPages = Object.entries(routes.pages).filter(([, page]) => page.locale === "en");
   const cases = [];
