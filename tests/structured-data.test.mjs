@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { LOCALES } from "../data/site-content.mjs";
-import { LOCAL_OFFER } from "../data/local-offer.mjs";
+import { LOCAL_OFFER, introOfferActive } from "../data/local-offer.mjs";
 import { COMPARE_PAGES } from "../data/compare-pages.mjs";
 import { firstPublished } from "../data/first-published.mjs";
 
@@ -81,7 +81,7 @@ test("sameAs appears only on the Organization", () => {
 const appNode = (file) => nodes(file).find((node) => node["@type"] === "SoftwareApplication");
 const localOffers = (app) => [app.offers].flat().filter((offer) => offer.name === "Dictivo Local");
 
-test("comparison pages describe the software itself and list both Local prices", () => {
+test("comparison pages describe the software itself, as the homepage does", () => {
   for (const locale of LOCALES) {
     const home = appNode(page(`${prefix(locale.code)}index.html`));
     assert.deepEqual(home.publisher, { "@id": ORG_ID }, `${locale.code}: homepage app publisher`);
@@ -95,7 +95,8 @@ test("comparison pages describe the software itself and list both Local prices",
   }
 });
 
-test("the introductory and the regular Local offer both appear, dated from LOCAL_OFFER", () => {
+// Two dated Offers while the introductory offer runs; one undated Offer after the 2026-11-01 rollover.
+test("the Local offers follow LOCAL_OFFER: introductory and regular while the offer runs, then one undated", () => {
   const targets = [
     ...LOCALES.flatMap((locale) => [
       `${prefix(locale.code)}index.html`,
@@ -105,6 +106,13 @@ test("the introductory and the regular Local offer both appear, dated from LOCAL
   ];
   for (const path of targets) {
     const offers = localOffers(appNode(page(path)));
+    if (!introOfferActive()) {
+      assert.equal(offers.length, 1, `${path}: ${offers.length} Local offers`);
+      assert.equal(offers[0].price, String(LOCAL_OFFER.price), path);
+      assert.equal(offers[0].priceSpecification.price, String(LOCAL_OFFER.price), path);
+      assert.ok(!("priceValidUntil" in offers[0]) && !("priceValidFrom" in offers[0]), `${path}: ${JSON.stringify(offers[0])}`);
+      continue;
+    }
     assert.equal(offers.length, 2, `${path}: ${offers.length} Local offers`);
     const intro = offers.find((offer) => offer.priceValidUntil);
     const regular = offers.find((offer) => offer.priceValidFrom);

@@ -1,5 +1,31 @@
 # Dictivo site
 
+## Tests pass on both sides of the 1 November price change — 2026-10-09
+
+A rehearsal of the 2026-11-01 runbook (US$29 → US$49) cleared the offer dates and failed 25
+tests in 10 files: they had the introductory state written into their assertions. They now pass
+unchanged in both states, so on 1 November no test needs editing (runbook steps A.4 and A.6). Tests
+of the offer functions pass one of two fixtures, `INTRO_OFFER` or `REGULAR_OFFER` from
+`tests/helpers/offer-states.mjs`, instead of reading `LOCAL_OFFER`; tests of the built site branch
+on `introOfferActive()` and check each state for real: two dated Offers or one undated Offer, three
+price spans in the guide tables or two, the dated or the undated llms.txt line. Two tests are new.
+One checks that `LOCAL_OFFER` is one of the two states, not a half-applied rollover, and after the
+rollover that `PRICING_LASTMOD` was moved to 2026-11-01. The other, once the dates are cleared, fails
+on any page or llms.txt that still shows the introductory figure, 31 October in any homepage
+language, a card's "introductory price" label or the price-change section; before then it checks
+that each of those phrases is really on the site, so the list cannot go stale unnoticed.
+
+The sitemap gap the rehearsal found is fixed now rather than on the day: the offline Mac guide in
+the five languages with a price column, `/guides/best-speech-to-text-apps-for-mac/` and `/terms/`
+report at least `PRICING_LASTMOD`, like the other priced pages, so the deploy's IndexNow step
+resubmits them after the price change. `PRICING_LASTMOD` (2026-09-16) is older than all seven, so
+today's sitemap is byte-identical. `introPriceExpired()` takes the offer as an optional second
+argument; `check-public-output.mjs` still calls it bare and still fails the daily deploy after
+31 October until the dates are cleared.
+
+Validation: 207 tests and the eight deploy check scripts, in the current state and in a copy with
+runbook steps A.1, A.2 and A.5 applied.
+
 ## Homepage poster preload and eager result screenshot — 2026-10-09
 
 squirrelscan's `perf/lcp-hints` found the homepage hero poster without a preload (all eleven
@@ -446,6 +472,11 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
 | `COMPARE_LAST_UPDATED` | `data/compare-pages.mjs` | visible stamp + sitemap for every `/compare/` page, and a build gate |
+
+Every page that shows a Dictivo price (homepages, `/pricing/`, comparison pages and hubs, the
+priced guides, the media kit, the first-dictation guides, `/terms/`) reports at least
+`PRICING_LASTMOD` from `data/local-offer.mjs` in the sitemap; its visible stamp and `dateModified`
+keep the page's own date. `tests/sitemap-lastmod.test.mjs` finds any priced page that does not.
 
 The two `/privacy/` sub-pages carry their own inline `lastModified` values in
 `data/trust-pages.mjs`. Pages with no date of their own fall back to `release.updatedAt` from

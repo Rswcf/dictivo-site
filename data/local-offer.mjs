@@ -43,6 +43,9 @@ export function introOfferActive(offer = LOCAL_OFFER) {
 
 // The copy promises the regular price from regularPriceFrom, so a build after
 // introPriceUntil must not keep advertising the introductory price.
-export function introPriceExpired(today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(new Date())) {
-  return Boolean(LOCAL_OFFER.introPriceUntil) && today > LOCAL_OFFER.introPriceUntil;
+export function introPriceExpired(
+  today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(new Date()),
+  offer = LOCAL_OFFER,
+) {
+  return Boolean(offer.introPriceUntil) && today > offer.introPriceUntil;
 }

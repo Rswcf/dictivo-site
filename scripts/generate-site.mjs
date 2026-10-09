@@ -6394,6 +6394,10 @@ function compareHubLastmod(code) {
   return latestDate(COMPARE_HUB_GUIDANCE_LASTMOD, ...localizedDates);
 }
 
+// True when page copy names a Dictivo price through a placeholder; such pages report at least
+// PRICING_LASTMOD in the sitemap, so the deploy's IndexNow step resubmits them after a price change.
+const showsPrice = (copy) => JSON.stringify(copy).includes("{{price.");
+
 function renderSitemap() {
   const alternates = LOCALES.map(
     (locale) => `    <xhtml:link rel="alternate" hreflang="${locale.htmlLang}" href="${localeUrl(locale.code)}" />`,
@@ -6441,7 +6445,7 @@ ${privacyProofXDefault}
   const offlineGuideEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${offlineDictationGuideUrl(locale.code)}</loc>
-    <lastmod>${offlineDictationGuideLastmod(locale.code)}</lastmod>
+    <lastmod>${latestDate(offlineDictationGuideLastmod(locale.code), offlineDictationGuideCopy(locale.code).priceHeaders && PRICING_LASTMOD)}</lastmod>
 ${offlineGuideAlternates}
 ${offlineGuideXDefault}
     <priority>${locale.code === "en" ? "0.85" : "0.8"}</priority>
@@ -6456,7 +6460,7 @@ ${offlineGuideXDefault}
   </url>`;
   const speechToTextMacGuideEntry = `  <url>
     <loc>${speechToTextMacGuideUrl()}</loc>
-    <lastmod>${SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD}</lastmod>
+    <lastmod>${latestDate(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD, PRICING_LASTMOD)}</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="${speechToTextMacGuideUrl()}" />
     <xhtml:link rel="alternate" hreflang="x-default" href="${speechToTextMacGuideUrl()}" />
     <priority>0.85</priority>
@@ -6530,7 +6534,7 @@ ${compareXDefault}
     if (!hasLocalizedTrustPage(page)) {
       return `  <url>
     <loc>${trustUrl(page.slug)}</loc>
-    <lastmod>${page.lastModified || release.updatedAt}</lastmod>
+    <lastmod>${latestDate(page.lastModified || release.updatedAt, showsPrice(page) && PRICING_LASTMOD)}</lastmod>
     <priority>${page.slug === "privacy" ? "0.7" : "0.6"}</priority>
   </url>`;
     }
@@ -6541,7 +6545,7 @@ ${compareXDefault}
     const localized = localizedTrustPage(page, code);
     return `  <url>
     <loc>${localizedTrustUrl(code, page.slug)}</loc>
-    <lastmod>${localized.lastModified || release.updatedAt}</lastmod>
+    <lastmod>${latestDate(localized.lastModified || release.updatedAt, showsPrice({ ...localized, locales: undefined }) && PRICING_LASTMOD)}</lastmod>
 ${trustAlternates}
 ${trustXDefault}
     <priority>${code === "en" ? "0.7" : "0.65"}</priority>

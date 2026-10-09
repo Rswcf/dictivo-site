@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { LOCAL_OFFER, offerDate } from "../data/local-offer.mjs";
+import { LOCAL_OFFER, introOfferActive, offerDate } from "../data/local-offer.mjs";
+import { llmsLocalPriceLine } from "../data/local-offer-copy.mjs";
 
 const dist = new URL("../dist/", import.meta.url).pathname;
 const llms = () => readFileSync(`${dist}llms.txt`, "utf8");
@@ -12,11 +13,18 @@ const section = (text, title) => {
   return rest.slice(0, rest.search(/\n## |$/));
 };
 
+// Both introductory figures with their dates while the offer runs; one undated price after it.
 test("llms.txt states prices and licence terms from the offer terms", () => {
   const prices = section(llms(), "Prices and license");
+  assert.ok(prices.includes(llmsLocalPriceLine()), `missing "${llmsLocalPriceLine()}"`);
+  if (!introOfferActive()) assert.doesNotMatch(prices, /until|introductory|from \d/, prices);
   for (const expected of [
-    `US$${LOCAL_OFFER.price} once until ${offerDate(LOCAL_OFFER.introPriceUntil, "en")}`,
-    `US$${LOCAL_OFFER.regularPrice} once from ${offerDate(LOCAL_OFFER.regularPriceFrom, "en")}`,
+    ...(introOfferActive()
+      ? [
+        `US$${LOCAL_OFFER.price} once until ${offerDate(LOCAL_OFFER.introPriceUntil, "en")}`,
+        `US$${LOCAL_OFFER.regularPrice} once from ${offerDate(LOCAL_OFFER.regularPriceFrom, "en")}`,
+      ]
+      : [`Dictivo Local: US$${LOCAL_OFFER.price} once.`]),
     `${LOCAL_OFFER.includedUpdateMonths} months of updates`,
     `US$${LOCAL_OFFER.updateRenewal} a year`,
     `up to ${LOCAL_OFFER.personalDevices} personal devices`,

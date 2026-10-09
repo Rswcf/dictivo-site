@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCALES } from "../data/site-content.mjs";
+import { PRICING_LASTMOD } from "../data/local-offer.mjs";
 import { offlineDictationGuideLastmod } from "../data/offline-dictation-guide.mjs";
 import { OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD } from "../data/offline-dictation-windows-guide.mjs";
 import { SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD } from "../data/speech-to-text-mac-guide.mjs";
@@ -36,12 +37,15 @@ test("comparison guide readers can download the right platform and reach localiz
   }
 });
 
+// A guide that shows a Dictivo price may report a later sitemap date: PRICING_LASTMOD, the day the
+// displayed price last changed (see tests/sitemap-lastmod.test.mjs).
 test("all changed guides agree on visible, structured and sitemap modification dates", () => {
   const sitemap = read("sitemap.xml");
   for (const [path, , , , date] of cases) {
     const page = read(`${path}index.html`);
     assert.ok(page.includes(`datetime="${date}"`), path);
     assert.ok(page.includes(`"dateModified":"${date}"`), path);
-    assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${path}</loc>\\s*<lastmod>${date}</lastmod>`), path);
+    const lastmod = page.includes('<span class="price">') && PRICING_LASTMOD > date ? PRICING_LASTMOD : date;
+    assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${path}</loc>\\s*<lastmod>${lastmod}</lastmod>`), path);
   }
 });

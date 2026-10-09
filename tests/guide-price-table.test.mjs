@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { LOCAL_OFFER, offerDate } from "../data/local-offer.mjs";
+import { LOCAL_OFFER, introOfferActive, offerDate } from "../data/local-offer.mjs";
 
 const dist = new URL("../dist/", import.meta.url).pathname;
 const CHECKED = "2026-09-29";
@@ -12,6 +12,9 @@ const bestSpeech = () => readFileSync(`${dist}guides/best-speech-to-text-apps-fo
 const tableAfter = (html, id) => html.slice(html.indexOf(`id="${id}"`)).match(/<table class="compare-table">[\s\S]*?<\/table>/)[0];
 const rows = (table) => [...table.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(([, row]) => [...row.matchAll(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g)].map(([, cell]) => cell.trim()));
 const text = (cell) => cell.replace(/<[^>]+>/g, "").replace(/\s+/g, " ");
+// The Dictivo cell prices Local and the renewal, plus the regular price while the introductory offer runs.
+const DICTIVO_PRICES = introOfferActive() ? 3 : 2;
+const DICTIVO_SPAN = (dollars) => new RegExp(`<span class="price">[^<]*(?<![\\d.,])${dollars}(?![\\d.,])[^<]*</span>`);
 
 test("the short answer comes straight after the heading, lede and date", () => {
   for (const prefix of [...Object.values(PRICED), ...UNPRICED.map((code) => `${code}/`)]) {
@@ -52,10 +55,15 @@ test("offline guides with a price column show a price, a purchase model and a ch
       assert.ok(row[5].includes(`<time datetime="${CHECKED}">`), `${code}: ${row[0]} has no check date`);
     }
     const dictivo = body.find((row) => row[0] === "Dictivo Local")[4];
-    assert.equal((dictivo.match(/<span class="price">/g) || []).length, 3, `${code}: Dictivo prices must come from price placeholders`);
+    assert.equal((dictivo.match(/<span class="price">/g) || []).length, DICTIVO_PRICES, `${code}: Dictivo prices must come from price placeholders`);
+    assert.match(dictivo, DICTIVO_SPAN(LOCAL_OFFER.price), `${code}: no Local price`);
     const dateCode = code === "zh-hant" ? "zh" : code;
-    assert.ok(dictivo.includes(offerDate(LOCAL_OFFER.introPriceUntil, dateCode)), `${code}: no introductory end date`);
-    assert.ok(dictivo.includes(offerDate(LOCAL_OFFER.regularPriceFrom, dateCode)), `${code}: no regular price date`);
+    if (introOfferActive()) {
+      assert.ok(dictivo.includes(offerDate(LOCAL_OFFER.introPriceUntil, dateCode)), `${code}: no introductory end date`);
+      assert.ok(dictivo.includes(offerDate(LOCAL_OFFER.regularPriceFrom, dateCode)), `${code}: no regular price date`);
+    } else {
+      assert.doesNotMatch(text(dictivo), /2026/, `${code}: dated Dictivo price after the rollover`);
+    }
     const cell = (app) => text(body.find((row) => row[0] === app)[4]);
     assert.match(cell("VoiceInk"), /\$25.*\$39.*\$49/, code);
     assert.match(cell("Voice Type"), /\$19\.99/, code);
@@ -113,5 +121,6 @@ test("the Mac speech-to-text guide leads with a verdict and prices every option"
   }
   const merged = text(body.find((row) => row[0].startsWith("VoiceInk"))[4]);
   assert.match(merged, /VoiceInk.*\$25.*Voice Type.*\$19\.99.*Voibe.*\$149/);
-  assert.equal((body[0][4].match(/<span class="price">/g) || []).length, 3, "Dictivo prices must come from price placeholders");
+  assert.equal((body[0][4].match(/<span class="price">/g) || []).length, DICTIVO_PRICES, "Dictivo prices must come from price placeholders");
+  assert.match(body[0][4], DICTIVO_SPAN(LOCAL_OFFER.price), "no Local price");
 });

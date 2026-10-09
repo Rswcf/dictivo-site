@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { LOCALES } from "../data/site-content.mjs";
+import { LOCAL_OFFER, introOfferActive } from "../data/local-offer.mjs";
+import { priceText } from "../scripts/lib/price-tokens.mjs";
 
 const dist = new URL("../dist/", import.meta.url).pathname;
 const files = (dir) => readdirSync(dir).flatMap((name) => {
@@ -19,24 +21,25 @@ const walk = (value, visit) => {
 };
 const nbsp = (text) => text.replaceAll("_", " ");
 
-// Local figure, Cloud Fast figure, tax note — as rendered in the static HTML.
+// Local figure, Cloud Fast figure, tax note — as rendered in the static HTML. "#" is the current
+// Local price from LOCAL_OFFER (29 during the introductory offer, 49 after it).
 const HOME_PRICES = {
-  en: ["US$29", "US$8.99", "tax included"],
-  de: ["29_US$", "8,99_US$", "inkl. MwSt."],
-  fr: ["29_$_US", "8,99_$_US", "TTC"],
-  es: ["29_US$", "8,99_US$", "IVA incluido"],
-  it: ["29_US$", "8,99_US$", "IVA inclusa"],
-  nl: ["US$_29", "US$_8,99", "incl. btw"],
-  pt: ["US$_29", "US$_8,99", "impostos incluídos"],
-  zh: ["US$29", "US$8.99", "含税"],
-  "zh-hant": ["US$29", "US$8.99", "含稅"],
-  ja: ["US$29", "US$8.99", "税込"],
-  ko: ["US$29", "US$8.99", "부가세 포함"],
+  en: ["US$#", "US$8.99", "tax included"],
+  de: ["#_US$", "8,99_US$", "inkl. MwSt."],
+  fr: ["#_$_US", "8,99_$_US", "TTC"],
+  es: ["#_US$", "8,99_US$", "IVA incluido"],
+  it: ["#_US$", "8,99_US$", "IVA inclusa"],
+  nl: ["US$_#", "US$_8,99", "incl. btw"],
+  pt: ["US$_#", "US$_8,99", "impostos incluídos"],
+  zh: ["US$#", "US$8.99", "含税"],
+  "zh-hant": ["US$#", "US$8.99", "含稅"],
+  ja: ["US$#", "US$8.99", "税込"],
+  ko: ["US$#", "US$8.99", "부가세 포함"],
 };
 
 test("pricing cards show one figure and a tax-included note in every language", () => {
   for (const locale of LOCALES) {
-    const [local, cloudFast, note] = HOME_PRICES[locale.code].map(nbsp);
+    const [local, cloudFast, note] = HOME_PRICES[locale.code].map((text) => nbsp(text.replace("#", String(LOCAL_OFFER.price))));
     const html = readFileSync(`${dist}${locale.path.slice(1)}index.html`, "utf8");
     assert.ok(html.includes(`<p class="tier-price"><span class="price">${local}</span><small>`), `${locale.code}: Local card`);
     assert.ok(html.includes(`<p class="tier-price"><span class="price">${cloudFast}</span><small>`), `${locale.code}: Cloud Fast card`);
@@ -65,7 +68,8 @@ test("paid offers in structured data are marked as including tax", () => {
 const withoutPrices = (html) => html
   .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "")
   .replace(/<span class="price">[^<]*<\/span>/g, "");
-const DICTIVO_FIGURE = /\$(?:29|24|49|77)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|29米ドル/g;
+// Dictivo's figures in both offer states: Local 29 then 49, three years 77 then 97, renewal 24.
+const DICTIVO_FIGURE = /\$(?:29|24|49|77|97)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|(?:29|49)米ドル/g;
 
 test("every Dictivo price on the site comes from a placeholder", () => {
   for (const file of htmlFiles()) {
@@ -83,15 +87,17 @@ test("titles and meta descriptions carry no Dictivo price; only the English llms
   for (const file of htmlFiles()) {
     const html = readFileSync(file, "utf8");
     const head = html.slice(0, html.search(/<body[\s>]/)).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "");
-    assert.doesNotMatch(head, /\$(?:29|24|77)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|29米ドル/, file);
+    assert.doesNotMatch(head, /\$(?:29|24|49|77|97)(?!\d)(?![.,]\d)|\$(?:6|8)\.99|US\$|(?:29|49)米ドル/, file);
   }
   // Every buyer pays the same tax-inclusive US-dollar total, so the English llms.txt may quote it.
   // Its figures must be the formatted LOCAL_OFFER amounts; the localized files still quote none.
   const english = `${dist}llms.txt`;
   const figures = [...readFileSync(english, "utf8").matchAll(/US\$[\d.]+/g)].map(([figure]) => figure);
-  assert.deepEqual([...new Set(figures)].sort(), ["US$24", "US$29", "US$49", "US$8.99"], english);
+  // The regular price is a second figure only while the introductory offer runs.
+  const expected = ["local", "renewal", "cloudFast", ...(introOfferActive() ? ["regular"] : [])].map((amount) => priceText(amount));
+  assert.deepEqual([...new Set(figures)].sort(), [...new Set(expected)].sort(), english);
   for (const file of files(dist).filter((path) => path.endsWith("llms.txt") && path !== english)) {
-    assert.doesNotMatch(readFileSync(file, "utf8"), /\$(?:29|24)(?!\d)|\$(?:6|8)\.99|US\$/, file);
+    assert.doesNotMatch(readFileSync(file, "utf8"), /\$(?:29|24|49|77|97)(?!\d)|\$(?:6|8)\.99|US\$/, file);
   }
 });
 
