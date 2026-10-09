@@ -25,10 +25,27 @@ typing no; voice access yes, after a one-time language download). It quotes no D
 Dictivo section and Windows trial panel render only while Windows downloads are public.
 
 Inbound links: the English Wispr Flow comparison (its English figures re-checked the same day, so its
-English date moved to 2026-10-09), the English Dragon comparison (date unchanged: it still states a
-Dragon Professional price that Nuance no longer publishes, to be resolved separately), the Windows
-offline guide's Voice Access section and related pages, the English footer (Windows guide only) and
-`llms.txt`. Validation: 230 tests and the eight deploy check scripts. Not deployed or measured.
+English date moved to 2026-10-09), the English Dragon comparison, the Windows offline guide's Voice
+Access section and related pages, the English footer (Windows guide only) and `llms.txt`.
+
+**Dragon Professional's price, one wording.** Nuance's Dragon Professional pages (eight country
+editions) show no price on 2026-10-09, only a sales contact, and the old store addresses redirect to
+them. The last archived store page with a price is the Wayback Machine capture of 11 February 2025
+($699, one-time payment); on 24 February 2025 the store said purchases were on hold. The site had said
+"$699.99" as a current price on the Dragon comparison (English title and all eleven languages), the
+Windows offline guide, the English homepage teaser, the comparison hub and `llms.txt`.
+`data/dragon-price-status.mjs` now holds one statement (no public price, sales contact only, checked
+on 9 October 2026; last public list price $699, a one-time payment, archived 11 February 2025), used
+verbatim in English and translated in the ten other languages' pricing fact; the archived page is a
+cited source. The English title is now "Dragon Alternative: Local, Train-Free Dictation Bought Once",
+the "about 1/24 of the Dragon Professional license" line is gone, the comparison is re-dated
+2026-10-09 in every language and the English hub's sitemap date follows. `tests/dragon-price-status.test.mjs`
+fails on any "699.99" in the built site and on any "$699" without its archive date.
+
+The new pricing tests use `INTRO_OFFER` / `REGULAR_OFFER` from `tests/helpers/offer-states.mjs`.
+Validation: 235 tests and the eight deploy check scripts, today and in a copy with runbook steps A.1
+and A.2 applied (offer dates cleared, `PRICING_LASTMOD` 2026-11-01). Not deployed or measured.
+
 ## Tests pass on both sides of the 1 November price change — 2026-10-09
 
 A rehearsal of the 2026-11-01 runbook (US$29 → US$49) cleared the offer dates and failed 25
