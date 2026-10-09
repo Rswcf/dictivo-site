@@ -146,3 +146,114 @@ export function localOfferNodes(offer = LOCAL_OFFER) {
     offerNode(offer.regularPrice, { priceValidFrom: offer.regularPriceFrom }),
   ];
 }
+
+// The /pricing/ page (English only for now). Every sentence there that names a Dictivo price or
+// an offer date comes from these functions; data/pricing-page.mjs holds the undated copy. With
+// introOfferActive() false they state the regular price once, with no dates, and the
+// price-change section and question disappear.
+const PRICING_PAGE_SENTENCES = {
+  en: {
+    localPrice: {
+      intro: (until, from) => `Dictivo Local is {{price.local.inline}} once until ${until} and {{price.regular.inline}} once from ${from}.`,
+      regular: () => "Dictivo Local is {{price.local.inline}} once.",
+    },
+    answerTerms: (offer) =>
+      `The license is perpetual for the version you buy, includes ${offer.includedUpdateMonths} months of updates and new local models, and covers up to ${offer.personalDevices} personal devices; renewing updates afterwards is optional at {{price.renewal.inline}} a year. Cloud Fast is a separate, optional add-on at {{price.cloudFast.inline}} a month. The Tiny local model is free, every new install gets a ${offer.trialDays}-day full Local trial without a card or Dictivo account, and every purchase has a 14-day no-questions refund.`,
+    priceChange: {
+      title: (from) => `Price change on ${from}`,
+      terms: (offer) =>
+        `The license terms are the same on both sides of that date: ${offer.includedUpdateMonths} months of updates, up to ${offer.personalDevices} personal devices, optional renewal at {{price.renewal.inline}} a year.`,
+    },
+    faqs: {
+      subscription: (localPrice, offer) => [
+        "Is Dictivo a subscription?",
+        `No. ${localPrice} The version you buy keeps working; after the ${offer.includedUpdateMonths} included months, renewing updates is optional. Cloud Fast is the only monthly option: a separate, optional add-on at {{price.cloudFast.inline}} a month.`,
+      ],
+      offline: () => [
+        "Does Dictivo Local work offline?",
+        "Yes, in Local mode after a local model is installed: dictation audio is transcribed on your device, and Dictivo does not send Local dictation audio to a transcription server. The first model download needs internet.",
+      ],
+      devices: (offer) => [
+        "How many devices can I use one Local license on?",
+        `Up to ${offer.personalDevices} personal devices. The license may be used for personal, professional and commercial work.`,
+      ],
+      afterUpdates: (offer) => [
+        `What happens after the ${offer.includedUpdateMonths} months of updates?`,
+        "The version you have keeps working. Renewing updates is optional at {{price.renewal.inline}} a year and is needed only for future app updates and new local models.",
+      ],
+      priceChange: (from) => [
+        "When does the Local price change?",
+        `On ${from}, from {{price.local.inline}} to {{price.regular.inline}}. The license terms do not change.`,
+      ],
+      refund: () => [
+        "What is the refund policy?",
+        "Every purchase has a 14-day no-questions refund. Email support@dictivo.app with your purchase email and order reference. If you are a consumer in the EU, you also have a statutory right of withdrawal that is separate from, and additional to, this policy; the refund page explains both.",
+      ],
+      platforms: (windows) => [
+        "Is the price the same on Windows and Mac?",
+        windows
+          ? "Yes. One Dictivo Local license covers both desktop platforms, macOS and Windows x64, at the same price."
+          : "One license covers the Mac app; Windows downloads are temporarily unavailable.",
+      ],
+      account: () => [
+        "Do I need an account?",
+        "No. Local mode never asks for an email or login. After you buy, you activate Local in the app with the license key from your purchase email.",
+      ],
+      tax: () => [
+        "Is tax included?",
+        "Yes. Prices include applicable sales tax and VAT, so the amount shown is the amount you pay. Prices are in US dollars, and refunds are issued in US dollars.",
+      ],
+    },
+  },
+};
+
+function pricingPageSentences(locale) {
+  const copy = PRICING_PAGE_SENTENCES[locale];
+  if (!copy) throw new Error(`No pricing page copy for ${locale}`);
+  return copy;
+}
+
+function pricingLocalPrice(copy, locale, offer) {
+  return introOfferActive(offer)
+    ? copy.localPrice.intro(offerDate(offer.introPriceUntil, locale), offerDate(offer.regularPriceFrom, locale))
+    : copy.localPrice.regular();
+}
+
+// The short answer at the top of /pricing/.
+export function pricingPageAnswer(locale, offer = LOCAL_OFFER) {
+  const copy = pricingPageSentences(locale);
+  return `${pricingLocalPrice(copy, locale, offer)} ${copy.answerTerms(offer)}`;
+}
+
+// The Dictivo Local price cell of the /pricing/ comparison table: the guide tables' sentence.
+export function pricingPlanPrice(locale, offer = LOCAL_OFFER) {
+  pricingPageSentences(locale);
+  return guideLocalPrice(locale, offer);
+}
+
+// The "Price change" section: { title, paragraphs } while the introductory offer runs, then null.
+export function pricingPriceChangeSection(locale, offer = LOCAL_OFFER) {
+  const copy = pricingPageSentences(locale);
+  if (!introOfferActive(offer)) return null;
+  return {
+    title: copy.priceChange.title(offerDate(offer.regularPriceFrom, locale)),
+    paragraphs: [`${pricingLocalPrice(copy, locale, offer)} ${copy.priceChange.terms(offer)}`],
+  };
+}
+
+// The visible pricing FAQ, as [question, answer] pairs. `windows` mirrors hasWindowsRelease.
+export function pricingFaqs(locale, offer = LOCAL_OFFER, { windows = false } = {}) {
+  const copy = pricingPageSentences(locale);
+  const faqs = copy.faqs;
+  return [
+    faqs.subscription(pricingLocalPrice(copy, locale, offer), offer),
+    faqs.offline(),
+    faqs.devices(offer),
+    faqs.afterUpdates(offer),
+    ...(introOfferActive(offer) ? [faqs.priceChange(offerDate(offer.regularPriceFrom, locale))] : []),
+    faqs.refund(),
+    faqs.platforms(windows),
+    faqs.account(),
+    faqs.tax(),
+  ];
+}

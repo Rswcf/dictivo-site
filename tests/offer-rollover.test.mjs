@@ -1,7 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { LOCAL_OFFER, introOfferActive, offerDate } from "../data/local-offer.mjs";
-import { guideLocalPrice, llmsLocalPriceLine, localOfferNodes, mediaKitLocalFacts, pricingAnchor } from "../data/local-offer-copy.mjs";
+import {
+  guideLocalPrice,
+  llmsLocalPriceLine,
+  localOfferNodes,
+  mediaKitLocalFacts,
+  pricingAnchor,
+  pricingFaqs,
+  pricingPageAnswer,
+  pricingPlanPrice,
+  pricingPriceChangeSection,
+} from "../data/local-offer-copy.mjs";
 
 // data/local-offer.mjs as the 2026-11-01 runbook (step 1) leaves it.
 const AFTER = Object.freeze({ ...LOCAL_OFFER, price: 49, regularPrice: 49, introPriceUntil: null, regularPriceFrom: null });
@@ -105,4 +115,93 @@ test("structured data lists one undated Local offer after the rollover", () => {
     ["29", "2026-10-31", undefined],
     ["49", undefined, "2026-11-01"],
   ]);
+});
+
+// The /pricing/ page builds every sentence that names a Dictivo price or an offer date here.
+const PRICING_DATED = /2026|until|from 1 November|introductory/;
+const LITERAL_PRICE = /US\$|\$\d/;
+const pricingTexts = (offer, options) => [
+  pricingPageAnswer("en", offer),
+  pricingPlanPrice("en", offer),
+  ...(pricingPriceChangeSection("en", offer) ? [pricingPriceChangeSection("en", offer).title, ...pricingPriceChangeSection("en", offer).paragraphs] : []),
+  ...pricingFaqs("en", offer, options).flat(),
+];
+
+test("the pricing page answer and plan price state one undated price after the rollover", () => {
+  for (const text of [pricingPageAnswer("en", AFTER), pricingPlanPrice("en", AFTER)]) {
+    assert.equal(count(text, "{{price.local.inline}}"), 1, text);
+    assert.equal(count(text, "{{price.regular."), 0, text);
+    assert.doesNotMatch(text, PRICING_DATED, text);
+    assert.doesNotMatch(text, BROKEN, text);
+  }
+  assert.ok(pricingPageAnswer("en", AFTER).startsWith("Dictivo Local is {{price.local.inline}} once."), pricingPageAnswer("en", AFTER));
+  for (const text of [pricingPageAnswer("en"), pricingPlanPrice("en")]) {
+    assert.equal(count(text, "{{price.local.inline}}"), 1, text);
+    assert.equal(count(text, "{{price.regular.inline}}"), 1, text);
+    assert.ok(text.includes(offerDate(LOCAL_OFFER.introPriceUntil, "en")), text);
+    assert.ok(text.includes(offerDate(LOCAL_OFFER.regularPriceFrom, "en")), text);
+    assert.doesNotMatch(text, BROKEN, text);
+  }
+  // The license terms come from the offer, not from the copy.
+  for (const offer of [LOCAL_OFFER, AFTER]) {
+    const answer = pricingPageAnswer("en", offer);
+    assert.ok(answer.includes(`${offer.includedUpdateMonths} months of updates`), answer);
+    assert.ok(answer.includes(`up to ${offer.personalDevices} personal devices`), answer);
+    assert.ok(answer.includes(`${offer.trialDays}-day full Local trial`), answer);
+    assert.equal(count(answer, "{{price.renewal.inline}}"), 1, answer);
+    assert.equal(count(answer, "{{price.cloudFast.inline}}"), 1, answer);
+  }
+  const changed = pricingPageAnswer("en", { ...AFTER, includedUpdateMonths: 18, personalDevices: 5, trialDays: 7 });
+  for (const expected of ["18 months", "up to 5 personal devices", "7-day full Local trial"]) assert.ok(changed.includes(expected), changed);
+  assert.equal(pricingPlanPrice("en"), guideLocalPrice("en"));
+  assert.equal(pricingPlanPrice("en", AFTER), guideLocalPrice("en", AFTER));
+});
+
+test("the pricing page price-change section exists only while the introductory offer runs", () => {
+  assert.equal(pricingPriceChangeSection("en", AFTER), null);
+  const section = pricingPriceChangeSection("en");
+  assert.ok(section.title.includes(offerDate(LOCAL_OFFER.regularPriceFrom, "en")), section.title);
+  const body = section.paragraphs.join(" ");
+  assert.equal(count(body, "{{price.local.inline}}"), 1, body);
+  assert.equal(count(body, "{{price.regular.inline}}"), 1, body);
+  assert.ok(body.includes(offerDate(LOCAL_OFFER.introPriceUntil, "en")), body);
+  assert.ok(body.includes(offerDate(LOCAL_OFFER.regularPriceFrom, "en")), body);
+  assert.ok(body.includes(`${LOCAL_OFFER.includedUpdateMonths} months of updates`) && body.includes(`up to ${LOCAL_OFFER.personalDevices} personal devices`), body);
+  assert.doesNotMatch(body, /buy before|hurry|last chance/i, body);
+  assert.doesNotMatch(body, BROKEN, body);
+});
+
+test("the pricing FAQ drops the price-change question after the rollover", () => {
+  for (const windows of [true, false]) {
+    const before = pricingFaqs("en", LOCAL_OFFER, { windows });
+    const after = pricingFaqs("en", AFTER, { windows });
+    assert.equal(before.length, 9, `windows ${windows}`);
+    assert.equal(after.length, before.length - 1, `windows ${windows}`);
+    assert.ok(before.some(([question]) => question === "When does the Local price change?"));
+    assert.ok(!after.some(([question]) => /price change/i.test(question)), JSON.stringify(after));
+    for (const [question, answer] of after) {
+      assert.doesNotMatch(`${question} ${answer}`, PRICING_DATED, question);
+      assert.equal(count(answer, "{{price.regular."), 0, question);
+      assert.doesNotMatch(`${question} ${answer}`, BROKEN, question);
+    }
+    for (const [question, answer] of before) assert.doesNotMatch(`${question} ${answer}`, BROKEN, question);
+    const [subscriptionQuestion, subscriptionAnswer] = before[0];
+    assert.equal(subscriptionQuestion, "Is Dictivo a subscription?");
+    assert.ok(subscriptionAnswer.startsWith("No."), subscriptionAnswer);
+    assert.ok(subscriptionAnswer.includes(offerDate(LOCAL_OFFER.introPriceUntil, "en")), subscriptionAnswer);
+    assert.equal(count(after[0][1], "{{price.local.inline}}"), 1, after[0][1]);
+    const platformAnswer = before.find(([question]) => question === "Is the price the same on Windows and Mac?")[1];
+    assert.equal(/Windows x64/.test(platformAnswer), windows, platformAnswer);
+    if (!windows) assert.match(platformAnswer, /temporarily unavailable/, platformAnswer);
+  }
+  assert.deepEqual(pricingFaqs("en").map(([question]) => question), pricingFaqs("en", LOCAL_OFFER, { windows: false }).map(([question]) => question));
+});
+
+test("pricing page sentences never write a Dictivo price literally and exist only in English", () => {
+  for (const offer of [LOCAL_OFFER, AFTER]) for (const windows of [true, false]) {
+    for (const text of pricingTexts(offer, { windows })) assert.doesNotMatch(text, LITERAL_PRICE, text);
+  }
+  for (const make of [pricingPageAnswer, pricingPlanPrice, pricingPriceChangeSection, pricingFaqs]) {
+    assert.throws(() => make("de"), /No pricing page copy for de/, make.name);
+  }
 });
