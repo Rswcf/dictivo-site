@@ -4198,7 +4198,7 @@ function renderOfflineDictationWindowsGuideSection(section, index) {
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}
+        ${renderDocBullets(section.bullets)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
       </section>`;
 }
 
@@ -4693,6 +4693,12 @@ function renderDictationGuideLinks(links) {
   return `\n        <p>${links.map(([label, href]) => `<a href="${attr(href)}">${html(label)}</a>`).join(" · ")}</p>`;
 }
 
+// An optional table inside a section, after its steps (a vendor's plan list, for example).
+function renderDictationGuideSectionTable(table) {
+  if (!table) return "";
+  return `\n        ${renderBenchmarkMethodTable(table.caption, table.headers, table.rows)}`;
+}
+
 function renderDictationGuideSection(idPrefix) {
   return (section, index) => {
     const id = `${idPrefix}-section-${index + 1}`;
@@ -4700,7 +4706,7 @@ function renderDictationGuideSection(idPrefix) {
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocSteps(section.steps)}
+        ${renderDocSteps(section.steps)}${renderDictationGuideSectionTable(section.table)}
         ${(section.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(section.links)}
       </section>`;
   };
@@ -4749,8 +4755,21 @@ ${copy.sections.map((section, index) => `          <li><a href="#${idPrefix}-sec
       </section>`;
 }
 
+// The one section that names Dictivo. A guide can leave it out (copy.dictivo null), for
+// example a Windows guide while Windows downloads are switched off.
+function renderDictationGuideDictivo(copy, idPrefix) {
+  if (!copy.dictivo) return "";
+  return `<section class="doc-section" aria-labelledby="${attr(`${idPrefix}-dictivo`)}">
+        <p class="doc-meta">${html(copy.dictivo.kicker)}</p>
+        <h2 id="${attr(`${idPrefix}-dictivo`)}">${html(copy.dictivo.title)}</h2>
+        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(copy.dictivo.links)}
+      </section>`;
+}
+
 function renderDictationGuidePage(guide) {
   const { code, path, url, copy, lastmod, references, headTags, trialSource, idPrefix, mainId, quickReference, hrefForLocale } = guide;
+  // The trial panel's download button: "macos" unless the guide is about Windows.
+  const platform = guide.platform ?? "macos";
   // `doc-page` alone keeps the 760px table minimum, so three- and four-column tables fit the
   // 880px column on desktop; `offline-guide-page` raises it to 980px (the Japanese guide has no table).
   const mainClass = guide.mainClass ?? "doc-page offline-guide-page";
@@ -4790,13 +4809,9 @@ ${renderDictationGuideQuickReference(quickReference, idPrefix)}
 
       ${renderDictationGuideFieldTest(copy, idPrefix)}
 
-      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-dictivo`)}">
-        <p class="doc-meta">${html(copy.dictivo.kicker)}</p>
-        <h2 id="${attr(`${idPrefix}-dictivo`)}">${html(copy.dictivo.title)}</h2>
-        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(copy.dictivo.links)}
-      </section>
+      ${renderDictationGuideDictivo(copy, idPrefix)}
 
-      ${renderGuideTrial(code, "macos", trialSource)}
+      ${renderGuideTrial(code, platform, trialSource)}
 
       <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-faq`)}">
         <h2 id="${attr(`${idPrefix}-faq`)}">${html(copy.faqTitle)}</h2>
