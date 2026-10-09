@@ -60,6 +60,7 @@ import {
 } from "../data/mac-dictation-shortcut-guide.mjs";
 import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
+import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
@@ -827,6 +828,18 @@ function macDictationShortcutUrl() {
 
 function macDictationShortcutCopyForRender() {
   return macDictationShortcutCopy({ windows: hasWindowsRelease, troubleshootingPath: macDictationNotWorkingPath() });
+}
+
+function windowsVoiceTypingPath() {
+  return "/guides/windows-voice-typing-not-working/";
+}
+
+function windowsVoiceTypingUrl() {
+  return absoluteUrl(windowsVoiceTypingPath());
+}
+
+function windowsVoiceTypingCopyForRender() {
+  return windowsVoiceTypingCopy({ windows: hasWindowsRelease, offlineGuidePath: offlineDictationWindowsGuidePath() });
 }
 
 // Pricing facts pages for other dictation products (English only). Each quotes a Dictivo price
@@ -4914,6 +4927,31 @@ function renderMacDictationShortcutPage() {
   });
 }
 
+function renderWindowsVoiceTypingPage() {
+  const url = windowsVoiceTypingUrl();
+  const copy = windowsVoiceTypingCopyForRender();
+  return renderDictationGuidePage({
+    code: "en",
+    path: windowsVoiceTypingPath(),
+    url,
+    copy,
+    lastmod: WINDOWS_VOICE_TYPING_LASTMOD,
+    references: WINDOWS_VOICE_TYPING_REFERENCES,
+    headTags: enOnlyHeadTags(url),
+    // Without public Windows downloads the trial panel renders nothing and copy.dictivo is null.
+    platform: "windows",
+    trialSource: "troubleshooting_windows",
+    mainClass: "doc-page",
+    idPrefix: "windows-voice-typing",
+    mainId: "windows-voice-typing-not-working",
+    quickReference: copy.quickReference,
+    route: "guides/windows-voice-typing-not-working",
+    headline: copy.metaTitle,
+    about: ["Windows voice typing", "Win+H", "Online speech recognition", "Voice access"],
+    legacyFaqSchema: false,
+  });
+}
+
 function renderDragonPricingPage() {
   const url = dragonPricingUrl();
   const copy = dragonPricingCopyForRender();
@@ -5111,6 +5149,7 @@ function renderHomeFooterLinks(currentCode, t) {
     currentCode === "ja" ? `<a href="${attr(jaMacDictationTroubleshootingPath())}">${html(JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(macDictationNotWorkingPath())}">${html(macDictationNotWorkingCopyForRender().navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(macDictationShortcutPath())}">${html(macDictationShortcutCopyForRender().navLabel)}</a>` : "",
+    currentCode === "en" ? `<a href="${attr(windowsVoiceTypingPath())}">${html(windowsVoiceTypingCopyForRender().navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
@@ -6078,6 +6117,7 @@ function renderLlmsEnglishFacts() {
     ["What has Dictivo actually measured in its Mac dictation benchmark?", BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
     ["Why is built-in Mac dictation not working, and what should I check first?", macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()],
     ["What is the Mac dictation keyboard shortcut, and how do I change it?", macDictationShortcutCopyForRender().navLabel, macDictationShortcutUrl()],
+    ["Why is Windows voice typing (Win+H) not working, and does Windows 11 dictation work offline?", windowsVoiceTypingCopyForRender().navLabel, windowsVoiceTypingUrl()],
     ["How much does Dragon cost, and can you still buy Dragon for Mac?", dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
     ["What do Wispr Flow's plans cost, and what does the free plan include?", wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
   ];
@@ -6118,6 +6158,7 @@ function renderLlmsTxt(currentCode = "en") {
       ? [
           [macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()],
           [macDictationShortcutCopyForRender().navLabel, macDictationShortcutUrl()],
+          [windowsVoiceTypingCopyForRender().navLabel, windowsVoiceTypingUrl()],
           [dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
           [wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
         ]
@@ -6594,6 +6635,13 @@ ${macDictationTroubleshootingAlternates}
     <xhtml:link rel="alternate" hreflang="x-default" href="${macDictationShortcutUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const windowsVoiceTypingEntry = `  <url>
+    <loc>${windowsVoiceTypingUrl()}</loc>
+    <lastmod>${WINDOWS_VOICE_TYPING_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${windowsVoiceTypingUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${windowsVoiceTypingUrl()}" />
+    <priority>0.8</priority>
+  </url>`;
   const dragonPricingEntry = `  <url>
     <loc>${dragonPricingUrl()}</loc>
     <lastmod>${dragonPricingLastmod()}</lastmod>
@@ -6685,6 +6733,7 @@ ${offlineDictationWindowsGuideEntry}
 ${macDictationNotWorkingEntry}
 ${jaMacDictationTroubleshootingEntry}
 ${macDictationShortcutEntry}
+${windowsVoiceTypingEntry}
 ${dragonPricingEntry}
 ${wisprFlowPricingEntry}
 ${mediaKitEntry}
@@ -7085,6 +7134,7 @@ write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMa
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write(`${macDictationNotWorkingPath().slice(1)}index.html`, renderMacDictationNotWorkingPage());
 write(`${macDictationShortcutPath().slice(1)}index.html`, renderMacDictationShortcutPage());
+write(`${windowsVoiceTypingPath().slice(1)}index.html`, renderWindowsVoiceTypingPage());
 write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${wisprFlowPricingPath().slice(1)}index.html`, renderWisprFlowPricingPage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());

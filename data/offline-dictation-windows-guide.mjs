@@ -128,6 +128,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
         "Voice Access: free, on-device after a one-time model download, Windows 11 22H2 or later.",
         "Both are worth testing before paying for anything.",
       ],
+      link: { label: "If Win+H voice typing is not working, check these settings by symptom", href: "/guides/windows-voice-typing-not-working/" },
     },
     {
       kicker: "Where Dictivo fits",
@@ -183,6 +184,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
   relatedTitle: "Related Dictivo pages",
   relatedRows: [
     ["Offline dictation on Mac", "The macOS version of this comparison.", "https://dictivo.app/guides/offline-dictation-on-mac/"],
+    ["Windows voice typing not working", "What to check, symptom by symptom, when Win+H voice typing fails, from Microsoft's support documents.", "https://dictivo.app/guides/windows-voice-typing-not-working/"],
     ["Dragon alternative", "Full Dictivo vs Dragon Professional comparison and the Dragon Home migration story.", "https://dictivo.app/compare/dragon-alternative/"],
     ["Dragon pricing", "What each Dragon edition costs and how it is licensed, from Nuance and Microsoft sources.", "https://dictivo.app/guides/dragon-pricing/"],
     ["Wispr Flow pricing", "Wispr Flow's plans, word limits, student pricing, tax and refunds, from its own pages.", "https://dictivo.app/guides/wispr-flow-pricing/"],
