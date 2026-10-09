@@ -101,7 +101,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Download for Windows",
     msiButton: "MSI installer",
     note: (version) => `Version ${version} - Windows x64.`,
-    smartscreen: 'Not yet code-signed: Windows SmartScreen may warn. Choose "More info" and then "Run anyway".',
+    smartscreen: 'Not yet code-signed, so Windows may warn. If Edge blocks the download, open "…" next to it and choose "Keep", then "Keep anyway". If SmartScreen appears when you run the installer, choose "More info", then "Run anyway".',
   },
   de: {
     badge: "Verfügbar",
@@ -109,7 +109,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Für Windows herunterladen",
     msiButton: "MSI-Installer",
     note: (version) => `Version ${version} - Windows x64.`,
-    smartscreen: 'Noch nicht code-signiert: Windows SmartScreen kann warnen. Wählen Sie "Weitere Informationen" und dann "Trotzdem ausführen".',
+    smartscreen: 'Noch nicht code-signiert, daher kann Windows warnen. Wenn Edge den Download blockiert, öffnen Sie daneben "…" und wählen Sie "Beibehalten", dann "Trotzdem beibehalten". Wenn beim Start des Installers SmartScreen erscheint, wählen Sie "Weitere Informationen" und dann "Trotzdem ausführen".',
   },
   fr: {
     badge: "Disponible",
@@ -117,7 +117,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Télécharger pour Windows",
     msiButton: "Installateur MSI",
     note: (version) => `Version ${version} - Windows x64.`,
-    smartscreen: "Pas encore signé numériquement : Windows SmartScreen peut afficher un avertissement. Choisissez « Informations complémentaires » puis « Exécuter quand même ».",
+    smartscreen: "Pas encore signé numériquement : Windows peut afficher un avertissement. Si Edge bloque le téléchargement, ouvrez « … » à côté du fichier, choisissez de le conserver, puis confirmez. Si SmartScreen s'affiche au lancement de l'installateur, choisissez « Informations complémentaires » puis « Exécuter quand même ».",
   },
   es: {
     badge: "Disponible",
@@ -125,7 +125,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Descargar para Windows",
     msiButton: "Instalador MSI",
     note: (version) => `Versión ${version} - Windows x64.`,
-    smartscreen: 'Aún sin firma de código: Windows SmartScreen puede avisar. Elige "Más información" y luego "Ejecutar de todas formas".',
+    smartscreen: 'Aún sin firma de código: Windows puede avisar. Si Edge bloquea la descarga, abre "…" junto al archivo, elige conservarlo y confirma. Si aparece SmartScreen al ejecutar el instalador, elige "Más información" y luego "Ejecutar de todas formas".',
   },
   it: {
     badge: "Disponibile",
@@ -133,7 +133,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Scarica per Windows",
     msiButton: "Installer MSI",
     note: (version) => `Versione ${version} - Windows x64.`,
-    smartscreen: 'Non ancora firmato: Windows SmartScreen può mostrare un avviso. Scegli "Ulteriori informazioni" e poi "Esegui comunque".',
+    smartscreen: "Non ancora firmato: Windows può mostrare un avviso. Se Edge blocca il download, apri \"…\" accanto al file, scegli di mantenerlo e conferma. Se all'avvio dell'installer compare SmartScreen, scegli \"Ulteriori informazioni\" e poi \"Esegui comunque\".",
   },
   nl: {
     badge: "Beschikbaar",
@@ -141,7 +141,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Download voor Windows",
     msiButton: "MSI-installer",
     note: (version) => `Versie ${version} - Windows x64.`,
-    smartscreen: 'Nog niet code-ondertekend: Windows SmartScreen kan waarschuwen. Kies "Meer informatie" en daarna "Toch uitvoeren".',
+    smartscreen: 'Nog niet code-ondertekend: Windows kan waarschuwen. Blokkeert Edge de download, open dan "…" naast het bestand, kies ervoor het te behouden en bevestig. Verschijnt SmartScreen bij het starten van de installer, kies dan "Meer informatie" en daarna "Toch uitvoeren".',
   },
   pt: {
     badge: "Disponível",
@@ -149,7 +149,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Baixar para Windows",
     msiButton: "Instalador MSI",
     note: (version) => `Versão ${version} - Windows x64.`,
-    smartscreen: 'Ainda sem assinatura de código: o Windows SmartScreen pode alertar. Escolha "Mais informações" e depois "Executar assim mesmo".',
+    smartscreen: 'Ainda sem assinatura de código: o Windows pode alertar. Se o Edge bloquear o download, abra "…" ao lado do arquivo, escolha manter o arquivo e confirme. Se o SmartScreen aparecer ao executar o instalador, escolha "Mais informações" e depois "Executar assim mesmo".',
   },
   zh: {
     badge: "可用",
@@ -157,7 +157,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "下载 Windows 版",
     msiButton: "MSI 安装包",
     note: (version) => `版本 ${version} - Windows x64。`,
-    smartscreen: "安装包暂未进行代码签名，Windows SmartScreen 可能弹出提示。点击「更多信息」→「仍要运行」即可继续。",
+    smartscreen: '安装包暂未进行代码签名，Windows 可能弹出提示。如果 Edge 拦截了下载，点击文件旁的「…」，选择保留该文件并确认。运行安装包时如果出现 SmartScreen，点击「更多信息」→「仍要运行」即可继续。',
   },
   ja: {
     badge: "利用可能",
@@ -165,7 +165,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Windows 版をダウンロード",
     msiButton: "MSI インストーラ",
     note: (version) => `バージョン ${version} - Windows x64。`,
-    smartscreen: "現在コード署名前のため、Windows SmartScreen が警告を表示する場合があります。「詳細情報」→「実行」を選んでください。",
+    smartscreen: '現在コード署名前のため、Windows が警告を表示する場合があります。Edge がダウンロードをブロックした場合は、ファイル横の「…」からファイルを保持して確定してください。インストーラーの実行時に SmartScreen が表示された場合は、「詳細情報」→「実行」を選んでください。',
   },
   ko: {
     badge: "사용 가능",
@@ -173,7 +173,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Windows용 다운로드",
     msiButton: "MSI 설치 파일",
     note: (version) => `버전 ${version} - Windows x64.`,
-    smartscreen: '아직 코드 서명이 적용되지 않아 Windows SmartScreen 경고가 표시될 수 있습니다. "추가 정보" → "실행"을 선택하세요.',
+    smartscreen: '아직 코드 서명이 적용되지 않아 Windows 경고가 표시될 수 있습니다. Edge가 다운로드를 차단하면 파일 옆의 "…"를 열어 파일을 유지하도록 선택하고 확인하세요. 설치 파일을 실행할 때 SmartScreen이 표시되면 "추가 정보" → "실행"을 선택하세요.',
   },
 };
 
