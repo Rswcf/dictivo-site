@@ -1,6 +1,6 @@
 export const RELEASE_NOTES = Object.freeze({
   "0.3.53": Object.freeze({
-    date: "2026-10-19",
+    date: "2026-10-09",
     title: "Setup on Windows reports what really happened, and the Local price shows its date.",
     bullets: Object.freeze([
       "Account & Billing now says until when the current Dictivo Local price applies and what it costs after that, in the same words as this website, and shows the new price by itself from that day on.",
