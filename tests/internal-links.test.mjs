@@ -46,3 +46,16 @@ test("each homepage's comparison teaser links to its own offline dictation guide
     assert.match(teaser, new RegExp(`<a href="${guide}">[\\s\\S]*?<strong>${label}</strong>`), home);
   }
 });
+
+test("English pages link to the pricing page; other languages keep the homepage section", () => {
+  const footer = (html) => html.slice(html.lastIndexOf('<footer class="site-footer"'));
+  for (const path of ["index.html", "compare/wispr-flow-alternative/index.html", "guides/offline-dictation-on-mac/index.html"]) {
+    const html = read(path);
+    // The homepage body keeps its in-page #pricing button; the other pages link from their body.
+    if (path !== "index.html") assert.ok(main(html).includes('href="/pricing/"'), `${path}: body`);
+    assert.ok(footer(html).includes('href="/pricing/"'), `${path}: footer`);
+  }
+  const de = read("de/index.html");
+  assert.ok(de.includes('href="/de/#pricing"'));
+  assert.ok(!de.includes("/pricing/"));
+});

@@ -54,7 +54,15 @@ import { HANT, addHant, toHant } from "./lib/hant.mjs";
 import { priceText, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
-import { llmsLocalPriceLine, localOfferNodes } from "../data/local-offer-copy.mjs";
+import {
+  llmsLocalPriceLine,
+  localOfferNodes,
+  pricingFaqs,
+  pricingPageAnswer,
+  pricingPlanPrice,
+  pricingPriceChangeSection,
+} from "../data/local-offer-copy.mjs";
+import { PRICING_PAGE_COPY, PRICING_PAGE_LASTMOD } from "../data/pricing-page.mjs";
 import { firstPublished } from "../data/first-published.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -780,6 +788,21 @@ function jaMacDictationTroubleshootingUrl() {
 
 function mediaKitPath() {
   return "/media-kit/";
+}
+
+// Languages with a pricing page (PRICING_PAGE_COPY) link to it; the others keep linking to
+// the pricing section of their homepage. The homepage hero button stays an in-page anchor.
+function pricingPath(code) {
+  if (!PRICING_PAGE_COPY[code]) throw new Error(`No pricing page for ${code}`);
+  return code === "en" ? "/pricing/" : `${localeByCode(code).path}pricing/`;
+}
+
+function pricingHref(code) {
+  return PRICING_PAGE_COPY[code] ? pricingPath(code) : localePath(code, "#pricing");
+}
+
+function pricingUrl(code) {
+  return absoluteUrl(pricingHref(code));
 }
 
 function mediaKitUrl() {
@@ -2352,31 +2375,25 @@ function offlineDictationGuideHreflangTags(currentCode) {
   return alternates.join("\n    ");
 }
 
-function benchmarkMethodGuideHreflangTags() {
-  const url = benchmarkMethodGuideUrl();
+// English-only pages: a self hreflang, x-default to the same URL, and a self canonical.
+function enOnlyHeadTags(url) {
   return [
     `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
     `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
     `<link rel="canonical" href="${attr(url)}" />`,
   ].join("\n    ");
+}
+
+function benchmarkMethodGuideHreflangTags() {
+  return enOnlyHeadTags(benchmarkMethodGuideUrl());
 }
 
 function speechToTextMacGuideHreflangTags() {
-  const url = speechToTextMacGuideUrl();
-  return [
-    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
-    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
-    `<link rel="canonical" href="${attr(url)}" />`,
-  ].join("\n    ");
+  return enOnlyHeadTags(speechToTextMacGuideUrl());
 }
 
 function offlineDictationWindowsGuideHreflangTags() {
-  const url = offlineDictationWindowsGuideUrl();
-  return [
-    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
-    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
-    `<link rel="canonical" href="${attr(url)}" />`,
-  ].join("\n    ");
+  return enOnlyHeadTags(offlineDictationWindowsGuideUrl());
 }
 
 // Japanese only: no x-default, so the page is not offered to readers of other languages.
@@ -2389,12 +2406,7 @@ function jaMacDictationTroubleshootingHeadTags() {
 }
 
 function mediaKitHreflangTags() {
-  const url = mediaKitUrl();
-  return [
-    `<link rel="alternate" hreflang="en" href="${attr(url)}" />`,
-    `<link rel="alternate" hreflang="x-default" href="${attr(url)}" />`,
-    `<link rel="canonical" href="${attr(url)}" />`,
-  ].join("\n    ");
+  return enOnlyHeadTags(mediaKitUrl());
 }
 
 function privacyProofHreflangTags(currentCode) {
@@ -2456,7 +2468,7 @@ function renderHeader(currentCode, t, options = {}) {
       <nav class="nav-links" aria-label="Site navigation">
         <a href="${attr(hash("privacy"))}">${html(t.nav.privacy)}</a>
         <a href="${attr(hash("cloud-fast"))}">${html(t.nav.cloudFast)}</a>
-        <a href="${attr(hash("pricing"))}">${html(t.nav.pricing)}</a>
+        <a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>
         <a href="${attr(macGuidePath(currentCode))}">${html(macAdvisorCopy(currentCode).navLabel)}</a>
         <a href="${attr(hash("downloads"))}">${html(t.nav.downloads)}</a>
       </nav>
@@ -2473,9 +2485,11 @@ ${items.map((item) => `                <li>${html(item)}</li>`).join("\n")}
               </ul>`;
 }
 
-function renderTier(tier, index) {
+// options.plainLinks: the Free card links to a page, not to a download, so it is not marked
+// as a download link (download links do not carry the visitor's campaign to the next page).
+function renderTier(tier, index, options = {}) {
   const classes = index === 1 ? "tier tier--highlight" : "tier";
-  const buttonClass = `${index === 1 ? "button button-dark" : "button button-secondary"}${index === 0 ? " download-link" : ""}`;
+  const buttonClass = `${index === 1 ? "button button-dark" : "button button-secondary"}${index === 0 && !options.plainLinks ? " download-link" : ""}`;
   const href = tier.href || (index === 0 ? downloadUrl("macos", "pricing_free") : index === 1 ? "/checkout/local" : "/checkout/cloud-fast");
   const data = tier.dataAttr ?? (index === 0 ? downloadData("macos", "pricing_free") : index === 1 ? " data-local-checkout" : " data-cloud-fast-checkout");
   const price = index === 1 ? "local" : index === 2 ? "cloudFast" : null;
@@ -2530,8 +2544,43 @@ function homeBreadcrumb(code) {
   return { "@type": "ListItem", position: 1, name: llmsCopy(code).pageLabels.home, item: localeUrl(code) };
 }
 
+// The product with every offer, as the homepage of `code` describes it. The pricing page
+// repeats the same node, so its url stays the homepage.
+function softwareApplicationSchema(code, t) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Dictivo",
+    applicationCategory: "BusinessApplication",
+    image: `${BASE_URL}${NATIVE_DEMO.poster}`,
+    screenshot: `${BASE_URL}${NATIVE_DEMO.poster}`,
+    operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
+    url: localeUrl(code),
+    downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
+    softwareVersion: release.version,
+    description: t.metaDescription,
+    publisher: ORGANIZATION_REF,
+    offers: [
+      { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
+      ...localOffers(),
+      {
+        "@type": "Offer",
+        name: "Cloud Fast",
+        price: schemaPrice("cloudFast"),
+        priceCurrency: "USD",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: schemaPrice("cloudFast"),
+          priceCurrency: "USD",
+          billingDuration: "P1M",
+          valueAddedTaxIncluded: true,
+        },
+      },
+    ],
+  };
+}
+
 function renderSchema(currentCode, t) {
-  const pageUrl = localeUrl(currentCode);
   const faqEntities = t.faq.items.map(([question, answer]) => ({
     "@type": "Question",
     name: question,
@@ -2543,37 +2592,7 @@ function renderSchema(currentCode, t) {
 
   const schema = [
     organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "Dictivo",
-      applicationCategory: "BusinessApplication",
-      image: `${BASE_URL}${NATIVE_DEMO.poster}`,
-      screenshot: `${BASE_URL}${NATIVE_DEMO.poster}`,
-      operatingSystem: hasWindowsRelease ? "macOS, Windows" : "macOS",
-      url: pageUrl,
-      downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
-      softwareVersion: release.version,
-      description: t.metaDescription,
-      publisher: ORGANIZATION_REF,
-      offers: [
-        { "@type": "Offer", name: "Free Local", price: "0", priceCurrency: "USD" },
-        ...localOffers(),
-        {
-          "@type": "Offer",
-          name: "Cloud Fast",
-          price: schemaPrice("cloudFast"),
-          priceCurrency: "USD",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: schemaPrice("cloudFast"),
-            priceCurrency: "USD",
-            billingDuration: "P1M",
-            valueAddedTaxIncluded: true,
-          },
-        },
-      ],
-    },
+    softwareApplicationSchema(currentCode, t),
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -2803,7 +2822,7 @@ function renderCompareLinks(page, currentCode, copy) {
     .join("\n              ");
 
   return `<nav class="compare-resource-links" aria-label="${attr(copy.resourceAria)}">
-              <a href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.resourcePricing)}</a>
+              <a href="${attr(pricingHref(currentCode))}">${html(copy.resourcePricing)}</a>
               ${currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : ""}
               ${currentCode === "en" ? `<a href="${attr(offlineDictationWindowsGuidePath())}">${html(OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel)}</a>` : ""}
               ${relatedLinks}
@@ -2859,7 +2878,7 @@ function renderCompareCta(page, currentCode, copy) {
             <div class="compare-cta-actions">
               <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_${page.slug}`))}"${downloadData("macos", `compare_${page.slug}`)}>${html(copy.ctaPrimary)} · macOS</a>
               ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", `compare_${page.slug}_windows`))}"${downloadData("windows", `compare_${page.slug}_windows`)}>${html(copy.ctaPrimary)} · Windows</a>` : ""}
-              <a class="button button-outline" href="${attr(localePath(currentCode, "#pricing"))}">${html(copy.ctaSecondary)}</a>
+              <a class="button button-outline" href="${attr(pricingHref(currentCode))}">${html(copy.ctaSecondary)}</a>
             </div>
             ${renderCompareLinks(page, currentCode, copy)}
           </section>`;
@@ -3020,7 +3039,7 @@ ${COMPARE_PAGES.map(
         <p>${html(guidance.body)}</p>
         <div class="hero-actions">
           <a class="button button-light" href="${attr(`${localePath(currentCode)}#downloads`)}">${html(guidance.download)}</a>
-          <a class="button button-outline" href="${attr(`${localePath(currentCode)}#pricing`)}">${html(guidance.pricing)}</a>
+          <a class="button button-outline" href="${attr(pricingHref(currentCode))}">${html(guidance.pricing)}</a>
         </div>
         ${renderFirstDictationLink(currentCode)}
       </section>
@@ -3462,7 +3481,7 @@ function renderGuideTrial(code, platform, source) {
         <p>${html(c.body)}</p>
         <div class="compare-intro-actions">
           <a class="button button-light download-link" href="${attr(downloadUrl(platform, source))}"${downloadData(platform, source)}>${html(button)}</a>
-          <a class="button button-outline" href="${attr(localePath(code, "#pricing"))}">${html(c.pricing)}</a>
+          <a class="button button-outline" href="${attr(pricingHref(code))}">${html(c.pricing)}</a>
         </div>
         ${renderFirstDictationLink(code)}
         ${platform === "windows" ? `<p class="guide-trial-note">Windows x64. The installer is not yet code-signed; verify the download source before deciding whether to proceed.</p>` : ""}
@@ -3630,7 +3649,7 @@ function renderFirstDictationPage(code) {
       </section>
       <section class="doc-section" aria-labelledby="next-title">
         <h2 id="next-title">${html(c.nextTitle)}</h2><p>${html(c.next)}</p>
-        <ul><li><a href="${localePath(code, "#pricing")}">${html(c.pricing)}</a></li><li><a href="${macGuidePath(code)}">${html(c.models)}</a></li><li><a href="${offlineDictationGuidePath(code)}">${html(c.offline)}</a></li></ul>
+        <ul><li><a href="${pricingHref(code)}">${html(c.pricing)}</a></li><li><a href="${macGuidePath(code)}">${html(c.models)}</a></li><li><a href="${offlineDictationGuidePath(code)}">${html(c.offline)}</a></li></ul>
       </section>
     </main>
     ${renderFooterOnly(code)}
@@ -4428,7 +4447,7 @@ function renderProductFilmPage() {
         ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "film_windows"))}"${downloadData("windows", "film_windows")}>Download for Windows</a>` : ""}
       </div>
       <p class="compare-trial">${html(HOME_CONVERSION_COPY.en.trial)}</p>
-      <p><a href="/guides/first-local-dictation/">Try your first spoken draft</a> · <a href="/#pricing">See pricing</a></p>
+      <p><a href="/guides/first-local-dictation/">Try your first spoken draft</a> · <a href="${attr(pricingHref("en"))}">See pricing</a></p>
       <section class="doc-section" aria-labelledby="film-story"><h2 id="film-story">In the film</h2>
         ${FILM_CHAPTERS.map(c => `<h3>${html(c.title)}</h3><p>${html(c.description)}</p>`).join("")}
       </section>
@@ -4702,6 +4721,120 @@ ${JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES.map(
 `;
 }
 
+function pricingPageLastmod() {
+  return latestDate(PRICING_PAGE_LASTMOD, PRICING_LASTMOD);
+}
+
+function renderFaqGrid(faqs) {
+  return `<div class="faq-grid">
+          ${faqs
+            .map(
+              ([question, answer], index) => `<details class="faq-item">
+              <summary>
+                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
+                <span class="faq-question">${html(question)}</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p class="faq-answer-body">${html(answer)}</p>
+              </div>
+            </details>`,
+            )
+            .join("\n")}
+        </div>`;
+}
+
+function renderPricingSection(section) {
+  const blocks = section.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`);
+  if (section.links?.length) blocks.push(`<p>${section.links.map(([label, href]) => `<a href="${attr(href)}">${html(label)}</a>`).join(" · ")}</p>`);
+  return `<section class="doc-section" id="${attr(section.id)}" aria-labelledby="${attr(`${section.id}-title`)}">
+        <h2 id="${attr(`${section.id}-title`)}">${html(section.title)}</h2>
+        ${blocks.join("\n        ")}
+      </section>`;
+}
+
+function renderPricingSchema(code, copy, t) {
+  const schema = [
+    organizationSchema(),
+    softwareApplicationSchema(code, t),
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        homeBreadcrumb(code),
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pricingUrl(code) },
+      ],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderPricingPage(code = "en") {
+  const copy = PRICING_PAGE_COPY[code];
+  const locale = localeByCode(code);
+  const t = homeCopyForRender(code);
+  const canonical = pricingUrl(code);
+  const lastmod = pricingPageLastmod();
+  // The Free card leaves this page for the homepage downloads, which list every platform.
+  const tiers = t.pricing.tiers.map((tier, index) => (index === 0 ? { ...tier, href: localePath(code, "#downloads"), dataAttr: "" } : tier));
+  const rows = copy.tableRows(hasWindowsRelease).map(([label, ...cells]) => [label, ...cells.map((cell) => cell ?? pricingPlanPrice(code))]);
+  const priceChange = pricingPriceChangeSection(code);
+  const sections = copy.sections.flatMap((section) =>
+    priceChange && section.id === copy.priceChangeBefore ? [{ id: copy.priceChangeId, ...priceChange }, section] : [section],
+  );
+  return `<!doctype html>
+<html lang="${attr(locale.htmlLang)}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${html(copy.metaTitle)}</title>
+    <meta name="description" content="${attr(copy.metaDescription)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: locale.htmlLang })}
+    ${enOnlyHeadTags(canonical)}
+    ${assetTags()}
+    ${renderPricingSchema(code, copy, t)}
+  </head>
+  <body>
+    <a class="skip-link" href="#pricing-page">${html(copy.navLabel)}</a>
+    ${renderHeader(code, t, { hrefForLocale: (item) => pricingHref(item.code) })}
+    <main class="doc-page offline-guide-page" id="pricing-page">
+      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(copy.lastUpdated)} <time datetime="${attr(lastmod)}">${html(formatLocalizedDate(lastmod, code))}</time></p>
+
+      <section class="doc-section" aria-labelledby="pricing-answer">
+        <h2 id="pricing-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(pricingPageAnswer(code))}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="pricing-plans">
+        <h2 id="pricing-plans">${html(copy.plansTitle)}</h2>
+        <div class="pricing-band" role="list">
+            ${tiers.map((tier, index) => renderTier(tier, index, { plainLinks: true })).join("\n")}
+        </div>
+      </section>
+
+      <section class="doc-section" aria-labelledby="pricing-table">
+        <h2 id="pricing-table">${html(copy.tableTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.tableCaption(formatLocalizedDate(lastmod, code)), copy.tableHeaders, rows)}
+        <p>${html(copy.audioNote[0])} <a href="${attr(copy.audioNote[2])}">${html(copy.audioNote[1])}</a>.</p>
+      </section>
+
+      ${sections.map(renderPricingSection).join("\n\n      ")}
+
+      <section class="doc-section" aria-labelledby="pricing-faq">
+        <h2 id="pricing-faq">${html(copy.faqTitle)}</h2>
+        ${renderFaqGrid(pricingFaqs(code, LOCAL_OFFER, { windows: hasWindowsRelease }))}
+      </section>
+    </main>
+    ${renderFooterOnly(code)}
+  </body>
+</html>
+`;
+}
+
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const links = [
@@ -4715,7 +4848,7 @@ function renderHomeFooterLinks(currentCode, t) {
     currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
-    `<a href="${attr(localePath(currentCode, "#pricing"))}">${html(t.nav.pricing)}</a>`,
+    `<a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>`,
     `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
     `<a href="/security/">${html(ui.footer.security)}</a>`,
     `<a href="/terms/">${html(ui.footer.terms)}</a>`,
@@ -4890,7 +5023,7 @@ function renderHome(currentCode) {
           </div>
 
           <div class="pricing-band" role="list">
-            ${t.pricing.tiers.map(renderTier).join("\n")}
+            ${t.pricing.tiers.map((tier, index) => renderTier(tier, index)).join("\n")}
           </div>
 
           <p class="pricing-footnote">${html(t.pricing.footnote)}</p>
@@ -5656,7 +5789,7 @@ function renderLlmsEnglishFacts() {
     ["Is there a one-time-purchase alternative to Superwhisper or MacWhisper?", "Superwhisper alternative", localizedCompareUrl("en", "superwhisper-alternative"), ["MacWhisper alternative", localizedCompareUrl("en", "macwhisper-alternative")]],
     ["How can I check whether a dictation app sends my audio to a server?", "Network test", localizedTrustUrl("en", "privacy/local-dictation-network-test")],
     ["Does Dictivo upload my audio, and what is the difference between Local and Cloud Fast?", "Audio path", localizedTrustUrl("en", "privacy/where-dictation-audio-goes")],
-    ["What does Dictivo Local cost, and what happens after the included updates end?", "Pricing", `${localeUrl("en")}#pricing`],
+    ["What does Dictivo Local cost, and what happens after the included updates end?", PRICING_PAGE_COPY.en.navLabel, pricingUrl("en")],
     ["What has Dictivo actually measured in its Mac dictation benchmark?", BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
   ];
   return `
@@ -5684,7 +5817,7 @@ function renderLlmsTxt(currentCode = "en") {
   const pages = [
     [copy.pageLabels.home, localeUrl(currentCode)],
     [FILM_COPY[currentCode].link, `${BASE_URL}${PRODUCT_FILM.path}`],
-    [copy.pageLabels.pricing, `${localeUrl(currentCode)}#pricing`],
+    [copy.pageLabels.pricing, pricingUrl(currentCode)],
     [copy.pageLabels.privacy, `${localeUrl(currentCode)}#privacy`],
     [copy.pageLabels.cloudFast, `${localeUrl(currentCode)}#cloud-fast`],
     [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
@@ -5742,8 +5875,6 @@ function renderRedirects() {
 /.github/* /404.html 404
 /cloud-fast /#cloud-fast 302
 /cloud-fast.html /#cloud-fast 302
-/pricing /#pricing 302
-/pricing/ /#pricing 302
 /download /#downloads 302
 /download/ /#downloads 302
 /download/mac ${macDownloadRedirect} 302
@@ -6149,6 +6280,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="ja" href="${jaMacDictationTroubleshootingUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const pricingEntries = Object.keys(PRICING_PAGE_COPY).map((code) => `  <url>
+    <loc>${pricingUrl(code)}</loc>
+    <lastmod>${pricingPageLastmod()}</lastmod>
+${Object.keys(PRICING_PAGE_COPY).map((alt) => `    <xhtml:link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${pricingUrl(alt)}" />`).join("\n")}
+    <xhtml:link rel="alternate" hreflang="x-default" href="${pricingUrl("en")}" />
+    <priority>0.9</priority>
+  </url>`).join("\n");
   const mediaKitEntry = `  <url>
     <loc>${mediaKitUrl()}</loc>
     <lastmod>${latestDate(MEDIA_KIT_LASTMOD, PRICING_LASTMOD)}</lastmod>
@@ -6203,6 +6341,7 @@ ${trustXDefault}
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${homepageEntries}
+${pricingEntries}
 ${macGuideEntries}
 ${privacyProofEntries}
 ${offlineGuideEntries}
@@ -6608,6 +6747,7 @@ write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMa
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write("media-kit/index.html", renderMediaKitPage());
+for (const code of Object.keys(PRICING_PAGE_COPY)) write(`${pricingPath(code).slice(1)}index.html`, renderPricingPage(code));
 write("demo/index.html", renderProductFilmPage());
 for (const code of Object.keys(FIRST_DICTATION_COPY)) write(`${firstDictationPath(code).slice(1)}index.html`, renderFirstDictationPage(code));
 

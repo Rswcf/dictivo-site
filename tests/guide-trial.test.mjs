@@ -26,7 +26,8 @@ test("comparison guide readers can download the right platform and reach localiz
     assert.equal(url.pathname, platform === "macos" ? "/download/mac" : "/download/windows", path);
     assert.equal(url.searchParams.get("utm_content"), source, path);
     assert.ok(url.searchParams.get("version"), path);
-    assert.ok(panel.includes(`href="${localePath}#pricing"`), path);
+    // English pricing has its own page; other languages keep the homepage section.
+    assert.ok(panel.includes(`href="${localePath === "/" ? "/pricing/" : `${localePath}#pricing`}"`), path);
     assert.ok(panel.includes(`href="${localePath}guides/first-local-dictation/"`), path);
     assert.ok(page.indexOf("</table>") < page.indexOf("data-guide-trial"), path);
     assert.ok(!panel.includes("undefined"), path);

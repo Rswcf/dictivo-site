@@ -82,10 +82,13 @@ test("comparison pages describe the software itself and list both Local prices",
 });
 
 test("the introductory and the regular Local offer both appear, dated from LOCAL_OFFER", () => {
-  const targets = LOCALES.flatMap((locale) => [
-    `${prefix(locale.code)}index.html`,
-    ...COMPARE_PAGES.map((compare) => `${prefix(locale.code)}compare/${compare.slug}/index.html`),
-  ]);
+  const targets = [
+    ...LOCALES.flatMap((locale) => [
+      `${prefix(locale.code)}index.html`,
+      ...COMPARE_PAGES.map((compare) => `${prefix(locale.code)}compare/${compare.slug}/index.html`),
+    ]),
+    "pricing/index.html",
+  ];
   for (const path of targets) {
     const offers = localOffers(appNode(page(path)));
     assert.equal(offers.length, 2, `${path}: ${offers.length} Local offers`);

@@ -158,6 +158,7 @@ const requiredGeoFiles = [
   "guides/best-speech-to-text-apps-for-mac/index.html",
   "ja/guides/mac-dictation-not-working/index.html",
   "media-kit/index.html",
+  "pricing/index.html",
 ];
 
 // Traditional Chinese pages are converted from Simplified copy, so guard both scripts.

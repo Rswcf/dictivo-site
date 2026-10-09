@@ -63,18 +63,32 @@ test("_routes.json sends every mapped page, and nothing static, to the Function"
 });
 
 // Pages applies _redirects only to requests the Function does not take, so these
-// shortcuts must stay out of _routes.json. A visitor redirected to /#pricing may then
+// shortcuts must stay out of _routes.json. A visitor redirected to /#downloads may then
 // be sent on to a translated homepage; the browser keeps the fragment, and every
 // homepage carries both section ids.
-test("/pricing and /download lead to the homepage sections", () => {
+test("/download leads to the homepage section", () => {
   const redirects = readFileSync(`${root}dist/_redirects`, "utf8");
-  for (const [path, target] of [["/pricing", "/#pricing"], ["/pricing/", "/#pricing"], ["/download", "/#downloads"], ["/download/", "/#downloads"]]) {
+  for (const [path, target] of [["/download", "/#downloads"], ["/download/", "/#downloads"]]) {
     assert.ok(redirects.split("\n").includes(`${path} ${target} 302`), `${path} → ${target}`);
     assert.ok(!routedToFunction(path), path);
   }
   for (const locale of LOCALES) {
     const html = readFileSync(`${root}dist${locale.path}index.html`, "utf8");
     for (const id of ["pricing", "downloads"]) assert.ok(html.includes(` id="${id}"`), `${locale.code}: #${id}`);
+  }
+});
+
+// /pricing/ is a page since 2026-10-09. Without a _redirects rule, Pages answers /pricing
+// with its own 308 to /pricing/. The page is English-only, so every visitor stays on it.
+test("/pricing/ is an English-only page that the language Function passes through", () => {
+  const redirects = readFileSync(`${root}dist/_redirects`, "utf8");
+  assert.ok(!redirects.split("\n").some((line) => /^\/pricing\b/.test(line)), "no /pricing redirect");
+  assert.ok(readFileSync(`${root}dist/pricing/index.html`, "utf8").includes('<html lang="en">'));
+  assert.ok(languageChoicePaths(`${root}dist`).includes("/pricing/"));
+  assert.ok(routedToFunction("/pricing/"));
+  assert.ok(!routes.pages["/pricing/"], "not a translated page");
+  for (const country of ["DE", "JP", "FR", "US"]) {
+    assert.deepEqual(decide("/pricing/", { country }), { action: "pass", reason: "unmapped" }, country);
   }
 });
 

@@ -81,6 +81,8 @@ if (override) {
   for (const [country, path] of stays) {
     await expect(`${country} ${path} stays`, visit(path, { country }), (r) => [status(r, 200), noPrompt(r)]);
   }
+  // English-only pages are not in the routing map, so the Function passes them through.
+  await expect("DE /pricing/ stays on the English-only page", visit("/pricing/", { country: "DE" }), (r) => [status(r, 200), route(r, "unmapped"), noPrompt(r)]);
 
   const prompts = [["FR", "", "fr"], ["AT", "", "de"], ["BE", "", "nl"], ["BE", "fr-BE", "fr"], ["LU", "", "fr"], ["ES", "", "es"], ["IT", "", "it"], ["NL", "", "nl"], ["PT", "", "pt"], ["LI", "", "de"], ["RE", "", "fr"]];
   for (const [country, acceptLanguage, locale] of prompts) {
