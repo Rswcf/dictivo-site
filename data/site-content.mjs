@@ -1,4 +1,5 @@
 import { LOCAL_OFFER, offerDate } from "./local-offer.mjs";
+import { pricingAnchor } from "./local-offer-copy.mjs";
 
 export const BASE_URL = "https://dictivo.app";
 
@@ -98,7 +99,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Start free. Pay once if it fits.",
-      body: `Try every local model free for 14 days, with 10 Cloud Fast minutes included. Subscription dictation apps run $85-$180 every year - Dictivo Local is {{price.local.inline}} once until ${introUntil("en")}.`,
+      body: `Try every local model free for 14 days, with 10 Cloud Fast minutes included. ${pricingAnchor("en")}`,
       tiers: [
         {
           name: "Free Local",
@@ -145,7 +146,7 @@ export const HOME_COPY = {
       footnote: `Introductory price {{price.local.inline}} until ${introUntil("en")}; {{price.regular.inline}} from ${regularFrom("en")}. Mac is available now; Windows is in validation before public release.`,
       checkoutTitle: "Secure checkout opens in a new tab.",
       checkoutBody:
-        "After purchase, return to Dictivo and activate Local with your license email. Every purchase has a 14-day no-questions refund. If checkout does not open, email support@dictivo.app.",
+        "After purchase, return to Dictivo and activate Local with the license key from your purchase email. Every purchase has a 14-day no-questions refund. If checkout does not open, email support@dictivo.app.",
     },
     downloads: {
       kicker: "Desktop app",
@@ -307,7 +308,7 @@ export const HOME_COPY = {
       ],
       footnote: "Mac ist jetzt verfügbar. Windows folgt später.",
       checkoutTitle: "Der sichere Checkout öffnet in einem neuen Tab.",
-      checkoutBody: "Kehren Sie nach dem Kauf zu Dictivo zurück und aktivieren Sie Local mit Ihrer Lizenz-E-Mail. Wenn der Checkout nicht öffnet, schreiben Sie an support@dictivo.app.",
+      checkoutBody: "Kehren Sie nach dem Kauf zu Dictivo zurück und aktivieren Sie Local mit dem Lizenzschlüssel, den Sie per E-Mail erhalten. Für jeden Kauf gibt es 14 Tage Erstattung ohne Fragen. Wenn der Checkout nicht öffnet, schreiben Sie an support@dictivo.app.",
     },
     downloads: {
       kicker: "Mac App",
@@ -403,7 +404,7 @@ export const HOME_COPY = {
       ],
       footnote: "Mac est disponible maintenant. Windows arrive plus tard.",
       checkoutTitle: "Le paiement sécurisé s'ouvre dans un nouvel onglet.",
-      checkoutBody: "Après l'achat, revenez dans Dictivo et activez Local avec votre e-mail de licence. Si le paiement ne s'ouvre pas, écrivez à support@dictivo.app.",
+      checkoutBody: "Après l'achat, revenez dans Dictivo et activez Local avec la clé de licence reçue par e-mail. Chaque achat bénéficie d'un remboursement 14 jours, sans question. Si le paiement ne s'ouvre pas, écrivez à support@dictivo.app.",
     },
     downloads: {
       kicker: "App Mac",
@@ -499,7 +500,7 @@ export const HOME_COPY = {
       ],
       footnote: "Mac está disponible ahora. Windows llegará más adelante.",
       checkoutTitle: "El pago seguro se abre en una pestaña nueva.",
-      checkoutBody: "Después de comprar, vuelve a Dictivo y activa Local con tu correo de licencia. Si el pago no se abre, escribe a support@dictivo.app.",
+      checkoutBody: "Después de comprar, vuelve a Dictivo y activa Local con la clave de licencia que recibes por correo. Cada compra tiene un reembolso de 14 días, sin preguntas. Si el pago no se abre, escribe a support@dictivo.app.",
     },
     downloads: {
       kicker: "App para Mac",
@@ -994,7 +995,7 @@ const details = {
         },
       ],
       checkoutTitle: "Il checkout sicuro si apre in una nuova scheda.",
-      checkoutBody: "Dopo l'acquisto, torna in Dictivo e attiva Local con l'email della licenza. Se il checkout non si apre, scrivi a support@dictivo.app.",
+      checkoutBody: "Dopo l'acquisto, torna in Dictivo e attiva Local con la chiave di licenza ricevuta via email. Ogni acquisto prevede un rimborso entro 14 giorni, senza domande. Se il checkout non si apre, scrivi a support@dictivo.app.",
     },
     downloads: {
       available: "Installer disponibili",
@@ -1047,7 +1048,7 @@ const details = {
         { name: "Cloud Fast", sub: "Voeg snelle cloud-transcriptie toe voor gekozen opnames.", small: "per maand", features: ["1.500 transcriptieminuten per maand", "Los of naast Dictivo Local", "Een eenvoudige Cloud Fast-schakelaar in de app", "Uploadt alleen opnames die je kiest", "Lokaal woordenboek en snippets worden toegepast nadat tekst terugkomt"], button: "Cloud Fast toevoegen" },
       ],
       checkoutTitle: "Veilig afrekenen opent in een nieuw tabblad.",
-      checkoutBody: "Keer na aankoop terug naar Dictivo en activeer Local met je licentie-e-mail. Als checkout niet opent, mail support@dictivo.app.",
+      checkoutBody: "Keer na aankoop terug naar Dictivo en activeer Local met de licentiesleutel die je per e-mail ontvangt. Bij elke aankoop geldt een terugbetaling binnen 14 dagen, zonder vragen. Als checkout niet opent, mail support@dictivo.app.",
     },
     downloads: {
       available: "Beschikbare installers",
@@ -1100,7 +1101,7 @@ const details = {
         { name: "Cloud Fast", sub: "Adicione transcrição em nuvem rápida para gravações escolhidas.", small: "por mês", features: ["1.500 minutos de transcrição por mês", "Separado ou junto com Dictivo Local", "Um interruptor Cloud Fast simples no app", "Envia apenas gravações escolhidas", "Dicionário local e snippets ainda se aplicam quando o texto retorna"], button: "Adicionar Cloud Fast" },
       ],
       checkoutTitle: "O checkout seguro abre em uma nova aba.",
-      checkoutBody: "Depois da compra, volte ao Dictivo e ative o Local com o e-mail da licença. Se o checkout não abrir, escreva para support@dictivo.app.",
+      checkoutBody: "Depois da compra, volte ao Dictivo e ative o Local com a chave de licença que você recebe por e-mail. Toda compra tem reembolso de 14 dias, sem perguntas. Se o checkout não abrir, escreva para support@dictivo.app.",
     },
     downloads: {
       available: "Instaladores disponíveis",
@@ -1156,7 +1157,7 @@ const asiaDetails = {
         { name: "Cloud Fast", sub: "为所选录音添加快速云端转录。", small: "每月", features: ["每月 1,500 分钟转录", "可单独使用，也可搭配 Dictivo Local", "应用内一个清晰的 Cloud Fast 开关", "只上传你选择的录音", "文本返回后仍会应用本地词典和片段"], button: "添加 Cloud Fast" },
       ],
       checkoutTitle: "安全购买页面会在新标签页打开。",
-      checkoutBody: "购买后回到 Dictivo，用许可证邮箱激活 Local。如果购买页面没有打开，请邮件联系 support@dictivo.app。",
+      checkoutBody: "购买后回到 Dictivo，用邮件收到的许可证密钥激活 Local。每笔购买都有 14 天无理由退款。如果购买页面没有打开，请邮件联系 support@dictivo.app。",
     },
     downloads: {
       available: "可用安装包",
@@ -1209,7 +1210,7 @@ const asiaDetails = {
         { name: "Cloud Fast", sub: "選択した録音に高速クラウド文字起こしを追加します。", small: "月額", features: ["月 1,500 分の文字起こし", "単体でも Dictivo Local と併用でも利用可能", "アプリ内のシンプルな Cloud Fast スイッチ", "選択した録音だけをアップロード", "テキストが戻った後もローカル辞書とスニペットを適用"], button: "Cloud Fast を追加" },
       ],
       checkoutTitle: "安全な購入ページが新しいタブで開きます。",
-      checkoutBody: "購入後、Dictivo に戻ってライセンス用メールで Local を有効化してください。購入ページが開かない場合は support@dictivo.app へご連絡ください。",
+      checkoutBody: "購入後、Dictivo に戻り、メールで届くライセンスキーで Local を有効化してください。購入にはすべて 14 日間の返金保証が付き、理由は問いません。購入ページが開かない場合は support@dictivo.app へご連絡ください。",
     },
     downloads: {
       available: "利用可能なインストーラ",
@@ -1262,7 +1263,7 @@ const asiaDetails = {
         { name: "Cloud Fast", sub: "선택한 녹음에 빠른 클라우드 전사를 추가합니다.", small: "월", features: ["월 1,500분 전사", "단독 또는 Dictivo Local과 함께 사용", "앱 안의 단순한 Cloud Fast 스위치", "선택한 녹음만 업로드", "텍스트가 돌아온 뒤에도 로컬 사전과 스니펫 적용"], button: "Cloud Fast 추가" },
       ],
       checkoutTitle: "안전한 결제 페이지가 새 탭에서 열립니다.",
-      checkoutBody: "구매 후 Dictivo로 돌아와 라이선스 이메일로 Local을 활성화하세요. 결제 페이지가 열리지 않으면 support@dictivo.app으로 연락하세요.",
+      checkoutBody: "구매 후 Dictivo로 돌아와 이메일로 받은 라이선스 키로 Local을 활성화하세요. 모든 구매에는 이유를 묻지 않는 14일 환불이 적용됩니다. 결제 페이지가 열리지 않으면 support@dictivo.app으로 연락하세요.",
     },
     downloads: {
       available: "사용 가능한 설치 파일",
@@ -1301,7 +1302,7 @@ HOME_COPY.ko = mergeCopy(deriveFromEnglish(HOME_COPY.en, korean, "ko"), asiaDeta
 const LAUNCH_OFFER_COPY = {
   de: {
     privacyTail: ["Tiny bleibt dauerhaft gratis", "14 Tage voller Local-Test schalten jedes lokale Modell frei"],
-    pricingBody: "Starten Sie mit Tiny dauerhaft gratis, testen Sie jedes lokale Modell 14 Tage kostenlos und nutzen Sie 10 kostenlose Cloud-Fast-Minuten auf diesem Gerät, bevor Sie abonnieren.",
+    pricingBody: `Starten Sie mit Tiny dauerhaft gratis, testen Sie jedes lokale Modell 14 Tage kostenlos und nutzen Sie 10 kostenlose Cloud-Fast-Minuten auf diesem Gerät, bevor Sie etwas kaufen. ${pricingAnchor("de")}`,
     freeFeatures: ["Lokales Diktieren auf Ihrem Gerät", "Tiny On-Device-Modell enthalten", "Globaler Hotkey und lokaler Verlauf", "14 Tage voller Local-Test schalten jedes lokale Modell frei", "Kein Cloud-Upload im lokalen Modus"],
     cloudFeatures: ["10 kostenlose Minuten auf diesem Gerät", "1.500 Transkriptionsminuten pro Monat", "Eigenständig oder zusammen mit Dictivo Local", "Ein klarer Cloud Fast Schalter in der App", "Lädt nur ausgewählte Aufnahmen hoch"],
     downloadsBody: "Die Mac App enthält lokalen Modus, Tiny dauerhaft gratis, 14 Tage vollen Local-Test, 10 kostenlose Cloud-Fast-Minuten, Lizenzaktivierung und Anzeigesprachen.",
@@ -1309,7 +1310,7 @@ const LAUNCH_OFFER_COPY = {
   },
   fr: {
     privacyTail: ["Tiny reste gratuit à vie", "L'essai Local complet de 14 jours débloque tous les modèles locaux"],
-    pricingBody: "Commencez avec Tiny gratuit à vie, essayez chaque modèle local gratuitement pendant 14 jours et utilisez 10 minutes Cloud Fast gratuites sur cet appareil avant de vous abonner.",
+    pricingBody: `Commencez avec Tiny gratuit à vie, essayez chaque modèle local gratuitement pendant 14 jours et utilisez 10 minutes Cloud Fast gratuites sur cet appareil avant tout achat. ${pricingAnchor("fr")}`,
     freeFeatures: ["Dictée locale sur votre appareil", "Modèle Tiny embarqué inclus", "Raccourci global et historique local", "L'essai Local complet de 14 jours débloque tous les modèles locaux", "Aucun envoi cloud en mode Local"],
     cloudFeatures: ["10 minutes gratuites sur cet appareil", "1 500 minutes de transcription par mois", "Seul ou avec Dictivo Local", "Un simple bouton Cloud Fast dans l'app", "N'envoie que les enregistrements choisis"],
     downloadsBody: "L'app Mac inclut le mode Local, Tiny gratuit à vie, 14 jours d'essai Local complet, 10 minutes Cloud Fast gratuites, l'activation de licence et les langues d'affichage.",
@@ -1317,7 +1318,7 @@ const LAUNCH_OFFER_COPY = {
   },
   es: {
     privacyTail: ["Tiny es gratis para siempre", "La prueba Local completa de 14 días desbloquea todos los modelos locales"],
-    pricingBody: "Empieza con Tiny gratis para siempre, prueba todos los modelos locales gratis durante 14 días y usa 10 minutos gratis de Cloud Fast en este dispositivo antes de suscribirte.",
+    pricingBody: `Empieza con Tiny gratis para siempre, prueba todos los modelos locales gratis durante 14 días y usa 10 minutos gratis de Cloud Fast en este dispositivo antes de comprar nada. ${pricingAnchor("es")}`,
     freeFeatures: ["Dictado local en tu dispositivo", "Modelo Tiny en el dispositivo incluido", "Atajo global e historial local", "La prueba Local completa de 14 días desbloquea todos los modelos locales", "Sin subida a la nube en modo Local"],
     cloudFeatures: ["10 minutos gratis en este dispositivo", "1.500 minutos de transcripción al mes", "Solo o junto a Dictivo Local", "Un simple interruptor Cloud Fast en la app", "Sube solo las grabaciones que eliges"],
     downloadsBody: "La app de Mac incluye modo Local, Tiny gratis para siempre, 14 días de prueba Local completa, 10 minutos gratis de Cloud Fast, activación de licencia e idiomas de visualización.",
@@ -1325,7 +1326,7 @@ const LAUNCH_OFFER_COPY = {
   },
   it: {
     privacyTail: ["Tiny resta gratis per sempre", "La prova Local completa di 14 giorni sblocca ogni modello locale"],
-    pricingBody: "Inizia con Tiny gratis per sempre, prova ogni modello locale gratis per 14 giorni e usa 10 minuti Cloud Fast gratuiti su questo dispositivo prima di abbonarti.",
+    pricingBody: `Inizia con Tiny gratis per sempre, prova ogni modello locale gratis per 14 giorni e usa 10 minuti Cloud Fast gratuiti su questo dispositivo prima di acquistare. ${pricingAnchor("it")}`,
     freeFeatures: ["Dettatura locale sul tuo dispositivo", "Modello Tiny on-device incluso", "Scorciatoia globale e cronologia locale", "La prova Local completa di 14 giorni sblocca ogni modello locale", "Nessun upload cloud in modalità Local"],
     cloudFeatures: ["10 minuti gratis su questo dispositivo", "1.500 minuti di trascrizione al mese", "Da solo o insieme a Dictivo Local", "Un semplice interruttore Cloud Fast nell'app", "Carica solo le registrazioni che scegli"],
     downloadsBody: "L'app Mac include modalità Local, Tiny gratis per sempre, 14 giorni di prova Local completa, 10 minuti Cloud Fast gratuiti, attivazione licenza e lingue di visualizzazione.",
@@ -1333,7 +1334,7 @@ const LAUNCH_OFFER_COPY = {
   },
   nl: {
     privacyTail: ["Tiny blijft altijd gratis", "De volledige Local-proef van 14 dagen ontgrendelt elk lokaal model"],
-    pricingBody: "Begin met Tiny altijd gratis, probeer elk lokaal model 14 dagen gratis en gebruik 10 gratis Cloud Fast-minuten op dit apparaat voordat je abonneert.",
+    pricingBody: `Begin met Tiny altijd gratis, probeer elk lokaal model 14 dagen gratis en gebruik 10 gratis Cloud Fast-minuten op dit apparaat voordat je iets koopt. ${pricingAnchor("nl")}`,
     freeFeatures: ["Lokaal dicteren op je apparaat", "Tiny on-device model inbegrepen", "Globale sneltoets en lokale geschiedenis", "De volledige Local-proef van 14 dagen ontgrendelt elk lokaal model", "Geen cloud-upload in Local-modus"],
     cloudFeatures: ["10 gratis minuten op dit apparaat", "1.500 transcriptieminuten per maand", "Los of naast Dictivo Local", "Een eenvoudige Cloud Fast-schakelaar in de app", "Uploadt alleen opnames die je kiest"],
     downloadsBody: "De Mac-app bevat Local-modus, Tiny altijd gratis, een volledige Local-proef van 14 dagen, 10 gratis Cloud Fast-minuten, licentieactivatie en weergavetalen.",
@@ -1341,7 +1342,7 @@ const LAUNCH_OFFER_COPY = {
   },
   pt: {
     privacyTail: ["Tiny fica grátis para sempre", "O teste Local completo de 14 dias desbloqueia todos os modelos locais"],
-    pricingBody: "Comece com Tiny grátis para sempre, teste todos os modelos locais grátis por 14 dias e use 10 minutos grátis de Cloud Fast neste dispositivo antes de assinar.",
+    pricingBody: `Comece com Tiny grátis para sempre, teste todos os modelos locais grátis por 14 dias e use 10 minutos grátis de Cloud Fast neste dispositivo antes de comprar. ${pricingAnchor("pt")}`,
     freeFeatures: ["Ditado local no seu dispositivo", "Modelo Tiny no dispositivo incluído", "Atalho global e histórico local", "O teste Local completo de 14 dias desbloqueia todos os modelos locais", "Sem envio para nuvem no modo Local"],
     cloudFeatures: ["10 minutos grátis neste dispositivo", "1.500 minutos de transcrição por mês", "Separado ou junto com Dictivo Local", "Um interruptor Cloud Fast simples no app", "Envia apenas gravações escolhidas"],
     downloadsBody: "O app para Mac inclui modo Local, Tiny grátis para sempre, teste Local completo de 14 dias, 10 minutos grátis de Cloud Fast, ativação de licença e idiomas de exibição.",
@@ -1349,7 +1350,7 @@ const LAUNCH_OFFER_COPY = {
   },
   zh: {
     privacyTail: ["Tiny 永久免费", "14 天完整 Local 试用可解锁所有本地模型"],
-    pricingBody: "先从 Tiny 永久免费开始，14 天免费试用所有本地模型，并在订阅前使用本设备 10 分钟免费 Cloud Fast 额度。",
+    pricingBody: `先从 Tiny 永久免费开始，14 天免费试用所有本地模型，并在购买前使用本设备 10 分钟免费 Cloud Fast 额度。${pricingAnchor("zh")}`,
     freeFeatures: ["在本设备上本地听写", "包含 Tiny 设备端模型", "全局快捷键和本地历史记录", "14 天完整 Local 试用可解锁所有本地模型", "本地模式不会上传到云端"],
     cloudFeatures: ["本设备 10 分钟免费额度", "每月 1,500 分钟转录", "可单独使用，也可搭配 Dictivo Local", "应用内一个清晰的 Cloud Fast 开关", "只上传你选择的录音"],
     downloadsBody: "Mac 应用包含本地模式、Tiny 永久免费、14 天完整 Local 试用、10 分钟免费 Cloud Fast、许可证激活和显示语言选项。",
@@ -1357,7 +1358,7 @@ const LAUNCH_OFFER_COPY = {
   },
   ja: {
     privacyTail: ["Tiny は永久無料です", "14 日間の完全 Local トライアルで全ローカルモデルを利用できます"],
-    pricingBody: "Tiny は永久無料で始められます。14 日間すべてのローカルモデルを無料で試し、この端末で Cloud Fast 10 分を無料で使ってから購読できます。",
+    pricingBody: `Tiny は永久無料で始められます。14 日間すべてのローカルモデルを無料で試し、この端末で Cloud Fast 10 分を無料で使ってから購入を決められます。${pricingAnchor("ja")}`,
     freeFeatures: ["デバイス上でのローカル音声入力", "Tiny オンデバイスモデルを含む", "グローバルショートカットとローカル履歴", "14 日間の完全 Local トライアルで全ローカルモデルを利用できます", "Local モードではクラウドアップロードなし"],
     cloudFeatures: ["この端末で 10 分無料", "月 1,500 分の文字起こし", "単体でも Dictivo Local と併用でも利用可能", "アプリ内のシンプルな Cloud Fast スイッチ", "選択した録音だけをアップロード"],
     downloadsBody: "Mac アプリには Local モード、永久無料の Tiny、14 日間の完全 Local トライアル、10 分の無料 Cloud Fast、ライセンス有効化、表示言語が含まれます。",
@@ -1365,7 +1366,7 @@ const LAUNCH_OFFER_COPY = {
   },
   ko: {
     privacyTail: ["Tiny는 영구 무료입니다", "14일 전체 Local 체험으로 모든 로컬 모델을 사용할 수 있습니다"],
-    pricingBody: "Tiny는 영구 무료로 시작할 수 있습니다. 14일 동안 모든 로컬 모델을 무료로 체험하고, 구독 전에 이 기기에서 Cloud Fast 10분을 무료로 사용할 수 있습니다.",
+    pricingBody: `Tiny는 영구 무료로 시작할 수 있습니다. 14일 동안 모든 로컬 모델을 무료로 체험하고, 구매 전에 이 기기에서 Cloud Fast 10분을 무료로 사용할 수 있습니다. ${pricingAnchor("ko")}`,
     freeFeatures: ["기기에서 로컬 받아쓰기", "Tiny 온디바이스 모델 포함", "전역 단축키와 로컬 기록", "14일 전체 Local 체험으로 모든 로컬 모델을 사용할 수 있습니다", "Local 모드에서는 클라우드 업로드 없음"],
     cloudFeatures: ["이 기기에서 10분 무료", "월 1,500분 전사", "단독 또는 Dictivo Local과 함께 사용", "앱 안의 단순한 Cloud Fast 스위치", "선택한 녹음만 업로드"],
     downloadsBody: "Mac 앱에는 Local 모드, 영구 무료 Tiny, 14일 전체 Local 체험, 10분 무료 Cloud Fast, 라이선스 활성화, 표시 언어가 포함됩니다.",
