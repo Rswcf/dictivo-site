@@ -113,7 +113,7 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         kicker: "Symptom 4",
         title: "It says voice typing isn't available in the current language",
         paragraphs: [
-          "Voice typing works only in the languages Microsoft lists for it: 46 languages and regional varieties in Windows 11, including six varieties of English and Chinese, French, German, Japanese, Korean, Portuguese and Spanish. The language does not have to be your Windows display language.",
+          "Voice typing works only in the languages Microsoft lists for it: 46 languages and regional varieties in Windows 11, including six varieties of English, plus Chinese, French, German, Japanese, Korean, Portuguese and Spanish. The language does not have to be your Windows display language.",
         ],
         steps: [
           "Open Settings > Time & language > Language & region and select Add a language next to Preferred languages.",

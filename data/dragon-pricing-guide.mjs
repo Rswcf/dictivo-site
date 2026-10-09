@@ -54,7 +54,7 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
     environmentLabel: "Checked",
     environment: `Nuance's Dragon product pages and support articles, the Dragon Medical One listing on Microsoft Marketplace and Microsoft Learn, read on ${checkedOn}. Prices change; each source is linked under References.`,
     answerTitle: "Short answer",
-    answer: `Nuance's Dragon Professional page (version 16, for Windows 10 and 11) no longer publishes a price: on ${checkedOn} it offered Contact us, and the old Nuance store address led to the same page. Dragon Medical One is a per-user cloud subscription; its Microsoft Marketplace listing shows $123 per user per month on a 1-year term ($1,476 per user per year) and asks buyers to confirm eligibility with Microsoft first. Dragon Anywhere Mobile has not been sold or renewable since 1 July 2026, and Dragon Home 15 has not been sold since 27 February 2023. Dragon for Mac was discontinued on 22 October 2018: existing licenses keep working without updates, and Dragon Medical One runs on a Mac only through Windows.`,
+    answer: `Nuance's Dragon Professional page (version 16, for Windows 10 and 11) no longer publishes a price: on ${checkedOn} it offered Contact us, and the old Nuance store address led to the same page. Dragon Medical One is a per-user cloud subscription; its Microsoft Marketplace listing shows $123 per user per month on a 1-year term ($1,476 per user per year) and asks buyers to confirm eligibility with Microsoft first. Dragon Anywhere Mobile has not been sold or renewable since 1 July 2026, and Dragon Home 15 has not been sold after 27 February 2023. Dragon for Mac was discontinued on 22 October 2018: existing licenses keep working without updates, and Dragon Medical One runs on a Mac only through Windows.`,
     quickReference: {
       title: "Dragon products at a glance",
       caption: `Dragon editions, prices and availability as published by Nuance and Microsoft, checked on ${checkedOn}.`,
@@ -64,7 +64,7 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ["Dragon Professional Anywhere", "Not published", "Cloud-hosted subscription", "Contact Nuance", "Windows"],
         ["Dragon Medical One", "$123 per user per month on a 1-year term (Microsoft Marketplace)", "Cloud subscription, per user", "Yes, after Microsoft confirms eligibility", "Windows (a Mac only through Windows)"],
         ["Dragon Anywhere Mobile", "-", "Subscription", "No: sales and renewals ended 1 July 2026", "iOS and Android"],
-        ["Dragon Home 15", "-", "Perpetual", "No: not sold since 27 February 2023", "Windows"],
+        ["Dragon Home 15", "-", "Perpetual", "No: not sold after 27 February 2023", "Windows"],
         ["Dragon Professional Individual for Mac 6", "-", "Perpetual; no updates after 22 October 2018", "No: discontinued 22 October 2018", "macOS"],
       ],
     },
