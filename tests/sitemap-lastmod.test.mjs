@@ -43,7 +43,8 @@ test("comparison refresh is scoped to changed pages and languages", () => {
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   const locales = ["", "de/", "fr/", "es/", "it/", "nl/", "pt/", "zh/", "zh-hant/", "ja/", "ko/"];
   for (const locale of locales) {
-    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(locale === "de/" ? "2026-10-04" : "2026-09-20"));
+    // English 2026-10-09: the Dragon comparison title it lists changed.
+    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(locale === "de/" ? "2026-10-04" : locale === "" ? "2026-10-09" : "2026-09-20"));
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
     assert.equal(dates.get(superPath), atLeastPricing("2026-09-18"));

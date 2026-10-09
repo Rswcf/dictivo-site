@@ -1,5 +1,8 @@
 // Task-oriented summaries. Product-specific factual detail stays in the linked comparisons.
 export const COMPARE_HUB_GUIDANCE_LASTMOD = "2026-09-20";
+// Per-language hub changes that come from the comparison pages it lists. 2026-10-09: the English
+// Dragon comparison's title no longer names a Dragon Professional price.
+export const COMPARE_HUB_LOCALE_LASTMOD = Object.freeze({ en: "2026-10-09" });
 const slugs = ["wispr-flow-alternative", "superwhisper-alternative", "macwhisper-alternative", "voiceink-alternative", "macos-dictation-alternative", "dragon-alternative"];
 const rows = {
   en: {

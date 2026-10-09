@@ -1,7 +1,7 @@
 import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, compareLastUpdated, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
-import { COMPARE_HUB_GUIDANCE, COMPARE_HUB_GUIDANCE_LASTMOD } from "../data/compare-hub-guidance.mjs";
+import { COMPARE_HUB_GUIDANCE, COMPARE_HUB_GUIDANCE_LASTMOD, COMPARE_HUB_LOCALE_LASTMOD } from "../data/compare-hub-guidance.mjs";
 import { COMPARE_SELECTION_GUIDES } from "../data/compare-selection-guides.mjs";
 import {
   BENCHMARK_METHOD_GUIDE_COPY,
@@ -6535,7 +6535,7 @@ function compareHubLastmod(code) {
   const localizedDates = COMPARE_PAGES
     .filter((page) => page.localizedCopy?.[code])
     .map((page) => compareLastUpdated(page, code));
-  return latestDate(COMPARE_HUB_GUIDANCE_LASTMOD, ...localizedDates);
+  return latestDate(COMPARE_HUB_GUIDANCE_LASTMOD, COMPARE_HUB_LOCALE_LASTMOD[code], ...localizedDates);
 }
 
 // True when page copy names a Dictivo price through a placeholder; such pages report at least
