@@ -1,4 +1,14 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.53": Object.freeze({
+    date: "2026-10-19",
+    title: "Setup on Windows reports what really happened, and the Local price shows its date.",
+    bullets: Object.freeze([
+      "Account & Billing now says until when the current Dictivo Local price applies and what it costs after that, in the same words as this website, and shows the new price by itself from that day on.",
+      "The shortcut test during setup no longer passes when nobody spoke. Speech recognition can turn silence into a word such as \"You.\"; the test now says it heard no words and asks you to check your microphone.",
+      "Right after setup, the main window shows the model you downloaded, not one that is not installed. Until Dictivo has checked, it shows a dash instead of a guess.",
+      "On Windows, when Dictivo starts at login it no longer keeps the keyboard focus in its hidden window, so you can type in other apps right away.",
+    ]),
+  }),
   "0.3.52": Object.freeze({
     date: "2026-09-27",
     title: "Start at login, and your clipboard comes back after pasting.",
