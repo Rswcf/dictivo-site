@@ -1,5 +1,25 @@
 # Dictivo site
 
+## Pricing and checkout copy — 2026-10-09
+
+Nine homepage languages ended the pricing introduction with "before you subscribe"
+(`bevor Sie abonnieren`, `購読できます` …), though Local is bought once; they now say
+"before you buy". Every language now closes that introduction with the comparison English
+already had: subscription dictation apps cost $85-$180 a year, Dictivo Local is paid once.
+`pricingAnchor()` in `data/local-offer-copy.mjs` writes it from `LOCAL_OFFER`, so when the
+2026-11-01 runbook clears the offer dates it names the regular price alone; the English
+pricing body needs no manual edit then. The checkout note names the license key from the
+purchase email, as the app does, instead of a "license email", and repeats the 14-day refund
+in every language. Only the eleven homepages are redated (`HOME_SHARED_CONTENT_LASTMOD`).
+
+`/pricing`, `/pricing/`, `/download` and `/download/` returned 404; they now redirect (302)
+to `/#pricing` and `/#downloads`, like `/cloud-fast`. Prefixed paths such as `/de/pricing`
+are not redirected: the site has no localized redirects, and those paths run through the
+locale Function. A visitor sent on from `/#pricing` to a translated homepage keeps the fragment.
+
+Validation: 154 tests and the eight deploy check scripts. These are copy and routing fixes;
+they do not establish a conversion change.
+
 ## Directory checkout attribution — 2026-10-05
 
 SaaSHub and TrustMRR referrer hosts now map to the existing `directory` billing channel.
