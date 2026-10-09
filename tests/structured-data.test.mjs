@@ -124,6 +124,7 @@ const publishedRoutes = () => [
   ["guides/offline-dictation-on-windows/index.html", "guides/offline-dictation-on-windows", "en"],
   ["guides/first-local-dictation/index.html", "guides/first-local-dictation", "en"],
   ["ja/guides/first-local-dictation/index.html", "guides/first-local-dictation", "ja"],
+  ["guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ...LOCALES.flatMap((locale) => [
     ...COMPARE_PAGES.map((compare) => [`${prefix(locale.code)}compare/${compare.slug}/index.html`, `compare/${compare.slug}`, locale.code]),
@@ -143,4 +144,8 @@ test("guides, comparisons and privacy answers carry datePublished from their fir
   assert.equal(firstPublished("compare/dragon-alternative", "de"), "2026-07-12");
   assert.equal(firstPublished("compare/wispr-flow-alternative", "zh-hant"), "2026-09-14");
   assert.throws(() => firstPublished("guides/unknown"));
+  // The troubleshooting guide shipped in Japanese first; each language keeps its own date.
+  assert.equal(firstPublished("guides/mac-dictation-not-working", "ja"), "2026-09-26");
+  assert.equal(firstPublished("guides/mac-dictation-not-working", "en"), "2026-10-09");
+  assert.throws(() => firstPublished("guides/mac-dictation-not-working", "de"), /mac-dictation-not-working \(de\)/);
 });

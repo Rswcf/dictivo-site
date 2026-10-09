@@ -9,7 +9,8 @@ export const FIRST_PUBLISHED = Object.freeze({
   "guides/mac-dictation-benchmark-method": "2026-06-07", // 75c3ee6
   "guides/offline-dictation-on-windows": "2026-07-12", // 79e0da2
   "guides/first-local-dictation": "2026-09-10", // 8d9f594, English and Japanese
-  "guides/mac-dictation-not-working": "2026-09-26", // Japanese only
+  // Per language where the translations shipped on different days.
+  "guides/mac-dictation-not-working": Object.freeze({ ja: "2026-09-26", en: "2026-10-09" }),
   "privacy/where-dictation-audio-goes": "2026-06-07", // b431ef4, all ten languages
   "privacy/local-dictation-network-test": "2026-06-07", // b431ef4, all ten languages
   compare: "2026-05-25", // e3b0593 (English) and 61a8a25 (localized), the first five comparisons
@@ -20,7 +21,9 @@ export const FIRST_PUBLISHED = Object.freeze({
 export const HANT_FIRST_PUBLISHED = "2026-09-14";
 
 export function firstPublished(route, code = "en") {
-  const date = FIRST_PUBLISHED[route] ?? (route.startsWith("compare/") ? FIRST_PUBLISHED.compare : undefined);
-  if (!date) throw new Error(`No first-published date for ${route}`);
+  const value = FIRST_PUBLISHED[route] ?? (route.startsWith("compare/") ? FIRST_PUBLISHED.compare : undefined);
+  // A per-language value never falls back to another language's date.
+  const date = typeof value === "object" && value !== null ? value[code] : value;
+  if (!date) throw new Error(`No first-published date for ${route}${typeof value === "object" ? ` (${code})` : ""}`);
   return code === "zh-hant" && HANT_FIRST_PUBLISHED > date ? HANT_FIRST_PUBLISHED : date;
 }

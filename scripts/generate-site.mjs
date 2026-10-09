@@ -48,6 +48,11 @@ import {
   JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
   JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES,
 } from "../data/ja-mac-dictation-troubleshooting.mjs";
+import {
+  MAC_DICTATION_NOT_WORKING_LASTMOD,
+  MAC_DICTATION_NOT_WORKING_REFERENCES,
+  macDictationNotWorkingCopy,
+} from "../data/mac-dictation-not-working-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
@@ -784,6 +789,18 @@ function jaMacDictationTroubleshootingPath() {
 
 function jaMacDictationTroubleshootingUrl() {
   return absoluteUrl(jaMacDictationTroubleshootingPath());
+}
+
+function macDictationNotWorkingPath() {
+  return "/guides/mac-dictation-not-working/";
+}
+
+function macDictationNotWorkingUrl() {
+  return absoluteUrl(macDictationNotWorkingPath());
+}
+
+function macDictationNotWorkingCopyForRender() {
+  return macDictationNotWorkingCopy({ windows: hasWindowsRelease });
 }
 
 function mediaKitPath() {
@@ -4731,6 +4748,29 @@ ${references.map(([label, href]) => `          <li><a href="${attr(href)}">${htm
 `;
 }
 
+function renderMacDictationNotWorkingPage() {
+  const url = macDictationNotWorkingUrl();
+  const copy = macDictationNotWorkingCopyForRender();
+  return renderDictationGuidePage({
+    code: "en",
+    path: macDictationNotWorkingPath(),
+    url,
+    copy,
+    lastmod: MAC_DICTATION_NOT_WORKING_LASTMOD,
+    references: MAC_DICTATION_NOT_WORKING_REFERENCES,
+    headTags: enOnlyHeadTags(url),
+    trialSource: "troubleshooting_mac",
+    idPrefix: "troubleshooting",
+    mainId: "mac-dictation-not-working",
+    quickReference: copy.quickReference,
+    route: "guides/mac-dictation-not-working",
+    headline: copy.metaTitle,
+    about: ["Mac dictation not working", "macOS Dictation settings", "Voice Control", "Microphone source"],
+    articleImage: true,
+    legacyFaqSchema: false,
+  });
+}
+
 function renderJaMacDictationTroubleshootingPage() {
   const url = jaMacDictationTroubleshootingUrl();
   const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
@@ -4876,6 +4916,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
     `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
     currentCode === "ja" ? `<a href="${attr(jaMacDictationTroubleshootingPath())}">${html(JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel)}</a>` : "",
+    currentCode === "en" ? `<a href="${attr(macDictationNotWorkingPath())}">${html(macDictationNotWorkingCopyForRender().navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
@@ -5823,6 +5864,7 @@ function renderLlmsEnglishFacts() {
     ["Does Dictivo upload my audio, and what is the difference between Local and Cloud Fast?", "Audio path", localizedTrustUrl("en", "privacy/where-dictation-audio-goes")],
     ["What does Dictivo Local cost, and what happens after the included updates end?", PRICING_PAGE_COPY.en.navLabel, pricingUrl("en")],
     ["What has Dictivo actually measured in its Mac dictation benchmark?", BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
+    ["Why is built-in Mac dictation not working, and what should I check first?", macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()],
   ];
   return `
 ## Prices and license
@@ -5857,6 +5899,7 @@ function renderLlmsTxt(currentCode = "en") {
     [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
     [SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel, speechToTextMacGuideUrl()],
     [OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
+    ...(currentCode === "en" ? [[macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()]] : []),
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
@@ -6306,6 +6349,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const macDictationNotWorkingEntry = `  <url>
+    <loc>${macDictationNotWorkingUrl()}</loc>
+    <lastmod>${MAC_DICTATION_NOT_WORKING_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${macDictationNotWorkingUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${macDictationNotWorkingUrl()}" />
+    <priority>0.8</priority>
+  </url>`;
   const jaMacDictationTroubleshootingEntry = `  <url>
     <loc>${jaMacDictationTroubleshootingUrl()}</loc>
     <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
@@ -6380,6 +6430,7 @@ ${offlineGuideEntries}
 ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
 ${offlineDictationWindowsGuideEntry}
+${macDictationNotWorkingEntry}
 ${jaMacDictationTroubleshootingEntry}
 ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
@@ -6777,6 +6828,7 @@ for (const locale of LOCALES) {
 write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
+write(`${macDictationNotWorkingPath().slice(1)}index.html`, renderMacDictationNotWorkingPage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write("media-kit/index.html", renderMediaKitPage());
 for (const code of Object.keys(PRICING_PAGE_COPY)) write(`${pricingPath(code).slice(1)}index.html`, renderPricingPage(code));

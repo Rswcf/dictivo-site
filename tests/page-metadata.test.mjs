@@ -6,6 +6,7 @@ import { readFileSync } from "node:fs";
 // outside these limits. New pages are held to them by test.
 const PAGES = [
   ["pricing/index.html", "https://dictivo.app/pricing/"],
+  ["guides/mac-dictation-not-working/index.html", "https://dictivo.app/guides/mac-dictation-not-working/"],
 ];
 
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
