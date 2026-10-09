@@ -1,5 +1,34 @@
 # Dictivo site
 
+## Pricing page and two Mac dictation guides — 2026-10-09
+
+`/pricing/` is now an English page instead of a 302 to `/#pricing`: a short answer, the homepage
+plan cards, a side-by-side table, license, free-tier, Cloud Fast, price-change and refund sections,
+and a visible FAQ. Every sentence that names the Local price or an offer date comes from
+`pricingPageAnswer()`, `pricingPlanPrice()`, `pricingPriceChangeSection()` and `pricingFaqs()` in
+`data/local-offer-copy.mjs`; `data/pricing-page.mjs` holds only undated copy. When the 2026-11-01
+runbook clears the offer dates, the page states the regular price once, and the price-change section
+and question disappear (`tests/offer-rollover.test.mjs`). The page repeats the homepage's
+SoftwareApplication node (`softwareApplicationSchema()`); homepage and comparison JSON-LD did not change.
+English navigation, footers, guide trial panels, comparison CTAs, the comparison hub,
+first-dictation next steps, the film page and `llms.txt` link `/pricing/` through `pricingHref()`;
+other languages keep `/<locale>/#pricing` until `PRICING_PAGE_COPY` has their copy, and the homepage
+hero button stays an in-page anchor. Without a `_redirects` rule, Pages answers `/pricing` with its own
+308 to `/pricing/`; `/download` still redirects to `/#downloads`.
+
+Two English guides follow Apple's English Mac help (read 2026-10-09, dated in each reference):
+`/guides/mac-dictation-not-working/`, paired with the Japanese guide through hreflang, language
+menus and the routing map, and `/guides/mac-dictation-shortcut/`. Neither claims an on-device test;
+Dictivo appears only in a closing section labelled as this site's product, with its Windows
+shortcut named only while Windows downloads are public. Their TechArticles carry the brand image and
+no FAQPage. The speech-to-text guide's related pages and the English macOS Dictation comparison now
+link the troubleshooting guide, so both are redated.
+
+New pages are held to title and description limits by `tests/page-metadata.test.mjs`. They render
+with `doc-page` only, so their tables fit the desktop column. Validation: 188 tests and the eight
+deploy check scripts. These pages have not been deployed or measured; they do not establish a
+ranking, traffic or conversion change.
+
 ## Pricing and checkout copy — 2026-10-09
 
 Nine homepage languages ended the pricing introduction with "before you subscribe"
@@ -13,7 +42,8 @@ purchase email, as the app does, instead of a "license email", and repeats the 1
 in every language. Only the eleven homepages are redated (`HOME_SHARED_CONTENT_LASTMOD`).
 
 `/pricing`, `/pricing/`, `/download` and `/download/` returned 404; they now redirect (302)
-to `/#pricing` and `/#downloads`, like `/cloud-fast`. Prefixed paths such as `/de/pricing`
+to `/#pricing` and `/#downloads`, like `/cloud-fast`. (Later the same day `/pricing/` became a page;
+see above.) Prefixed paths such as `/de/pricing`
 are not redirected: the site has no localized redirects, and those paths run through the
 locale Function. A visitor sent on from `/#pricing` to a translated homepage keeps the fragment.
 
@@ -361,6 +391,8 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD` | `data/offline-dictation-windows-guide.mjs` | visible stamp + sitemap for `/guides/offline-dictation-on-windows/` |
 | `BENCHMARK_METHOD_GUIDE_LASTMOD` | `data/benchmark-method-guide.mjs` | visible stamp + sitemap for `/guides/mac-dictation-benchmark-method/` |
 | `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/speech-to-text-mac-guide.mjs` | visible stamp + sitemap for `/guides/best-speech-to-text-apps-for-mac/` |
+| `PRICING_PAGE_LASTMOD` | `data/pricing-page.mjs` | visible stamp + sitemap for `/pricing/`, never older than `PRICING_LASTMOD` |
+| `MAC_DICTATION_SHORTCUT_LASTMOD` | `data/mac-dictation-shortcut-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-shortcut/` |
 | `MAC_DICTATION_NOT_WORKING_LASTMOD` | `data/mac-dictation-not-working-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-not-working/` |
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
