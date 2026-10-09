@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
 
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
 const main = (html) => html.split("<main")[1].split("</main>")[0];
@@ -63,4 +64,16 @@ test("English pages link to the pricing page; other languages keep the homepage 
 test("the macOS Dictation comparison is dated for English only after gaining the troubleshooting link", () => {
   assert.ok(read("compare/macos-dictation-alternative/index.html").includes('datetime="2026-10-09"'));
   assert.ok(!read("de/compare/macos-dictation-alternative/index.html").includes('datetime="2026-10-09"'));
+});
+
+test("no English page still sends Pricing links to the homepage section", () => {
+  const dist = new URL("../dist/", import.meta.url).pathname;
+  const files = (dir) => readdirSync(dir).flatMap((name) => (statSync(join(dir, name)).isDirectory() ? files(join(dir, name)) : [join(dir, name)]));
+  const localized = /^(de|fr|es|it|nl|pt|zh|zh-hant|ja|ko)\//;
+  const english = files(dist).filter((file) => /\.html$|llms\.txt$/.test(file) && !localized.test(file.slice(dist.length)));
+  assert.ok(english.length >= 30, `${english.length} English files`);
+  for (const file of english) {
+    // The homepage hero button is the in-page anchor href="#pricing", which this does not match.
+    assert.doesNotMatch(readFileSync(file, "utf8"), /href="\/#pricing"|dictivo\.app\/#pricing/, file);
+  }
 });

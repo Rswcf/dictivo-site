@@ -25,7 +25,8 @@ no FAQPage. The speech-to-text guide's related pages and the English macOS Dicta
 link the troubleshooting guide, so both are redated.
 
 New pages are held to title and description limits by `tests/page-metadata.test.mjs`. They render
-with `doc-page` only, so their tables fit the desktop column. Validation: 188 tests and the eight
+with `doc-page` only, so their tables fit the desktop column. The hand-maintained `security.html`
+links `/pricing/` too. Validation: 189 tests and the eight
 deploy check scripts. These pages have not been deployed or measured; they do not establish a
 ranking, traffic or conversion change.
 
