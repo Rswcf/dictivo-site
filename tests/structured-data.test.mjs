@@ -148,6 +148,7 @@ const publishedRoutes = () => [
   ["ja/guides/first-local-dictation/index.html", "guides/first-local-dictation", "ja"],
   ["guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "en"],
   ["guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "en"],
+  ["guides/dragon-pricing/index.html", "guides/dragon-pricing", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ...LOCALES.flatMap((locale) => [
     ...COMPARE_PAGES.map((compare) => [`${prefix(locale.code)}compare/${compare.slug}/index.html`, `compare/${compare.slug}`, locale.code]),

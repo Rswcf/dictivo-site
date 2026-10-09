@@ -184,6 +184,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
   relatedRows: [
     ["Offline dictation on Mac", "The macOS version of this comparison.", "https://dictivo.app/guides/offline-dictation-on-mac/"],
     ["Dragon alternative", "Full Dictivo vs Dragon Professional comparison and the Dragon Home migration story.", "https://dictivo.app/compare/dragon-alternative/"],
+    ["Dragon pricing", "What each Dragon edition costs and how it is licensed, from Nuance and Microsoft sources.", "https://dictivo.app/guides/dragon-pricing/"],
     ["Where dictation audio goes", "Dictivo's documented audio path for Local mode and Cloud Fast.", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
     ["Local dictation network test", "The repeatable test for verifying that Local mode does not upload audio.", "https://dictivo.app/privacy/local-dictation-network-test/"],
   ],

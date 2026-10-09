@@ -58,6 +58,7 @@ import {
   MAC_DICTATION_SHORTCUT_REFERENCES,
   macDictationShortcutCopy,
 } from "../data/mac-dictation-shortcut-guide.mjs";
+import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
@@ -825,6 +826,24 @@ function macDictationShortcutUrl() {
 
 function macDictationShortcutCopyForRender() {
   return macDictationShortcutCopy({ windows: hasWindowsRelease, troubleshootingPath: macDictationNotWorkingPath() });
+}
+
+// Pricing facts pages for other dictation products (English only). Each quotes a Dictivo price
+// in its closing section, so its date also follows PRICING_LASTMOD.
+function dragonPricingPath() {
+  return "/guides/dragon-pricing/";
+}
+
+function dragonPricingUrl() {
+  return absoluteUrl(dragonPricingPath());
+}
+
+function dragonPricingCopyForRender() {
+  return dragonPricingCopy({ windows: hasWindowsRelease });
+}
+
+function dragonPricingLastmod() {
+  return latestDate(DRAGON_PRICING_LASTMOD, PRICING_LASTMOD);
 }
 
 function mediaKitPath() {
@@ -4878,6 +4897,31 @@ function renderMacDictationShortcutPage() {
   });
 }
 
+function renderDragonPricingPage() {
+  const url = dragonPricingUrl();
+  const copy = dragonPricingCopyForRender();
+  return renderDictationGuidePage({
+    code: "en",
+    path: dragonPricingPath(),
+    url,
+    copy,
+    lastmod: dragonPricingLastmod(),
+    references: DRAGON_PRICING_REFERENCES,
+    headTags: enOnlyHeadTags(url),
+    // Dragon Professional is a Windows product; Mac readers get the Mac download.
+    platform: hasWindowsRelease ? "windows" : "macos",
+    trialSource: "dragon_pricing",
+    mainClass: "doc-page",
+    idPrefix: "dragon-pricing",
+    mainId: "dragon-pricing",
+    quickReference: copy.quickReference,
+    route: "guides/dragon-pricing",
+    headline: copy.metaTitle,
+    about: ["Dragon Professional", "Dragon Medical One", "Dragon for Mac", "Dragon pricing"],
+    legacyFaqSchema: false,
+  });
+}
+
 function renderJaMacDictationTroubleshootingPage() {
   const url = jaMacDictationTroubleshootingUrl();
   const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
@@ -5994,6 +6038,7 @@ function renderLlmsEnglishFacts() {
     ["What has Dictivo actually measured in its Mac dictation benchmark?", BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
     ["Why is built-in Mac dictation not working, and what should I check first?", macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()],
     ["What is the Mac dictation keyboard shortcut, and how do I change it?", macDictationShortcutCopyForRender().navLabel, macDictationShortcutUrl()],
+    ["How much does Dragon cost, and can you still buy Dragon for Mac?", dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
   ];
   return `
 ## Prices and license
@@ -6032,6 +6077,7 @@ function renderLlmsTxt(currentCode = "en") {
       ? [
           [macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()],
           [macDictationShortcutCopyForRender().navLabel, macDictationShortcutUrl()],
+          [dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
         ]
       : []),
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
@@ -6506,6 +6552,13 @@ ${macDictationTroubleshootingAlternates}
     <xhtml:link rel="alternate" hreflang="x-default" href="${macDictationShortcutUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const dragonPricingEntry = `  <url>
+    <loc>${dragonPricingUrl()}</loc>
+    <lastmod>${dragonPricingLastmod()}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${dragonPricingUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${dragonPricingUrl()}" />
+    <priority>0.8</priority>
+  </url>`;
   const jaMacDictationTroubleshootingEntry = `  <url>
     <loc>${jaMacDictationTroubleshootingUrl()}</loc>
     <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
@@ -6583,6 +6636,7 @@ ${offlineDictationWindowsGuideEntry}
 ${macDictationNotWorkingEntry}
 ${jaMacDictationTroubleshootingEntry}
 ${macDictationShortcutEntry}
+${dragonPricingEntry}
 ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
@@ -6981,6 +7035,7 @@ write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMa
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write(`${macDictationNotWorkingPath().slice(1)}index.html`, renderMacDictationNotWorkingPage());
 write(`${macDictationShortcutPath().slice(1)}index.html`, renderMacDictationShortcutPage());
+write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write("media-kit/index.html", renderMediaKitPage());
 for (const code of Object.keys(PRICING_PAGE_COPY)) write(`${pricingPath(code).slice(1)}index.html`, renderPricingPage(code));

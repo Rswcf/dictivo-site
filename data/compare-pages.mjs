@@ -692,6 +692,7 @@ export const COMPARE_PAGES = [
           `Dictivo Local is {{price.local.inline}} once with 12 months of updates. Keeping optional update renewals active for two more years brings the three-year total to {{price.threeYear.inline}}. Without renewals, the version you bought keeps working.`,
           "The honest framing: if specialized vocabulary accuracy or hands-free control earns you money or independence every day, Dragon's price can be rational. If you want private, local, everyday dictation, you are paying for capabilities you will not use.",
         ],
+        link: { label: "Dragon pricing: what each edition costs and how it is licensed, with sources", href: "/guides/dragon-pricing/" },
       },
       {
         kicker: "Decision",
