@@ -40,8 +40,13 @@ function decide(path, { country, region = "", acceptLanguage = "", cookie = "" }
 
 test("the map covers every translated page in all 11 locales", () => {
   assert.deepEqual(routes.locales, LOCALES.map((locale) => locale.code));
-  // 13 page groups × 11 locales + the en/ja first-dictation guide (2026-09-14).
-  assert.ok(Object.keys(routes.pages).length >= 13 * LOCALES.length + 2);
+  // 13 page groups × 11 locales + the en/ja first-dictation guide (2026-09-14)
+  // + the en/ja Mac dictation troubleshooting guide (2026-10-09).
+  assert.ok(Object.keys(routes.pages).length >= 13 * LOCALES.length + 4);
+  assert.deepEqual(routes.pages["/guides/mac-dictation-not-working/"], {
+    locale: "en",
+    alternates: { en: "/guides/mac-dictation-not-working/", ja: "/ja/guides/mac-dictation-not-working/" },
+  });
   assert.equal(routes.pages["/"].alternates["zh-hant"], "/zh-hant/");
   assert.equal(routes.pages["/zh-hant/compare/"].locale, "zh-hant");
   assert.deepEqual(JSON.parse(readFileSync(`${root}lib/locale-routing/generated/routes.json`, "utf8")), routes);
@@ -129,6 +134,17 @@ test("entry decisions land on a translation of the same page, prompt in the EU, 
   }
   assert.ok(redirects > 10_000, `only ${redirects} redirects exercised`);
   assert.ok(suggestions > 1_000, `only ${suggestions} prompts exercised`);
+});
+
+test("the troubleshooting guide sends Japanese visitors to the Japanese guide and keeps everyone else", () => {
+  const path = "/guides/mac-dictation-not-working/";
+  const jp = decide(path, { country: "JP" });
+  assert.equal(jp.action, "redirect");
+  assert.equal(jp.location, "/ja/guides/mac-dictation-not-working/");
+  // No German translation: German visitors stay on the English page.
+  assert.deepEqual(decide(path, { country: "DE" }), { action: "pass", reason: "country:de" });
+  assert.equal(decide(path, { country: "FR" }).action, "pass");
+  assert.equal(decide("/ja/guides/mac-dictation-not-working/", { country: "US" }).action, "pass");
 });
 
 test("translated pages never redirect or prompt on entry", () => {

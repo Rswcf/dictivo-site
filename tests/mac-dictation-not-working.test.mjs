@@ -7,6 +7,8 @@ import { MAC_DICTATION_NOT_WORKING_LASTMOD } from "../data/mac-dictation-not-wor
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
 const path = "/guides/mac-dictation-not-working/";
 const url = `https://dictivo.app${path}`;
+const jaPath = "/ja/guides/mac-dictation-not-working/";
+const jaUrl = `https://dictivo.app${jaPath}`;
 const page = () => read(`${path.slice(1)}index.html`);
 const release = JSON.parse(readFileSync(new URL("../data/release.json", import.meta.url), "utf8"));
 const hasWindowsRelease = release.publicWindowsDownloads === true && Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
@@ -16,14 +18,32 @@ const alternates = (html) => [...html.matchAll(/<link rel="alternate" hreflang="
 const between = (html, from, to) => html.slice(html.indexOf(from), html.indexOf(to, html.indexOf(from)));
 const footer = (html) => html.slice(html.lastIndexOf('<footer class="site-footer"'));
 
-test("the English troubleshooting guide is a self-canonical English page", () => {
+test("the English troubleshooting guide is self-canonical and paired with the Japanese guide", () => {
   const html = page();
   assert.ok(html.includes('<html lang="en">'));
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.ok(html.includes("<h1>Mac dictation not working: what to check, by symptom</h1>"));
   assert.ok(html.includes("<title>Mac Dictation Not Working? What to Check, by Symptom</title>"));
   assert.ok(html.includes(`<link rel="canonical" href="${url}" />`));
-  assert.deepEqual(alternates(html), [["en", url], ["x-default", url]]);
+  const pair = [["en", url], ["ja", jaUrl], ["x-default", url]];
+  assert.deepEqual(alternates(html), pair);
+  assert.deepEqual(alternates(read(`${jaPath.slice(1)}index.html`)), pair, "the Japanese guide lists the same alternates");
+  const sitemap = read("sitemap.xml");
+  for (const loc of [url, jaUrl]) {
+    const block = sitemap.match(new RegExp(`<url>\\s*<loc>${loc.replaceAll(".", "\\.")}</loc>[\\s\\S]*?</url>`))[0];
+    assert.deepEqual([...block.matchAll(/hreflang="([^"]+)" href="([^"]+)"/g)].map(([, lang, href]) => [lang, href]), pair, loc);
+  }
+});
+
+test("each guide's language menu offers the other translation and the other homepages", () => {
+  const menu = (html) => Object.fromEntries([...html.matchAll(/<a href="([^"]+)" lang="([^"]+)" hreflang="\2"/g)].map(([, href, lang]) => [lang, href.replaceAll("&amp;", "&")]));
+  const en = menu(page());
+  const ja = menu(read(`${jaPath.slice(1)}index.html`));
+  for (const links of [en, ja]) {
+    assert.equal(links.en, `${path}?lang=en`);
+    assert.equal(links.ja, `${jaPath}?lang=ja`);
+    assert.equal(links.de, "/de/?lang=de");
+  }
 });
 
 test("the answer comes first, then the quick reference, contents, symptoms, Dictivo, trial, FAQ and references", () => {

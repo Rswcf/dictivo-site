@@ -783,8 +783,15 @@ function offlineDictationWindowsGuideUrl() {
   return absoluteUrl(offlineDictationWindowsGuidePath());
 }
 
+// The Mac dictation troubleshooting guide exists in English and Japanese; English is the
+// x-default for every other language.
+const MAC_DICTATION_TROUBLESHOOTING_PATHS = Object.freeze({
+  en: "/guides/mac-dictation-not-working/",
+  ja: "/ja/guides/mac-dictation-not-working/",
+});
+
 function jaMacDictationTroubleshootingPath() {
-  return "/ja/guides/mac-dictation-not-working/";
+  return MAC_DICTATION_TROUBLESHOOTING_PATHS.ja;
 }
 
 function jaMacDictationTroubleshootingUrl() {
@@ -792,7 +799,7 @@ function jaMacDictationTroubleshootingUrl() {
 }
 
 function macDictationNotWorkingPath() {
-  return "/guides/mac-dictation-not-working/";
+  return MAC_DICTATION_TROUBLESHOOTING_PATHS.en;
 }
 
 function macDictationNotWorkingUrl() {
@@ -2413,13 +2420,18 @@ function offlineDictationWindowsGuideHreflangTags() {
   return enOnlyHeadTags(offlineDictationWindowsGuideUrl());
 }
 
-// Japanese only: no x-default, so the page is not offered to readers of other languages.
-function jaMacDictationTroubleshootingHeadTags() {
-  const url = jaMacDictationTroubleshootingUrl();
+function macDictationTroubleshootingHeadTags(code) {
   return [
-    `<link rel="alternate" hreflang="ja" href="${attr(url)}" />`,
-    `<link rel="canonical" href="${attr(url)}" />`,
+    ...Object.entries(MAC_DICTATION_TROUBLESHOOTING_PATHS).map(
+      ([alt, path]) => `<link rel="alternate" hreflang="${attr(localeByCode(alt).htmlLang)}" href="${attr(absoluteUrl(path))}" />`,
+    ),
+    `<link rel="alternate" hreflang="x-default" href="${attr(absoluteUrl(MAC_DICTATION_TROUBLESHOOTING_PATHS.en))}" />`,
+    `<link rel="canonical" href="${attr(absoluteUrl(MAC_DICTATION_TROUBLESHOOTING_PATHS[code]))}" />`,
   ].join("\n    ");
+}
+
+function macDictationTroubleshootingHrefForLocale(item) {
+  return MAC_DICTATION_TROUBLESHOOTING_PATHS[item.code] ?? localePath(item.code);
 }
 
 function mediaKitHreflangTags() {
@@ -4758,7 +4770,8 @@ function renderMacDictationNotWorkingPage() {
     copy,
     lastmod: MAC_DICTATION_NOT_WORKING_LASTMOD,
     references: MAC_DICTATION_NOT_WORKING_REFERENCES,
-    headTags: enOnlyHeadTags(url),
+    headTags: macDictationTroubleshootingHeadTags("en"),
+    hrefForLocale: macDictationTroubleshootingHrefForLocale,
     trialSource: "troubleshooting_mac",
     idPrefix: "troubleshooting",
     mainId: "mac-dictation-not-working",
@@ -4781,14 +4794,15 @@ function renderJaMacDictationTroubleshootingPage() {
     copy,
     lastmod: JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
     references: JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES,
-    headTags: jaMacDictationTroubleshootingHeadTags(),
+    headTags: macDictationTroubleshootingHeadTags("ja"),
+    hrefForLocale: macDictationTroubleshootingHrefForLocale,
     trialSource: "ja_troubleshooting_mac",
     idPrefix: "ja-troubleshooting",
     mainId: "ja-mac-dictation-troubleshooting",
     route: "guides/mac-dictation-not-working",
     headline: copy.title,
     about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
-    articleImage: false,
+    articleImage: true,
     legacyFaqSchema: true,
   });
 }
@@ -6349,17 +6363,22 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const macDictationTroubleshootingAlternates = [
+    ...Object.entries(MAC_DICTATION_TROUBLESHOOTING_PATHS).map(
+      ([alt, path]) => `    <xhtml:link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${absoluteUrl(path)}" />`,
+    ),
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${absoluteUrl(MAC_DICTATION_TROUBLESHOOTING_PATHS.en)}" />`,
+  ].join("\n");
   const macDictationNotWorkingEntry = `  <url>
     <loc>${macDictationNotWorkingUrl()}</loc>
     <lastmod>${MAC_DICTATION_NOT_WORKING_LASTMOD}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${macDictationNotWorkingUrl()}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${macDictationNotWorkingUrl()}" />
+${macDictationTroubleshootingAlternates}
     <priority>0.8</priority>
   </url>`;
   const jaMacDictationTroubleshootingEntry = `  <url>
     <loc>${jaMacDictationTroubleshootingUrl()}</loc>
     <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
-    <xhtml:link rel="alternate" hreflang="ja" href="${jaMacDictationTroubleshootingUrl()}" />
+${macDictationTroubleshootingAlternates}
     <priority>0.8</priority>
   </url>`;
   const pricingEntries = Object.keys(PRICING_PAGE_COPY).map((code) => `  <url>

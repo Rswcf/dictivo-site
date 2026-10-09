@@ -5,11 +5,12 @@ import { readFileSync } from "node:fs";
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
 const path = "/ja/guides/mac-dictation-not-working/";
 const url = `https://dictivo.app${path}`;
+const enUrl = "https://dictivo.app/guides/mac-dictation-not-working/";
 const page = () => read(`${path.slice(1)}index.html`);
 const jsonLd = (html) =>
   [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(([, body]) => JSON.parse(body));
 
-test("the Japanese troubleshooting guide is a self-canonical Japanese-only page with agreeing dates", () => {
+test("the Japanese troubleshooting guide is self-canonical, paired with the English guide, with agreeing dates", () => {
   const html = page();
   assert.ok(html.includes('<html lang="ja">'));
   assert.equal((html.match(/<h1>/g) || []).length, 1);
@@ -17,7 +18,7 @@ test("the Japanese troubleshooting guide is a self-canonical Japanese-only page 
   assert.ok(html.includes("<title>Macで音声入力できないときの直し方｜症状別の確認手順</title>"));
   assert.ok(html.includes(`<link rel="canonical" href="${url}" />`));
   const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map(([, lang, href]) => [lang, href]);
-  assert.deepEqual(alternates, [["ja", url]]);
+  assert.deepEqual(alternates, [["en", enUrl], ["ja", url], ["x-default", enUrl]]);
 
   const lastmod = html.match(/<time datetime="(\d{4}-\d{2}-\d{2})">/)[1];
   const article = jsonLd(html).find((item) => item["@type"] === "TechArticle");
@@ -53,7 +54,9 @@ test("Japanese readers can reach the guide and its trial panel attributes downlo
     assert.ok(read(entry).includes(`href="${path}"`), entry);
   }
   assert.ok(read("ja/llms.txt").includes(url));
-  assert.ok(!read("de/index.html").includes(`href="${path}"`), "other languages do not link a Japanese-only page");
+  // Other homepages link their own language's guide, never the Japanese one.
+  assert.ok(!read("de/index.html").includes(`href="${path}"`), "the German homepage does not link the Japanese guide");
+  assert.ok(!read("index.html").includes(`href="${path}"`), "the English homepage does not link the Japanese guide");
   assert.ok(
     !read("ja/guides/offline-dictation-on-mac/index.html").includes("Macで音声入力できないときの切り分け"),
     "the offline guide no longer competes with a generic heading",

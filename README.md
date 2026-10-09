@@ -206,16 +206,23 @@ examples preserves user input; clearing empties and focuses the field; pagehide
 clears it before leaving. Page-view/download analytics contain metadata only.
 Keep examples labeled as practice text, never as measured recognition results.
 
-### Japanese troubleshooting guide
+### Mac dictation troubleshooting guide (English and Japanese)
 
+`data/mac-dictation-not-working-guide.mjs` supplies `/guides/mac-dictation-not-working/` and
 `data/ja-mac-dictation-troubleshooting.mjs` supplies `/ja/guides/mac-dictation-not-working/`,
-a Japanese-only page for built-in macOS dictation that does not work. It has no translations:
-the head carries a self `hreflang="ja"` and no `x-default`, and the language menu sends other
-languages to their homepages. Every statement must come from the Apple or Google Japanese help
-pages in its reference list, or from `fieldTest`, which holds results measured on an actual Mac
-and renders nothing while it is `null`. Dictivo appears only in the closing section, labelled as
-this site's product. The Japanese offline guide's troubleshooting section is Dictivo-specific
-and links here, so the two pages do not target the same heading.
+both for built-in macOS Dictation that does not work. They are translations of one topic, not of
+each other's text: each follows Apple's help in its own language. Both heads list `en`, `ja` and
+`x-default` (English), the sitemap entries carry the same three alternates, and each language menu
+offers the other guide; other languages go to their homepages. Japanese visitors who enter on the
+English URL are sent to the Japanese guide, as on every other translated page.
+
+Every statement must come from the Apple or Google help pages in the page's reference list, or
+from `fieldTest`, which holds results measured on an actual Mac and renders nothing while it is
+`null`. Dictivo appears only in the closing section, labelled as this site's product. Both pages
+render through `renderDictationGuidePage()`. The Japanese page keeps the `FAQPage` node it shipped
+with (`legacyFaqSchema`); newer guides carry a visible FAQ but no FAQ schema. Its title and body
+are unchanged since 2026-09-26. The Japanese offline guide's troubleshooting section is
+Dictivo-specific and links here, so the two pages do not target the same heading.
 
 ### `WINDOWS_HOME_COPY` is the stage that surprises people
 
@@ -354,6 +361,7 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD` | `data/offline-dictation-windows-guide.mjs` | visible stamp + sitemap for `/guides/offline-dictation-on-windows/` |
 | `BENCHMARK_METHOD_GUIDE_LASTMOD` | `data/benchmark-method-guide.mjs` | visible stamp + sitemap for `/guides/mac-dictation-benchmark-method/` |
 | `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/speech-to-text-mac-guide.mjs` | visible stamp + sitemap for `/guides/best-speech-to-text-apps-for-mac/` |
+| `MAC_DICTATION_NOT_WORKING_LASTMOD` | `data/mac-dictation-not-working-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-not-working/` |
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
@@ -365,7 +373,9 @@ The two `/privacy/` sub-pages carry their own inline `lastModified` values in
 
 schema.org `datePublished` on guides, comparison pages and the two `/privacy/` sub-pages comes
 from `data/first-published.mjs`: the first commit that published each route (Traditional Chinese
-pages from 2026-09-14). Those dates never move.
+pages from 2026-09-14). A route whose languages shipped on different days holds one date per
+language (`guides/mac-dictation-not-working`: Japanese 2026-09-26, English 2026-10-09), and a
+language missing from it is an error rather than a fallback. Those dates never move.
 
 ## Cloudflare Pages
 
