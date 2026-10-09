@@ -678,7 +678,7 @@ export const COMPARE_PAGES = [
         kicker: "Migration",
         title: "Dragon Home is gone - what former users actually need",
         paragraphs: [
-          "Nuance discontinued Dragon Home, the roughly $150 consumer edition, in 2023, and discontinued Dragon for Mac back in 2018. Dragon Professional v16 is still sold for Windows, but Nuance no longer lists a public price for it. Check your own license terms and any available upgrade offers separately.",
+          "Nuance discontinued Dragon Home, its consumer edition, in 2023, and discontinued Dragon for Mac back in 2018. Dragon Professional v16 is still sold for Windows, but Nuance no longer lists a public price for it. Check your own license terms and any available upgrade offers separately.",
           "Before switching, list the tasks you used in Dragon Home: text entry, corrections, commands and any saved vocabulary. A lower price does not establish that another app supports the whole workflow.",
           "If what you used Dragon Home for was everyday dictation - not custom legal vocabularies or full hands-free control - a train-free local tool like Dictivo covers that job at the price class Dragon Home used to occupy.",
         ],
@@ -731,7 +731,7 @@ export const COMPARE_PAGES = [
       ["Do I need to train Dictivo like Dragon?", "No. Dictivo uses modern Whisper-grade local models that work without a voice profile. Dragon builds accuracy through profile and vocabulary training, which pays off for specialized terminology but adds setup and maintenance."],
       ["Is Dictivo as accurate as Dragon?", "We have not published a controlled accuracy comparison between Dictivo and Dragon. Try the same recordings and work tasks in both, using the vocabulary and settings you would normally use, and compare the corrections required."],
       ["Does Dragon run offline like Dictivo?", "Yes - this is a real similarity. Dragon Professional v16 processes speech locally and works offline after activation. The differences are price, platforms, and training, not the local processing itself."],
-      ["What happened to Dragon Home?", `Nuance discontinued the roughly $150 Dragon Home edition in 2023 without a consumer replacement. Dragon Professional v16 is still sold. ${DRAGON_PROFESSIONAL_PRICE_SENTENCE} Compare the tasks and license terms you need before choosing a replacement.`],
+      ["What happened to Dragon Home?", `Nuance discontinued the Dragon Home consumer edition in 2023 without a replacement. Dragon Professional v16 is still sold. ${DRAGON_PROFESSIONAL_PRICE_SENTENCE} Compare the tasks and license terms you need before choosing a replacement.`],
       ["What happened to MacSpeech Dictate?", "MacSpeech Dictate launched in 2008 on Nuance's Dragon engine. Nuance bought MacSpeech in February 2010 and renamed the product Dragon Dictate for Mac with version 2.0 that September. Its last Mac edition, Dragon Professional Individual for Mac, was discontinued on October 22, 2018; perpetual licenses keep working but receive no updates. Dragon vocabularies and voice commands do not move to other apps, so add your key terms to the new app's dictionary."],
     ],
     related: ["wispr-flow-alternative", "macos-dictation-alternative"],
