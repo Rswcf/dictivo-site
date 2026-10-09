@@ -1,4 +1,4 @@
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-04";
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-09";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],
@@ -134,14 +134,14 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       title: "Where Dictivo fits on Windows",
       paragraphs: [
         "Dictivo brings the same local-first workflow to Windows that it runs on macOS: hold a hotkey, speak, and the text lands in the active app. Local mode processes audio on the device, and the app keeps history, dictionary terms, and snippets locally. Optional Cloud Fast is a separate mode that uploads only recordings you choose.",
-        "One honest caveat: the Windows installer is not yet Authenticode-signed, so SmartScreen may show an unknown-publisher notice during setup. SHA-256 checksums are published for verification, and signing is on the roadmap.",
+        "One honest caveat: the Windows installer is not yet Authenticode-signed, so you may see up to two warnings. If Edge blocks the download as not commonly downloaded, open '…' next to it and choose 'Keep', then 'Keep anyway'. If SmartScreen shows an unknown-publisher notice when you run the installer, choose 'More info', then 'Run anyway'. SHA-256 checksums are published for verification, and signing is on the roadmap.",
         "The free Tiny tier and the 14-day full Local trial work the same on Windows as on Mac, so you can test the whole local workflow before paying {{price.local.inline}}.",
       ],
       bullets: [
         "Same hotkey-driven local dictation on Windows and macOS.",
         "Local mode keeps audio, transcripts, history, and dictionary on the PC.",
         "Free Tiny tier plus a 14-day full Local trial before buying Local ({{price.local.inline}}).",
-        "SmartScreen may warn during install until code signing lands; checksums are published.",
+        "Edge may warn during download and SmartScreen during install until code signing lands; checksums are published.",
       ],
     },
     {
