@@ -1,3 +1,5 @@
+import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./dragon-price-status.mjs";
+
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-09";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
@@ -10,6 +12,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Wispr Flow privacy page", "https://wisprflow.ai/privacy"],
   ["Weesper Neon Flow", "https://weesperneonflow.ai/"],
   ["Dragon Professional", "https://dragon.nuance.com/en-us/dragon-professional"],
+  ["Nuance US store page for Dragon Professional, archived 11 February 2025 (last public price)", DRAGON_PRICE_STATUS.lastListArchive],
   ["Dictivo audio path", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
   ["Dictivo network test", "https://dictivo.app/privacy/local-dictation-network-test/"],
 ];
@@ -25,7 +28,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
     "Use this guide when the deciding factor is where dictation audio is processed on Windows. The two built-in options differ on exactly that point, and so do the paid tools.",
   answerTitle: "Short answer",
   answer:
-    "Windows 11's built-in Voice Access works on-device and is free - start there. Win+H Voice Typing is also free but sends audio to the cloud by default. For paid local dictation built around writing, shortlist Dictivo, Whisperstream, and Weesper Neon Flow. Talon is free and local but built for voice coding. Wispr Flow is cloud-only, and Dragon Professional is local but costs $699.99.",
+    "Windows 11's built-in Voice Access works on-device and is free - start there. Win+H Voice Typing is also free but sends audio to the cloud by default. For paid local dictation built around writing, shortlist Dictivo, Whisperstream, and Weesper Neon Flow. Talon is free and local but built for voice coding. Wispr Flow is cloud-only, and Dragon Professional is local but no longer has a public price.",
   intentTitle: "Which Windows dictation question are you really asking?",
   intentCaption: "Choose a Windows dictation workflow for your task",
   intentHeaders: ["Your task", "Best-fit answer", "What to evaluate"],
@@ -47,7 +50,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
     ],
     [
       "Dragon alternative for Windows",
-      "Modern train-free local tools cover everyday dictation at a fraction of Dragon's price.",
+      "Modern train-free local tools cover everyday dictation without voice-profile training.",
       "Whether you need Dragon's specialized vocabularies or just want to write by voice.",
     ],
     [
@@ -111,7 +114,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
     [
       "Dragon Professional v16",
       "Yes. Processes speech locally after installation and one-time license activation.",
-      "$699.99 one-time. The consumer Dragon Home edition was discontinued in 2023.",
+      `${DRAGON_PROFESSIONAL_PRICE_SENTENCE} The consumer Dragon Home edition was discontinued in 2023.`,
       "Specialized legal or medical vocabularies, deep hands-free control, and enterprise deployment.",
     ],
   ],
@@ -149,7 +152,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       kicker: "The Dragon question",
       title: "What about Dragon?",
       paragraphs: [
-        "Dragon Professional v16 deserves a clear answer because it is genuinely local: speech is processed on the PC after activation. The differences are price ($699.99), Windows-only desktop support, and a voice-profile training model that pays off mainly for specialized legal and medical vocabulary.",
+        "Dragon Professional v16 deserves a clear answer because it is genuinely local: speech is processed on the PC after activation. The differences are price (Nuance no longer lists a public price; the last public list price was $699, a one-time payment, in its US store as archived on 11 February 2025), Windows-only desktop support, and a voice-profile training model that pays off mainly for specialized legal and medical vocabulary.",
         "If you are a former Dragon Home user - that edition was discontinued in 2023 - the full comparison covers when the Professional upgrade is worth it and when a modern train-free tool covers the same job.",
       ],
       bullets: [
@@ -178,7 +181,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
     ["Is Windows Voice Typing (Win+H) private?", "Win+H uses Microsoft's cloud-based speech services by default, so dictation audio is sent to the cloud for processing. If on-device processing matters, use Voice Access or a local third-party dictation app."],
     ["What is the best offline dictation software for Windows?", "Start free with Voice Access. For a dedicated local writing workflow, compare Dictivo ({{price.local.inline}} once), Whisperstream ($29 once), JesType, and Weesper Neon Flow. For voice coding and hands-free control, Talon is free and local."],
     ["Does Dictivo work offline on Windows?", "Yes. In Local mode, Dictivo processes dictation on the PC after the local model is installed, and transcripts, history, and dictionary terms stay on the device. The installer is not yet Authenticode-signed, so SmartScreen may show a notice during setup."],
-    ["Is there a local Dragon alternative for Windows?", "Yes. Dragon Professional itself processes locally but costs $699.99 and relies on voice-profile training. Modern train-free local tools like Dictivo ({{price.local.inline}} once) cover everyday dictation; Dragon keeps the edge for specialized legal and medical vocabulary."],
+    ["Is there a local Dragon alternative for Windows?", "Yes. Dragon Professional itself processes locally, is sold through a Nuance sales contact with no public price, and relies on voice-profile training. Modern train-free local tools like Dictivo ({{price.local.inline}} once) cover everyday dictation; Dragon keeps the edge for specialized legal and medical vocabulary."],
     ["How can I check that a dictation app is really local?", "Dictate while watching the app's network activity in Resource Monitor or a firewall log: local processing should produce no upload during speech. Dictivo publishes an open network test and an audio-path page so you can run this check yourself."],
   ],
   relatedTitle: "Related Dictivo pages",
