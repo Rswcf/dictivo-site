@@ -58,6 +58,11 @@ import {
   MAC_DICTATION_SHORTCUT_REFERENCES,
   macDictationShortcutCopy,
 } from "../data/mac-dictation-shortcut-guide.mjs";
+import {
+  JA_MAC_DICTATION_SHORTCUT_LASTMOD,
+  JA_MAC_DICTATION_SHORTCUT_REFERENCES,
+  jaMacDictationShortcutCopy,
+} from "../data/ja-mac-dictation-shortcut-guide.mjs";
 import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
@@ -818,8 +823,14 @@ function macDictationNotWorkingCopyForRender() {
   return macDictationNotWorkingCopy({ windows: hasWindowsRelease });
 }
 
+// The Mac dictation shortcut guide exists in English and Japanese; English is the x-default.
+const MAC_DICTATION_SHORTCUT_PATHS = Object.freeze({
+  en: "/guides/mac-dictation-shortcut/",
+  ja: "/ja/guides/mac-dictation-shortcut/",
+});
+
 function macDictationShortcutPath() {
-  return "/guides/mac-dictation-shortcut/";
+  return MAC_DICTATION_SHORTCUT_PATHS.en;
 }
 
 function macDictationShortcutUrl() {
@@ -828,6 +839,24 @@ function macDictationShortcutUrl() {
 
 function macDictationShortcutCopyForRender() {
   return macDictationShortcutCopy({ windows: hasWindowsRelease, troubleshootingPath: macDictationNotWorkingPath() });
+}
+
+function jaMacDictationShortcutPath() {
+  return MAC_DICTATION_SHORTCUT_PATHS.ja;
+}
+
+function jaMacDictationShortcutUrl() {
+  return absoluteUrl(jaMacDictationShortcutPath());
+}
+
+// Site paths come in as arguments, so the module needs no change when Japanese gets /ja/pricing/.
+function jaMacDictationShortcutCopyForRender() {
+  return jaMacDictationShortcutCopy({
+    windows: hasWindowsRelease,
+    troubleshootingPath: jaMacDictationTroubleshootingPath(),
+    pricingPath: pricingHref("ja"),
+    firstDictationPath: firstDictationPath("ja"),
+  });
 }
 
 function windowsVoiceTypingPath() {
@@ -2489,18 +2518,42 @@ function offlineDictationWindowsGuideHreflangTags() {
   return enOnlyHeadTags(offlineDictationWindowsGuideUrl());
 }
 
-function macDictationTroubleshootingHeadTags(code) {
+// A guide translated into some languages only (`paths`: code -> path, English first): every
+// translation, x-default to English, and a self canonical. The language menu offers the
+// translations and sends the other languages to their homepages.
+function translatedGuideHeadTags(paths, code) {
   return [
-    ...Object.entries(MAC_DICTATION_TROUBLESHOOTING_PATHS).map(
+    ...Object.entries(paths).map(
       ([alt, path]) => `<link rel="alternate" hreflang="${attr(localeByCode(alt).htmlLang)}" href="${attr(absoluteUrl(path))}" />`,
     ),
-    `<link rel="alternate" hreflang="x-default" href="${attr(absoluteUrl(MAC_DICTATION_TROUBLESHOOTING_PATHS.en))}" />`,
-    `<link rel="canonical" href="${attr(absoluteUrl(MAC_DICTATION_TROUBLESHOOTING_PATHS[code]))}" />`,
+    `<link rel="alternate" hreflang="x-default" href="${attr(absoluteUrl(paths.en))}" />`,
+    `<link rel="canonical" href="${attr(absoluteUrl(paths[code]))}" />`,
   ].join("\n    ");
+}
+
+function translatedGuideSitemapAlternates(paths) {
+  return [
+    ...Object.entries(paths).map(
+      ([alt, path]) => `    <xhtml:link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${absoluteUrl(path)}" />`,
+    ),
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${absoluteUrl(paths.en)}" />`,
+  ].join("\n");
+}
+
+function macDictationTroubleshootingHeadTags(code) {
+  return translatedGuideHeadTags(MAC_DICTATION_TROUBLESHOOTING_PATHS, code);
 }
 
 function macDictationTroubleshootingHrefForLocale(item) {
   return MAC_DICTATION_TROUBLESHOOTING_PATHS[item.code] ?? localePath(item.code);
+}
+
+function macDictationShortcutHeadTags(code) {
+  return translatedGuideHeadTags(MAC_DICTATION_SHORTCUT_PATHS, code);
+}
+
+function macDictationShortcutHrefForLocale(item) {
+  return MAC_DICTATION_SHORTCUT_PATHS[item.code] ?? localePath(item.code);
 }
 
 function mediaKitHreflangTags() {
@@ -4914,7 +4967,8 @@ function renderMacDictationShortcutPage() {
     copy,
     lastmod: MAC_DICTATION_SHORTCUT_LASTMOD,
     references: MAC_DICTATION_SHORTCUT_REFERENCES,
-    headTags: enOnlyHeadTags(url),
+    headTags: macDictationShortcutHeadTags("en"),
+    hrefForLocale: macDictationShortcutHrefForLocale,
     trialSource: "shortcut_mac",
     mainClass: "doc-page",
     idPrefix: "shortcut",
@@ -5019,6 +5073,30 @@ function renderJaMacDictationTroubleshootingPage() {
     headline: copy.title,
     about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
     legacyFaqSchema: true,
+  });
+}
+
+function renderJaMacDictationShortcutPage() {
+  const url = jaMacDictationShortcutUrl();
+  const copy = jaMacDictationShortcutCopyForRender();
+  return renderDictationGuidePage({
+    code: "ja",
+    path: jaMacDictationShortcutPath(),
+    url,
+    copy,
+    lastmod: JA_MAC_DICTATION_SHORTCUT_LASTMOD,
+    references: JA_MAC_DICTATION_SHORTCUT_REFERENCES,
+    headTags: macDictationShortcutHeadTags("ja"),
+    hrefForLocale: macDictationShortcutHrefForLocale,
+    trialSource: "ja_shortcut_mac",
+    mainClass: "doc-page",
+    idPrefix: "ja-shortcut",
+    mainId: "ja-mac-dictation-shortcut",
+    quickReference: copy.quickReference,
+    route: "guides/mac-dictation-shortcut",
+    headline: copy.metaTitle,
+    about: ["Mac 音声入力 ショートカット", "キーボード設定", "マイクキー", "音声入力 ショートカット 変更"],
+    legacyFaqSchema: false,
   });
 }
 
@@ -5147,6 +5225,7 @@ function renderHomeFooterLinks(currentCode, t) {
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
     `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
     currentCode === "ja" ? `<a href="${attr(jaMacDictationTroubleshootingPath())}">${html(JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel)}</a>` : "",
+    currentCode === "ja" ? `<a href="${attr(jaMacDictationShortcutPath())}">${html(jaMacDictationShortcutCopyForRender().navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(macDictationNotWorkingPath())}">${html(macDictationNotWorkingCopyForRender().navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(macDictationShortcutPath())}">${html(macDictationShortcutCopyForRender().navLabel)}</a>` : "",
     currentCode === "en" ? `<a href="${attr(windowsVoiceTypingPath())}">${html(windowsVoiceTypingCopyForRender().navLabel)}</a>` : "",
@@ -6166,7 +6245,12 @@ function renderLlmsTxt(currentCode = "en") {
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
     [copy.pageLabels.privacyProof, privacyProofUrl(currentCode)],
     [offlineDictationGuideCopy(currentCode).navLabel, offlineDictationGuideUrl(currentCode)],
-    ...(currentCode === "ja" ? [[JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel, jaMacDictationTroubleshootingUrl()]] : []),
+    ...(currentCode === "ja"
+      ? [
+          [JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel, jaMacDictationTroubleshootingUrl()],
+          [jaMacDictationShortcutCopyForRender().navLabel, jaMacDictationShortcutUrl()],
+        ]
+      : []),
     [ui.footer.audioPath, localizedTrustUrl(currentCode, "privacy/where-dictation-audio-goes")],
     [ui.footer.networkTest, localizedTrustUrl(currentCode, "privacy/local-dictation-network-test")],
     [copy.pageLabels.compare, localizedCompareUrl(currentCode)],
@@ -6616,12 +6700,8 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
-  const macDictationTroubleshootingAlternates = [
-    ...Object.entries(MAC_DICTATION_TROUBLESHOOTING_PATHS).map(
-      ([alt, path]) => `    <xhtml:link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${absoluteUrl(path)}" />`,
-    ),
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${absoluteUrl(MAC_DICTATION_TROUBLESHOOTING_PATHS.en)}" />`,
-  ].join("\n");
+  const macDictationTroubleshootingAlternates = translatedGuideSitemapAlternates(MAC_DICTATION_TROUBLESHOOTING_PATHS);
+  const macDictationShortcutAlternates = translatedGuideSitemapAlternates(MAC_DICTATION_SHORTCUT_PATHS);
   const macDictationNotWorkingEntry = `  <url>
     <loc>${macDictationNotWorkingUrl()}</loc>
     <lastmod>${MAC_DICTATION_NOT_WORKING_LASTMOD}</lastmod>
@@ -6631,8 +6711,13 @@ ${macDictationTroubleshootingAlternates}
   const macDictationShortcutEntry = `  <url>
     <loc>${macDictationShortcutUrl()}</loc>
     <lastmod>${MAC_DICTATION_SHORTCUT_LASTMOD}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${macDictationShortcutUrl()}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${macDictationShortcutUrl()}" />
+${macDictationShortcutAlternates}
+    <priority>0.8</priority>
+  </url>`;
+  const jaMacDictationShortcutEntry = `  <url>
+    <loc>${jaMacDictationShortcutUrl()}</loc>
+    <lastmod>${JA_MAC_DICTATION_SHORTCUT_LASTMOD}</lastmod>
+${macDictationShortcutAlternates}
     <priority>0.8</priority>
   </url>`;
   const windowsVoiceTypingEntry = `  <url>
@@ -6733,6 +6818,7 @@ ${offlineDictationWindowsGuideEntry}
 ${macDictationNotWorkingEntry}
 ${jaMacDictationTroubleshootingEntry}
 ${macDictationShortcutEntry}
+${jaMacDictationShortcutEntry}
 ${windowsVoiceTypingEntry}
 ${dragonPricingEntry}
 ${wisprFlowPricingEntry}
@@ -7138,6 +7224,7 @@ write(`${windowsVoiceTypingPath().slice(1)}index.html`, renderWindowsVoiceTyping
 write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${wisprFlowPricingPath().slice(1)}index.html`, renderWisprFlowPricingPage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
+write(`${jaMacDictationShortcutPath().slice(1)}index.html`, renderJaMacDictationShortcutPage());
 write("media-kit/index.html", renderMediaKitPage());
 for (const code of Object.keys(PRICING_PAGE_COPY)) write(`${pricingPath(code).slice(1)}index.html`, renderPricingPage(code));
 write("demo/index.html", renderProductFilmPage());

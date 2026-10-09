@@ -152,6 +152,7 @@ const publishedRoutes = () => [
   ["guides/wispr-flow-pricing/index.html", "guides/wispr-flow-pricing", "en"],
   ["guides/windows-voice-typing-not-working/index.html", "guides/windows-voice-typing-not-working", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
+  ["ja/guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "ja"],
   ...LOCALES.flatMap((locale) => [
     ...COMPARE_PAGES.map((compare) => [`${prefix(locale.code)}compare/${compare.slug}/index.html`, `compare/${compare.slug}`, locale.code]),
     ...["privacy/where-dictation-audio-goes", "privacy/local-dictation-network-test"].map((slug) => [`${prefix(locale.code)}${slug}/index.html`, slug, locale.code]),
@@ -174,4 +175,7 @@ test("guides, comparisons and privacy answers carry datePublished from their fir
   assert.equal(firstPublished("guides/mac-dictation-not-working", "ja"), "2026-09-26");
   assert.equal(firstPublished("guides/mac-dictation-not-working", "en"), "2026-10-09");
   assert.throws(() => firstPublished("guides/mac-dictation-not-working", "de"), /mac-dictation-not-working \(de\)/);
+  assert.equal(firstPublished("guides/mac-dictation-shortcut", "en"), "2026-10-09");
+  assert.equal(firstPublished("guides/mac-dictation-shortcut", "ja"), "2026-10-09");
+  assert.throws(() => firstPublished("guides/mac-dictation-shortcut", "de"), /mac-dictation-shortcut \(de\)/);
 });

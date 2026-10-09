@@ -17,14 +17,15 @@ const between = (html, from, to) => html.slice(html.indexOf(from), html.indexOf(
 const footer = (html) => html.slice(html.lastIndexOf('<footer class="site-footer"'));
 const main = (html) => html.split("<main")[1].split("</main>")[0];
 
-test("the shortcut guide is a self-canonical English-only page", () => {
+test("the shortcut guide is self-canonical and paired with the Japanese shortcut guide", () => {
   const html = page();
   assert.ok(html.includes('<html lang="en">'));
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.ok(html.includes("<h1>The Mac dictation shortcut: where it is, how to change it, and why it stops working</h1>"));
   assert.ok(html.includes("<title>Mac Dictation Shortcut: Default, Change It, Fix Conflicts</title>"));
   assert.ok(html.includes(`<link rel="canonical" href="${url}" />`));
-  assert.deepEqual(alternates(html), [["en", url], ["x-default", url]]);
+  const jaUrl = "https://dictivo.app/ja/guides/mac-dictation-shortcut/";
+  assert.deepEqual(alternates(html), [["en", url], ["ja", jaUrl], ["x-default", url]]);
 });
 
 test("the answer comes first, then the shortcut table, contents, sections, Dictivo, trial, FAQ and references", () => {

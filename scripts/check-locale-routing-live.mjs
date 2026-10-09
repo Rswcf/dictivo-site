@@ -71,6 +71,7 @@ if (override) {
     ["MO", "", "", "/", "/zh-hant/"], ["SG", "", "zh-CN", "/", "/zh/"], ["JP", "", "", "/", "/ja/"], ["KR", "", "", "/", "/ko/"],
     ["JP", "", "", "/guides/first-local-dictation/", "/ja/guides/first-local-dictation/"],
     ["JP", "", "", "/guides/mac-dictation-not-working/", "/ja/guides/mac-dictation-not-working/"],
+    ["JP", "", "", "/guides/mac-dictation-shortcut/", "/ja/guides/mac-dictation-shortcut/"],
     ["TW", "", "", "/privacy/where-dictation-audio-goes/", "/zh-hant/privacy/where-dictation-audio-goes/"],
   ];
   for (const [country, region, acceptLanguage, path, target] of redirects) {
@@ -78,7 +79,7 @@ if (override) {
     await expect(label, visit(path, { country, region, headers: acceptLanguage ? { "accept-language": acceptLanguage } : {} }), (r) => [status(r, 302), location(r, target)]);
   }
 
-  const stays = [["CA", "/"], ["SG", "/"], ["US", "/"], ["GB", "/"], ["IN", "/"], ["XX", "/"], ["FR", "/de/"], ["DE", "/about/"], ["DE", "/guides/first-local-dictation/"], ["DE", "/guides/mac-dictation-not-working/"]];
+  const stays = [["CA", "/"], ["SG", "/"], ["US", "/"], ["GB", "/"], ["IN", "/"], ["XX", "/"], ["FR", "/de/"], ["DE", "/about/"], ["DE", "/guides/first-local-dictation/"], ["DE", "/guides/mac-dictation-not-working/"], ["DE", "/guides/mac-dictation-shortcut/"]];
   for (const [country, path] of stays) {
     await expect(`${country} ${path} stays`, visit(path, { country }), (r) => [status(r, 200), noPrompt(r)]);
   }

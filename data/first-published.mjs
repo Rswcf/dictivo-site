@@ -9,9 +9,11 @@ export const FIRST_PUBLISHED = Object.freeze({
   "guides/mac-dictation-benchmark-method": "2026-06-07", // 75c3ee6
   "guides/offline-dictation-on-windows": "2026-07-12", // 79e0da2
   "guides/first-local-dictation": "2026-09-10", // 8d9f594, English and Japanese
-  // Per language where the translations shipped on different days.
+  // Per language for routes whose translations ship separately; a language missing here is an
+  // error, never a fallback to another language's date.
   "guides/mac-dictation-not-working": Object.freeze({ ja: "2026-09-26", en: "2026-10-09" }),
-  "guides/mac-dictation-shortcut": "2026-10-09", // English only
+  // English 2026-10-09 (1f17428), Japanese 2026-10-09.
+  "guides/mac-dictation-shortcut": Object.freeze({ en: "2026-10-09", ja: "2026-10-09" }),
   "guides/dragon-pricing": "2026-10-09", // English only
   "guides/wispr-flow-pricing": "2026-10-09", // English only
   "guides/windows-voice-typing-not-working": "2026-10-09", // English only
