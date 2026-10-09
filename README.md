@@ -1,5 +1,34 @@
 # Dictivo site
 
+## Dragon and Wispr Flow pricing facts and a Windows voice typing guide — 2026-10-09
+
+Three English pages render through `renderDictationGuidePage()`, which now takes a trial-panel
+`platform`, a table inside a section and a guide without a Dictivo section; the existing guides render
+byte for byte as before.
+
+`/guides/dragon-pricing/` and `/guides/wispr-flow-pricing/` state another vendor's prices only as
+that vendor publishes them, read on 2026-10-09 and linked under References with the check date:
+Nuance's product pages and support articles, the Dragon Medical One listing on Microsoft Marketplace
+and Microsoft Learn for Dragon; wisprflow.ai, its help center and its terms for Wispr Flow. Nuance's
+Dragon Professional page no longer shows a price, so the Dragon page says so and quotes none. Where
+Wispr's own pages disagree (student pricing, tax) both statements appear. Competitor figures are
+plain text, never `US$`, and carry no Offer schema. Dictivo appears only in a closing section labelled
+as this site's product (the Dragon page adds that Dictivo is not a clinical documentation product);
+its one price sentence is `guideLocalPrice("en", offer)`, so it drops the dated clause when the
+2026-11-01 runbook clears the offer, which each page's test checks against the post-rollover offer.
+Their sitemap dates follow `PRICING_LASTMOD` as well. Prices change: the monthly re-check list is
+`docs/research/2026-10-08-ahrefs-audit/price-watch.md` in the desktop repository.
+
+`/guides/windows-voice-typing-not-working/` lists what to check for each Win+H symptom from
+Microsoft's support and Learn documents, plus whether Windows 11 dictation works offline (voice
+typing no; voice access yes, after a one-time language download). It quotes no Dictivo price; its
+Dictivo section and Windows trial panel render only while Windows downloads are public.
+
+Inbound links: the English Wispr Flow comparison (its English figures re-checked the same day, so its
+English date moved to 2026-10-09), the English Dragon comparison (date unchanged: it still states a
+Dragon Professional price that Nuance no longer publishes, to be resolved separately), the Windows
+offline guide's Voice Access section and related pages, the English footer (Windows guide only) and
+`llms.txt`. Validation: 230 tests and the eight deploy check scripts. Not deployed or measured.
 ## Tests pass on both sides of the 1 November price change — 2026-10-09
 
 A rehearsal of the 2026-11-01 runbook (US$29 → US$49) cleared the offer dates and failed 25
@@ -468,6 +497,9 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `PRICING_PAGE_LASTMOD` | `data/pricing-page.mjs` | visible stamp + sitemap for `/pricing/`, never older than `PRICING_LASTMOD` |
 | `MAC_DICTATION_SHORTCUT_LASTMOD` | `data/mac-dictation-shortcut-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-shortcut/` |
 | `MAC_DICTATION_NOT_WORKING_LASTMOD` | `data/mac-dictation-not-working-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-not-working/` |
+| `DRAGON_PRICING_LASTMOD` | `data/dragon-pricing-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/dragon-pricing/`, never older than `PRICING_LASTMOD`; `DRAGON_PRICING_CHECKED` dates the references |
+| `WISPR_FLOW_PRICING_LASTMOD` | `data/wispr-flow-pricing-guide.mjs` | the same for `/guides/wispr-flow-pricing/`; `WISPR_FLOW_PRICING_CHECKED` dates the references |
+| `WINDOWS_VOICE_TYPING_LASTMOD` | `data/windows-voice-typing-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/windows-voice-typing-not-working/` |
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
