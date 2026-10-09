@@ -642,7 +642,11 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         "paragraphs": [
           "「システム設定」→「キーボード」→「音声入力」で機能を有効にし、使う言語とマイクを確認します。同じ画面の「ショートカット」で開始・停止のキーを確認してください。Fnキーを2回押す設定は選択肢の一つで、すべてのMacの初期設定とは限りません。",
           "メモなどの入力欄をクリックし、設定したキー、または「編集」→「音声入力を開始」で短い文章を話します。オフライン処理の可否は機種・言語・設定によるため、設定画面に表示される音声の処理方法を確認してください。標準機能で必要な作業ができれば、追加のアプリを購入する必要はありません。"
-        ]
+        ],
+        "link": {
+          "label": "Macの音声入力ショートカットを確認・変更する方法",
+          "href": "/ja/guides/mac-dictation-shortcut/"
+        }
       },
       {
         "kicker": "判断基準",
@@ -718,7 +722,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ]
     ],
     "referenceTitle": "参考資料",
-    "lastUpdated": "2026-09-29"
+    // 2026-10-09: the built-in dictation section links the Japanese shortcut guide.
+    "lastUpdated": "2026-10-09"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",

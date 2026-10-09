@@ -64,7 +64,8 @@ test("Guide dates reflect scoped trial improvements without redating unchanged s
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   for (const [path, date] of [
     // 2026-09-29: the answer comes first and the table gained price and check-date columns.
-    ["/ja/guides/offline-dictation-on-mac/", "2026-09-29"],
+    // 2026-10-09 (Japanese): the built-in dictation section links the shortcut guide.
+    ["/ja/guides/offline-dictation-on-mac/", "2026-10-09"],
     ["/guides/offline-dictation-on-mac/", "2026-09-29"],
     ["/ja/guides/first-local-dictation/", "2026-09-18"],
     ["/guides/first-local-dictation/", "2026-09-11"],

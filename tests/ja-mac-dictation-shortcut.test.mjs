@@ -180,3 +180,13 @@ test("Japanese readers reach the guide from every Japanese footer and llms.txt, 
   assert.ok(!read("llms.txt").includes(url), "the English llms.txt lists no locale URL");
   assert.equal((main(page()).match(/href="\/ja\/guides\/mac-dictation-not-working\/"/g) || []).length, 2, "sections 4 and 5 link the troubleshooting guide");
 });
+
+test("the Japanese offline guide links the shortcut guide from its built-in dictation section", () => {
+  const offline = read("ja/guides/offline-dictation-on-mac/index.html");
+  const section = between(offline, 'id="offline-guide-section-1"', "</section>");
+  assert.ok(section.includes(`<a href="${path}">Macの音声入力ショートカットを確認・変更する方法</a>`));
+  assert.ok(offline.includes('<time datetime="2026-10-09">'), "redated for the link");
+  // Its title and its shortcut question stay until the 2026-11-08 review of both pages in Search Console.
+  assert.ok(offline.includes("<title>Macのオフライン音声入力：設定・ショートカット・アプリ比較</title>"));
+  assert.ok(offline.includes("Macの音声入力のショートカットは？"));
+});
