@@ -7,6 +7,7 @@ import { readFileSync } from "node:fs";
 const PAGES = [
   ["pricing/index.html", "https://dictivo.app/pricing/"],
   ["guides/mac-dictation-not-working/index.html", "https://dictivo.app/guides/mac-dictation-not-working/"],
+  ["guides/mac-dictation-shortcut/index.html", "https://dictivo.app/guides/mac-dictation-shortcut/"],
 ];
 
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");

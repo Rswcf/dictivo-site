@@ -1,4 +1,4 @@
-// 2026-10-09: Related pages gained the Mac dictation troubleshooting guide.
+// 2026-10-09: Related pages gained the Mac dictation troubleshooting and shortcut guides.
 export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-10-09";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
@@ -275,6 +275,11 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
       "Mac dictation not working",
       "Check built-in macOS Dictation settings symptom by symptom, following Apple's help.",
       "https://dictivo.app/guides/mac-dictation-not-working/"
+    ],
+    [
+      "Mac dictation shortcut",
+      "Find, change or fix the built-in macOS Dictation shortcut.",
+      "https://dictivo.app/guides/mac-dictation-shortcut/"
     ]
   ],
   "referencesTitle": "Evidence links"

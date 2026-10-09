@@ -11,6 +11,7 @@ export const FIRST_PUBLISHED = Object.freeze({
   "guides/first-local-dictation": "2026-09-10", // 8d9f594, English and Japanese
   // Per language where the translations shipped on different days.
   "guides/mac-dictation-not-working": Object.freeze({ ja: "2026-09-26", en: "2026-10-09" }),
+  "guides/mac-dictation-shortcut": "2026-10-09", // English only
   "privacy/where-dictation-audio-goes": "2026-06-07", // b431ef4, all ten languages
   "privacy/local-dictation-network-test": "2026-06-07", // b431ef4, all ten languages
   compare: "2026-05-25", // e3b0593 (English) and 61a8a25 (localized), the first five comparisons

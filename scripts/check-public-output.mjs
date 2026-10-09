@@ -157,6 +157,7 @@ const requiredGeoFiles = [
   "guides/mac-dictation-benchmark-method/index.html",
   "guides/best-speech-to-text-apps-for-mac/index.html",
   "guides/mac-dictation-not-working/index.html",
+  "guides/mac-dictation-shortcut/index.html",
   "ja/guides/mac-dictation-not-working/index.html",
   "media-kit/index.html",
   "pricing/index.html",

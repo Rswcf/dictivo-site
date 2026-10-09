@@ -94,6 +94,7 @@ export function macDictationNotWorkingCopy({ windows }) {
           "Open System Settings > Accessibility > Voice Control and turn it off. While Voice Control is on, standard macOS Dictation is not available.",
           "If another app uses the same key combination, change the shortcut in one of the two.",
         ],
+        links: [["How the Mac dictation shortcut works and how to change it", "/guides/mac-dictation-shortcut/"]],
       },
       {
         kicker: "Symptom 3",
