@@ -4569,149 +4569,159 @@ function renderMediaKitPage() {
 `;
 }
 
-function renderJaMacDictationTroubleshootingSchema() {
-  const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
-  const pageUrl = jaMacDictationTroubleshootingUrl();
+// The Mac dictation guides (troubleshooting, shortcut) share one page shape: answer first, an
+// optional quick-reference table, a table of contents, numbered sections, an optional field test,
+// the one section that names Dictivo, the trial panel, a visible FAQ and the references.
+// Every statement must come from the references or from `fieldTest`.
+const LABEL_SEPARATOR = { ja: "：" };
+
+function renderDictationGuideSchema(guide) {
+  const { code, url, copy, lastmod, route, headline, about, articleImage, legacyFaqSchema } = guide;
+  const inLanguage = localeByCode(code).htmlLang;
   const schema = [
     organizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      headline: copy.title,
+      headline,
       description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "ja",
-      ...publicationDates("guides/mac-dictation-not-working", "ja", JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD),
-      mainEntityOfPage: pageUrl,
+      url,
+      inLanguage,
+      ...publicationDates(route, code, lastmod),
+      mainEntityOfPage: url,
       publisher: ORGANIZATION_REF,
       author: ORGANIZATION_REF,
-      about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
+      ...(articleImage ? { image: `${BASE_URL}${NATIVE_DEMO.poster}` } : {}),
+      about,
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "ja",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
+    // The Japanese guide kept the FAQPage node it shipped with; newer guides have none.
+    ...(legacyFaqSchema
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            inLanguage,
+            mainEntity: copy.faqs.map(([question, answer]) => ({
+              "@type": "Question",
+              name: question,
+              acceptedAnswer: { "@type": "Answer", text: answer },
+            })),
+          },
+        ]
+      : []),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        homeBreadcrumb("ja"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
+        homeBreadcrumb(code),
+        { "@type": "ListItem", position: 2, name: copy.navLabel, item: url },
       ],
     },
   ];
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
-function renderJaTroubleshootingSection(section, index) {
-  const id = `ja-troubleshooting-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+function renderDictationGuideLinks(links) {
+  if (!links?.length) return "";
+  return `\n        <p>${links.map(([label, href]) => `<a href="${attr(href)}">${html(label)}</a>`).join(" · ")}</p>`;
+}
+
+function renderDictationGuideSection(idPrefix) {
+  return (section, index) => {
+    const id = `${idPrefix}-section-${index + 1}`;
+    return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${renderDocSteps(section.steps)}
-        ${(section.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        ${(section.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(section.links)}
       </section>`;
+  };
 }
 
 // Results from an actual Mac. The section exists only once those results do.
-function renderJaTroubleshootingFieldTest(copy) {
+function renderDictationGuideFieldTest(copy, idPrefix) {
   const fieldTest = copy.fieldTest;
   if (!fieldTest) return "";
-  return `<section class="doc-section" aria-labelledby="ja-troubleshooting-field-test">
+  return `<section class="doc-section" aria-labelledby="${attr(`${idPrefix}-field-test`)}">
         <p class="doc-meta">${html(fieldTest.kicker)}</p>
-        <h2 id="ja-troubleshooting-field-test">${html(fieldTest.title)}</h2>
+        <h2 id="${attr(`${idPrefix}-field-test`)}">${html(fieldTest.title)}</h2>
         <p>${html(fieldTest.environment)}</p>
         ${renderBenchmarkMethodTable(fieldTest.caption, fieldTest.headers, fieldTest.rows)}
         ${(fieldTest.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
       </section>`;
 }
 
-function renderJaMacDictationTroubleshootingPage() {
-  const code = "ja";
-  const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
+function renderDictationGuideQuickReference(table, idPrefix) {
+  if (!table) return "";
+  return `
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-quick-reference`)}">
+        <h2 id="${attr(`${idPrefix}-quick-reference`)}">${html(table.title)}</h2>
+        ${renderBenchmarkMethodTable(table.caption, table.headers, table.rows)}
+      </section>
+`;
+}
+
+function renderDictationGuidePage(guide) {
+  const { code, path, url, copy, lastmod, references, headTags, trialSource, idPrefix, mainId, quickReference, hrefForLocale } = guide;
+  const locale = localeByCode(code);
   const t = homeCopyForRender(code);
-  const url = jaMacDictationTroubleshootingUrl();
-  const path = jaMacDictationTroubleshootingPath();
   return `<!doctype html>
-<html lang="ja">
+<html lang="${attr(locale.htmlLang)}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${html(copy.metaTitle)}</title>
     <meta name="description" content="${attr(copy.metaDescription)}" />
     <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: "ja", type: "article" })}
-    ${jaMacDictationTroubleshootingHeadTags()}
+    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: locale.htmlLang, type: "article" })}
+    ${headTags}
     ${assetTags()}
-    ${renderJaMacDictationTroubleshootingSchema()}
+    ${renderDictationGuideSchema(guide)}
   </head>
   <body>
-    <a class="skip-link" href="#ja-mac-dictation-troubleshooting">${html(copy.navLabel)}</a>
-    ${renderHeader(code, t, { hrefForLocale: (item) => (item.code === code ? path : localePath(item.code)) })}
-    <main class="doc-page offline-guide-page" id="ja-mac-dictation-troubleshooting">
+    <a class="skip-link" href="#${attr(mainId)}">${html(copy.navLabel)}</a>
+    ${renderHeader(code, t, { hrefForLocale: hrefForLocale ?? ((item) => (item.code === code ? path : localePath(item.code))) })}
+    <main class="doc-page offline-guide-page" id="${attr(mainId)}">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
-      <p class="doc-meta">${html(trustUiCopy(code).lastUpdated)} <time datetime="${attr(JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD)}">${html(formatLocalizedDate(JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD, code))}</time></p>
-      <p class="doc-environment">${html(copy.environmentLabel)}：${html(copy.environment)}</p>
+      <p class="doc-meta">${html(trustUiCopy(code).lastUpdated)} <time datetime="${attr(lastmod)}">${html(formatLocalizedDate(lastmod, code))}</time></p>
+      <p class="doc-environment">${html(copy.environmentLabel)}${LABEL_SEPARATOR[code] ?? ": "}${html(copy.environment)}</p>
 
-      <section class="doc-section" aria-labelledby="ja-troubleshooting-answer">
-        <h2 id="ja-troubleshooting-answer">${html(copy.answerTitle)}</h2>
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-answer`)}">
+        <h2 id="${attr(`${idPrefix}-answer`)}">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
-
+${renderDictationGuideQuickReference(quickReference, idPrefix)}
       <nav class="doc-section" aria-label="${attr(copy.tocLabel)}">
         <p class="doc-meta">${html(copy.tocLabel)}</p>
         <ol>
-${copy.sections.map((section, index) => `          <li><a href="#ja-troubleshooting-section-${index + 1}-title">${html(section.title)}</a></li>`).join("\n")}
+${copy.sections.map((section, index) => `          <li><a href="#${idPrefix}-section-${index + 1}-title">${html(section.title)}</a></li>`).join("\n")}
         </ol>
       </nav>
 
-      ${copy.sections.map(renderJaTroubleshootingSection).join("\n\n      ")}
+      ${copy.sections.map(renderDictationGuideSection(idPrefix)).join("\n\n      ")}
 
-      ${renderJaTroubleshootingFieldTest(copy)}
+      ${renderDictationGuideFieldTest(copy, idPrefix)}
 
-      <section class="doc-section" aria-labelledby="ja-troubleshooting-dictivo">
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-dictivo`)}">
         <p class="doc-meta">${html(copy.dictivo.kicker)}</p>
-        <h2 id="ja-troubleshooting-dictivo">${html(copy.dictivo.title)}</h2>
-        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        <h2 id="${attr(`${idPrefix}-dictivo`)}">${html(copy.dictivo.title)}</h2>
+        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(copy.dictivo.links)}
       </section>
 
-      ${renderGuideTrial(code, "macos", "ja_troubleshooting_mac")}
+      ${renderGuideTrial(code, "macos", trialSource)}
 
-      <section class="doc-section" aria-labelledby="ja-troubleshooting-faq">
-        <h2 id="ja-troubleshooting-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer], index) => `<details class="faq-item">
-              <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-faq`)}">
+        <h2 id="${attr(`${idPrefix}-faq`)}">${html(copy.faqTitle)}</h2>
+        ${renderFaqGrid(copy.faqs)}
       </section>
 
-      <section class="doc-section" aria-labelledby="ja-troubleshooting-references">
-        <h2 id="ja-troubleshooting-references">${html(copy.referencesTitle)}</h2>
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-references`)}">
+        <h2 id="${attr(`${idPrefix}-references`)}">${html(copy.referencesTitle)}</h2>
         <ul class="compare-source-list">
-${JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES.map(
-  ([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`,
-).join("\n")}
+${references.map(([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`).join("\n")}
         </ul>
       </section>
     </main>
@@ -4719,6 +4729,28 @@ ${JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES.map(
   </body>
 </html>
 `;
+}
+
+function renderJaMacDictationTroubleshootingPage() {
+  const url = jaMacDictationTroubleshootingUrl();
+  const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
+  return renderDictationGuidePage({
+    code: "ja",
+    path: jaMacDictationTroubleshootingPath(),
+    url,
+    copy,
+    lastmod: JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
+    references: JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES,
+    headTags: jaMacDictationTroubleshootingHeadTags(),
+    trialSource: "ja_troubleshooting_mac",
+    idPrefix: "ja-troubleshooting",
+    mainId: "ja-mac-dictation-troubleshooting",
+    route: "guides/mac-dictation-not-working",
+    headline: copy.title,
+    about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
+    articleImage: false,
+    legacyFaqSchema: true,
+  });
 }
 
 function pricingPageLastmod() {
