@@ -1,11 +1,13 @@
 import { LOCAL_OFFER } from "./local-offer.mjs";
 import { guideLocalPrice } from "./local-offer-copy.mjs";
+import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./dragon-price-status.mjs";
 
 // What each Dragon product costs, as Nuance and Microsoft publish it. Every figure and status
 // below was read on DRAGON_PRICING_CHECKED from the page in DRAGON_SOURCES that the reference
 // list names; anything those pages do not state (a current Dragon Professional price, reseller
 // quotes, set-up fees) is left out. Dragon Professional v16's product page no longer shows a
-// price, so this page says so instead of repeating an old figure. Dictivo appears only in the
+// price, so this page says so and gives the last archived store price, in the wording every page
+// on the site uses (data/dragon-price-status.mjs). Dictivo appears only in the
 // closing section, disclosed as this site's product; its price comes from the Local offer.
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
 export const DRAGON_PRICING_LASTMOD = "2026-10-09";
@@ -15,7 +17,9 @@ const checked = `(checked ${DRAGON_PRICING_CHECKED})`;
 const checkedOn = new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${DRAGON_PRICING_CHECKED}T00:00:00Z`));
 
 export const DRAGON_SOURCES = {
-  professional: "https://dragon.nuance.com/en-us/dragon-professional",
+  professional: DRAGON_PRICE_STATUS.productPage,
+  lastListArchive: DRAGON_PRICE_STATUS.lastListArchive,
+  onHoldArchive: DRAGON_PRICE_STATUS.onHoldArchive,
   professionalDataSheet: "https://dragon.nuance.com/shared/data-sheets/ds-dragon-professional-v16-en-us.pdf",
   professionalAnywhere: "https://dragon.nuance.com/en-us/dragon-professional-anywhere",
   v15Notice: "https://nuance.custhelp.com/app/answers/detail/a_id/29838",
@@ -28,6 +32,8 @@ export const DRAGON_SOURCES = {
 
 export const DRAGON_PRICING_REFERENCES = [
   [`Nuance: Dragon Professional product page ${checked}`, DRAGON_SOURCES.professional],
+  [`Wayback Machine: Nuance US store page for Dragon Professional, captured 11 February 2025 ${checked}`, DRAGON_SOURCES.lastListArchive],
+  [`Wayback Machine: Nuance store page for Dragon Professional, captured 24 February 2025 ${checked}`, DRAGON_SOURCES.onHoldArchive],
   [`Nuance: Dragon Professional v16 data sheet ${checked}`, DRAGON_SOURCES.professionalDataSheet],
   [`Nuance: Dragon Professional Anywhere ${checked}`, DRAGON_SOURCES.professionalAnywhere],
   [`Nuance support: Dragon Professional v14 and v15 Product Advisory Notice ${checked}`, DRAGON_SOURCES.v15Notice],
@@ -54,13 +60,13 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
     environmentLabel: "Checked",
     environment: `Nuance's Dragon product pages and support articles, the Dragon Medical One listing on Microsoft Marketplace and Microsoft Learn, read on ${checkedOn}. Prices change; each source is linked under References.`,
     answerTitle: "Short answer",
-    answer: `Nuance's Dragon Professional page (version 16, for Windows 10 and 11) no longer publishes a price: on ${checkedOn} it offered Contact us, and the old Nuance store address led to the same page. Dragon Medical One is a per-user cloud subscription; its Microsoft Marketplace listing shows $123 per user per month on a 1-year term ($1,476 per user per year) and asks buyers to confirm eligibility with Microsoft first. Dragon Anywhere Mobile has not been sold or renewable since 1 July 2026, and Dragon Home 15 has not been sold after 27 February 2023. Dragon for Mac was discontinued on 22 October 2018: existing licenses keep working without updates, and Dragon Medical One runs on a Mac only through Windows.`,
+    answer: `${DRAGON_PROFESSIONAL_PRICE_SENTENCE} Dragon Medical One is a per-user cloud subscription; its Microsoft Marketplace listing shows $123 per user per month on a 1-year term ($1,476 per user per year) and asks buyers to confirm eligibility with Microsoft first. Dragon Anywhere Mobile has not been sold or renewable since 1 July 2026, and Dragon Home 15 has not been sold after 27 February 2023. Dragon for Mac was discontinued on 22 October 2018: existing licenses keep working without updates, and Dragon Medical One runs on a Mac only through Windows.`,
     quickReference: {
       title: "Dragon products at a glance",
       caption: `Dragon editions, prices and availability as published by Nuance and Microsoft, checked on ${checkedOn}.`,
       headers: ["Product", "Price published by Nuance or Microsoft", "License", "Can you buy it now?", "Runs on"],
       rows: [
-        ["Dragon Professional v16", "Not published on Nuance's product page", "Installed on the PC; the product page does not state the license term", "Contact Nuance or an authorized reseller", "Windows 10 and 11"],
+        ["Dragon Professional v16", "Not published; last listed at $699 one-time (archived 11 February 2025)", "Installed on the PC; the product page does not state the license term", "Contact Nuance or an authorized reseller", "Windows 10 and 11"],
         ["Dragon Professional Anywhere", "Not published", "Cloud-hosted subscription", "Contact Nuance", "Windows"],
         ["Dragon Medical One", "$123 per user per month on a 1-year term (Microsoft Marketplace)", "Cloud subscription, per user", "Yes, after Microsoft confirms eligibility", "Windows (a Mac only through Windows)"],
         ["Dragon Anywhere Mobile", "-", "Subscription", "No: sales and renewals ended 1 July 2026", "iOS and Android"],
@@ -74,7 +80,8 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
         kicker: "Windows desktop",
         title: "Dragon Professional v16: no published price",
         paragraphs: [
-          `Nuance's Dragon Professional page describes version 16 as optimized for Windows 11 and compatible with Windows 10. On ${checkedOn} it showed no price and no checkout, only Contact us, and the Nuance store address for Dragon Professional led back to the same page. The same site lists Dragon Legal and Dragon Law Enforcement as separate products.`,
+          `Nuance's Dragon Professional page describes version 16 as optimized for Windows 11 and compatible with Windows 10. On ${checkedOn} it showed no price and no checkout, only Contact us, in its US, UK, Australian, German, French, Spanish, Italian and Dutch editions, and both old Nuance store addresses for Dragon Professional led back to the product page. The same site lists Dragon Legal and Dragon Law Enforcement as separate products.`,
+          "The last archived Nuance store page that shows a price, captured by the Wayback Machine on 11 February 2025, listed Dragon Professional at $699 as a one-time payment. The next capture, on 24 February 2025, said that Nuance store purchases were temporarily on hold while Nuance switched to a new payment platform.",
           "The v16 data sheet lists Windows 10 or 11 (or Windows Server 2016, 2019 or 2022), 4 GB of RAM and 8 GB of free disk space, and an internet connection for the product download and automatic activation.",
           "In its notice about the version 16 release, Nuance said that customers with a maintenance and support contract could upgrade free, that version 15 users without one would get discounted upgrade pricing, and that customers could reach Nuance through its website, an authorized Nuance reseller or a Nuance account executive. The same notice calls version 14 and 15 licenses perpetual. The Dragon Professional page does not state the license term for version 16, so ask Nuance or the reseller before you buy.",
         ],
@@ -142,7 +149,7 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
     faqs: [
       [
         "How much does Dragon Professional cost?",
-        `Nuance's Dragon Professional page does not publish a price for version 16. On ${checkedOn} it offered Contact us; Nuance also sells through authorized resellers.`,
+        `${DRAGON_PROFESSIONAL_PRICE_SENTENCE} Nuance also sells through authorized resellers.`,
       ],
       [
         "Is Dragon a subscription or a one-time purchase?",

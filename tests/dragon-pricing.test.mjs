@@ -5,6 +5,7 @@ import { firstPublished } from "../data/first-published.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD, introOfferActive, offerDate } from "../data/local-offer.mjs";
 import { INTRO_OFFER, REGULAR_OFFER } from "./helpers/offer-states.mjs";
 import { DRAGON_PRICING_CHECKED, DRAGON_PRICING_LASTMOD, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
+import { DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "../data/dragon-price-status.mjs";
 
 const read = (path) => readFileSync(new URL(`../dist/${path}`, import.meta.url), "utf8");
 const path = "/guides/dragon-pricing/";
@@ -52,14 +53,19 @@ test("the answer comes first, then the product table, contents, sections, Dictiv
   }
 });
 
-test("the page states what Nuance and Microsoft publish, and no Dragon Professional price", () => {
+test("the page states what Nuance and Microsoft publish, and Dragon Professional's price only as its last archived list price", () => {
   const html = page();
   const answer = text(between(html, 'id="dragon-pricing-answer"', "</section>"));
-  for (const fact of ["no longer publishes a price", "$123 per user per month", "$1,476", "1 July 2026", "27 February 2023", "22 October 2018"]) {
+  for (const fact of [DRAGON_PROFESSIONAL_PRICE_SENTENCE, "$123 per user per month", "$1,476", "1 July 2026", "27 February 2023", "22 October 2018"]) {
     assert.ok(answer.includes(fact), fact);
   }
-  // Nuance's product page shows no price; old list prices and reseller quotes stay out.
-  assert.doesNotMatch(main(html), /\$699|\$678|\$599|\$525|\$399|\$299|\$150|\$89|\$79|\$14\.99|\$15/);
+  // Nuance's product page shows no price; reseller quotes and unsourced figures stay out, and $699
+  // appears only with the archive date of the store page that showed it.
+  assert.doesNotMatch(main(html), /\$699\.99|\$678|\$599|\$525|\$399|\$349|\$299|\$150|\$89|\$79|\$14\.99|\$15/);
+  for (const match of text(main(html)).matchAll(/\$699/g)) {
+    const sentence = text(main(html)).slice(Math.max(0, match.index - 260), match.index + 120);
+    assert.match(sentence, /11 February 2025/, sentence);
+  }
   const table = between(html, 'id="dragon-pricing-quick-reference"', "</table>");
   const rows = table.split("<tbody>")[1].split("<tr>").slice(1);
   assert.equal(rows.length, 6);
@@ -129,8 +135,8 @@ test("the Dictivo sentence states one undated price after the 1 November rollove
 
 test("every reference is a Nuance, Microsoft or App Store page with its check date", () => {
   const references = [...between(page(), 'id="dragon-pricing-references"', "</ul>").matchAll(/<li><a href="([^"]+)">([^<]+)<\/a><\/li>/g)];
-  assert.equal(references.length, 9);
-  const official = new Set(["dragon.nuance.com", "nuance.custhelp.com", "marketplace.microsoft.com", "www.microsoft.com", "learn.microsoft.com", "apps.apple.com"]);
+  assert.equal(references.length, 11);
+  const official = new Set(["dragon.nuance.com", "nuance.custhelp.com", "marketplace.microsoft.com", "www.microsoft.com", "learn.microsoft.com", "apps.apple.com", "web.archive.org"]);
   for (const [, href, label] of references) {
     assert.ok(official.has(new URL(href.replaceAll("&amp;", "&")).hostname), href);
     assert.ok(label.endsWith(`(checked ${DRAGON_PRICING_CHECKED})`), label);
