@@ -1,5 +1,17 @@
 # Dictivo site
 
+## Article structured data names its image, author and publisher — 2026-10-09
+
+squirrelscan's `schema/json-ld-valid` (2026-10-08 audit, about 30 URLs) reported the guides'
+TechArticle nodes without `image`, `author.name`, `publisher.name` and `publisher.logo`. Fourteen of
+the seventeen had no image; the rest were `{ "@id": ".../#org" }` references the validator does not
+follow. `articleSchemaFields()` now gives every TechArticle the page's og:image (the same
+`DEFAULT_SOCIAL_IMAGE` that `socialMeta()` uses) and repeats the Organization in place: same `@id`,
+`name`, and for the publisher the logo. The author stays the Organization; no person is named. The
+Organization's own `logo` is now the same ImageObject (`/assets/favicon.svg`, still the only brand
+image). WebPage and SoftwareApplication nodes keep the bare `@id` reference.
+`tests/article-schema.test.mjs` parses every JSON-LD block on every page and checks each Article.
+
 ## Windows visitors see the Windows download first — 2026-10-09
 
 The homepage hero rendered "Download for Mac" as the solid button for every visitor; a Windows

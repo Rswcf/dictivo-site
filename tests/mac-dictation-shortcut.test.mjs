@@ -88,8 +88,11 @@ test("the shortcut guide is a TechArticle with an image and no FAQ schema", () =
   assert.equal(article.inLanguage, "en");
   assert.equal(article.headline, "Mac Dictation Shortcut: Default, Change It, Fix Conflicts");
   assert.ok(article.image.startsWith("https://dictivo.app/assets/"), article.image);
-  assert.deepEqual(article.publisher, { "@id": "https://dictivo.app/#org" });
-  assert.deepEqual(article.author, { "@id": "https://dictivo.app/#org" });
+  assert.equal(article.image, "https://dictivo.app/assets/native-demo-2026-09/result.png");
+  assert.deepEqual(article.author, { "@type": "Organization", "@id": "https://dictivo.app/#org", name: "Dictivo", url: "https://dictivo.app/" });
+  assert.equal(article.publisher["@id"], "https://dictivo.app/#org");
+  assert.equal(article.publisher.name, "Dictivo");
+  assert.equal(article.publisher.logo.url, "https://dictivo.app/assets/favicon.svg");
   assert.equal(article.datePublished, firstPublished("guides/mac-dictation-shortcut", "en"));
   assert.equal(article.dateModified, MAC_DICTATION_SHORTCUT_LASTMOD);
   assert.ok(!ld.some((node) => node["@type"] === "FAQPage"), "no FAQPage");

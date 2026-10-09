@@ -2360,7 +2360,10 @@ const OG_LOCALE_BY_HTML_LANG = {
   ko: "ko_KR",
 };
 
-function socialMeta({ title, description, url, htmlLang = "en", type = "website", imagePath = NATIVE_DEMO.poster, imageWidth = 1161, imageHeight = 768 }) {
+// The default og:image, and so the default Article image: the actual Local result screenshot.
+const DEFAULT_SOCIAL_IMAGE = Object.freeze({ path: NATIVE_DEMO.poster, width: 1161, height: 768 });
+
+function socialMeta({ title, description, url, htmlLang = "en", type = "website", imagePath = DEFAULT_SOCIAL_IMAGE.path, imageWidth = DEFAULT_SOCIAL_IMAGE.width, imageHeight = DEFAULT_SOCIAL_IMAGE.height }) {
   const image = `${BASE_URL}${imagePath}`;
   const ogLocale = OG_LOCALE_BY_HTML_LANG[htmlLang] || "en_US";
   return [
@@ -2563,19 +2566,39 @@ function localOffers() {
 // One Organization per page. Every publisher and author refers to it by @id.
 // sameAs lists only brand profiles the founder has confirmed as Dictivo's own.
 const ORGANIZATION_ID = `${BASE_URL}/#org`;
+const ORGANIZATION_NAME = "Dictivo";
 const ORGANIZATION_REF = Object.freeze({ "@id": ORGANIZATION_ID });
+
+// No raster logo exists in assets/ yet; the SVG mark is the only brand image.
+function organizationLogo() {
+  const url = `${BASE_URL}/assets/favicon.svg`;
+  return { "@type": "ImageObject", "@id": `${BASE_URL}/#logo`, url, contentUrl: url, caption: ORGANIZATION_NAME };
+}
 
 function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": ORGANIZATION_ID,
-    name: "Dictivo",
+    name: ORGANIZATION_NAME,
     url: `${BASE_URL}/`,
     email: "support@dictivo.app",
-    // No raster logo exists in assets/ yet; the SVG mark is the only brand image.
-    logo: `${BASE_URL}/assets/favicon.svg`,
+    logo: organizationLogo(),
     sameAs: ["https://www.producthunt.com/products/dictivo", "https://trustmrr.com/startup/dictivo"],
+  };
+}
+
+// An Article names its image, author and publisher in place. The author and publisher are
+// the page's Organization (same @id), repeated with name and logo because Article
+// validators that do not follow @id references report them missing otherwise. The founder
+// is not named publicly, so the author is the Organization, never a Person. The image is
+// the page's og:image: pass the same imagePath the page gives socialMeta().
+function articleSchemaFields(imagePath = DEFAULT_SOCIAL_IMAGE.path) {
+  const organization = { "@type": "Organization", "@id": ORGANIZATION_ID, name: ORGANIZATION_NAME, url: `${BASE_URL}/` };
+  return {
+    image: `${BASE_URL}${imagePath}`,
+    author: organization,
+    publisher: { ...organization, logo: organizationLogo() },
   };
 }
 
@@ -3389,8 +3412,7 @@ function renderOfflineGuideSchema(currentCode = "en") {
       inLanguage: localeByCode(currentCode).htmlLang,
       ...publicationDates("guides/offline-dictation-on-mac", currentCode, offlineDictationGuideLastmod(currentCode)),
       mainEntityOfPage: offlineDictationGuideUrl(currentCode),
-      publisher: ORGANIZATION_REF,
-      author: ORGANIZATION_REF,
+      ...articleSchemaFields(),
       about: ["offline dictation", "local dictation", "Mac dictation privacy"],
     },
     {
@@ -3721,8 +3743,7 @@ function renderBenchmarkMethodSchema() {
       inLanguage: "en",
       ...publicationDates("guides/mac-dictation-benchmark-method", "en", BENCHMARK_METHOD_GUIDE_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: ORGANIZATION_REF,
-      author: ORGANIZATION_REF,
+      ...articleSchemaFields(),
       about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
     },
     {
@@ -3945,8 +3966,7 @@ function renderSpeechToTextMacGuideSchema() {
       inLanguage: "en",
       ...publicationDates("guides/best-speech-to-text-apps-for-mac", "en", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: ORGANIZATION_REF,
-      author: ORGANIZATION_REF,
+      ...articleSchemaFields(),
       about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
     },
     {
@@ -4136,8 +4156,7 @@ function renderOfflineDictationWindowsGuideSchema() {
       inLanguage: "en",
       ...publicationDates("guides/offline-dictation-on-windows", "en", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD),
       mainEntityOfPage: pageUrl,
-      publisher: ORGANIZATION_REF,
-      author: ORGANIZATION_REF,
+      ...articleSchemaFields(),
       about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
     },
     {
@@ -4626,7 +4645,7 @@ function renderMediaKitPage() {
 const LABEL_SEPARATOR = { ja: "：" };
 
 function renderDictationGuideSchema(guide) {
-  const { code, url, copy, lastmod, route, headline, about, articleImage, legacyFaqSchema } = guide;
+  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema } = guide;
   const inLanguage = localeByCode(code).htmlLang;
   const schema = [
     organizationSchema(),
@@ -4639,9 +4658,7 @@ function renderDictationGuideSchema(guide) {
       inLanguage,
       ...publicationDates(route, code, lastmod),
       mainEntityOfPage: url,
-      publisher: ORGANIZATION_REF,
-      author: ORGANIZATION_REF,
-      ...(articleImage ? { image: `${BASE_URL}${NATIVE_DEMO.poster}` } : {}),
+      ...articleSchemaFields(),
       about,
     },
     // The Japanese guide kept the FAQPage node it shipped with; newer guides have none.
@@ -4819,7 +4836,6 @@ function renderMacDictationNotWorkingPage() {
     route: "guides/mac-dictation-not-working",
     headline: copy.metaTitle,
     about: ["Mac dictation not working", "macOS Dictation settings", "Voice Control", "Microphone source"],
-    articleImage: true,
     legacyFaqSchema: false,
   });
 }
@@ -4843,7 +4859,6 @@ function renderMacDictationShortcutPage() {
     route: "guides/mac-dictation-shortcut",
     headline: copy.metaTitle,
     about: ["Mac dictation shortcut", "Keyboard settings", "Microphone key", "Customize shortcut"],
-    articleImage: true,
     legacyFaqSchema: false,
   });
 }
@@ -4866,7 +4881,6 @@ function renderJaMacDictationTroubleshootingPage() {
     route: "guides/mac-dictation-not-working",
     headline: copy.title,
     about: ["Mac 音声入力", "macOS 音声入力 できない", "音声コントロール", "自動句読点"],
-    articleImage: true,
     legacyFaqSchema: true,
   });
 }

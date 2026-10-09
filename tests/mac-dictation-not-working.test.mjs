@@ -104,8 +104,11 @@ test("the guide is a TechArticle with an image, the Organization as publisher, a
   assert.equal(article.inLanguage, "en");
   assert.equal(article.headline, "Mac Dictation Not Working? What to Check, by Symptom");
   assert.ok(article.image.startsWith("https://dictivo.app/assets/"), article.image);
-  assert.deepEqual(article.publisher, { "@id": "https://dictivo.app/#org" });
-  assert.deepEqual(article.author, { "@id": "https://dictivo.app/#org" });
+  assert.equal(article.image, "https://dictivo.app/assets/native-demo-2026-09/result.png");
+  assert.deepEqual(article.author, { "@type": "Organization", "@id": "https://dictivo.app/#org", name: "Dictivo", url: "https://dictivo.app/" });
+  assert.equal(article.publisher["@id"], "https://dictivo.app/#org");
+  assert.equal(article.publisher.name, "Dictivo");
+  assert.equal(article.publisher.logo.url, "https://dictivo.app/assets/favicon.svg");
   assert.equal(article.datePublished, firstPublished("guides/mac-dictation-not-working", "en"));
   assert.equal(article.dateModified, MAC_DICTATION_NOT_WORKING_LASTMOD);
   assert.ok(!ld.some((node) => node["@type"] === "FAQPage"), "no FAQPage");

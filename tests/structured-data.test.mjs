@@ -29,6 +29,12 @@ const walk = (value, visit, key = "") => {
 const prefix = (code) => (code === "en" ? "" : `${code}/`);
 const page = (path) => `${dist}${path}`;
 
+const LOGO = { "@type": "ImageObject", "@id": "https://dictivo.app/#logo", url: "https://dictivo.app/assets/favicon.svg", contentUrl: "https://dictivo.app/assets/favicon.svg", caption: "Dictivo" };
+const ARTICLE_TYPES = new Set(["Article", "TechArticle", "BlogPosting", "NewsArticle"]);
+const isArticle = (value) => [value["@type"]].flat().some((type) => ARTICLE_TYPES.has(type));
+
+// Articles repeat the Organization in place (same @id, with name and logo) for validators that do
+// not follow @id; every other publisher or author is the bare reference.
 test("every page names one Organization and points publisher and author at it", () => {
   let pagesWithOrg = 0;
   for (const file of htmlFiles()) {
@@ -36,8 +42,8 @@ test("every page names one Organization and points publisher and author at it", 
     const references = [];
     for (const node of nodes(file)) {
       walk(node, (value, key) => {
-        if (value["@type"] === "Organization") organizations.push(value);
-        if (key === "publisher" || key === "author") references.push(value);
+        if (value["@type"] === "Organization" && key !== "publisher" && key !== "author") organizations.push(value);
+        for (const role of ["publisher", "author"]) if (value[role]) references.push([role, value[role], isArticle(value)]);
       });
     }
     if (!organizations.length && !references.length) continue;
@@ -45,11 +51,19 @@ test("every page names one Organization and points publisher and author at it", 
     assert.equal(organizations.length, 1, `${file}: ${organizations.length} Organization nodes`);
     const [org] = organizations;
     assert.equal(org["@id"], ORG_ID, file);
+    assert.equal(org.name, "Dictivo", file);
     assert.equal(org.url, "https://dictivo.app/", file);
     assert.equal(org.email, "support@dictivo.app", file);
-    assert.ok(org.logo, file);
+    assert.deepEqual(org.logo, LOGO, file);
     assert.deepEqual(org.sameAs, SAME_AS, file);
-    for (const reference of references) assert.deepEqual(reference, { "@id": ORG_ID }, `${file}: inline publisher/author`);
+    for (const [role, reference, inArticle] of references) {
+      if (!inArticle) {
+        assert.deepEqual(reference, { "@id": ORG_ID }, `${file}: inline ${role} outside an Article`);
+        continue;
+      }
+      const expected = { "@type": "Organization", "@id": ORG_ID, name: org.name, url: org.url };
+      assert.deepEqual(reference, role === "publisher" ? { ...expected, logo: org.logo } : expected, `${file}: Article ${role}`);
+    }
   }
   assert.ok(pagesWithOrg >= 11 + 66 + 11 + 5, `only ${pagesWithOrg} pages carry the Organization`);
 });
