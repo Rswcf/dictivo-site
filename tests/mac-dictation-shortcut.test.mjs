@@ -32,7 +32,7 @@ test("the answer comes first, then the shortcut table, contents, sections, Dicti
   const order = [
     'id="shortcut-answer"',
     'id="shortcut-quick-reference"',
-    '<nav class="doc-section"',
+    '<nav aria-label=',
     ...Array.from({ length: 6 }, (_, index) => `id="shortcut-section-${index + 1}"`),
     'id="shortcut-dictivo"',
     "data-guide-trial",

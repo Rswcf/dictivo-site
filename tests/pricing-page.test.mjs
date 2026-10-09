@@ -61,6 +61,11 @@ test("the plan cards reuse the homepage tiers with links that work away from the
   assert.ok(band.includes('href="/checkout/local" data-local-checkout'));
   assert.ok(band.includes('href="/checkout/cloud-fast" data-cloud-fast-checkout'));
   assert.equal((band.match(/<p class="tier-tax"><span class="price">tax included<\/span>/g) || []).length, 2);
+  // .doc-section restyles paragraphs, lists and links, so the cards must not sit inside one.
+  const beforeBand = html.slice(0, html.indexOf('class="pricing-band"'));
+  assert.ok(beforeBand.lastIndexOf("</section>") > beforeBand.lastIndexOf("<section"), "cards are outside every section");
+  // Without offline-guide-page the comparison table keeps its 760px minimum and fits the desktop column.
+  assert.ok(html.includes('<main class="doc-page" id="pricing-page">'));
   assert.ok(!html.includes("checkout-pending"), "no hidden checkout note");
   assert.ok(html.includes("license key from your purchase email"));
 });

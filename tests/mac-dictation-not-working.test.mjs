@@ -51,7 +51,7 @@ test("the answer comes first, then the quick reference, contents, symptoms, Dict
   const order = [
     'id="troubleshooting-answer"',
     'id="troubleshooting-quick-reference"',
-    '<nav class="doc-section"',
+    '<nav aria-label=',
     ...Array.from({ length: 9 }, (_, index) => `id="troubleshooting-section-${index + 1}"`),
     'id="troubleshooting-dictivo"',
     "data-guide-trial",
@@ -66,7 +66,7 @@ test("the answer comes first, then the quick reference, contents, symptoms, Dict
   const table = between(html, 'id="troubleshooting-quick-reference"', "</table>");
   assert.deepEqual([...table.matchAll(/<th scope="col">([^<]*)<\/th>/g)].map(([, cell]) => cell), ["Symptom", "First thing to check", "Where"]);
   assert.equal((table.match(/<th scope="row">/g) || []).length, 9);
-  assert.equal((between(html, '<nav class="doc-section"', "</nav>").match(/href="#troubleshooting-section-\d-title"/g) || []).length, 9);
+  assert.equal((between(html, '<nav aria-label=', "</nav>").match(/href="#troubleshooting-section-\d-title"/g) || []).length, 9);
 });
 
 test("the answer names Voice Control and Microphone source; Dictivo appears only in its disclosed section", () => {

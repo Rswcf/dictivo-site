@@ -21,6 +21,7 @@ export const PRICING_PAGE_COPY = {
     lede: "Prices are in US dollars, tax included: the total you see is the total you pay at checkout. Nothing on this page needs a Dictivo account to read or to try.",
     answerTitle: "Short answer",
     plansTitle: "Free, Local and Cloud Fast",
+    plansIntro: "The same three plans as on the homepage. The table below sets them side by side.",
     tableTitle: "The three options side by side",
     tableCaption: (checked) => `Dictivo plans compared. Prices in US dollars, tax included. Checked on ${checked}.`,
     tableHeaders: ["", "Free Local", "Dictivo Local", "Cloud Fast"],

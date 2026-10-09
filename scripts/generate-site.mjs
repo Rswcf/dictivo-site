@@ -4712,8 +4712,31 @@ function renderDictationGuideQuickReference(table, idPrefix) {
 `;
 }
 
+// The contents list. After a quick-reference table it sits in its own section, so it gets the
+// section spacing and rule: as the first <nav> in <main> it would otherwise lose them
+// (.doc-section:first-of-type) and touch the table.
+function renderDictationGuideContents(copy, idPrefix, wrapped) {
+  const list = `<p class="doc-meta">${html(copy.tocLabel)}</p>
+        <ol>
+${copy.sections.map((section, index) => `          <li><a href="#${idPrefix}-section-${index + 1}-title">${html(section.title)}</a></li>`).join("\n")}
+        </ol>`;
+  if (!wrapped) {
+    return `<nav class="doc-section" aria-label="${attr(copy.tocLabel)}">
+        ${list}
+      </nav>`;
+  }
+  return `<section class="doc-section">
+        <nav aria-label="${attr(copy.tocLabel)}">
+        ${list}
+        </nav>
+      </section>`;
+}
+
 function renderDictationGuidePage(guide) {
   const { code, path, url, copy, lastmod, references, headTags, trialSource, idPrefix, mainId, quickReference, hrefForLocale } = guide;
+  // `doc-page` alone keeps the 760px table minimum, so three- and four-column tables fit the
+  // 880px column on desktop; `offline-guide-page` raises it to 980px (the Japanese guide has no table).
+  const mainClass = guide.mainClass ?? "doc-page offline-guide-page";
   const locale = localeByCode(code);
   const t = homeCopyForRender(code);
   return `<!doctype html>
@@ -4732,7 +4755,7 @@ function renderDictationGuidePage(guide) {
   <body>
     <a class="skip-link" href="#${attr(mainId)}">${html(copy.navLabel)}</a>
     ${renderHeader(code, t, { hrefForLocale: hrefForLocale ?? ((item) => (item.code === code ? path : localePath(item.code))) })}
-    <main class="doc-page offline-guide-page" id="${attr(mainId)}">
+    <main class="${attr(mainClass)}" id="${attr(mainId)}">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -4744,12 +4767,7 @@ function renderDictationGuidePage(guide) {
         <p>${html(copy.answer)}</p>
       </section>
 ${renderDictationGuideQuickReference(quickReference, idPrefix)}
-      <nav class="doc-section" aria-label="${attr(copy.tocLabel)}">
-        <p class="doc-meta">${html(copy.tocLabel)}</p>
-        <ol>
-${copy.sections.map((section, index) => `          <li><a href="#${idPrefix}-section-${index + 1}-title">${html(section.title)}</a></li>`).join("\n")}
-        </ol>
-      </nav>
+      ${renderDictationGuideContents(copy, idPrefix, Boolean(quickReference))}
 
       ${copy.sections.map(renderDictationGuideSection(idPrefix)).join("\n\n      ")}
 
@@ -4794,6 +4812,7 @@ function renderMacDictationNotWorkingPage() {
     headTags: macDictationTroubleshootingHeadTags("en"),
     hrefForLocale: macDictationTroubleshootingHrefForLocale,
     trialSource: "troubleshooting_mac",
+    mainClass: "doc-page",
     idPrefix: "troubleshooting",
     mainId: "mac-dictation-not-working",
     quickReference: copy.quickReference,
@@ -4817,6 +4836,7 @@ function renderMacDictationShortcutPage() {
     references: MAC_DICTATION_SHORTCUT_REFERENCES,
     headTags: enOnlyHeadTags(url),
     trialSource: "shortcut_mac",
+    mainClass: "doc-page",
     idPrefix: "shortcut",
     mainId: "mac-dictation-shortcut",
     quickReference: copy.quickReference,
@@ -4905,7 +4925,8 @@ function renderPricingPage(code = "en") {
   const t = homeCopyForRender(code);
   const canonical = pricingUrl(code);
   const lastmod = pricingPageLastmod();
-  // The Free card leaves this page for the homepage downloads, which list every platform.
+  // The plan cards sit outside .doc-section, whose paragraph, list and link rules would restyle
+  // them. The Free card leaves this page for the homepage downloads, which list every platform.
   const tiers = t.pricing.tiers.map((tier, index) => (index === 0 ? { ...tier, href: localePath(code, "#downloads"), dataAttr: "" } : tier));
   const rows = copy.tableRows(hasWindowsRelease).map(([label, ...cells]) => [label, ...cells.map((cell) => cell ?? pricingPlanPrice(code))]);
   const priceChange = pricingPriceChangeSection(code);
@@ -4928,7 +4949,7 @@ function renderPricingPage(code = "en") {
   <body>
     <a class="skip-link" href="#pricing-page">${html(copy.navLabel)}</a>
     ${renderHeader(code, t, { hrefForLocale: (item) => pricingHref(item.code) })}
-    <main class="doc-page offline-guide-page" id="pricing-page">
+    <main class="doc-page" id="pricing-page">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -4941,10 +4962,11 @@ function renderPricingPage(code = "en") {
 
       <section class="doc-section" aria-labelledby="pricing-plans">
         <h2 id="pricing-plans">${html(copy.plansTitle)}</h2>
-        <div class="pricing-band" role="list">
-            ${tiers.map((tier, index) => renderTier(tier, index, { plainLinks: true })).join("\n")}
-        </div>
+        <p>${html(copy.plansIntro)}</p>
       </section>
+      <div class="pricing-band" role="list" aria-labelledby="pricing-plans">
+            ${tiers.map((tier, index) => renderTier(tier, index, { plainLinks: true })).join("\n")}
+      </div>
 
       <section class="doc-section" aria-labelledby="pricing-table">
         <h2 id="pricing-table">${html(copy.tableTitle)}</h2>
