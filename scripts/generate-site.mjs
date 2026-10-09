@@ -3644,7 +3644,7 @@ function renderNativeExample(code = "en") {
   return `<section class="doc-section native-example" aria-labelledby="native-example-title">
     <h2 id="native-example-title">${ja ? "実際のLocalの出力例" : "An actual Local result"}</h2>
     <p>${html(NATIVE_DEMO.summary[code] || NATIVE_DEMO.summary.en)}</p>
-    <figure><a href="${NATIVE_DEMO.poster}"><img src="${NATIVE_DEMO.poster}" width="1161" height="768" loading="lazy" alt="${ja ? "Dictivo Localで英語のテスト文が表示された実際の画面" : "Actual Dictivo Local output of the English test sentence"}" /></a>
+    <figure><a href="${NATIVE_DEMO.poster}"><img src="${NATIVE_DEMO.poster}" width="1161" height="768" alt="${ja ? "Dictivo Localで英語のテスト文が表示された実際の画面" : "Actual Dictivo Local output of the English test sentence"}" /></a>
     <figcaption>Dictivo 0.3.46 · macOS 26.3.1 · Apple M4 Pro / 48 GB · Large v3 · Balanced / Metal</figcaption></figure>
     <p lang="en">“Please move our meeting to Thursday and send me the updated agenda.”</p>
     <p>${ja ? "アプリ内の開始・停止ボタンを使用しました。この例は他のアプリへの自動貼り付けや、日本語の認識精度を示すものではありません。" : "The app’s Start and Stop buttons were used. This example does not demonstrate automatic paste into another app or establish accuracy for other voices or languages."}</p>
@@ -5032,6 +5032,23 @@ function renderHomeFooterLinks(currentCode, t) {
   return links.map((link) => `        ${link}`).join("\n");
 }
 
+// The homepage hero's film poster is the largest contentful paint at 768, 1440 and 1440@2x
+// (measured 2026-10-09), and on a 390px phone for the Chinese homepages, whose headline is
+// shorter; on English and Japanese phones the headline is. The <img> already loads eagerly at high
+// priority, so preloading it everywhere costs no extra bytes. The <img> and its preload
+// share these strings so the browser picks the same candidate for both and fetches it once.
+// inject-asset-version.mjs rewrites only site.css and site.js, so the preload and the
+// <img> keep the same URLs after deployment.
+const HERO_POSTER = Object.freeze({
+  src: PRODUCT_FILM.poster,
+  srcset: `/assets/film-v08/poster-800.webp 800w, ${PRODUCT_FILM.poster} 1600w`,
+  sizes: "(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 52vw, 720px",
+});
+
+function heroPosterPreload() {
+  return `<link rel="preload" as="image" href="${attr(HERO_POSTER.src)}" imagesrcset="${attr(HERO_POSTER.srcset)}" imagesizes="${attr(HERO_POSTER.sizes)}" fetchpriority="high" />`;
+}
+
 function renderHome(currentCode) {
   const locale = localeByCode(currentCode);
   const t = homeCopyForRender(currentCode);
@@ -5055,6 +5072,7 @@ function renderHome(currentCode) {
     ${socialMeta({ title: t.metaTitle, description: t.metaDescription, url: localeUrl(currentCode), htmlLang: locale.htmlLang })}
     ${hreflangTags(currentCode)}
     ${assetTags()}
+    ${heroPosterPreload()}
     ${renderSchema(currentCode, t)}
   </head>
   <body>
@@ -5085,7 +5103,7 @@ function renderHome(currentCode) {
 
           <figure class="hero-film" id="demo-video">
             <button class="hero-video-poster" type="button" hidden aria-label="${attr(FILM_COPY[currentCode].play)}">
-              <img src="${PRODUCT_FILM.poster}" srcset="/assets/film-v08/poster-800.webp 800w, ${PRODUCT_FILM.poster} 1600w" sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 52vw, 720px" alt="${attr(FILM_COPY[currentCode].alt)}" fetchpriority="high" width="1600" height="900" />
+              <img src="${attr(HERO_POSTER.src)}" srcset="${attr(HERO_POSTER.srcset)}" sizes="${attr(HERO_POSTER.sizes)}" alt="${attr(FILM_COPY[currentCode].alt)}" fetchpriority="high" width="1600" height="900" />
               <span class="hero-video-play">${html(FILM_COPY[currentCode].play)}</span>
             </button>
             <video controls preload="none" poster="${PRODUCT_FILM.poster}" playsinline src="${PRODUCT_FILM.video}" width="1920" height="1080" tabindex="0" aria-label="${attr(FILM_COPY[currentCode].play)}">

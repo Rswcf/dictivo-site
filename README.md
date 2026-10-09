@@ -1,5 +1,22 @@
 # Dictivo site
 
+## Homepage poster preload and eager result screenshot — 2026-10-09
+
+squirrelscan's `perf/lcp-hints` found the homepage hero poster without a preload (all eleven
+homepages). Measured in headless Chrome on 2026-10-09, the poster `<img>` is the largest contentful
+paint at 768, 1440 and 1440@2x, and on a 390px phone for the Chinese homepages; on English and
+Japanese phones the headline is. Each homepage head now has
+`<link rel="preload" as="image" imagesrcset imagesizes fetchpriority="high">` built from the same
+`HERO_POSTER` strings as the `<img>`, so the browser picks one candidate and fetches it once (the
+request shows the link as its initiator). There is no `media` limit: the `<img>` already loads
+eagerly at high priority on phones. `inject-asset-version.mjs` rewrites only `site.css` and
+`site.js`, so the preload and the `<img>` keep matching URLs after deployment;
+`tests/lcp-preload.test.mjs` runs that script on a copy of the homepages to prove it.
+`perf/lazy-above-fold`: the Local result screenshot near the top of `/media-kit/` and the English and
+Japanese first-dictation guides is no longer `loading="lazy"`; the site has no lazy images left.
+Unchanged: on a 1x desktop the `<img>` picks `poster-800.webp` while the `<video>` poster
+attribute still fetches `poster.jpg`.
+
 ## Article structured data names its image, author and publisher — 2026-10-09
 
 squirrelscan's `schema/json-ld-valid` (2026-10-08 audit, about 30 URLs) reported the guides'
