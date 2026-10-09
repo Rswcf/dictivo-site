@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { LOCAL_OFFER, introOfferActive, offerDate } from "../data/local-offer.mjs";
-import { guideLocalPrice, llmsLocalPriceLine, localOfferNodes, mediaKitLocalFacts } from "../data/local-offer-copy.mjs";
+import { guideLocalPrice, llmsLocalPriceLine, localOfferNodes, mediaKitLocalFacts, pricingAnchor } from "../data/local-offer-copy.mjs";
 
 // data/local-offer.mjs as the 2026-11-01 runbook (step 1) leaves it.
 const AFTER = Object.freeze({ ...LOCAL_OFFER, price: 49, regularPrice: 49, introPriceUntil: null, regularPriceFrom: null });
@@ -36,6 +36,37 @@ test("guide price cells state one price after the rollover and both prices befor
     assert.doesNotMatch(before, BROKEN, locale);
   }
   assert.throws(() => guideLocalPrice("fr"), /No guide price copy/);
+});
+
+// Every language the homepage copy is written in; Traditional Chinese is converted from zh.
+const HOME_LOCALES = ["en", "de", "fr", "es", "it", "nl", "pt", "zh", "ja", "ko"];
+
+test("the homepage pricing anchor states one price, dated only while the introductory offer runs", () => {
+  for (const locale of HOME_LOCALES) {
+    const after = pricingAnchor(locale, AFTER);
+    assert.equal(count(after, "{{price.local.inline}}"), 1, `${locale}: ${after}`);
+    assert.equal(count(after, "{{price."), 1, `${locale}: ${after}`);
+    assert.doesNotMatch(after, BROKEN, locale);
+    assert.doesNotMatch(after, /2026|until|bis zum|jusqu|hasta|fino al|tot en met|até|截至|まで|까지/, `${locale}: dated clause after the rollover: ${after}`);
+    assert.match(after, /85/, `${locale}: subscription range: ${after}`);
+
+    const before = pricingAnchor(locale);
+    assert.equal(count(before, "{{price.local.inline}}"), 1, `${locale}: ${before}`);
+    assert.equal(count(before, "{{price."), 1, `${locale}: ${before}`);
+    assert.ok(before.includes(offerDate(LOCAL_OFFER.introPriceUntil, locale)), `${locale}: ${before}`);
+    assert.doesNotMatch(before, BROKEN, locale);
+    assert.equal(before.replace(offerDate(LOCAL_OFFER.introPriceUntil, locale), "").includes("2026"), false, `${locale}: ${before}`);
+    // Dictivo's own figures come from placeholders; a literal "US$" would read as one.
+    assert.doesNotMatch(`${before} ${after}`, /US\$|米ドル/, locale);
+  }
+  // German prices never end a sentence: "inkl. MwSt." already ends in a full stop.
+  for (const text of [pricingAnchor("de"), pricingAnchor("de", AFTER)]) assert.doesNotMatch(text, /\{\{price\.local\.inline\}\}\./, text);
+  assert.equal(
+    pricingAnchor("en"),
+    "Subscription dictation apps run $85-$180 every year - Dictivo Local is {{price.local.inline}} once until 31 October 2026.",
+  );
+  assert.equal(pricingAnchor("en", AFTER), "Subscription dictation apps run $85-$180 every year - Dictivo Local is {{price.local.inline}} once.");
+  assert.throws(() => pricingAnchor("zh-hant"), /No pricing anchor copy/);
 });
 
 test("media kit facts drop the introductory clause after the rollover", () => {

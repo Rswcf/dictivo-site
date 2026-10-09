@@ -37,6 +37,61 @@ export function guideLocalPrice(locale, offer = LOCAL_OFFER) {
     : copy.regular(months);
 }
 
+// The homepage pricing section sets the one-time Local price beside what subscription
+// dictation apps cost a year. The range is other apps' list prices (Superwhisper $84.99 to
+// Wispr Flow $15 x 12, as on the comparison pages), so it is plain text; Dictivo's own price
+// stays a placeholder. German keeps the price mid-sentence (see GUIDE_COPY).
+const PRICING_ANCHOR_COPY = {
+  en: {
+    intro: (until) => `Subscription dictation apps run $85-$180 every year - Dictivo Local is {{price.local.inline}} once until ${until}.`,
+    regular: () => "Subscription dictation apps run $85-$180 every year - Dictivo Local is {{price.local.inline}} once.",
+  },
+  de: {
+    intro: (until) => `Dictivo Local kostet bis zum ${until} einmalig {{price.local.inline}} - Diktier-Apps im Abo kosten 85 bis 180 US-Dollar pro Jahr.`,
+    regular: () => "Dictivo Local kostet einmalig {{price.local.inline}} - Diktier-Apps im Abo kosten 85 bis 180 US-Dollar pro Jahr.",
+  },
+  fr: {
+    intro: (until) => `Les apps de dictée par abonnement coûtent de 85 à 180 dollars par an - Dictivo Local coûte {{price.local.inline}} en un seul paiement jusqu'au ${until}.`,
+    regular: () => "Les apps de dictée par abonnement coûtent de 85 à 180 dollars par an - Dictivo Local coûte {{price.local.inline}} en un seul paiement.",
+  },
+  es: {
+    intro: (until) => `Las apps de dictado por suscripción cuestan entre 85 y 180 dólares al año - Dictivo Local cuesta {{price.local.inline}} en un solo pago hasta el ${until}.`,
+    regular: () => "Las apps de dictado por suscripción cuestan entre 85 y 180 dólares al año - Dictivo Local cuesta {{price.local.inline}} en un solo pago.",
+  },
+  it: {
+    intro: (until) => `Le app di dettatura in abbonamento costano da 85 a 180 dollari l'anno - Dictivo Local costa {{price.local.inline}} una tantum fino al ${until}.`,
+    regular: () => "Le app di dettatura in abbonamento costano da 85 a 180 dollari l'anno - Dictivo Local costa {{price.local.inline}} una tantum.",
+  },
+  nl: {
+    intro: (until) => `Dicteerapps met een abonnement kosten 85 tot 180 dollar per jaar - Dictivo Local kost eenmalig {{price.local.inline}} tot en met ${until}.`,
+    regular: () => "Dicteerapps met een abonnement kosten 85 tot 180 dollar per jaar - Dictivo Local kost eenmalig {{price.local.inline}}.",
+  },
+  pt: {
+    intro: (until) => `Apps de ditado por assinatura custam de 85 a 180 dólares por ano - o Dictivo Local custa {{price.local.inline}} uma única vez até ${until}.`,
+    regular: () => "Apps de ditado por assinatura custam de 85 a 180 dólares por ano - o Dictivo Local custa {{price.local.inline}} uma única vez.",
+  },
+  zh: {
+    intro: (until) => `订阅制听写应用每年要花 85–180 美元；Dictivo Local 截至 ${until} 一次买断 {{price.local.inline}}。`,
+    regular: () => "订阅制听写应用每年要花 85–180 美元；Dictivo Local 一次买断 {{price.local.inline}}。",
+  },
+  ja: {
+    intro: (until) => `サブスクリプション型の音声入力アプリは年間 85〜180 ドルかかります。Dictivo Local は ${until}まで {{price.local.inline}} の買い切りです。`,
+    regular: () => "サブスクリプション型の音声入力アプリは年間 85〜180 ドルかかります。Dictivo Local は {{price.local.inline}} の買い切りです。",
+  },
+  ko: {
+    intro: (until) => `구독형 받아쓰기 앱은 매년 85~180달러가 듭니다. Dictivo Local은 ${until}까지 {{price.local.inline}} 한 번 결제로 끝납니다.`,
+    regular: () => "구독형 받아쓰기 앱은 매년 85~180달러가 듭니다. Dictivo Local은 {{price.local.inline}} 한 번 결제로 끝납니다.",
+  },
+};
+
+// The closing sentence of the homepage pricing introduction. Traditional Chinese is
+// converted from zh with the rest of the homepage copy.
+export function pricingAnchor(locale, offer = LOCAL_OFFER) {
+  const copy = PRICING_ANCHOR_COPY[locale];
+  if (!copy) throw new Error(`No pricing anchor copy for ${locale}`);
+  return introOfferActive(offer) ? copy.intro(offerDate(offer.introPriceUntil, locale)) : copy.regular();
+}
+
 // The media kit's "Paid Local" fact and its one-time license claim (English only).
 export function mediaKitLocalFacts(offer = LOCAL_OFFER) {
   const months = offer.includedUpdateMonths;
