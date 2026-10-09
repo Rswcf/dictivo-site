@@ -2925,7 +2925,7 @@ function renderCompareCta(page, currentCode, copy) {
               <h2 id="compare-cta-title">${html(copy.ctaTitle)}</h2>
               <p>${html(copy.ctaBody)}</p>
             </div>
-            <div class="compare-cta-actions">
+            <div class="compare-cta-actions" data-platform-downloads>
               <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_${page.slug}`))}"${downloadData("macos", `compare_${page.slug}`)}>${html(copy.ctaPrimary)} · macOS</a>
               ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", `compare_${page.slug}_windows`))}"${downloadData("windows", `compare_${page.slug}_windows`)}>${html(copy.ctaPrimary)} · Windows</a>` : ""}
               <a class="button button-outline" href="${attr(pricingHref(currentCode))}">${html(copy.ctaSecondary)}</a>
@@ -2966,7 +2966,7 @@ function renderComparePage(page, currentCode = "en") {
         <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(compareLastUpdated(page, currentCode))}">${html(formatLocalizedMonth(compareLastUpdated(page, currentCode), currentCode))}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
-        <div class="compare-intro-actions">
+        <div class="compare-intro-actions" data-platform-downloads>
           <a class="button button-light download-link" href="${attr(downloadUrl("macos", `compare_hero_${page.slug}`))}"${downloadData("macos", `compare_hero_${page.slug}`)}>${html(t.hero.download)}</a>
           ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", `compare_hero_${page.slug}_windows`))}"${downloadData("windows", `compare_hero_${page.slug}_windows`)}>${html(windowsDownloadCopy(currentCode).exeButton)}</a>` : ""}
         </div>
@@ -3669,7 +3669,7 @@ function renderFirstDictationPage(code) {
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(c.eyebrow)}</span>
       <h1>${html(c.title)}</h1>
       <p class="doc-lede">${html(c.lede)}</p>
-      <div class="compare-intro-actions">
+      <div class="compare-intro-actions" data-platform-downloads>
         <a class="button button-light download-link" href="${attr(downloadUrl("macos", "first_dictation_mac"))}"${downloadData("macos", "first_dictation_mac")}>${html(t.hero.download)}</a>
         ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "first_dictation_windows"))}"${downloadData("windows", "first_dictation_windows")}>${html(windowsDownloadCopy(code).exeButton)}</a>` : ""}
       </div>
@@ -4492,7 +4492,7 @@ function renderProductFilmPage() {
         <figcaption>English audio · English and Chinese subtitles · <a href="${PRODUCT_FILM.credits}">Human recordings: CSTR VCTK · CC BY 4.0</a></figcaption>
       </figure>
       <nav class="film-chapters" aria-label="Film chapters">${FILM_CHAPTERS.map(c => `<a href="?t=${c.start}" data-film-time="${c.start}"><span>${Math.floor(c.start / 60)}:${String(c.start % 60).padStart(2, "0")}</span> ${html(c.title)}</a>`).join("")}</nav>
-      <div class="compare-intro-actions">
+      <div class="compare-intro-actions" data-platform-downloads>
         <a class="button button-light download-link" href="${attr(downloadUrl("macos", "film_mac"))}"${downloadData("macos", "film_mac")}>${html(t.hero.download)}</a>
         ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "film_windows"))}"${downloadData("windows", "film_windows")}>Download for Windows</a>` : ""}
       </div>
@@ -5060,7 +5060,7 @@ function renderHome(currentCode) {
               <h1 id="hero-title">${html(conversion.title)} <em>${html(conversion.emphasis)}</em></h1>
               <p class="hero-lede">${html(conversion.lede)}</p>
               <ol class="hero-steps">${conversion.steps.map((step) => `<li>${html(step)}</li>`).join("")}</ol>
-              <div class="hero-actions hero-actions--top" aria-label="Download Dictivo">
+              <div class="hero-actions hero-actions--top" aria-label="Download Dictivo" data-platform-downloads>
                 <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_top_mac"))}"${downloadData("macos", "hero_top_mac")}>${html(t.hero.download)}</a>
                 ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
               </div>

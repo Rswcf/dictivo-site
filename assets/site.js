@@ -27,18 +27,50 @@ document.querySelectorAll(".hero-film").forEach((film) => {
   });
 });
 
-const platform = (navigator.userAgentData?.platform || navigator.platform || navigator.userAgent || "").toLowerCase();
-let recommendedPlatform = "";
-
-if (platform.includes("mac")) {
-  recommendedPlatform = "macos";
-} else if (platform.includes("win")) {
-  recommendedPlatform = "windows";
+// The desktop installer this browser can run: "windows", "macos" or "" when unknown.
+// Windows wins when any signal says Windows (client hints, navigator.platform or the
+// user agent string), so a browser that reports Windows anywhere is offered Windows.
+// Phones and consoles never count, even when their user agent names Windows.
+function preferredDownloadPlatform(nav) {
+  const hints = nav?.userAgentData;
+  const hintPlatform = String(hints?.platform || "").toLowerCase();
+  const legacyPlatform = String(nav?.platform || "").toLowerCase();
+  const agent = String(nav?.userAgent || "");
+  if (hints?.mobile === true || /Windows Phone|Xbox|Mobile|Android|iPhone|iPad|iPod/i.test(agent)) return "";
+  if (hintPlatform === "windows" || legacyPlatform.startsWith("win") || /Windows/i.test(agent)) return "windows";
+  if (hintPlatform === "macos" || legacyPlatform.startsWith("mac") || /Macintosh|Mac OS X/i.test(agent)) return "macos";
+  return "";
 }
 
-if (recommendedPlatform) {
-  document.querySelector(`[data-platform-card="${recommendedPlatform}"]`)?.setAttribute("data-recommended", "true");
+// The pages render the Mac download first and solid, and the Windows download beside it
+// as an outline button; that stays the order without JavaScript, on a Mac and on any
+// other platform. For a Windows browser, swap each such pair: the existing Windows link
+// moves first and takes the solid style, so its own href, label, data-platform and
+// data-download-content travel with it and click attribution is unchanged. While
+// Windows downloads are switched off the pages render no Windows link, so nothing moves.
+function promoteWindowsDownloads(root, platform) {
+  if (platform !== "windows") return 0;
+  let promoted = 0;
+  root.querySelectorAll("[data-platform-downloads]").forEach((group) => {
+    const mac = group.querySelector('a.download-link[data-platform="macos"]');
+    const windows = group.querySelector('a.download-link[data-platform="windows"]');
+    if (!mac || !windows || mac.parentNode !== group || windows.parentNode !== group) return;
+    const macClass = mac.className;
+    mac.className = windows.className;
+    windows.className = macClass;
+    group.insertBefore(windows, mac);
+    group.setAttribute("data-platform-promoted", "windows");
+    promoted += 1;
+  });
+  return promoted;
 }
+
+const visitorPlatform = preferredDownloadPlatform(navigator);
+
+if (visitorPlatform) {
+  document.querySelector(`[data-platform-card="${visitorPlatform}"]`)?.setAttribute("data-recommended", "true");
+}
+promoteWindowsDownloads(document, visitorPlatform);
 
 function normalizeDownloadPlatform(value) {
   const platform = String(value || "").toLowerCase();

@@ -1,5 +1,22 @@
 # Dictivo site
 
+## Windows visitors see the Windows download first — 2026-10-09
+
+The homepage hero rendered "Download for Mac" as the solid button for every visitor; a Windows
+visitor got Windows only as the outline button beside it (Windows VM test, 2026-10-09). `assets/site.js`
+now reads the platform once with `preferredDownloadPlatform(navigator)`: Windows when client hints,
+`navigator.platform` or the user agent names Windows, never for phones or consoles. On a Windows
+browser `promoteWindowsDownloads()` swaps each `[data-platform-downloads]` pair: the Windows link
+the page already renders moves first and takes the solid style, so its href, label,
+`data-platform="windows"` and `data-download-content` travel with it. The same function drives the
+download card's `data-recommended`. Pairs are marked on the eleven homepage heroes, both comparison
+download groups, the first-dictation guide and `/demo/`. Mac, Linux, unknown browsers and pages
+without JavaScript keep the Mac link first; while Windows downloads are off the pages render no
+Windows link, so nothing moves. After this ships, `hero_top_windows` counts clicks on a solid
+button for Windows browsers, so compare it with earlier weeks only with that change in mind.
+`tests/windows-download-promotion.test.mjs` covers detection, the swap, click attribution and the
+static order.
+
 ## Pricing page and two Mac dictation guides — 2026-10-09
 
 `/pricing/` is now an English page instead of a 302 to `/#pricing`: a short answer, the homepage
@@ -295,7 +312,8 @@ Mac-download-only state:
 
 - the whole `WINDOWS_HOME_COPY` layer stops applying, on all eleven homepages at once;
 - the hero Windows button and the Windows download card disappear, and the download grid switches
-  from `multi` to `single`;
+  from `multi` to `single`; with no Windows link in a `[data-platform-downloads]` pair, `site.js`
+  has nothing to promote for Windows visitors;
 - `/download/windows`, `/download/windows-msi` and the two `/downloads/Dictivo-Windows-x64.*`
   routes point at `/#downloads` instead of the tracking API;
 - `downloads.json` drops the Windows artifacts;
