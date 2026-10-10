@@ -1,5 +1,34 @@
 # Dictivo site
 
+## Cache headers, homepage film and phone menu — 2026-10-10
+
+A cold email from a site scanner (Can We Launch, 2026-10-10) named three problems; all three were
+real. **Cache:** Cloudflare Pages applies every matching `_headers` rule in file order and joins a
+header set twice with a comma, so fonts, `/assets/ui/` and the favicon were sent
+`max-age=31536000, immutable, public, max-age=300, must-revalidate`, and the fingerprinted
+`site.<hash>.css` / `.js` only got the 300 s of `/assets/*`. The long-lived rules now come after
+`/assets/*` and detach its value with `! Cache-Control`; two placeholder rules
+(`/assets/site.:hash.css`, `.js`) cover the fingerprinted files. `tests/cache-headers.test.mjs`
+checks the order and runs `inject-asset-version.mjs` on a copy for the real file names. The zone's
+Browser Cache TTL (it raised every lower `max-age` to 4 hours) is set to respect existing headers.
+
+**Homepage film:** the hidden `<video>` downloaded its `poster.jpg` (74 KB) and captions on every
+visit. The player now waits in a `<template>`; the poster button clones it into place and calls
+`play()` in the same click, and `<noscript>` keeps the native player, which `check-product-film.mjs`
+now checks. Lighthouse 13.5.0 mobile on a local `wrangler pages dev` build: LCP 2.26 s before,
+1.66–1.81 s after (live before: 2.5–2.7 s).
+
+**Phone menu:** at 880 px and below `.nav-links` were hidden with nothing to open them. Every header
+(`renderHeader()` and `security.html`) now has a menu button, hidden until `site.js` wires it up:
+`aria-controls`, `aria-expanded`, a label in all 11 languages (`nav.menu`), a panel with 44 px rows,
+and closing on Escape, outside click, a chosen link or the language menu. With four controls in the
+header, French overflows first, so the wordmark yields at 440 px and below and the language name
+becomes a globe below 375 px (measured for every locale from 320 to 880 px).
+
+Validation: 281 tests and seven deploy check scripts, with `release.json` as committed and set to
+0.3.54; `check-checkout-live` was not run. A `dist/` diff against main changes only the 185 page
+headers, the 11 homepage films, `site.css`, `site.js` and `_headers`.
+
 ## Best dictation software guide (Mac, Windows, free) — 2026-10-10
 
 `/guides/best-dictation-software/` (English only) groups dictation software for Mac and Windows by
