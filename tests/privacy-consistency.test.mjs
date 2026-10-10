@@ -64,11 +64,14 @@ test("the Privacy Policy and /security/ explain the dictivo-self opt-out flag, a
 
 // Desktop 0.3.54 (spec 2026-10-09 §6): the install census and the optional trial reminder email.
 test("every language explains the trial reminder: purpose, deletion and how to withdraw, with support@dictivo.app", () => {
+  // Where the address is kept is named by region; provider names stay out of public copy (check-public-output).
+  const region = { en: "Western Europe", de: "Westeuropa", fr: "Europe de l'Ouest", es: "Europa occidental", it: "Europa occidentale", nl: "West-Europa", pt: "Europa Ocidental", zh: "西欧", ja: "西ヨーロッパ", ko: "서유럽" };
   for (const [locale, copy] of Object.entries(TRIAL_MILESTONE_COPY)) {
     assert.ok(copy.reminder, `${locale}: reminder copy missing`);
     assert.ok(copy.reminder.includes("support@dictivo.app"), `${locale}: reminder does not name support@dictivo.app`);
     assert.ok(copy.reminder.includes("14"), `${locale}: reminder does not name the 14-day trial`);
-    assert.ok(copy.reminder.includes("Cloudflare"), `${locale}: reminder does not name where the address is kept`);
+    assert.ok(copy.reminder.includes(region[locale]), `${locale}: reminder does not name where the address is kept`);
+    assert.ok(!/Cloudflare/i.test(copy.reminder), `${locale}: reminder names a provider`);
   }
 });
 
