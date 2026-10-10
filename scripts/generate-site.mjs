@@ -4603,6 +4603,17 @@ function productFilmSchema() {
   };
 }
 
+// The homepage player waits in a <template> until the visitor presses play (site.js), so its
+// poster and captions do not download with the page; <noscript> keeps it for browsers without JS.
+function heroFilmPlayer(code) {
+  return `
+              <video controls preload="none" poster="${PRODUCT_FILM.poster}" playsinline src="${PRODUCT_FILM.video}" width="1920" height="1080" tabindex="0" aria-label="${attr(FILM_COPY[code].play)}">
+                ${productFilmTracks(code)}
+                <p><a href="${PRODUCT_FILM.video}">${html(FILM_COPY[code].play)}</a></p>
+              </video>
+            `;
+}
+
 function productFilmTracks(code = "en") {
   const selected = code === "zh" ? "zh-CN" : code === HANT ? "zh-Hant" : "en";
   const isDefault = (lang) => (selected === lang ? " default" : "");
@@ -5389,10 +5400,8 @@ function renderHome(currentCode) {
               <img src="${attr(HERO_POSTER.src)}" srcset="${attr(HERO_POSTER.srcset)}" sizes="${attr(HERO_POSTER.sizes)}" alt="${attr(FILM_COPY[currentCode].alt)}" fetchpriority="high" width="1600" height="900" />
               <span class="hero-video-play">${html(FILM_COPY[currentCode].play)}</span>
             </button>
-            <video controls preload="none" poster="${PRODUCT_FILM.poster}" playsinline src="${PRODUCT_FILM.video}" width="1920" height="1080" tabindex="0" aria-label="${attr(FILM_COPY[currentCode].play)}">
-              ${productFilmTracks(currentCode)}
-              <p><a href="${PRODUCT_FILM.video}">${html(FILM_COPY[currentCode].play)}</a></p>
-            </video>
+            <template>${heroFilmPlayer(currentCode)}</template>
+            <noscript>${heroFilmPlayer(currentCode)}</noscript>
             <figcaption>${html(FILM_COPY[currentCode].summary)} <a href="${PRODUCT_FILM.path}">${html(FILM_COPY[currentCode].link)}</a><br><a href="${PRODUCT_FILM.credits}">${html(FILM_COPY[currentCode].credit)}</a></figcaption>
           </figure>
 

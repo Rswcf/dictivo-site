@@ -6,8 +6,9 @@ const root = new URL('../dist/', import.meta.url);
 const get = path => readFileSync(new URL(path.replace(/^\//, ''), root), 'utf8');
 for (const { code } of LOCALES) {
   const page = get(code === 'en' ? 'index.html' : `${code}/index.html`);
-  const video = page.match(/<video\b[^>]*>/)?.[0];
-  assert(video?.includes(`src="${film.video}"`), `${code}: video must have a static src`);
+  // The player itself waits in a <template>; browsers without JavaScript get the <noscript> copy.
+  const video = page.match(/<noscript>\s*(<video\b[^>]*>)/)?.[1];
+  assert(video?.includes(`src="${film.video}"`), `${code}: the <noscript> native player must have a static src`);
   assert(video.includes('preload="none"') && !video.includes('autoplay') && !video.includes('hidden'), `${code}: native player fallback / load policy`);
   const all = [...page.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => JSON.parse(m[1]));
   const schema = all.find(s => s['@type'] === 'VideoObject');

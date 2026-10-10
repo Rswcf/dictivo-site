@@ -1,21 +1,19 @@
-document.querySelectorAll(".hero-film").forEach((film) => {
+// The homepage film player waits in a <template>, so its poster and captions download only
+// when the visitor presses play. play() runs inside the click, which counts as user activation.
+function initHeroFilm(film) {
   const posterButton = film.querySelector(".hero-video-poster");
-  const video = film.querySelector("video");
+  const template = film.querySelector("template");
 
-  if (!posterButton || !video) {
+  if (!posterButton || !template) {
     return;
   }
 
   posterButton.hidden = false;
-  video.hidden = true;
 
   posterButton.addEventListener("click", () => {
-    if (!video.getAttribute("src")) {
-      video.setAttribute("src", video.dataset.src);
-    }
-
+    const video = template.content.querySelector("video").cloneNode(true);
+    template.replaceWith(video);
     posterButton.hidden = true;
-    video.hidden = false;
     video.focus({ preventScroll: true });
 
     const playPromise = video.play();
@@ -24,8 +22,10 @@ document.querySelectorAll(".hero-film").forEach((film) => {
         video.focus({ preventScroll: true });
       });
     }
-  });
-});
+  }, { once: true });
+}
+
+document.querySelectorAll(".hero-film").forEach(initHeroFilm);
 
 // The desktop installer this browser can run: "windows", "macos" or "" when unknown.
 // Windows wins when any signal says Windows (client hints, navigator.platform or the
