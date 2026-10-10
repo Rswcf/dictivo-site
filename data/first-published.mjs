@@ -17,6 +17,7 @@ export const FIRST_PUBLISHED = Object.freeze({
   "guides/dragon-pricing": "2026-10-09", // English only
   "guides/wispr-flow-pricing": "2026-10-09", // English only
   "guides/windows-voice-typing-not-working": "2026-10-09", // English only
+  "guides/best-dictation-software": "2026-10-10", // English only
   "privacy/where-dictation-audio-goes": "2026-06-07", // b431ef4, all ten languages
   "privacy/local-dictation-network-test": "2026-06-07", // b431ef4, all ten languages
   compare: "2026-05-25", // e3b0593 (English) and 61a8a25 (localized), the first five comparisons

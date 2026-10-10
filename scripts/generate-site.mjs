@@ -65,6 +65,7 @@ import {
 } from "../data/ja-mac-dictation-shortcut-guide.mjs";
 import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
+import { BEST_DICTATION_SOFTWARE_LASTMOD, BEST_DICTATION_SOFTWARE_REFERENCES, bestDictationSoftwareCopy } from "../data/best-dictation-software-guide.mjs";
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
@@ -903,6 +904,23 @@ function wisprFlowPricingCopyForRender() {
 
 function wisprFlowPricingLastmod() {
   return latestDate(WISPR_FLOW_PRICING_LASTMOD, PRICING_LASTMOD);
+}
+
+function bestDictationSoftwarePath() {
+  return "/guides/best-dictation-software/";
+}
+
+function bestDictationSoftwareUrl() {
+  return absoluteUrl(bestDictationSoftwarePath());
+}
+
+function bestDictationSoftwareCopyForRender() {
+  return bestDictationSoftwareCopy({ windows: hasWindowsRelease });
+}
+
+// The page quotes Dictivo's price, so its date never precedes PRICING_LASTMOD.
+function bestDictationSoftwareLastmod() {
+  return latestDate(BEST_DICTATION_SOFTWARE_LASTMOD, PRICING_LASTMOD);
 }
 
 function mediaKitPath() {
@@ -5090,6 +5108,34 @@ function renderWisprFlowPricingPage() {
   });
 }
 
+// Dictation software for Mac and Windows, grouped by need. Dictivo is disclosed in the lede and
+// sits in the groups and table like any other product, so there is no closing Dictivo section.
+function renderBestDictationSoftwarePage() {
+  const url = bestDictationSoftwareUrl();
+  const copy = bestDictationSoftwareCopyForRender();
+  return renderDictationGuidePage({
+    code: "en",
+    path: bestDictationSoftwarePath(),
+    url,
+    copy,
+    lastmod: bestDictationSoftwareLastmod(),
+    references: BEST_DICTATION_SOFTWARE_REFERENCES,
+    headTags: enOnlyHeadTags(url),
+    // A page about Mac and Windows: both downloads, Windows first for Windows visitors.
+    platform: "both",
+    trialSource: "best_software",
+    // Five columns: the wider table minimum of the offline guides.
+    mainClass: "doc-page offline-guide-page",
+    idPrefix: "best-software",
+    mainId: "best-dictation-software",
+    quickReference: copy.quickReference,
+    route: "guides/best-dictation-software",
+    headline: copy.metaTitle,
+    about: ["dictation software", "free dictation software", "dictation software for Windows", "offline dictation"],
+    legacyFaqSchema: false,
+  });
+}
+
 function renderJaMacDictationTroubleshootingPage() {
   const url = jaMacDictationTroubleshootingUrl();
   const copy = JA_MAC_DICTATION_TROUBLESHOOTING_COPY;
@@ -6235,6 +6281,7 @@ function renderLlmsEnglishFacts() {
     ["Why is Windows voice typing (Win+H) not working, and does Windows 11 dictation work offline?", windowsVoiceTypingCopyForRender().navLabel, windowsVoiceTypingUrl()],
     ["How much does Dragon cost, and can you still buy Dragon for Mac?", dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
     ["What do Wispr Flow's plans cost, and what does the free plan include?", wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
+    ["Which dictation software is free, works offline, or runs on Windows as well as Mac?", bestDictationSoftwareCopyForRender().navLabel, bestDictationSoftwareUrl()],
   ];
   return `
 ## Prices and license
@@ -6276,6 +6323,7 @@ function renderLlmsTxt(currentCode = "en") {
           [windowsVoiceTypingCopyForRender().navLabel, windowsVoiceTypingUrl()],
           [dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
           [wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
+          [bestDictationSoftwareCopyForRender().navLabel, bestDictationSoftwareUrl()],
         ]
       : []),
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
@@ -6777,6 +6825,13 @@ ${macDictationShortcutAlternates}
     <xhtml:link rel="alternate" hreflang="x-default" href="${wisprFlowPricingUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const bestDictationSoftwareEntry = `  <url>
+    <loc>${bestDictationSoftwareUrl()}</loc>
+    <lastmod>${bestDictationSoftwareLastmod()}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${bestDictationSoftwareUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${bestDictationSoftwareUrl()}" />
+    <priority>0.8</priority>
+  </url>`;
   const jaMacDictationTroubleshootingEntry = `  <url>
     <loc>${jaMacDictationTroubleshootingUrl()}</loc>
     <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
@@ -6858,6 +6913,7 @@ ${jaMacDictationShortcutEntry}
 ${windowsVoiceTypingEntry}
 ${dragonPricingEntry}
 ${wisprFlowPricingEntry}
+${bestDictationSoftwareEntry}
 ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
@@ -7259,6 +7315,7 @@ write(`${macDictationShortcutPath().slice(1)}index.html`, renderMacDictationShor
 write(`${windowsVoiceTypingPath().slice(1)}index.html`, renderWindowsVoiceTypingPage());
 write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${wisprFlowPricingPath().slice(1)}index.html`, renderWisprFlowPricingPage());
+write(`${bestDictationSoftwarePath().slice(1)}index.html`, renderBestDictationSoftwarePage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write(`${jaMacDictationShortcutPath().slice(1)}index.html`, renderJaMacDictationShortcutPage());
 write("media-kit/index.html", renderMediaKitPage());

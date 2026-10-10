@@ -151,6 +151,7 @@ const publishedRoutes = () => [
   ["guides/dragon-pricing/index.html", "guides/dragon-pricing", "en"],
   ["guides/wispr-flow-pricing/index.html", "guides/wispr-flow-pricing", "en"],
   ["guides/windows-voice-typing-not-working/index.html", "guides/windows-voice-typing-not-working", "en"],
+  ["guides/best-dictation-software/index.html", "guides/best-dictation-software", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ["ja/guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "ja"],
   ...LOCALES.flatMap((locale) => [

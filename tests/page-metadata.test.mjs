@@ -11,6 +11,7 @@ const PAGES = [
   ["guides/dragon-pricing/index.html", "https://dictivo.app/guides/dragon-pricing/", "en"],
   ["guides/wispr-flow-pricing/index.html", "https://dictivo.app/guides/wispr-flow-pricing/", "en"],
   ["guides/windows-voice-typing-not-working/index.html", "https://dictivo.app/guides/windows-voice-typing-not-working/", "en"],
+  ["guides/best-dictation-software/index.html", "https://dictivo.app/guides/best-dictation-software/", "en"],
   ["ja/guides/mac-dictation-shortcut/index.html", "https://dictivo.app/ja/guides/mac-dictation-shortcut/", "ja"],
 ];
 

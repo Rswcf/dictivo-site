@@ -163,6 +163,13 @@ test("the shortcut guide sends Japanese visitors to the Japanese guide and keeps
   assert.equal(decide("/ja/guides/mac-dictation-shortcut/", { country: "US" }).action, "pass");
 });
 
+test("the dictation software guide is English-only, so every visitor stays on it", () => {
+  const path = "/guides/best-dictation-software/";
+  assert.equal(routes.pages[path], undefined);
+  assert.ok(routedToFunction(path), "its ?lang= choice still reaches the Function");
+  for (const country of ["US", "JP", "DE", "FR", "TW"]) assert.deepEqual(decide(path, { country }), { action: "pass", reason: "unmapped" }, country);
+});
+
 test("translated pages never redirect or prompt on entry", () => {
   for (const [path, page] of Object.entries(routes.pages)) {
     if (page.locale === "en") continue;
