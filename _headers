@@ -6,17 +6,32 @@
   Permissions-Policy: camera=(), geolocation=(), microphone=()
   Content-Security-Policy: default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; font-src 'self'; connect-src 'self' https://api.dictivo.app; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
+/assets/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Pages applies every matching rule in file order and joins a header set twice with a comma.
+# These files never change in place, so their rules come after /assets/* and detach its
+# Cache-Control ("! ") before setting their own.
 /assets/ui/*
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/favicon.svg
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/fonts/*
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
-/assets/*
-  Cache-Control: public, max-age=300, must-revalidate
+# site.css and site.js as renamed with their content hash by inject-asset-version.mjs.
+/assets/site.:hash.css
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/site.:hash.js
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
 
 /downloads.json
   Cache-Control: public, max-age=300
