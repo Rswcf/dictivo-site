@@ -1,12 +1,12 @@
 export const RELEASE_NOTES = Object.freeze({
-  // Desktop 0.3.54 (spec 2026-10-09 §8.2 step 4). The date is the planned week; set it to the real release day.
-  // No Windows signing bullet: the certificate is not in place yet.
+  // Desktop 0.3.54 (spec 2026-10-09 §8.2 step 4). No Windows signing bullet: the first signed build is 0.3.55.
   "0.3.54": Object.freeze({
-    date: "2026-11-17",
+    date: "2026-10-10",
     title: "An optional reminder before your Local trial ends.",
     bullets: Object.freeze([
       "During setup, or in Settings, Account & Billing while your Local trial runs, you can leave an email address and Dictivo sends you one email two days before the trial ends. It is optional, it is the only email you get, and the address is deleted when it is sent. Cancel it in the app or through the link in the email.",
       "If your Local trial ends while you dictate with Cloud Fast, Dictivo now says so once, in one line, without a price or a buy button. Press OK and it does not come back.",
+      "On Windows, Local dictation now works on PCs without Microsoft's Visual C++ Redistributable: Dictivo ships the files its local engine needs, and if the GPU engine cannot start, it switches to the CPU engine by itself instead of showing system error windows.",
       "To see where setup gets stuck, the app now also reports, without any content, when it is first opened on a new install and whether microphone access (and on Mac, accessibility access) was granted, denied or recorded no sound. This is separate from the usage statistics setting, and never includes audio, text, file or app names.",
       "The privacy policy and the security page describe the reminder and these reports.",
     ]),
