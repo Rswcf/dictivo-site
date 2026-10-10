@@ -65,14 +65,19 @@
         <span class="brand-mark" aria-hidden="true">D</span>
         <span class="brand-name">Dictivo</span>
       </a>
-      <nav class="nav-links" aria-label="Site navigation">
+      <nav class="nav-links" id="site-nav" aria-label="Site navigation">
         <a href="/#privacy">Privacy</a>
         <a href="/#cloud-fast">Cloud Fast</a>
         <a href="/pricing/">Pricing</a>
         <a href="/mac-model-guide/">Mac model guide</a>
         <a href="/#downloads">Downloads</a>
       </nav>
-      <a class="header-download" href="/#downloads">Download</a>
+      <div class="header-actions">
+        <a class="header-download" href="/#downloads">Download</a>
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Menu" hidden>
+          <svg class="nav-toggle-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path class="nav-toggle-bars" d="M3 5.5h14M3 10h14M3 14.5h14" /><path class="nav-toggle-close" d="M5 5l10 10M15 5L5 15" /></svg>
+        </button>
+      </div>
     </header>
 
     <main class="doc-page" id="security">

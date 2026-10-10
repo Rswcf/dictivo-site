@@ -27,6 +27,54 @@ function initHeroFilm(film) {
 
 document.querySelectorAll(".hero-film").forEach(initHeroFilm);
 
+// Phones hide .nav-links (site.css, 880 px and below). The menu button opens them as a panel and
+// follows the WAI-ARIA disclosure pattern: aria-expanded reports the state, Escape closes and
+// returns focus, and the panel closes on a chosen link, a click outside or the language menu.
+function initSiteNav(header) {
+  const toggle = header.querySelector(".nav-toggle");
+  const nav = header.querySelector(".nav-links");
+  const languageMenu = header.querySelector(".language-menu");
+
+  if (!toggle || !nav) {
+    return;
+  }
+
+  const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+  const setOpen = (open) => {
+    toggle.setAttribute("aria-expanded", String(open));
+    header.classList.toggle("is-nav-open", open);
+    if (open && languageMenu) {
+      languageMenu.open = false;
+    }
+  };
+
+  toggle.hidden = false;
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+  nav.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      setOpen(false);
+    }
+  });
+  languageMenu?.addEventListener("toggle", () => {
+    if (languageMenu.open) {
+      setOpen(false);
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen()) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (isOpen() && !header.contains(event.target)) {
+      setOpen(false);
+    }
+  });
+}
+
+document.querySelectorAll(".site-header").forEach(initSiteNav);
+
 // The desktop installer this browser can run: "windows", "macos" or "" when unknown.
 // Windows wins when any signal says Windows (client hints, navigator.platform or the
 // user agent string), so a browser that reports Windows anywhere is offered Windows.

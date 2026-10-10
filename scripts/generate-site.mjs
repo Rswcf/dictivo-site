@@ -2617,7 +2617,7 @@ function renderHeader(currentCode, t, options = {}) {
         <span class="brand-mark" aria-hidden="true">D</span>
         <span class="brand-name">Dictivo</span>
       </a>
-      <nav class="nav-links" aria-label="Site navigation">
+      <nav class="nav-links" id="site-nav" aria-label="Site navigation">
         <a href="${attr(hash("privacy"))}">${html(t.nav.privacy)}</a>
         <a href="${attr(hash("cloud-fast"))}">${html(t.nav.cloudFast)}</a>
         <a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>
@@ -2627,8 +2627,17 @@ function renderHeader(currentCode, t, options = {}) {
       <div class="header-actions">
         ${renderLanguageMenu(currentCode, t, options.hrefForLocale)}
         <a class="header-download" href="${attr(hash("downloads"))}">${html(t.nav.download)}</a>
+        ${renderNavToggle(t.nav.menu)}
       </div>
     </header>`;
+}
+
+// Phones hide .nav-links (site.css); site.js shows this button and opens them as a panel.
+// It stays hidden without JavaScript, where it could not open anything.
+function renderNavToggle(label) {
+  return `<button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="${attr(label)}" hidden>
+          <svg class="nav-toggle-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path class="nav-toggle-bars" d="M3 5.5h14M3 10h14M3 14.5h14" /><path class="nav-toggle-close" d="M5 5l10 10M15 5L5 15" /></svg>
+        </button>`;
 }
 
 function renderList(items, className = "tier-features") {

@@ -308,6 +308,48 @@ main section[id] {
   justify-self: end;
 }
 
+/* The phone menu button (site.js reveals it); wide screens show .nav-links directly. */
+.nav-toggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 7%);
+  padding: 0;
+  color: rgb(255 255 255 / 82%);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.nav-toggle:hover,
+.nav-toggle[aria-expanded="true"] {
+  border-color: rgb(255 255 255 / 24%);
+  background: rgb(255 255 255 / 12%);
+  color: var(--ink);
+}
+
+.nav-toggle-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.nav-toggle-close,
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-close {
+  display: inline;
+}
+
 .language-menu {
   position: relative;
   z-index: 12;
@@ -3456,6 +3498,44 @@ main section[id] {
     display: none;
   }
 
+  .nav-toggle:not([hidden]) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header.is-nav-open .nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: 0;
+    display: grid;
+    justify-content: stretch;
+    gap: 2px;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 18px;
+    /* Opaque: the header's own backdrop blur keeps a nested blur from hiding the hero text. */
+    background: rgb(10 17 16);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 8%) inset,
+      0 24px 80px rgb(0 0 0 / 42%);
+    padding: 8px;
+    font-size: 15px;
+  }
+
+  .site-header.is-nav-open .nav-links a {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+
+  .site-header.is-nav-open .nav-links a:hover {
+    background: rgb(125 211 199 / 13%);
+    color: var(--ink);
+  }
+
   .header-download {
     justify-self: end;
   }
@@ -3819,6 +3899,38 @@ main section[id] {
 .reveal:target {
   opacity: 1;
   transform: none;
+}
+
+/* Narrow phones: the header holds the logo, language, download and menu buttons, so the
+   wordmark yields first (the logo link keeps its "Dictivo home" label). French needs 441 px. */
+@media (max-width: 440px) {
+  .brand-name {
+    display: none;
+  }
+}
+
+/* Below 375 px the language name gives way to a globe; the summary keeps its aria-label. */
+@media (max-width: 374px) {
+  .header-actions {
+    gap: 6px;
+  }
+
+  .language-menu summary {
+    padding-inline: 9px;
+  }
+
+  .language-menu summary strong {
+    display: none;
+  }
+
+  .language-menu summary::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Ccircle cx='10' cy='10' r='7.5'/%3E%3Cpath d='M2.5 10h15M10 2.5c2.2 2.1 3.3 4.6 3.3 7.5s-1.1 5.4-3.3 7.5c-2.2-2.1-3.3-4.6-3.3-7.5S7.8 4.6 10 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Ccircle cx='10' cy='10' r='7.5'/%3E%3Cpath d='M2.5 10h15M10 2.5c2.2 2.1 3.3 4.6 3.3 7.5s-1.1 5.4-3.3 7.5c-2.2-2.1-3.3-4.6-3.3-7.5S7.8 4.6 10 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
