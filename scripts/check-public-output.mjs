@@ -3,6 +3,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { LOCALES } from "../data/site-content.mjs";
 import { toHant } from "./lib/hant.mjs";
+import { html } from "./lib/html.mjs";
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { LOCAL_OFFER, introPriceExpired } from "../data/local-offer.mjs";
@@ -472,8 +473,9 @@ function verifyReleaseNotes() {
 
   const changelog = readFileSync(changelogPath, "utf8");
   const current = releaseNotesFor(release.version, hasWindowsRelease);
+  // Escape with the generator's own html(): body text keeps ' as is, so "Microsoft's" must match.
   for (const text of [current.title, ...current.bullets]) {
-    if (!changelog.includes(escapeHtml(text))) {
+    if (!changelog.includes(html(text))) {
       failures.push(`changelog.html: missing current release note ${JSON.stringify(text)}`);
     }
   }
@@ -485,13 +487,4 @@ function verifyReleaseNotes() {
   if ([future.title, ...future.bullets].some((line) => /0\.3\.39|Windows hotkey|long recordings/i.test(line))) {
     failures.push("release-notes.mjs: unknown versions inherited v0.3.39-specific details");
   }
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
 }

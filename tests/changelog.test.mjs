@@ -2,10 +2,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { RELEASE_NOTES, earlierReleaseNotes } from "../data/release-notes.mjs";
+import { html } from "../scripts/lib/html.mjs";
 
 const dist = new URL("../dist/", import.meta.url).pathname;
 const release = JSON.parse(readFileSync(new URL("../data/release.json", import.meta.url), "utf8"));
-const escape = (text) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
 test("earlier releases are listed newest first and never include the current one", () => {
   const versions = earlierReleaseNotes("0.3.48").map((notes) => notes.version);
@@ -24,7 +24,7 @@ test("the changelog shows every written release note in order", () => {
     const at = changelog.indexOf(`id="${notes.version}"`);
     assert.ok(at > previous, `${notes.version}: missing or out of order`);
     assert.ok(changelog.includes(`datetime="${notes.date}"`), `${notes.version}: date missing`);
-    for (const text of [notes.title, ...notes.bullets]) assert.ok(changelog.includes(escape(text)), `${notes.version}: ${text}`);
+    for (const text of [notes.title, ...notes.bullets]) assert.ok(changelog.includes(html(text)), `${notes.version}: ${text}`);
     previous = at;
   }
   assert.ok(changelog.indexOf('id="0.3.37"') > previous, "hand-written history must follow the release notes");

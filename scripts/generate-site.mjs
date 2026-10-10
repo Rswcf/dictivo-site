@@ -70,6 +70,7 @@ import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsV
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
+import { attr, html } from "./lib/html.mjs";
 import { priceText, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
@@ -552,24 +553,6 @@ const SEO_HOME_COPY = {
     footerPrivacyProof: "개인정보 증명",
   },
 };
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function html(value) {
-  return escapeHtml(value)
-    .replaceAll("support@dictivo.app", "<!--email_off-->support@dictivo.app<!--/email_off-->")
-    .replaceAll("security@dictivo.app", "<!--email_off-->security@dictivo.app<!--/email_off-->");
-}
-
-function attr(value) {
-  return escapeHtml(value).replaceAll("'", "&#39;");
-}
 
 function jsonForScript(value) {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
