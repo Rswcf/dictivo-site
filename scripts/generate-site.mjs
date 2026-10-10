@@ -3645,7 +3645,11 @@ ${OFFLINE_DICTATION_GUIDE_REFERENCES.map(
 }
 
 // Keep a platform-specific trial action beside the decision table, without new tracking.
+// platform "both" (a page about Mac and Windows) offers the Mac download and, while Windows
+// downloads are public, the Windows one: `<source>_mac` / `<source>_windows`. site.js moves the
+// Windows button first for Windows visitors (data-platform-downloads).
 function renderGuideTrial(code, platform, source) {
+  if (platform === "both") return renderGuideTrialBoth(code, source);
   if (platform === "windows" && !hasWindowsRelease) return "";
   const c = COMPARE_HUB_GUIDANCE[code];
   const t = homeCopyForRender(code);
@@ -3659,6 +3663,24 @@ function renderGuideTrial(code, platform, source) {
         </div>
         ${renderFirstDictationLink(code)}
         ${platform === "windows" ? `<p class="guide-trial-note">Windows x64. The installer is not yet code-signed; verify the download source before deciding whether to proceed.</p>` : ""}
+      </section>`;
+}
+
+function renderGuideTrialBoth(code, source) {
+  const c = COMPARE_HUB_GUIDANCE[code];
+  const t = homeCopyForRender(code);
+  const mac = `${source}_mac`;
+  const windows = `${source}_windows`;
+  return `<section class="doc-section guide-trial" data-guide-trial aria-labelledby="guide-trial-title">
+        <h2 id="guide-trial-title">${html(c.title)}</h2>
+        <p>${html(c.body)}</p>
+        <div class="compare-intro-actions" data-platform-downloads>
+          <a class="button button-light download-link" href="${attr(downloadUrl("macos", mac))}"${downloadData("macos", mac)}>${html(t.hero.download)}</a>${hasWindowsRelease ? `
+          <a class="button button-outline download-link" href="${attr(downloadUrl("windows", windows))}"${downloadData("windows", windows)}>${html(windowsDownloadCopy(code).exeButton)}</a>` : ""}
+          <a class="button button-outline" href="${attr(pricingHref(code))}">${html(c.pricing)}</a>
+        </div>
+        ${renderFirstDictationLink(code)}
+        ${hasWindowsRelease ? `<p class="guide-trial-note">Windows x64. The installer is not yet code-signed; verify the download source before deciding whether to proceed.</p>` : ""}
       </section>`;
 }
 
@@ -4801,6 +4823,20 @@ function renderDictationGuideSectionTable(table) {
   return `\n        ${renderBenchmarkMethodTable(table.caption, table.headers, table.rows)}`;
 }
 
+// Optional named items at the end of a section, each under its own <h3> (one note per product,
+// for example). Ids are `<section id>-entry-<n>`.
+function renderDictationGuideEntries(entries, sectionId) {
+  if (!entries?.length) return "";
+  return entries
+    .map(
+      (entry, index) => `
+        <h3 id="${attr(`${sectionId}-entry-${index + 1}`)}">${html(entry.title)}</h3>
+        ${entry.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(entry.links)}`,
+    )
+    .join("");
+}
+
+// A section may also carry an unordered list (`bullets`), for picks that are not a ranking.
 function renderDictationGuideSection(idPrefix) {
   return (section, index) => {
     const id = `${idPrefix}-section-${index + 1}`;
@@ -4808,8 +4844,8 @@ function renderDictationGuideSection(idPrefix) {
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocSteps(section.steps)}${renderDictationGuideSectionTable(section.table)}
-        ${(section.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(section.links)}
+        ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${renderDictationGuideSectionTable(section.table)}
+        ${(section.notes || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(section.links)}${renderDictationGuideEntries(section.entries, id)}
       </section>`;
   };
 }
