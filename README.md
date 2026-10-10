@@ -1,5 +1,35 @@
 # Dictivo site
 
+## Best dictation software guide (Mac, Windows, free) — 2026-10-10
+
+`/guides/best-dictation-software/` (English only) groups dictation software for Mac and Windows by
+need: free, fully local, Windows, Mac, several languages, buy once, phone and computer, recordings
+and meetings, then a short note per product. It covers thirteen products: the macOS, Windows 11,
+Google Docs and Word built-ins, Dragon Professional, Handy, MacWhisper, Spokenly, Superwhisper,
+Voibe, VoiceInk, Wispr Flow and Dictivo. Every statement about another product was read on its
+vendor's own page on 2026-10-10 and is linked with that date; built-in tools are described as built
+in, not free, because their vendors state no price. It is the cross-platform counterpart of
+`/guides/best-speech-to-text-apps-for-mac/`, which stays the Mac-only comparison; the two link to
+each other.
+
+The lede says the guide is written by Dictivo before any product is named. Dictivo is listed last,
+appears only in the groups it fits and states its limits in the others (no mobile app, no
+recorded-file import). Its price is `guideLocalPrice("en", offer)` in three places, so the dated
+clause drops at the 1 November rollover, and the sitemap date follows `PRICING_LASTMOD`. The title
+carries the year of `BEST_DICTATION_SOFTWARE_CHECKED`, so it changes only when every price is
+re-read (first 2027 re-check: 4 January). Prices it shares with the comparison pages and the Mac
+offline guide are tested to match them. Structured data is TechArticle and BreadcrumbList only.
+
+`renderDictationGuidePage()` sections now take `bullets` and per-product `entries`, and
+`renderGuideTrial()` takes `platform: "both"` (Mac and, while public, Windows downloads); existing
+pages render byte for byte as before. Inbound links: the Mac speech-to-text list and the Windows
+offline guide (related pages), the English Mac offline guide's Dictivo section, a line under the
+English comparison hub's introduction (English only), and `llms.txt`; those four pages are re-dated
+2026-10-10. Validation: 263 tests and seven deploy check scripts, today and in a copy with the
+rollover applied; `check-checkout-live` was not run because it requests the production checkout.
+Spec: `docs/research/2026-10-08-ahrefs-audit/09-pages-batch4-best-of-spec.zh-CN.md` in the desktop
+repository; monthly price re-check in `price-watch.md` there. Not deployed or measured.
+
 ## Dragon and Wispr Flow pricing facts and a Windows voice typing guide — 2026-10-09
 
 Three English pages render through `renderDictationGuidePage()`, which now takes a trial-panel
@@ -517,6 +547,7 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `DRAGON_PRICING_LASTMOD` | `data/dragon-pricing-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/dragon-pricing/`, never older than `PRICING_LASTMOD`; `DRAGON_PRICING_CHECKED` dates the references |
 | `WISPR_FLOW_PRICING_LASTMOD` | `data/wispr-flow-pricing-guide.mjs` | the same for `/guides/wispr-flow-pricing/`; `WISPR_FLOW_PRICING_CHECKED` dates the references |
 | `WINDOWS_VOICE_TYPING_LASTMOD` | `data/windows-voice-typing-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/windows-voice-typing-not-working/` |
+| `BEST_DICTATION_SOFTWARE_LASTMOD` | `data/best-dictation-software-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/best-dictation-software/`, never older than `PRICING_LASTMOD`; `BEST_DICTATION_SOFTWARE_CHECKED` dates the references and sets the title's year |
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
