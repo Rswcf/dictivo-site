@@ -1,3 +1,4 @@
+import { TRIAL_MILESTONE_LASTMOD } from "../data/trial-milestone-copy.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -36,7 +37,9 @@ test("the rendered network test pages carry the fourth paragraph and the new dat
     // Both sides collapsed: \s also matches the no-break and narrow no-break spaces French and
     // Chinese typography use, so a correctly typeset translation cannot trip the comparison.
     assert.ok(page.includes(flat(`<p>${escape(NETWORK_TEST_METHOD[locale][3])}</p>`)), `${locale}: fourth paragraph not rendered`);
-    assert.ok(page.includes(`datetime="${NETWORK_TEST_LASTMOD}"`), `${locale}: page date is not NETWORK_TEST_LASTMOD`);
+    // The page also carries the content-free report copy, so it is dated by the later of the two changes.
+    const stamp = NETWORK_TEST_LASTMOD > TRIAL_MILESTONE_LASTMOD ? NETWORK_TEST_LASTMOD : TRIAL_MILESTONE_LASTMOD;
+    assert.ok(page.includes(`datetime="${stamp}"`), `${locale}: page date is not the later of NETWORK_TEST_LASTMOD and TRIAL_MILESTONE_LASTMOD`);
   }
   const hant = readFileSync(`${dist}zh-hant/privacy/local-dictation-network-test/index.html`, "utf8");
   for (const host of ["app.dictivo.app", "huggingface.co"]) assert.ok(hant.includes(host), `zh-hant page missing ${host}`);

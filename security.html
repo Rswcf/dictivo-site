@@ -183,8 +183,8 @@
               </tr>
               <tr>
                 <th scope="row">app.dictivo.app</th>
-                <td>Trial start; the first Local trial transcription you paste or copy; usage statistics only if you opt in; purchase claims after you start a checkout, until the licence arrives; Local price and renewal information when that screen opens</td>
-                <td>Hashed device id, platform, app version, timestamps; a one-time checkout nonce (the reply carries the licence key and product family); statistics events carry operational metadata — never content</td>
+                <td>Trial start; the first Local trial transcription you paste or copy; once when the app is first opened and when microphone (on a Mac also accessibility) access is decided; usage statistics only if you opt in; purchase claims after you start a checkout, until the licence arrives; Local price and renewal information when that screen opens; the optional trial reminder, only if you ask for it</td>
+                <td>Hashed device id, platform, app version, timestamps; install census (first open, permission state); trial reminder email address (optional, deleted when sent); a one-time checkout nonce (the reply carries the licence key and product family); statistics events carry operational metadata — never content</td>
                 <td>Unchanged</td>
                 <td>Yes; paste the licence key manually after buying</td>
               </tr>
@@ -226,6 +226,8 @@
         <ul>
           <li><strong>Usage statistics</strong> — off by default. Only if you turn on “Share usage statistics” in Settings (“Share anonymous usage statistics” before 0.3.51) does the app send metadata-only events (which step of setup was reached, whether microphone access was granted, dictation duration and word count), each with a hashed device identifier that does not name you. No audio, no transcript text, no file or app names. You can turn it off again at any time.</li>
           <li><strong>Trial milestones</strong> — independent of the usage-statistics setting, the Local trial reports its start and the first Local transcript successfully copied or pasted to app.dictivo.app (api.dictivo.app in versions before 0.3.51). Reports contain a hashed device identifier, platform, app version, trial-start time and a capability flag; the success report adds its time. Failed deliveries may retry. Neither report contains audio or transcript text.</li>
+          <li><strong>Install census</strong> — from 0.3.54, also independent of the usage-statistics setting: once per new install, that the app was first opened, and, when it is decided, whether microphone access (on a Mac also accessibility access) was granted, denied or produced no audio, as one word. Same hashed device identifier, platform and app version; no content, no file or app names.</li>
+          <li><strong>Trial reminder</strong> — from 0.3.54, only if you type an email address and ask for it: the address, your interface language and the trial's start date are stored to send one email two days before the trial ends, and the address is deleted when that email is sent. Cancel it in the app, through the link in the email, or by writing to support@dictivo.app.</li>
         </ul>
         <p>
           That table is the whole desktop network surface. Dictivo does not use third-party ads, third-party
@@ -270,7 +272,7 @@
           to acknowledge within two business days and to ship a fix or mitigation as quickly as the severity warrants.
         </p>
         <p>
-          Last reviewed <time datetime="2026-09-29">September&nbsp;29,&nbsp;2026</time>.
+          Last reviewed <time datetime="2026-10-10">October&nbsp;10,&nbsp;2026</time>.
         </p>
       </section>
     </main>

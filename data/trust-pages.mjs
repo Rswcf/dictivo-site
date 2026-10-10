@@ -9,6 +9,8 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * tell which version they agreed to.
  */
 const LEGAL_LASTMOD = "2026-08-01";
+// The Privacy Policy moved on 2026-10-10: the install census and the optional trial reminder (desktop 0.3.54).
+const PRIVACY_LASTMOD = "2026-10-10";
 // The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-26).
 const TERMS_LASTMOD = "2026-09-26";
 
@@ -78,12 +80,21 @@ export const TRUST_PAGES = [
         paragraphs: [
           "Dictivo can send metadata-only usage statistics so setup problems and dead ends can be found. This is off by default. Nothing is sent unless you turn on \"Share usage statistics\" in Settings (called \"Share anonymous usage statistics\" before version 0.3.51), and you can turn it off again at any time. Each event carries a hashed device identifier that does not name you. The events describe what happened, not what you said: which setup step was reached, whether microphone access was granted or denied, how long a dictation ran, and how many words it produced. They never include audio, transcript text, file names, or application names.",
           TRIAL_MILESTONE_COPY.en.trial,
-          "Both go to Dictivo's own endpoint. There is no third-party analytics or advertising SDK in the desktop app. The website records anonymous, cookieless page views and download clicks for the same purpose. If you open dictivo.app/?self=1, the website stores a single flag named dictivo-self in that browser's local storage and stops sending its page views and download clicks; /?self=0 removes the flag.",
+          "Both streams go to Dictivo's own endpoint. There is no third-party analytics or advertising SDK in the desktop app. The website records anonymous, cookieless page views and download clicks for the same purpose. If you open dictivo.app/?self=1, the website stores a single flag named dictivo-self in that browser's local storage and stops sending its page views and download clicks; /?self=0 removes the flag.",
         ],
         bullets: [
           "Usage statistics are off by default and can be turned off again at any time in Settings.",
           "No dictation audio and no transcript text is ever included in either stream.",
           "The full desktop network surface is listed on the security page.",
+        ],
+      },
+      {
+        title: "Trial reminder email",
+        paragraphs: [TRIAL_MILESTONE_COPY.en.reminder],
+        bullets: [
+          "Optional, and separate from the usage-statistics setting: nothing is stored unless you type an address and ask for the reminder.",
+          "One email, two days before the 14-day Local trial ends. No newsletter, no other messages.",
+          "Cancel in the app, through the link in the email, or by writing to support@dictivo.app.",
         ],
       },
       {
@@ -1552,8 +1563,9 @@ for (const page of TRUST_PAGES.filter((p) => ["privacy", "privacy/where-dictatio
 
 // The Privacy Policy gained the website-language section on 2026-09-14, the
 // renamed statistics setting and the app.dictivo.app trial host on 2026-09-26,
-// and the website's /?self=1 opt-out flag on 2026-09-29.
-TRUST_PAGES.find((page) => page.slug === "privacy").lastModified = "2026-09-29";
+// the website's /?self=1 opt-out flag on 2026-09-29, and the install census and
+// the optional trial reminder email (desktop 0.3.54) on 2026-10-10.
+TRUST_PAGES.find((page) => page.slug === "privacy").lastModified = PRIVACY_LASTMOD;
 
 // Link the procedure to a separately scoped, reproducible engine-only observation.
 networkTestPage.relatedLinks.push({
