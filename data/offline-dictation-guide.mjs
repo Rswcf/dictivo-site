@@ -94,6 +94,10 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
           "Use Cloud Fast only for selected low-sensitivity recordings where speed matters.",
           "Use Dictivo when a one-time Local license is easier to justify than recurring cloud dictation.",
         ],
+        link: {
+          label: "Need Windows or a free option too? See the best dictation software by need",
+          href: "/guides/best-dictation-software/",
+        },
       },
     ],
     faqTitle: "Offline dictation questions",
@@ -104,6 +108,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["Which apps handle recorded files?", "MacWhisper supports dictation and files; Aiko transcribes recordings."],
     ],
     referenceTitle: "References",
+    // 2026-10-10: the Dictivo fit section links the cross-platform dictation software guide.
+    lastUpdated: "2026-10-10",
   },
   de: {
     navLabel: "Offline-Diktat für Mac",

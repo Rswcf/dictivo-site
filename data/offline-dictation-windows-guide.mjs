@@ -1,6 +1,7 @@
 import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./dragon-price-status.mjs";
 
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-09";
+// 2026-10-10: Related pages gained the cross-platform dictation software guide.
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-10";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],
@@ -191,6 +192,7 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
     ["Dragon alternative", "Full Dictivo vs Dragon Professional comparison and the Dragon Home migration story.", "https://dictivo.app/compare/dragon-alternative/"],
     ["Dragon pricing", "What each Dragon edition costs and how it is licensed, from Nuance and Microsoft sources.", "https://dictivo.app/guides/dragon-pricing/"],
     ["Wispr Flow pricing", "Wispr Flow's plans, word limits, student pricing, tax and refunds, from its own pages.", "https://dictivo.app/guides/wispr-flow-pricing/"],
+    ["Best dictation software", "Cross-platform picks by need, including free and built-in Windows options.", "https://dictivo.app/guides/best-dictation-software/"],
     ["Where dictation audio goes", "Dictivo's documented audio path for Local mode and Cloud Fast.", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
     ["Local dictation network test", "The repeatable test for verifying that Local mode does not upload audio.", "https://dictivo.app/privacy/local-dictation-network-test/"],
   ],

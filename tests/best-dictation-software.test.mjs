@@ -238,3 +238,23 @@ test("llms.txt lists the guide in English only", () => {
   assert.ok(llms.includes("Which dictation software is free, works offline, or runs on Windows as well as Mac?"));
   assert.ok(!read("de/llms.txt").includes(url));
 });
+
+test("readers reach the guide from the Mac list, both offline guides and the English comparison hub", () => {
+  const link = `href="${path}"`;
+  const absolute = `href="${url}"`;
+  assert.ok(main(read("guides/best-speech-to-text-apps-for-mac/index.html")).includes(absolute), "Mac list related pages");
+  assert.ok(main(read("guides/offline-dictation-on-windows/index.html")).includes(absolute), "Windows offline guide related pages");
+  assert.ok(main(read("guides/offline-dictation-on-mac/index.html")).includes(link), "Mac offline guide, English");
+  assert.ok(main(read("compare/index.html")).includes(link), "English comparison hub");
+  for (const other of ["de/", "ja/", "fr/", "zh-hant/"]) {
+    assert.ok(!read(`${other}compare/index.html`).includes(path), `${other} comparison hub`);
+    assert.ok(!read(`${other}guides/offline-dictation-on-mac/index.html`).includes(path), `${other} offline guide`);
+  }
+  // The guide links back to the Mac list with a descriptive anchor, so the two split the work.
+  assert.ok(section(page(), 4).includes('<a href="/guides/best-speech-to-text-apps-for-mac/">Best speech-to-text apps for Mac, compared by workflow</a>'));
+  const sitemap = read("sitemap.xml");
+  for (const [loc, date] of [["guides/best-speech-to-text-apps-for-mac/", "2026-10-10"], ["guides/offline-dictation-on-windows/", "2026-10-10"], ["guides/offline-dictation-on-mac/", "2026-10-10"]]) {
+    const lastmod = date > PRICING_LASTMOD ? date : PRICING_LASTMOD;
+    assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${loc}</loc>\\s*<lastmod>${lastmod}</lastmod>`), loc);
+  }
+});

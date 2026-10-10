@@ -65,7 +65,7 @@ import {
 } from "../data/ja-mac-dictation-shortcut-guide.mjs";
 import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
-import { BEST_DICTATION_SOFTWARE_LASTMOD, BEST_DICTATION_SOFTWARE_REFERENCES, bestDictationSoftwareCopy } from "../data/best-dictation-software-guide.mjs";
+import { BEST_DICTATION_SOFTWARE_HUB_LINK, BEST_DICTATION_SOFTWARE_LASTMOD, BEST_DICTATION_SOFTWARE_REFERENCES, bestDictationSoftwareCopy } from "../data/best-dictation-software-guide.mjs";
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
@@ -3210,7 +3210,8 @@ function renderCompareHub(currentCode = "en") {
       <section class="compare-hero" aria-labelledby="compare-hub-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.hubEyebrow)}</span>
         <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
-        <p class="doc-lede">${html(copy.hubLede)}</p>${COMPARE_SELECTION_GUIDES[currentCode] ? `
+        <p class="doc-lede">${html(copy.hubLede)}</p>${currentCode === "en" ? `
+        <p><a href="${attr(BEST_DICTATION_SOFTWARE_HUB_LINK.href)}">${html(BEST_DICTATION_SOFTWARE_HUB_LINK.label)}</a></p>` : ""}${COMPARE_SELECTION_GUIDES[currentCode] ? `
         <div class="hero-actions">
           <a class="button button-light" href="${attr(firstDictationPath(currentCode))}">${html(copy.practice)}</a>
           <a class="button button-outline" href="#compare-apps">${html(copy.compare)}</a>

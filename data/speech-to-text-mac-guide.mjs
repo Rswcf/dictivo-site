@@ -1,5 +1,6 @@
 // 2026-10-09: Related pages gained the Mac dictation troubleshooting and shortcut guides.
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-10-09";
+// 2026-10-10: Related pages gained the cross-platform dictation software guide.
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-10-10";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["Dictivo offline dictation guide", "https://dictivo.app/guides/offline-dictation-on-mac/"],
@@ -280,6 +281,11 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_COPY = {
       "Mac dictation shortcut",
       "Find, change or fix the built-in macOS Dictation shortcut.",
       "https://dictivo.app/guides/mac-dictation-shortcut/"
+    ],
+    [
+      "Best dictation software across Mac and Windows",
+      "Cross-platform picks by need: free, fully local, Windows, several languages and buy-once.",
+      "https://dictivo.app/guides/best-dictation-software/"
     ]
   ],
   "referencesTitle": "Evidence links"
