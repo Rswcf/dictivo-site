@@ -6,7 +6,7 @@ export const RELEASE_NOTES = Object.freeze({
     bullets: Object.freeze([
       "During setup, or in Settings, Account & Billing while your Local trial runs, you can leave an email address and Dictivo sends you one email two days before the trial ends. It is optional, it is the only email you get, and the address is deleted when it is sent. Cancel it in the app or through the link in the email.",
       "If your Local trial ends while you dictate with Cloud Fast, Dictivo now says so once, in one line, without a price or a buy button. Press OK and it does not come back.",
-      "On Windows, Local dictation now works on PCs without the Microsoft Visual C++ Redistributable: Dictivo ships the files its local engine needs, and if the GPU engine cannot start, it switches to the CPU engine by itself instead of showing system error windows.",
+      "On Windows, Local dictation now works on PCs without Microsoft's Visual C++ Redistributable: Dictivo ships the files its local engine needs, and if the GPU engine cannot start, it switches to the CPU engine by itself instead of showing system error windows.",
       "To see where setup gets stuck, the app now also reports, without any content, when it is first opened on a new install and whether microphone access (and on Mac, accessibility access) was granted, denied or recorded no sound. This is separate from the usage statistics setting, and never includes audio, text, file or app names.",
       "The privacy policy and the security page describe the reminder and these reports.",
     ]),
