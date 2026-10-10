@@ -282,7 +282,7 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
           {
             title: "Dragon Professional v16",
             paragraphs: [
-              "Nuance's long-running dictation software for Windows 10 and 11, installed on the PC, with voice commands; Nuance also lists Dragon Legal and Dragon Law Enforcement. It suits organizations that already run Dragon. It runs only on Windows, and it is bought through Nuance's sales team.",
+              "Nuance's long-running dictation software for Windows 10 and 11, installed on the PC; Nuance also lists Dragon Legal and Dragon Law Enforcement. It suits organizations that already run Dragon. It runs only on Windows, and it is bought through Nuance's sales team.",
               DRAGON_PROFESSIONAL_PRICE_SENTENCE,
             ],
             links: [["Dragon pricing, edition by edition", "/guides/dragon-pricing/"]],

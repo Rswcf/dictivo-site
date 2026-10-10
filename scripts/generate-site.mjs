@@ -5125,8 +5125,8 @@ function renderBestDictationSoftwarePage() {
     // A page about Mac and Windows: both downloads, Windows first for Windows visitors.
     platform: "both",
     trialSource: "best_software",
-    // Five columns: the wider table minimum of the offline guides.
-    mainClass: "doc-page offline-guide-page",
+    // `doc-page` alone: the five-column table fits the desktop column without scrolling.
+    mainClass: "doc-page",
     idPrefix: "best-software",
     mainId: "best-dictation-software",
     quickReference: copy.quickReference,
