@@ -1,28 +1,28 @@
 {
-  "version": "0.3.54",
-  "tag": "v0.3.54",
+  "version": "0.3.56",
+  "tag": "v0.3.56",
   "channel": "stable",
-  "updatedAt": "2026-10-10",
-  "publishedAt": "2026-10-10T16:03:52Z",
-  "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.54",
+  "updatedAt": "2026-10-17",
+  "publishedAt": "2026-10-17T20:29:05Z",
+  "releaseUrl": "https://github.com/Rswcf/Dictivo/releases/tag/v0.3.56",
   "publicWindowsDownloads": true,
   "dmg": {
-    "fileName": "Dictivo_0.3.54_universal.dmg",
-    "url": "https://downloads.dictivo.app/v0.3.54/Dictivo_0.3.54_universal.dmg",
-    "sha256": "d6ca73d67c85127e772f57df0b34125ea806d0e9749abbe5f905b9a495b7e208",
-    "size": 25152193
+    "fileName": "Dictivo_0.3.56_universal.dmg",
+    "url": "https://downloads.dictivo.app/v0.3.56/Dictivo_0.3.56_universal.dmg",
+    "sha256": "27128719abc06f30d882f50b14579c482d54e722cc694dafebaabb7e04114f4f",
+    "size": 25156692
   },
   "windows": {
     "exe": {
-      "fileName": "Dictivo_0.3.54_x64-setup.exe",
-      "url": "https://downloads.dictivo.app/v0.3.54/Dictivo_0.3.54_x64-setup.exe",
-      "sha256": "14f829b2f9503bc8a9d7ebe5a25c345cbadbdaf6966674fb3652a3f758093700",
-      "size": 13663457
+      "fileName": "Dictivo_0.3.56_x64-setup.exe",
+      "url": "https://downloads.dictivo.app/v0.3.56/Dictivo_0.3.56_x64-setup.exe",
+      "sha256": "d1b00aa73ccfcd77cda5cb5846d45edf7ff3f0fa13ebc6308462f2e74679f22c",
+      "size": 13689282
     },
     "msi": {
-      "fileName": "Dictivo_0.3.54_x64_en-US.msi",
-      "url": "https://downloads.dictivo.app/v0.3.54/Dictivo_0.3.54_x64_en-US.msi",
-      "sha256": "8b295ad99f8879241619dfc3cc601e8d73e95908876604cb878ff779b7a6f322",
+      "fileName": "Dictivo_0.3.56_x64_en-US.msi",
+      "url": "https://downloads.dictivo.app/v0.3.56/Dictivo_0.3.56_x64_en-US.msi",
+      "sha256": "69f907bba1ffdac8dd9ea3e8b301dd8beb779668c8ce6190676d326cebe8f7eb",
       "size": 28725248
     }
   }
