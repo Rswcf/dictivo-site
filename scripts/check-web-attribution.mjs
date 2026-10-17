@@ -161,3 +161,24 @@ const withoutSelfFlag = script.replace(new RegExp(selfFlagAccess.source, "g"), "
 const forbiddenStorage = /\b(?:localStorage|sessionStorage|caches)\s*[.\[]|\[\s*["'`](?:localStorage|sessionStorage|caches)["'`]\s*\]|\bindexedDB\b|\bcookieStore\b|document(?:\.cookie|\[\s*["'`]cookie["'`]\s*\])\s*\+?=/;
 assert(!forbiddenStorage.test(withoutSelfFlag), "No persistent browser tracking beyond the dictivo-self opt-out flag");
 console.log("Web attribution checks passed: campaign handoff, fresh page ids, CTA/redirect parity, referrer privacy, navigation exclusions, preview isolation, and the opt-out flag.");
+
+// Real external entry URLs must retain their coarse channel even when a
+// browser omits Referer. Unknown or ambiguous ref values remain uncollected.
+for (const [ref, channel] of [["producthunt", "producthunt"], ...["trustmrr", "dealmrr", "mrrwars", "stockmrrket", "whatitmakes", "epicsaas"].map(ref => [ref, "directory"])]) {
+  const entry = loadPage(`https://dictivo.app/?ref=${ref}`);
+  assert.equal(entry.events[0].source, channel);
+  assert.equal(entry.events[0].medium, "referral");
+  const practice = navigate(entry, link("https://dictivo.app/guides/first-local-dictation/"));
+  assert.equal(practice.searchParams.get("utm_source"), channel);
+  assert(!practice.searchParams.has("ref"));
+  const follow = loadPage(practice.href, entry.location.href);
+  const checkout = navigate(follow, link("https://dictivo.app/checkout/local"));
+  assert.equal(checkout.searchParams.get("checkout[custom][channel]"), channel);
+}
+for (const query of ["ref=person%40example.com", "ref=unknown", "ref=producthunt&ref=trustmrr", "ref=__proto__", "ref=constructor"]) {
+  const entry = loadPage(`https://dictivo.app/?${query}`);
+  assert.equal(entry.events[0].source, "direct");
+}
+assert.equal(loadPage("https://dictivo.app/?ref=producthunt&utm_source=newsletter").events[0].source, "newsletter");
+assert.equal(loadPage("https://dictivo.app/?ref=producthunt", "https://www.google.com/search?q=private").events[0].source, "www.google.com");
+console.log("Known referral entry checks passed: coarse allowlist, priority, navigation and checkout continuity.");

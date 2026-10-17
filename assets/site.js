@@ -200,9 +200,17 @@ function campaignValue(value) {
 function readPageAttribution() {
   const params = new URLSearchParams(window.location.search);
   const referral = referrerHost();
+  // Existing public backlinks use these coarse campaign labels. Never copy an
+  // arbitrary ref value (which could be a person or identifier) into analytics.
+  // Explicit UTM and an actual external referrer keep their existing priority.
+  const knownRefs = new Map([
+    ["producthunt", "producthunt"],
+    ...["trustmrr", "dealmrr", "mrrwars", "stockmrrket", "whatitmakes", "epicsaas"].map(name => [name, "directory"]),
+  ]);
+  const taggedSource = params.getAll("ref").length === 1 ? knownRefs.get(params.get("ref")) : undefined;
   return {
-    source: campaignValue(params.get("utm_source")) || referral || "direct",
-    medium: campaignValue(params.get("utm_medium")) || (referral ? "referral" : "direct"),
+    source: campaignValue(params.get("utm_source")) || referral || taggedSource || "direct",
+    medium: campaignValue(params.get("utm_medium")) || (referral || taggedSource ? "referral" : "direct"),
     campaign: campaignValue(params.get("utm_campaign")),
     content: campaignValue(params.get("utm_content")),
     term: campaignValue(params.get("utm_term")),
