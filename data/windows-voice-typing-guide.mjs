@@ -4,7 +4,7 @@
 // document (registry edits, system file repair, third-party tools) is suggested. Dictivo appears
 // only in the closing section, disclosed as this site's product, and only while Windows
 // downloads are public: without them the section is null and the trial panel is not rendered.
-export const WINDOWS_VOICE_TYPING_LASTMOD = "2026-10-09";
+export const WINDOWS_VOICE_TYPING_LASTMOD = "2026-10-17";
 export const WINDOWS_VOICE_TYPING_CHECKED = "2026-10-09";
 
 const checked = `(checked ${WINDOWS_VOICE_TYPING_CHECKED})`;
@@ -188,6 +188,11 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
           paragraphs: [
             "Dictivo is this site's product. It is a separate dictation app with its own shortcut (Ctrl+Shift+Space on Windows by default), so it does not depend on voice typing or the online speech recognition setting. In Local mode it transcribes on your PC with a downloaded model, so it works without an internet connection once the model is installed, and then pastes the text into the app you are using.",
             "It is a desktop app, so Windows' Let desktop apps access your microphone setting applies to it too, and it cannot help if Windows does not detect your microphone at all. If voice typing already does what you need, you do not need another app.",
+          ],
+          steps: [
+            "Install Dictivo on Windows x64 and choose Set up Local. Download the recommended model while online; the 14-day full Local trial needs no account or card.",
+            "Allow desktop apps to access the microphone, select Local in Dictivo, and click the text field you want to write in. Use Ctrl+Shift+Space to start and stop, or release it to stop if you selected hold-to-talk.",
+            "Check one short sentence for names, numbers and punctuation, then repeat in your normal writing app. If text appears in Dictivo but not the field, use Copy and paste it manually with Ctrl+V. Confirm the workflow saves editing time before buying.",
           ],
           links: [
             ["Try your first sentence with Dictivo", "/guides/first-local-dictation/"],

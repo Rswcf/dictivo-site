@@ -687,7 +687,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
           "Dictivoをインストールし、「Set up Local」からモデルを取得します。初回ダウンロードにはネット接続が必要です。14日間はすべてのLocalモデルを試せます。カードやDictivoアカウントは不要です。",
           "Macの初期ショートカットはCmd+Shift+Spaceです。これはDictivoのキー設定であり、Mac標準の音声入力とは別です。Localを選び、入力欄をクリックしてから録音を開始・停止します。押している間だけ録音する設定なら、キーを離すと停止します。",
           "「明日の打ち合わせは午後3時です。資料を田中さんに送ってください。」など短い文章で、人名・数字・句読点を確認します。この例文は練習用で、測定済みの日本語認識結果ではありません。モデル取得後に通信を切った状態でも試し、普段のアプリに貼り付くか確かめてください。"
-        ]
+        ],
+        "link": { "label": "日本語の例文と練習欄で、最初の一文を試す", "href": "/ja/guides/first-local-dictation/" }
       },
       {
         "kicker": "うまくいかないとき",
@@ -728,8 +729,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ]
     ],
     "referenceTitle": "参考資料",
-    // 2026-10-09: the built-in dictation section links the Japanese shortcut guide.
-    "lastUpdated": "2026-10-09"
+    // 2026-10-17: the trial steps link directly to the Japanese practice page.
+    "lastUpdated": "2026-10-17"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",
