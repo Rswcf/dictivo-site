@@ -9,8 +9,8 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * tell which version they agreed to.
  */
 const LEGAL_LASTMOD = "2026-08-01";
-// The Privacy Policy moved on 2026-10-10: the install census and the optional trial reminder (desktop 0.3.54).
-const PRIVACY_LASTMOD = "2026-10-10";
+// Revised for optional desktop acquisition-channel sharing.
+const PRIVACY_LASTMOD = "2026-10-17";
 // The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-26).
 const TERMS_LASTMOD = "2026-09-26";
 
