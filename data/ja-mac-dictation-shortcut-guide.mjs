@@ -4,7 +4,7 @@
 // those pages, never translated from the English guide. Apple names only two choices of the
 // Shortcut pop-up menu, so this page names only those. Dictivo appears only in the third column
 // of the quick reference, in its own disclosed section and in the last FAQ.
-export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-10-09"; // set to the publishing commit's date
+export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-10-17"; // set to the publishing commit's date
 
 // The day the Apple pages below were read for this guide.
 export const JA_MAC_DICTATION_SHORTCUT_CHECKED = "2026-10-09";
@@ -149,11 +149,17 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
     fieldTest: null,
     dictivo: {
       kicker: "標準機能以外の選択肢",
-      title: "Dictivoのショートカット",
+      title: "Dictivoのショートカットと、日本語で試す手順",
       paragraphs: [
         `ここからは当サイトの製品の案内です。Dictivoは、macOS標準の音声入力とは別の音声入力アプリで、ショートカットも「キーボード」設定ではなくDictivoの中で設定します。初期設定は${dictivoShortcutJa(windows)}です。1回押すと録音が始まり、もう一度押すと止まります。キーを押している間だけ録音する方式にも切り替えられます。`,
         `直前の文字起こしをもう一度貼り付けるショートカットもあり、初期設定は${dictivoPasteLastJa(windows)}です。どちらも、Dictivoの「設定」→「ホットキー」（英語表示ではSettings → Hotkeys）で変更できます。`,
         "Dictivoのショートカットと、macOSの音声入力のショートカットは別々の設定で、片方を変えてももう片方は変わりません。両方を使うなら、違うキーにしてください。文字起こしが終わると、Dictivoは使っているアプリに文字を貼り付けます。",
+      ],
+      steps: [
+        "まずmacOS標準の音声入力で、普段のメールを1文入力してください。必要な文章を無理なく書けるなら、追加のアプリを購入する必要はありません。",
+        "ローカルモデルを選んで使いたい場合や、録音結果を履歴から再利用したい場合は、Dictivoをインストールし、Set up Localでモデルをダウンロードします。全ローカルモデルの試用は14日間で、カード登録・アカウントは不要です。",
+        "Localを選び、入力欄をクリックして、Dictivoのショートカットで日本語のメールやメモを1文話します。人名・社名・数字・句読点を確認し、いつも使うアプリでも試してください。自動で貼り付かない場合は、結果をコピーしてCmd+Vで貼り付けます。",
+        "標準機能と同じ文章を比べ、修正を含む作業時間が減るか確認してください。Tinyで十分なら無料で使い続けられます。試用した大きなローカルモデルを継続して使いたい場合に、有料Localを検討してください。",
       ],
       links: [
         ["Dictivoで最初の1文を試す", firstDictationPath],

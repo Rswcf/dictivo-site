@@ -189,9 +189,20 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       ],
       link: { label: "Open the first-dictation guide and private practice field", href: "/guides/first-local-dictation/" },
     },
+    {
+      kicker: "Purchase decision",
+      title: "When is paid offline dictation worth it on Windows?",
+      paragraphs: [
+        "Start with a task you already do: a short email, a work note or an AI prompt. Dictate the same text with your current tool and Dictivo Local. Include the time spent correcting names, numbers and punctuation, and test insertion in your actual writing app. Model speed and recognition quality depend on your PC, microphone and speech; this page does not claim a measured advantage.",
+        "Keep Voice Access if its free dictation and PC controls meet your needs. Keep Dictivo's free Tiny tier if it gives you usable results. Consider paid Local only if a larger model from the 14-day trial improves your everyday workflow enough to justify the purchase. Paying is not a fix for a missing microphone or an app that blocks text insertion.",
+        "Local is a one-time license with 12 months of updates; renewing updates is optional. Cloud Fast is a separate online option, not a requirement for Local. Read the current price, device allowance and refund terms before checkout. Windows downloads are for x64, and the installer is not yet Authenticode-signed; check your organization's software policy before installing on a work PC.",
+      ],
+      link: { label: "Check Local pricing, license and refund terms", href: "/pricing/" },
+    },
   ],
   faqTitle: "Windows offline dictation questions",
   faqs: [
+    ["Do I need a subscription for offline dictation on Windows?", "No. Windows Voice Access is free after setup. Dictivo has a free Tiny tier and a 14-day full Local trial. Paid Local is a one-time license with 12 months of updates and optional update renewal. Cloud Fast is separate and is not required for offline Local dictation."],
     ["How can I try Dictivo offline on Windows before paying?", "Install Dictivo on Windows x64, choose Set up Local and download the model while online. The 14-day full Local trial needs no account or card. Then select Local, click a text field and dictate with Ctrl+Shift+Space. Test your usual writing app and correction workload before buying; after model setup, Local transcription can run without an internet connection."],
     ["Does Windows have built-in offline dictation?", "Yes. Voice Access, built into Windows 11 22H2 and later, downloads a speech model once and then works on-device, including offline. The older Win+H Voice Typing path is cloud-based by default and needs an internet connection."],
     ["Is Windows Voice Typing (Win+H) private?", "Win+H uses Microsoft's cloud-based speech services by default, so dictation audio is sent to the cloud for processing. If on-device processing matters, use Voice Access or a local third-party dictation app."],

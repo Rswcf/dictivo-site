@@ -1,6 +1,6 @@
 // Outcome and trial details sit together above the first download buttons.
 export const HOME_CONVERSION_LASTMOD = "2026-09-10";
-export const HOME_CONVERSION_LOCALE_LASTMOD = { zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
+export const HOME_CONVERSION_LOCALE_LASTMOD = { ja: "2026-10-17", zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
 // The last body edit shared by every homepage: on 2026-10-09 the pricing introduction and
 // checkout note in all eleven languages (purchase wording, subscription price comparison,
 // license key, refund). Before that, the contextual offline-guide link (2026-09-29, d78a233).
@@ -73,7 +73,7 @@ export const HOME_CONVERSION_COPY = {
   },
   ja: {
     title: "次の下書きは、声で。", emphasis: "音声はデバイス内に。",
-    lede: "ショートカットを押して話し、使っているアプリに貼り付ける。メール、メモ、AIへの指示をデバイス上で音声入力できます。",
+    lede: "Mac・Windows x64で使える音声入力アプリ。ショートカットを押して話し、メール、メモ、AIへの指示を入力できます。Localモードは、モデルのダウンロード後にオフラインで使えます。",
     trial: "すべてのローカルモデルを14日間無料体験。カード登録・Dictivoアカウント不要。",
     steps: ["ショートカットを押す", "Localモードで話す", "確認して貼り付ける"],
     offer: "気に入ったら{{price.local.inline}}で買い切り。12か月のアップデート付き、以降の更新は任意です。",
