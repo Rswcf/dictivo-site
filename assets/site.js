@@ -555,3 +555,31 @@ if (productFilm) {
   });
   window.addEventListener('popstate', () => void seekFilm(Number(new URL(location.href).searchParams.get('t') || 0), false));
 }
+
+// An optional, coarse handoff after a download click. The installer is unchanged.
+// The desktop app asks again before saving or reporting the source. No page ID
+// or arbitrary URL parameter crosses this boundary; nothing is stored here.
+document.addEventListener("click", (event) => {
+  if (!event.isTrusted || !analyticsEnabled) return;
+  const link = event.target.closest?.("a.download-link");
+  const channel = checkoutChannel(pageAttribution.source);
+  const release = String(link?.dataset.releaseVersion || "").match(/^(\d+)\.(\d+)\.(\d+)$/);
+  const supported = release && (Number(release[1]) > 0 || Number(release[2]) > 3 || (Number(release[2]) === 3 && Number(release[3]) >= 56));
+  if (!link || !supported || !channel || document.getElementById("desktop-source-handoff")) return;
+  const locale = document.documentElement.lang;
+  const copy = locale.startsWith("zh")
+    ? ["安装之后（可选）", "如果你愿意，可将发现 Dictivo 的渠道交给应用，用于试用和购买统计。只传渠道名，不传页面标识或浏览历史。需要 Dictivo 0.3.56 或更新版本；应用会先征求同意。", "打开 Dictivo，查看来源共享选项", "关闭"]
+    : locale.startsWith("ja")
+      ? ["インストール後（任意）", "経路名だけをアプリに渡し、試用と購入の統計に使用できます。ページ ID や閲覧履歴は渡しません。Dictivo 0.3.56 以降が必要です。アプリで同意を確認します。", "Dictivo で共有の選択肢を確認", "閉じる"]
+      : ["After installing (optional)", "You can share how you found Dictivo for trial and purchase statistics. Only the channel name is passed, never page IDs or browsing history. Requires Dictivo 0.3.56 or later; the app asks for your agreement first.", "Open Dictivo to review source sharing", "Dismiss"];
+  const panel = document.createElement("aside");
+  panel.id = "desktop-source-handoff";
+  panel.setAttribute("aria-label", copy[0]);
+  panel.style.cssText = "position:fixed;bottom:16px;right:16px;width:min(420px,calc(100vw - 32px));padding:20px;background:#fff;color:#15231c;border:1px solid #c8d7cf;border-radius:16px;box-shadow:0 8px 32px #0002;z-index:1000;font-size:15px;line-height:1.5";
+  const title = document.createElement("strong"); title.textContent = copy[0];
+  const body = document.createElement("p"); body.textContent = `${copy[1]} (${channel})`;
+  const open = document.createElement("a"); open.href = `dictivo://source?channel=${encodeURIComponent(channel)}`; open.textContent = copy[2];
+  const close = document.createElement("button"); close.type = "button"; close.textContent = copy[3]; close.style.marginLeft = "12px"; close.addEventListener("click", () => panel.remove());
+  panel.append(title, body, open, close);
+  document.body.append(panel);
+});
