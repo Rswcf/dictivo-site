@@ -1,7 +1,7 @@
 import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./dragon-price-status.mjs";
 
-// 2026-10-10: Related pages gained the cross-platform dictation software guide.
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-10";
+// 2026-10-17: Added a Local trial and purchase-evaluation path.
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-10-17";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],
@@ -175,9 +175,24 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
         "Apply the same test to any app in this guide, including ours.",
       ],
     },
+    {
+      kicker: "Try before buying",
+      title: "Try one offline sentence on your Windows PC",
+      paragraphs: [
+        "Dictivo is our product. Use the trial to check your own microphone, writing app and editing workload before deciding whether the paid Local license is useful.",
+      ],
+      steps: [
+        "Install Dictivo for Windows x64 and choose Set up Local. Download the recommended model while online. The 14-day full Local trial does not require an account or card.",
+        "Allow microphone access for desktop apps, finish calibration and select Local. Click an empty text field and use the shortcut shown in Dictivo (Ctrl+Shift+Space by default). Press again to stop, or release it if you chose hold-to-talk.",
+        "Check the resulting sentence for names, numbers and punctuation. Repeat in the app you actually write in. If automatic paste fails, copy the result from Dictivo and paste with Ctrl+V.",
+        "After the model is installed, try a sentence with the network disconnected. Keep Local selected; Cloud Fast is a separate online mode. Compare the time you spend correcting the result with typing the sentence yourself.",
+      ],
+      link: { label: "Open the first-dictation guide and private practice field", href: "/guides/first-local-dictation/" },
+    },
   ],
   faqTitle: "Windows offline dictation questions",
   faqs: [
+    ["How can I try Dictivo offline on Windows before paying?", "Install Dictivo on Windows x64, choose Set up Local and download the model while online. The 14-day full Local trial needs no account or card. Then select Local, click a text field and dictate with Ctrl+Shift+Space. Test your usual writing app and correction workload before buying; after model setup, Local transcription can run without an internet connection."],
     ["Does Windows have built-in offline dictation?", "Yes. Voice Access, built into Windows 11 22H2 and later, downloads a speech model once and then works on-device, including offline. The older Win+H Voice Typing path is cloud-based by default and needs an internet connection."],
     ["Is Windows Voice Typing (Win+H) private?", "Win+H uses Microsoft's cloud-based speech services by default, so dictation audio is sent to the cloud for processing. If on-device processing matters, use Voice Access or a local third-party dictation app."],
     ["What is the best offline dictation software for Windows?", "Start free with Voice Access. For a dedicated local writing workflow, compare Dictivo ({{price.local.inline}} once), Whisperstream ($29 once), JesType, and Weesper Neon Flow. For voice coding and hands-free control, Talon is free and local."],

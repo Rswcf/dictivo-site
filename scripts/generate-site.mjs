@@ -4333,7 +4333,7 @@ function renderOfflineDictationWindowsGuideSection(section, index) {
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
+        ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
       </section>`;
 }
 
@@ -4922,7 +4922,7 @@ function renderDictationGuideDictivo(copy, idPrefix) {
   return `<section class="doc-section" aria-labelledby="${attr(`${idPrefix}-dictivo`)}">
         <p class="doc-meta">${html(copy.dictivo.kicker)}</p>
         <h2 id="${attr(`${idPrefix}-dictivo`)}">${html(copy.dictivo.title)}</h2>
-        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDictationGuideLinks(copy.dictivo.links)}
+        ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDocSteps(copy.dictivo.steps)}${renderDictationGuideLinks(copy.dictivo.links)}
       </section>`;
 }
 
@@ -4960,7 +4960,7 @@ function renderDictationGuidePage(guide) {
 
       <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-answer`)}">
         <h2 id="${attr(`${idPrefix}-answer`)}">${html(copy.answerTitle)}</h2>
-        <p>${html(copy.answer)}</p>
+        <p>${html(copy.answer)}</p>${renderDictationGuideLinks(copy.answerLinks)}
       </section>
 ${renderDictationGuideQuickReference(quickReference, idPrefix)}
       ${renderDictationGuideContents(copy, idPrefix, Boolean(quickReference))}
