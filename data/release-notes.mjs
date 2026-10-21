@@ -1,4 +1,13 @@
 export const RELEASE_NOTES = Object.freeze({
+  "0.3.57": Object.freeze({
+    date: "2026-10-21",
+    title: "More reliable automatic paste on Windows.",
+    bullets: Object.freeze([
+      "Windows now sends paste directly instead of starting a helper process. It waits for you to release the shortcut keys before sending the text to the active app.",
+      "If you switch windows or keep the shortcut held, Dictivo leaves the transcript on the clipboard for you to paste. It does not retry automatic input, which could insert the text twice.",
+      "Paste Last now tells you whether the text was sent to the active app or copied for manual paste. Mac keeps its existing automatic paste behavior.",
+    ]),
+  }),
   // Desktop 0.3.54 (spec 2026-10-09 §8.2 step 4). No Windows signing bullet: the first signed build is 0.3.55.
   "0.3.54": Object.freeze({
     date: "2026-10-10",
