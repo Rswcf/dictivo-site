@@ -16,6 +16,7 @@ export const FIRST_PUBLISHED = Object.freeze({
   "guides/mac-dictation-shortcut": Object.freeze({ en: "2026-10-09", ja: "2026-10-09" }),
   "guides/dragon-pricing": "2026-10-09", // English only
   "guides/wispr-flow-pricing": "2026-10-09", // English only
+  "guides/windows-installer-blocked": "2026-10-31", // English, German, Simplified and Traditional Chinese
   "guides/windows-voice-typing-not-working": "2026-10-09", // English only
   "guides/best-dictation-software": "2026-10-10", // English only
   "privacy/where-dictation-audio-goes": "2026-06-07", // b431ef4, all ten languages

@@ -67,6 +67,7 @@ import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } 
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
 import { BEST_DICTATION_SOFTWARE_HUB_LINK, BEST_DICTATION_SOFTWARE_LASTMOD, BEST_DICTATION_SOFTWARE_REFERENCES, bestDictationSoftwareCopy } from "../data/best-dictation-software-guide.mjs";
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
+import { WINDOWS_INSTALL_HELP_LASTMOD, WINDOWS_INSTALL_HELP_PATHS, WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_HELP_REFERENCES, WINDOWS_INSTALL_ENTRY_COPY, windowsInstallHelpPath } from "../data/windows-installer-help.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
@@ -129,7 +130,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Download for Windows",
     msiButton: "MSI installer",
     note: (version) => `Version ${version} - Windows x64.`,
-    smartscreen: 'Not yet code-signed, so Windows may warn. If Edge blocks the download, open "…" next to it and choose "Keep", then "Keep anyway". If SmartScreen appears when you run the installer, choose "More info", then "Run anyway".',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.en.note,
   },
   de: {
     badge: "Verfügbar",
@@ -137,7 +138,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Für Windows herunterladen",
     msiButton: "MSI-Installer",
     note: (version) => `Version ${version} - Windows x64.`,
-    smartscreen: 'Noch nicht code-signiert, daher kann Windows warnen. Wenn Edge den Download blockiert, öffnen Sie daneben "…" und wählen Sie "Beibehalten", dann "Trotzdem beibehalten". Wenn beim Start des Installers SmartScreen erscheint, wählen Sie "Weitere Informationen" und dann "Trotzdem ausführen".',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.de.note,
   },
   fr: {
     badge: "Disponible",
@@ -145,7 +146,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Télécharger pour Windows",
     msiButton: "Installateur MSI",
     note: (version) => `Version ${version} - Windows x64.`,
-    smartscreen: "Pas encore signé numériquement : Windows peut afficher un avertissement. Si Edge bloque le téléchargement, ouvrez « … » à côté du fichier, choisissez de le conserver, puis confirmez. Si SmartScreen s'affiche au lancement de l'installateur, choisissez « Informations complémentaires » puis « Exécuter quand même ».",
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.fr.note,
   },
   es: {
     badge: "Disponible",
@@ -153,7 +154,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Descargar para Windows",
     msiButton: "Instalador MSI",
     note: (version) => `Versión ${version} - Windows x64.`,
-    smartscreen: 'Aún sin firma de código: Windows puede avisar. Si Edge bloquea la descarga, abre "…" junto al archivo, elige conservarlo y confirma. Si aparece SmartScreen al ejecutar el instalador, elige "Más información" y luego "Ejecutar de todas formas".',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.es.note,
   },
   it: {
     badge: "Disponibile",
@@ -161,7 +162,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Scarica per Windows",
     msiButton: "Installer MSI",
     note: (version) => `Versione ${version} - Windows x64.`,
-    smartscreen: "Non ancora firmato: Windows può mostrare un avviso. Se Edge blocca il download, apri \"…\" accanto al file, scegli di mantenerlo e conferma. Se all'avvio dell'installer compare SmartScreen, scegli \"Ulteriori informazioni\" e poi \"Esegui comunque\".",
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.it.note,
   },
   nl: {
     badge: "Beschikbaar",
@@ -169,7 +170,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Download voor Windows",
     msiButton: "MSI-installer",
     note: (version) => `Versie ${version} - Windows x64.`,
-    smartscreen: 'Nog niet code-ondertekend: Windows kan waarschuwen. Blokkeert Edge de download, open dan "…" naast het bestand, kies ervoor het te behouden en bevestig. Verschijnt SmartScreen bij het starten van de installer, kies dan "Meer informatie" en daarna "Toch uitvoeren".',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.nl.note,
   },
   pt: {
     badge: "Disponível",
@@ -177,7 +178,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Baixar para Windows",
     msiButton: "Instalador MSI",
     note: (version) => `Versão ${version} - Windows x64.`,
-    smartscreen: 'Ainda sem assinatura de código: o Windows pode alertar. Se o Edge bloquear o download, abra "…" ao lado do arquivo, escolha manter o arquivo e confirme. Se o SmartScreen aparecer ao executar o instalador, escolha "Mais informações" e depois "Executar assim mesmo".',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.pt.note,
   },
   zh: {
     badge: "可用",
@@ -185,7 +186,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "下载 Windows 版",
     msiButton: "MSI 安装包",
     note: (version) => `版本 ${version} - Windows x64。`,
-    smartscreen: '安装包暂未进行代码签名，Windows 可能弹出提示。如果 Edge 拦截了下载，点击文件旁的「…」，选择保留该文件并确认。运行安装包时如果出现 SmartScreen，点击「更多信息」→「仍要运行」即可继续。',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.zh.note,
   },
   ja: {
     badge: "利用可能",
@@ -193,7 +194,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Windows 版をダウンロード",
     msiButton: "MSI インストーラ",
     note: (version) => `バージョン ${version} - Windows x64。`,
-    smartscreen: '現在コード署名前のため、Windows が警告を表示する場合があります。Edge がダウンロードをブロックした場合は、ファイル横の「…」からファイルを保持して確定してください。インストーラーの実行時に SmartScreen が表示された場合は、「詳細情報」→「実行」を選んでください。',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.ja.note,
   },
   ko: {
     badge: "사용 가능",
@@ -201,7 +202,7 @@ const WINDOWS_DOWNLOAD_COPY = {
     exeButton: "Windows용 다운로드",
     msiButton: "MSI 설치 파일",
     note: (version) => `버전 ${version} - Windows x64.`,
-    smartscreen: '아직 코드 서명이 적용되지 않아 Windows 경고가 표시될 수 있습니다. Edge가 다운로드를 차단하면 파일 옆의 "…"를 열어 파일을 유지하도록 선택하고 확인하세요. 설치 파일을 실행할 때 SmartScreen이 표시되면 "추가 정보" → "실행"을 선택하세요.',
+    smartscreen: WINDOWS_INSTALL_ENTRY_COPY.ko.note,
   },
 };
 
@@ -841,6 +842,13 @@ function jaMacDictationShortcutCopyForRender() {
     pricingPath: pricingHref("ja"),
     firstDictationPath: firstDictationPath("ja"),
   });
+}
+
+function windowsInstallHelpCopyForRender(code) {
+  const copy = WINDOWS_INSTALL_HELP_COPY[code];
+  if (code !== "zh-hant") return copy;
+  const localizeLinks = (links) => links?.map(([label, href]) => [label, href.replace(/^\/zh\//, "/zh-hant/")]);
+  return { ...copy, answerLinks: localizeLinks(copy.answerLinks), sections: copy.sections.map((section) => ({ ...section, links: localizeLinks(section.links) })) };
 }
 
 function windowsVoiceTypingPath() {
@@ -4971,7 +4979,7 @@ ${renderDictationGuideQuickReference(quickReference, idPrefix)}
 
       ${renderDictationGuideDictivo(copy, idPrefix)}
 
-      ${renderGuideTrial(code, platform, trialSource)}
+      ${guide.showTrial === false ? "" : renderGuideTrial(code, platform, trialSource)}
 
       <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-faq`)}">
         <h2 id="${attr(`${idPrefix}-faq`)}">${html(copy.faqTitle)}</h2>
@@ -5035,6 +5043,24 @@ function renderMacDictationShortcutPage() {
     route: "guides/mac-dictation-shortcut",
     headline: copy.metaTitle,
     about: ["Mac dictation shortcut", "Keyboard settings", "Microphone key", "Customize shortcut"],
+    legacyFaqSchema: false,
+  });
+}
+
+function renderWindowsInstallHelpPage(code) {
+  const path = windowsInstallHelpPath(code);
+  const copy = windowsInstallHelpCopyForRender(code);
+  return renderDictationGuidePage({
+    code, path, url: absoluteUrl(path), copy,
+    lastmod: WINDOWS_INSTALL_HELP_LASTMOD,
+    references: WINDOWS_INSTALL_HELP_REFERENCES,
+    headTags: translatedGuideHeadTags(WINDOWS_INSTALL_HELP_PATHS, code),
+    hrefForLocale: (item) => WINDOWS_INSTALL_HELP_PATHS[item.code] ?? localePath(item.code),
+    platform: "windows", showTrial: false,
+    mainClass: "doc-page", idPrefix: "windows-install", mainId: "windows-installer-help",
+    quickReference: copy.quickReference,
+    route: "guides/windows-installer-blocked", headline: copy.metaTitle,
+    about: ["Windows installation", "Microsoft Defender SmartScreen", "Smart App Control"],
     legacyFaqSchema: false,
   });
 }
@@ -5306,6 +5332,7 @@ function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const links = [
     FIRST_DICTATION_COPY[currentCode] ? `<a href="${firstDictationPath(currentCode)}">${html(FIRST_DICTATION_COPY[currentCode].navLabel)}</a>` : "",
+    `<a href="${attr(windowsInstallHelpPath(currentCode))}">${html(WINDOWS_INSTALL_ENTRY_COPY[currentCode].label)}</a>`,
     `<a href="/privacy/">${html(ui.footer.privacy)}</a>`,
     `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
     `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
@@ -5569,6 +5596,7 @@ function renderHome(currentCode) {
               </div>
               <p class="download-note">${html(liveWindowsCopy.note(release.version))}</p>
               <p class="download-note">${html(liveWindowsCopy.smartscreen)}</p>
+              <p class="download-note"><a href="${attr(windowsInstallHelpPath(currentCode))}" data-windows-install-help>${html(WINDOWS_INSTALL_ENTRY_COPY[currentCode].label)}</a></p>
             </article>` : ""}
           </div>
         </div>
@@ -6720,7 +6748,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD[locale.code], HOME_SHARED_CONTENT_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD[locale.code], HOME_SHARED_CONTENT_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
@@ -6806,6 +6834,12 @@ ${macDictationShortcutAlternates}
 ${macDictationShortcutAlternates}
     <priority>0.8</priority>
   </url>`;
+  const windowsInstallHelpEntries = Object.entries(WINDOWS_INSTALL_HELP_PATHS).map(([code, path]) => `  <url>
+    <loc>${absoluteUrl(path)}</loc>
+    <lastmod>${WINDOWS_INSTALL_HELP_LASTMOD}</lastmod>
+${translatedGuideSitemapAlternates(WINDOWS_INSTALL_HELP_PATHS)}
+    <priority>0.8</priority>
+  </url>`).join("\n");
   const windowsVoiceTypingEntry = `  <url>
     <loc>${windowsVoiceTypingUrl()}</loc>
     <lastmod>${WINDOWS_VOICE_TYPING_LASTMOD}</lastmod>
@@ -6913,6 +6947,7 @@ ${jaMacDictationTroubleshootingEntry}
 ${macDictationShortcutEntry}
 ${jaMacDictationShortcutEntry}
 ${windowsVoiceTypingEntry}
+${windowsInstallHelpEntries}
 ${dragonPricingEntry}
 ${wisprFlowPricingEntry}
 ${bestDictationSoftwareEntry}
@@ -7284,6 +7319,7 @@ for (const map of [
   HOME_COPY, HOME_CONVERSION_COPY, FILM_COPY, COMPARISON_EVIDENCE_COPY, MAC_ADVISOR_COPY,
   OFFLINE_DICTATION_GUIDE_COPY, PRIVACY_PROOF_COPY, NATIVE_DEMO.summary, WINDOWS_DOWNLOAD_COPY,
   WINDOWS_HOME_COPY, WINDOWS_UNAVAILABLE_HOME_COPY, SEO_HOME_COPY, TRUST_UI, LLMS_LABELS,
+  WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_ENTRY_COPY,
 ]) addHant(map);
 for (const page of TRUST_PAGES) if (page.locales?.zh) page.locales[HANT] = toHant(page.locales.zh);
 
@@ -7315,6 +7351,7 @@ write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWi
 write(`${macDictationNotWorkingPath().slice(1)}index.html`, renderMacDictationNotWorkingPage());
 write(`${macDictationShortcutPath().slice(1)}index.html`, renderMacDictationShortcutPage());
 write(`${windowsVoiceTypingPath().slice(1)}index.html`, renderWindowsVoiceTypingPage());
+for (const code of Object.keys(WINDOWS_INSTALL_HELP_PATHS)) write(`${windowsInstallHelpPath(code).slice(1)}index.html`, renderWindowsInstallHelpPage(code));
 write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${wisprFlowPricingPath().slice(1)}index.html`, renderWisprFlowPricingPage());
 write(`${bestDictationSoftwarePath().slice(1)}index.html`, renderBestDictationSoftwarePage());
