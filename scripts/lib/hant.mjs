@@ -32,6 +32,8 @@ const HANT_FIXES = [
   [/名片語成/g, "名詞組成"],
   [/全域性/g, "全域"],
   [/隱私宣告/g, "隱私聲明"],
+  // Match Microsoft's Taiwan name for Smart App Control.
+  [/智慧應用控制/g, "智慧型應用程式控制"],
 ];
 
 function convertString(value) {
