@@ -2200,6 +2200,57 @@ main section[id] {
   font-size: 13px;
 }
 
+/* Installation help belongs beside the Windows download, not in muted fine print. */
+.windows-install-help {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 18px;
+  align-items: start;
+  gap: 12px;
+  min-height: 48px;
+  border: 1px solid rgb(217 173 99 / 55%);
+  border-radius: var(--radius);
+  background: rgb(217 173 99 / 8%);
+  padding: 14px;
+  color: var(--ink);
+  text-align: left;
+  text-decoration: none;
+}
+
+.windows-install-help:hover {
+  border-color: var(--dot-beta);
+  background: rgb(217 173 99 / 14%);
+}
+
+.windows-install-help:focus-visible {
+  outline: 3px solid var(--dot-beta);
+  outline-offset: 4px;
+}
+
+.windows-install-help-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--dot-beta);
+}
+
+.windows-install-help-copy { min-width: 0; }
+.windows-install-help-copy strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.windows-install-help-copy > span {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.windows-install-help-arrow { color: var(--dot-beta); }
+.windows-install-help:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.windows-install-help--hero { width: min(100%, 560px); margin: 12px auto 0; }
+
 /* ---------------------------------------------------------- *
  * Signed strip                                                *
  * ---------------------------------------------------------- */

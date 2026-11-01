@@ -1,12 +1,12 @@
 // Commercial terms shared by the pricing copy and comparison calculations. Keep the
 // introductory offer separate from the regular price; renewing updates is always optional.
-// On regularPriceFrom, update this file, the copy and the API first, and raise the store price last
-// (runbook: docs/release/2026-11-01-local-price-rise-runbook.zh-CN.md in the desktop repository).
+// The founder approved the website rollover to the regular price on 2026-11-01.
+// Store and desktop/API price changes are separate steps in the desktop repository runbook.
 export const LOCAL_OFFER = Object.freeze({
-  price: 29,
+  price: 49,
   regularPrice: 49,
-  introPriceUntil: "2026-10-31",
-  regularPriceFrom: "2026-11-01",
+  introPriceUntil: null,
+  regularPriceFrom: null,
   updateRenewal: 24,
   includedUpdateMonths: 12,
   trialDays: 14,
@@ -18,7 +18,7 @@ export const CLOUD_FAST_MONTHLY_PRICE = 8.99;
 
 // The last day any displayed Dictivo price or its tax wording changed. Pages that show a
 // price report at least this date in the sitemap, so search engines recrawl them.
-export const PRICING_LASTMOD = "2026-09-16";
+export const PRICING_LASTMOD = "2026-11-01";
 
 const DATE_LOCALES = { en: "en-GB", de: "de-DE", fr: "fr-FR", es: "es-ES", it: "it-IT", nl: "nl-NL", pt: "pt-BR", zh: "zh-CN", ja: "ja-JP", ko: "ko-KR" };
 

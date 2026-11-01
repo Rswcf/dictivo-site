@@ -67,7 +67,7 @@ import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } 
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
 import { BEST_DICTATION_SOFTWARE_HUB_LINK, BEST_DICTATION_SOFTWARE_LASTMOD, BEST_DICTATION_SOFTWARE_REFERENCES, bestDictationSoftwareCopy } from "../data/best-dictation-software-guide.mjs";
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
-import { WINDOWS_INSTALL_HELP_LASTMOD, WINDOWS_INSTALL_HELP_PATHS, WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_HELP_REFERENCES, WINDOWS_INSTALL_ENTRY_COPY, windowsInstallHelpPath } from "../data/windows-installer-help.mjs";
+import { WINDOWS_INSTALL_ENTRY_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, WINDOWS_INSTALL_HELP_PATHS, WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_HELP_REFERENCES, WINDOWS_INSTALL_ENTRY_COPY, windowsInstallHelpPath } from "../data/windows-installer-help.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
@@ -842,6 +842,16 @@ function jaMacDictationShortcutCopyForRender() {
     pricingPath: pricingHref("ja"),
     firstDictationPath: firstDictationPath("ja"),
   });
+}
+
+// Keep help next to the actual EXE actions, including the first-screen download pair.
+function renderWindowsInstallHelpLink(code, placement) {
+  const copy = WINDOWS_INSTALL_ENTRY_COPY[code];
+  return `<a class="windows-install-help windows-install-help--${placement}" href="${attr(windowsInstallHelpPath(code))}" data-windows-install-help data-help-placement="${placement}">
+                <svg class="windows-install-help-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 3v1"/></svg>
+                <span class="windows-install-help-copy"><strong>${html(copy.shortTitle)}</strong><span>${html(copy.shortNote)}</span></span>
+                <span class="windows-install-help-arrow" aria-hidden="true">→</span>
+              </a>`;
 }
 
 function windowsInstallHelpCopyForRender(code) {
@@ -5426,6 +5436,7 @@ function renderHome(currentCode) {
                 <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_top_mac"))}"${downloadData("macos", "hero_top_mac")}>${html(t.hero.download)}</a>
                 ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
               </div>
+              ${hasWindowsRelease ? renderWindowsInstallHelpLink(currentCode, "hero") : ""}
               <p class="hero-trial">${html(conversion.trial)}</p>
               ${renderFirstDictationLink(currentCode)}
             </div>
@@ -5592,11 +5603,10 @@ function renderHome(currentCode) {
               <p>${html(hasWindowsRelease ? liveWindowsCopy.body : t.downloads.windowsBody)}</p>
               <div class="download-actions">
                 <a class="button button-dark download-link" href="${attr(downloadUrl("windows", "downloads_windows_exe"))}"${downloadData("windows", "downloads_windows_exe")}>${html(liveWindowsCopy.exeButton)}</a>
+                ${renderWindowsInstallHelpLink(currentCode, "download")}
                 <a class="button button-secondary download-link" href="${attr(downloadUrl("windows", "downloads_windows_msi", { artifact: "msi" }))}"${downloadData("windows", "downloads_windows_msi", { artifact: "msi" })}>${html(liveWindowsCopy.msiButton)}</a>
               </div>
               <p class="download-note">${html(liveWindowsCopy.note(release.version))}</p>
-              <p class="download-note">${html(liveWindowsCopy.smartscreen)}</p>
-              <p class="download-note"><a href="${attr(windowsInstallHelpPath(currentCode))}" data-windows-install-help>${html(WINDOWS_INSTALL_ENTRY_COPY[currentCode].label)}</a></p>
             </article>` : ""}
           </div>
         </div>
@@ -6748,7 +6758,7 @@ function renderSitemap() {
   const homepageEntries = LOCALES.map(
     (locale) => `  <url>
     <loc>${localeUrl(locale.code)}</loc>
-    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD[locale.code], HOME_SHARED_CONTENT_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
+    <lastmod>${latestDate(release.updatedAt, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD[locale.code], HOME_SHARED_CONTENT_LASTMOD, WINDOWS_INSTALL_ENTRY_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, PRODUCT_FILM.lastmod, PRICING_LASTMOD)}</lastmod>
 ${alternates}
 ${xDefault}
     <priority>${locale.code === "en" ? "1.0" : "0.9"}</priority>
