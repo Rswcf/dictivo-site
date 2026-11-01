@@ -44,6 +44,26 @@ test('every Windows download card and every homepage footer links to the appropr
   }
 });
 
+test('Windows help is beside both download entry points, before trial copy or the MSI alternative', () => {
+  for (const locale of LOCALES) {
+    const html = read(`${locale.path.slice(1)}index.html`);
+    const notices = [...html.matchAll(/<a class="windows-install-help [^>]+data-help-placement="(hero|download)"[\s\S]*?<\/a>/g)];
+    assert.equal(notices.length, publicWindows ? 2 : 0, locale.code);
+    if (!publicWindows) continue;
+    for (const [, placement] of notices) assert.ok(['hero', 'download'].includes(placement));
+    for (const [notice] of notices) {
+      assert.ok(notice.includes(`href="${windowsInstallHelpPath(locale.code)}"`), locale.code);
+      assert.ok(!notice.includes('download-link'), 'help opens the guide; it is not an installer download');
+      assert.ok(!notice.includes('target="_blank"'), 'help stays in the same tab');
+    }
+    const hero = html.split('class="hero-actions hero-actions--top"')[1].split('<figure')[0];
+    assert.ok(hero.indexOf('data-help-placement="hero"') < hero.indexOf('class="hero-trial"'), locale.code);
+    const card = html.split('data-platform-card="windows"')[1].split('</article>')[0];
+    assert.ok(card.indexOf('downloads_windows_exe') < card.indexOf('data-help-placement="download"'), locale.code);
+    assert.ok(card.indexOf('data-help-placement="download"') < card.indexOf('downloads_windows_msi'), locale.code);
+  }
+});
+
 test('SAC, SmartScreen and malware are separate; no protection-disabling commands or safety guarantee', () => {
   const html = page('en');
   const sections = (i) => html.split(`id="windows-install-section-${i}"`)[1].split('</section>')[0];

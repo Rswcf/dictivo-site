@@ -1,6 +1,7 @@
 // User-facing Windows download triage. Keep reputation warnings separate from execution
 // policy and malware detections. No protection changes or blanket safety assurances.
 export const WINDOWS_INSTALL_HELP_LASTMOD = "2026-10-31";
+export const WINDOWS_INSTALL_ENTRY_LASTMOD = "2026-11-01";
 export const WINDOWS_INSTALL_HELP_PATHS = Object.freeze({
   en: "/guides/windows-installer-blocked/",
   de: "/de/guides/windows-installer-blocked/",
@@ -10,16 +11,16 @@ export const WINDOWS_INSTALL_HELP_PATHS = Object.freeze({
 export const windowsInstallHelpPath = (code = "en") => WINDOWS_INSTALL_HELP_PATHS[code] ?? WINDOWS_INSTALL_HELP_PATHS.en;
 
 export const WINDOWS_INSTALL_ENTRY_COPY = {
-  en: { label: "Windows installer blocked? Read the installation help", note: "Windows may warn about an unsigned or unfamiliar installer. SmartScreen and Smart App Control need different steps; identify the warning before continuing." },
-  de: { label: "Windows blockiert die Installation? Zur Hilfe", note: "Windows kann vor unbekannten oder unsignierten Installern warnen. SmartScreen und Smart App Control erfordern unterschiedliche Schritte. Prüfen Sie zuerst den Hinweis." },
-  fr: { label: "Installation Windows bloquée ? Lire l’aide (en anglais)", note: "Windows peut avertir pour un programme inconnu ou non signé. SmartScreen et Smart App Control nécessitent des démarches différentes : identifiez d’abord le message." },
-  es: { label: "¿Windows bloquea el instalador? Consulta la ayuda (en inglés)", note: "Windows puede advertir sobre un instalador desconocido o sin firma. SmartScreen y Smart App Control requieren pasos distintos: identifica primero el aviso." },
-  it: { label: "Installer Windows bloccato? Leggi la guida (in inglese)", note: "Windows può segnalare un installer sconosciuto o non firmato. SmartScreen e Smart App Control richiedono passaggi diversi: controlla prima il messaggio." },
-  nl: { label: "Windows blokkeert de installatie? Lees de hulp (Engels)", note: "Windows kan waarschuwen voor onbekende of niet-ondertekende installers. SmartScreen en Smart App Control vragen om verschillende stappen. Controleer eerst de melding." },
-  pt: { label: "O Windows bloqueou o instalador? Leia a ajuda (em inglês)", note: "O Windows pode alertar sobre um instalador desconhecido ou sem assinatura. SmartScreen e Smart App Control exigem passos diferentes: identifique primeiro o aviso." },
-  zh: { label: "Windows 安装包被拦截？查看解决方法", note: "Windows 可能提示安装包不常见或未签名。SmartScreen 与智能应用控制（Smart App Control）的处理方式不同，请先确认提示类型。" },
-  ja: { label: "Windows でインストーラーがブロックされた場合（英語）", note: "未署名または利用実績の少ないインストーラーには警告が出る場合があります。SmartScreen と Smart App Control は対処方法が異なります。まず警告の種類を確認してください。" },
-  ko: { label: "Windows 설치 파일이 차단되었나요? 도움말 보기(영어)", note: "Windows는 서명되지 않았거나 생소한 설치 파일에 경고할 수 있습니다. SmartScreen과 Smart App Control은 해결 방법이 다르므로 먼저 경고 종류를 확인하세요." },
+  en: { shortTitle: "Windows installer blocked?", shortNote: "Read the installation guide.", label: "Windows installer blocked? Read the installation help", note: "Windows may warn about an unsigned or unfamiliar installer. SmartScreen and Smart App Control need different steps; identify the warning before continuing." },
+  de: { shortTitle: "Windows blockiert die Installation?", shortNote: "Die passende Installationshilfe finden.", label: "Windows blockiert die Installation? Zur Hilfe", note: "Windows kann vor unbekannten oder unsignierten Installern warnen. SmartScreen und Smart App Control erfordern unterschiedliche Schritte. Prüfen Sie zuerst den Hinweis." },
+  fr: { shortTitle: "Windows bloque l’installation ?", shortNote: "Lire le guide d’installation (en anglais).", label: "Installation Windows bloquée ? Lire l’aide (en anglais)", note: "Windows peut avertir pour un programme inconnu ou non signé. SmartScreen et Smart App Control nécessitent des démarches différentes : identifiez d’abord le message." },
+  es: { shortTitle: "¿Windows bloquea la instalación?", shortNote: "Leer la guía de instalación (en inglés).", label: "¿Windows bloquea el instalador? Consulta la ayuda (en inglés)", note: "Windows puede advertir sobre un instalador desconocido o sin firma. SmartScreen y Smart App Control requieren pasos distintos: identifica primero el aviso." },
+  it: { shortTitle: "Windows blocca l’installazione?", shortNote: "Leggi la guida all’installazione (in inglese).", label: "Installer Windows bloccato? Leggi la guida (in inglese)", note: "Windows può segnalare un installer sconosciuto o non firmato. SmartScreen e Smart App Control richiedono passaggi diversi: controlla prima il messaggio." },
+  nl: { shortTitle: "Windows blokkeert de installatie?", shortNote: "Lees de installatiehulp (Engels).", label: "Windows blokkeert de installatie? Lees de hulp (Engels)", note: "Windows kan waarschuwen voor onbekende of niet-ondertekende installers. SmartScreen en Smart App Control vragen om verschillende stappen. Controleer eerst de melding." },
+  pt: { shortTitle: "O Windows bloqueou a instalação?", shortNote: "Leia a ajuda de instalação (em inglês).", label: "O Windows bloqueou o instalador? Leia a ajuda (em inglês)", note: "O Windows pode alertar sobre um instalador desconhecido ou sem assinatura. SmartScreen e Smart App Control exigem passos diferentes: identifique primeiro o aviso." },
+  zh: { shortTitle: "Windows 安装包被拦截？", shortNote: "查看对应的处理方法", label: "Windows 安装包被拦截？查看解决方法", note: "Windows 可能提示安装包不常见或未签名。SmartScreen 与智能应用控制（Smart App Control）的处理方式不同，请先确认提示类型。" },
+  ja: { shortTitle: "Windows がインストールをブロック？", shortNote: "インストールの対処方法を見る（英語）", label: "Windows でインストーラーがブロックされた場合（英語）", note: "未署名または利用実績の少ないインストーラーには警告が出る場合があります。SmartScreen と Smart App Control は対処方法が異なります。まず警告の種類を確認してください。" },
+  ko: { shortTitle: "Windows에서 설치가 차단되었나요?", shortNote: "설치 도움말 보기(영어)", label: "Windows 설치 파일이 차단되었나요? 도움말 보기(영어)", note: "Windows는 서명되지 않았거나 생소한 설치 파일에 경고할 수 있습니다. SmartScreen과 Smart App Control은 해결 방법이 다르므로 먼저 경고 종류를 확인하세요." },
 };
 
 const MS = {
