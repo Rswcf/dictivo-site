@@ -266,7 +266,7 @@ Fast is an optional speed mode for users who accept cloud transcription upload.
 
 Current public pricing copy (all prices are tax-inclusive totals in US dollars; the checkout deducts the buyer's tax from the total):
 
-- Dictivo Local: `US$29` introductory price until 2026-10-31, `US$49` from 2026-11-01 (`data/local-offer.mjs`; follow `docs/release/2026-11-01-local-price-rise-runbook.zh-CN.md` in the desktop repository: site and API first, store price last; the deploy check fails after the end date), one-time, perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `US$24/year` renewal for future updates.
+- Dictivo Local: `US$49` one-time from 2026-11-01 (`data/local-offer.mjs`), perpetual for the version bought, 12 months of updates, use on up to 3 personal devices, optional `US$24/year` renewal for future updates. Introductory dates are cleared; the website, API offer and Lemon Squeezy product must stay aligned.
 - Dictivo Cloud Fast: `US$8.99/month` (`CLOUD_FAST_MONTHLY_PRICE` in `data/local-offer.mjs`), 1,500 minutes/month, standalone or alongside Local.
 - Copy writes prices as `{{price.<amount>.<form>}}` placeholders, never as figures; `data/price-display.mjs` renders them
   per page language with a "tax included" note (`inkl. MwSt.`, `税込`, …). Titles, meta descriptions and `llms.txt` carry
