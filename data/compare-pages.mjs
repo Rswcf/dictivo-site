@@ -406,7 +406,6 @@ export const COMPARE_PAGES = [
     ],
     sections: [
       {
-        kicker: "Where it wins",
         title: "What VoiceInk is great at",
         paragraphs: [
           "VoiceInk is the hardest honesty test because it is genuinely good. It is local-first, inexpensive, and comfortable as a smaller indie tool. If your top priority is the lowest price, VoiceInk deserves a serious look.",
@@ -420,7 +419,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo does not win this on price. Dictivo Local is {{price.local.inline}} once and includes the first year of updates, with an optional renewal at {{price.renewal.inline}} a year after that. VoiceInk's current Solo offer is $25 once and advertises lifetime updates, so over enough years VoiceInk is the cheaper way to stay current. Choose on the Local versus Cloud Fast boundary, guided setup, and support - not on a few dollars.",
@@ -435,7 +433,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Privacy",
         title: "Privacy: local processing without pretending price is the only factor",
         paragraphs: [
           "Both VoiceInk and Dictivo offer local dictation. VoiceInk also documents optional cloud transcription and AI processing, so check both recognition and text-processing settings. Dictivo Local keeps dictation audio and text on-device; choosing Cloud Fast sends the selected recording for remote transcription.",
@@ -448,7 +445,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
           "VoiceInk currently lists $25 for Solo, $39 for Personal, and $49 for Extended, with lifetime updates. Those tiers differ by device count, not by core feature access. The page also advertises a Try Free path and 14-day money-back guarantee.",
@@ -457,7 +453,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Decision",
         title: "Who should choose which",
         cards: [
           {
@@ -527,7 +522,6 @@ export const COMPARE_PAGES = [
     ],
     sections: [
       {
-        kicker: "Where it wins",
         title: "What macOS Dictation is great at",
         paragraphs: [
           "Apple Dictation wins the first comparison before the page even starts: it is free and already on your Mac. There is no installer, no checkout, no third-party app permission prompt beyond the system feature itself, and no need to learn a new product.",
@@ -542,7 +536,6 @@ export const COMPARE_PAGES = [
         link: { label: "If built-in Dictation is not working, check these settings first", href: "/guides/mac-dictation-not-working/" },
       },
       {
-        kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo is for the point where built-in dictation stops feeling like enough. Serious dictation is not just speech recognition. It is model choice, local history, correction loops, a personal dictionary, snippets, visible privacy mode, and a product surface designed for repeated daily use.",
@@ -557,7 +550,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Privacy",
         title: "Privacy: be precise about Apple's current behavior",
         paragraphs: [
           "Apple's privacy story has improved over the years, and it would be unfair to describe every Mac dictation as cloud-only. Apple Support says Keyboard settings can show whether general text Dictation is processed on-device and not sent to Siri servers, or whether an internet connection is needed. Apple's legal page says that otherwise, dictated content is sent to and processed on servers, and it describes separate settings for Improve Siri & Dictation.",
@@ -570,7 +562,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
           `There is no price battle with Apple. macOS Dictation is included with your Mac. Dictivo Local is {{price.local.inline}} once, with an optional update renewal at {{price.renewal.inline}} a year after the first 12 months. Three years with update renewals active is {{price.threeYear.inline}}.`,
@@ -578,7 +569,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Decision",
         title: "Who should choose which",
         cards: [
           {
@@ -646,7 +636,6 @@ export const COMPARE_PAGES = [
     ],
     sections: [
       {
-        kicker: "Where it wins",
         title: "What Dragon Professional is great at",
         paragraphs: [
           "Dragon Professional v16 combines local speech recognition with custom vocabulary and voice commands for controlling a Windows PC. These features matter when your workflow depends on established commands or a vocabulary you have built over time.",
@@ -660,7 +649,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo focuses on typing into emails, documents, notes and chat using a hotkey. It does not provide a feature-for-feature replacement for specialized Dragon workflows or full hands-free PC control.",
@@ -675,7 +663,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Migration",
         title: "Dragon Home is gone - what former users actually need",
         paragraphs: [
           "Nuance discontinued Dragon Home, its consumer edition, in 2023, and discontinued Dragon for Mac back in 2018. Dragon Professional v16 is still sold for Windows, but Nuance no longer lists a public price for it. Check your own license terms and any available upgrade offers separately.",
@@ -690,7 +677,6 @@ export const COMPARE_PAGES = [
         ],
       },
       {
-        kicker: "Pricing",
         title: "Pricing compared",
         paragraphs: [
           `${DRAGON_PROFESSIONAL_PRICE_SENTENCE} Dragon Anywhere Mobile is no longer on sale: as of 1 July 2026 new subscriptions cannot be bought and existing ones cannot be renewed. Dragon Medical One remains, enterprise-priced per user per month.`,
@@ -700,7 +686,6 @@ export const COMPARE_PAGES = [
         link: { label: "Dragon pricing: what each edition costs and how it is licensed, with sources", href: "/guides/dragon-pricing/" },
       },
       {
-        kicker: "Decision",
         title: "Who should choose which",
         cards: [
           {

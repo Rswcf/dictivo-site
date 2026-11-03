@@ -77,7 +77,6 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
     tocLabel: "On this page",
     sections: [
       {
-        kicker: "Windows desktop",
         title: "Dragon Professional v16: no published price",
         paragraphs: [
           `Nuance's Dragon Professional page describes version 16 as optimized for Windows 11 and compatible with Windows 10. On ${checkedOn} it showed no price and no checkout, only Contact us, in its US, UK, Australian, German, French, Spanish, Italian and Dutch editions, and both old Nuance store addresses for Dragon Professional led back to the product page. The same site lists Dragon Legal and Dragon Law Enforcement as separate products.`,
@@ -87,7 +86,6 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Healthcare edition",
         title: "Dragon Medical One: a per-user subscription",
         paragraphs: [
           "Dragon Medical One is a cloud-based speech product for clinical documentation. Microsoft's Dragon Medical One page links to a Microsoft Marketplace listing, published by Nuance, that shows three plans, each a 1-year subscription priced per user:",
@@ -107,7 +105,6 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Mac",
         title: "Dragon on a Mac",
         paragraphs: [
           "Nuance discontinued Dragon Professional Individual for Mac on 22 October 2018. Its notice says owners of version 6 have a perpetual license and may keep using it, and that Nuance provides no updates after that date. The Dragon Professional v16 data sheet lists Windows only.",
@@ -115,7 +112,6 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Discontinued",
         title: "Editions you can no longer buy",
         paragraphs: [
           "Dragon Anywhere Mobile: in the App Store notes for version 1.96, Nuance wrote that as of 1 July 2026 Dragon Anywhere Mobile is no longer available for sale, and that new subscriptions and renewals are no longer possible. The app uses cloud-based speech recognition and needs an internet connection to dictate.",
@@ -123,7 +119,6 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "License types",
         title: "Subscription or one-time license?",
         steps: [
           "Subscription: Dragon Medical One (per user, 1-year term on Microsoft Marketplace) and Dragon Professional Anywhere, which Nuance describes as cloud-hosted with subscription-based pricing. Dragon Anywhere Mobile was a subscription until it stopped being sold.",
@@ -134,7 +129,6 @@ export function dragonPricingCopy({ windows, offer = LOCAL_OFFER }) {
     ],
     fieldTest: null,
     dictivo: {
-      kicker: "Another option",
       title: "If you want a one-time local license",
       paragraphs: [
         `Dictivo is this site's product. It is a general-purpose dictation app for ${platforms}, not a clinical documentation product, and this page makes no claim about medical use.`,

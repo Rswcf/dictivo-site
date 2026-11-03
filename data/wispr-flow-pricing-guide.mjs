@@ -73,7 +73,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
     tocLabel: "On this page",
     sections: [
       {
-        kicker: "Free",
         title: "The free plan and its weekly limit",
         paragraphs: [
           "Flow Free is $0 and, in the pricing page's words, \"You never need a credit card to start.\" It allows 2,000 dictated words a week on Mac and Windows and 1,000 a week on mobile, where iPhone and Android share one allowance. On desktop the count resets on Sunday at 12 a.m. Pacific Time. Free also includes the Notetaker with a weekly meeting limit.",
@@ -81,7 +80,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Pro",
         title: "Pro: monthly or annual billing",
         paragraphs: [
           "Pro is $15 per user per month billed monthly, or $144 per user per year billed annually, which the help center describes as a $12 monthly equivalent and a 20% saving. The pricing page lists unlimited dictation, longer Notetaker history, a shared dictionary and snippets, a shared team workspace, centralized billing and user management, team usage analytics, priority support and early access to new features.",
@@ -89,7 +87,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Teams",
         title: "Growth and Enterprise for teams",
         paragraphs: ["Growth comes in two versions, priced per user:"],
         table: {
@@ -106,7 +103,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Discounts",
         title: "Student, educator and nonprofit pricing",
         paragraphs: [
           "Wispr Flow describes its student offer in three places, and they differ:",
@@ -119,7 +115,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
         notes: ["The price shown at checkout is the one that applies to your account."],
       },
       {
-        kicker: "Billing terms",
         title: "Currency, tax, cancellation and refunds",
         paragraphs: [
           "The help center says checkout picks the currency from your region and defaults to US dollars. Each of 24 supported currencies has its own fixed price rather than a conversion, and existing subscribers keep their original price and currency. The figures on this page are the US dollar list prices.",
@@ -128,7 +123,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Processing",
         title: "Where transcription happens",
         paragraphs: [
           "Wispr Flow's Data Controls page says: \"Transcription always occurs on the cloud.\" Its privacy settings change what Wispr stores, not where transcription runs. The pricing page lists dictation on Mac, Windows, iOS and Android.",
@@ -137,7 +131,6 @@ export function wisprFlowPricingCopy({ windows, offer = LOCAL_OFFER }) {
     ],
     fieldTest: null,
     dictivo: {
-      kicker: "Another option",
       title: "If you want a one-time local license instead",
       paragraphs: [
         "Dictivo is this site's product.",

@@ -121,7 +121,6 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
   ],
   sections: [
     {
-      kicker: "Built-in options",
       title: "Voice Access vs Win+H: the two built-ins are not the same",
       paragraphs: [
         "Windows ships two free dictation paths, and they differ on exactly the question this guide is about. Voice Typing (Win+H) uses Microsoft's cloud-based speech services: audio goes to the cloud, and it needs an internet connection. Voice Access, added in Windows 11 22H2, downloads a speech model once and then works on-device, including offline.",
@@ -135,7 +134,6 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       link: { label: "If Win+H voice typing is not working, check these settings by symptom", href: "/guides/windows-voice-typing-not-working/" },
     },
     {
-      kicker: "Where Dictivo fits",
       title: "Where Dictivo fits on Windows",
       paragraphs: [
         "Dictivo brings the same local-first workflow to Windows that it runs on macOS: hold a hotkey, speak, and the text lands in the active app. Local mode processes audio on the device, and the app keeps history, dictionary terms, and snippets locally. Optional Cloud Fast is a separate mode that uploads only recordings you choose.",
@@ -150,7 +148,6 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       ],
     },
     {
-      kicker: "The Dragon question",
       title: "What about Dragon?",
       paragraphs: [
         "Dragon Professional v16 deserves a clear answer because it is genuinely local: speech is processed on the PC after activation. The differences are price (Nuance no longer lists a public price; the last public list price was $699, a one-time payment, in its US store as archived on 11 February 2025), Windows-only desktop support, and a voice-profile training model that pays off mainly for specialized legal and medical vocabulary.",
@@ -163,7 +160,6 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       ],
     },
     {
-      kicker: "Verification",
       title: "How to verify a 'local' claim instead of trusting it",
       paragraphs: [
         "Any app can say 'private' on a landing page. The verifiable question is whether dictation audio leaves the machine. On Windows, you can watch an app's network activity with Resource Monitor or a firewall log while dictating: a local tool should show no upload spike during speech.",
@@ -176,7 +172,6 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       ],
     },
     {
-      kicker: "Try before buying",
       title: "Try one offline sentence on your Windows PC",
       paragraphs: [
         "Dictivo is our product. Use the trial to check your own microphone, writing app and editing workload before deciding whether the paid Local license is useful.",
@@ -190,7 +185,6 @@ export const OFFLINE_DICTATION_WINDOWS_GUIDE_COPY = {
       link: { label: "Open the first-dictation guide and private practice field", href: "/guides/first-local-dictation/" },
     },
     {
-      kicker: "Purchase decision",
       title: "When is paid offline dictation worth it on Windows?",
       paragraphs: [
         "Start with a task you already do: a short email, a work note or an AI prompt. Dictate the same text with your current tool and Dictivo Local. Include the time spent correcting names, numbers and punctuation, and test insertion in your actual writing app. Model speed and recognition quality depend on your PC, microphone and speech; this page does not claim a measured advantage.",

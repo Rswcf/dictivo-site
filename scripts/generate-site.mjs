@@ -572,7 +572,6 @@ const COMPARE_I18N = {
       ["Dictivo model", "{{price.local.inline}} once, Tiny free forever, 14-day full Local trial", "See {competitor} pricing and trial notes below"],
       ["Privacy model", "Local mode by default", "See processing-location details below"],
     ],
-    atAGlanceKicker: "At a glance",
     atAGlanceTitle: "{competitor} vs Dictivo at a glance",
     tableCaption: "{competitor} vs Dictivo at a glance",
     questionHeader: "Question",
@@ -602,7 +601,6 @@ const COMPARE_I18N = {
     },
     sections: [
       {
-        kicker: "Context",
         title: "Where {competitor} can make sense",
         paragraphs: [
           "{competitor} may be the right choice if its platform support, existing workflow, team features, or cloud model behavior match what you need today.",
@@ -615,7 +613,6 @@ const COMPARE_I18N = {
         ],
       },
       {
-        kicker: "Dictivo difference",
         title: "Where Dictivo is different",
         paragraphs: [
           "Dictivo is built around Local mode first. Speech recognition runs on the device, and transcripts, history, dictionary terms, snippets, and local settings stay on the machine.",
@@ -629,7 +626,6 @@ const COMPARE_I18N = {
         ],
       },
       {
-        kicker: "Decision",
         title: "Who should choose which",
         cards: [
           {
@@ -651,7 +647,6 @@ const COMPARE_I18N = {
         ],
       },
     ],
-    faqKicker: "FAQ",
     faqTitle: "Frequently asked questions",
     faqs: [
       [
@@ -675,7 +670,6 @@ const COMPARE_I18N = {
         "Choose Dictivo if private desktop dictation and buy-once Local pricing matter most. Choose the competitor if its platform support, cloud features, or built-in workflow matters more.",
       ],
     ],
-    ctaKicker: "Try Dictivo",
     ctaTitle: "Try Dictivo free for 14 days.",
     ctaBody:
       "Every local model unlocked, no Dictivo account for Local mode. Buy Local for {{price.local.inline}} once if it fits your workflow.",
@@ -686,7 +680,6 @@ const COMPARE_I18N = {
     resourceRelated: "See how Dictivo compares to {competitor}",
     compareFooter: "Compare alternatives",
     footerAlternative: "{competitor} alternative",
-    teaserKicker: "Compare",
     teaserTitle: "Choosing against another dictation app?",
     teaserBody:
       "Compare Dictivo with the tools people usually evaluate first: cloud dictation, local mode systems, file transcription apps, low-cost indie tools, and Apple's built-in Dictation.",
@@ -722,7 +715,6 @@ const COMPARE_I18N = {
       ["Dictivo-Modell", "{{price.local.inline}} einmalig, Tiny dauerhaft gratis, 14 Tage voller Local-Test", "Siehe Preis- und Testnotizen unten"],
       ["Datenschutzmodell", "Local standardmäßig", "Siehe Details zum Verarbeitungsort unten"],
     ],
-    atAGlanceKicker: "Auf einen Blick",
     atAGlanceTitle: "{competitor} vs. Dictivo auf einen Blick",
     tableCaption: "{competitor} vs. Dictivo auf einen Blick",
     questionHeader: "Frage",
@@ -749,7 +741,6 @@ const COMPARE_I18N = {
     },
     sections: [
       {
-        kicker: "Kontext",
         title: "Wann {competitor} sinnvoll sein kann",
         paragraphs: [
           "{competitor} kann passen, wenn Plattformabdeckung, bestehender Workflow, Teamfunktionen oder Cloud-Modellverhalten genau Ihren Bedarf treffen.",
@@ -762,7 +753,6 @@ const COMPARE_I18N = {
         ],
       },
       {
-        kicker: "Dictivo-Unterschied",
         title: "Worin Dictivo anders ist",
         paragraphs: [
           "Dictivo ist zuerst um Local mode gebaut. Spracherkennung läuft auf dem Mac; Transkripte, Verlauf, Wörterbuch, Textbausteine und lokale Einstellungen bleiben auf dem Gerät.",
@@ -776,7 +766,6 @@ const COMPARE_I18N = {
         ],
       },
       {
-        kicker: "Entscheidung",
         title: "Wer welches Produkt wählen sollte",
         cards: [
           {
@@ -798,7 +787,6 @@ const COMPARE_I18N = {
         ],
       },
     ],
-    faqKicker: "FAQ",
     faqTitle: "Häufige Fragen",
     faqs: [
       ["Ist Dictivo eine Alternative zu {competitor}?", "Ja. Dictivo ist eine Alternative, wenn Sie einen lokalen Mac-Diktier-Workflow mit optionalem Cloud Fast suchen."],
@@ -807,7 +795,6 @@ const COMPARE_I18N = {
       ["Was kann ich vor dem Kauf testen?", "Tiny bleibt dauerhaft gratis. Neue Installationen erhalten außerdem 14 Tage vollen Local-Test mit allen lokalen Modellen plus 10 lebenslange Cloud-Fast-Minuten auf diesem Gerät."],
       ["Was sollte ich wählen?", "Wählen Sie Dictivo, wenn privates Mac-Diktat und Buy-once-Local-Preis am wichtigsten sind. Wählen Sie den Wettbewerber, wenn Plattformabdeckung oder Cloud-Funktionen wichtiger sind."],
     ],
-    ctaKicker: "Dictivo testen",
     ctaTitle: "Dictivo 14 Tage kostenlos testen.",
     ctaBody: "Alle lokalen Modelle entsperrt, kein Dictivo-Konto für Local mode. Dictivo Local kostet {{price.local.inline}} einmalig, wenn es passt.",
     ctaPrimary: "Dictivo 14 Tage testen",
@@ -817,7 +804,6 @@ const COMPARE_I18N = {
     resourceRelated: "Weitere Alternative: {competitor}",
     compareFooter: "Alternativen vergleichen",
     footerAlternative: "{competitor}-Alternative",
-    teaserKicker: "Vergleichen",
     teaserTitle: "Vergleichen Sie gerade Diktier-Apps?",
     teaserBody:
       "Vergleichen Sie Dictivo mit Cloud-Diktat, lokalen Modus-Systemen, Datei-Transkription, günstigen Indie-Tools und Apples eingebautem Diktat.",
@@ -853,7 +839,6 @@ const COMPARE_I18N = {
       ["Modèle Dictivo", "{{price.local.inline}} une fois, Tiny gratuit à vie, essai Local complet 14 jours", "Voir les notes de prix et d'essai ci-dessous"],
       ["Modèle de confidentialité", "Local par défaut", "Voir les détails de traitement ci-dessous"],
     ],
-    atAGlanceKicker: "En bref",
     atAGlanceTitle: "{competitor} vs Dictivo en bref",
     tableCaption: "{competitor} vs Dictivo en bref",
     questionHeader: "Question",
@@ -880,7 +865,6 @@ const COMPARE_I18N = {
     },
     sections: [
       {
-        kicker: "Contexte",
         title: "Quand {competitor} peut convenir",
         paragraphs: [
           "{competitor} peut être le bon choix si sa couverture de plateformes, son workflow, ses fonctions d'équipe ou son cloud correspondent à votre besoin actuel.",
@@ -893,7 +877,6 @@ const COMPARE_I18N = {
         ],
       },
       {
-        kicker: "Différence Dictivo",
         title: "Ce qui rend Dictivo différent",
         paragraphs: [
           "Dictivo est d'abord conçu autour du mode Local. La reconnaissance vocale s'exécute sur le Mac, et les transcriptions, l'historique, le dictionnaire, les extraits et les réglages locaux restent sur la machine.",
@@ -907,7 +890,6 @@ const COMPARE_I18N = {
         ],
       },
       {
-        kicker: "Décision",
         title: "Qui devrait choisir quoi",
         cards: [
           {
@@ -929,7 +911,6 @@ const COMPARE_I18N = {
         ],
       },
     ],
-    faqKicker: "FAQ",
     faqTitle: "Questions fréquentes",
     faqs: [
       ["Dictivo est-il une alternative à {competitor} ?", "Oui. Dictivo est une alternative si vous voulez une dictée Mac locale d'abord, avec Cloud Fast en option."],
@@ -938,7 +919,6 @@ const COMPARE_I18N = {
       ["Que puis-je essayer avant d'acheter ?", "Tiny reste gratuit à vie. Les nouvelles installations reçoivent aussi 14 jours d'essai Local complet avec tous les modèles locaux déverrouillés, plus 10 minutes Cloud Fast à vie sur cet appareil."],
       ["Que choisir ?", "Choisissez Dictivo si la dictée Mac privée et le prix Local en achat unique comptent le plus. Choisissez l'autre outil si ses plateformes ou fonctions cloud comptent davantage."],
     ],
-    ctaKicker: "Essayer Dictivo",
     ctaTitle: "Essayez Dictivo gratuitement pendant 14 jours.",
     ctaBody: "Tous les modèles locaux sont déverrouillés, sans compte Dictivo pour le mode Local. Dictivo Local coûte {{price.local.inline}} une fois si cela vous convient.",
     ctaPrimary: "Essayer Dictivo 14 jours",
@@ -948,7 +928,6 @@ const COMPARE_I18N = {
     resourceRelated: "Voir la comparaison avec {competitor}",
     compareFooter: "Comparer les alternatives",
     footerAlternative: "Alternative à {competitor}",
-    teaserKicker: "Comparer",
     teaserTitle: "Vous hésitez avec une autre app de dictée ?",
     teaserBody:
       "Comparez Dictivo avec les outils évalués en premier : dictée cloud, systèmes locaux, apps de transcription de fichiers, outils indie peu coûteux et dictée intégrée d'Apple.",
@@ -996,7 +975,6 @@ Object.assign(COMPARE_I18N, {
       ["Modelo de Dictivo", "{{price.local.inline}} una vez, Tiny gratis para siempre, prueba Local completa de 14 días", "Ver notas de precio y prueba abajo"],
       ["Modelo de privacidad", "Local por defecto", "Ver detalles de procesamiento abajo"],
     ],
-    atAGlanceKicker: "De un vistazo",
     atAGlanceTitle: "{competitor} vs Dictivo de un vistazo",
     tableCaption: "{competitor} vs Dictivo de un vistazo",
     questionHeader: "Pregunta",
@@ -1022,7 +1000,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "Contexto",
         title: "Cuándo {competitor} puede tener sentido",
         paragraphs: [
           "{competitor} puede ser la elección correcta si su cobertura de plataformas, flujo de trabajo, funciones de equipo o comportamiento en la nube coinciden con lo que necesitas.",
@@ -1035,7 +1012,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Diferencia Dictivo",
         title: "Dónde Dictivo es diferente",
         paragraphs: [
           "Dictivo está construido primero alrededor del modo Local. El reconocimiento de voz corre en el Mac y las transcripciones, historial, diccionario, snippets y ajustes locales permanecen en la máquina.",
@@ -1049,7 +1025,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Decisión",
         title: "Quién debería elegir cada opción",
         cards: [
           {
@@ -1071,7 +1046,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
     ],
-    faqKicker: "FAQ",
     faqTitle: "Preguntas frecuentes",
     faqs: [
       ["¿Dictivo es una alternativa a {competitor}?", "Sí. Dictivo es una alternativa si quieres un flujo de dictado en Mac local primero, con Cloud Fast como opción separada."],
@@ -1080,7 +1054,6 @@ Object.assign(COMPARE_I18N, {
       ["¿Qué puedo probar antes de comprar?", "Tiny sigue gratis para siempre. Las nuevas instalaciones también reciben 14 días de prueba Local completa con todos los modelos locales desbloqueados, más 10 minutos Cloud Fast de por vida en ese dispositivo."],
       ["¿Cuál debería elegir?", "Elige Dictivo si importan más el dictado privado en Mac y el precio Local de compra única. Elige el competidor si sus plataformas o funciones cloud pesan más."],
     ],
-    ctaKicker: "Probar Dictivo",
     ctaTitle: "Prueba Dictivo gratis durante 14 días.",
     ctaBody: "Todos los modelos locales desbloqueados, sin cuenta de Dictivo para Local. Dictivo Local cuesta {{price.local.inline}} una vez si encaja con tu flujo.",
     ctaPrimary: "Probar Dictivo 14 días",
@@ -1090,7 +1063,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "Ver comparación con {competitor}",
     compareFooter: "Comparar alternativas",
     footerAlternative: "Alternativa a {competitor}",
-    teaserKicker: "Comparar",
     teaserTitle: "¿Estás evaluando otra app de dictado?",
     teaserBody:
       "Compara Dictivo con dictado cloud, sistemas locales, apps de transcripción de archivos, herramientas indie de bajo coste y el dictado integrado de Apple.",
@@ -1126,7 +1098,6 @@ Object.assign(COMPARE_I18N, {
       ["Dictivo 模式", "{{price.local.inline}} 一次买断，Tiny 永久免费，14 天完整 Local 试用", "见下方价格与试用说明"],
       ["隐私模式", "默认 Local", "见下方处理位置说明"],
     ],
-    atAGlanceKicker: "快速概览",
     atAGlanceTitle: "{competitor} vs Dictivo 快速对比",
     tableCaption: "{competitor} vs Dictivo 快速对比",
     questionHeader: "问题",
@@ -1152,7 +1123,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "背景",
         title: "{competitor} 什么时候可能合适",
         paragraphs: [
           "如果你需要 {competitor} 当前的平台覆盖、特定工作流、团队功能或云模型能力，它可能是更合适的选择。",
@@ -1165,7 +1135,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Dictivo 的不同",
         title: "Dictivo 不同在哪里",
         paragraphs: [
           "Dictivo 首先围绕 Local 模式构建。语音识别在 Mac 上运行，转录、历史、词典、片段和本地设置都保留在本机。",
@@ -1179,7 +1148,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "选择建议",
         title: "应该选择哪一个",
         cards: [
           {
@@ -1201,7 +1169,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
     ],
-    faqKicker: "FAQ",
     faqTitle: "常见问题",
     faqs: [
       ["Dictivo 是 {competitor} 的替代方案吗？", "是。如果你想要本地优先的 Mac 听写工作流，并把 Cloud Fast 作为可选路径，Dictivo 就是一个替代方案。"],
@@ -1210,7 +1177,6 @@ Object.assign(COMPARE_I18N, {
       ["购买前可以免费试什么？", "Tiny 永久免费。新安装还会获得 14 天完整 Local 试用，解锁所有本地模型，并在该设备上获得 10 分钟终身 Cloud Fast 免费额度。"],
       ["我应该选哪个？", "如果私密 Mac 听写和 Local 一次买断价格最重要，选择 Dictivo。如果对方的平台或云功能更重要，选择对方。"],
     ],
-    ctaKicker: "试用 Dictivo",
     ctaTitle: "免费试用 Dictivo 14 天。",
     ctaBody: "所有本地模型解锁，Local 模式不需要 Dictivo 账号。如果适合你的工作流，Dictivo Local {{price.local.inline}} 一次买断。",
     ctaPrimary: "试用 Dictivo 14 天",
@@ -1220,7 +1186,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "查看与 {competitor} 的比较",
     compareFooter: "比较替代方案",
     footerAlternative: "{competitor} 替代方案",
-    teaserKicker: "比较",
     teaserTitle: "正在和其他听写应用做选择？",
     teaserBody:
       "对比 Dictivo 与常见候选：云听写、本地模式系统、文件转录应用、低成本独立工具，以及 Apple 内置听写。",
@@ -1259,7 +1224,6 @@ Object.assign(COMPARE_I18N, {
       ["Modello Dictivo", "{{price.local.inline}} una volta, Tiny gratis per sempre, prova Local completa di 14 giorni", "Vedi note su prezzi e prova sotto"],
       ["Privacy", "Local per impostazione predefinita", "Vedi dettagli sul luogo di elaborazione sotto"],
     ],
-    atAGlanceKicker: "In breve",
     atAGlanceTitle: "{competitor} vs Dictivo in breve",
     tableCaption: "{competitor} vs Dictivo in breve",
     questionHeader: "Domanda",
@@ -1285,7 +1249,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "Contesto",
         title: "Quando {competitor} può avere senso",
         paragraphs: [
           "{competitor} può essere la scelta giusta se piattaforme, workflow, funzioni di team o comportamento cloud corrispondono a ciò che ti serve oggi.",
@@ -1298,7 +1261,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Differenza Dictivo",
         title: "Dove Dictivo è diverso",
         paragraphs: [
           "Dictivo è costruito prima attorno alla modalità Local. Il riconoscimento vocale gira sul Mac e trascrizioni, cronologia, dizionario, snippet e impostazioni locali restano sulla macchina.",
@@ -1312,7 +1274,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Decisione",
         title: "Chi dovrebbe scegliere cosa",
         cards: [
           {
@@ -1341,7 +1302,6 @@ Object.assign(COMPARE_I18N, {
       ["Cosa posso provare prima di acquistare?", "Tiny resta gratis per sempre. Le nuove installazioni hanno anche 14 giorni di prova Local completa con tutti i modelli locali, più 10 minuti Cloud Fast a vita su quel dispositivo."],
       ["Cosa dovrei scegliere?", "Scegli Dictivo se contano di più dettatura privata su Mac e prezzo Local una tantum. Scegli il concorrente se piattaforme o funzioni cloud contano di più."],
     ],
-    ctaKicker: "Prova Dictivo",
     ctaTitle: "Prova Dictivo gratis per 14 giorni.",
     ctaBody: "Tutti i modelli locali sbloccati, senza account Dictivo per Local. Dictivo Local costa {{price.local.inline}} una volta se si adatta al tuo flusso.",
     ctaPrimary: "Prova Dictivo 14 giorni",
@@ -1351,7 +1311,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "Vedi confronto con {competitor}",
     compareFooter: "Confronta alternative",
     footerAlternative: "Alternativa a {competitor}",
-    teaserKicker: "Confronta",
     teaserTitle: "Stai valutando un'altra app di dettatura?",
     teaserBody:
       "Confronta Dictivo con dettatura cloud, sistemi locali, app di trascrizione file, strumenti indie a basso costo e la dettatura integrata di Apple.",
@@ -1387,7 +1346,6 @@ Object.assign(COMPARE_I18N, {
       ["Dictivo-model", "{{price.local.inline}} eenmalig, Tiny altijd gratis, 14 dagen volledige Local-proef", "Zie prijs- en proefnotities hieronder"],
       ["Privacymodel", "Local standaard", "Zie verwerkingslocatie hieronder"],
     ],
-    atAGlanceKicker: "In één oogopslag",
     atAGlanceTitle: "{competitor} vs Dictivo in één oogopslag",
     tableCaption: "{competitor} vs Dictivo in één oogopslag",
     questionHeader: "Vraag",
@@ -1413,7 +1371,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "Context",
         title: "Wanneer {competitor} logisch kan zijn",
         paragraphs: [
           "{competitor} kan de juiste keuze zijn als platformdekking, workflow, teamfuncties of cloudgedrag precies passen bij wat je nu nodig hebt.",
@@ -1426,7 +1383,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Dictivo-verschil",
         title: "Waar Dictivo anders is",
         paragraphs: [
           "Dictivo is eerst gebouwd rond Local-modus. Spraakherkenning draait op de Mac en transcripties, geschiedenis, woordenboek, snippets en lokale instellingen blijven op de machine.",
@@ -1440,7 +1396,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Beslissing",
         title: "Wie welke optie zou moeten kiezen",
         cards: [
           {
@@ -1469,7 +1424,6 @@ Object.assign(COMPARE_I18N, {
       ["Wat kan ik proberen voordat ik koop?", "Tiny blijft altijd gratis. Nieuwe installaties krijgen ook 14 dagen volledige Local-proef met alle lokale modellen plus 10 Cloud Fast-minuten voor altijd op dat apparaat."],
       ["Welke moet ik kiezen?", "Kies Dictivo als private Mac-dictatie en eenmalige Local-prijs het belangrijkst zijn. Kies de concurrent als platforms of cloudfuncties belangrijker zijn."],
     ],
-    ctaKicker: "Probeer Dictivo",
     ctaTitle: "Probeer Dictivo 14 dagen gratis.",
     ctaBody: "Alle lokale modellen ontgrendeld, geen Dictivo-account voor Local. Dictivo Local kost {{price.local.inline}} eenmalig als het past.",
     ctaPrimary: "Probeer Dictivo 14 dagen",
@@ -1479,7 +1433,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "Bekijk vergelijking met {competitor}",
     compareFooter: "Alternatieven vergelijken",
     footerAlternative: "{competitor}-alternatief",
-    teaserKicker: "Vergelijk",
     teaserTitle: "Vergelijk je met een andere dicteerapp?",
     teaserBody:
       "Vergelijk Dictivo met cloud-dictatie, lokale modussystemen, bestandstranscriptieapps, goedkope indie-tools en Apple's ingebouwde dictatie.",
@@ -1515,7 +1468,6 @@ Object.assign(COMPARE_I18N, {
       ["Modelo Dictivo", "{{price.local.inline}} uma vez, Tiny grátis para sempre, teste Local completo de 14 dias", "Veja notas de preço e teste abaixo"],
       ["Modelo de privacidade", "Local por padrão", "Veja detalhes de processamento abaixo"],
     ],
-    atAGlanceKicker: "Resumo",
     atAGlanceTitle: "{competitor} vs Dictivo em resumo",
     tableCaption: "{competitor} vs Dictivo em resumo",
     questionHeader: "Pergunta",
@@ -1541,7 +1493,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "Contexto",
         title: "Quando {competitor} pode fazer sentido",
         paragraphs: [
           "{competitor} pode ser a escolha certa se cobertura de plataformas, fluxo de trabalho, recursos de equipe ou comportamento em nuvem forem exatamente o que você precisa.",
@@ -1554,7 +1505,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Diferença Dictivo",
         title: "Onde o Dictivo é diferente",
         paragraphs: [
           "O Dictivo é construído primeiro em torno do modo Local. O reconhecimento de voz roda no Mac, e transcrições, histórico, dicionário, snippets e configurações locais ficam na máquina.",
@@ -1568,7 +1518,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Decisão",
         title: "Quem deve escolher cada opção",
         cards: [
           {
@@ -1597,7 +1546,6 @@ Object.assign(COMPARE_I18N, {
       ["O que posso testar antes de comprar?", "Tiny continua grátis para sempre. Novas instalações também recebem 14 dias de teste Local completo com todos os modelos locais, mais 10 minutos Cloud Fast vitalícios nesse dispositivo."],
       ["Qual devo escolher?", "Escolha Dictivo se ditado privado no Mac e preço Local de compra única importam mais. Escolha o concorrente se plataformas ou recursos em nuvem importam mais."],
     ],
-    ctaKicker: "Teste o Dictivo",
     ctaTitle: "Teste o Dictivo grátis por 14 dias.",
     ctaBody: "Todos os modelos locais desbloqueados, sem conta Dictivo para Local. Dictivo Local custa {{price.local.inline}} uma vez se fizer sentido.",
     ctaPrimary: "Testar Dictivo por 14 dias",
@@ -1607,7 +1555,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "Ver comparação com {competitor}",
     compareFooter: "Comparar alternativas",
     footerAlternative: "Alternativa ao {competitor}",
-    teaserKicker: "Comparar",
     teaserTitle: "Comparando com outro app de ditado?",
     teaserBody:
       "Compare o Dictivo com ditado em nuvem, sistemas locais, apps de transcrição de arquivos, ferramentas indie de baixo custo e o Ditado integrado da Apple.",
@@ -1643,7 +1590,6 @@ Object.assign(COMPARE_I18N, {
       ["Dictivo の形", "{{price.local.inline}} 買い切り、Tiny は永久無料、14 日間の完全 Local トライアル", "価格とトライアルの注記は下を参照"],
       ["プライバシー", "Local がデフォルト", "処理場所の詳細は下を参照"],
     ],
-    atAGlanceKicker: "概要",
     atAGlanceTitle: "{competitor} vs Dictivo 概要",
     tableCaption: "{competitor} vs Dictivo 概要",
     questionHeader: "項目",
@@ -1669,7 +1615,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "背景",
         title: "{competitor} が向いている場合",
         paragraphs: [
           "{competitor} は、対応プラットフォーム、既存ワークフロー、チーム機能、クラウド機能が今の要件に合う場合に適しています。",
@@ -1682,7 +1627,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Dictivo の違い",
         title: "Dictivo が違うところ",
         paragraphs: [
           "Dictivo は Local モードを中心に設計されています。音声認識は Mac 上で動き、文字起こし、履歴、辞書、スニペット、ローカル設定は端末に残ります。",
@@ -1696,7 +1640,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "判断",
         title: "どちらを選ぶべきか",
         cards: [
           {
@@ -1725,7 +1668,6 @@ Object.assign(COMPARE_I18N, {
       ["購入前に何を試せますか？", "Tiny は永久無料です。新規インストールでは全ローカルモデルを使える 14 日間の Local トライアルと、その端末で使える Cloud Fast 10 分が付属します。"],
       ["どちらを選べばよいですか？", "プライベートな Mac 音声入力と Local の買い切り価格が最重要なら Dictivo。対応プラットフォームやクラウド機能が重要なら競合製品を選んでください。"],
     ],
-    ctaKicker: "Dictivo を試す",
     ctaTitle: "Dictivo を 14 日間無料で試す。",
     ctaBody: "すべてのローカルモデルを利用可能。Local には Dictivo アカウント不要。合えば Dictivo Local は {{price.local.inline}} 買い切りです。",
     ctaPrimary: "Dictivo を 14 日間試す",
@@ -1735,7 +1677,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "{competitor} との比較を見る",
     compareFooter: "代替候補を比較",
     footerAlternative: "{competitor} の代替",
-    teaserKicker: "比較",
     teaserTitle: "他の音声入力アプリと迷っていますか？",
     teaserBody:
       "クラウド音声入力、ローカルモード型ツール、ファイル文字起こしアプリ、低価格のインディーツール、Apple の内蔵音声入力と Dictivo を比較できます。",
@@ -1771,7 +1712,6 @@ Object.assign(COMPARE_I18N, {
       ["Dictivo 모델", "{{price.local.inline}} 일회 구매, Tiny 영구 무료, 14일 전체 Local 체험", "아래 가격과 체험 정보 참고"],
       ["개인정보 모델", "Local 기본값", "아래 처리 위치 세부 정보 참고"],
     ],
-    atAGlanceKicker: "요약",
     atAGlanceTitle: "{competitor} vs Dictivo 요약",
     tableCaption: "{competitor} vs Dictivo 요약",
     questionHeader: "항목",
@@ -1797,7 +1737,6 @@ Object.assign(COMPARE_I18N, {
     },
     sections: [
       {
-        kicker: "배경",
         title: "{competitor}가 맞을 수 있는 경우",
         paragraphs: [
           "{competitor}는 플랫폼 지원, 기존 워크플로, 팀 기능, 클라우드 기능이 현재 요구에 맞을 때 좋은 선택일 수 있습니다.",
@@ -1810,7 +1749,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "Dictivo 차이",
         title: "Dictivo가 다른 점",
         paragraphs: [
           "Dictivo는 먼저 Local 모드를 중심으로 만들어졌습니다. 음성 인식은 Mac에서 실행되고 전사, 기록, 사전, 스니펫, 로컬 설정은 기기에 남습니다.",
@@ -1824,7 +1762,6 @@ Object.assign(COMPARE_I18N, {
         ],
       },
       {
-        kicker: "선택",
         title: "어느 쪽을 선택해야 할까",
         cards: [
           {
@@ -1853,7 +1790,6 @@ Object.assign(COMPARE_I18N, {
       ["구매 전에 무엇을 체험할 수 있나요?", "Tiny는 영구 무료입니다. 새 설치에는 모든 로컬 모델을 여는 14일 Local 체험과 해당 기기의 Cloud Fast 10분 평생 무료 사용이 포함됩니다."],
       ["무엇을 선택해야 하나요?", "비공개 Mac 받아쓰기와 Local 일회 구매 가격이 가장 중요하면 Dictivo를 선택하세요. 플랫폼이나 클라우드 기능이 더 중요하면 경쟁 제품을 선택하세요."],
     ],
-    ctaKicker: "Dictivo 체험",
     ctaTitle: "Dictivo를 14일 무료로 체험하세요.",
     ctaBody: "모든 로컬 모델이 열리고, Local에는 Dictivo 계정이 필요 없습니다. 맞는다면 Dictivo Local은 {{price.local.inline}} 일회 구매입니다.",
     ctaPrimary: "Dictivo 14일 체험",
@@ -1863,7 +1799,6 @@ Object.assign(COMPARE_I18N, {
     resourceRelated: "{competitor}와의 비교 보기",
     compareFooter: "대안 비교",
     footerAlternative: "{competitor} 대안",
-    teaserKicker: "비교",
     teaserTitle: "다른 받아쓰기 앱과 비교 중인가요?",
     teaserBody:
       "클라우드 받아쓰기, 로컬 모드 도구, 파일 전사 앱, 저가 인디 도구, Apple 내장 받아쓰기와 Dictivo를 비교하세요.",
@@ -2524,7 +2459,6 @@ ${section.cards
   const link = section.link ? `\n            <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : "";
 
   return `<section class="compare-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-            <p class="doc-meta">${html(section.kicker)}</p>
             <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
             ${paragraphs}
             ${bullets}
@@ -2601,7 +2535,6 @@ function renderCompareLinks(page, currentCode, copy) {
 function renderCompareFaq(page, copy) {
   const faqs = localizedCompareFaqs(page, copy);
   return `<section class="compare-section compare-faq-section" id="faq" aria-labelledby="compare-faq-title">
-            <p class="doc-meta">${html(copy.faqKicker)}</p>
             <h2 id="compare-faq-title">${html(trustUiCopy(copy.locale || "en").faqTitle)}</h2>
             <div class="compare-faq-list">
 ${faqs
@@ -2639,7 +2572,6 @@ ${page.sources.map(url => {
 function renderCompareCta(page, currentCode, copy) {
   return `<section class="compare-cta" aria-labelledby="compare-cta-title">
             <div>
-              <p class="doc-meta">${html(copy.ctaKicker)}</p>
               <h2 id="compare-cta-title">${html(copy.ctaTitle)}</h2>
               <p>${html(copy.ctaBody)}</p>
             </div>
@@ -2677,7 +2609,6 @@ function renderComparePage(page, currentCode = "en") {
     footer: renderFooterOnly(currentCode),
     main: `<main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
-        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
         <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(compareLastUpdated(page, currentCode))}">${html(formatLocalizedMonth(compareLastUpdated(page, currentCode), currentCode))}</time></p>
         <h1 id="compare-title">${html(h1)}</h1>
         <p class="doc-lede">${html(intro.join(" "))}</p>
@@ -2691,7 +2622,6 @@ function renderComparePage(page, currentCode = "en") {
       </section>
 
       <section class="compare-section compare-table-section" aria-labelledby="at-a-glance">
-        <p class="doc-meta">${html(copy.atAGlanceKicker)}</p>
         <h2 id="at-a-glance">${html(currentCode === "en" ? `${page.competitor} vs Dictivo at a glance` : fillCompareTemplate(copy.atAGlanceTitle, page))}</h2>
         ${renderCompareTable(page, copy)}
       </section>
@@ -2774,7 +2704,6 @@ function renderCompareHub(currentCode = "en") {
     footer: renderFooterOnly(currentCode),
     main: `<main class="compare-page compare-hub" id="compare-hub">
       <section class="compare-hero" aria-labelledby="compare-hub-title">
-        <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.hubEyebrow)}</span>
         <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
         <p class="doc-lede">${html(copy.hubLede)}</p>${currentCode === "en" ? `
         <p><a href="${attr(BEST_DICTATION_SOFTWARE_HUB_LINK.href)}">${html(BEST_DICTATION_SOFTWARE_HUB_LINK.label)}</a></p>` : ""}${COMPARE_SELECTION_GUIDES[currentCode] ? `
@@ -2812,7 +2741,6 @@ function renderCompareTeaser(currentCode = "en") {
   return `<section class="compare-teaser reveal" id="compare" aria-labelledby="compare-teaser-title">
         <div class="section-shell">
           <div class="section-heading section-heading-left">
-            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(copy.teaserKicker)}</span>
             <h2 id="compare-teaser-title">${html(copy.teaserTitle)}</h2>
             <p>${html(copy.teaserBody)}</p>
           </div>
@@ -2972,7 +2900,6 @@ function renderMacAdvisorSection(currentCode = "en") {
         <div class="section-shell">
           <div class="mac-advisor-layout">
             <div class="section-heading section-heading-left">
-              <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(copy.sectionKicker)}</span>
               <h2 id="mac-advisor-title">${html(copy.sectionTitle)}</h2>
               <p>${html(copy.sectionBody)}</p>
             </div>
@@ -3036,19 +2963,16 @@ function renderMacModelGuidePage(currentCode = "en") {
     header: renderHeader(currentCode, t, { hrefForLocale: (item) => macGuidePath(item.code) }),
     footer: renderFooterOnly(currentCode),
     main: `<main class="doc-page mac-guide-page" id="mac-model-guide">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.pageEyebrow)}</span>
       <h1>${html(copy.pageTitle)}</h1>
       <p class="doc-lede">${html(copy.pageLede)}</p>
 
       <section class="doc-section mac-guide-advisor" aria-labelledby="mac-guide-advisor-title">
-        <p class="doc-meta">${html(copy.sectionKicker)}</p>
         <h2 id="mac-guide-advisor-title">${html(copy.pageSectionTitle)}</h2>
         <p>${html(copy.pageSectionBody)}</p>
         ${renderMacAdvisorTool(currentCode)}
       </section>
 
       <section class="doc-section" aria-labelledby="mac-guide-faq-title">
-        <p class="doc-meta">${html(copy.pageEyebrow)}</p>
         <h2 id="mac-guide-faq-title">${html(copy.faqTitle)}</h2>
         <div class="faq-grid mac-guide-faq">
           ${copy.faqItems
@@ -3175,7 +3099,6 @@ ${items.map((item) => `            <li>${html(item)}</li>`).join("\n")}
 function renderOfflineGuideSection(section, index) {
   const id = `offline-guide-section-${index + 1}`;
   return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${renderDocBullets(section.bullets)}
@@ -3241,7 +3164,6 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
     header: renderHeader(currentCode, t, { hrefForLocale: (item) => offlineDictationGuidePath(item.code) }),
     footer: renderFooterOnly(currentCode),
     main: `<main class="doc-page offline-guide-page" id="offline-dictation-guide">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy(currentCode).lastUpdated)} <time datetime="${attr(offlineDictationGuideLastmod(currentCode))}">${html(formatLocalizedDate(offlineDictationGuideLastmod(currentCode), currentCode))}</time></p>
@@ -3255,7 +3177,6 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
       ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">Dictivoで入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
 
       <section class="doc-section" aria-labelledby="offline-guide-table">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="offline-guide-table">${html(copy.tableCaption)}</h2>
         ${renderOfflineGuideTable(copy, currentCode)}
       </section>
@@ -3264,11 +3185,11 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
 
       ${copy.sections.map(renderOfflineGuideSection).join("\n\n      ")}
 
-      ${renderGuideFaq("offline-guide", copy.faqTitle, copy.faqs, copy.eyebrow)}
+      ${renderGuideFaq("offline-guide", copy.faqTitle, copy.faqs)}
 
       ${currentCode === "en" ? renderBenchmarkMethodRelatedSection("offline-guide") : ""}
 
-      ${renderGuideReferences("offline-guide", copy.referenceTitle, OFFLINE_DICTATION_GUIDE_REFERENCES, copy.eyebrow)}
+      ${renderGuideReferences("offline-guide", copy.referenceTitle, OFFLINE_DICTATION_GUIDE_REFERENCES)}
     </main>`,
   });
 }
@@ -3324,7 +3245,6 @@ function renderFirstDictationPage(code) {
     footer: renderFooterOnly(code),
     finalNewline: false,
     main: `<main class="doc-page first-dictation-page">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(c.eyebrow)}</span>
       <h1>${html(c.title)}</h1>
       <p class="doc-lede">${html(c.lede)}</p>
       <div class="compare-intro-actions" data-platform-downloads>
@@ -3404,7 +3324,6 @@ function renderGuideSection(idPrefix) {
   return (section, index) => {
     const id = `${idPrefix}-section-${index + 1}`;
     return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
@@ -3414,7 +3333,6 @@ function renderGuideSection(idPrefix) {
 
 function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
   return `<section class="doc-section" id="${attr(`${sourceId}-benchmark-method`)}" aria-labelledby="${attr(`${sourceId}-benchmark-method-title`)}">
-        <p class="doc-meta">Evidence</p>
         <h2 id="${attr(`${sourceId}-benchmark-method-title`)}">How Dictivo decides local model fit</h2>
         <p>Dictivo's Mac model recommendations are backed by a local calibration method that measures real-time factor and maps the result to Fast, Medium, and Quality local model tiers.</p>
         <p><a href="${attr(benchmarkMethodGuidePath())}">Read the Mac dictation benchmark method</a> or <a href="${attr(benchmarkMethodGuidePath())}#human-speech-example">hear the 25-second human-speech sample and inspect its actual output</a>.</p>
@@ -3469,14 +3387,12 @@ function renderBenchmarkMethodGuidePage() {
     header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? benchmarkMethodGuidePath() : localePath(item.code)) }),
     footer: renderFooterOnly("en"),
     main: `<main class="doc-page offline-guide-page" id="benchmark-method-guide">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(BENCHMARK_METHOD_GUIDE_LASTMOD)}">${html(formatLocalizedDate(BENCHMARK_METHOD_GUIDE_LASTMOD, "en"))}</time></p>
       ${renderFirstDictationLink("en")}
 
       <section class="doc-section" aria-labelledby="benchmark-method-answer">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="benchmark-method-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
@@ -3484,13 +3400,11 @@ function renderBenchmarkMethodGuidePage() {
       ${renderLocalSpeechEvidence()}
 
       <section class="doc-section" aria-labelledby="benchmark-method-summary">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="benchmark-method-summary">${html(copy.summaryTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.summaryTitle, ["Signal", "How Dictivo uses it"], copy.summaryRows)}
       </section>
 
       <section class="doc-section" aria-labelledby="benchmark-method-steps">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="benchmark-method-steps">${html(copy.stepsTitle)}</h2>
         <ol>
 ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
@@ -3498,7 +3412,6 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
       </section>
 
       <section class="doc-section" id="measured-results" aria-labelledby="benchmark-measured-title">
-        <p class="doc-meta">${html(copy.measured.kicker)}</p>
         <h2 id="benchmark-measured-title">${html(copy.measured.title)}</h2>
         ${copy.measured.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${renderBenchmarkMethodTable(copy.measured.caption, copy.measured.headers, copy.measured.rows)}
@@ -3507,22 +3420,20 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
       </section>
 
       <section class="doc-section" aria-labelledby="benchmark-method-tiers">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="benchmark-method-tiers">${html(copy.tierTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.tierCaption, copy.tierHeaders, copy.tierRows)}
       </section>
 
       <section class="doc-section" aria-labelledby="benchmark-method-models">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="benchmark-method-models">${html(copy.modelTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.modelCaption, copy.modelHeaders, copy.modelRows)}
       </section>
 
       ${copy.sections.map(renderGuideSection("benchmark-method")).join("\n\n      ")}
 
-      ${renderGuideFaq("benchmark-method", copy.faqTitle, copy.faqs, copy.eyebrow)}
+      ${renderGuideFaq("benchmark-method", copy.faqTitle, copy.faqs)}
 
-      ${renderGuideReferences("benchmark-method", copy.referencesTitle, BENCHMARK_METHOD_GUIDE_REFERENCES, copy.eyebrow)}
+      ${renderGuideReferences("benchmark-method", copy.referencesTitle, BENCHMARK_METHOD_GUIDE_REFERENCES)}
     </main>`,
   });
 }
@@ -3554,7 +3465,6 @@ function speechToTextPriceCell(option) {
 function renderGuideRelated(copy, idPrefix) {
   const id = `${idPrefix}-related`;
   return `<section class="doc-section" aria-labelledby="${attr(id)}">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="${attr(id)}">${html(copy.relatedTitle)}</h2>
         <div class="compare-table-wrap">
           <table class="compare-table">
@@ -3600,7 +3510,6 @@ function renderSpeechToTextMacGuidePage() {
     header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? speechToTextMacGuidePath() : localePath(item.code)) }),
     footer: renderFooterOnly("en"),
     main: `<main class="doc-page offline-guide-page" id="speech-to-text-mac-guide">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD)}">${html(formatLocalizedDate(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD, "en"))}</time></p>
@@ -3613,13 +3522,11 @@ function renderSpeechToTextMacGuidePage() {
       </section>
 
       <section class="doc-section" aria-labelledby="speech-to-text-mac-intents">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="speech-to-text-mac-intents">${html(copy.intentTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
       </section>
 
       <section class="doc-section" aria-labelledby="speech-to-text-mac-apps">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="speech-to-text-mac-apps">${html(copy.appTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows.map((row) => [...row, { html: speechToTextPriceCell(row[0]) }, { html: guideCheckedCell("en") }]))}
       </section>
@@ -3628,11 +3535,11 @@ function renderSpeechToTextMacGuidePage() {
 
       ${copy.sections.map(renderGuideSection("speech-to-text-mac")).join("\n\n      ")}
 
-      ${renderGuideFaq("speech-to-text-mac", copy.faqTitle, copy.faqs, copy.eyebrow)}
+      ${renderGuideFaq("speech-to-text-mac", copy.faqTitle, copy.faqs)}
 
       ${renderGuideRelated(copy, "speech-to-text-mac")}
 
-      ${renderGuideReferences("speech-to-text-mac", copy.referencesTitle, SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES, copy.eyebrow)}
+      ${renderGuideReferences("speech-to-text-mac", copy.referencesTitle, SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES)}
     </main>`,
   });
 }
@@ -3670,25 +3577,21 @@ function renderOfflineDictationWindowsGuidePage() {
     header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? offlineDictationWindowsGuidePath() : localePath(item.code)) }),
     footer: renderFooterOnly("en"),
     main: `<main class="doc-page offline-guide-page" id="offline-dictation-windows-guide">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD)}">${html(formatLocalizedDate(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD, "en"))}</time></p>
 
       <section class="doc-section" aria-labelledby="offline-dictation-windows-answer">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="offline-dictation-windows-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
 
       <section class="doc-section" aria-labelledby="offline-dictation-windows-intents">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="offline-dictation-windows-intents">${html(copy.intentTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
       </section>
 
       <section class="doc-section" aria-labelledby="offline-dictation-windows-apps">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="offline-dictation-windows-apps">${html(copy.appTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows)}
       </section>
@@ -3697,11 +3600,11 @@ function renderOfflineDictationWindowsGuidePage() {
 
       ${copy.sections.map(renderGuideSection("offline-dictation-windows")).join("\n\n      ")}
 
-      ${renderGuideFaq("offline-dictation-windows", copy.faqTitle, copy.faqs, copy.eyebrow)}
+      ${renderGuideFaq("offline-dictation-windows", copy.faqTitle, copy.faqs)}
 
       ${renderGuideRelated(copy, "offline-dictation-windows")}
 
-      ${renderGuideReferences("offline-dictation-windows", copy.referencesTitle, OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES, copy.eyebrow)}
+      ${renderGuideReferences("offline-dictation-windows", copy.referencesTitle, OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES)}
     </main>`,
   });
 }
@@ -3895,7 +3798,6 @@ function renderProductFilmPage() {
     <a class="skip-link" href="#film">Watch the film</a>
     ${renderHeader("en", t, { hrefForLocale: item => item.code === "en" ? PRODUCT_FILM.path : localePath(item.code) })}
     <main class="doc-page film-page" id="film">
-      <span class="doc-eyebrow">Dictivo · 35-second product film</span>
       <h1>Your voice. On your device.</h1>
       <p class="doc-lede">Turn a thought into words. Keep your audio local. Choose Cloud Fast when it suits your work.</p>
       <figure class="hero-film film-watch">
@@ -3948,12 +3850,10 @@ function renderMediaKitPage() {
     header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? mediaKitPath() : localePath(item.code)) }),
     footer: renderFooterOnly("en"),
     main: `<main class="doc-page offline-guide-page" id="media-kit">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
 
       <section class="doc-section" aria-labelledby="media-kit-answer">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
@@ -3961,48 +3861,41 @@ function renderMediaKitPage() {
       ${renderNativeExample("en")}
 
       <section class="doc-section" aria-labelledby="media-kit-facts">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-facts">${html(copy.factsTitle)}</h2>
         ${renderMediaKitKeyValueTable(copy.factsTitle, copy.factRows)}
       </section>
 
       <section class="doc-section" aria-labelledby="media-kit-copy">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-copy">${html(copy.copyBlocksTitle)}</h2>
         ${renderMediaKitKeyValueTable(copy.copyBlocksTitle, copy.copyBlocks)}
       </section>
 
       <section class="doc-section" aria-labelledby="media-kit-categories">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-categories">${html(copy.categoriesTitle)}</h2>
         ${renderDocBullets(copy.categories)}
       </section>
 
       <section class="doc-section" aria-labelledby="media-kit-claims">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-claims">${html(copy.claimsTitle)}</h2>
         ${renderMediaKitClaimsTable(copy)}
       </section>
 
       <section class="doc-section" aria-labelledby="media-kit-comparisons">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-comparisons">${html(copy.comparisonTitle)}</h2>
         ${renderMediaKitKeyValueTable(copy.comparisonTitle, copy.comparisonRows)}
       </section>
 
       <section class="doc-section" aria-labelledby="media-kit-links">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-links">${html(copy.linksTitle)}</h2>
         ${renderMediaKitLinks(copy)}
       </section>
 
       <section class="doc-section" aria-labelledby="media-kit-outreach">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="media-kit-outreach">${html(copy.outreachTitle)}</h2>
         <p>${html(copy.outreach)}</p>
       </section>
 
-      ${renderGuideFaq("media-kit", copy.faqTitle, copy.faqs, copy.eyebrow)}
+      ${renderGuideFaq("media-kit", copy.faqTitle, copy.faqs)}
     </main>`,
   });
 }
@@ -4075,22 +3968,22 @@ function renderDictationGuideSchema(guide) {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
-// The references list that ends every guide. `kicker` adds a doc-meta line above the heading.
-function renderGuideReferences(idPrefix, title, references, kicker) {
+// The references list that ends every guide.
+function renderGuideReferences(idPrefix, title, references) {
   const id = `${idPrefix}-references`;
   return `<section class="doc-section" aria-labelledby="${attr(id)}">
-        ${kicker ? `<p class="doc-meta">${html(kicker)}</p>\n        ` : ""}<h2 id="${attr(id)}">${html(title)}</h2>
+        <h2 id="${attr(id)}">${html(title)}</h2>
         <ul class="compare-source-list">
 ${references.map(([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`).join("\n")}
         </ul>
       </section>`;
 }
 
-// The visible FAQ of a guide or the media kit. `kicker` works as in renderGuideReferences.
-function renderGuideFaq(idPrefix, title, faqs, kicker) {
+// The visible FAQ of a guide or the media kit.
+function renderGuideFaq(idPrefix, title, faqs) {
   const id = `${idPrefix}-faq`;
   return `<section class="doc-section" aria-labelledby="${attr(id)}">
-        ${kicker ? `<p class="doc-meta">${html(kicker)}</p>\n        ` : ""}<h2 id="${attr(id)}">${html(title)}</h2>
+        <h2 id="${attr(id)}">${html(title)}</h2>
         ${renderFaqGrid(faqs)}
       </section>`;
 }
@@ -4124,7 +4017,6 @@ function renderDictationGuideSection(idPrefix) {
   return (section, index) => {
     const id = `${idPrefix}-section-${index + 1}`;
     return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${renderDictationGuideSectionTable(section.table)}
@@ -4138,7 +4030,6 @@ function renderDictationGuideFieldTest(copy, idPrefix) {
   const fieldTest = copy.fieldTest;
   if (!fieldTest) return "";
   return `<section class="doc-section" aria-labelledby="${attr(`${idPrefix}-field-test`)}">
-        <p class="doc-meta">${html(fieldTest.kicker)}</p>
         <h2 id="${attr(`${idPrefix}-field-test`)}">${html(fieldTest.title)}</h2>
         <p>${html(fieldTest.environment)}</p>
         ${renderBenchmarkMethodTable(fieldTest.caption, fieldTest.headers, fieldTest.rows)}
@@ -4181,7 +4072,6 @@ ${copy.sections.map((section, index) => `          <li><a href="#${idPrefix}-sec
 function renderDictationGuideDictivo(copy, idPrefix) {
   if (!copy.dictivo) return "";
   return `<section class="doc-section" aria-labelledby="${attr(`${idPrefix}-dictivo`)}">
-        <p class="doc-meta">${html(copy.dictivo.kicker)}</p>
         <h2 id="${attr(`${idPrefix}-dictivo`)}">${html(copy.dictivo.title)}</h2>
         ${copy.dictivo.paragraphs.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}${renderDocSteps(copy.dictivo.steps)}${renderDictationGuideLinks(copy.dictivo.links)}
       </section>`;
@@ -4210,7 +4100,6 @@ function renderDictationGuidePage(guide) {
     header: renderHeader(code, t, { hrefForLocale: hrefForLocale ?? ((item) => (item.code === code ? path : localePath(item.code))) }),
     footer: renderFooterOnly(code),
     main: `<main class="${attr(mainClass)}" id="${attr(mainId)}">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(trustUiCopy(code).lastUpdated)} <time datetime="${attr(lastmod)}">${html(formatLocalizedDate(lastmod, code))}</time></p>
@@ -4526,7 +4415,6 @@ function renderPricingPage(code = "en") {
     header: renderHeader(code, t, { hrefForLocale: (item) => pricingHref(item.code) }),
     footer: renderFooterOnly(code),
     main: `<main class="doc-page" id="pricing-page">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
       <p class="doc-meta">${html(copy.lastUpdated)} <time datetime="${attr(lastmod)}">${html(formatLocalizedDate(lastmod, code))}</time></p>
@@ -4686,7 +4574,6 @@ function renderHome(currentCode) {
       <section class="trust-section reveal" id="privacy" aria-labelledby="privacy-title">
         <div class="section-shell">
           <div class="section-heading section-heading-left trust-heading">
-            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>${html(t.privacy.kicker)}</span>
             <h2 id="privacy-title">${html(t.privacy.title)}</h2>
             <p>${html(t.privacy.body)}</p>
           </div>
@@ -4716,7 +4603,6 @@ function renderHome(currentCode) {
       <section class="cloud-flow reveal" id="workflow" aria-labelledby="workflow-title">
         <div class="section-shell">
           <div class="section-heading">
-            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(t.workflow.kicker)}</span>
             <h2 id="workflow-title">${html(t.workflow.title)}</h2>
             <p>${html(t.workflow.body)}</p>
           </div>
@@ -4778,7 +4664,6 @@ function renderHome(currentCode) {
       <section class="download-band reveal" id="downloads" aria-labelledby="downloads-title">
         <div class="section-shell">
           <div class="section-heading">
-            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>${html(t.downloads.kicker)}</span>
             <h2 id="downloads-title">${html(t.downloads.title)}</h2>
             <p>${html(t.downloads.body)}</p>
           </div>
@@ -4811,7 +4696,6 @@ ${compareTeaser}
       <section class="channel-section language-section reveal" id="languages" aria-labelledby="languages-title">
         <div class="section-shell">
           <div class="section-heading section-heading-left">
-            <span class="section-kicker"><span class="eyebrow-dot eyebrow-dot--info" aria-hidden="true"></span>${html(t.languages.kicker)}</span>
             <h2 id="languages-title">${html(t.languages.title)}</h2>
             <p>${html(t.languages.body)}</p>
           </div>
@@ -4825,7 +4709,6 @@ ${compareTeaser}
       <section class="faq-section reveal" id="faq" aria-labelledby="faq-title">
         <div class="section-shell faq-shell">
           <div class="section-heading section-heading-left">
-            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>${html(t.faq.kicker)}</span>
             <h2 id="faq-title">${html(t.faq.title)}</h2>
             <p>${html(t.faq.body)}</p>
           </div>
@@ -5654,7 +5537,6 @@ function renderNotFound() {
     header: renderHeader("en", HOME_COPY.en),
     footer: renderFooterOnly(),
     main: `<main class="doc-page" id="not-found">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dictivo</span>
       <h1>Page not found</h1>
       <p class="doc-lede">The page you requested is not available. Start from Dictivo home to compare plans, privacy options, and downloads.</p>
       <section class="doc-section" aria-labelledby="not-found-next">
@@ -5714,7 +5596,6 @@ function renderTrustPage(sourcePage, currentCode = "en") {
   const sectionHtml = page.sections
     .map(
       (section, index) => `<section class="doc-section" aria-labelledby="${attr(`${pageId}-${index + 1}`)}">
-        <p class="doc-meta">${html(page.eyebrow)}</p>
         <h2 id="${attr(`${pageId}-${index + 1}`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${section.bullets ? `<ul>
@@ -5725,7 +5606,6 @@ function renderTrustPage(sourcePage, currentCode = "en") {
     .join("\n\n      ");
   const faqHtml = page.faqs?.length
     ? `<section class="doc-section" aria-labelledby="${attr(`${pageId}-faq`)}">
-        <p class="doc-meta">${html(ui.faq)}</p>
         <h2 id="${attr(`${pageId}-faq`)}">${html(ui.faqTitle)}</h2>
         <div class="faq-grid">
         ${page.faqs
@@ -5749,7 +5629,6 @@ function renderTrustPage(sourcePage, currentCode = "en") {
     : "";
   const relatedHtml = page.relatedLinks?.length
     ? `<section class="doc-section" aria-labelledby="${attr(`${pageId}-related`)}">
-        <p class="doc-meta">${html(ui.related)}</p>
         <h2 id="${attr(`${pageId}-related`)}">${html(ui.relatedTitle)}</h2>
         <ul>
           ${page.relatedLinks.map((item) => `<li><a href="${attr(localizeTrustHref(item.href, currentCode))}">${html(item.label)}</a></li>`).join("\n          ")}
@@ -5771,7 +5650,6 @@ function renderTrustPage(sourcePage, currentCode = "en") {
     header: renderHeader(currentCode, t, headerOptions),
     footer: renderFooterOnly(currentCode),
     main: `<main class="doc-page" id="${attr(pageId)}">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(page.eyebrow)}</span>
       <h1>${html(page.title)}</h1>
       <p class="doc-lede">${html(page.lede)}</p>
       ${updatedHtml}
@@ -5840,7 +5718,6 @@ function renderPrivacyProofPage(currentCode = "en") {
   const sectionHtml = copy.sections
     .map(
       (section, index) => `<section class="doc-section" aria-labelledby="${attr(`privacy-proof-${index + 1}`)}">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="${attr(`privacy-proof-${index + 1}`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${section.bullets ? `<ul>
@@ -5877,12 +5754,10 @@ function renderPrivacyProofPage(currentCode = "en") {
     header: renderHeader(currentCode, t, { hrefForLocale: (item) => privacyProofPath(item.code) }),
     footer: renderFooterOnly(currentCode),
     main: `<main class="doc-page" id="privacy-proof">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
 
       <section class="doc-section" aria-labelledby="privacy-proof-answer">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
         <h2 id="privacy-proof-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
@@ -5890,7 +5765,6 @@ function renderPrivacyProofPage(currentCode = "en") {
       ${sectionHtml}
 
       <section class="doc-section" aria-labelledby="privacy-proof-faq">
-        <p class="doc-meta">FAQ</p>
         <h2 id="privacy-proof-faq">${html(copy.faqTitle)}</h2>
         <div class="faq-grid">
         ${faqHtml}
@@ -6190,7 +6064,6 @@ function renderChangelog() {
     header: renderHeader("en", HOME_COPY.en),
     footer: renderFooterOnly(),
     main: `<main class="doc-page" id="changelog">
-      <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Release notes</span>
       <h1>Changelog</h1>
       <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
 

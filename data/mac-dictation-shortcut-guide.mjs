@@ -52,7 +52,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
     tocLabel: "On this page",
     sections: [
       {
-        kicker: "Setting",
         title: "Where the setting is and what the menu offers",
         paragraphs: [
           "Choose Apple menu > System Settings, click Keyboard in the sidebar (you may need to scroll down), go to Dictation, and open the Shortcut pop-up menu.",
@@ -61,7 +60,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
         ],
       },
       {
-        kicker: "Change",
         title: "How to change it, including a custom combination",
         steps: [
           "Open System Settings > Keyboard and go to Dictation. If Dictation is off, turn it on; the first time, click Enable.",
@@ -73,7 +71,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
         ],
       },
       {
-        kicker: "Keys",
         title: "Microphone key, Fn key and Globe key",
         paragraphs: [
           "On keyboards with a Microphone key in the row of function keys, press and release it to start Dictation. Pressing and holding it activates Siri instead, when Siri is enabled.",
@@ -82,7 +79,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
         ],
       },
       {
-        kicker: "Fixes",
         title: "When the shortcut does nothing or opens something else",
         steps: [
           "Check that Dictation is on in System Settings > Keyboard. The first time you turn it on, click Enable.",
@@ -94,7 +90,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
         links: [["Mac dictation not working: what to check for each symptom", troubleshootingPath]],
       },
       {
-        kicker: "Menu",
         title: "Starting and stopping without the shortcut",
         paragraphs: [
           "Click where you want the text and choose Edit > Start Dictation. Some apps do not show this menu item.",
@@ -102,7 +97,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
         ],
       },
       {
-        kicker: "Commands",
         title: "Commands while you dictate",
         paragraphs: [
           "These spoken commands are always available while you dictate. Say \"new line\" (like pressing Return once) or \"new paragraph\" (like pressing Return twice); both appear when you finish dictating.",
@@ -113,7 +107,6 @@ export function macDictationShortcutCopy({ windows, troubleshootingPath }) {
     ],
     fieldTest: null,
     dictivo: {
-      kicker: "Another option",
       title: "Dictivo's shortcut",
       paragraphs: [
         `Dictivo is this site's product. It is a separate dictation app with its own shortcut, which you set in Dictivo rather than in Keyboard settings. The default is ${dictivoShortcutDefault(windows)}: press it once to start recording and again to stop. To hold the keys while you speak instead, choose Press and hold under Dictation activation in Dictivo's Settings > Hotkeys.`,

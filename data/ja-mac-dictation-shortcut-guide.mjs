@@ -73,7 +73,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
     tocLabel: "このページの内容",
     sections: [
       {
-        kicker: "設定の場所",
         title: "ショートカットの設定場所とメニューの選択肢",
         paragraphs: [
           "アップルメニューから「システム設定」を開き、サイドバーの「キーボード」をクリックします（下にスクロールする必要がある場合があります）。「音声入力」の項目にある「ショートカット」のポップアップメニューで、音声入力を始めるショートカットを選びます。",
@@ -82,7 +81,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
         ],
       },
       {
-        kicker: "変更",
         title: "ショートカットを変更する（好きな組み合わせにする）",
         steps: [
           "「システム設定」→「キーボード」で「音声入力」に移動します。オフになっていればオンにします。初めてオンにするときは「有効にする」をクリックします。",
@@ -94,7 +92,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
         ],
       },
       {
-        kicker: "キー",
         title: "マイクキー・fnキー・地球儀キーとfn + D",
         paragraphs: [
           "マイクキーは、キーボードのファンクションキーの列にある場合に使えます。押してすぐ放すと音声入力が始まり、押したままにするとSiriが起動します（Siriが有効な場合）。",
@@ -104,7 +101,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
         ],
       },
       {
-        kicker: "無効にする",
         title: "ショートカットを無効にしたい・勝手に起動する",
         paragraphs: [
           "意図せず音声入力が始まるときは、「ショートカット」を普段押さない組み合わせに変えます。「カスタマイズ」を選んでから使いたいキーを押すと、一覧にない組み合わせも設定できます。",
@@ -114,7 +110,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
         links: [["音声入力が勝手に起動するときの確認点（症状別の直し方）", troubleshootingPath]],
       },
       {
-        kicker: "反応しない",
         title: "押しても反応しない・Siriが起動するとき",
         steps: [
           "「システム設定」→「キーボード」で「音声入力」がオンか確認します。初めてオンにするときは「有効にする」をクリックします。",
@@ -128,7 +123,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
         links: [["Macで音声入力できないときの直し方（症状別の確認手順）", troubleshootingPath]],
       },
       {
-        kicker: "メニュー",
         title: "ショートカットを使わずに開始・終了する",
         paragraphs: [
           "文字を入れたい場所をクリックし、メニューバーの「編集」→「音声入力を開始」を選びます。アプリによっては、この項目が表示されないことがあります。",
@@ -136,7 +130,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
         ],
       },
       {
-        kicker: "コマンド",
         title: "音声入力中に使えるコマンド",
         paragraphs: [
           "次のコマンドは、音声入力中いつでも使えます。改行するときは「次の行」（Returnキーを1回押すのと同じ）、段落を分けるときは「次の段落」（Returnキーを2回押すのと同じ）と言います。改行は、音声入力を終えた時点で表示されます。",
@@ -148,7 +141,6 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
     ],
     fieldTest: null,
     dictivo: {
-      kicker: "標準機能以外の選択肢",
       title: "Dictivoのショートカットと、日本語で試す手順",
       paragraphs: [
         `ここからは当サイトの製品の案内です。Dictivoは、macOS標準の音声入力とは別の音声入力アプリで、ショートカットも「キーボード」設定ではなくDictivoの中で設定します。初期設定は${dictivoShortcutJa(windows)}です。1回押すと録音が始まり、もう一度押すと止まります。キーを押している間だけ録音する方式にも切り替えられます。`,

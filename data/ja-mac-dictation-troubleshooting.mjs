@@ -31,7 +31,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
   tocLabel: "症状から探す",
   sections: [
     {
-      kicker: "症状1",
       title: "マイクのアイコンは出るのに文字が入らない",
       paragraphs: [
         "アイコンが出ているなら、音声入力そのものは始まっています。声がMacに届いていないか、話している言語と設定が合っていない可能性があります。",
@@ -44,7 +43,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "症状2",
       title: "ショートカットを押しても何も起きない",
       steps: [
         "「システム設定」→「キーボード」で「音声入力」がオンか確認します。初めてオンにするときは「有効にする」をクリックします。",
@@ -59,7 +57,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "症状3",
       title: "話している途中で止まる",
       paragraphs: [
         "音声入力には、話せる長さの上限やタイムアウトはありません。ただし、30秒間声が検出されないと自動で止まります。考えながら話していて止まったときは、同じ操作でもう一度始めてください。",
@@ -67,7 +64,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "症状4",
       title: "句読点や改行が入らない",
       paragraphs: [
         "日本語（日本）は、話している間に句読点が自動で入る「自動句読点」の対象言語です。入らないときは「キーボード」→「音声入力」の「自動句読点」の設定を確認します。自動で入るのが邪魔なら、ここでオフにできます。",
@@ -76,7 +72,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "症状5",
       title: "日本語が別の言語で入力される",
       steps: [
         "「キーボード」→「音声入力」で「言語」の横の「編集」をクリックし、「日本語（日本）」を選びます。",
@@ -84,7 +79,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "症状6",
       title: "特定のアプリだけで使えない",
       paragraphs: [
         "まず「メモ」など別のアプリで試し、Mac全体の問題か、そのアプリだけの問題かを分けます。文字を入れたい場所をクリックして、カーソルが点滅している状態で始めることも確認します。",
@@ -93,7 +87,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "症状7",
       title: "勝手に起動する・オフにしたい",
       paragraphs: [
         "意図せず起動してしまうときは、「キーボード」→「音声入力」の「ショートカット」を、普段は押さない組み合わせに変えます。「カスタマイズ」を選んでから使いたいキーを押すと、一覧にない組み合わせも設定できます。",
@@ -101,7 +94,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       ],
     },
     {
-      kicker: "最後に",
       title: "それでも直らないとき",
       steps: [
         "「音声入力」をいったんオフにして、もう一度オンにします。",
@@ -113,7 +105,6 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
   ],
   fieldTest: null,
   dictivo: {
-    kicker: "標準機能以外の選択肢",
     title: "標準の音声入力で解決しないとき",
     paragraphs: [
       "ここからは当サイトの製品の案内です。Dictivoは、ショートカットで録音し、Mac上のモデルで文字にしてから、入力先のアプリに貼り付けるアプリです。macOS標準の音声入力とは別の仕組みで、Dictivo独自のショートカット（Macの初期設定はCmd+Shift+Space）で操作します。",

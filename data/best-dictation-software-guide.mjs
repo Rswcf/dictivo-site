@@ -142,7 +142,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
     tocLabel: "On this page",
     sections: [
       {
-        kicker: "Free",
         title: "Which dictation software is free?",
         paragraphs: [
           "Start with what your computer already has. Dictation in macOS, voice typing and voice access in Windows 11, and voice typing in Google Docs come with the system or app, with no separate price. They differ in where speech is processed: Windows voice typing needs an internet connection, while voice access works on the PC after a one-time language download.",
@@ -158,7 +157,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         notes: [`Free plans change: the limits above are as each vendor published them on ${checkedOn}.`],
       },
       {
-        kicker: "Fully local",
         title: "Which dictation software works offline, without uploading your voice?",
         paragraphs: [
           "If recordings must not leave your computer, choose software that runs its speech model on the computer, and check that the mode you use is the local one: several apps offer both.",
@@ -181,7 +179,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Windows",
         title: "What dictation software works on Windows?",
         paragraphs: [
           "Windows 11 has two built-in options: voice typing, which you start with Windows key + H in a text field and which needs an internet connection, and voice access, which works on the PC after setup. These separate apps also run on Windows:",
@@ -201,7 +198,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Mac",
         title: "What about dictation software for Mac?",
         paragraphs: [
           "Besides macOS Dictation, these all run on a Mac: MacWhisper, VoiceInk, Superwhisper, Spokenly, Voibe, Wispr Flow, Handy and Dictivo. VoiceInk needs a Mac with Apple silicon and macOS 14.4 or later. For a Mac-only comparison by workflow, including apps for transcribing recordings, see the Mac guide.",
@@ -212,7 +208,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Several languages",
         title: "Which dictation software handles several languages?",
         paragraphs: ["Language support below is as each vendor lists it; check your own language and accent during a trial."],
         bullets: [
@@ -223,7 +218,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Buy once",
         title: "Which dictation apps can you buy once instead of subscribing?",
         bullets: [
           "VoiceInk is currently listed at $25 for one Mac, $39 for two or $49 for three, with lifetime updates and a 14-day money-back guarantee.",
@@ -235,7 +229,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         notes: ["Wispr Flow and Spokenly Pro are monthly or annual subscriptions, and Dragon Professional has no public price."],
       },
       {
-        kicker: "Phone and computer",
         title: "Which dictation apps work on a phone as well as a computer?",
         paragraphs: [
           "Wispr Flow runs on Mac, Windows, iPhone and Android. One Superwhisper Pro license covers unlimited Macs and Windows PCs plus an iPhone and an Android phone. Spokenly Pro is available on macOS, Windows, Linux and iOS.",
@@ -243,14 +236,12 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Recordings and meetings",
         title: "What if you also need to transcribe recordings or meetings?",
         paragraphs: [
           "Live dictation and transcribing a recording are different jobs. MacWhisper transcribes audio and video files and can record meetings in Zoom, Teams and other apps; Superwhisper Pro adds file transcription; Voibe Work and Wispr Flow's Notetaker take meeting notes. Dictivo is for live dictation and does not import recorded files.",
         ],
       },
       {
-        kicker: "Product notes",
         title: "Each product in brief",
         paragraphs: ["In the same order as the table. Each note gives what the vendor publishes and who the product suits; the limits are the ones the vendor states."],
         entries: [
@@ -344,7 +335,6 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ],
       },
       {
-        kicker: "Before you pay",
         title: "How to compare dictation software before you pay",
         paragraphs: [
           "Dictate the same short paragraph in each tool, with names and terms from your own work, and count the corrections you make. Dictate into the app you actually write in: a transcript that looks right in a tool's own window may still need pasting elsewhere.",

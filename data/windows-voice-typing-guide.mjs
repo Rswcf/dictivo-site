@@ -75,7 +75,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
     tocLabel: "On this page",
     sections: [
       {
-        kicker: "Symptom 1",
         title: "Windows logo key + H does nothing",
         steps: [
           "Click in a text box first, so the cursor is blinking where the text should go. Voice typing needs a text box to type into.",
@@ -88,7 +87,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         ],
       },
       {
-        kicker: "Symptom 2",
         title: "It says voice typing needs access to your microphone",
         paragraphs: [
           "Microsoft's message reads: \"Voice typing needs access to your microphone. You'll need to turn this on in settings to use speech to text.\"",
@@ -100,7 +98,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         ],
       },
       {
-        kicker: "Symptom 3",
         title: "It listens, but no text appears",
         steps: [
           "Open Settings > System > Sound and, under Input, choose the device you speak into. If you use an external microphone, check that it is properly connected.",
@@ -110,7 +107,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         ],
       },
       {
-        kicker: "Symptom 4",
         title: "It says voice typing isn't available in the current language",
         paragraphs: [
           "Voice typing works only in the languages Microsoft lists for it: 46 languages and regional varieties in Windows 11, including six varieties of English, plus Chinese, French, German, Japanese, Korean, Portuguese and Spanish. The language does not have to be your Windows display language.",
@@ -122,7 +118,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         ],
       },
       {
-        kicker: "Symptom 5",
         title: "It types the wrong words or the wrong language",
         steps: [
           "Press Windows logo key + Spacebar and choose the language you are speaking; voice typing follows the input language.",
@@ -132,7 +127,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         notes: ["Say \"delete that\" to remove the last word or phrase, and \"stop listening\" to stop."],
       },
       {
-        kicker: "Symptom 6",
         title: "It stopped working offline, or on a work or school PC",
         paragraphs: [
           "Voice typing converts speech to text with Microsoft's online speech recognition, so it needs an internet connection. When Online speech recognition is turned off, Microsoft says only device-based features, such as Narrator, are available.",
@@ -145,21 +139,18 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         notes: ["With a work or school account you cannot contribute voice clips, but Microsoft says you can still use voice typing."],
       },
       {
-        kicker: "Symptom 7",
         title: "An app is missing from the microphone list",
         paragraphs: [
           "Settings > Privacy & security > Microphone lists Microsoft Store apps one by one. Desktop apps are not listed individually: they are allowed or blocked together by Let desktop apps access your microphone, and Microsoft notes that they may not always appear in the list. If the app you dictate into is a desktop app, that setting is the one to check.",
         ],
       },
       {
-        kicker: "Symptom 8",
         title: "You opened voice access instead",
         paragraphs: [
           "Voice typing and voice access are separate features. Voice typing starts with Windows logo key + H and types what you say. Voice access, in Windows 11 version 22H2 and later, controls the whole PC by voice and is turned on from Settings > Accessibility > Speech. Windows Speech Recognition, the older command feature, has been deprecated since December 2023 and is being replaced by voice access.",
         ],
       },
       {
-        kicker: "Symptom 9",
         title: "If it still does not work",
         steps: [
           "Microsoft's microphone troubleshooting ends with the audio driver: right-click Start, open Device Manager, uninstall the audio device (check Attempt to remove the driver for this device), and restart the PC so Windows reinstalls it.",
@@ -170,7 +161,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
         ],
       },
       {
-        kicker: "Offline",
         title: "Can Windows 11 dictation work offline?",
         paragraphs: [
           "Voice typing cannot. Microsoft's voice typing article says it uses online speech recognition powered by Azure Speech services, and that you need to be connected to the internet.",
@@ -183,7 +173,6 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
     fieldTest: null,
     dictivo: windows
       ? {
-          kicker: "Another option",
           title: "If you need dictation that works offline",
           paragraphs: [
             "Dictivo is this site's product. It is a separate dictation app with its own shortcut (Ctrl+Shift+Space on Windows by default), so it does not depend on voice typing or the online speech recognition setting. In Local mode it transcribes on your PC with a downloaded model, so it works without an internet connection once the model is installed, and then pastes the text into the app you are using.",
