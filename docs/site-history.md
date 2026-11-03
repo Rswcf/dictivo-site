@@ -4,6 +4,17 @@ Dated change notes, newest first. README.md held them until 2026-11-03.
 A note records what changed on its date. README.md describes current behavior.
 
 
+
+## Kickers and eyebrows removed — 2026-11-04
+
+Every page lost the small label above its h1 (`doc-eyebrow`, 176 pages) and the labels above
+section headings (`doc-meta` kickers, 852 lines; homepage `section-kicker`, 7 templates). They
+repeated the heading below them. Kept: "Last updated" dates, the benchmark's measured date, and
+two labels that name a control (practice samples, table of contents). "Last updated" stays above
+each guide: it is a freshness signal that AI answer engines read. The 256 copy fields that only
+fed these labels are deleted; `hubEyebrow` stays because the compare hub breadcrumb uses it.
+The Mac advisor's embedded JSON lost two unread keys (`sectionKicker`, `pageEyebrow`). Skip
+links already land on each page's `<main>` id and were not changed.
 ## Dead CSS removed — 2026-11-04
 
 `site.css` went from 4,108 to 3,274 lines. 61 classes that no built page and no script used

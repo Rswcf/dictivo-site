@@ -23,7 +23,6 @@ export const HOME_COPY = {
       download: "Download for Mac",
     },
     privacy: {
-      kicker: "Privacy first",
       title: "Your private words stay on your device.",
       body: "Dictivo starts local because most dictation should feel private by default. Cloud Fast is visible because it changes where audio is processed.",
       localTitle: "Local mode",
@@ -99,7 +98,6 @@ export const HOME_COPY = {
       checkoutBody: "After purchase, return to Dictivo and activate Local with the license key from your purchase email. Every purchase has a 14-day no-questions refund. If checkout does not open, email support@dictivo.app.",
     },
     downloads: {
-      kicker: "Desktop app",
       title: "Download Dictivo for Mac or Windows.",
       body: "The desktop app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
       available: "Available installers",
@@ -129,13 +127,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "Display language choices for global desktop users.",
       body: "Dictivo can present the site and product interface in Deutsch, Français, Español, Italiano, Nederlands, Português, plus 简体中文, 繁體中文, 日本語, 한국어. Speech language detection remains automatic.",
       note: "Display language changes the interface. Dictation language detection stays automatic.",
     },
     workflow: {
-      kicker: "Workflow",
       title: "The workflow is intentionally simple.",
       body: "Dictivo is designed for the moment you need words out of your head and into the app in front of you.",
       steps: [
@@ -157,7 +153,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Questions before you download.",
       body: "Short answers about privacy, pricing, Cloud Fast, languages, and availability.",
       items: [
@@ -218,7 +213,6 @@ export const HOME_COPY = {
       download: "Für Mac herunterladen",
     },
     privacy: {
-      kicker: "Datenschutz zuerst",
       title: "Ihre privaten Worte bleiben auf Ihrem Gerät.",
       body: "Dictivo startet lokal, weil Diktieren standardmäßig privat sein sollte. Cloud Fast ist klar sichtbar, weil sich dadurch ändert, wo Audio verarbeitet wird.",
       localTitle: "Lokaler Modus",
@@ -293,7 +287,6 @@ export const HOME_COPY = {
       checkoutBody: "Kehren Sie nach dem Kauf zu Dictivo zurück und aktivieren Sie Local mit dem Lizenzschlüssel, den Sie per E-Mail erhalten. Für jeden Kauf gibt es 14 Tage Erstattung ohne Fragen. Wenn der Checkout nicht öffnet, schreiben Sie an support@dictivo.app.",
     },
     downloads: {
-      kicker: "Desktop-App",
       title: "Dictivo für Mac oder Windows herunterladen.",
       body: "Die Desktop-App enthält den lokalen Modus, Tiny dauerhaft gratis, 14 Tage vollen Local-Test, 10 kostenlose Cloud-Fast-Minuten, Lizenzaktivierung und Anzeigesprachen.",
       available: "Verfügbare Installer",
@@ -323,13 +316,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Sprachen",
       title: "Anzeigesprachen für globale Desktop-Nutzer.",
       body: "Dictivo kann Website und Oberfläche in Deutsch, Français, Español, Italiano, Nederlands, Português sowie 简体中文, 繁體中文, 日本語, 한국어 anzeigen. Die Erkennung der gesprochenen Sprache bleibt automatisch.",
       note: "Die Anzeigesprache ändert die Oberfläche. Die Diktatsprache wird weiter automatisch erkannt.",
     },
     workflow: {
-      kicker: "Ablauf",
       title: "Der Ablauf bleibt bewusst einfach.",
       body: "Dictivo ist für den Moment gebaut, in dem Gedanken schnell als Text in der aktuellen App landen sollen.",
       steps: [
@@ -351,7 +342,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Fragen vor dem Download.",
       body: "Kurze Antworten zu Datenschutz, Preisen, Cloud Fast, Sprachen und Verfügbarkeit.",
       items: [
@@ -412,7 +402,6 @@ export const HOME_COPY = {
       download: "Télécharger pour Mac",
     },
     privacy: {
-      kicker: "Confidentialité d'abord",
       title: "Vos mots privés restent sur votre appareil.",
       body: "Dictivo commence en local, parce que la dictée devrait être privée par défaut. Cloud Fast est explicite, car il change l'endroit où l'audio est traité.",
       localTitle: "Mode local",
@@ -487,7 +476,6 @@ export const HOME_COPY = {
       checkoutBody: "Après l'achat, revenez dans Dictivo et activez Local avec la clé de licence reçue par e-mail. Chaque achat bénéficie d'un remboursement 14 jours, sans question. Si le paiement ne s'ouvre pas, écrivez à support@dictivo.app.",
     },
     downloads: {
-      kicker: "App de bureau",
       title: "Télécharger Dictivo pour Mac ou Windows.",
       body: "L'app de bureau inclut le mode Local, Tiny gratuit à vie, 14 jours d'essai Local complet, 10 minutes Cloud Fast gratuites, l'activation de licence et les langues d'affichage.",
       available: "Installateurs disponibles",
@@ -517,13 +505,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Langues",
       title: "Des langues d'affichage pour les utilisateurs desktop du monde entier.",
       body: "Dictivo peut afficher le site et l'interface en Deutsch, Français, Español, Italiano, Nederlands, Português, ainsi qu'en 简体中文, 繁體中文, 日本語, 한국어. La détection de la langue dictée reste automatique.",
       note: "La langue d'affichage change l'interface. La langue de dictée reste détectée automatiquement.",
     },
     workflow: {
-      kicker: "Flux",
       title: "Le flux reste volontairement simple.",
       body: "Dictivo est conçu pour transformer rapidement vos idées en texte dans l'app où vous travaillez.",
       steps: [
@@ -545,7 +531,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Questions avant le téléchargement.",
       body: "Réponses courtes sur confidentialité, tarifs, Cloud Fast, langues et disponibilité.",
       items: [
@@ -606,7 +591,6 @@ export const HOME_COPY = {
       download: "Descargar para Mac",
     },
     privacy: {
-      kicker: "Privacidad primero",
       title: "Tus palabras privadas se quedan en tu dispositivo.",
       body: "Dictivo empieza en local porque el dictado debería ser privado por defecto. Cloud Fast es visible porque cambia dónde se procesa el audio.",
       localTitle: "Modo Local",
@@ -681,7 +665,6 @@ export const HOME_COPY = {
       checkoutBody: "Después de comprar, vuelve a Dictivo y activa Local con la clave de licencia que recibes por correo. Cada compra tiene un reembolso de 14 días, sin preguntas. Si el pago no se abre, escribe a support@dictivo.app.",
     },
     downloads: {
-      kicker: "App de escritorio",
       title: "Descarga Dictivo para Mac o Windows.",
       body: "La app de escritorio incluye modo Local, Tiny gratis para siempre, 14 días de prueba Local completa, 10 minutos gratis de Cloud Fast, activación de licencia e idiomas de visualización.",
       available: "Instaladores disponibles",
@@ -711,13 +694,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Idiomas",
       title: "Idiomas de visualización para usuarios de escritorio en todo el mundo.",
       body: "Dictivo puede mostrar el sitio y la interfaz en Deutsch, Français, Español, Italiano, Nederlands, Português, además de 简体中文, 繁體中文, 日本語, 한국어. La detección del idioma dictado sigue siendo automática.",
       note: "El idioma de visualización cambia la interfaz. El idioma de dictado se detecta automáticamente.",
     },
     workflow: {
-      kicker: "Flujo",
       title: "El flujo es deliberadamente simple.",
       body: "Dictivo está diseñado para pasar tus palabras a la app en la que trabajas justo cuando lo necesitas.",
       steps: [
@@ -739,7 +720,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Preguntas antes de descargar.",
       body: "Respuestas breves sobre privacidad, precios, Cloud Fast, idiomas y disponibilidad.",
       items: [
@@ -800,7 +780,6 @@ export const HOME_COPY = {
       download: "Scarica per Mac",
     },
     privacy: {
-      kicker: "Privacy",
       title: "Le tue parole private restano sul tuo dispositivo.",
       body: "Dictivo parte in locale perché la dettatura dovrebbe essere privata per impostazione predefinita. Cloud Fast è esplicito perché cambia dove viene elaborato l'audio.",
       localTitle: "Modalità Local",
@@ -875,7 +854,6 @@ export const HOME_COPY = {
       checkoutBody: "Dopo l'acquisto, torna in Dictivo e attiva Local con la chiave di licenza ricevuta via email. Ogni acquisto prevede un rimborso entro 14 giorni, senza domande. Se il checkout non si apre, scrivi a support@dictivo.app.",
     },
     downloads: {
-      kicker: "App desktop",
       title: "Scarica Dictivo per Mac o Windows.",
       body: "L'app desktop include modalità Local, Tiny gratis per sempre, 14 giorni di prova Local completa, 10 minuti Cloud Fast gratuiti, attivazione licenza e lingue di visualizzazione.",
       available: "Installer disponibili",
@@ -905,13 +883,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "Lingue di visualizzazione per utenti desktop in tutto il mondo.",
       body: "Dictivo può mostrare sito e interfaccia in Deutsch, Français, Español, Italiano, Nederlands, Português, oltre a 简体中文, 繁體中文, 日本語, 한국어. Il rilevamento della lingua parlata resta automatico.",
       note: "La lingua di visualizzazione cambia l'interfaccia. La lingua dettata viene rilevata automaticamente.",
     },
     workflow: {
-      kicker: "Workflow",
       title: "Il flusso è volutamente semplice.",
       body: "Dictivo è progettato per trasformare rapidamente le parole in testo nell'app in cui stai lavorando.",
       steps: [
@@ -933,7 +909,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Domande prima del download.",
       body: "Risposte brevi su privacy, prezzi, Cloud Fast, lingue e disponibilità.",
       items: [
@@ -994,7 +969,6 @@ export const HOME_COPY = {
       download: "Download voor Mac",
     },
     privacy: {
-      kicker: "Privacy",
       title: "Je privéwoorden blijven op je apparaat.",
       body: "Dictivo begint lokaal omdat dicteren standaard privé moet aanvoelen. Cloud Fast is duidelijk zichtbaar omdat audio dan elders wordt verwerkt.",
       localTitle: "Local-modus",
@@ -1069,7 +1043,6 @@ export const HOME_COPY = {
       checkoutBody: "Keer na aankoop terug naar Dictivo en activeer Local met de licentiesleutel die je per e-mail ontvangt. Bij elke aankoop geldt een terugbetaling binnen 14 dagen, zonder vragen. Als checkout niet opent, mail support@dictivo.app.",
     },
     downloads: {
-      kicker: "Desktop-app",
       title: "Download Dictivo voor Mac of Windows.",
       body: "De desktop-app bevat Local, Tiny altijd gratis, een volledige Local-proef van 14 dagen, 10 gratis Cloud Fast-minuten, licentieactivatie en weergavetalen.",
       available: "Beschikbare installers",
@@ -1099,13 +1072,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "Weergavetalen voor desktopgebruikers wereldwijd.",
       body: "Dictivo kan de site en interface tonen in Deutsch, Français, Español, Italiano, Nederlands, Português, plus 简体中文, 繁體中文, 日本語, 한국어. Spraaktaaldetectie blijft automatisch.",
       note: "De weergavetaal wijzigt de interface. De dicteertaal blijft automatisch gedetecteerd.",
     },
     workflow: {
-      kicker: "Workflow",
       title: "De workflow is bewust eenvoudig.",
       body: "Dictivo is gemaakt voor het moment waarop je woorden snel in de app voor je nodig hebt.",
       steps: [
@@ -1127,7 +1098,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Vragen voordat je downloadt.",
       body: "Korte antwoorden over privacy, prijzen, Cloud Fast, talen en beschikbaarheid.",
       items: [
@@ -1188,7 +1158,6 @@ export const HOME_COPY = {
       download: "Baixar para Mac",
     },
     privacy: {
-      kicker: "Privacidade",
       title: "Suas palavras privadas ficam no seu dispositivo.",
       body: "Dictivo começa local porque ditado deve parecer privado por padrão. Cloud Fast fica visível porque muda onde o áudio é processado.",
       localTitle: "Modo Local",
@@ -1263,7 +1232,6 @@ export const HOME_COPY = {
       checkoutBody: "Depois da compra, volte ao Dictivo e ative o Local com a chave de licença que você recebe por e-mail. Toda compra tem reembolso de 14 dias, sem perguntas. Se o checkout não abrir, escreva para support@dictivo.app.",
     },
     downloads: {
-      kicker: "App desktop",
       title: "Baixe Dictivo para Mac ou Windows.",
       body: "O app para desktop inclui modo Local, Tiny grátis para sempre, 14 dias de teste Local completo, 10 minutos Cloud Fast gratuitos, ativação de licença e idiomas de exibição.",
       available: "Instaladores disponíveis",
@@ -1293,13 +1261,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "Idiomas de exibição para usuários de desktop no mundo todo.",
       body: "Dictivo pode exibir o site e a interface em Deutsch, Français, Español, Italiano, Nederlands, Português, além de 简体中文, 繁體中文, 日本語, 한국어. A detecção do idioma falado continua automática.",
       note: "O idioma de exibição muda a interface. O idioma do ditado continua com detecção automática.",
     },
     workflow: {
-      kicker: "Workflow",
       title: "O fluxo é intencionalmente simples.",
       body: "Dictivo foi feito para quando você precisa transformar fala em texto dentro do app em que está trabalhando.",
       steps: [
@@ -1321,7 +1287,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "Perguntas antes de baixar.",
       body: "Respostas rápidas sobre privacidade, preços, Cloud Fast, idiomas e disponibilidade.",
       items: [
@@ -1382,7 +1347,6 @@ export const HOME_COPY = {
       download: "下载 Mac 版",
     },
     privacy: {
-      kicker: "隐私",
       title: "你的私密内容留在本设备上。",
       body: "Dictivo 默认从本地模式开始，因为大多数听写都应该默认私密。Cloud Fast 会被明确展示，因为它会改变音频处理位置。",
       localTitle: "本地模式",
@@ -1439,7 +1403,6 @@ export const HOME_COPY = {
       checkoutBody: "购买后回到 Dictivo，用邮件收到的许可证密钥激活 Local。每笔购买都有 14 天无理由退款。如果购买页面没有打开，请邮件联系 support@dictivo.app。",
     },
     downloads: {
-      kicker: "桌面应用",
       title: "下载 Dictivo Mac 或 Windows 版。",
       body: "桌面应用包含 Local 模式、Tiny 永久免费、14 天完整 Local 试用、10 分钟免费 Cloud Fast、许可证激活和显示语言选项。",
       available: "可用安装包",
@@ -1463,13 +1426,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "面向全球桌面用户的显示语言选项。",
       body: "Dictivo 可以用 Deutsch, Français, Español, Italiano, Nederlands, Português，以及 简体中文, 繁體中文, 日本語, 한국어 显示网站和产品界面。听写语言检测仍然自动完成。",
       note: "显示语言只改变界面。听写语言仍然自动检测。",
     },
     workflow: {
-      kicker: "Workflow",
       title: "工作流刻意保持简单。",
       body: "Dictivo 适合在你需要把脑中的话快速放进当前应用的那一刻使用。",
       steps: [
@@ -1479,7 +1440,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "下载前的常见问题。",
       body: "关于隐私、价格、Cloud Fast、语言和可用性的简短回答。",
       items: [
@@ -1522,7 +1482,6 @@ export const HOME_COPY = {
       download: "Mac 版をダウンロード",
     },
     privacy: {
-      kicker: "プライバシー",
       title: "プライベートな言葉はデバイスに残ります。",
       body: "Dictivo は標準でローカル処理から始まります。Cloud Fast は音声の処理場所が変わるため、明確に表示されます。",
       localTitle: "Local モード",
@@ -1597,7 +1556,6 @@ export const HOME_COPY = {
       checkoutBody: "購入後、Dictivo に戻り、メールで届くライセンスキーで Local を有効化してください。購入にはすべて 14 日間の返金保証が付き、理由は問いません。購入ページが開かない場合は support@dictivo.app へご連絡ください。",
     },
     downloads: {
-      kicker: "デスクトップアプリ",
       title: "Dictivo の Mac 版または Windows 版をダウンロード。",
       body: "デスクトップアプリには Local、永久無料の Tiny、14 日間の完全 Local トライアル、10 分の無料 Cloud Fast、ライセンス有効化、表示言語が含まれます。",
       available: "利用可能なインストーラ",
@@ -1621,13 +1579,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "世界中のデスクトップユーザー向け表示言語。",
       body: "Dictivo は Deutsch, Français, Español, Italiano, Nederlands, Português に加え、简体中文, 繁體中文, 日本語, 한국어 でサイトと製品 UI を表示できます。音声入力の言語検出は自動のままです。",
       note: "表示言語はインターフェースだけを変更します。音声入力の言語は自動検出されます。",
     },
     workflow: {
-      kicker: "Workflow",
       title: "ワークフローは意図的にシンプルです。",
       body: "Dictivo は、頭の中の言葉を今使っているアプリへすぐ入れたい瞬間のために設計されています。",
       steps: [
@@ -1637,7 +1593,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "ダウンロード前のよくある質問。",
       body: "プライバシー、料金、Cloud Fast、言語、対応状況についての短い回答です。",
       items: [
@@ -1692,7 +1647,6 @@ export const HOME_COPY = {
       download: "Mac용 다운로드",
     },
     privacy: {
-      kicker: "개인정보",
       title: "내 비공개 말은 기기에 남습니다.",
       body: "Dictivo는 기본적으로 로컬에서 시작합니다. Cloud Fast는 오디오 처리 위치가 바뀌기 때문에 명확히 표시됩니다.",
       localTitle: "Local 모드",
@@ -1767,7 +1721,6 @@ export const HOME_COPY = {
       checkoutBody: "구매 후 Dictivo로 돌아와 이메일로 받은 라이선스 키로 Local을 활성화하세요. 모든 구매에는 이유를 묻지 않는 14일 환불이 적용됩니다. 결제 페이지가 열리지 않으면 support@dictivo.app으로 연락하세요.",
     },
     downloads: {
-      kicker: "데스크톱 앱",
       title: "Dictivo Mac 또는 Windows 버전을 다운로드하세요.",
       body: "데스크톱 앱에는 Local 모드, 영구 무료 Tiny, 14일 전체 Local 체험, 10분 무료 Cloud Fast, 라이선스 활성화, 표시 언어가 포함됩니다.",
       available: "사용 가능한 설치 파일",
@@ -1791,13 +1744,11 @@ export const HOME_COPY = {
       footnoteHref: "/privacy/local-dictation-network-test/",
     },
     languages: {
-      kicker: "Languages",
       title: "전 세계 데스크톱 사용자를 위한 표시 언어.",
       body: "Dictivo는 Deutsch, Français, Español, Italiano, Nederlands, Português 및 简体中文, 繁體中文, 日本語, 한국어로 사이트와 제품 UI를 표시할 수 있습니다. 받아쓰기 언어 감지는 계속 자동입니다.",
       note: "표시 언어는 인터페이스만 바꿉니다. 받아쓰기 언어는 계속 자동 감지됩니다.",
     },
     workflow: {
-      kicker: "Workflow",
       title: "워크플로는 의도적으로 단순합니다.",
       body: "Dictivo는 머릿속의 말을 지금 사용하는 앱으로 바로 넣어야 하는 순간을 위해 설계되었습니다.",
       steps: [
@@ -1807,7 +1758,6 @@ export const HOME_COPY = {
       ],
     },
     faq: {
-      kicker: "FAQ",
       title: "다운로드 전 자주 묻는 질문.",
       body: "개인정보, 가격, Cloud Fast, 언어, 사용 가능 여부에 대한 짧은 답변입니다.",
       items: [

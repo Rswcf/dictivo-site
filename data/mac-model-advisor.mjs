@@ -169,7 +169,6 @@ export const MAC_ADVISOR_FAMILIES = [
 export const MAC_ADVISOR_COPY = {
   en: {
     navLabel: "Mac model guide",
-    sectionKicker: "Mac model advisor",
     sectionTitle: "Choose your Mac. Get the right local model.",
     sectionBody:
       "Pick the closest MacBook and memory size before you download. Dictivo will still check your Mac after install and tune the local recommendation on the device.",
@@ -188,7 +187,6 @@ export const MAC_ADVISOR_COPY = {
     pageMetaTitle: "Mac model guide for Dictivo local dictation",
     pageMetaDescription:
       "Choose your MacBook model and memory size to see which Dictivo local model is the best starting point before you download.",
-    pageEyebrow: "Mac model guide",
     pageTitle: "Find the right Dictivo local model for your MacBook.",
     pageLede:
       "This guide is for purchase confidence, not a hard limit. Dictivo checks the real Mac after install and can recommend a safer local tier.",
@@ -228,7 +226,6 @@ export const MAC_ADVISOR_COPY = {
   },
   de: {
     navLabel: "Mac Modellguide",
-    sectionKicker: "Mac Modellberater",
     sectionTitle: "Wählen Sie Ihren Mac. Finden Sie das passende lokale Modell.",
     sectionBody:
       "Wählen Sie vor dem Download das nächste MacBook und die Speichergröße. Dictivo prüft den Mac nach der Installation trotzdem lokal.",
@@ -246,7 +243,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "Wählen Sie nach dem Download die nächste Option. Dictivo prüft den Mac auch beim ersten Start.",
     pageMetaTitle: "Mac Modellguide für lokale Dictivo-Diktate",
     pageMetaDescription: "Wählen Sie MacBook Modell und Speicher, um ein gutes Startmodell für Dictivo Local zu sehen.",
-    pageEyebrow: "Mac Modellguide",
     pageTitle: "Finden Sie das passende lokale Dictivo-Modell für Ihr MacBook.",
     pageLede:
       "Dieser Guide hilft vor dem Kauf. Er ist keine harte Grenze. Dictivo prüft den echten Mac nach der Installation.",
@@ -280,7 +276,6 @@ export const MAC_ADVISOR_COPY = {
   },
   fr: {
     navLabel: "Guide Mac",
-    sectionKicker: "Conseiller Mac",
     sectionTitle: "Choisissez votre Mac. Obtenez le bon modèle local.",
     sectionBody:
       "Choisissez le MacBook le plus proche et la mémoire avant le téléchargement. Dictivo vérifiera aussi votre Mac après installation.",
@@ -298,7 +293,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "Choisissez l'option la plus proche après téléchargement. Dictivo vérifie aussi le Mac au premier lancement.",
     pageMetaTitle: "Guide Mac pour la dictée locale Dictivo",
     pageMetaDescription: "Choisissez votre MacBook et sa mémoire pour voir le meilleur point de départ local dans Dictivo.",
-    pageEyebrow: "Guide Mac",
     pageTitle: "Trouvez le bon modèle local Dictivo pour votre MacBook.",
     pageLede: "Ce guide aide avant l'achat. Ce n'est pas une limite stricte. Dictivo vérifie le vrai Mac après installation.",
     pageSectionTitle: "Commencez par le conseiller.",
@@ -331,7 +325,6 @@ export const MAC_ADVISOR_COPY = {
   },
   es: {
     navLabel: "Guía de Mac",
-    sectionKicker: "Asesor de Mac",
     sectionTitle: "Elige tu Mac. Obtén el modelo local adecuado.",
     sectionBody:
       "Elige el MacBook más cercano y la memoria antes de descargar. Dictivo también revisará tu Mac después de instalar.",
@@ -349,7 +342,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "Elige la opción más cercana después de descargar. Dictivo también revisa el Mac al iniciar.",
     pageMetaTitle: "Guía de Mac para dictado local con Dictivo",
     pageMetaDescription: "Elige tu modelo de MacBook y memoria para ver el mejor punto de partida local en Dictivo.",
-    pageEyebrow: "Guía de Mac",
     pageTitle: "Encuentra el modelo local de Dictivo adecuado para tu MacBook.",
     pageLede: "Esta guía ayuda antes de comprar. No es un límite estricto. Dictivo revisa el Mac real después de instalar.",
     pageSectionTitle: "Usa primero el asesor.",
@@ -382,7 +374,6 @@ export const MAC_ADVISOR_COPY = {
   },
   it: {
     navLabel: "Guida Mac",
-    sectionKicker: "Consulente Mac",
     sectionTitle: "Scegli il tuo Mac. Trova il modello locale giusto.",
     sectionBody:
       "Scegli il MacBook più vicino e la memoria prima del download. Dictivo controllerà comunque il Mac dopo l'installazione.",
@@ -400,7 +391,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "Scegli l'opzione più vicina dopo il download. Dictivo controlla anche il Mac al primo avvio.",
     pageMetaTitle: "Guida Mac per la dettatura locale Dictivo",
     pageMetaDescription: "Scegli modello MacBook e memoria per vedere il miglior punto di partenza locale in Dictivo.",
-    pageEyebrow: "Guida Mac",
     pageTitle: "Trova il modello locale Dictivo giusto per il tuo MacBook.",
     pageLede: "Questa guida aiuta prima dell'acquisto. Non è un limite rigido. Dictivo controlla il Mac reale dopo l'installazione.",
     pageSectionTitle: "Usa prima il consulente.",
@@ -433,7 +423,6 @@ export const MAC_ADVISOR_COPY = {
   },
   nl: {
     navLabel: "Mac-gids",
-    sectionKicker: "Mac-adviseur",
     sectionTitle: "Kies je Mac. Vind het juiste lokale model.",
     sectionBody:
       "Kies voor de download de dichtstbijzijnde MacBook en het geheugen. Dictivo controleert je Mac ook na installatie.",
@@ -451,7 +440,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "Kies na download de dichtstbijzijnde optie. Dictivo controleert je Mac ook bij de eerste start.",
     pageMetaTitle: "Mac-gids voor lokale Dictivo-dictatie",
     pageMetaDescription: "Kies je MacBook-model en geheugen om het beste lokale startpunt in Dictivo te zien.",
-    pageEyebrow: "Mac-gids",
     pageTitle: "Vind het juiste lokale Dictivo-model voor je MacBook.",
     pageLede: "Deze gids helpt voor aankoop. Het is geen harde grens. Dictivo controleert de echte Mac na installatie.",
     pageSectionTitle: "Gebruik eerst de adviseur.",
@@ -484,7 +472,6 @@ export const MAC_ADVISOR_COPY = {
   },
   pt: {
     navLabel: "Guia de Mac",
-    sectionKicker: "Consultor de Mac",
     sectionTitle: "Escolha seu Mac. Veja o modelo local certo.",
     sectionBody:
       "Escolha o MacBook mais próximo e a memória antes de baixar. O Dictivo também verificará seu Mac após a instalação.",
@@ -502,7 +489,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "Escolha a opção mais próxima após baixar. O Dictivo também verifica o Mac na primeira abertura.",
     pageMetaTitle: "Guia de Mac para ditado local com Dictivo",
     pageMetaDescription: "Escolha o modelo do MacBook e a memória para ver o melhor ponto de partida local no Dictivo.",
-    pageEyebrow: "Guia de Mac",
     pageTitle: "Encontre o modelo local do Dictivo certo para seu MacBook.",
     pageLede: "Este guia ajuda antes da compra. Não é um limite rígido. O Dictivo verifica o Mac real após a instalação.",
     pageSectionTitle: "Use primeiro o consultor.",
@@ -535,7 +521,6 @@ export const MAC_ADVISOR_COPY = {
   },
   zh: {
     navLabel: "Mac 型号指南",
-    sectionKicker: "Mac 型号建议",
     sectionTitle: "选择你的 Mac，找到合适的本地模型。",
     sectionBody: "下载前选择最接近的 MacBook 和内存。安装后 Dictivo 仍会在本机检测你的 Mac，并给出更稳妥的本地推荐。",
     modelLabel: "MacBook 型号",
@@ -552,7 +537,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "下载后选择最接近的选项。Dictivo 第一次启动时也会检测你的 Mac。",
     pageMetaTitle: "Dictivo 本地听写 Mac 型号指南",
     pageMetaDescription: "选择你的 MacBook 型号和内存，查看 Dictivo Local 推荐从哪个本地模型开始。",
-    pageEyebrow: "Mac 型号指南",
     pageTitle: "为你的 MacBook 找到合适的 Dictivo 本地模型。",
     pageLede: "这个指南用于下载和购买前判断方向，不是硬性限制。Dictivo 安装后会检测真实设备。",
     pageSectionTitle: "先使用型号建议器。",
@@ -585,7 +569,6 @@ export const MAC_ADVISOR_COPY = {
   },
   ja: {
     navLabel: "Macモデルガイド",
-    sectionKicker: "Macモデル診断",
     sectionTitle: "Macを選ぶだけで、適したローカルモデルが分かります。",
     sectionBody: "ダウンロード前に近いMacBookとメモリを選んでください。Dictivoはインストール後にもMacを確認します。",
     modelLabel: "MacBookモデル",
@@ -602,7 +585,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "ダウンロード後に近い選択肢を選んでください。Dictivoは初回起動時にもMacを確認します。",
     pageMetaTitle: "Dictivoローカル音声入力のMacモデルガイド",
     pageMetaDescription: "MacBookモデルとメモリを選び、Dictivo Localの最初のおすすめを確認できます。",
-    pageEyebrow: "Macモデルガイド",
     pageTitle: "あなたのMacBookに合うDictivoローカルモデルを見つける。",
     pageLede: "このガイドは購入前の目安です。厳密な制限ではありません。Dictivoはインストール後に実機を確認します。",
     pageSectionTitle: "まず診断を使ってください。",
@@ -635,7 +617,6 @@ export const MAC_ADVISOR_COPY = {
   },
   ko: {
     navLabel: "Mac 모델 가이드",
-    sectionKicker: "Mac 모델 어드바이저",
     sectionTitle: "Mac을 선택하면 알맞은 로컬 모델을 추천합니다.",
     sectionBody: "다운로드 전에 가장 가까운 MacBook과 메모리를 선택하세요. Dictivo는 설치 후에도 Mac을 로컬에서 확인합니다.",
     modelLabel: "MacBook 모델",
@@ -652,7 +633,6 @@ export const MAC_ADVISOR_COPY = {
     noScript: "다운로드 후 가장 가까운 옵션을 선택하세요. Dictivo는 첫 실행 시에도 Mac을 확인합니다.",
     pageMetaTitle: "Dictivo 로컬 받아쓰기를 위한 Mac 모델 가이드",
     pageMetaDescription: "MacBook 모델과 메모리를 선택해 Dictivo Local의 추천 시작 모델을 확인하세요.",
-    pageEyebrow: "Mac 모델 가이드",
     pageTitle: "내 MacBook에 맞는 Dictivo 로컬 모델 찾기.",
     pageLede: "이 가이드는 구매 전 판단을 돕는 기준입니다. 엄격한 제한은 아니며, Dictivo는 설치 후 실제 Mac을 확인합니다.",
     pageSectionTitle: "먼저 어드바이저를 사용하세요.",

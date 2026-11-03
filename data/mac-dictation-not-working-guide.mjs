@@ -70,7 +70,6 @@ export function macDictationNotWorkingCopy({ windows }) {
     tocLabel: "Find your symptom",
     sections: [
       {
-        kicker: "Symptom 1",
         title: "The microphone icon appears but nothing is typed",
         paragraphs: [
           "When the cursor is highlighted and pulsing, or you hear the tone that signals your Mac is ready, Dictation has started. Check whether your voice reaches the microphone it listens to, and whether it expects the language you speak.",
@@ -84,7 +83,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Symptom 2",
         title: "Pressing the shortcut does nothing",
         steps: [
           "Open System Settings > Keyboard and check that Dictation is turned on. The first time you turn it on, click Enable.",
@@ -97,7 +95,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         links: [["How the Mac dictation shortcut works and how to change it", "/guides/mac-dictation-shortcut/"]],
       },
       {
-        kicker: "Symptom 3",
         title: "The microphone key opens Siri instead of Dictation",
         paragraphs: [
           "On Macs with a Microphone key in the row of function keys, pressing and releasing the key starts Dictation, and pressing and holding it activates Siri (when Siri is enabled). Press it briefly and let go.",
@@ -105,7 +102,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Symptom 4",
         title: "Dictation stops while you are still speaking",
         paragraphs: [
           "Dictation has no length limit and no timeout, but it stops automatically when no speech is detected for 30 seconds. If you paused to think, start it again the same way. Pressing Escape, the Microphone key or the Dictation shortcut also ends it.",
@@ -113,7 +109,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Symptom 5",
         title: "Punctuation or line breaks do not appear",
         paragraphs: [
           "In supported languages, including English (United States) and English (United Kingdom), Dictation inserts commas, periods and question marks as you speak. If it does not, check that Auto-punctuation is on in System Settings > Keyboard > Dictation. Apple's macOS Feature Availability page lists the supported languages and regions; not every English region is on it.",
@@ -126,7 +121,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Symptom 6",
         title: "It types the wrong language",
         steps: [
           "Open System Settings > Keyboard, go to Dictation, click Edit next to Languages, and select the language and region you speak. To remove a language, deselect it.",
@@ -134,7 +128,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Symptom 7",
         title: "It works in some apps but not in others",
         paragraphs: [
           "Try Dictation in Notes or TextEdit first. If it works there, the problem lies with the other app, not with Dictation. Before you start, click where you want the text to go.",
@@ -144,7 +137,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Symptom 8",
         title: "It starts by itself, or you want it off",
         paragraphs: [
           "If Dictation starts when you did not mean it to, pick a shortcut you will not press by accident in System Settings > Keyboard > Dictation > Shortcut, or choose Customize and press a combination such as Option-Z.",
@@ -152,7 +144,6 @@ export function macDictationNotWorkingCopy({ windows }) {
         ],
       },
       {
-        kicker: "Last step",
         title: "If it still does not work",
         steps: [
           "Turn Dictation off in Keyboard settings, then turn it on again.",
@@ -165,7 +156,6 @@ export function macDictationNotWorkingCopy({ windows }) {
     ],
     fieldTest: null,
     dictivo: {
-      kicker: "Another option",
       title: "If built-in Dictation does not fit",
       paragraphs: [
         `Dictivo is this site's product. It is a separate dictation app with its own shortcut, so it does not depend on the macOS Dictation settings above. Its default shortcut is ${dictivoShortcutDefault(windows)}: press it once to start recording and again to stop, or switch to hold-to-talk. In Local mode it transcribes the recording on your computer with a downloaded model, then pastes the text into the app you are using.`,

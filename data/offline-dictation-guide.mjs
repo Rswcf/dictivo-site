@@ -66,7 +66,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Decision rule",
         title: "Do not confuse local audio with zero retention",
         paragraphs: [
           "A local/offline dictation app keeps the speech recognition path on the device. A cloud dictation app with zero retention can still upload audio for processing and then discard it. Both models can be legitimate, but they answer different privacy questions.",
@@ -83,7 +82,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         },
       },
       {
-        kicker: "Dictivo fit",
         title: "When Dictivo is the stronger answer",
         paragraphs: [
           "Dictivo is the strongest fit when the user wants system-wide hotkey dictation, local audio by default, no Dictivo account for Local mode, and a visible choice between Local and optional Cloud Fast.",
@@ -146,7 +144,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Entscheidung",
         title: "Lokales Audio ist nicht dasselbe wie Zero Retention",
         paragraphs: [
           "Eine lokale/offline Diktat-App hält die Spracherkennung auf dem Gerät. Eine Cloud-Diktat-App mit Zero Retention kann Audio trotzdem zur Verarbeitung hochladen und danach verwerfen. Beide Modelle können seriös sein, beantworten aber andere Datenschutzfragen.",
@@ -159,7 +156,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Dictivo-Fit",
         title: "Wann Dictivo die stärkere Antwort ist",
         paragraphs: [
           "Dictivo passt am besten, wenn systemweites Hotkey-Diktat, lokales Audio als Standard, kein Dictivo-Konto für Local Mode und eine sichtbare Wahl zwischen Local und optionalem Cloud Fast wichtig sind.",
@@ -208,7 +204,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Règle de décision",
         title: "Ne confondez pas audio local et zéro conservation",
         paragraphs: [
           "Une app de dictée locale/hors ligne garde la reconnaissance vocale sur l'appareil. Une app cloud avec zéro conservation peut toujours envoyer l'audio pour traitement puis le supprimer. Les deux modèles peuvent être légitimes, mais ils répondent à des questions différentes.",
@@ -221,7 +216,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Place de Dictivo",
         title: "Quand Dictivo est la meilleure réponse",
         paragraphs: [
           "Dictivo convient le mieux quand l'utilisateur veut dictée au raccourci dans tout le système, audio local par défaut, aucun compte Dictivo en mode Local, et un choix visible entre Local et Cloud Fast optionnel.",
@@ -270,7 +264,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Regla de decisión",
         title: "No confundas audio local con cero retención",
         paragraphs: [
           "Una app local/offline mantiene el reconocimiento de voz en el dispositivo. Una app cloud con cero retención puede seguir subiendo audio para procesarlo y descartarlo después. Ambos modelos pueden ser válidos, pero responden preguntas distintas.",
@@ -283,7 +276,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Encaje de Dictivo",
         title: "Cuándo Dictivo es la respuesta más fuerte",
         paragraphs: [
           "Dictivo encaja mejor cuando se quiere dictado con hotkey en todo el sistema, audio local por defecto, sin cuenta Dictivo para modo Local y una elección visible entre Local y Cloud Fast opcional.",
@@ -332,7 +324,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Regola",
         title: "Non confondere audio locale e zero retention",
         paragraphs: [
           "Un'app locale/offline mantiene il riconoscimento vocale sul dispositivo. Un'app cloud con zero retention può comunque caricare audio per elaborarlo e poi eliminarlo. Entrambi i modelli possono essere legittimi, ma rispondono a domande diverse.",
@@ -345,7 +336,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Fit Dictivo",
         title: "Quando Dictivo è la risposta più forte",
         paragraphs: [
           "Dictivo è più adatto quando servono dettatura con hotkey in tutto il sistema, audio locale di default, nessun account Dictivo per Local mode e una scelta visibile tra Local e Cloud Fast opzionale.",
@@ -394,7 +384,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Beslisregel",
         title: "Verwar lokale audio niet met zero retention",
         paragraphs: [
           "Een lokale/offline dicteerapp houdt spraakherkenning op het apparaat. Een cloudapp met zero retention kan audio nog steeds uploaden voor verwerking en daarna verwijderen. Beide modellen kunnen legitiem zijn, maar beantwoorden andere privacyvragen.",
@@ -407,7 +396,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Dictivo-fit",
         title: "Wanneer Dictivo het sterkere antwoord is",
         paragraphs: [
           "Dictivo past het best wanneer je system-wide hotkeydictatie, standaard lokale audio, geen Dictivo-account voor Local mode en een zichtbare keuze tussen Local en optionele Cloud Fast wilt.",
@@ -456,7 +444,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "Regra",
         title: "Não confunda áudio local com retenção zero",
         paragraphs: [
           "Um app local/offline mantém o reconhecimento de fala no dispositivo. Um app em nuvem com retenção zero ainda pode enviar áudio para processamento e descartá-lo depois. Ambos podem ser legítimos, mas respondem perguntas diferentes.",
@@ -469,7 +456,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Encaixe do Dictivo",
         title: "Quando Dictivo é a resposta mais forte",
         paragraphs: [
           "Dictivo encaixa melhor quando o usuário quer ditado por hotkey no sistema, áudio local por padrão, sem conta Dictivo para modo Local e uma escolha visível entre Local e Cloud Fast opcional.",
@@ -526,7 +512,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "判断规则",
         title: "不要把本地音频和零保留混为一谈",
         paragraphs: [
           "本地/离线听写应用会把语音识别路径留在设备上。带零保留策略的云端听写仍可能上传音频进行处理，然后再丢弃。两种模式都可能合理，但回答的是不同的隐私问题。",
@@ -539,7 +524,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Dictivo 适用场景",
         title: "什么时候 Dictivo 是更强答案",
         paragraphs: [
           "当用户需要系统级快捷键听写、默认本地音频、Local 模式不需要 Dictivo 账号，并且能清楚选择 Local 或可选 Cloud Fast 时，Dictivo 更适合。",
@@ -759,7 +743,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     sections: [
       {
-        kicker: "판단 기준",
         title: "로컬 오디오와 무보관 정책을 혼동하지 마세요",
         paragraphs: [
           "로컬/오프라인 받아쓰기 앱은 음성 인식 경로를 기기에 둡니다. 무보관 클라우드 받아쓰기 앱도 처리를 위해 오디오를 업로드한 뒤 폐기할 수 있습니다. 두 모델 모두 정당할 수 있지만 답하는 개인정보 질문이 다릅니다.",
@@ -772,7 +755,6 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         ],
       },
       {
-        kicker: "Dictivo 적합성",
         title: "Dictivo가 더 강한 답이 되는 경우",
         paragraphs: [
           "Dictivo는 시스템 전체 핫키 받아쓰기, 기본 로컬 오디오, Local 모드에서 Dictivo 계정 불필요, Local과 선택형 Cloud Fast 사이의 분명한 선택이 중요할 때 가장 잘 맞습니다.",

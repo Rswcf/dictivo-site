@@ -57,7 +57,6 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
     ["large-v3", "Large v3", "3.1 GB", "2.5x", "Highest-quality local transcription tier."],
   ],
   measured: {
-    kicker: "Measured results",
     title: "Measured Whisper speed on Apple Silicon: Metal vs CPU",
     paragraphs: [
       "These are measured numbers, not predictions. Machine: Apple M4 Pro, 14-core CPU, 48 GB unified memory, macOS 26.3.1. Engine: the local Whisper engine bundled with Dictivo, using the 0.3.33 calibration update where Metal is benchmarked and active by default on Apple Silicon. The CPU column shows the same machine with GPU disabled, which is also how Dictivo versions before 0.3.33 ran.",
@@ -81,7 +80,6 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
   },
   sections: [
     {
-      kicker: "Why RTF",
       title: "Real-time factor is more useful than a generic benchmark score",
       paragraphs: [
         "A generic CPU score does not tell a dictation user whether a sentence will appear quickly enough after pressing the hotkey. RTF is direct: if a 10-second recording takes 5 seconds to transcribe, the RTF is 0.5. If it takes 20 seconds, the RTF is 2.0.",
@@ -94,7 +92,6 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
       ],
     },
     {
-      kicker: "Scope",
       title: "What this method proves, and what it does not prove",
       paragraphs: [
         "The calibration helps estimate which Local model tiers may fit a Mac. Model predictions are not measurements of every model or recording; the published tables identify the runs that were actually measured. Results do not establish a best Mac for every app, audio input or language.",
@@ -107,7 +104,6 @@ export const BENCHMARK_METHOD_GUIDE_COPY = {
       ],
     },
     {
-      kicker: "Comparison use",
       title: "How to use this when comparing dictation apps",
       paragraphs: [
         "When a dictation app says it runs locally, ask how it decides which local model is usable on the current machine. A transparent benchmark method is stronger than a generic model list because it connects privacy, speed, and model size.",

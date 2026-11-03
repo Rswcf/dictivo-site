@@ -489,47 +489,6 @@ main section[id] {
   min-width: 0;
 }
 
-.section-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 18px;
-  border: 1px solid rgb(255 255 255 / 15%);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  padding: 5px 11px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-  align-self: flex-start;
-}
-
-.section-kicker .eyebrow-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--dot-live);
-}
-
-.eyebrow-dot--info {
-  background: var(--dot-info) !important;
-}
-
-/* Eyebrows on dark sections */
-.trust-section .section-kicker {
-  background: rgb(255 255 255 / 6%);
-  border-color: rgb(255 255 255 / 20%);
-  color: rgb(255 255 255 / 80%);
-}
-
-.trust-section .section-kicker .eyebrow-dot {
-  background: var(--signal);
-}
-
 .hero h1 {
   margin: 0;
   max-width: 1080px;
@@ -938,23 +897,6 @@ main section[id] {
 
 .trust-section .section-heading h2 em {
   color: var(--accent);
-}
-
-.section-heading p:not(.section-kicker) {
-  margin: 20px auto 0;
-  max-width: 60ch;
-  color: var(--muted);
-  font-size: clamp(15px, 1.6vw, 18px);
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-
-.section-heading-left p:not(.section-kicker) {
-  margin-left: 0;
-}
-
-.trust-section .section-heading p:not(.section-kicker) {
-  color: rgb(255 255 255 / 70%);
 }
 
 /* ---------------------------------------------------------- *
@@ -1815,10 +1757,6 @@ main section[id] {
 .faq-shell .section-heading {
   margin: 0 0 36px;
   max-width: none;
-}
-
-.faq-shell .section-heading p:not(.section-kicker) {
-  margin: 20px 0 0;
 }
 
 .faq-grid {
