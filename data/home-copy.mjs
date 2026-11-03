@@ -10,7 +10,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. Buy once, yours to keep.",
     skip: "Skip to content",
     nav: {
-      privacy: "Privacy",
       pricing: "Pricing",
       downloads: "Downloads",
       download: "Downloads",
@@ -22,8 +21,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Download for Mac",
-      pricing: "See pricing",
-      windows: "Mac and Windows x64 are available now.",
     },
     privacy: {
       kicker: "Privacy first",
@@ -208,7 +205,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per offenem Netzwerktest überprüfbar. Einmal kaufen, für immer Ihres.",
     skip: "Zum Inhalt springen",
     nav: {
-      privacy: "Datenschutz",
       pricing: "Preise",
       downloads: "Downloads",
       download: "Downloads",
@@ -220,8 +216,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Für Mac herunterladen",
-      pricing: "Preise ansehen",
-      windows: "Mac und Windows x64 sind jetzt verfügbar.",
     },
     privacy: {
       kicker: "Datenschutz zuerst",
@@ -405,7 +399,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. Achat unique, à vous pour toujours.",
     skip: "Aller au contenu",
     nav: {
-      privacy: "Confidentialité",
       pricing: "Tarifs",
       downloads: "Téléchargements",
       download: "Téléchargements",
@@ -417,8 +410,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Télécharger pour Mac",
-      pricing: "Voir les tarifs",
-      windows: "Mac et Windows x64 sont disponibles maintenant.",
     },
     privacy: {
       kicker: "Confidentialité d'abord",
@@ -602,7 +593,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo escribe lo que dictas en cualquier app de Mac o Windows. En modo local, el audio se queda en tu equipo. Un solo pago y es tuyo para siempre.",
     skip: "Saltar al contenido",
     nav: {
-      privacy: "Privacidad",
       pricing: "Precios",
       downloads: "Descargas",
       download: "Descargas",
@@ -614,8 +604,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Descargar para Mac",
-      pricing: "Ver precios",
-      windows: "Mac y Windows x64 ya están disponibles.",
     },
     privacy: {
       kicker: "Privacidad primero",
@@ -799,7 +787,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo scrive ciò che detti in qualsiasi app per Mac o Windows. In modalità locale l'audio resta sul tuo dispositivo. Un solo acquisto, ed è tuo per sempre.",
     skip: "Vai al contenuto",
     nav: {
-      privacy: "Privacy",
       pricing: "Prezzi",
       downloads: "Scaricamenti",
       download: "Download",
@@ -811,8 +798,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Scarica per Mac",
-      pricing: "Vedi prezzi",
-      windows: "Mac e Windows x64 sono disponibili ora.",
     },
     privacy: {
       kicker: "Privacy",
@@ -996,7 +981,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo typt wat je zegt in elke Mac- of Windows-app. In lokale modus blijft audio op je apparaat. Eenmalig kopen, voor altijd van jou.",
     skip: "Naar de inhoud",
     nav: {
-      privacy: "Privacy",
       pricing: "Prijzen",
       downloads: "Downloads",
       download: "Downloads",
@@ -1008,8 +992,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Download voor Mac",
-      pricing: "Bekijk prijzen",
-      windows: "Mac en Windows x64 zijn nu beschikbaar.",
     },
     privacy: {
       kicker: "Privacy",
@@ -1193,7 +1175,6 @@ export const HOME_COPY = {
     metaDescription: "Transforme voz em texto no Mac e Windows. Use digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 14 dias.",
     skip: "Ir para o conteúdo",
     nav: {
-      privacy: "Privacidade",
       pricing: "Preços",
       downloads: "Downloads",
       download: "Downloads",
@@ -1205,8 +1186,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Baixar para Mac",
-      pricing: "Ver preços",
-      windows: "Mac e Windows x64 estão disponíveis agora.",
     },
     privacy: {
       kicker: "Privacidade",
@@ -1390,7 +1369,6 @@ export const HOME_COPY = {
     metaDescription: "用 Dictivo 在 Mac 和 Windows 上把语音转成文字，起草邮件、笔记和 AI 提示词。Local 模式在本机处理音频，安装模型后可离线语音输入。全部本地模型免费试用 14 天，无需账号或银行卡。",
     skip: "跳到正文",
     nav: {
-      privacy: "隐私",
       pricing: "价格",
       downloads: "下载",
       download: "下载",
@@ -1402,8 +1380,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "下载 Mac 版",
-      pricing: "查看价格",
-      windows: "Mac 与 Windows x64 现已可用。",
     },
     privacy: {
       kicker: "隐私",
@@ -1533,7 +1509,6 @@ export const HOME_COPY = {
     metaDescription: "Dictivo はホットキーひとつで Mac や Windows のどのアプリにも音声をテキスト入力。ローカルモードでは音声が端末の外に出ません。買い切り、サブスクなし。",
     skip: "本文へ移動",
     nav: {
-      privacy: "プライバシー",
       pricing: "料金",
       downloads: "ダウンロード",
       download: "ダウンロード",
@@ -1545,8 +1520,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Mac 版をダウンロード",
-      pricing: "料金を見る",
-      windows: "Mac と Windows x64 が利用可能です。",
     },
     privacy: {
       kicker: "プライバシー",
@@ -1706,7 +1679,6 @@ export const HOME_COPY = {
     metaDescription: "Mac과 Windows에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요. Local 모드는 기기에서 음성을 처리합니다. 모든 로컬 모델을 14일 무료로 체험하세요.",
     skip: "본문으로 이동",
     nav: {
-      privacy: "개인정보",
       pricing: "가격",
       downloads: "다운로드",
       download: "다운로드",
@@ -1718,8 +1690,6 @@ export const HOME_COPY = {
     },
     hero: {
       download: "Mac용 다운로드",
-      pricing: "가격 보기",
-      windows: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
     },
     privacy: {
       kicker: "개인정보",
