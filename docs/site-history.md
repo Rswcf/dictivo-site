@@ -3,6 +3,17 @@
 Dated change notes, newest first. README.md held them until 2026-11-03.
 A note records what changed on its date. README.md describes current behavior.
 
+## Source handoff panel kept and themed — 2026-11-04
+
+The 2026-11-03 review suggested deleting the panel that appears after a download click (G11).
+It stays: the desktop app reads its `dictivo://source?channel=` link for consent-based channel
+attribution (033 commit `4362b20`). The panel now takes its colors from `site.css`
+(`.source-handoff`) instead of an inline white box, and it is a `role="status"` region that is
+filled on the next frame, so screen readers announce it. It still has English, Chinese and
+Japanese text only; other languages see English. The dormant introductory-offer code (G10) also
+stays: it is tested price-rollover logic, it changes nothing a visitor sees, and a holiday
+promotion may need it.
+
 ## Header, hero and FAQ chrome — 2026-11-04
 
 Second chrome batch from the 2026-11-03 review. **Hero:** the second action group under the film

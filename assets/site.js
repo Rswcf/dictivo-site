@@ -631,14 +631,17 @@ document.addEventListener("click", (event) => {
     : locale.startsWith("ja")
       ? ["インストール後（任意）", "経路名だけをアプリに渡し、試用と購入の統計に使用できます。ページ ID や閲覧履歴は渡しません。Dictivo 0.3.56 以降が必要です。アプリで同意を確認します。", "Dictivo で共有の選択肢を確認", "閉じる"]
       : ["After installing (optional)", "You can share how you found Dictivo for trial and purchase statistics. Only the channel name is passed, never page IDs or browsing history. Requires Dictivo 0.3.56 or later; the app asks for your agreement first.", "Open Dictivo to review source sharing", "Dismiss"];
+  // An empty status region first, filled on the next frame, so screen readers announce it.
   const panel = document.createElement("aside");
   panel.id = "desktop-source-handoff";
+  panel.className = "source-handoff";
+  panel.setAttribute("role", "status");
   panel.setAttribute("aria-label", copy[0]);
-  panel.style.cssText = "position:fixed;bottom:16px;right:16px;width:min(420px,calc(100vw - 32px));padding:20px;background:#fff;color:#15231c;border:1px solid #c8d7cf;border-radius:16px;box-shadow:0 8px 32px #0002;z-index:1000;font-size:15px;line-height:1.5";
   const title = document.createElement("strong"); title.textContent = copy[0];
   const body = document.createElement("p"); body.textContent = `${copy[1]} (${channel})`;
   const open = document.createElement("a"); open.href = `dictivo://source?channel=${encodeURIComponent(channel)}`; open.textContent = copy[2];
-  const close = document.createElement("button"); close.type = "button"; close.textContent = copy[3]; close.style.marginLeft = "12px"; close.addEventListener("click", () => panel.remove());
-  panel.append(title, body, open, close);
+  const close = document.createElement("button"); close.type = "button"; close.textContent = copy[3]; close.addEventListener("click", () => panel.remove());
   document.body.append(panel);
+  const fill = () => panel.append(title, body, open, close);
+  if (typeof requestAnimationFrame === "function") requestAnimationFrame(fill); else fill();
 });

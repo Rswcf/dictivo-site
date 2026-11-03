@@ -31,3 +31,20 @@ test('older or unknown installers never expose an unsupported handoff', () => {
     const h = harness(true, 'google', version); h.click(true); assert.equal(h.elements.length, 0);
   }
 });
+
+test('the handoff panel is a status region styled by site.css, not inline colors', () => {
+  const attrs = {};
+  const document = {
+    documentElement: { lang: 'en' },
+    addEventListener: (name, fn) => { document.listener = fn; },
+    getElementById: () => null,
+    createElement(tag) { return { tag, style: {}, setAttribute(k, v) { if (tag === 'aside') attrs[k] = v; }, append() {}, addEventListener() {} }; },
+    body: { append() {} },
+  };
+  vm.runInNewContext(code, { document, analyticsEnabled: true, checkoutChannel: () => 'google', pageAttribution: { source: 'google' }, encodeURIComponent });
+  document.listener({ isTrusted: true, target: { closest: () => ({ dataset: { releaseVersion: '0.3.56' } }) } });
+  assert.equal(attrs.role, 'status');
+  assert.doesNotMatch(code, /cssText|#fff/);
+  const css = fs.readFileSync(new URL('../../assets/site.css', import.meta.url), 'utf8');
+  assert.match(css, /\.source-handoff \{[^}]*background: var\(--surface-raised\)/);
+});
