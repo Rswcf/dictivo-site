@@ -50,6 +50,14 @@ function initSiteNav(header) {
 
   toggle.hidden = false;
   toggle.addEventListener("click", () => setOpen(!isOpen()));
+  // The links come before the button in the page, so Tab from the open button goes to them.
+  toggle.addEventListener("keydown", (event) => {
+    const first = nav.querySelector("a");
+    if (event.key === "Tab" && !event.shiftKey && isOpen() && first) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
   nav.addEventListener("click", (event) => {
     if (event.target.closest("a")) {
       setOpen(false);
@@ -74,6 +82,45 @@ function initSiteNav(header) {
 }
 
 document.querySelectorAll(".site-header").forEach(initSiteNav);
+
+// The language menu is a <details>. Escape and a click outside close it; Escape returns focus.
+function initLanguageMenu(menu) {
+  const summary = menu.querySelector("summary");
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu.open) {
+      menu.open = false;
+      summary?.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (menu.open && !menu.contains(event.target)) {
+      menu.open = false;
+    }
+  });
+}
+
+document.querySelectorAll(".language-menu").forEach(initLanguageMenu);
+
+// A wide table scrolls sideways in its wrapper. While it overflows, the wrapper is a focusable
+// region named by the table caption, so the arrow keys can scroll it.
+function initTableScroll(wrap) {
+  const caption = wrap.querySelector("caption")?.textContent.trim();
+  const update = () => {
+    if (wrap.scrollWidth > wrap.clientWidth + 1) {
+      wrap.tabIndex = 0;
+      wrap.setAttribute("role", "region");
+      if (caption) wrap.setAttribute("aria-label", caption);
+    } else {
+      ["tabindex", "role", "aria-label"].forEach((name) => wrap.removeAttribute(name));
+    }
+  };
+  update();
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(update).observe(wrap);
+  }
+}
+
+document.querySelectorAll(".compare-table-wrap").forEach(initTableScroll);
 
 // The desktop installer this browser can run: "windows", "macos" or "" when unknown.
 // Windows wins when any signal says Windows (client hints, navigator.platform or the

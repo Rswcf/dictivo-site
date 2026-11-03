@@ -26,7 +26,7 @@ export const HOME_COPY = {
     metaTitle: "Dictivo - Private desktop dictation with optional Cloud Fast",
     metaDescription:
       "Dictivo is a private-first Mac dictation app. Dictate locally by default, then use optional Cloud Fast when speed matters.",
-    skip: "Skip to downloads",
+    skip: "Skip to content",
     nav: {
       privacy: "Privacy",
       cloudFast: "Cloud Fast",
@@ -238,7 +238,7 @@ export const HOME_COPY = {
     metaTitle: "Dictivo - Private Mac-Diktat-App mit Cloud Fast",
     metaDescription:
       "Dictivo ist eine private Mac-Diktat-App. Diktieren Sie standardmäßig lokal und nutzen Sie optional Cloud Fast, wenn Geschwindigkeit wichtiger ist.",
-    skip: "Zu den Downloads springen",
+    skip: "Zum Inhalt springen",
     nav: { privacy: "Datenschutz", cloudFast: "Cloud Fast", pricing: "Preise", faq: "FAQ", downloads: "Downloads", download: "Mac Download", menu: "Menü" },
     language: { label: "Sprache", aria: "Anzeigesprache der Website ändern" },
     hero: {
@@ -354,7 +354,7 @@ export const HOME_COPY = {
     metaTitle: "Dictivo - Dictée Mac privée avec Cloud Fast en option",
     metaDescription:
       "Dictivo est une app de dictée Mac privée par défaut. Dictez en local, gardez vos notes sur l'appareil, puis utilisez Cloud Fast quand la vitesse compte.",
-    skip: "Aller aux téléchargements",
+    skip: "Aller au contenu",
     nav: { privacy: "Confidentialité", cloudFast: "Cloud Fast", pricing: "Tarifs", faq: "FAQ", downloads: "Téléchargements", download: "Télécharger", menu: "Menu" },
     language: { label: "Langue", aria: "Changer la langue d'affichage du site" },
     hero: {
@@ -450,7 +450,7 @@ export const HOME_COPY = {
     metaTitle: "Dictivo - Dictado privado para Mac con Cloud Fast opcional",
     metaDescription:
       "Dictivo es una app de dictado para Mac centrada en la privacidad. Dicta localmente y usa Cloud Fast cuando la velocidad importa.",
-    skip: "Saltar a descargas",
+    skip: "Saltar al contenido",
     nav: { privacy: "Privacidad", cloudFast: "Cloud Fast", pricing: "Precios", faq: "FAQ", downloads: "Descargas", download: "Descargar", menu: "Menú" },
     language: { label: "Idioma", aria: "Cambiar idioma de visualización del sitio" },
     hero: {
@@ -547,7 +547,7 @@ const italian = {
   metaTitle: "Dictivo - Dettatura privata per Mac con Cloud Fast opzionale",
   metaDescription:
     "Dictivo è un'app di dettatura per Mac orientata alla privacy. Detta in locale per impostazione predefinita e usa Cloud Fast quando serve velocità.",
-  skip: "Vai ai download",
+  skip: "Vai al contenuto",
   nav: { privacy: "Privacy", cloudFast: "Cloud Fast", pricing: "Prezzi", faq: "FAQ", downloads: "Scaricamenti", download: "Scarica Mac", menu: "Menu" },
   language: { label: "Lingua", aria: "Cambia lingua di visualizzazione del sito" },
   hero: {
@@ -566,7 +566,7 @@ const dutch = {
   metaTitle: "Dictivo - Privé dicteren voor Mac met optionele Cloud Fast",
   metaDescription:
     "Dictivo is een privacygerichte dicteerapp voor Mac. Dicteer standaard lokaal en gebruik Cloud Fast wanneer snelheid telt.",
-  skip: "Naar downloads",
+  skip: "Naar de inhoud",
   nav: { privacy: "Privacy", cloudFast: "Cloud Fast", pricing: "Prijzen", faq: "FAQ", downloads: "Downloads", download: "Mac-download", menu: "Menu" },
   language: { label: "Taal", aria: "Weergavetaal van de site wijzigen" },
   hero: {
@@ -585,7 +585,7 @@ const portuguese = {
   metaTitle: "Dictivo - Ditado privado para Mac com Cloud Fast opcional",
   metaDescription:
     "Dictivo é um app de ditado para Mac com privacidade em primeiro lugar. Dite localmente e use Cloud Fast quando a velocidade importar.",
-  skip: "Ir para downloads",
+  skip: "Ir para o conteúdo",
   nav: { privacy: "Privacidade", cloudFast: "Cloud Fast", pricing: "Preços", faq: "FAQ", downloads: "Downloads", download: "Baixar", menu: "Menu" },
   language: { label: "Idioma", aria: "Alterar idioma de exibição do site" },
   hero: {
@@ -604,7 +604,7 @@ const chinese = {
   metaTitle: "Dictivo - 面向 Mac 的私密听写，Cloud Fast 可选",
   metaDescription:
     "Dictivo 是一款以隐私优先的 Mac 听写应用。默认使用本地转录，音频和历史记录留在设备上；只有在你需要速度并主动选择时，才使用 Cloud Fast。适合笔记、写作、会议摘要、客户沟通、邮件回复、研究整理、商务记录和日常长文本输入。",
-  skip: "跳到下载",
+  skip: "跳到正文",
   nav: { privacy: "隐私", cloudFast: "Cloud Fast", pricing: "价格", faq: "常见问题", downloads: "下载", download: "下载", menu: "菜单" },
   language: { label: "语言", aria: "切换网站显示语言" },
   hero: {
@@ -623,7 +623,7 @@ const japanese = {
   metaTitle: "Dictivo - Cloud Fast を選べる Mac 向けプライベート音声入力",
   metaDescription:
     "Dictivo はプライバシーを優先する Mac 向け音声入力アプリです。標準はローカル処理で、音声と履歴はデバイスに残ります。速度が必要な時だけ Cloud Fast を使えます。メモ、執筆、会議要約、顧客対応、日常の長文入力に向いています。",
-  skip: "ダウンロードへ移動",
+  skip: "本文へ移動",
   nav: { privacy: "プライバシー", cloudFast: "Cloud Fast", pricing: "料金", faq: "FAQ", downloads: "ダウンロード", download: "ダウンロード", menu: "メニュー" },
   language: { label: "言語", aria: "サイトの表示言語を変更" },
   hero: {
@@ -642,7 +642,7 @@ const korean = {
   metaTitle: "Dictivo - Cloud Fast를 선택할 수 있는 Mac용 비공개 받아쓰기",
   metaDescription:
     "Dictivo는 개인정보 보호를 우선하는 Mac 받아쓰기 앱입니다. 기본은 로컬 처리라 오디오와 기록이 기기에 남고, 속도가 필요할 때만 Cloud Fast를 사용합니다. 메모, 글쓰기, 회의 요약, 고객 커뮤니케이션, 일상적인 긴 텍스트 입력에 적합합니다.",
-  skip: "다운로드로 이동",
+  skip: "본문으로 이동",
   nav: { privacy: "개인정보", cloudFast: "Cloud Fast", pricing: "가격", faq: "FAQ", downloads: "다운로드", download: "다운로드", menu: "메뉴" },
   language: { label: "언어", aria: "사이트 표시 언어 변경" },
   hero: {
