@@ -166,6 +166,10 @@ if (visitorPlatform) {
   document.querySelector(`[data-platform-card="${visitorPlatform}"]`)?.setAttribute("data-recommended", "true");
 }
 promoteWindowsDownloads(document, visitorPlatform);
+// The first-screen installer help is for Windows browsers only; the download card keeps its own.
+if (visitorPlatform === "windows") {
+  document.querySelectorAll("[data-windows-install-help][hidden]").forEach((link) => { link.hidden = false; });
+}
 
 function normalizeDownloadPlatform(value) {
   const platform = String(value || "").toLowerCase();

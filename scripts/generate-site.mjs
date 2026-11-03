@@ -388,10 +388,11 @@ function jaMacDictationShortcutCopyForRender() {
   });
 }
 
-// Keep help next to the actual EXE actions, including the first-screen download pair.
-function renderWindowsInstallHelpLink(code, placement) {
+// Keep help next to the actual EXE actions, including the first-screen download pair. A hidden
+// link is for Windows visitors only; site.js reveals it.
+function renderWindowsInstallHelpLink(code, placement, { hidden = false } = {}) {
   const copy = WINDOWS_INSTALL_ENTRY_COPY[code];
-  return `<a class="windows-install-help windows-install-help--${placement}" href="${attr(windowsInstallHelpPath(code))}" data-windows-install-help data-help-placement="${placement}">
+  return `<a class="windows-install-help windows-install-help--${placement}" href="${attr(windowsInstallHelpPath(code))}" data-windows-install-help data-help-placement="${placement}"${hidden ? " hidden" : ""}>
                 <svg class="windows-install-help-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 3v1"/></svg>
                 <span class="windows-install-help-copy"><strong>${html(copy.shortTitle)}</strong><span>${html(copy.shortNote)}</span></span>
                 <span class="windows-install-help-arrow" aria-hidden="true">→</span>
@@ -2181,7 +2182,6 @@ function renderHeader(currentCode, t, options = {}) {
       </a>
       <nav class="nav-links" id="site-nav" aria-label="Site navigation">
         <a href="${attr(hash("privacy"))}">${html(t.nav.privacy)}</a>
-        <a href="${attr(hash("cloud-fast"))}">${html(t.nav.cloudFast)}</a>
         <a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>
         <a href="${attr(macGuidePath(currentCode))}">${html(macAdvisorCopy(currentCode).navLabel)}</a>
         <a href="${attr(hash("downloads"))}">${html(t.nav.downloads)}</a>
@@ -4882,38 +4882,48 @@ function renderPricingPage(code = "en") {
 `;
 }
 
+// Three columns: product, guides, privacy and company. They need no headings to read as groups.
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
-  const links = [
-    FIRST_DICTATION_COPY[currentCode] ? `<a href="${firstDictationPath(currentCode)}">${html(FIRST_DICTATION_COPY[currentCode].navLabel)}</a>` : "",
-    `<a href="${attr(windowsInstallHelpPath(currentCode))}">${html(WINDOWS_INSTALL_ENTRY_COPY[currentCode].label)}</a>`,
-    `<a href="/privacy/">${html(ui.footer.privacy)}</a>`,
-    `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
-    `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
-    `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
-    currentCode === "ja" ? `<a href="${attr(jaMacDictationTroubleshootingPath())}">${html(JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel)}</a>` : "",
-    currentCode === "ja" ? `<a href="${attr(jaMacDictationShortcutPath())}">${html(jaMacDictationShortcutCopyForRender().navLabel)}</a>` : "",
-    currentCode === "en" ? `<a href="${attr(macDictationNotWorkingPath())}">${html(macDictationNotWorkingCopyForRender().navLabel)}</a>` : "",
-    currentCode === "en" ? `<a href="${attr(macDictationShortcutPath())}">${html(macDictationShortcutCopyForRender().navLabel)}</a>` : "",
-    currentCode === "en" ? `<a href="${attr(windowsVoiceTypingPath())}">${html(windowsVoiceTypingCopyForRender().navLabel)}</a>` : "",
-    currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
-    currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
-    currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
-    `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
-    `<a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>`,
-    `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
-    `<a href="/security/">${html(ui.footer.security)}</a>`,
-    `<a href="/terms/">${html(ui.footer.terms)}</a>`,
-    `<a href="/refund/">${html(ui.footer.refunds)}</a>`,
-    `<a href="/contact/">${html(ui.footer.contact)}</a>`,
-    `<a href="/about/">${html(ui.footer.about)}</a>`,
-    `<a href="/changelog/">${html(HOME_CONVERSION_COPY[currentCode].changelog)}</a>`,
-    // § 5 DDG requires the Impressum to be "leicht erkennbar und unmittelbar
-    // erreichbar" — a footer link on every page is the accepted way to do
-    // that. Appears only once data/impressum.json is filled in.
-    IMPRESSUM_READY ? `<a href="/impressum/">${html(IMPRESSUM_LABEL)}</a>` : "",
-  ].filter(Boolean);
-  return links.map((link) => `        ${link}`).join("\n");
+  const columns = [
+    [
+      `<a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>`,
+      `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
+      `<a href="/changelog/">${html(HOME_CONVERSION_COPY[currentCode].changelog)}</a>`,
+      `<a href="/security/">${html(ui.footer.security)}</a>`,
+      currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
+    ],
+    [
+      `<a href="/privacy/">${html(ui.footer.privacy)}</a>`,
+      `<a href="${attr(localizedTrustPath(currentCode, "privacy/where-dictation-audio-goes"))}">${html(ui.footer.audioPath)}</a>`,
+      `<a href="${attr(privacyProofPath(currentCode))}">${html(t.seo?.privacyProofLabel || ui.footer.privacyProof)}</a>`,
+      `<a href="${attr(localizedTrustPath(currentCode, "privacy/local-dictation-network-test"))}">${html(ui.footer.networkTest)}</a>`,
+      `<a href="/terms/">${html(ui.footer.terms)}</a>`,
+      `<a href="/refund/">${html(ui.footer.refunds)}</a>`,
+      `<a href="/contact/">${html(ui.footer.contact)}</a>`,
+      `<a href="/about/">${html(ui.footer.about)}</a>`,
+      // § 5 DDG requires the Impressum to be "leicht erkennbar und unmittelbar
+      // erreichbar" — a footer link on every page is the accepted way to do
+      // that. Appears only once data/impressum.json is filled in.
+      IMPRESSUM_READY ? `<a href="/impressum/">${html(IMPRESSUM_LABEL)}</a>` : "",
+    ],
+
+    [
+      FIRST_DICTATION_COPY[currentCode] ? `<a href="${firstDictationPath(currentCode)}">${html(FIRST_DICTATION_COPY[currentCode].navLabel)}</a>` : "",
+      `<a href="${attr(windowsInstallHelpPath(currentCode))}">${html(WINDOWS_INSTALL_ENTRY_COPY[currentCode].shortTitle)}</a>`,
+      `<a href="${attr(offlineDictationGuidePath(currentCode))}">${html(offlineDictationGuideCopy(currentCode).navLabel)}</a>`,
+      currentCode === "ja" ? `<a href="${attr(jaMacDictationTroubleshootingPath())}">${html(JA_MAC_DICTATION_TROUBLESHOOTING_COPY.navLabel)}</a>` : "",
+      currentCode === "ja" ? `<a href="${attr(jaMacDictationShortcutPath())}">${html(jaMacDictationShortcutCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(macDictationNotWorkingPath())}">${html(macDictationNotWorkingCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(macDictationShortcutPath())}">${html(macDictationShortcutCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(windowsVoiceTypingPath())}">${html(windowsVoiceTypingCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
+    ],
+  ];
+  return columns
+    .map((links) => `        <div class="footer-column">\n${links.filter(Boolean).map((link) => `          ${link}`).join("\n")}\n        </div>`)
+    .join("\n");
 }
 
 // The homepage hero's film poster is the largest contentful paint at 768, 1440 and 1440@2x
@@ -4969,10 +4979,6 @@ function renderHome(currentCode) {
         <div class="hero-inner">
           <div class="hero-copy">
             <div class="hero-statement">
-              <span class="eyebrow">
-                <span class="eyebrow-dot" aria-hidden="true"></span>
-                ${html(t.hero.eyebrow)}
-              </span>
               <h1 id="hero-title">${html(conversion.title)} <em>${html(conversion.emphasis)}</em></h1>
               <p class="hero-lede">${html(conversion.lede)}</p>
               <ol class="hero-steps">${conversion.steps.map((step) => `<li>${html(step)}</li>`).join("")}</ol>
@@ -4980,7 +4986,7 @@ function renderHome(currentCode) {
                 <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_top_mac"))}"${downloadData("macos", "hero_top_mac")}>${html(t.hero.download)}</a>
                 ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
               </div>
-              ${hasWindowsRelease ? renderWindowsInstallHelpLink(currentCode, "hero") : ""}
+              ${hasWindowsRelease ? renderWindowsInstallHelpLink(currentCode, "hero", { hidden: true }) : ""}
               <p class="hero-trial">${html(conversion.trial)}</p>
               ${renderFirstDictationLink(currentCode)}
             </div>
@@ -4993,7 +4999,7 @@ function renderHome(currentCode) {
             </button>
             <template>${heroFilmPlayer(currentCode)}</template>
             <noscript>${heroFilmPlayer(currentCode)}</noscript>
-            <figcaption>${html(FILM_COPY[currentCode].summary)} <a href="${PRODUCT_FILM.path}">${html(FILM_COPY[currentCode].link)}</a><br><a href="${PRODUCT_FILM.credits}">${html(FILM_COPY[currentCode].credit)}</a></figcaption>
+            <figcaption><a href="${PRODUCT_FILM.path}">${html(FILM_COPY[currentCode].link)}</a><br><a href="${PRODUCT_FILM.credits}">${html(FILM_COPY[currentCode].credit)}</a></figcaption>
           </figure>
 
           <div class="hero-support">
@@ -5023,7 +5029,7 @@ function renderHome(currentCode) {
               ${renderList(t.privacy.localItems, "trust-list")}
             </article>
 
-            <article class="trust-column trust-column--network">
+            <article class="trust-column trust-column--network" id="cloud-fast">
               <header class="trust-column-head">
                 <span class="trust-tag trust-tag--network"><span class="trust-dot trust-dot--network" aria-hidden="true"></span>${html(t.privacy.cloudTitle)}</span>
                 <p class="trust-column-lede">${html(t.privacy.cloudLead)}</p>
@@ -5033,32 +5039,6 @@ function renderHome(currentCode) {
           </div>
 
           <p class="trust-footnote"><a href="/security/">${html(t.privacy.footnote)}</a></p>
-        </div>
-      </section>
-
-      <section class="cloud-comparison reveal" id="cloud-fast" aria-labelledby="cloud-fast-title">
-        <div class="section-shell">
-          <div class="section-heading section-heading-left">
-            <span class="section-kicker"><span class="eyebrow-dot" aria-hidden="true"></span>${html(t.cloud.kicker)}</span>
-            <h2 id="cloud-fast-title">${html(t.cloud.title)}</h2>
-            <p>${html(t.cloud.body)}</p>
-          </div>
-
-          <div class="cloud-mode-grid">
-            <article class="cloud-mode-card">
-              <div class="card-topline"><span>${html(t.cloud.localTop[0])}</span><span>${html(t.cloud.localTop[1])}</span></div>
-              <h3>${html(t.cloud.localTitle)}</h3>
-              ${renderList(t.cloud.localItems)}
-              <a class="button button-secondary download-link" href="${attr(downloadUrl("macos", "cloud_local_card"))}"${downloadData("macos", "cloud_local_card")}>${html(t.hero.download)}</a>
-            </article>
-
-            <article class="cloud-mode-card cloud-mode-card--highlight">
-              <div class="card-topline"><span>${html(t.cloud.cloudTop[0])}</span><span>${html(t.cloud.cloudTop[1])}</span></div>
-              <h3>${html(t.cloud.cloudTitle)}</h3>
-              ${renderList(t.cloud.cloudItems)}
-              <a class="button button-light" href="/checkout/cloud-fast" data-cloud-fast-checkout>${html(t.cloud.cloudButton)}</a>
-            </article>
-          </div>
         </div>
       </section>
 
@@ -5205,8 +5185,6 @@ ${compareTeaser}
           <span class="brand-mark" aria-hidden="true">D</span>
           <span class="brand-name">Dictivo</span>
         </a>
-        <p class="footer-tagline">${html(t.footer.tagline)}</p>
-        <p>${html(t.footer.beta)}</p>
       </div>
       <div class="footer-links">
 ${renderHomeFooterLinks(currentCode, t)}
@@ -6761,8 +6739,6 @@ function renderFooterOnly(currentCode = "en") {
   return `<footer class="site-footer">
       <div class="footer-meta">
         <a class="brand footer-brand" href="${attr(localePath(currentCode))}" aria-label="Dictivo home"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-name">Dictivo</span></a>
-        <p class="footer-tagline">${html(t.footer.tagline)}</p>
-        <p>${html(t.footer.beta)}</p>
       </div>
       <div class="footer-links">
 ${renderHomeFooterLinks(currentCode, t)}
