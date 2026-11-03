@@ -40,9 +40,10 @@ entry instead of inheriting details from the previous release. Add the new
 version's notes in the desktop release preparation PR, then verify the generated
 `dist/changelog.html` after release metadata sync.
 
-This is not a style preference. An audit that read `data/site-content.mjs` once reported about 178
-Mac-only strings as live defects on the public site. Every one of them had already been rewritten
-at render time and none of them appeared in `dist/`.
+This is not a style preference. Until 2026-11-03 homepage copy passed through six override stages,
+and an audit that read the first one reported about 178 Mac-only strings as live defects. None of
+them appeared in `dist/`. Price tokens, the zh-hant conversion and `assets/site.js` still change
+text after `data/`.
 
 To check what actually ships:
 
@@ -52,33 +53,21 @@ grep -r "the string you are checking" dist/
 node scripts/check-public-output.mjs
 ```
 
-### The homepage override chain
+### Homepage copy
 
-Homepage copy passes through six stages. A later stage always wins.
+`HOME_COPY` in `data/home-copy.mjs` holds the homepage, header and footer copy, one complete object
+per language. No later stage replaces a field. Edit the language you mean; the other languages do
+not follow. Three things still change the text on the way to `dist/`:
 
-1. **`HOME_COPY`** in `data/site-content.mjs`. English, German, French and Spanish are written out
-   in full. Italian, Dutch, Portuguese, Chinese, Japanese and Korean are produced by
-   `deriveFromEnglish()` and then merged with per-locale `details`.
-2. **`LAUNCH_OFFER_COPY`**, a loop at the end of `data/site-content.mjs`. For the nine non-English
-   locales it replaces the tail of the privacy list, the pricing body, the free-tier and Cloud Fast
-   feature lists, the downloads body, and one FAQ answer.
-3. **`L10N_PARITY`**, a second loop directly after it. It appends the three FAQ entries the
-   localized pages were missing, replaces the whole `signed.cells` trust block with four cards,
-   sets `signed.footnoteHref`, and rewrites the Local tier subtitle.
-4. **`applySeoHomeCopy()`** in `scripts/generate-site.mjs`. It overwrites `metaTitle`,
-   `metaDescription`, the hero eyebrow, title and emphasis, and the footer privacy-proof label from
-   `SEO_HOME_COPY`.
-5. **`homeCopyForRender()`** in the same file. When `hasWindowsRelease` is true it applies
-   `WINDOWS_HOME_COPY`; otherwise it applies the narrow `WINDOWS_UNAVAILABLE_HOME_COPY`
-   safety layer so an incomplete release cannot resurrect pre-launch Windows wording.
+1. `{{price.*}}` tokens become prices (`scripts/lib/price-tokens.mjs`). `pricing.body` calls
+   `pricingAnchor(code)`, so it follows the offer in `data/local-offer.mjs`.
+2. `zh` becomes `zh-hant` (`scripts/lib/hant.mjs`).
+3. `assets/site.js` changes text in the browser, for example the Windows download promotion.
 
-6. **`HOME_CONVERSION_COPY`** in `data/home-conversion.mjs` supplies the final homepage H1,
-   task description, three workflow steps, trial terms, and purchase note in `renderHome()`.
-   It does not change platform availability. `HOME_CONVERSION_LASTMOD` advances homepage
-   sitemap dates when this copy changes; a newer release date still takes precedence.
-
-Every page renderer calls `homeCopyForRender(code)`. Nothing in the generator reads `HOME_COPY`
-directly except that one function.
+`HOME_CONVERSION_COPY` in `data/home-conversion.mjs` holds the fields only the homepage uses: the
+H1, lede, three workflow steps, trial terms, purchase note and changelog label. It shares no field with
+`HOME_COPY`. `HOME_CONVERSION_LASTMOD` advances homepage sitemap dates when this copy changes; a
+newer release date still takes precedence.
 
 ### First-use guide and practice field
 
@@ -112,27 +101,17 @@ with (`legacyFaqSchema`); newer guides carry a visible FAQ but no FAQ schema. It
 are unchanged since 2026-09-26. The Japanese offline guide's troubleshooting section is
 Dictivo-specific and links here, so the two pages do not target the same heading.
 
-### `WINDOWS_HOME_COPY` is the stage that surprises people
+### Homepage copy assumes Windows is public
 
-It lives in `scripts/generate-site.mjs`, has an entry for all eleven locales (Traditional Chinese is converted from Simplified), and while Windows is
-public it rewrites: `metaTitle`, `metaDescription`, the nav download label, the hero eyebrow, hero
-title and hero Windows note, the privacy section title, the free tier's subtitle, button, `href`
-and data attribute, the pricing footnote, the downloads kicker, title and body, the signed-section
-title and footnote, the languages title, the first workflow step title, the first FAQ question,
-every FAQ answer whose question mentions Windows, and the footer beta line.
+`data/home-copy.mjs` states that Mac and Windows x64 are available. Until 2026-11-03 a
+`WINDOWS_HOME_COPY` layer and a `WINDOWS_UNAVAILABLE_HOME_COPY` fallback switched that wording
+with `hasWindowsRelease`; both were removed (decision G9). If Windows downloads are withdrawn,
+`scripts/check-public-output.mjs` fails the build on the Windows launch strings in every homepage,
+so rewrite those strings in `data/home-copy.mjs` first.
 
-The Mac-only originals for all of those are still sitting in `data/site-content.mjs`. While Windows
-is public they are dead source, not live copy. Do not delete them either: they are the fallback the
-site reverts to when `hasWindowsRelease` goes false.
-
-`WINDOWS_UNAVAILABLE_HOME_COPY` then corrects the fallback's hero note, pricing
-footnote, and Windows FAQ answer in all eleven locales to say that Windows x64 is
-supported but downloads are temporarily unavailable. This distinction matters:
-a missing artifact is an availability incident, not a return to pre-launch validation.
-
-`WINDOWS_DOWNLOAD_COPY` is a separate per-locale map in the same file. It supplies the download
-card badge and body, the EXE and MSI button labels, the version note, and the SmartScreen warning
-shown because the Windows installers are not Authenticode-signed.
+`WINDOWS_DOWNLOAD_COPY` in `scripts/generate-site.mjs` supplies the download card badge and body,
+the EXE and MSI button labels, the version note, and the SmartScreen warning shown because the
+Windows installers are not Authenticode-signed.
 
 ### `hasWindowsRelease`
 
@@ -150,7 +129,7 @@ That one boolean is read throughout `scripts/generate-site.mjs` and
 `scripts/check-public-output.mjs`. When it goes false the site switches to a guarded
 Mac-download-only state:
 
-- the whole `WINDOWS_HOME_COPY` layer stops applying, on all eleven homepages at once;
+- homepage copy does not change (see above), so the build stops at `check-public-output`;
 - the hero Windows button and the Windows download card disappear, and the download grid switches
   from `multi` to `single`; with no Windows link in a `[data-platform-downloads]` pair, `site.js`
   has nothing to promote for Windows visitors;
