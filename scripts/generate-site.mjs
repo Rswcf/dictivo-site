@@ -2423,7 +2423,6 @@ function platformUnavailableCopy(code) {
   return copy[code] || (code === HANT ? toHant(copy.zh) : copy.en);
 }
 
-
 function localizedCompareSections(page, copy) {
   if (copy === COMPARE_I18N.en) return page.sections;
   if (copy.locale === HANT) return toHant(localizedComparisonSections(page, "zh"));
@@ -3079,40 +3078,16 @@ function offlineDictationGuideCopy(currentCode = "en") {
 
 function renderOfflineGuideSchema(currentCode = "en") {
   const copy = offlineDictationGuideCopy(currentCode);
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: offlineDictationGuideUrl(currentCode),
-      inLanguage: localeByCode(currentCode).htmlLang,
-      ...publicationDates("guides/offline-dictation-on-mac", currentCode, offlineDictationGuideLastmod(currentCode)),
-      mainEntityOfPage: offlineDictationGuideUrl(currentCode),
-      ...articleSchemaFields(),
-      about: ["offline dictation", "local dictation", "Mac dictation privacy"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: localeByCode(currentCode).htmlLang,
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb(currentCode),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: offlineDictationGuideUrl(currentCode) },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  return renderDictationGuideSchema({
+    code: currentCode,
+    url: offlineDictationGuideUrl(currentCode),
+    copy,
+    lastmod: offlineDictationGuideLastmod(currentCode),
+    route: "guides/offline-dictation-on-mac",
+    headline: copy.metaTitle,
+    about: ["offline dictation", "local dictation", "Mac dictation privacy"],
+    legacyFaqSchema: true,
+  });
 }
 
 // Where each app's price comes from. Apps with a comparison page reuse that page's "Pricing model"
@@ -3208,18 +3183,6 @@ function renderOfflineGuideSection(section, index) {
       </section>`;
 }
 
-function renderOfflineGuideReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="offline-guide-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-guide-references">${html(copy.referenceTitle)}</h2>
-        <ul class="compare-source-list">
-${OFFLINE_DICTATION_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
-      </section>`;
-}
-
 // Keep a platform-specific trial action beside the decision table, without new tracking.
 // platform "both" (a page about Mac and Windows) offers the Mac download and, while Windows
 // downloads are public, the Windows one: `<source>_mac` / `<source>_windows`. site.js moves the
@@ -3301,29 +3264,11 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
 
       ${copy.sections.map(renderOfflineGuideSection).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="offline-guide-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-guide-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("offline-guide", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
       ${currentCode === "en" ? renderBenchmarkMethodRelatedSection("offline-guide") : ""}
 
-      ${renderOfflineGuideReferences(copy)}
+      ${renderGuideReferences("offline-guide", copy.referenceTitle, OFFLINE_DICTATION_GUIDE_REFERENCES, copy.eyebrow)}
     </main>`,
   });
 }
@@ -3420,41 +3365,16 @@ function renderFirstDictationPage(code) {
 
 function renderBenchmarkMethodSchema() {
   const copy = BENCHMARK_METHOD_GUIDE_COPY;
-  const pageUrl = benchmarkMethodGuideUrl();
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "en",
-      ...publicationDates("guides/mac-dictation-benchmark-method", "en", BENCHMARK_METHOD_GUIDE_LASTMOD),
-      mainEntityOfPage: pageUrl,
-      ...articleSchemaFields(),
-      about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "en",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb("en"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  return renderDictationGuideSchema({
+    code: "en",
+    url: benchmarkMethodGuideUrl(),
+    copy,
+    lastmod: BENCHMARK_METHOD_GUIDE_LASTMOD,
+    route: "guides/mac-dictation-benchmark-method",
+    headline: copy.metaTitle,
+    about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
+    legacyFaqSchema: true,
+  });
 }
 
 function renderBenchmarkMethodTable(caption, headers, rows) {
@@ -3479,14 +3399,17 @@ ${rows
           </div>`;
 }
 
-function renderBenchmarkMethodSection(section, index) {
-  const id = `benchmark-method-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+// A numbered section of a hand-built guide. Ids are `<idPrefix>-section-<n>`.
+function renderGuideSection(idPrefix) {
+  return (section, index) => {
+    const id = `${idPrefix}-section-${index + 1}`;
+    return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}
+        ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
       </section>`;
+  };
 }
 
 function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
@@ -3495,18 +3418,6 @@ function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
         <h2 id="${attr(`${sourceId}-benchmark-method-title`)}">How Dictivo decides local model fit</h2>
         <p>Dictivo's Mac model recommendations are backed by a local calibration method that measures real-time factor and maps the result to Fast, Medium, and Quality local model tiers.</p>
         <p><a href="${attr(benchmarkMethodGuidePath())}">Read the Mac dictation benchmark method</a> or <a href="${attr(benchmarkMethodGuidePath())}#human-speech-example">hear the 25-second human-speech sample and inspect its actual output</a>.</p>
-      </section>`;
-}
-
-function renderBenchmarkMethodReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="benchmark-method-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="benchmark-method-references">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${BENCHMARK_METHOD_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
       </section>`;
 }
 
@@ -3607,81 +3518,28 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
         ${renderBenchmarkMethodTable(copy.modelCaption, copy.modelHeaders, copy.modelRows)}
       </section>
 
-      ${copy.sections.map(renderBenchmarkMethodSection).join("\n\n      ")}
+      ${copy.sections.map(renderGuideSection("benchmark-method")).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="benchmark-method-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="benchmark-method-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("benchmark-method", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
-      ${renderBenchmarkMethodReferences(copy)}
+      ${renderGuideReferences("benchmark-method", copy.referencesTitle, BENCHMARK_METHOD_GUIDE_REFERENCES, copy.eyebrow)}
     </main>`,
   });
 }
 
 function renderSpeechToTextMacGuideSchema() {
   const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
-  const pageUrl = speechToTextMacGuideUrl();
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "en",
-      ...publicationDates("guides/best-speech-to-text-apps-for-mac", "en", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD),
-      mainEntityOfPage: pageUrl,
-      ...articleSchemaFields(),
-      about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "en",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Mac speech-to-text app categories",
-      itemListElement: copy.appRows.map(([name, bestFit], index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name,
-        description: bestFit,
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb("en"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  return renderDictationGuideSchema({
+    code: "en",
+    url: speechToTextMacGuideUrl(),
+    copy,
+    lastmod: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+    route: "guides/best-speech-to-text-apps-for-mac",
+    headline: copy.metaTitle,
+    about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
+    legacyFaqSchema: true,
+    itemList: { name: "Mac speech-to-text app categories", rows: copy.appRows },
+  });
 }
 
 // The shortlist groups three local apps in one row; price each of them by name.
@@ -3692,20 +3550,12 @@ function speechToTextPriceCell(option) {
   return apps.map((app) => `<strong>${html(app)}</strong> (${html(OFFLINE_DICTATION_GUIDE_COPY.en.purchaseModels[GUIDE_PRICE_SOURCES[app].model])}): ${html(guidePriceText(app, "en"))}`).join("<br />");
 }
 
-function renderSpeechToTextMacGuideSection(section, index) {
-  const id = `speech-to-text-mac-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
-        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
-        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}
-      </section>`;
-}
-
-function renderSpeechToTextMacRelated(copy) {
-  return `<section class="doc-section" aria-labelledby="speech-to-text-mac-related">
+// The related-pages table of the speech-to-text and Windows guides.
+function renderGuideRelated(copy, idPrefix) {
+  const id = `${idPrefix}-related`;
+  return `<section class="doc-section" aria-labelledby="${attr(id)}">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="speech-to-text-mac-related">${html(copy.relatedTitle)}</h2>
+        <h2 id="${attr(id)}">${html(copy.relatedTitle)}</h2>
         <div class="compare-table-wrap">
           <table class="compare-table">
             <caption>${html(copy.relatedTitle)}</caption>
@@ -3729,18 +3579,6 @@ ${copy.relatedRows
             </tbody>
           </table>
         </div>
-      </section>`;
-}
-
-function renderSpeechToTextMacReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="speech-to-text-mac-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="speech-to-text-mac-references">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
       </section>`;
 }
 
@@ -3788,135 +3626,30 @@ function renderSpeechToTextMacGuidePage() {
 
       ${renderGuideTrial("en", "macos", "speech_guide_mac")}
 
-      ${copy.sections.map(renderSpeechToTextMacGuideSection).join("\n\n      ")}
+      ${copy.sections.map(renderGuideSection("speech-to-text-mac")).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="speech-to-text-mac-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="speech-to-text-mac-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("speech-to-text-mac", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
-      ${renderSpeechToTextMacRelated(copy)}
+      ${renderGuideRelated(copy, "speech-to-text-mac")}
 
-      ${renderSpeechToTextMacReferences(copy)}
+      ${renderGuideReferences("speech-to-text-mac", copy.referencesTitle, SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES, copy.eyebrow)}
     </main>`,
   });
 }
 
 function renderOfflineDictationWindowsGuideSchema() {
   const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
-  const pageUrl = offlineDictationWindowsGuideUrl();
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "en",
-      ...publicationDates("guides/offline-dictation-on-windows", "en", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD),
-      mainEntityOfPage: pageUrl,
-      ...articleSchemaFields(),
-      about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "en",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Windows dictation tools by where audio is processed",
-      itemListElement: copy.appRows.map(([name, bestFit], index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name,
-        description: bestFit,
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb("en"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
-}
-
-function renderOfflineDictationWindowsGuideSection(section, index) {
-  const id = `offline-dictation-windows-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
-        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
-        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
-      </section>`;
-}
-
-function renderOfflineDictationWindowsRelated(copy) {
-  return `<section class="doc-section" aria-labelledby="offline-dictation-windows-related">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-dictation-windows-related">${html(copy.relatedTitle)}</h2>
-        <div class="compare-table-wrap">
-          <table class="compare-table">
-            <caption>${html(copy.relatedTitle)}</caption>
-            <thead>
-              <tr>
-                <th scope="col">Page</th>
-                <th scope="col">Use it for</th>
-                <th scope="col">URL</th>
-              </tr>
-            </thead>
-            <tbody>
-${copy.relatedRows
-  .map(
-    ([label, description, url]) => `              <tr>
-                <th scope="row"><a href="${attr(url)}">${html(label)}</a></th>
-                <td>${html(description)}</td>
-                <td>${html(url.replace(BASE_URL, ""))}</td>
-              </tr>`,
-  )
-  .join("\n")}
-            </tbody>
-          </table>
-        </div>
-      </section>`;
-}
-
-function renderOfflineDictationWindowsReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="offline-dictation-windows-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-dictation-windows-references">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
-      </section>`;
+  return renderDictationGuideSchema({
+    code: "en",
+    url: offlineDictationWindowsGuideUrl(),
+    copy,
+    lastmod: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
+    route: "guides/offline-dictation-on-windows",
+    headline: copy.metaTitle,
+    about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
+    legacyFaqSchema: true,
+    itemList: { name: "Windows dictation tools by where audio is processed", rows: copy.appRows },
+  });
 }
 
 function renderOfflineDictationWindowsGuidePage() {
@@ -3962,31 +3695,13 @@ function renderOfflineDictationWindowsGuidePage() {
 
       ${renderGuideTrial("en", "windows", "offline_guide_windows")}
 
-      ${copy.sections.map(renderOfflineDictationWindowsGuideSection).join("\n\n      ")}
+      ${copy.sections.map(renderGuideSection("offline-dictation-windows")).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="offline-dictation-windows-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-dictation-windows-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("offline-dictation-windows", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
-      ${renderOfflineDictationWindowsRelated(copy)}
+      ${renderGuideRelated(copy, "offline-dictation-windows")}
 
-      ${renderOfflineDictationWindowsReferences(copy)}
+      ${renderGuideReferences("offline-dictation-windows", copy.referencesTitle, OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES, copy.eyebrow)}
     </main>`,
   });
 }
@@ -4287,25 +4002,7 @@ function renderMediaKitPage() {
         <p>${html(copy.outreach)}</p>
       </section>
 
-      <section class="doc-section" aria-labelledby="media-kit-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="media-kit-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("media-kit", copy.faqTitle, copy.faqs, copy.eyebrow)}
     </main>`,
   });
 }
@@ -4316,8 +4013,10 @@ function renderMediaKitPage() {
 // Every statement must come from the references or from `fieldTest`.
 const LABEL_SEPARATOR = { ja: "：" };
 
+// Also the schema of the hand-built guides (offline, benchmark method, speech to text, Windows),
+// which keep their FAQPage node and may add an ItemList of the apps they compare.
 function renderDictationGuideSchema(guide) {
-  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema } = guide;
+  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema, itemList } = guide;
   const inLanguage = localeByCode(code).htmlLang;
   const schema = [
     organizationSchema(),
@@ -4333,7 +4032,8 @@ function renderDictationGuideSchema(guide) {
       ...articleSchemaFields(),
       about,
     },
-    // The Japanese guide kept the FAQPage node it shipped with; newer guides have none.
+    // The Japanese guide and the hand-built guides kept the FAQPage node they shipped with; newer
+    // guides have none.
     ...(legacyFaqSchema
       ? [
           {
@@ -4348,6 +4048,21 @@ function renderDictationGuideSchema(guide) {
           },
         ]
       : []),
+    ...(itemList
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: itemList.name,
+            itemListElement: itemList.rows.map(([name, bestFit], index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name,
+              description: bestFit,
+            })),
+          },
+        ]
+      : []),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -4358,6 +4073,26 @@ function renderDictationGuideSchema(guide) {
     },
   ];
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+// The references list that ends every guide. `kicker` adds a doc-meta line above the heading.
+function renderGuideReferences(idPrefix, title, references, kicker) {
+  const id = `${idPrefix}-references`;
+  return `<section class="doc-section" aria-labelledby="${attr(id)}">
+        ${kicker ? `<p class="doc-meta">${html(kicker)}</p>\n        ` : ""}<h2 id="${attr(id)}">${html(title)}</h2>
+        <ul class="compare-source-list">
+${references.map(([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`).join("\n")}
+        </ul>
+      </section>`;
+}
+
+// The visible FAQ of a guide or the media kit. `kicker` works as in renderGuideReferences.
+function renderGuideFaq(idPrefix, title, faqs, kicker) {
+  const id = `${idPrefix}-faq`;
+  return `<section class="doc-section" aria-labelledby="${attr(id)}">
+        ${kicker ? `<p class="doc-meta">${html(kicker)}</p>\n        ` : ""}<h2 id="${attr(id)}">${html(title)}</h2>
+        ${renderFaqGrid(faqs)}
+      </section>`;
 }
 
 function renderDictationGuideLinks(links) {
@@ -4496,17 +4231,9 @@ ${renderDictationGuideQuickReference(quickReference, idPrefix)}
 
       ${guide.showTrial === false ? "" : renderGuideTrial(code, platform, trialSource)}
 
-      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-faq`)}">
-        <h2 id="${attr(`${idPrefix}-faq`)}">${html(copy.faqTitle)}</h2>
-        ${renderFaqGrid(copy.faqs)}
-      </section>
+      ${renderGuideFaq(idPrefix, copy.faqTitle, copy.faqs)}
 
-      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-references`)}">
-        <h2 id="${attr(`${idPrefix}-references`)}">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${references.map(([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`).join("\n")}
-        </ul>
-      </section>
+      ${renderGuideReferences(idPrefix, copy.referencesTitle, references)}
     </main>`,
   });
 }
