@@ -3,6 +3,19 @@
 Dated change notes, newest first. README.md held them until 2026-11-03.
 A note records what changed on its date. README.md describes current behavior.
 
+## Homepage chrome trim — 2026-11-03
+
+The site review (2026-11-03) found the homepage said the same things many times. This batch cut
+chrome only; indexed sections (FAQ, compare cards, language list) wait for a Bing baseline.
+**Cloud Fast:** the separate Cloud Fast section and its header nav item are gone. The Cloud Fast
+column of the privacy section now carries `id="cloud-fast"`, so old links still land.
+**Hero:** the eyebrow and the film slogan are gone. The caption keeps the `/demo/` link and the
+CC BY 4.0 credit. The Windows install help link in the hero starts `hidden`; `site.js` shows it
+only to Windows visitors. The footer keeps a short link for everyone else.
+**Footer:** the tagline and beta line are gone. Links sit in three columns (product, privacy and
+company, guides); on phones the guides column spans the full width below the other two.
+`tests/structure/home-layout.test.mjs` checks these.
+
 ## Cache headers, homepage film and phone menu — 2026-10-10
 
 A cold email from a site scanner (Can We Launch, 2026-10-10) named three problems; all three were

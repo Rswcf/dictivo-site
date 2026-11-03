@@ -2225,6 +2225,10 @@ main section[id] {
   text-decoration: none;
 }
 
+.windows-install-help[hidden] {
+  display: none;
+}
+
 .windows-install-help:hover {
   border-color: var(--dot-beta);
   background: rgb(217 173 99 / 14%);
@@ -3298,16 +3302,20 @@ main section[id] {
 }
 
 .footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 12px clamp(28px, 5vw, 64px);
   color: var(--muted);
   font-family: var(--mono);
   font-size: 11.5px;
   font-weight: 500;
   letter-spacing: 0.06em;
+}
+
+.footer-column {
+  display: grid;
+  align-content: start;
+  gap: 10px;
 }
 
 .footer-links a {
@@ -3948,7 +3956,13 @@ main section[id] {
   }
 
   .footer-links {
-    justify-content: flex-start;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  /* Product and Privacy share the first row; the longer Guides column goes below at full width. */
+  .footer-column:last-child {
+    grid-column: 1 / -1;
   }
 }
 
@@ -4147,3 +4161,8 @@ main section[id] {
 .guide-trial .button { white-space: normal; text-align: center; }
 
 .guide-trial .guide-trial-note { font-size: 0.9rem; line-height: 1.6; }
+
+/* The Cloud Fast column in the privacy section carries the #cloud-fast anchor. */
+.trust-column[id] {
+  scroll-margin-top: 96px;
+}

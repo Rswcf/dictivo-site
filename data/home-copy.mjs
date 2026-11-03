@@ -11,7 +11,6 @@ export const HOME_COPY = {
     skip: "Skip to content",
     nav: {
       privacy: "Privacy",
-      cloudFast: "Cloud Fast",
       pricing: "Pricing",
       downloads: "Downloads",
       download: "Downloads",
@@ -22,7 +21,6 @@ export const HOME_COPY = {
       aria: "Change site display language",
     },
     hero: {
-      eyebrow: "Private dictation for Mac & Windows",
       download: "Download for Mac",
       pricing: "See pricing",
       windows: "Mac and Windows x64 are available now.",
@@ -50,26 +48,6 @@ export const HOME_COPY = {
         "Use Local whenever the audio is sensitive.",
       ],
       footnote: "Read the full privacy boundary on the security page.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Fast transcription without making cloud the default.",
-      body: "Use Local when words are private. Use Cloud Fast for low-sensitivity work when waiting breaks your flow.",
-      localTop: ["Local", "Default"],
-      localTitle: "Private by default.",
-      localItems: [
-        "Audio remains on your computer",
-        "Transcripts, history, dictionary, and snippets stay local",
-        "Best for client work, notes, post-meeting summaries, and sensitive drafting",
-      ],
-      cloudTop: ["Cloud Fast", "Optional"],
-      cloudTitle: "Speed when you choose it.",
-      cloudItems: [
-        "Uploads only recordings you send through Cloud Fast",
-        "Best when turnaround matters more than local-only processing",
-        "Use it for low-sensitivity work when speed matters",
-      ],
-      cloudButton: "Add Cloud Fast",
     },
     pricing: {
       title: "Start free. Pay once if it fits.",
@@ -221,10 +199,6 @@ export const HOME_COPY = {
         ["Is Windows available?", "Yes. Dictivo is available for macOS and Windows x64."],
       ],
     },
-    footer: {
-      tagline: "Private dictation first - optional Cloud Fast",
-      beta: "Mac and Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Privacy proof",
     },
@@ -235,7 +209,6 @@ export const HOME_COPY = {
     skip: "Zum Inhalt springen",
     nav: {
       privacy: "Datenschutz",
-      cloudFast: "Cloud Fast",
       pricing: "Preise",
       downloads: "Downloads",
       download: "Downloads",
@@ -246,7 +219,6 @@ export const HOME_COPY = {
       aria: "Anzeigesprache der Website ändern",
     },
     hero: {
-      eyebrow: "Privates Diktieren für Mac & Windows",
       download: "Für Mac herunterladen",
       pricing: "Preise ansehen",
       windows: "Mac und Windows x64 sind jetzt verfügbar.",
@@ -274,26 +246,6 @@ export const HOME_COPY = {
         "Nutzen Sie Lokal, sobald Audio sensibel ist.",
       ],
       footnote: "Die vollständige Datenschutzgrenze steht auf der Sicherheitsseite.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Schnelle Transkription, ohne Cloud zum Standard zu machen.",
-      body: "Nutzen Sie Lokal für private Inhalte. Nutzen Sie Cloud Fast für wenig sensible Arbeit, wenn Wartezeit den Fluss stört.",
-      localTop: ["Lokal", "Standard"],
-      localTitle: "Standardmäßig privat.",
-      localItems: [
-        "Audio bleibt auf Ihrem Computer",
-        "Transkripte, Verlauf, Wörterbuch und Textbausteine bleiben lokal",
-        "Ideal für Kundenarbeit, Notizen, Meetings und sensible Entwürfe",
-      ],
-      cloudTop: ["Cloud Fast", "Optional"],
-      cloudTitle: "Tempo, wenn Sie es wählen.",
-      cloudItems: [
-        "Lädt nur Aufnahmen hoch, die Sie über Cloud Fast senden",
-        "Ideal, wenn Tempo wichtiger ist als rein lokale Verarbeitung",
-        "Für wenig sensible Arbeit, wenn Geschwindigkeit zählt",
-      ],
-      cloudButton: "Cloud Fast hinzufügen",
     },
     pricing: {
       title: "Kostenlos starten. Erst upgraden, wenn Grenzen stören.",
@@ -444,10 +396,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "Privates Diktieren zuerst - optional Cloud Fast",
-      beta: "Mac und Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Datenschutznachweis",
     },
@@ -458,7 +406,6 @@ export const HOME_COPY = {
     skip: "Aller au contenu",
     nav: {
       privacy: "Confidentialité",
-      cloudFast: "Cloud Fast",
       pricing: "Tarifs",
       downloads: "Téléchargements",
       download: "Téléchargements",
@@ -469,7 +416,6 @@ export const HOME_COPY = {
       aria: "Changer la langue d'affichage du site",
     },
     hero: {
-      eyebrow: "Dictée privée pour Mac et Windows",
       download: "Télécharger pour Mac",
       pricing: "Voir les tarifs",
       windows: "Mac et Windows x64 sont disponibles maintenant.",
@@ -497,26 +443,6 @@ export const HOME_COPY = {
         "Utilisez Local dès que l'audio est sensible.",
       ],
       footnote: "Lisez la frontière complète de confidentialité sur la page sécurité.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Une transcription rapide sans faire du cloud le choix par défaut.",
-      body: "Utilisez Local quand les mots sont privés. Utilisez Cloud Fast pour les contenus peu sensibles quand l'attente ralentit votre travail.",
-      localTop: ["Local", "Défaut"],
-      localTitle: "Privé par défaut.",
-      localItems: [
-        "L'audio reste sur votre ordinateur",
-        "Transcriptions, historique, dictionnaire et extraits restent locaux",
-        "Idéal pour clients, notes, réunions et brouillons sensibles",
-      ],
-      cloudTop: ["Cloud Fast", "Optionnel"],
-      cloudTitle: "La vitesse quand vous la choisissez.",
-      cloudItems: [
-        "Téléverse uniquement les enregistrements envoyés via Cloud Fast",
-        "Idéal quand le délai compte plus que le traitement local seul",
-        "Pour les travaux peu sensibles où la vitesse compte",
-      ],
-      cloudButton: "Ajouter Cloud Fast",
     },
     pricing: {
       title: "Commencez gratuitement. Payez seulement quand les limites comptent.",
@@ -667,10 +593,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "Dictée privée d'abord - Cloud Fast en option",
-      beta: "Mac et Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Preuve confidentialité",
     },
@@ -681,7 +603,6 @@ export const HOME_COPY = {
     skip: "Saltar al contenido",
     nav: {
       privacy: "Privacidad",
-      cloudFast: "Cloud Fast",
       pricing: "Precios",
       downloads: "Descargas",
       download: "Descargas",
@@ -692,7 +613,6 @@ export const HOME_COPY = {
       aria: "Cambiar idioma de visualización del sitio",
     },
     hero: {
-      eyebrow: "Dictado privado para Mac y Windows",
       download: "Descargar para Mac",
       pricing: "Ver precios",
       windows: "Mac y Windows x64 ya están disponibles.",
@@ -720,26 +640,6 @@ export const HOME_COPY = {
         "Usa Local siempre que el audio sea sensible.",
       ],
       footnote: "Lee el límite completo de privacidad en la página de seguridad.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Transcripción rápida sin hacer que la nube sea el valor predeterminado.",
-      body: "Usa Local cuando las palabras son privadas. Usa Cloud Fast para trabajo poco sensible cuando esperar corta el ritmo.",
-      localTop: ["Local", "Por defecto"],
-      localTitle: "Privado por defecto.",
-      localItems: [
-        "El audio permanece en tu ordenador",
-        "Transcripciones, historial, diccionario y fragmentos quedan locales",
-        "Ideal para clientes, notas, reuniones y borradores sensibles",
-      ],
-      cloudTop: ["Cloud Fast", "Opcional"],
-      cloudTitle: "Velocidad cuando la eliges.",
-      cloudItems: [
-        "Solo sube las grabaciones que envías con Cloud Fast",
-        "Ideal cuando la rapidez pesa más que procesar solo en local",
-        "Para trabajo poco sensible cuando importa la velocidad",
-      ],
-      cloudButton: "Añadir Cloud Fast",
     },
     pricing: {
       title: "Empieza gratis. Mejora solo cuando los límites importen.",
@@ -890,10 +790,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "Primero dictado privado - Cloud Fast opcional",
-      beta: "Mac y Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Prueba de privacidad",
     },
@@ -904,7 +800,6 @@ export const HOME_COPY = {
     skip: "Vai al contenuto",
     nav: {
       privacy: "Privacy",
-      cloudFast: "Cloud Fast",
       pricing: "Prezzi",
       downloads: "Scaricamenti",
       download: "Download",
@@ -915,7 +810,6 @@ export const HOME_COPY = {
       aria: "Cambia lingua di visualizzazione del sito",
     },
     hero: {
-      eyebrow: "Dettatura privata per Mac e Windows",
       download: "Scarica per Mac",
       pricing: "Vedi prezzi",
       windows: "Mac e Windows x64 sono disponibili ora.",
@@ -943,26 +837,6 @@ export const HOME_COPY = {
         "Usa Local ogni volta che l'audio è sensibile.",
       ],
       footnote: "Leggi il confine completo della privacy nella pagina sicurezza.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Trascrizione rapida senza rendere il cloud predefinito.",
-      body: "Usa Local quando le parole sono private. Usa Cloud Fast per lavoro poco sensibile quando l'attesa interrompe il flusso.",
-      localTop: ["Local", "Predefinito"],
-      localTitle: "Privato per impostazione predefinita.",
-      localItems: [
-        "L'audio resta sul tuo computer",
-        "Trascrizioni, cronologia, dizionario e frammenti restano locali",
-        "Ideale per clienti, note, riunioni e bozze sensibili",
-      ],
-      cloudTop: ["Cloud Fast", "Opzionale"],
-      cloudTitle: "Velocità quando la scegli.",
-      cloudItems: [
-        "Carica solo le registrazioni che invii con Cloud Fast",
-        "Ideale quando il tempo conta più dell'elaborazione solo locale",
-        "Per lavori poco sensibili in cui la velocità conta",
-      ],
-      cloudButton: "Aggiungi Cloud Fast",
     },
     pricing: {
       title: "Inizia gratis. Aggiorna solo quando i limiti contano.",
@@ -1113,10 +987,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "Prima la dettatura privata - Cloud Fast opzionale",
-      beta: "Mac e Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Prova privacy",
     },
@@ -1127,7 +997,6 @@ export const HOME_COPY = {
     skip: "Naar de inhoud",
     nav: {
       privacy: "Privacy",
-      cloudFast: "Cloud Fast",
       pricing: "Prijzen",
       downloads: "Downloads",
       download: "Downloads",
@@ -1138,7 +1007,6 @@ export const HOME_COPY = {
       aria: "Weergavetaal van de site wijzigen",
     },
     hero: {
-      eyebrow: "Privé dicteren voor Mac en Windows",
       download: "Download voor Mac",
       pricing: "Bekijk prijzen",
       windows: "Mac en Windows x64 zijn nu beschikbaar.",
@@ -1166,26 +1034,6 @@ export const HOME_COPY = {
         "Gebruik Local wanneer audio gevoelig is.",
       ],
       footnote: "Lees de volledige privacygrens op de beveiligingspagina.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Snelle transcriptie zonder cloud als standaard.",
-      body: "Gebruik Local wanneer woorden privé zijn. Gebruik Cloud Fast voor minder gevoelige opnames wanneer wachten je flow breekt.",
-      localTop: ["Local", "Standaard"],
-      localTitle: "Privé als standaard.",
-      localItems: [
-        "Audio blijft op je computer",
-        "Transcripties, geschiedenis, woordenboek en snippets blijven lokaal",
-        "Ideaal voor klantwerk, notities, vergaderingen en gevoelige concepten",
-      ],
-      cloudTop: ["Cloud Fast", "Optioneel"],
-      cloudTitle: "Snelheid wanneer je kiest.",
-      cloudItems: [
-        "Uploadt alleen opnames die je via Cloud Fast verstuurt",
-        "Ideaal wanneer doorlooptijd belangrijker is dan alleen lokale verwerking",
-        "Voor minder gevoelig werk waarbij snelheid telt",
-      ],
-      cloudButton: "Cloud Fast toevoegen",
     },
     pricing: {
       title: "Begin gratis. Upgrade pas wanneer limieten ertoe doen.",
@@ -1336,10 +1184,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "Eerst privé dicteren - optionele Cloud Fast",
-      beta: "Mac en Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Privacybewijs",
     },
@@ -1350,7 +1194,6 @@ export const HOME_COPY = {
     skip: "Ir para o conteúdo",
     nav: {
       privacy: "Privacidade",
-      cloudFast: "Cloud Fast",
       pricing: "Preços",
       downloads: "Downloads",
       download: "Downloads",
@@ -1361,7 +1204,6 @@ export const HOME_COPY = {
       aria: "Alterar idioma de exibição do site",
     },
     hero: {
-      eyebrow: "Digitação por voz privada para Mac e Windows",
       download: "Baixar para Mac",
       pricing: "Ver preços",
       windows: "Mac e Windows x64 estão disponíveis agora.",
@@ -1389,26 +1231,6 @@ export const HOME_COPY = {
         "Use Local sempre que o áudio for sensível.",
       ],
       footnote: "Leia o limite completo de privacidade na página de segurança.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "Transcrição rápida sem tornar a nuvem o padrão.",
-      body: "Use Local quando as palavras são privadas. Use Cloud Fast para trabalhos pouco sensíveis quando esperar atrapalha o fluxo.",
-      localTop: ["Local", "Padrão"],
-      localTitle: "Privado por padrão.",
-      localItems: [
-        "O áudio permanece no seu computador",
-        "Transcrições, histórico, dicionário e snippets ficam locais",
-        "Ideal para clientes, notas, reuniões e rascunhos sensíveis",
-      ],
-      cloudTop: ["Cloud Fast", "Opcional"],
-      cloudTitle: "Velocidade quando você escolhe.",
-      cloudItems: [
-        "Envia apenas gravações que você manda pelo Cloud Fast",
-        "Ideal quando tempo importa mais que processamento apenas local",
-        "Para trabalho pouco sensível quando velocidade importa",
-      ],
-      cloudButton: "Adicionar Cloud Fast",
     },
     pricing: {
       title: "Comece grátis. Faça upgrade só quando os limites importarem.",
@@ -1559,10 +1381,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "Ditado privado primeiro - Cloud Fast opcional",
-      beta: "Mac e Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "Prova de privacidade",
     },
@@ -1573,7 +1391,6 @@ export const HOME_COPY = {
     skip: "跳到正文",
     nav: {
       privacy: "隐私",
-      cloudFast: "Cloud Fast",
       pricing: "价格",
       downloads: "下载",
       download: "下载",
@@ -1584,7 +1401,6 @@ export const HOME_COPY = {
       aria: "切换网站显示语言",
     },
     hero: {
-      eyebrow: "Mac 与 Windows 本地语音输入",
       download: "下载 Mac 版",
       pricing: "查看价格",
       windows: "Mac 与 Windows x64 现已可用。",
@@ -1600,18 +1416,6 @@ export const HOME_COPY = {
       cloudLead: "为低敏感度录音准备的独立加速路径，避免等待打断工作流。",
       cloudItems: ["只有选择 Cloud Fast 时才会运行", "上传所选录音以获得更快转录", "适合低敏感度录音", "隐私更重要时仍可随时使用本地模式", "音频敏感时请使用本地模式。"],
       footnote: "在安全页面查看完整的隐私边界。",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "快速转录，但不把云端设为默认。",
-      body: "内容私密时使用本地模式。录音敏感度较低且速度重要时，再使用 Cloud Fast。",
-      localTop: ["本地", "默认"],
-      localTitle: "默认保持私密。",
-      localItems: ["音频保留在你的电脑上", "转录文本、历史记录、词典和片段都保存在本地", "适合客户工作、笔记、会议和敏感草稿"],
-      cloudTop: ["Cloud Fast", "可选"],
-      cloudTitle: "需要时再选择速度。",
-      cloudItems: ["只上传你通过 Cloud Fast 发送的录音", "适合速度比纯本地处理更重要的场景", "适合低敏感度但需要快速结果的工作"],
-      cloudButton: "添加 Cloud Fast",
     },
     pricing: {
       title: "先免费开始。只有限制影响使用时再升级。",
@@ -1720,10 +1524,6 @@ export const HOME_COPY = {
         ["如果不适合我的工作流怎么办？", "每笔购买都有 14 天无理由退款；无论如何，Tiny Local 听写都永久免费。"],
       ],
     },
-    footer: {
-      tagline: "先保证私密听写 - Cloud Fast 可选",
-      beta: "Mac 与 Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "隐私证明",
     },
@@ -1734,7 +1534,6 @@ export const HOME_COPY = {
     skip: "本文へ移動",
     nav: {
       privacy: "プライバシー",
-      cloudFast: "Cloud Fast",
       pricing: "料金",
       downloads: "ダウンロード",
       download: "ダウンロード",
@@ -1745,7 +1544,6 @@ export const HOME_COPY = {
       aria: "サイトの表示言語を変更",
     },
     hero: {
-      eyebrow: "Mac・Windows のプライベート音声入力",
       download: "Mac 版をダウンロード",
       pricing: "料金を見る",
       windows: "Mac と Windows x64 が利用可能です。",
@@ -1773,18 +1571,6 @@ export const HOME_COPY = {
         "音声が機密なら Local を使ってください。",
       ],
       footnote: "プライバシー境界の詳細はセキュリティページで確認できます。",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "クラウドを標準にせず、高速に文字起こし。",
-      body: "内容がプライベートな時は Local を使い、待ち時間を避けたい低機密の録音では Cloud Fast を使います。",
-      localTop: ["Local", "標準"],
-      localTitle: "標準でプライベート。",
-      localItems: ["音声はコンピュータ上に残ります", "文字起こし、履歴、辞書、スニペットはローカルに保存されます", "顧客対応、メモ、会議、機密性のある下書きに最適です"],
-      cloudTop: ["Cloud Fast", "任意"],
-      cloudTitle: "必要な時だけ高速化。",
-      cloudItems: ["Cloud Fast で送信した録音だけをアップロードします", "純粋なローカル処理より速度が重要な時に適しています", "低機密で速い結果が必要な作業向けです"],
-      cloudButton: "Cloud Fast を追加",
     },
     pricing: {
       title: "無料で始めて、必要になった時だけアップグレード。",
@@ -1911,10 +1697,6 @@ export const HOME_COPY = {
         ],
       ],
     },
-    footer: {
-      tagline: "まずプライベート音声入力 - Cloud Fast は任意",
-      beta: "Mac と Windows - 2026",
-    },
     seo: {
       privacyProofLabel: "プライバシー証明",
     },
@@ -1925,7 +1707,6 @@ export const HOME_COPY = {
     skip: "본문으로 이동",
     nav: {
       privacy: "개인정보",
-      cloudFast: "Cloud Fast",
       pricing: "가격",
       downloads: "다운로드",
       download: "다운로드",
@@ -1936,7 +1717,6 @@ export const HOME_COPY = {
       aria: "사이트 표시 언어 변경",
     },
     hero: {
-      eyebrow: "Mac·Windows 오프라인 음성 입력",
       download: "Mac용 다운로드",
       pricing: "가격 보기",
       windows: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
@@ -1964,18 +1744,6 @@ export const HOME_COPY = {
         "오디오가 민감하면 Local을 사용하세요.",
       ],
       footnote: "전체 개인정보 경계는 보안 페이지에서 확인하세요.",
-    },
-    cloud: {
-      kicker: "Cloud Fast",
-      title: "클라우드를 기본으로 만들지 않고 빠르게 전사합니다.",
-      body: "내용이 비공개라면 Local을 사용하고, 민감도가 낮고 속도가 중요할 때만 Cloud Fast를 사용합니다.",
-      localTop: ["Local", "기본"],
-      localTitle: "기본은 비공개.",
-      localItems: ["오디오는 컴퓨터에 남습니다", "전사문, 기록, 사전, 스니펫은 로컬에 보관됩니다", "고객 작업, 메모, 회의, 민감한 초안에 적합합니다"],
-      cloudTop: ["Cloud Fast", "선택"],
-      cloudTitle: "필요할 때만 빠르게.",
-      cloudItems: ["Cloud Fast로 보낸 녹음만 업로드합니다", "순수 로컬 처리보다 속도가 더 중요할 때 적합합니다", "민감도가 낮고 빠른 결과가 필요한 작업에 적합합니다"],
-      cloudButton: "Cloud Fast 추가",
     },
     pricing: {
       title: "무료로 시작하고, 제한이 중요해질 때만 업그레이드하세요.",
@@ -2101,10 +1869,6 @@ export const HOME_COPY = {
           "모든 구매에는 이유를 묻지 않는 14일 환불이 적용되며, 어떤 경우에도 Tiny Local 받아쓰기는 영구 무료로 유지됩니다.",
         ],
       ],
-    },
-    footer: {
-      tagline: "먼저 비공개 받아쓰기 - Cloud Fast는 선택 사항",
-      beta: "Mac 및 Windows - 2026",
     },
     seo: {
       privacyProofLabel: "개인정보 증명",
