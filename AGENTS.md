@@ -45,6 +45,10 @@ Do not run these scripts locally unless the task is about them:
   language. Only `{{price.*}}` tokens, the zh to zh-hant conversion and `assets/site.js` change it
   later. README ("Homepage copy") has the details.
 - Every price comes from `data/local-offer.mjs` through price tokens. Do not type a price into copy.
+- Every page except the homepage and `/demo/` is wrapped by `renderLayout()` in the generator. Change
+  the shared head, header or footer there, not in one renderer.
+- `site.css` styles only classes that a built page or `assets/site.js` uses.
+  `tests/structure/css-classes.test.mjs` fails otherwise; delete the rule with the markup.
 - Edit Simplified Chinese (`zh`) copy only. The build converts it to `zh-hant`.
 - `security.html` at the root is hand-maintained and copied as is. It gets no shared header or footer.
 - The root `_redirects` holds only the three checkout lines. The build writes every other rule.
