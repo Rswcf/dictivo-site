@@ -1981,11 +1981,38 @@ function compareCopy(code) {
 function assetTags() {
   return `
     <meta name="google-site-verification" content="${attr(GOOGLE_SITE_VERIFICATION)}" />
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    ${unverifiedAssetTags()}`;
+}
+
+// The 404 page and the changelog carry no google-site-verification meta.
+function unverifiedAssetTags() {
+  return `<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
     <script src="/assets/site.js?v=local" defer></script>`;
+}
+
+// The outer document of every page except the homepage and /demo/. `head` items and `main` sit at
+// a four-space indent. assetTags() starts with a newline; write() strips the spaces it leaves.
+function renderLayout({ lang, noindex = false, title, description, head, skip, header, footer, finalNewline = true, main }) {
+  return `<!doctype html>
+<html lang="${attr(lang)}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+${noindex ? `    <meta name="robots" content="noindex" />\n` : ""}    <title>${html(title)}</title>
+    <meta name="description" content="${attr(description)}" />
+    <meta name="theme-color" content="#0a1110" />
+    ${head.join("\n    ")}
+  </head>
+  <body>
+    <a class="skip-link" href="${attr(skip.href)}">${html(skip.label)}</a>
+    ${header}
+    ${main}
+    ${footer}
+  </body>
+</html>${finalNewline ? "\n" : ""}`;
 }
 
 const OG_LOCALE_BY_HTML_LANG = {
@@ -2396,7 +2423,6 @@ function platformUnavailableCopy(code) {
   return copy[code] || (code === HANT ? toHant(copy.zh) : copy.en);
 }
 
-
 function localizedCompareSections(page, copy) {
   if (copy === COMPARE_I18N.en) return page.sections;
   if (copy.locale === HANT) return toHant(localizedComparisonSections(page, "zh"));
@@ -2636,23 +2662,20 @@ function renderComparePage(page, currentCode = "en") {
   const h1 = currentCode === "en" ? page.h1 : localizedCompareH1(page, copy);
   const intro = currentCode === "en" ? page.intro : page.localizedCopy?.[currentCode]?.intro || localizedTemplateList(copy.intro, page);
   const sections = localizedCompareSections(page, copy);
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(title)}</title>
-    <meta name="description" content="${attr(metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title, description: metaDescription, url: canonical, htmlLang: locale.htmlLang, type: "article" })}
-    ${compareHreflangTags(currentCode, page.slug)}
-    ${assetTags()}
-    ${renderCompareSchema(page, currentCode)}
-  </head>
-  <body>
-    <a class="skip-link" href="#comparison">${html(copy.skipComparison)}</a>
-    ${renderHeader(currentCode, t, { hrefForLocale: (item) => localizedComparePath(item.code, page.slug) })}
-    <main class="compare-page" id="comparison">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title,
+    description: metaDescription,
+    head: [
+      socialMeta({ title, description: metaDescription, url: canonical, htmlLang: locale.htmlLang, type: "article" }),
+      compareHreflangTags(currentCode, page.slug),
+      assetTags(),
+      renderCompareSchema(page, currentCode),
+    ],
+    skip: { href: "#comparison", label: copy.skipComparison },
+    header: renderHeader(currentCode, t, { hrefForLocale: (item) => localizedComparePath(item.code, page.slug) }),
+    footer: renderFooterOnly(currentCode),
+    main: `<main class="compare-page" id="comparison">
       <section class="compare-hero" aria-labelledby="compare-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(currentCode === "en" ? page.eyebrow : copy.eyebrow)}</span>
         <p class="compare-updated">${html(copy.updatedLabel)} <time datetime="${attr(compareLastUpdated(page, currentCode))}">${html(formatLocalizedMonth(compareLastUpdated(page, currentCode), currentCode))}</time></p>
@@ -2680,11 +2703,8 @@ function renderComparePage(page, currentCode = "en") {
       ${renderCompareSources(page, currentCode)}
 
       ${renderCompareCta(page, currentCode, copy)}
-    </main>
-    ${renderFooterOnly(currentCode)}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 function compareHubCopy(currentCode) {
@@ -2739,23 +2759,20 @@ function renderCompareHub(currentCode = "en") {
   const copy = compareHubCopy(currentCode);
   const guidance = COMPARE_HUB_GUIDANCE[currentCode];
   const canonical = localizedCompareUrl(currentCode);
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.hubMetaTitle)}</title>
-    <meta name="description" content="${attr(copy.hubMetaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.hubMetaTitle, description: copy.hubMetaDescription, url: canonical, htmlLang: locale.htmlLang })}
-    ${compareHreflangTags(currentCode)}
-    ${assetTags()}
-    ${renderCompareHubSchema(currentCode)}
-  </head>
-  <body>
-    <a class="skip-link" href="#compare-hub">${html(copy.skipComparisons)}</a>
-    ${renderHeader(currentCode, t, { hrefForLocale: (item) => localizedComparePath(item.code) })}
-    <main class="compare-page compare-hub" id="compare-hub">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: copy.hubMetaTitle,
+    description: copy.hubMetaDescription,
+    head: [
+      socialMeta({ title: copy.hubMetaTitle, description: copy.hubMetaDescription, url: canonical, htmlLang: locale.htmlLang }),
+      compareHreflangTags(currentCode),
+      assetTags(),
+      renderCompareHubSchema(currentCode),
+    ],
+    skip: { href: "#compare-hub", label: copy.skipComparisons },
+    header: renderHeader(currentCode, t, { hrefForLocale: (item) => localizedComparePath(item.code) }),
+    footer: renderFooterOnly(currentCode),
+    main: `<main class="compare-page compare-hub" id="compare-hub">
       <section class="compare-hero" aria-labelledby="compare-hub-title">
         <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.hubEyebrow)}</span>
         <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
@@ -2786,11 +2803,8 @@ ${COMPARE_PAGES.map(
         </div>
         ${renderFirstDictationLink(currentCode)}
       </section>
-    </main>
-    ${renderFooterOnly(currentCode)}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 function renderCompareTeaser(currentCode = "en") {
@@ -3008,23 +3022,20 @@ function renderMacModelGuidePage(currentCode = "en") {
   const locale = localeByCode(currentCode);
   const t = HOME_COPY[currentCode];
   const copy = macAdvisorCopy(currentCode);
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.pageMetaTitle)}</title>
-    <meta name="description" content="${attr(copy.pageMetaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.pageMetaTitle, description: copy.pageMetaDescription, url: macGuideUrl(currentCode), htmlLang: locale.htmlLang })}
-    ${macGuideHreflangTags(currentCode)}
-    ${assetTags()}
-    ${renderMacGuideSchema(currentCode)}
-  </head>
-  <body>
-    <a class="skip-link" href="#mac-model-guide">${html(copy.navLabel)}</a>
-    ${renderHeader(currentCode, t, { hrefForLocale: (item) => macGuidePath(item.code) })}
-    <main class="doc-page mac-guide-page" id="mac-model-guide">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: copy.pageMetaTitle,
+    description: copy.pageMetaDescription,
+    head: [
+      socialMeta({ title: copy.pageMetaTitle, description: copy.pageMetaDescription, url: macGuideUrl(currentCode), htmlLang: locale.htmlLang }),
+      macGuideHreflangTags(currentCode),
+      assetTags(),
+      renderMacGuideSchema(currentCode),
+    ],
+    skip: { href: "#mac-model-guide", label: copy.navLabel },
+    header: renderHeader(currentCode, t, { hrefForLocale: (item) => macGuidePath(item.code) }),
+    footer: renderFooterOnly(currentCode),
+    main: `<main class="doc-page mac-guide-page" id="mac-model-guide">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.pageEyebrow)}</span>
       <h1>${html(copy.pageTitle)}</h1>
       <p class="doc-lede">${html(copy.pageLede)}</p>
@@ -3057,11 +3068,8 @@ function renderMacModelGuidePage(currentCode = "en") {
       </section>
 
       ${currentCode === "en" ? renderBenchmarkMethodRelatedSection("mac-guide") : ""}
-    </main>
-    ${renderFooterOnly(currentCode)}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 function offlineDictationGuideCopy(currentCode = "en") {
@@ -3070,40 +3078,16 @@ function offlineDictationGuideCopy(currentCode = "en") {
 
 function renderOfflineGuideSchema(currentCode = "en") {
   const copy = offlineDictationGuideCopy(currentCode);
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: offlineDictationGuideUrl(currentCode),
-      inLanguage: localeByCode(currentCode).htmlLang,
-      ...publicationDates("guides/offline-dictation-on-mac", currentCode, offlineDictationGuideLastmod(currentCode)),
-      mainEntityOfPage: offlineDictationGuideUrl(currentCode),
-      ...articleSchemaFields(),
-      about: ["offline dictation", "local dictation", "Mac dictation privacy"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: localeByCode(currentCode).htmlLang,
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb(currentCode),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: offlineDictationGuideUrl(currentCode) },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  return renderDictationGuideSchema({
+    code: currentCode,
+    url: offlineDictationGuideUrl(currentCode),
+    copy,
+    lastmod: offlineDictationGuideLastmod(currentCode),
+    route: "guides/offline-dictation-on-mac",
+    headline: copy.metaTitle,
+    about: ["offline dictation", "local dictation", "Mac dictation privacy"],
+    legacyFaqSchema: true,
+  });
 }
 
 // Where each app's price comes from. Apps with a comparison page reuse that page's "Pricing model"
@@ -3199,18 +3183,6 @@ function renderOfflineGuideSection(section, index) {
       </section>`;
 }
 
-function renderOfflineGuideReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="offline-guide-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-guide-references">${html(copy.referenceTitle)}</h2>
-        <ul class="compare-source-list">
-${OFFLINE_DICTATION_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
-      </section>`;
-}
-
 // Keep a platform-specific trial action beside the decision table, without new tracking.
 // platform "both" (a page about Mac and Windows) offers the Mac download and, while Windows
 // downloads are public, the Windows one: `<source>_mac` / `<source>_windows`. site.js moves the
@@ -3255,23 +3227,20 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
   const locale = localeByCode(currentCode);
   const t = HOME_COPY[currentCode];
   const copy = offlineDictationGuideCopy(currentCode);
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: offlineDictationGuideUrl(currentCode), htmlLang: locale.htmlLang, type: "article" })}
-    ${offlineDictationGuideHreflangTags(currentCode)}
-    ${assetTags()}
-    ${renderOfflineGuideSchema(currentCode)}
-  </head>
-  <body>
-    <a class="skip-link" href="#offline-dictation-guide">${html(copy.navLabel)}</a>
-    ${renderHeader(currentCode, t, { hrefForLocale: (item) => offlineDictationGuidePath(item.code) })}
-    <main class="doc-page offline-guide-page" id="offline-dictation-guide">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: offlineDictationGuideUrl(currentCode), htmlLang: locale.htmlLang, type: "article" }),
+      offlineDictationGuideHreflangTags(currentCode),
+      assetTags(),
+      renderOfflineGuideSchema(currentCode),
+    ],
+    skip: { href: "#offline-dictation-guide", label: copy.navLabel },
+    header: renderHeader(currentCode, t, { hrefForLocale: (item) => offlineDictationGuidePath(item.code) }),
+    footer: renderFooterOnly(currentCode),
+    main: `<main class="doc-page offline-guide-page" id="offline-dictation-guide">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -3295,34 +3264,13 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
 
       ${copy.sections.map(renderOfflineGuideSection).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="offline-guide-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-guide-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("offline-guide", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
       ${currentCode === "en" ? renderBenchmarkMethodRelatedSection("offline-guide") : ""}
 
-      ${renderOfflineGuideReferences(copy)}
-    </main>
-    ${renderFooterOnly(currentCode)}
-  </body>
-</html>
-`;
+      ${renderGuideReferences("offline-guide", copy.referenceTitle, OFFLINE_DICTATION_GUIDE_REFERENCES, copy.eyebrow)}
+    </main>`,
+  });
 }
 
 function firstDictationPath(code) {
@@ -3359,25 +3307,23 @@ function renderFirstDictationPage(code) {
     ...publicationDates("guides/first-local-dictation", code, firstDictationLastmod(code)),
     isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
   };
-  return `<!doctype html>
-<html lang="${locale.htmlLang}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(c.metaTitle)}</title>
-    <meta name="description" content="${attr(c.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: c.metaTitle, description: c.metaDescription, url, htmlLang: locale.htmlLang, type: "article" })}
-    ${alternates}
-    <link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />
-    <link rel="canonical" href="${url}" />
-    ${assetTags()}
-    <script type="application/ld+json">${JSON.stringify(schema)}</script>
-  </head>
-  <body>
-    <a class="skip-link" href="#practice">${html(c.jump)}</a>
-    ${renderHeader(code, t, { hrefForLocale: item => FIRST_DICTATION_COPY[item.code] ? firstDictationPath(item.code) : localePath(item.code) })}
-    <main class="doc-page first-dictation-page">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: c.metaTitle,
+    description: c.metaDescription,
+    head: [
+      socialMeta({ title: c.metaTitle, description: c.metaDescription, url, htmlLang: locale.htmlLang, type: "article" }),
+      alternates,
+      `<link rel="alternate" hreflang="x-default" href="${BASE_URL}${firstDictationPath("en")}" />`,
+      `<link rel="canonical" href="${url}" />`,
+      assetTags(),
+      `<script type="application/ld+json">${JSON.stringify(schema)}</script>`,
+    ],
+    skip: { href: "#practice", label: c.jump },
+    header: renderHeader(code, t, { hrefForLocale: item => FIRST_DICTATION_COPY[item.code] ? firstDictationPath(item.code) : localePath(item.code) }),
+    footer: renderFooterOnly(code),
+    finalNewline: false,
+    main: `<main class="doc-page first-dictation-page">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(c.eyebrow)}</span>
       <h1>${html(c.title)}</h1>
       <p class="doc-lede">${html(c.lede)}</p>
@@ -3413,49 +3359,22 @@ function renderFirstDictationPage(code) {
         <h2 id="next-title">${html(c.nextTitle)}</h2><p>${html(c.next)}</p>
         <ul><li><a href="${pricingHref(code)}">${html(c.pricing)}</a></li><li><a href="${macGuidePath(code)}">${html(c.models)}</a></li><li><a href="${offlineDictationGuidePath(code)}">${html(c.offline)}</a></li></ul>
       </section>
-    </main>
-    ${renderFooterOnly(code)}
-  </body>
-</html>`;
+    </main>`,
+  });
 }
 
 function renderBenchmarkMethodSchema() {
   const copy = BENCHMARK_METHOD_GUIDE_COPY;
-  const pageUrl = benchmarkMethodGuideUrl();
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "en",
-      ...publicationDates("guides/mac-dictation-benchmark-method", "en", BENCHMARK_METHOD_GUIDE_LASTMOD),
-      mainEntityOfPage: pageUrl,
-      ...articleSchemaFields(),
-      about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "en",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb("en"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  return renderDictationGuideSchema({
+    code: "en",
+    url: benchmarkMethodGuideUrl(),
+    copy,
+    lastmod: BENCHMARK_METHOD_GUIDE_LASTMOD,
+    route: "guides/mac-dictation-benchmark-method",
+    headline: copy.metaTitle,
+    about: ["local dictation", "Mac dictation", "speech-to-text benchmarks", "real-time factor"],
+    legacyFaqSchema: true,
+  });
 }
 
 function renderBenchmarkMethodTable(caption, headers, rows) {
@@ -3480,14 +3399,17 @@ ${rows
           </div>`;
 }
 
-function renderBenchmarkMethodSection(section, index) {
-  const id = `benchmark-method-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
+// A numbered section of a hand-built guide. Ids are `<idPrefix>-section-<n>`.
+function renderGuideSection(idPrefix) {
+  return (section, index) => {
+    const id = `${idPrefix}-section-${index + 1}`;
+    return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
         <p class="doc-meta">${html(section.kicker)}</p>
         <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}
+        ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
       </section>`;
+  };
 }
 
 function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
@@ -3496,18 +3418,6 @@ function renderBenchmarkMethodRelatedSection(sourceId = "benchmark-method") {
         <h2 id="${attr(`${sourceId}-benchmark-method-title`)}">How Dictivo decides local model fit</h2>
         <p>Dictivo's Mac model recommendations are backed by a local calibration method that measures real-time factor and maps the result to Fast, Medium, and Quality local model tiers.</p>
         <p><a href="${attr(benchmarkMethodGuidePath())}">Read the Mac dictation benchmark method</a> or <a href="${attr(benchmarkMethodGuidePath())}#human-speech-example">hear the 25-second human-speech sample and inspect its actual output</a>.</p>
-      </section>`;
-}
-
-function renderBenchmarkMethodReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="benchmark-method-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="benchmark-method-references">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${BENCHMARK_METHOD_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
       </section>`;
 }
 
@@ -3545,23 +3455,20 @@ function renderBenchmarkMethodGuidePage() {
   const copy = BENCHMARK_METHOD_GUIDE_COPY;
   const t = HOME_COPY.en;
   const canonical = benchmarkMethodGuideUrl();
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
-    ${benchmarkMethodGuideHreflangTags()}
-    ${assetTags()}
-    ${renderBenchmarkMethodSchema()}
-  </head>
-  <body>
-    <a class="skip-link" href="#benchmark-method-guide">${html(copy.navLabel)}</a>
-    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? benchmarkMethodGuidePath() : localePath(item.code)) })}
-    <main class="doc-page offline-guide-page" id="benchmark-method-guide">
+  return renderLayout({
+    lang: "en",
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" }),
+      benchmarkMethodGuideHreflangTags(),
+      assetTags(),
+      renderBenchmarkMethodSchema(),
+    ],
+    skip: { href: "#benchmark-method-guide", label: copy.navLabel },
+    header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? benchmarkMethodGuidePath() : localePath(item.code)) }),
+    footer: renderFooterOnly("en"),
+    main: `<main class="doc-page offline-guide-page" id="benchmark-method-guide">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -3611,84 +3518,28 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
         ${renderBenchmarkMethodTable(copy.modelCaption, copy.modelHeaders, copy.modelRows)}
       </section>
 
-      ${copy.sections.map(renderBenchmarkMethodSection).join("\n\n      ")}
+      ${copy.sections.map(renderGuideSection("benchmark-method")).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="benchmark-method-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="benchmark-method-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("benchmark-method", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
-      ${renderBenchmarkMethodReferences(copy)}
-    </main>
-    ${renderFooterOnly("en")}
-  </body>
-</html>
-`;
+      ${renderGuideReferences("benchmark-method", copy.referencesTitle, BENCHMARK_METHOD_GUIDE_REFERENCES, copy.eyebrow)}
+    </main>`,
+  });
 }
 
 function renderSpeechToTextMacGuideSchema() {
   const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
-  const pageUrl = speechToTextMacGuideUrl();
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "en",
-      ...publicationDates("guides/best-speech-to-text-apps-for-mac", "en", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD),
-      mainEntityOfPage: pageUrl,
-      ...articleSchemaFields(),
-      about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "en",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Mac speech-to-text app categories",
-      itemListElement: copy.appRows.map(([name, bestFit], index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name,
-        description: bestFit,
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb("en"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  return renderDictationGuideSchema({
+    code: "en",
+    url: speechToTextMacGuideUrl(),
+    copy,
+    lastmod: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+    route: "guides/best-speech-to-text-apps-for-mac",
+    headline: copy.metaTitle,
+    about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
+    legacyFaqSchema: true,
+    itemList: { name: "Mac speech-to-text app categories", rows: copy.appRows },
+  });
 }
 
 // The shortlist groups three local apps in one row; price each of them by name.
@@ -3699,20 +3550,12 @@ function speechToTextPriceCell(option) {
   return apps.map((app) => `<strong>${html(app)}</strong> (${html(OFFLINE_DICTATION_GUIDE_COPY.en.purchaseModels[GUIDE_PRICE_SOURCES[app].model])}): ${html(guidePriceText(app, "en"))}`).join("<br />");
 }
 
-function renderSpeechToTextMacGuideSection(section, index) {
-  const id = `speech-to-text-mac-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
-        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
-        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}
-      </section>`;
-}
-
-function renderSpeechToTextMacRelated(copy) {
-  return `<section class="doc-section" aria-labelledby="speech-to-text-mac-related">
+// The related-pages table of the speech-to-text and Windows guides.
+function renderGuideRelated(copy, idPrefix) {
+  const id = `${idPrefix}-related`;
+  return `<section class="doc-section" aria-labelledby="${attr(id)}">
         <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="speech-to-text-mac-related">${html(copy.relatedTitle)}</h2>
+        <h2 id="${attr(id)}">${html(copy.relatedTitle)}</h2>
         <div class="compare-table-wrap">
           <table class="compare-table">
             <caption>${html(copy.relatedTitle)}</caption>
@@ -3739,39 +3582,24 @@ ${copy.relatedRows
       </section>`;
 }
 
-function renderSpeechToTextMacReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="speech-to-text-mac-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="speech-to-text-mac-references">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
-      </section>`;
-}
-
 function renderSpeechToTextMacGuidePage() {
   const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
   const t = HOME_COPY.en;
   const canonical = speechToTextMacGuideUrl();
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
-    ${speechToTextMacGuideHreflangTags()}
-    ${assetTags()}
-    ${renderSpeechToTextMacGuideSchema()}
-  </head>
-  <body>
-    <a class="skip-link" href="#speech-to-text-mac-guide">${html(copy.navLabel)}</a>
-    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? speechToTextMacGuidePath() : localePath(item.code)) })}
-    <main class="doc-page offline-guide-page" id="speech-to-text-mac-guide">
+  return renderLayout({
+    lang: "en",
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" }),
+      speechToTextMacGuideHreflangTags(),
+      assetTags(),
+      renderSpeechToTextMacGuideSchema(),
+    ],
+    skip: { href: "#speech-to-text-mac-guide", label: copy.navLabel },
+    header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? speechToTextMacGuidePath() : localePath(item.code)) }),
+    footer: renderFooterOnly("en"),
+    main: `<main class="doc-page offline-guide-page" id="speech-to-text-mac-guide">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -3798,161 +3626,50 @@ function renderSpeechToTextMacGuidePage() {
 
       ${renderGuideTrial("en", "macos", "speech_guide_mac")}
 
-      ${copy.sections.map(renderSpeechToTextMacGuideSection).join("\n\n      ")}
+      ${copy.sections.map(renderGuideSection("speech-to-text-mac")).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="speech-to-text-mac-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="speech-to-text-mac-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("speech-to-text-mac", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
-      ${renderSpeechToTextMacRelated(copy)}
+      ${renderGuideRelated(copy, "speech-to-text-mac")}
 
-      ${renderSpeechToTextMacReferences(copy)}
-    </main>
-    ${renderFooterOnly("en")}
-  </body>
-</html>
-`;
+      ${renderGuideReferences("speech-to-text-mac", copy.referencesTitle, SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES, copy.eyebrow)}
+    </main>`,
+  });
 }
 
 function renderOfflineDictationWindowsGuideSchema() {
   const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
-  const pageUrl = offlineDictationWindowsGuideUrl();
-  const schema = [
-    organizationSchema(),
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      headline: copy.metaTitle,
-      description: copy.metaDescription,
-      url: pageUrl,
-      inLanguage: "en",
-      ...publicationDates("guides/offline-dictation-on-windows", "en", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD),
-      mainEntityOfPage: pageUrl,
-      ...articleSchemaFields(),
-      about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "en",
-      mainEntity: copy.faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Windows dictation tools by where audio is processed",
-      itemListElement: copy.appRows.map(([name, bestFit], index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name,
-        description: bestFit,
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb("en"),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: pageUrl },
-      ],
-    },
-  ];
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
-}
-
-function renderOfflineDictationWindowsGuideSection(section, index) {
-  const id = `offline-dictation-windows-section-${index + 1}`;
-  return `<section class="doc-section" id="${attr(id)}" aria-labelledby="${attr(`${id}-title`)}">
-        <p class="doc-meta">${html(section.kicker)}</p>
-        <h2 id="${attr(`${id}-title`)}">${html(section.title)}</h2>
-        ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
-        ${renderDocBullets(section.bullets)}${renderDocSteps(section.steps)}${section.link ? `\n        <p><a href="${attr(section.link.href)}">${html(section.link.label)}</a></p>` : ""}
-      </section>`;
-}
-
-function renderOfflineDictationWindowsRelated(copy) {
-  return `<section class="doc-section" aria-labelledby="offline-dictation-windows-related">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-dictation-windows-related">${html(copy.relatedTitle)}</h2>
-        <div class="compare-table-wrap">
-          <table class="compare-table">
-            <caption>${html(copy.relatedTitle)}</caption>
-            <thead>
-              <tr>
-                <th scope="col">Page</th>
-                <th scope="col">Use it for</th>
-                <th scope="col">URL</th>
-              </tr>
-            </thead>
-            <tbody>
-${copy.relatedRows
-  .map(
-    ([label, description, url]) => `              <tr>
-                <th scope="row"><a href="${attr(url)}">${html(label)}</a></th>
-                <td>${html(description)}</td>
-                <td>${html(url.replace(BASE_URL, ""))}</td>
-              </tr>`,
-  )
-  .join("\n")}
-            </tbody>
-          </table>
-        </div>
-      </section>`;
-}
-
-function renderOfflineDictationWindowsReferences(copy) {
-  return `<section class="doc-section" aria-labelledby="offline-dictation-windows-references">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-dictation-windows-references">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES.map(
-  ([label, url]) => `          <li><a href="${attr(url)}">${html(label)}</a></li>`,
-).join("\n")}
-        </ul>
-      </section>`;
+  return renderDictationGuideSchema({
+    code: "en",
+    url: offlineDictationWindowsGuideUrl(),
+    copy,
+    lastmod: OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
+    route: "guides/offline-dictation-on-windows",
+    headline: copy.metaTitle,
+    about: ["offline dictation Windows", "dictation software for Windows", "Windows voice typing", "local speech to text"],
+    legacyFaqSchema: true,
+    itemList: { name: "Windows dictation tools by where audio is processed", rows: copy.appRows },
+  });
 }
 
 function renderOfflineDictationWindowsGuidePage() {
   const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
   const t = HOME_COPY.en;
   const canonical = offlineDictationWindowsGuideUrl();
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
-    ${offlineDictationWindowsGuideHreflangTags()}
-    ${assetTags()}
-    ${renderOfflineDictationWindowsGuideSchema()}
-  </head>
-  <body>
-    <a class="skip-link" href="#offline-dictation-windows-guide">${html(copy.navLabel)}</a>
-    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? offlineDictationWindowsGuidePath() : localePath(item.code)) })}
-    <main class="doc-page offline-guide-page" id="offline-dictation-windows-guide">
+  return renderLayout({
+    lang: "en",
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" }),
+      offlineDictationWindowsGuideHreflangTags(),
+      assetTags(),
+      renderOfflineDictationWindowsGuideSchema(),
+    ],
+    skip: { href: "#offline-dictation-windows-guide", label: copy.navLabel },
+    header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? offlineDictationWindowsGuidePath() : localePath(item.code)) }),
+    footer: renderFooterOnly("en"),
+    main: `<main class="doc-page offline-guide-page" id="offline-dictation-windows-guide">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -3978,36 +3695,15 @@ function renderOfflineDictationWindowsGuidePage() {
 
       ${renderGuideTrial("en", "windows", "offline_guide_windows")}
 
-      ${copy.sections.map(renderOfflineDictationWindowsGuideSection).join("\n\n      ")}
+      ${copy.sections.map(renderGuideSection("offline-dictation-windows")).join("\n\n      ")}
 
-      <section class="doc-section" aria-labelledby="offline-dictation-windows-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="offline-dictation-windows-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
+      ${renderGuideFaq("offline-dictation-windows", copy.faqTitle, copy.faqs, copy.eyebrow)}
 
-      ${renderOfflineDictationWindowsRelated(copy)}
+      ${renderGuideRelated(copy, "offline-dictation-windows")}
 
-      ${renderOfflineDictationWindowsReferences(copy)}
-    </main>
-    ${renderFooterOnly("en")}
-  </body>
-</html>
-`;
+      ${renderGuideReferences("offline-dictation-windows", copy.referencesTitle, OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES, copy.eyebrow)}
+    </main>`,
+  });
 }
 
 function renderMediaKitSchema() {
@@ -4238,23 +3934,20 @@ function renderMediaKitPage() {
   const copy = MEDIA_KIT_COPY;
   const t = HOME_COPY.en;
   const canonical = mediaKitUrl();
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" })}
-    ${mediaKitHreflangTags()}
-    ${assetTags()}
-    ${renderMediaKitSchema()}
-  </head>
-  <body>
-    <a class="skip-link" href="#media-kit">${html(copy.navLabel)}</a>
-    ${renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? mediaKitPath() : localePath(item.code)) })}
-    <main class="doc-page offline-guide-page" id="media-kit">
+  return renderLayout({
+    lang: "en",
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" }),
+      mediaKitHreflangTags(),
+      assetTags(),
+      renderMediaKitSchema(),
+    ],
+    skip: { href: "#media-kit", label: copy.navLabel },
+    header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? mediaKitPath() : localePath(item.code)) }),
+    footer: renderFooterOnly("en"),
+    main: `<main class="doc-page offline-guide-page" id="media-kit">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -4309,30 +4002,9 @@ function renderMediaKitPage() {
         <p>${html(copy.outreach)}</p>
       </section>
 
-      <section class="doc-section" aria-labelledby="media-kit-faq">
-        <p class="doc-meta">${html(copy.eyebrow)}</p>
-        <h2 id="media-kit-faq">${html(copy.faqTitle)}</h2>
-        <div class="faq-grid">
-          ${copy.faqs
-            .map(
-              ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-            )
-            .join("\n")}
-        </div>
-      </section>
-    </main>
-    ${renderFooterOnly("en")}
-  </body>
-</html>
-`;
+      ${renderGuideFaq("media-kit", copy.faqTitle, copy.faqs, copy.eyebrow)}
+    </main>`,
+  });
 }
 
 // The Mac dictation guides (troubleshooting, shortcut) share one page shape: answer first, an
@@ -4341,8 +4013,10 @@ function renderMediaKitPage() {
 // Every statement must come from the references or from `fieldTest`.
 const LABEL_SEPARATOR = { ja: "：" };
 
+// Also the schema of the hand-built guides (offline, benchmark method, speech to text, Windows),
+// which keep their FAQPage node and may add an ItemList of the apps they compare.
 function renderDictationGuideSchema(guide) {
-  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema } = guide;
+  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema, itemList } = guide;
   const inLanguage = localeByCode(code).htmlLang;
   const schema = [
     organizationSchema(),
@@ -4358,7 +4032,8 @@ function renderDictationGuideSchema(guide) {
       ...articleSchemaFields(),
       about,
     },
-    // The Japanese guide kept the FAQPage node it shipped with; newer guides have none.
+    // The Japanese guide and the hand-built guides kept the FAQPage node they shipped with; newer
+    // guides have none.
     ...(legacyFaqSchema
       ? [
           {
@@ -4373,6 +4048,21 @@ function renderDictationGuideSchema(guide) {
           },
         ]
       : []),
+    ...(itemList
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: itemList.name,
+            itemListElement: itemList.rows.map(([name, bestFit], index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name,
+              description: bestFit,
+            })),
+          },
+        ]
+      : []),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -4383,6 +4073,26 @@ function renderDictationGuideSchema(guide) {
     },
   ];
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+// The references list that ends every guide. `kicker` adds a doc-meta line above the heading.
+function renderGuideReferences(idPrefix, title, references, kicker) {
+  const id = `${idPrefix}-references`;
+  return `<section class="doc-section" aria-labelledby="${attr(id)}">
+        ${kicker ? `<p class="doc-meta">${html(kicker)}</p>\n        ` : ""}<h2 id="${attr(id)}">${html(title)}</h2>
+        <ul class="compare-source-list">
+${references.map(([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`).join("\n")}
+        </ul>
+      </section>`;
+}
+
+// The visible FAQ of a guide or the media kit. `kicker` works as in renderGuideReferences.
+function renderGuideFaq(idPrefix, title, faqs, kicker) {
+  const id = `${idPrefix}-faq`;
+  return `<section class="doc-section" aria-labelledby="${attr(id)}">
+        ${kicker ? `<p class="doc-meta">${html(kicker)}</p>\n        ` : ""}<h2 id="${attr(id)}">${html(title)}</h2>
+        ${renderFaqGrid(faqs)}
+      </section>`;
 }
 
 function renderDictationGuideLinks(links) {
@@ -4486,23 +4196,20 @@ function renderDictationGuidePage(guide) {
   const mainClass = guide.mainClass ?? "doc-page offline-guide-page";
   const locale = localeByCode(code);
   const t = HOME_COPY[code];
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: locale.htmlLang, type: "article" })}
-    ${headTags}
-    ${assetTags()}
-    ${renderDictationGuideSchema(guide)}
-  </head>
-  <body>
-    <a class="skip-link" href="#${attr(mainId)}">${html(copy.navLabel)}</a>
-    ${renderHeader(code, t, { hrefForLocale: hrefForLocale ?? ((item) => (item.code === code ? path : localePath(item.code))) })}
-    <main class="${attr(mainClass)}" id="${attr(mainId)}">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: locale.htmlLang, type: "article" }),
+      headTags,
+      assetTags(),
+      renderDictationGuideSchema(guide),
+    ],
+    skip: { href: `#${mainId}`, label: copy.navLabel },
+    header: renderHeader(code, t, { hrefForLocale: hrefForLocale ?? ((item) => (item.code === code ? path : localePath(item.code))) }),
+    footer: renderFooterOnly(code),
+    main: `<main class="${attr(mainClass)}" id="${attr(mainId)}">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -4524,22 +4231,11 @@ ${renderDictationGuideQuickReference(quickReference, idPrefix)}
 
       ${guide.showTrial === false ? "" : renderGuideTrial(code, platform, trialSource)}
 
-      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-faq`)}">
-        <h2 id="${attr(`${idPrefix}-faq`)}">${html(copy.faqTitle)}</h2>
-        ${renderFaqGrid(copy.faqs)}
-      </section>
+      ${renderGuideFaq(idPrefix, copy.faqTitle, copy.faqs)}
 
-      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-references`)}">
-        <h2 id="${attr(`${idPrefix}-references`)}">${html(copy.referencesTitle)}</h2>
-        <ul class="compare-source-list">
-${references.map(([label, href]) => `          <li><a href="${attr(href)}">${html(label)}</a></li>`).join("\n")}
-        </ul>
-      </section>
-    </main>
-    ${renderFooterOnly(code)}
-  </body>
-</html>
-`;
+      ${renderGuideReferences(idPrefix, copy.referencesTitle, references)}
+    </main>`,
+  });
 }
 
 function renderMacDictationNotWorkingPage() {
@@ -4816,23 +4512,20 @@ function renderPricingPage(code = "en") {
   const sections = copy.sections.flatMap((section) =>
     priceChange && section.id === copy.priceChangeBefore ? [{ id: copy.priceChangeId, ...priceChange }, section] : [section],
   );
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: locale.htmlLang })}
-    ${enOnlyHeadTags(canonical)}
-    ${assetTags()}
-    ${renderPricingSchema(code, copy, t)}
-  </head>
-  <body>
-    <a class="skip-link" href="#pricing-page">${html(copy.navLabel)}</a>
-    ${renderHeader(code, t, { hrefForLocale: (item) => pricingHref(item.code) })}
-    <main class="doc-page" id="pricing-page">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: locale.htmlLang }),
+      enOnlyHeadTags(canonical),
+      assetTags(),
+      renderPricingSchema(code, copy, t),
+    ],
+    skip: { href: "#pricing-page", label: copy.navLabel },
+    header: renderHeader(code, t, { hrefForLocale: (item) => pricingHref(item.code) }),
+    footer: renderFooterOnly(code),
+    main: `<main class="doc-page" id="pricing-page">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -4863,11 +4556,8 @@ function renderPricingPage(code = "en") {
         <h2 id="pricing-faq">${html(copy.faqTitle)}</h2>
         ${renderFaqGrid(pricingFaqs(code, LOCAL_OFFER, { windows: hasWindowsRelease }))}
       </section>
-    </main>
-    ${renderFooterOnly(code)}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 // Three columns: product, guides, privacy and company. They need no headings to read as groups.
@@ -5954,25 +5644,16 @@ function renderRedirects() {
 }
 
 function renderNotFound() {
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Page not found · Dictivo</title>
-    <meta name="description" content="This Dictivo page is not available." />
-    <meta name="theme-color" content="#0a1110" />
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
-    <link rel="stylesheet" href="/assets/site.css?v=local" />
-    <script src="/assets/site.js?v=local" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#not-found">Skip to content</a>
-    ${renderHeader("en", HOME_COPY.en)}
-    <main class="doc-page" id="not-found">
+  return renderLayout({
+    lang: "en",
+    noindex: true,
+    title: "Page not found · Dictivo",
+    description: "This Dictivo page is not available.",
+    head: [unverifiedAssetTags()],
+    skip: { href: "#not-found", label: "Skip to content" },
+    header: renderHeader("en", HOME_COPY.en),
+    footer: renderFooterOnly(),
+    main: `<main class="doc-page" id="not-found">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dictivo</span>
       <h1>Page not found</h1>
       <p class="doc-lede">The page you requested is not available. Start from Dictivo home to compare plans, privacy options, and downloads.</p>
@@ -5980,11 +5661,8 @@ function renderNotFound() {
         <h2 id="not-found-next">Continue with Dictivo</h2>
         <p><a href="/">Go to the Dictivo homepage</a></p>
       </section>
-    </main>
-    ${renderFooterOnly()}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 function renderTrustPage(sourcePage, currentCode = "en") {
@@ -6079,23 +5757,20 @@ function renderTrustPage(sourcePage, currentCode = "en") {
       </section>`
     : "";
 
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(page.metaTitle)}</title>
-    <meta name="description" content="${attr(page.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: page.metaTitle, description: page.metaDescription, url: pageUrl, htmlLang: locale.htmlLang })}
-    ${trustHreflangTags(sourcePage, currentCode)}
-    ${assetTags()}
-    <script type="application/ld+json">${JSON.stringify(schema)}</script>
-  </head>
-  <body>
-    <a class="skip-link" href="#${attr(pageId)}">Skip to ${html(page.eyebrow.toLowerCase())}</a>
-    ${renderHeader(currentCode, t, headerOptions)}
-    <main class="doc-page" id="${attr(pageId)}">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: page.metaTitle,
+    description: page.metaDescription,
+    head: [
+      socialMeta({ title: page.metaTitle, description: page.metaDescription, url: pageUrl, htmlLang: locale.htmlLang }),
+      trustHreflangTags(sourcePage, currentCode),
+      assetTags(),
+      `<script type="application/ld+json">${JSON.stringify(schema)}</script>`,
+    ],
+    skip: { href: `#${pageId}`, label: `Skip to ${page.eyebrow.toLowerCase()}` },
+    header: renderHeader(currentCode, t, headerOptions),
+    footer: renderFooterOnly(currentCode),
+    main: `<main class="doc-page" id="${attr(pageId)}">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(page.eyebrow)}</span>
       <h1>${html(page.title)}</h1>
       <p class="doc-lede">${html(page.lede)}</p>
@@ -6104,11 +5779,8 @@ function renderTrustPage(sourcePage, currentCode = "en") {
       ${sectionHtml}
       ${faqHtml}
       ${relatedHtml}
-    </main>
-    ${renderFooterOnly(currentCode)}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 function privacyProofCopy(currentCode = "en") {
@@ -6191,23 +5863,20 @@ function renderPrivacyProofPage(currentCode = "en") {
     )
     .join("\n        ");
 
-  return `<!doctype html>
-<html lang="${attr(locale.htmlLang)}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${html(copy.metaTitle)}</title>
-    <meta name="description" content="${attr(copy.metaDescription)}" />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: privacyProofUrl(currentCode), htmlLang: locale.htmlLang, type: "article" })}
-    ${privacyProofHreflangTags(currentCode)}
-    ${assetTags()}
-    ${renderPrivacyProofSchema(currentCode, copy)}
-  </head>
-  <body>
-    <a class="skip-link" href="#privacy-proof">${html(copy.navLabel)}</a>
-    ${renderHeader(currentCode, t, { hrefForLocale: (item) => privacyProofPath(item.code) })}
-    <main class="doc-page" id="privacy-proof">
+  return renderLayout({
+    lang: locale.htmlLang,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: privacyProofUrl(currentCode), htmlLang: locale.htmlLang, type: "article" }),
+      privacyProofHreflangTags(currentCode),
+      assetTags(),
+      renderPrivacyProofSchema(currentCode, copy),
+    ],
+    skip: { href: "#privacy-proof", label: copy.navLabel },
+    header: renderHeader(currentCode, t, { hrefForLocale: (item) => privacyProofPath(item.code) }),
+    footer: renderFooterOnly(currentCode),
+    main: `<main class="doc-page" id="privacy-proof">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>${html(copy.eyebrow)}</span>
       <h1>${html(copy.title)}</h1>
       <p class="doc-lede">${html(copy.lede)}</p>
@@ -6227,11 +5896,8 @@ function renderPrivacyProofPage(currentCode = "en") {
         ${faqHtml}
         </div>
       </section>
-    </main>
-    ${renderFooterOnly(currentCode)}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 // ISO dates compare correctly as strings.
@@ -6488,46 +6154,42 @@ ${trustEntries}
 
 function renderChangelog() {
   const currentNotes = releaseNotesFor(release.version, hasWindowsRelease);
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Changelog · Dictivo</title>
-    <meta name="description" content="Release notes for Dictivo, the local-first dictation app with optional Cloud Fast." />
-    <meta name="theme-color" content="#0a1110" />
-    ${socialMeta({ title: "Dictivo · Changelog", description: "Release notes for Dictivo, the local-first dictation app with optional Cloud Fast.", url: `${BASE_URL}/changelog/`, htmlLang: "en" })}
-    <link rel="canonical" href="${BASE_URL}/changelog/" />
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
-    <link rel="stylesheet" href="/assets/site.css?v=local" />
-    <script src="/assets/site.js?v=local" defer></script>
-    <script type="application/ld+json">${JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        name: "Dictivo Changelog",
-        description: "Release notes for Dictivo, the local-first dictation app with optional Cloud Fast.",
-        url: `${BASE_URL}/changelog/`,
-        inLanguage: "en",
-        dateModified: release.updatedAt,
-        isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          homeBreadcrumb("en"),
-          { "@type": "ListItem", position: 2, name: "Changelog", item: `${BASE_URL}/changelog/` },
-        ],
-      },
-    ])}</script>
-  </head>
-  <body>
-    <a class="skip-link" href="#changelog">Skip to changelog</a>
-    ${renderHeader("en", HOME_COPY.en)}
-    <main class="doc-page" id="changelog">
+  const description = "Release notes for Dictivo, the local-first dictation app with optional Cloud Fast.";
+  const url = `${BASE_URL}/changelog/`;
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Dictivo Changelog",
+      description,
+      url,
+      inLanguage: "en",
+      dateModified: release.updatedAt,
+      isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        homeBreadcrumb("en"),
+        { "@type": "ListItem", position: 2, name: "Changelog", item: url },
+      ],
+    },
+  ];
+  return renderLayout({
+    lang: "en",
+    title: "Changelog · Dictivo",
+    description,
+    head: [
+      socialMeta({ title: "Dictivo · Changelog", description, url, htmlLang: "en" }),
+      `<link rel="canonical" href="${url}" />`,
+      unverifiedAssetTags(),
+      `<script type="application/ld+json">${JSON.stringify(schema)}</script>`,
+    ],
+    skip: { href: "#changelog", label: "Skip to changelog" },
+    header: renderHeader("en", HOME_COPY.en),
+    footer: renderFooterOnly(),
+    main: `<main class="doc-page" id="changelog">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Release notes</span>
       <h1>Changelog</h1>
       <p class="doc-lede">What shipped, when, and what changed for the people using Dictivo every day.</p>
@@ -6705,11 +6367,8 @@ ${earlierReleaseNotes(release.version).map((notes) => {
           <li>macOS and Windows builds from the same workspace.</li>
         </ul>
       </section>
-    </main>
-    ${renderFooterOnly()}
-  </body>
-</html>
-`;
+    </main>`,
+  });
 }
 
 function renderFooterOnly(currentCode = "en") {
