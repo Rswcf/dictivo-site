@@ -41,10 +41,9 @@ Do not run these scripts locally unless the task is about them:
 
 - `dist/` is the only truth about what a visitor sees. A string in `data/` can be replaced by a later
   stage. Search `dist/` before you call copy live or dead.
-- Homepage copy passes through nine stages; a later stage wins. Stages 1–6 are in README
-  ("The homepage override chain"). After them come `{{price.*}}` tokens
-  (`scripts/lib/price-tokens.mjs`), the zh to zh-hant conversion (`scripts/lib/hant.mjs`) and
-  runtime text in `assets/site.js`.
+- Homepage, header and footer copy is `HOME_COPY` in `data/home-copy.mjs`, one full object per
+  language. Only `{{price.*}}` tokens, the zh to zh-hant conversion and `assets/site.js` change it
+  later. README ("Homepage copy") has the details.
 - Every price comes from `data/local-offer.mjs` through price tokens. Do not type a price into copy.
 - Edit Simplified Chinese (`zh`) copy only. The build converts it to `zh-hant`.
 - `security.html` at the root is hand-maintained and copied as is. It gets no shared header or footer.

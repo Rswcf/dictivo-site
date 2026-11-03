@@ -24,7 +24,8 @@ import {
 } from "../data/offline-dictation-guide.mjs";
 import { PRIVACY_PROOF_COPY, PRIVACY_PROOF_LASTMOD } from "../data/privacy-proof-pages.mjs";
 import { earlierReleaseNotes, releaseNotesFor } from "../data/release-notes.mjs";
-import { BASE_URL, HOME_COPY, LOCALES } from "../data/site-content.mjs";
+import { BASE_URL, LOCALES } from "../data/site-content.mjs";
+import { HOME_COPY } from "../data/home-copy.mjs";
 import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD, HOME_SHARED_CONTENT_LASTMOD } from "../data/home-conversion.mjs";
@@ -206,469 +207,12 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
 };
 
-const WINDOWS_HOME_COPY = {
-  en: {
-    metaTitle: "Offline Dictation App for Mac & Windows - Buy Once | Dictivo",
-    navDownload: "Downloads",
-    heroEyebrow: "Private dictation for Mac & Windows",
-    heroTitle: "Dictation that stays on your computer.",
-    heroNote: "Mac and Windows x64 are available now.",
-    privacyTitle: "Your private words stay on your device.",
-    pricingFreeSub: "Try the private-first workflow on your desktop.",
-    pricingFreeButton: "See downloads",
-    pricingFootnote: "Mac and Windows x64 are available now.",
-    downloadsKicker: "Desktop app",
-    downloadsTitle: "Download Dictivo for Mac or Windows.",
-    downloadsBody:
-      "The desktop app includes Local mode, Tiny free forever, a 14-day full Local trial, 10 free Cloud Fast minutes, license activation, and display language choices.",
-    signedTitle: "Start today and decide after the trial.",
-    signedFootnote: "Download Dictivo, try the full Local experience, and buy only if it fits your workflow.",
-    languagesTitle: "Display language choices for global desktop users.",
-    workflowFirstTitle: "Download Dictivo",
-    voiceQuestion: "Does my voice leave my device?",
-    faqAnswer: "Yes. Dictivo is available for macOS and Windows x64.",
-    footerBeta: "Mac and Windows - 2026",
-    metaDescription:
-      "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. Buy once, yours to keep.",
-  },
-  de: {
-    metaTitle: "Offline-Diktier-App für Mac & Windows - einmal kaufen | Dictivo",
-    navDownload: "Downloads",
-    heroEyebrow: "Privates Diktieren für Mac & Windows",
-    heroTitle: "Diktieren, das auf Ihrem Computer bleibt.",
-    heroNote: "Mac und Windows x64 sind jetzt verfügbar.",
-    privacyTitle: "Ihre privaten Worte bleiben auf Ihrem Gerät.",
-    pricingFreeSub: "Testen Sie den privaten Ablauf auf Ihrem Desktop.",
-    pricingFreeButton: "Downloads ansehen",
-    pricingFootnote: "Mac und Windows x64 sind jetzt verfügbar.",
-    downloadsKicker: "Desktop-App",
-    downloadsTitle: "Dictivo für Mac oder Windows herunterladen.",
-    downloadsBody:
-      "Die Desktop-App enthält den lokalen Modus, Tiny dauerhaft gratis, 14 Tage vollen Local-Test, 10 kostenlose Cloud-Fast-Minuten, Lizenzaktivierung und Anzeigesprachen.",
-    signedTitle: "Heute starten und nach dem Test entscheiden.",
-    signedFootnote: "Dictivo herunterladen, Local vollständig testen und nur kaufen, wenn es in Ihren Workflow passt.",
-    languagesTitle: "Anzeigesprachen für globale Desktop-Nutzer.",
-    workflowFirstTitle: "Dictivo herunterladen",
-    voiceQuestion: "Verlässt meine Stimme mein Gerät?",
-    faqAnswer: "Ja. Dictivo ist für macOS und Windows x64 verfügbar.",
-    footerBeta: "Mac und Windows - 2026",
-    metaDescription:
-      "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per offenem Netzwerktest überprüfbar. Einmal kaufen, für immer Ihres.",
-  },
-  fr: {
-    metaTitle: "App de dictée hors ligne pour Mac et Windows - achat unique | Dictivo",
-    navDownload: "Téléchargements",
-    heroEyebrow: "Dictée privée pour Mac et Windows",
-    heroTitle: "La dictée qui reste sur votre ordinateur.",
-    heroNote: "Mac et Windows x64 sont disponibles maintenant.",
-    privacyTitle: "Vos mots privés restent sur votre appareil.",
-    pricingFreeSub: "Essayez le flux privé sur votre ordinateur.",
-    pricingFreeButton: "Voir les téléchargements",
-    pricingFootnote: "Mac et Windows x64 sont disponibles maintenant.",
-    downloadsKicker: "App de bureau",
-    downloadsTitle: "Télécharger Dictivo pour Mac ou Windows.",
-    downloadsBody:
-      "L'app de bureau inclut le mode Local, Tiny gratuit à vie, 14 jours d'essai Local complet, 10 minutes Cloud Fast gratuites, l'activation de licence et les langues d'affichage.",
-    signedTitle: "Commencez aujourd'hui, puis décidez après l'essai.",
-    signedFootnote: "Téléchargez Dictivo, essayez Local en entier et achetez seulement si cela convient à votre workflow.",
-    languagesTitle: "Des langues d'affichage pour les utilisateurs desktop du monde entier.",
-    workflowFirstTitle: "Télécharger Dictivo",
-    voiceQuestion: "Ma voix quitte-t-elle mon appareil?",
-    faqAnswer: "Oui. Dictivo est disponible pour macOS et Windows x64.",
-    footerBeta: "Mac et Windows - 2026",
-    metaDescription:
-      "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. Achat unique, à vous pour toujours.",
-  },
-  es: {
-    metaTitle: "App de dictado sin conexión para Mac y Windows | Dictivo",
-    navDownload: "Descargas",
-    heroEyebrow: "Dictado privado para Mac y Windows",
-    heroTitle: "Dictado que se queda en tu equipo.",
-    heroNote: "Mac y Windows x64 ya están disponibles.",
-    privacyTitle: "Tus palabras privadas se quedan en tu dispositivo.",
-    pricingFreeSub: "Prueba el flujo privado en tu escritorio.",
-    pricingFreeButton: "Ver descargas",
-    pricingFootnote: "Mac y Windows x64 ya están disponibles.",
-    downloadsKicker: "App de escritorio",
-    downloadsTitle: "Descarga Dictivo para Mac o Windows.",
-    downloadsBody:
-      "La app de escritorio incluye modo Local, Tiny gratis para siempre, 14 días de prueba Local completa, 10 minutos gratis de Cloud Fast, activación de licencia e idiomas de visualización.",
-    signedTitle: "Empieza hoy y decide después de la prueba.",
-    signedFootnote: "Descarga Dictivo, prueba Local completo y compra solo si encaja con tu flujo.",
-    languagesTitle: "Idiomas de visualización para usuarios de escritorio en todo el mundo.",
-    workflowFirstTitle: "Descargar Dictivo",
-    voiceQuestion: "¿Mi voz sale de mi dispositivo?",
-    faqAnswer: "Sí. Dictivo está disponible para macOS y Windows x64.",
-    footerBeta: "Mac y Windows - 2026",
-    metaDescription:
-      "Dictivo escribe lo que dictas en cualquier app de Mac o Windows. En modo local, el audio se queda en tu equipo. Un solo pago y es tuyo para siempre.",
-  },
-  it: {
-    metaTitle: "App di dettatura offline per Mac e Windows - acquisto unico | Dictivo",
-    navDownload: "Download",
-    heroEyebrow: "Dettatura privata per Mac e Windows",
-    heroTitle: "La dettatura che resta sul tuo computer.",
-    heroNote: "Mac e Windows x64 sono disponibili ora.",
-    privacyTitle: "Le tue parole private restano sul tuo dispositivo.",
-    pricingFreeSub: "Prova il flusso privato sul tuo desktop.",
-    pricingFreeButton: "Vedi download",
-    pricingFootnote: "Mac e Windows x64 sono disponibili ora.",
-    downloadsKicker: "App desktop",
-    downloadsTitle: "Scarica Dictivo per Mac o Windows.",
-    downloadsBody:
-      "L'app desktop include modalità Local, Tiny gratis per sempre, 14 giorni di prova Local completa, 10 minuti Cloud Fast gratuiti, attivazione licenza e lingue di visualizzazione.",
-    signedTitle: "Inizia oggi e decidi dopo la prova.",
-    signedFootnote: "Scarica Dictivo, prova Local completo e acquista solo se si adatta al tuo flusso.",
-    languagesTitle: "Lingue di visualizzazione per utenti desktop in tutto il mondo.",
-    workflowFirstTitle: "Scarica Dictivo",
-    voiceQuestion: "La mia voce lascia il dispositivo?",
-    faqAnswer: "Sì. Dictivo è disponibile per macOS e Windows x64.",
-    footerBeta: "Mac e Windows - 2026",
-    metaDescription:
-      "Dictivo scrive ciò che detti in qualsiasi app per Mac o Windows. In modalità locale l'audio resta sul tuo dispositivo. Un solo acquisto, ed è tuo per sempre.",
-  },
-  nl: {
-    metaTitle: "Offline dicteer-app voor Mac en Windows - eenmalig kopen | Dictivo",
-    navDownload: "Downloads",
-    heroEyebrow: "Privé dicteren voor Mac en Windows",
-    heroTitle: "Dictatie die op je computer blijft.",
-    heroNote: "Mac en Windows x64 zijn nu beschikbaar.",
-    privacyTitle: "Je privéwoorden blijven op je apparaat.",
-    pricingFreeSub: "Probeer de privacygerichte workflow op je desktop.",
-    pricingFreeButton: "Bekijk downloads",
-    pricingFootnote: "Mac en Windows x64 zijn nu beschikbaar.",
-    downloadsKicker: "Desktop-app",
-    downloadsTitle: "Download Dictivo voor Mac of Windows.",
-    downloadsBody:
-      "De desktop-app bevat Local, Tiny altijd gratis, een volledige Local-proef van 14 dagen, 10 gratis Cloud Fast-minuten, licentieactivatie en weergavetalen.",
-    signedTitle: "Begin vandaag en beslis na de proef.",
-    signedFootnote: "Download Dictivo, probeer Local volledig en koop alleen als het bij je workflow past.",
-    languagesTitle: "Weergavetalen voor desktopgebruikers wereldwijd.",
-    workflowFirstTitle: "Download Dictivo",
-    voiceQuestion: "Verlaat mijn stem mijn apparaat?",
-    faqAnswer: "Ja. Dictivo is beschikbaar voor macOS en Windows x64.",
-    footerBeta: "Mac en Windows - 2026",
-    metaDescription:
-      "Dictivo typt wat je zegt in elke Mac- of Windows-app. In lokale modus blijft audio op je apparaat. Eenmalig kopen, voor altijd van jou.",
-  },
-  pt: {
-    metaTitle: "Digitação por voz offline para Mac e Windows | Dictivo",
-    navDownload: "Downloads",
-    heroEyebrow: "Digitação por voz privada para Mac e Windows",
-    heroTitle: "Ditado que fica no seu computador.",
-    heroNote: "Mac e Windows x64 estão disponíveis agora.",
-    privacyTitle: "Suas palavras privadas ficam no seu dispositivo.",
-    pricingFreeSub: "Teste o fluxo privado no seu desktop.",
-    pricingFreeButton: "Ver downloads",
-    pricingFootnote: "Mac e Windows x64 estão disponíveis agora.",
-    downloadsKicker: "App desktop",
-    downloadsTitle: "Baixe Dictivo para Mac ou Windows.",
-    downloadsBody:
-      "O app para desktop inclui modo Local, Tiny grátis para sempre, 14 dias de teste Local completo, 10 minutos Cloud Fast gratuitos, ativação de licença e idiomas de exibição.",
-    signedTitle: "Comece hoje e decida depois do teste.",
-    signedFootnote: "Baixe o Dictivo, teste o Local completo e compre só se fizer sentido para seu fluxo.",
-    languagesTitle: "Idiomas de exibição para usuários de desktop no mundo todo.",
-    workflowFirstTitle: "Baixar Dictivo",
-    voiceQuestion: "Minha voz sai do dispositivo?",
-    faqAnswer: "Sim. O Dictivo está disponível para macOS e Windows x64.",
-    footerBeta: "Mac e Windows - 2026",
-    metaDescription:
-      "Transforme voz em texto no Mac e Windows. Use digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 14 dias.",
-  },
-  zh: {
-    metaTitle: "Mac 和 Windows 离线语音输入软件 - 语音转文字 | Dictivo",
-    navDownload: "下载",
-    heroEyebrow: "Mac 与 Windows 本地语音输入",
-    heroTitle: "听写内容不离开你的电脑。",
-    heroNote: "Mac 与 Windows x64 现已可用。",
-    privacyTitle: "你的私密内容留在本设备上。",
-    pricingFreeSub: "在桌面端试用隐私优先的流程。",
-    pricingFreeButton: "查看下载",
-    pricingFootnote: "Mac 与 Windows x64 现已可用。",
-    downloadsKicker: "桌面应用",
-    downloadsTitle: "下载 Dictivo Mac 或 Windows 版。",
-    downloadsBody:
-      "桌面应用包含 Local 模式、Tiny 永久免费、14 天完整 Local 试用、10 分钟免费 Cloud Fast、许可证激活和显示语言选项。",
-    signedTitle: "今天开始试用，试用后再决定。",
-    signedFootnote: "下载 Dictivo，完整试用 Local，只在适合你的工作流时购买。",
-    languagesTitle: "面向全球桌面用户的显示语言选项。",
-    workflowFirstTitle: "下载 Dictivo",
-    voiceQuestion: "我的声音会离开本设备吗？",
-    faqAnswer: "可以。Dictivo 已支持 macOS 与 Windows x64。",
-    footerBeta: "Mac 与 Windows - 2026",
-    metaDescription:
-      "用 Dictivo 在 Mac 和 Windows 上把语音转成文字，起草邮件、笔记和 AI 提示词。Local 模式在本机处理音频，安装模型后可离线语音输入。全部本地模型免费试用 14 天，无需账号或银行卡。",
-  },
-  ja: {
-    metaTitle: "Mac・Windows 対応オフライン音声入力アプリ - 買い切り | Dictivo",
-    navDownload: "ダウンロード",
-    heroEyebrow: "Mac・Windows のプライベート音声入力",
-    heroTitle: "音声入力を、あなたのパソコンの中だけで。",
-    heroNote: "Mac と Windows x64 が利用可能です。",
-    privacyTitle: "プライベートな言葉はデバイスに残ります。",
-    pricingFreeSub: "デスクトップでプライバシー重視の流れを試せます。",
-    pricingFreeButton: "ダウンロードを見る",
-    pricingFootnote: "Mac と Windows x64 が利用可能です。",
-    downloadsKicker: "デスクトップアプリ",
-    downloadsTitle: "Dictivo の Mac 版または Windows 版をダウンロード。",
-    downloadsBody:
-      "デスクトップアプリには Local、永久無料の Tiny、14 日間の完全 Local トライアル、10 分の無料 Cloud Fast、ライセンス有効化、表示言語が含まれます。",
-    signedTitle: "今日始めて、トライアル後に判断できます。",
-    signedFootnote: "Dictivo をダウンロードし、Local をしっかり試して、合う場合だけ購入できます。",
-    languagesTitle: "世界中のデスクトップユーザー向け表示言語。",
-    workflowFirstTitle: "Dictivo をダウンロード",
-    voiceQuestion: "声はデバイスから外へ出ますか？",
-    faqAnswer: "はい。Dictivo は macOS と Windows x64 で利用できます。",
-    footerBeta: "Mac と Windows - 2026",
-    metaDescription:
-      "Dictivo はホットキーひとつで Mac や Windows のどのアプリにも音声をテキスト入力。ローカルモードでは音声が端末の外に出ません。買い切り、サブスクなし。",
-  },
-  ko: {
-    metaTitle: "Mac·Windows 음성 텍스트 변환 · 오프라인 음성 입력 | Dictivo",
-    navDownload: "다운로드",
-    heroEyebrow: "Mac·Windows 오프라인 음성 입력",
-    heroTitle: "받아쓰기가 내 컴퓨터 안에만 머뭅니다.",
-    heroNote: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
-    privacyTitle: "내 비공개 말은 기기에 남습니다.",
-    pricingFreeSub: "데스크톱에서 개인정보 우선 흐름을 사용해 보세요.",
-    pricingFreeButton: "다운로드 보기",
-    pricingFootnote: "Mac과 Windows x64를 지금 사용할 수 있습니다.",
-    downloadsKicker: "데스크톱 앱",
-    downloadsTitle: "Dictivo Mac 또는 Windows 버전을 다운로드하세요.",
-    downloadsBody:
-      "데스크톱 앱에는 Local 모드, 영구 무료 Tiny, 14일 전체 Local 체험, 10분 무료 Cloud Fast, 라이선스 활성화, 표시 언어가 포함됩니다.",
-    signedTitle: "오늘 시작하고 체험 후 결정하세요.",
-    signedFootnote: "Dictivo를 다운로드하고 Local을 충분히 체험한 뒤, 워크플로에 맞을 때만 구매하세요.",
-    languagesTitle: "전 세계 데스크톱 사용자를 위한 표시 언어.",
-    workflowFirstTitle: "Dictivo 다운로드",
-    voiceQuestion: "내 목소리가 기기 밖으로 나가나요?",
-    faqAnswer: "예. Dictivo는 macOS와 Windows x64에서 사용할 수 있습니다.",
-    footerBeta: "Mac 및 Windows - 2026",
-    metaDescription:
-      "Mac과 Windows에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요. Local 모드는 기기에서 음성을 처리합니다. 모든 로컬 모델을 14일 무료로 체험하세요.",
-  },
-};
-
-const WINDOWS_UNAVAILABLE_HOME_COPY = {
-  en: { heroNote: "Windows x64 downloads are temporarily unavailable.", pricingFootnote: "macOS is available; Windows x64 downloads are temporarily unavailable.", faqAnswer: "Dictivo supports Windows x64, but its downloads are temporarily unavailable." },
-  de: { heroNote: "Windows-x64-Downloads sind vorübergehend nicht verfügbar.", pricingFootnote: "macOS ist verfügbar; Windows-x64-Downloads sind vorübergehend nicht verfügbar.", faqAnswer: "Dictivo unterstützt Windows x64, aber die Downloads sind vorübergehend nicht verfügbar." },
-  fr: { heroNote: "Les téléchargements Windows x64 sont temporairement indisponibles.", pricingFootnote: "macOS est disponible; les téléchargements Windows x64 sont temporairement indisponibles.", faqAnswer: "Dictivo prend en charge Windows x64, mais ses téléchargements sont temporairement indisponibles." },
-  es: { heroNote: "Las descargas para Windows x64 no están disponibles temporalmente.", pricingFootnote: "macOS está disponible; las descargas para Windows x64 no están disponibles temporalmente.", faqAnswer: "Dictivo es compatible con Windows x64, pero sus descargas no están disponibles temporalmente." },
-  it: { heroNote: "I download per Windows x64 sono temporaneamente non disponibili.", pricingFootnote: "macOS è disponibile; i download per Windows x64 sono temporaneamente non disponibili.", faqAnswer: "Dictivo supporta Windows x64, ma i download sono temporaneamente non disponibili." },
-  nl: { heroNote: "Downloads voor Windows x64 zijn tijdelijk niet beschikbaar.", pricingFootnote: "macOS is beschikbaar; downloads voor Windows x64 zijn tijdelijk niet beschikbaar.", faqAnswer: "Dictivo ondersteunt Windows x64, maar de downloads zijn tijdelijk niet beschikbaar." },
-  pt: { heroNote: "Os downloads para Windows x64 estão temporariamente indisponíveis.", pricingFootnote: "O macOS está disponível; os downloads para Windows x64 estão temporariamente indisponíveis.", faqAnswer: "O Dictivo oferece suporte ao Windows x64, mas os downloads estão temporariamente indisponíveis." },
-  zh: { heroNote: "Windows x64 下载暂时不可用。", pricingFootnote: "macOS 版本可用；Windows x64 下载暂时不可用。", faqAnswer: "Dictivo 支持 Windows x64，但其下载暂时不可用。" },
-  ja: { heroNote: "Windows x64 のダウンロードは一時的に利用できません。", pricingFootnote: "macOS 版は利用できますが、Windows x64 のダウンロードは一時的に利用できません。", faqAnswer: "Dictivo は Windows x64 に対応していますが、ダウンロードは一時的に利用できません。" },
-  ko: { heroNote: "Windows x64 다운로드는 일시적으로 사용할 수 없습니다.", pricingFootnote: "macOS 버전은 사용할 수 있지만 Windows x64 다운로드는 일시적으로 사용할 수 없습니다.", faqAnswer: "Dictivo는 Windows x64를 지원하지만 다운로드는 일시적으로 사용할 수 없습니다." },
-};
-
-const SEO_HOME_COPY = {
-  en: {
-    metaTitle: "Dictivo - Private Mac dictation. Buy once, yours to keep",
-    metaDescription:
-      "Press one hotkey and Dictivo types what you say into any Mac app. Local mode keeps audio on your device - verify it yourself with an open network test. Buy once, yours to keep. Optional Cloud Fast when speed matters more.",
-    heroTitle: "Dictation that stays on your Mac.",
-    heroEmphasis: "Buy once, own it.",
-    heroEyebrow: "Private Mac dictation app",
-    footerPrivacyProof: "Privacy proof",
-  },
-  de: {
-    metaTitle: "Dictivo - Privates Mac-Diktat. Einmal kaufen, für immer Ihres",
-    metaDescription:
-      "Ein Hotkey, und Dictivo tippt, was Sie sagen - in jeder Mac-App. Im Local-Modus bleibt Audio auf Ihrem Gerät, überprüfbar per offenem Netzwerktest. Einmal kaufen, für immer Ihres. Optional Cloud Fast, wenn Tempo wichtiger ist.",
-    heroTitle: "Diktieren, das auf Ihrem Mac bleibt.",
-    heroEmphasis: "Einmal kaufen, für immer Ihres.",
-    heroEyebrow: "Private Mac-Diktat-App",
-    footerPrivacyProof: "Datenschutznachweis",
-  },
-  fr: {
-    metaTitle: "Dictivo - Dictée Mac privée. Achat unique, à vous pour toujours",
-    metaDescription:
-      "Un raccourci, et Dictivo tape ce que vous dites dans n'importe quelle app Mac. Le mode Local garde l'audio sur votre appareil, vérifiable par un test réseau ouvert. Achat unique, à vous pour toujours. Cloud Fast en option quand la vitesse prime.",
-    heroTitle: "La dictée qui reste sur votre Mac.",
-    heroEmphasis: "Achetez une fois, gardez-le.",
-    heroEyebrow: "App de dictée Mac privée",
-    footerPrivacyProof: "Preuve confidentialité",
-  },
-  es: {
-    metaTitle: "Dictivo - Dictado privado para Mac. Un solo pago y es tuyo para siempre",
-    metaDescription:
-      "Pulsa un atajo y Dictivo escribe lo que dices en cualquier app del Mac. El modo Local mantiene el audio en tu equipo, verificable con un test de red abierto. Un solo pago y es tuyo para siempre. Cloud Fast opcional cuando importa la velocidad.",
-    heroTitle: "Dictado que se queda en tu Mac.",
-    heroEmphasis: "Compra una vez y es tuyo.",
-    heroEyebrow: "App de dictado privado para Mac",
-    footerPrivacyProof: "Prueba de privacidad",
-  },
-  it: {
-    metaTitle: "Dictivo - Dettatura privata per Mac. Un solo acquisto, ed è tuo per sempre",
-    metaDescription:
-      "Premi una scorciatoia e Dictivo scrive ciò che dici in qualsiasi app del Mac. La modalità Local tiene l'audio sul tuo dispositivo, verificabile con un test di rete aperto. Un solo acquisto, ed è tuo per sempre. Cloud Fast opzionale quando conta la velocità.",
-    heroTitle: "La dettatura che resta sul tuo Mac.",
-    heroEmphasis: "Compra una volta, è tuo.",
-    heroEyebrow: "App di dettatura privata per Mac",
-    footerPrivacyProof: "Prova privacy",
-  },
-  nl: {
-    metaTitle: "Dictivo - Private Mac-dictatie. Eenmalig kopen, voor altijd van jou",
-    metaDescription:
-      "Eén sneltoets en Dictivo typt wat je zegt in elke Mac-app. Local-modus houdt audio op je apparaat, controleerbaar met een open netwerktest. Eenmalig kopen, voor altijd van jou. Optionele Cloud Fast wanneer snelheid telt.",
-    heroTitle: "Dictatie die op je Mac blijft.",
-    heroEmphasis: "Eén keer kopen, voor altijd van jou.",
-    heroEyebrow: "Private Mac-dictatie-app",
-    footerPrivacyProof: "Privacybewijs",
-  },
-  pt: {
-    metaTitle: "Digitação por voz offline para Mac | Dictivo",
-    metaDescription:
-      "Pressione um atalho e o Dictivo digita o que você fala em qualquer app do Mac. O modo Local mantém o áudio no seu aparelho, verificável com um teste de rede aberto. Uma compra, e é seu para sempre. Cloud Fast opcional quando a velocidade importa.",
-    heroTitle: "Ditado que fica no seu Mac.",
-    heroEmphasis: "Compre uma vez, é seu.",
-    heroEyebrow: "Digitação por voz privada para Mac",
-    footerPrivacyProof: "Prova de privacidade",
-  },
-  zh: {
-    metaTitle: "Mac 离线语音输入软件 - 语音转文字 | Dictivo",
-    metaDescription:
-      "按下快捷键，Dictivo 把你说的话直接打进任何 Mac 应用。Local 模式音频不离开设备，可用公开网络测试自行验证。一次买断，永久使用。需要速度时可选 Cloud Fast。",
-    heroTitle: "听写，不出你的 Mac。",
-    heroEmphasis: "一次买断，永久使用。",
-    heroEyebrow: "Mac 本地语音输入软件",
-    footerPrivacyProof: "隐私证明",
-  },
-  ja: {
-    metaTitle: "Dictivo - プライベート Mac 音声入力。買い切りで、ずっと使えます",
-    metaDescription:
-      "ホットキーを押して話すだけで、Dictivo がどの Mac アプリにも文字を入力します。Local モードでは音声がデバイスに留まり、公開ネットワークテストで検証できます。買い切りで、ずっと使えます。速度重視のときは Cloud Fast も選べます。",
-    heroTitle: "音声が Mac の外に出ない音声入力。",
-    heroEmphasis: "買い切り。ずっと使えます。",
-    heroEyebrow: "プライベート Mac 音声入力アプリ",
-    footerPrivacyProof: "プライバシー証明",
-  },
-  ko: {
-    metaTitle: "Mac 음성 텍스트 변환 · 오프라인 음성 입력 | Dictivo",
-    metaDescription:
-      "단축키를 누르고 말하면 Dictivo가 어떤 Mac 앱에든 텍스트를 입력합니다. Local 모드는 오디오를 기기에 보관하며 공개 네트워크 테스트로 직접 확인할 수 있습니다. 일회 구매, 영구 사용. 속도가 중요할 때는 Cloud Fast를 선택하세요.",
-    heroTitle: "오디오가 Mac을 떠나지 않는 받아쓰기.",
-    heroEmphasis: "일회 구매, 영구 사용.",
-    heroEyebrow: "Mac 오프라인 음성 입력 앱",
-    footerPrivacyProof: "개인정보 증명",
-  },
-};
-
 function jsonForScript(value) {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
 }
 
 function windowsDownloadCopy(code) {
   return WINDOWS_DOWNLOAD_COPY[code] || WINDOWS_DOWNLOAD_COPY.en;
-}
-
-function windowsHomeCopy(code) {
-  return WINDOWS_HOME_COPY[code] || WINDOWS_HOME_COPY.en;
-}
-
-function windowsUnavailableHomeCopy(code) {
-  return WINDOWS_UNAVAILABLE_HOME_COPY[code] || WINDOWS_UNAVAILABLE_HOME_COPY.en;
-}
-
-function questionIsAboutWindows(question) {
-  return String(question).toLowerCase().includes("windows");
-}
-
-function applySeoHomeCopy(code, base) {
-  if (!base) return base;
-  const seo = SEO_HOME_COPY[code] || SEO_HOME_COPY.en;
-  return {
-    ...base,
-    seo: {
-      ...(base.seo || {}),
-      privacyProofLabel: seo.footerPrivacyProof,
-    },
-    metaTitle: seo.metaTitle,
-    metaDescription: seo.metaDescription,
-    hero: {
-      ...base.hero,
-      eyebrow: seo.heroEyebrow,
-      title: seo.heroTitle,
-      emphasis: seo.heroEmphasis,
-    },
-  };
-}
-
-function homeCopyForRender(code) {
-  const base = applySeoHomeCopy(code, HOME_COPY[code]);
-  if (!base) return base;
-  if (!hasWindowsRelease) {
-    const unavailable = windowsUnavailableHomeCopy(code);
-    return {
-      ...base,
-      hero: { ...base.hero, windows: unavailable.heroNote },
-      pricing: { ...base.pricing, footnote: unavailable.pricingFootnote },
-      faq: {
-        ...base.faq,
-        items: base.faq.items.map(([question, answer]) =>
-          questionIsAboutWindows(question) ? [question, unavailable.faqAnswer] : [question, answer],
-        ),
-      },
-    };
-  }
-
-  const live = windowsHomeCopy(code);
-  return {
-    ...base,
-    metaTitle: live.metaTitle ?? base.metaTitle,
-    metaDescription: live.metaDescription,
-    nav: { ...base.nav, download: live.navDownload },
-    hero: { ...base.hero, eyebrow: live.heroEyebrow, title: live.heroTitle ?? base.hero.title, windows: live.heroNote },
-    privacy: { ...base.privacy, title: live.privacyTitle ?? base.privacy.title },
-    pricing: {
-      ...base.pricing,
-      footnote: live.pricingFootnote,
-      tiers: base.pricing.tiers.map((tier, index) =>
-        index === 0
-          ? {
-              ...tier,
-              sub: live.pricingFreeSub ?? tier.sub,
-              button: live.pricingFreeButton ?? tier.button,
-              href: "#downloads",
-              dataAttr: "",
-            }
-          : tier,
-      ),
-    },
-    downloads: {
-      ...base.downloads,
-      kicker: live.downloadsKicker ?? base.downloads.kicker,
-      title: live.downloadsTitle ?? base.downloads.title,
-      body: live.downloadsBody ?? base.downloads.body,
-    },
-    signed: {
-      ...base.signed,
-      title: live.signedTitle ?? base.signed.title,
-      footnote: live.signedFootnote ?? base.signed.footnote,
-    },
-    languages: {
-      ...base.languages,
-      title: live.languagesTitle ?? base.languages.title,
-    },
-    workflow: {
-      ...base.workflow,
-      steps: base.workflow.steps.map(([number, title, body], index) =>
-        index === 0 ? [number, live.workflowFirstTitle ?? title, body] : [number, title, body],
-      ),
-    },
-    faq: {
-      ...base.faq,
-      items: base.faq.items.map(([question, answer], index) =>
-        questionIsAboutWindows(question)
-          ? [question, live.faqAnswer]
-          : index === 0 && live.voiceQuestion
-            ? [live.voiceQuestion, answer]
-            : [question, answer],
-      ),
-    },
-    footer: { ...base.footer, beta: live.footerBeta },
-  };
 }
 
 function localeByCode(code) {
@@ -2899,7 +2443,7 @@ function renderCompareSchema(page, currentCode) {
       downloadUrl: hasWindowsRelease ? [`${BASE_URL}/download/mac`, `${BASE_URL}/download/windows`] : `${BASE_URL}/download/mac`,
       softwareVersion: release.version,
       // The same product description as the homepage, not a summary of this comparison.
-      description: homeCopyForRender(currentCode).metaDescription,
+      description: HOME_COPY[currentCode].metaDescription,
       publisher: ORGANIZATION_REF,
       offers: localOffers(),
     },
@@ -3089,7 +2633,7 @@ function renderCompareCta(page, currentCode, copy) {
 
 function renderComparePage(page, currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   const copy = compareCopy(currentCode);
   const canonical = localizedCompareUrl(currentCode, page.slug);
   const title = currentCode === "en" ? page.title : localizedCompareTitle(page, copy);
@@ -3196,7 +2740,7 @@ function renderCompareHubSchema(currentCode) {
 
 function renderCompareHub(currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   const copy = compareHubCopy(currentCode);
   const guidance = COMPARE_HUB_GUIDANCE[currentCode];
   const canonical = localizedCompareUrl(currentCode);
@@ -3467,7 +3011,7 @@ function renderMacGuideSchema(currentCode = "en") {
 
 function renderMacModelGuidePage(currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   const copy = macAdvisorCopy(currentCode);
   return `<!doctype html>
 <html lang="${attr(locale.htmlLang)}">
@@ -3681,7 +3225,7 @@ function renderGuideTrial(code, platform, source) {
   if (platform === "both") return renderGuideTrialBoth(code, source);
   if (platform === "windows" && !hasWindowsRelease) return "";
   const c = COMPARE_HUB_GUIDANCE[code];
-  const t = homeCopyForRender(code);
+  const t = HOME_COPY[code];
   const button = platform === "windows" ? windowsDownloadCopy(code).exeButton : t.hero.download;
   return `<section class="doc-section guide-trial" data-guide-trial aria-labelledby="guide-trial-title">
         <h2 id="guide-trial-title">${html(c.title)}</h2>
@@ -3697,7 +3241,7 @@ function renderGuideTrial(code, platform, source) {
 
 function renderGuideTrialBoth(code, source) {
   const c = COMPARE_HUB_GUIDANCE[code];
-  const t = homeCopyForRender(code);
+  const t = HOME_COPY[code];
   const mac = `${source}_mac`;
   const windows = `${source}_windows`;
   return `<section class="doc-section guide-trial" data-guide-trial aria-labelledby="guide-trial-title">
@@ -3715,7 +3259,7 @@ function renderGuideTrialBoth(code, source) {
 
 function renderOfflineDictationGuidePage(currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   const copy = offlineDictationGuideCopy(currentCode);
   return `<!doctype html>
 <html lang="${attr(locale.htmlLang)}">
@@ -3813,7 +3357,7 @@ function renderFirstDictationLink(code) {
 function renderFirstDictationPage(code) {
   const c = FIRST_DICTATION_COPY[code];
   const locale = localeByCode(code);
-  const t = homeCopyForRender(code);
+  const t = HOME_COPY[code];
   const url = `${BASE_URL}${firstDictationPath(code)}`;
   const alternates = Object.keys(FIRST_DICTATION_COPY).map(alt => `<link rel="alternate" hreflang="${localeByCode(alt).htmlLang}" href="${BASE_URL}${firstDictationPath(alt)}" />`).join("\n");
   const schema = {
@@ -4006,7 +3550,7 @@ function renderLocalSpeechEvidence() {
 
 function renderBenchmarkMethodGuidePage() {
   const copy = BENCHMARK_METHOD_GUIDE_COPY;
-  const t = homeCopyForRender("en");
+  const t = HOME_COPY.en;
   const canonical = benchmarkMethodGuideUrl();
   return `<!doctype html>
 <html lang="en">
@@ -4217,7 +3761,7 @@ ${SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES.map(
 
 function renderSpeechToTextMacGuidePage() {
   const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
-  const t = homeCopyForRender("en");
+  const t = HOME_COPY.en;
   const canonical = speechToTextMacGuideUrl();
   return `<!doctype html>
 <html lang="en">
@@ -4399,7 +3943,7 @@ ${OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES.map(
 
 function renderOfflineDictationWindowsGuidePage() {
   const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
-  const t = homeCopyForRender("en");
+  const t = HOME_COPY.en;
   const canonical = offlineDictationWindowsGuideUrl();
   return `<!doctype html>
 <html lang="en">
@@ -4650,7 +4194,7 @@ function productFilmTracks(code = "en") {
 }
 
 function renderProductFilmPage() {
-  const t = homeCopyForRender("en");
+  const t = HOME_COPY.en;
   const title = "Watch Dictivo: Your Voice, On Your Device | 35-Second Demo";
   const url = `${BASE_URL}${PRODUCT_FILM.path}`;
   const schema = [productFilmSchema(), { "@context": "https://schema.org", "@type": "WebPage", url, name: title, description: PRODUCT_FILM.description, inLanguage: "en", mainEntity: { "@id": `${BASE_URL}/demo/#film` } }];
@@ -4702,7 +4246,7 @@ function renderProductFilmPage() {
 
 function renderMediaKitPage() {
   const copy = MEDIA_KIT_COPY;
-  const t = homeCopyForRender("en");
+  const t = HOME_COPY.en;
   const canonical = mediaKitUrl();
   return `<!doctype html>
 <html lang="en">
@@ -4952,7 +4496,7 @@ function renderDictationGuidePage(guide) {
   // 880px column on desktop; `offline-guide-page` raises it to 980px (the Japanese guide has no table).
   const mainClass = guide.mainClass ?? "doc-page offline-guide-page";
   const locale = localeByCode(code);
-  const t = homeCopyForRender(code);
+  const t = HOME_COPY[code];
   return `<!doctype html>
 <html lang="${attr(locale.htmlLang)}">
   <head>
@@ -5273,7 +4817,7 @@ function renderPricingSchema(code, copy, t) {
 function renderPricingPage(code = "en") {
   const copy = PRICING_PAGE_COPY[code];
   const locale = localeByCode(code);
-  const t = homeCopyForRender(code);
+  const t = HOME_COPY[code];
   const canonical = pricingUrl(code);
   const lastmod = pricingPageLastmod();
   // The plan cards sit outside .doc-section, whose paragraph, list and link rules would restyle
@@ -5391,7 +4935,7 @@ function heroPosterPreload() {
 
 function renderHome(currentCode) {
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
   const compareTeaser = `${renderCompareTeaser(currentCode)}\n\n`;
   const liveWindowsCopy = windowsDownloadCopy(currentCode);
@@ -5598,9 +5142,9 @@ function renderHome(currentCode) {
             </article>
 
             ${hasWindowsRelease ? `<article class="download-card" data-platform-card="windows">
-              <div class="card-topline"><span>${html(t.downloads.windowsTop[0])}</span><span>${html(hasWindowsRelease ? liveWindowsCopy.badge : t.downloads.windowsTop[1])}</span></div>
+              <div class="card-topline"><span>${html(t.downloads.windowsTop[0])}</span><span>${html(liveWindowsCopy.badge)}</span></div>
               <h3>${html(t.downloads.windowsTitle)}</h3>
-              <p>${html(hasWindowsRelease ? liveWindowsCopy.body : t.downloads.windowsBody)}</p>
+              <p>${html(liveWindowsCopy.body)}</p>
               <div class="download-actions">
                 <a class="button button-dark download-link" href="${attr(downloadUrl("windows", "downloads_windows_exe"))}"${downloadData("windows", "downloads_windows_exe")}>${html(liveWindowsCopy.exeButton)}</a>
                 ${renderWindowsInstallHelpLink(currentCode, "download")}
@@ -6469,7 +6013,7 @@ function renderNotFound() {
   </head>
   <body>
     <a class="skip-link" href="#not-found">Skip to content</a>
-    ${renderHeader("en", homeCopyForRender("en"))}
+    ${renderHeader("en", HOME_COPY.en)}
     <main class="doc-page" id="not-found">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dictivo</span>
       <h1>Page not found</h1>
@@ -6488,7 +6032,7 @@ function renderNotFound() {
 function renderTrustPage(sourcePage, currentCode = "en") {
   const page = localizedTrustPage(sourcePage, currentCode);
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   const ui = trustUiCopy(currentCode);
   const pageUrl = hasLocalizedTrustPage(sourcePage) ? localizedTrustUrl(currentCode, sourcePage.slug) : trustUrl(sourcePage.slug);
   const pageId = sourcePage.slug.replaceAll("/", "-");
@@ -6662,7 +6206,7 @@ function renderPrivacyProofSchema(currentCode, copy) {
 
 function renderPrivacyProofPage(currentCode = "en") {
   const locale = localeByCode(currentCode);
-  const t = homeCopyForRender(currentCode);
+  const t = HOME_COPY[currentCode];
   const copy = privacyProofCopy(currentCode);
   const sectionHtml = copy.sections
     .map(
@@ -7026,7 +6570,7 @@ function renderChangelog() {
   </head>
   <body>
     <a class="skip-link" href="#changelog">Skip to changelog</a>
-    ${renderHeader("en", homeCopyForRender("en"))}
+    ${renderHeader("en", HOME_COPY.en)}
     <main class="doc-page" id="changelog">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Release notes</span>
       <h1>Changelog</h1>
@@ -7213,7 +6757,7 @@ ${earlierReleaseNotes(release.version).map((notes) => {
 }
 
 function renderFooterOnly(currentCode = "en") {
-  const t = homeCopyForRender(currentCode) || homeCopyForRender("en");
+  const t = HOME_COPY[currentCode] || HOME_COPY.en;
   return `<footer class="site-footer">
       <div class="footer-meta">
         <a class="brand footer-brand" href="${attr(localePath(currentCode))}" aria-label="Dictivo home"><span class="brand-mark" aria-hidden="true">D</span><span class="brand-name">Dictivo</span></a>
@@ -7329,7 +6873,7 @@ function writeLegacyPrivateTombstones() {
 for (const map of [
   HOME_COPY, HOME_CONVERSION_COPY, FILM_COPY, COMPARISON_EVIDENCE_COPY, MAC_ADVISOR_COPY,
   OFFLINE_DICTATION_GUIDE_COPY, PRIVACY_PROOF_COPY, NATIVE_DEMO.summary, WINDOWS_DOWNLOAD_COPY,
-  WINDOWS_HOME_COPY, WINDOWS_UNAVAILABLE_HOME_COPY, SEO_HOME_COPY, TRUST_UI, LLMS_LABELS,
+  TRUST_UI, LLMS_LABELS,
   WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_ENTRY_COPY,
 ]) addHant(map);
 for (const page of TRUST_PAGES) if (page.locales?.zh) page.locales[HANT] = toHant(page.locales.zh);
