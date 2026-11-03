@@ -61,3 +61,12 @@ test("llms.txt maps each tracked question to an English page that exists", () =>
 test("the English llms.txt adds no locale URLs", () => {
   assert.doesNotMatch(llms(), /https:\/\/dictivo\.app\/(de|fr|es|it|nl|pt|zh|zh-hant|ja|ko)\//);
 });
+
+// Until 2026-11-03 the European llms.txt files dropped their accents ("fur", "dictee").
+test("localized llms.txt files keep their accents", () => {
+  const expected = { de: ["behält Audio auf dem Gerät", "Rückerstattungen"], fr: ["dictée", "Téléchargements"], es: ["Páginas importantes", "días"], it: ["Dictivo è", "più"], pt: ["Preços", "mantém o áudio"] };
+  for (const [code, phrases] of Object.entries(expected)) {
+    const text = readFileSync(`${dist}${code}/llms.txt`, "utf8");
+    for (const phrase of phrases) assert.ok(text.includes(phrase), `${code}/llms.txt: missing "${phrase}"`);
+  }
+});

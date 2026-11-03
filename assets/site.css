@@ -718,6 +718,15 @@ main section[id] {
   display: none;
 }
 
+/* site.js reveals the poster. Until then it keeps its space, so the hero does not jump. Without
+   scripting the <noscript> player takes the space instead. */
+@media (scripting: enabled) {
+  .hero-film:has(> template) > .hero-video-poster[hidden] {
+    display: block;
+    visibility: hidden;
+  }
+}
+
 .hero-video-poster {
   position: relative;
   overflow: hidden;
@@ -1856,7 +1865,7 @@ main section[id] {
   margin-top: 18px;
   padding: 18px 20px;
   border: 1px solid rgb(255 255 255 / 18%);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius);
   background: rgb(255 255 255 / 6%);
 }
 
@@ -1959,7 +1968,7 @@ main section[id] {
   color: var(--ink);
   padding: 0 42px 0 14px;
   font: inherit;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0;
   text-overflow: ellipsis;
 }
@@ -2540,6 +2549,15 @@ main section[id] {
   font-size: 15px;
   line-height: 1.65;
   max-width: 62ch;
+}
+
+/* Items without a number, such as the first-use guide's fixes, use the full width. */
+.faq-item summary:not(:has(.faq-index)) {
+  grid-template-columns: 1fr auto;
+}
+
+.faq-item:not(:has(.faq-index)) .faq-answer-body {
+  grid-column: 1 / -1;
 }
 
 .faq-answer-body a {

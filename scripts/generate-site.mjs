@@ -3372,7 +3372,7 @@ function renderMacAdvisorTool(currentCode = "en") {
               <div class="mac-advisor-fields">
                 <label>
                   <span>${html(copy.modelLabel)}</span>
-                  <select data-mac-family aria-label="${attr(copy.modelLabel)}">
+                  <select name="mac-family" data-mac-family>
                     ${MAC_ADVISOR_FAMILIES.map(
                       (family) =>
                         `<option value="${attr(family.id)}"${family.id === defaultFamily.id ? " selected" : ""}>${html(`${family.label} · ${family.examples}`)}</option>`,
@@ -3382,7 +3382,7 @@ function renderMacAdvisorTool(currentCode = "en") {
 
                 <label>
                   <span>${html(copy.memoryLabel)}</span>
-                  <select data-mac-memory aria-label="${attr(copy.memoryLabel)}">
+                  <select name="mac-memory" data-mac-memory>
                     ${memoryOptions}
                   </select>
                 </label>
@@ -3390,13 +3390,13 @@ function renderMacAdvisorTool(currentCode = "en") {
               <noscript><p class="mac-advisor-noscript">${html(copy.noScript)}</p></noscript>
             </div>
 
-            <article class="mac-advisor-result" aria-live="polite">
+            <article class="mac-advisor-result">
               <div class="mac-advisor-result-top">
                 <span>${html(copy.resultKicker)}</span>
                 <strong data-mac-fit>${html(result.fit)}</strong>
               </div>
               <h3 data-mac-title>${html(result.title)}</h3>
-              <p data-mac-summary>${html(result.summary)}</p>
+              <p data-mac-summary aria-live="polite">${html(result.summary)}</p>
               <dl class="mac-advisor-metrics">
                 ${renderMacAdvisorMetric(copy.tierLabel, result.tier, "data-mac-tier")}
                 ${renderMacAdvisorMetric(copy.dailyModelLabel, result.dailyModel, "data-mac-daily-model")}
@@ -5416,11 +5416,11 @@ function renderHome(currentCode) {
     ${renderSchema(currentCode, t)}
   </head>
   <body>
-    <a class="skip-link" href="#downloads">${html(t.skip)}</a>
+    <a class="skip-link" href="#main">${html(t.skip)}</a>
 
     ${renderHeader(currentCode, t)}
 
-    <main>
+    <main id="main">
       <section class="hero hero--film" id="demo" aria-labelledby="hero-title">
         <div class="hero-inner">
           <div class="hero-copy">
@@ -5951,53 +5951,53 @@ const LLMS_LABELS = {
   de: {
     title: "Dictivo",
     summary:
-      "Dictivo ist eine lokal ausgerichtete Diktier-App fur den Mac. Der lokale Modus behalt Audio auf dem Gerat; optionales Cloud Fast ist fur Situationen gedacht, in denen Geschwindigkeit wichtiger ist.",
+      "Dictivo ist eine lokal ausgerichtete Diktier-App für den Mac. Der lokale Modus behält Audio auf dem Gerät; optionales Cloud Fast ist für Situationen gedacht, in denen Geschwindigkeit wichtiger ist.",
     pagesTitle: "Wichtige Seiten",
-    audiencesTitle: "Fur wen Dictivo gedacht ist",
+    audiencesTitle: "Für wen Dictivo gedacht ist",
     factsTitle: "Wichtige Fakten",
     pageLabels: {
       home: "Startseite",
       pricing: "Preise",
-      privacy: "Privatsphare",
+      privacy: "Privatsphäre",
       cloudFast: "Cloud Fast",
       downloads: "Downloads",
       macGuide: "Mac-Modellberater",
       privacyProof: "Privacy proof",
       compare: "Alternativen vergleichen",
       contact: "Support kontaktieren",
-      refunds: "Ruckerstattungen",
+      refunds: "Rückerstattungen",
     },
     audiences: [
       "Menschen, die private Notizen, Kundenarbeit, Meeting-Notizen, Recherche oder lange Texte auf dem Mac diktieren.",
-      "Kaufer, die lokale Diktier-Apps, Cloud-Diktat, Datei-Transkription und Apples integrierte Diktierfunktion vergleichen.",
-      "Nutzer, die einen kleinen kostenlosen lokalen Modus, eine 14-tagige volle Local-Testphase und optionale Cloud-Fast-Minuten mochten.",
+      "Käufer, die lokale Diktier-Apps, Cloud-Diktat, Datei-Transkription und Apples integrierte Diktierfunktion vergleichen.",
+      "Nutzer, die einen kleinen kostenlosen lokalen Modus, eine 14-tägige volle Local-Testphase und optionale Cloud-Fast-Minuten möchten.",
     ],
     facts: [
-      "Der offentliche Mac-Download ist aktuell der wichtigste Launch-Pfad.",
-      "Windows-Builds konnen weiter Updates erhalten, aber neue offentliche Windows-Downloads bleiben verborgen, bis diese Version breit genug ist.",
+      "Der öffentliche Mac-Download ist aktuell der wichtigste Launch-Pfad.",
+      "Windows-Builds können weiter Updates erhalten, aber neue öffentliche Windows-Downloads bleiben verborgen, bis diese Version breit genug ist.",
       "Local und Cloud Fast sind getrennte Entscheidungen in der App.",
       "Support ist unter support@dictivo.app erreichbar.",
     ],
     windowsSummary:
-      "Dictivo ist eine lokal ausgerichtete Diktier-App fur Mac und Windows. Der lokale Modus behalt Audio auf dem Gerat; optionales Cloud Fast ist fur Situationen gedacht, in denen Geschwindigkeit wichtiger ist.",
+      "Dictivo ist eine lokal ausgerichtete Diktier-App für Mac und Windows. Der lokale Modus behält Audio auf dem Gerät; optionales Cloud Fast ist für Situationen gedacht, in denen Geschwindigkeit wichtiger ist.",
     windowsFacts: [
-      "Offentliche Downloads gibt es fur macOS und Windows x64.",
-      "Der Windows-Installer ist noch nicht Authenticode-signiert; SmartScreen kann daher einen Hinweis zeigen. SHA-256-Prufsummen stehen in downloads.json.",
+      "Öffentliche Downloads gibt es fur macOS und Windows x64.",
+      "Der Windows-Installer ist noch nicht Authenticode-signiert; SmartScreen kann daher einen Hinweis zeigen. SHA-256-Prüfsummen stehen in downloads.json.",
     ],
   },
   fr: {
     title: "Dictivo",
     summary:
-      "Dictivo est une app de dictee Mac pensee d'abord pour le local. Le mode Local garde l'audio sur l'appareil; Cloud Fast reste optionnel quand la vitesse compte davantage.",
+      "Dictivo est une app de dictée Mac pensée d'abord pour le local. Le mode Local garde l'audio sur l'appareil; Cloud Fast reste optionnel quand la vitesse compte davantage.",
     pagesTitle: "Pages importantes",
-    audiencesTitle: "A qui s'adresse Dictivo",
-    factsTitle: "Points cles",
+    audiencesTitle: "À qui s'adresse Dictivo",
+    factsTitle: "Points clés",
     pageLabels: {
       home: "Accueil",
       pricing: "Tarifs",
-      privacy: "Confidentialite",
+      privacy: "Confidentialité",
       cloudFast: "Cloud Fast",
-      downloads: "Telechargements",
+      downloads: "Téléchargements",
       macGuide: "Guide des Mac",
       privacyProof: "Preuve de confidentialite",
       compare: "Comparer les alternatives",
@@ -6005,29 +6005,29 @@ const LLMS_LABELS = {
       refunds: "Remboursements",
     },
     audiences: [
-      "Les personnes qui dictent des notes privees, du travail client, des comptes rendus, de la recherche ou des textes longs sur Mac.",
-      "Les acheteurs qui comparent les apps de dictee locale, les apps cloud, les outils de transcription de fichiers et la dictee integree d'Apple.",
+      "Les personnes qui dictent des notes privées, du travail client, des comptes rendus, de la recherche ou des textes longs sur Mac.",
+      "Les acheteurs qui comparent les apps de dictée locale, les apps cloud, les outils de transcription de fichiers et la dictée intégrée d'Apple.",
       "Les utilisateurs qui veulent un petit mode local gratuit, un essai Local complet de 14 jours et des minutes Cloud Fast optionnelles.",
     ],
     facts: [
-      "Le telechargement Mac public est le principal canal de lancement aujourd'hui.",
-      "Les versions Windows peuvent recevoir les mises a jour, mais les nouveaux telechargements Windows publics restent caches jusqu'a une disponibilite plus large.",
-      "Local et Cloud Fast sont des choix separes dans l'app.",
-      "Le support est disponible a support@dictivo.app.",
+      "Le téléchargement Mac public est le principal canal de lancement aujourd'hui.",
+      "Les versions Windows peuvent recevoir les mises à jour, mais les nouveaux téléchargements Windows publics restent cachés jusqu'à une disponibilité plus large.",
+      "Local et Cloud Fast sont des choix séparés dans l'app.",
+      "Le support est disponible à support@dictivo.app.",
     ],
     windowsSummary:
-      "Dictivo est une app de dictee pensee d'abord pour le local, sur Mac et Windows. Le mode Local garde l'audio sur l'appareil; Cloud Fast reste optionnel quand la vitesse compte davantage.",
+      "Dictivo est une app de dictée pensée d'abord pour le local, sur Mac et Windows. Le mode Local garde l'audio sur l'appareil; Cloud Fast reste optionnel quand la vitesse compte davantage.",
     windowsFacts: [
-      "Des telechargements publics sont disponibles pour macOS et Windows x64.",
-      "L'installateur Windows n'est pas encore signe Authenticode; SmartScreen peut afficher un avertissement. Les sommes SHA-256 sont publiees dans downloads.json.",
+      "Des téléchargements publics sont disponibles pour macOS et Windows x64.",
+      "L'installateur Windows n'est pas encore signé Authenticode; SmartScreen peut afficher un avertissement. Les sommes SHA-256 sont publiées dans downloads.json.",
     ],
   },
   es: {
     title: "Dictivo",
     summary:
-      "Dictivo es una app de dictado para Mac con prioridad local. El modo Local mantiene el audio en el dispositivo; Cloud Fast es opcional cuando la velocidad importa mas.",
-    pagesTitle: "Paginas importantes",
-    audiencesTitle: "Para quien es Dictivo",
+      "Dictivo es una app de dictado para Mac con prioridad local. El modo Local mantiene el audio en el dispositivo; Cloud Fast es opcional cuando la velocidad importa más.",
+    pagesTitle: "Páginas importantes",
+    audiencesTitle: "Para quién es Dictivo",
     factsTitle: "Datos clave",
     pageLabels: {
       home: "Inicio",
@@ -6035,36 +6035,36 @@ const LLMS_LABELS = {
       privacy: "Privacidad",
       cloudFast: "Cloud Fast",
       downloads: "Descargas",
-      macGuide: "Guia de modelos Mac",
+      macGuide: "Guía de modelos Mac",
       privacyProof: "Prueba de privacidad",
       compare: "Comparar alternativas",
       contact: "Contactar soporte",
       refunds: "Reembolsos",
     },
     audiences: [
-      "Personas que dictan notas privadas, trabajo de clientes, notas de reuniones, investigacion o textos largos en Mac.",
-      "Compradores que comparan apps de dictado local, dictado en la nube, transcripcion de archivos y Dictado de Apple.",
-      "Usuarios que quieren un modo local pequeno gratis, una prueba Local completa de 14 dias y minutos opcionales de Cloud Fast.",
+      "Personas que dictan notas privadas, trabajo de clientes, notas de reuniones, investigación o textos largos en Mac.",
+      "Compradores que comparan apps de dictado local, dictado en la nube, transcripción de archivos y Dictado de Apple.",
+      "Usuarios que quieren un modo local pequeño gratis, una prueba Local completa de 14 días y minutos opcionales de Cloud Fast.",
     ],
     facts: [
-      "La descarga publica para Mac es el canal principal de lanzamiento hoy.",
-      "Las builds de Windows pueden recibir actualizaciones, pero las nuevas descargas publicas de Windows siguen ocultas hasta que esa version este lista para mas usuarios.",
+      "La descarga pública para Mac es el canal principal de lanzamiento hoy.",
+      "Las builds de Windows pueden recibir actualizaciones, pero las nuevas descargas públicas de Windows siguen ocultas hasta que esa versión esté lista para más usuarios.",
       "Local y Cloud Fast son decisiones separadas dentro de la app.",
-      "El soporte esta disponible en support@dictivo.app.",
+      "El soporte está disponible en support@dictivo.app.",
     ],
     windowsSummary:
-      "Dictivo es una app de dictado de escritorio con prioridad local para Mac y Windows. El modo Local mantiene el audio en el dispositivo; Cloud Fast es opcional cuando la velocidad importa mas.",
+      "Dictivo es una app de dictado de escritorio con prioridad local para Mac y Windows. El modo Local mantiene el audio en el dispositivo; Cloud Fast es opcional cuando la velocidad importa más.",
     windowsFacts: [
-      "Hay descargas publicas para macOS y Windows x64.",
-      "El instalador de Windows aun no tiene firma Authenticode; SmartScreen puede mostrar un aviso. Las sumas SHA-256 estan en downloads.json.",
+      "Hay descargas públicas para macOS y Windows x64.",
+      "El instalador de Windows aún no tiene firma Authenticode; SmartScreen puede mostrar un aviso. Las sumas SHA-256 están en downloads.json.",
     ],
   },
   it: {
     title: "Dictivo",
     summary:
-      "Dictivo e un'app di dettatura per Mac con approccio local-first. Il modo Local mantiene l'audio sul dispositivo; Cloud Fast e opzionale quando la velocita conta di piu.",
+      "Dictivo è un'app di dettatura per Mac con approccio local-first. Il modo Local mantiene l'audio sul dispositivo; Cloud Fast è opzionale quando la velocità conta di più.",
     pagesTitle: "Pagine importanti",
-    audiencesTitle: "Per chi e Dictivo",
+    audiencesTitle: "Per chi è Dictivo",
     factsTitle: "Fatti chiave",
     pageLabels: {
       home: "Home",
@@ -6081,19 +6081,19 @@ const LLMS_LABELS = {
     audiences: [
       "Persone che dettano note private, lavoro per clienti, appunti di riunioni, ricerca o testi lunghi su Mac.",
       "Acquirenti che confrontano app di dettatura locale, app cloud, strumenti di trascrizione file e Dettatura di Apple.",
-      "Utenti che vogliono una piccola modalita locale gratuita, una prova Local completa di 14 giorni e minuti Cloud Fast opzionali.",
+      "Utenti che vogliono una piccola modalità locale gratuita, una prova Local completa di 14 giorni e minuti Cloud Fast opzionali.",
     ],
     facts: [
-      "Il download pubblico per Mac e oggi il principale percorso di lancio.",
-      "Le build Windows possono ricevere aggiornamenti, ma i nuovi download pubblici per Windows restano nascosti finche la versione non sara pronta per un lancio piu ampio.",
+      "Il download pubblico per Mac è oggi il principale percorso di lancio.",
+      "Le build Windows possono ricevere aggiornamenti, ma i nuovi download pubblici per Windows restano nascosti finché la versione non sarà pronta per un lancio più ampio.",
       "Local e Cloud Fast sono scelte separate nell'app.",
-      "Il supporto e disponibile a support@dictivo.app.",
+      "Il supporto è disponibile a support@dictivo.app.",
     ],
     windowsSummary:
-      "Dictivo e un'app di dettatura desktop con priorita locale per Mac e Windows. La modalita Local tiene l'audio sul dispositivo; Cloud Fast e opzionale quando la velocita conta di piu.",
+      "Dictivo è un'app di dettatura desktop con priorità locale per Mac e Windows. La modalità Local tiene l'audio sul dispositivo; Cloud Fast è opzionale quando la velocità conta di più.",
     windowsFacts: [
       "I download pubblici sono disponibili per macOS e Windows x64.",
-      "L'installer di Windows non e ancora firmato Authenticode; SmartScreen puo mostrare un avviso. I checksum SHA-256 sono in downloads.json.",
+      "L'installer di Windows non è ancora firmato Authenticode; SmartScreen può mostrare un avviso. I checksum SHA-256 sono in downloads.json.",
     ],
   },
   nl: {
@@ -6116,7 +6116,7 @@ const LLMS_LABELS = {
       refunds: "Terugbetalingen",
     },
     audiences: [
-      "Mensen die prive-notities, klantwerk, vergadernotities, onderzoek of lange teksten op Mac dicteren.",
+      "Mensen die privénotities, klantwerk, vergadernotities, onderzoek of lange teksten op Mac dicteren.",
       "Kopers die lokale dicteerapps, cloud-dictaat, bestandstranscriptie en Apple's ingebouwde Dictation vergelijken.",
       "Gebruikers die een kleine gratis lokale modus, een volledige Local-proef van 14 dagen en optionele Cloud Fast-minuten willen.",
     ],
@@ -6136,13 +6136,13 @@ const LLMS_LABELS = {
   pt: {
     title: "Dictivo",
     summary:
-      "Dictivo e um app de ditado para Mac com prioridade local. O modo Local mantem o audio no dispositivo; Cloud Fast e opcional quando velocidade importa mais.",
-    pagesTitle: "Paginas importantes",
-    audiencesTitle: "Para quem e o Dictivo",
+      "Dictivo é um app de ditado para Mac com prioridade local. O modo Local mantém o áudio no dispositivo; Cloud Fast é opcional quando velocidade importa mais.",
+    pagesTitle: "Páginas importantes",
+    audiencesTitle: "Para quem é o Dictivo",
     factsTitle: "Fatos principais",
     pageLabels: {
       home: "Início",
-      pricing: "Precos",
+      pricing: "Preços",
       privacy: "Privacidade",
       cloudFast: "Cloud Fast",
       downloads: "Downloads",
@@ -6153,21 +6153,21 @@ const LLMS_LABELS = {
       refunds: "Reembolsos",
     },
     audiences: [
-      "Pessoas que ditam notas privadas, trabalho de clientes, notas de reuniao, pesquisa ou textos longos no Mac.",
-      "Compradores que comparam apps de ditado local, ditado na nuvem, transcricao de arquivos e o Dictation da Apple.",
-      "Usuarios que querem um pequeno modo local gratis, um teste Local completo de 14 dias e minutos Cloud Fast opcionais.",
+      "Pessoas que ditam notas privadas, trabalho de clientes, notas de reunião, pesquisa ou textos longos no Mac.",
+      "Compradores que comparam apps de ditado local, ditado na nuvem, transcrição de arquivos e o Dictation da Apple.",
+      "Usuários que querem um pequeno modo local grátis, um teste Local completo de 14 dias e minutos Cloud Fast opcionais.",
     ],
     facts: [
-      "O download publico para Mac e hoje o principal caminho de lancamento.",
-      "Builds do Windows ainda podem receber atualizacoes, mas novos downloads publicos do Windows ficam ocultos ate essa versao estar pronta para um lancamento mais amplo.",
-      "Local e Cloud Fast sao escolhas separadas dentro do app.",
-      "O suporte esta disponivel em support@dictivo.app.",
+      "O download público para Mac é hoje o principal caminho de lançamento.",
+      "Builds do Windows ainda podem receber atualizações, mas novos downloads públicos do Windows ficam ocultos até essa versão estar pronta para um lançamento mais amplo.",
+      "Local e Cloud Fast são escolhas separadas dentro do app.",
+      "O suporte está disponível em support@dictivo.app.",
     ],
     windowsSummary:
-      "Dictivo e um app de ditado para desktop com prioridade local, para Mac e Windows. O modo Local mantem o audio no dispositivo; Cloud Fast e opcional quando a velocidade importa mais.",
+      "Dictivo é um app de ditado para desktop com prioridade local, para Mac e Windows. O modo Local mantém o áudio no dispositivo; Cloud Fast é opcional quando a velocidade importa mais.",
     windowsFacts: [
-      "Ha downloads publicos para macOS e Windows x64.",
-      "O instalador do Windows ainda nao tem assinatura Authenticode; o SmartScreen pode alertar. Os checksums SHA-256 estao em downloads.json.",
+      "Há downloads públicos para macOS e Windows x64.",
+      "O instalador do Windows ainda não tem assinatura Authenticode; o SmartScreen pode alertar. Os checksums SHA-256 estão em downloads.json.",
     ],
   },
   zh: {
@@ -6468,6 +6468,7 @@ function renderNotFound() {
     <script src="/assets/site.js?v=local" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#not-found">Skip to content</a>
     ${renderHeader("en", homeCopyForRender("en"))}
     <main class="doc-page" id="not-found">
       <span class="doc-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dictivo</span>

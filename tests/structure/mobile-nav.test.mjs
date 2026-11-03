@@ -86,8 +86,9 @@ function fakeHeader() {
   toggle.getAttribute = (name) => toggle.attributes[name];
   toggle.setAttribute = (name, value) => { toggle.attributes[name] = String(value); };
   toggle.focus = () => { toggle.focused = true; };
-  const link = { closest: (selector) => (selector === "a" ? link : null) };
-  const nav = { listeners: {} };
+  const link = { focused: false, closest: (selector) => (selector === "a" ? link : null) };
+  link.focus = () => { link.focused = true; };
+  const nav = { listeners: {}, querySelector: (selector) => (selector === "a" ? link : null) };
   nav.addEventListener = on(nav);
   const languageMenu = { open: false, listeners: {} };
   languageMenu.addEventListener = on(languageMenu);
@@ -152,4 +153,44 @@ test("the menu and the language menu never stay open together", () => {
   h.languageMenu.open = true;
   h.fire(h.languageMenu, "toggle");
   assert.equal(h.isOpen(), false, "opening the language menu closes the menu");
+});
+
+// The links come before the button in the page, so Tab from the open button would leave the header.
+test("Tab from the open menu button moves to the first link", () => {
+  const h = fakeHeader();
+  runInitSiteNav(h.header, h.documentStub);
+  let prevented = false;
+  const tab = (shiftKey = false) => ({ key: "Tab", shiftKey, preventDefault: () => { prevented = true; } });
+
+  h.fire(h.toggle, "keydown", tab());
+  assert.equal(h.link.focused, false, "a closed menu keeps the normal Tab order");
+  h.fire(h.toggle, "click");
+  h.fire(h.toggle, "keydown", tab(true));
+  assert.equal(h.link.focused, false, "Shift+Tab keeps the normal order");
+  h.fire(h.toggle, "keydown", tab());
+  assert.equal(h.link.focused, true);
+  assert.equal(prevented, true);
+});
+
+test("Escape and a click outside close the language menu; Escape returns focus", () => {
+  const script = readFileSync(new URL("../../assets/site.js", import.meta.url), "utf8");
+  const start = script.indexOf("\nfunction initLanguageMenu(");
+  assert.ok(start >= 0, "site.js must define a top-level function initLanguageMenu(menu)");
+  const listeners = {};
+  const documentStub = { addEventListener: (type, fn) => { (listeners[type] ??= []).push(fn); } };
+  const fire = (type, event) => (listeners[type] ?? []).forEach((fn) => fn(event));
+  const summary = { focused: false, focus() { this.focused = true; } };
+  const menu = { open: true, querySelector: () => summary, contains: (node) => node === summary };
+  const context = vm.createContext({ document: documentStub });
+  vm.runInContext(script.slice(start, script.indexOf("\n}\n", start) + 3), context);
+  context.initLanguageMenu(menu);
+
+  fire("click", { target: summary });
+  assert.equal(menu.open, true, "a click inside keeps it open");
+  fire("keydown", { key: "Escape" });
+  assert.equal(menu.open, false);
+  assert.equal(summary.focused, true);
+  menu.open = true;
+  fire("click", { target: {} });
+  assert.equal(menu.open, false);
 });
