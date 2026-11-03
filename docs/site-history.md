@@ -3,6 +3,16 @@
 Dated change notes, newest first. README.md held them until 2026-11-03.
 A note records what changed on its date. README.md describes current behavior.
 
+
+## Dead CSS removed — 2026-11-04
+
+`site.css` went from 4,108 to 3,274 lines. 61 classes that no built page and no script used
+(the old cinematic hero, the Cloud Fast landing section, product tabs, release strip and others)
+lost their 102 rules; 15 selector lists lost their dead members. Proof: every removed selector
+contains one of those classes, none was added, and computed styles of every element matched
+before and after on 12 pages at 1280 px and 375 px. `tests/structure/css-classes.test.mjs` now
+fails when site.css styles a class nothing uses. `tier-price-was` (introductory offer) and the
+`locale-suggestion` classes (injected by the Function) are allowed by name.
 ## Source handoff panel kept and themed — 2026-11-04
 
 The 2026-11-03 review suggested deleting the panel that appears after a download click (G11).
