@@ -143,7 +143,7 @@ test("the sitemap lists /pricing/ with a date no older than the last price chang
 test("English pricing links lead to /pricing/; other languages keep their homepage section", () => {
   assert.ok(header(read("index.html")).includes('href="/pricing/"'), "English header");
   assert.ok(footer(read("index.html")).includes('href="/pricing/"'), "English footer");
-  assert.ok(read("index.html").includes('<a class="button button-outline" href="#pricing">'), "the hero button stays on the homepage");
+  assert.match(read("index.html"), /<section[^>]*id="pricing"/, "the homepage keeps its pricing section");
   assert.ok(header(read("de/index.html")).includes('href="/de/#pricing"'), "German header");
   assert.ok(!read("de/index.html").includes('href="/pricing/"'), "German homepage");
   const trial = read("guides/offline-dictation-on-mac/index.html").match(/<section[^>]*data-guide-trial[^>]*>[\s\S]*?<\/section>/)[0];

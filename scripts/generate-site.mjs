@@ -2158,13 +2158,11 @@ function renderLanguageMenu(currentCode, t, hrefForLocale = (locale) => locale.p
     const active = locale.code === currentCode ? ' aria-current="page"' : "";
     return `<a href="${attr(languageChoiceHref(hrefForLocale(locale), locale.code))}" lang="${attr(locale.htmlLang)}" hreflang="${attr(locale.htmlLang)}"${active}>
               <span>${html(locale.nativeName)}</span>
-              <small>${html(locale.name)}</small>
             </a>`;
   }).join("\n");
 
   return `<details class="language-menu">
             <summary aria-label="${attr(t.language.aria)}">
-              <span class="language-label">${html(t.language.label)}</span>
               <strong>${html(current.nativeName)}</strong>
             </summary>
             <div class="language-menu-panel">
@@ -2181,10 +2179,8 @@ function renderHeader(currentCode, t, options = {}) {
         <span class="brand-name">Dictivo</span>
       </a>
       <nav class="nav-links" id="site-nav" aria-label="Site navigation">
-        <a href="${attr(hash("privacy"))}">${html(t.nav.privacy)}</a>
         <a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>
         <a href="${attr(macGuidePath(currentCode))}">${html(macAdvisorCopy(currentCode).navLabel)}</a>
-        <a href="${attr(hash("downloads"))}">${html(t.nav.downloads)}</a>
       </nav>
       <div class="header-actions">
         ${renderLanguageMenu(currentCode, t, options.hrefForLocale)}
@@ -2584,9 +2580,8 @@ function renderCompareFaq(page, copy) {
             <div class="compare-faq-list">
 ${faqs
   .map(
-    ([question, answer], index) => `              <details class="faq-item">
+    ([question, answer]) => `              <details class="faq-item">
                 <summary>
-                  <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                   <span class="faq-question">${html(question)}</span>
                   <span class="faq-toggle" aria-hidden="true">+</span>
                 </summary>
@@ -3047,9 +3042,8 @@ function renderMacModelGuidePage(currentCode = "en") {
         <div class="faq-grid mac-guide-faq">
           ${copy.faqItems
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -3307,9 +3301,8 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
         <div class="faq-grid">
           ${copy.faqs
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -3626,9 +3619,8 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
         <div class="faq-grid">
           ${copy.faqs
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -3814,9 +3806,8 @@ function renderSpeechToTextMacGuidePage() {
         <div class="faq-grid">
           ${copy.faqs
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -3995,9 +3986,8 @@ function renderOfflineDictationWindowsGuidePage() {
         <div class="faq-grid">
           ${copy.faqs
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -4325,9 +4315,8 @@ function renderMediaKitPage() {
         <div class="faq-grid">
           ${copy.faqs
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -4774,9 +4763,8 @@ function renderFaqGrid(faqs) {
   return `<div class="faq-grid">
           ${faqs
             .map(
-              ([question, answer], index) => `<details class="faq-item">
+              ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -5002,13 +4990,6 @@ function renderHome(currentCode) {
             <figcaption><a href="${PRODUCT_FILM.path}">${html(FILM_COPY[currentCode].link)}</a><br><a href="${PRODUCT_FILM.credits}">${html(FILM_COPY[currentCode].credit)}</a></figcaption>
           </figure>
 
-          <div class="hero-support">
-            <div class="hero-actions" aria-label="Download Dictivo">
-              <p class="hero-offer">${html(conversion.offer)}</p>
-              <a class="button button-outline" href="#pricing">${html(t.hero.pricing)}</a>
-              <p class="hero-note">${html(t.hero.windows)}</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -5162,9 +5143,8 @@ ${compareTeaser}
           <div class="faq-grid">
             ${t.faq.items
               .map(
-                ([question, answer], index) => `<details class="faq-item">
+                ([question, answer]) => `<details class="faq-item">
               <summary>
-                <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
                 <span class="faq-question">${html(question)}</span>
                 <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
@@ -6072,9 +6052,8 @@ function renderTrustPage(sourcePage, currentCode = "en") {
         <div class="faq-grid">
         ${page.faqs
           .map(
-            ([question, answer], index) => `<details class="faq-item">
+            ([question, answer]) => `<details class="faq-item">
           <summary>
-            <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
             <span class="faq-question">${html(question)}</span>
             <span class="faq-toggle" aria-hidden="true">+</span>
           </summary>
@@ -6200,9 +6179,8 @@ function renderPrivacyProofPage(currentCode = "en") {
     .join("\n\n      ");
   const faqHtml = copy.faqs
     .map(
-      ([question, answer], index) => `<details class="faq-item">
+      ([question, answer]) => `<details class="faq-item">
           <summary>
-            <span class="faq-index">${String(index + 1).padStart(2, "0")}</span>
             <span class="faq-question">${html(question)}</span>
             <span class="faq-toggle" aria-hidden="true">+</span>
           </summary>

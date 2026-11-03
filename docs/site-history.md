@@ -3,6 +3,18 @@
 Dated change notes, newest first. README.md held them until 2026-11-03.
 A note records what changed on its date. README.md describes current behavior.
 
+## Header, hero and FAQ chrome — 2026-11-04
+
+Second chrome batch from the 2026-11-03 review. **Hero:** the second action group under the film
+(offer line, "See pricing" button, "Mac and Windows x64 are available now") is gone; the price is
+in the pricing section and both download buttons sit above the film. The three hero steps keep
+their text and lose their numbers. **Header:** the nav keeps Pricing and the Mac guide. The
+homepage anchors Privacy and Downloads are gone; the header download button already goes to
+`#downloads`. No "Compare" item was added, because that needs new strings in 10 languages. The
+language menu drops the visible "Language" label (the summary keeps its aria-label) and the
+English name under each language. **FAQ:** the 01–09 numbers are gone on every page; questions
+and answers use the full width.
+
 ## Homepage chrome trim — 2026-11-03
 
 The site review (2026-11-03) found the homepage said the same things many times. This batch cut
