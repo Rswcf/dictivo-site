@@ -73,17 +73,24 @@ if (urls.length === 0) {
   }
 
   console.log(`Submitting ${urls.length} URLs to ${ENDPOINT}; public key file verified. ${scope}`);
-  const response = await fetch(ENDPOINT, {
-    method: "POST",
-    signal: AbortSignal.timeout(30000),
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify({
-      host: HOST,
-      key: KEY,
-      keyLocation,
-      urlList: urls,
-    }),
-  });
+  const body = JSON.stringify({ host: HOST, key: KEY, keyLocation, urlList: urls });
+  // The endpoint closed the socket once mid-deploy (2026-11-04). The next deploy diffs against the
+  // new live sitemap and would never resend these URLs, so a network error gets two more tries.
+  let response;
+  for (let attempt = 1; !response; attempt += 1) {
+    try {
+      response = await fetch(ENDPOINT, {
+        method: "POST",
+        signal: AbortSignal.timeout(30000),
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body,
+      });
+    } catch (error) {
+      if (attempt === 3) throw error;
+      console.log(`IndexNow attempt ${attempt} failed (${error.cause?.code || error.name}); retrying.`);
+      await new Promise((done) => setTimeout(done, attempt * 2000));
+    }
+  }
 
   const status = response.status === 200 ? "accepted" : response.status === 202 ? "received (key validation pending)" : "rejected";
   const result = `IndexNow ${status} ${urls.length} URLs via ${ENDPOINT}: HTTP ${response.status}.`;

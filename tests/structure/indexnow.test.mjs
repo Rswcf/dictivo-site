@@ -8,7 +8,7 @@ import { join } from "node:path";
 // Exercise the CLI with a fake transport: no search-engine notifications in tests.
 // `previous` is the live sitemap saved before deployment: a string is written to a
 // file, "missing" names a file that does not exist, and undefined leaves it unset.
-function runSubmission({ keyStatus = 200, keyBody, submitStatus = 200, previous } = {}) {
+function runSubmission({ keyStatus = 200, keyBody, submitStatus = 200, previous, networkErrors = 0 } = {}) {
   const directory = mkdtempSync(join(tmpdir(), "dictivo-indexnow-"));
   const summary = join(directory, "summary.md");
   const previousPath = join(directory, "live-sitemap.xml");
@@ -25,7 +25,8 @@ function runSubmission({ keyStatus = 200, keyBody, submitStatus = 200, previous 
           assert.equal(url, 'https://dictivo.app/a466589ed8677749e2b7fdd18c7ddcf6.txt');
           return new Response(${JSON.stringify(keyBody ?? key)}, { status: ${keyStatus} });
         }
-        assert.equal(requests, 2, 'No retry or extra provider submission');
+        if (requests <= 1 + ${networkErrors}) throw new TypeError('fetch failed', { cause: { code: 'UND_ERR_SOCKET' } });
+        assert.equal(requests, 2 + ${networkErrors}, 'No retry after an HTTP response, no extra provider submission');
         assert.equal(url, 'https://yandex.com/indexnow');
         assert.equal(options.method, 'POST');
         const payload = JSON.parse(options.body);
@@ -55,6 +56,16 @@ test("IndexNow accepted response records the actual provider and status", () => 
   const result = runSubmission();
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.summary, /accepted \d+ URLs via https:\/\/yandex.com\/indexnow: HTTP 200/);
+});
+
+test("IndexNow retries a dropped connection twice, then fails the CLI", () => {
+  const recovered = runSubmission({ networkErrors: 2 });
+  assert.equal(recovered.status, 0, recovered.stderr);
+  assert.equal((recovered.stdout.match(/IndexNow attempt \d failed \(UND_ERR_SOCKET\); retrying\./g) || []).length, 2);
+  assert.match(recovered.summary, /accepted \d+ URLs/);
+  const failed = runSubmission({ networkErrors: 3 });
+  assert.notEqual(failed.status, 0);
+  assert.equal(failed.urlList, null);
 });
 
 test("IndexNow pending verification is not reported as accepted", () => {
