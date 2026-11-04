@@ -809,12 +809,7 @@ main section[id] {
 }
 
 .pricing-section,
-.mac-advisor-section,
-.download-band,
-.signed-strip,
-.channel-section,
-.faq-section,
-.compare-teaser {
+.download-band {
   background:
     radial-gradient(circle at center, rgb(255 255 255 / 7%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
     var(--canvas);
@@ -822,40 +817,6 @@ main section[id] {
 }
 
 .pricing-section {
-  border-top: 1px solid var(--hairline);
-}
-
-.mac-advisor-section {
-  border-top: 1px solid var(--hairline);
-  background:
-    linear-gradient(180deg, rgb(125 211 199 / 8%), transparent 38%),
-    radial-gradient(circle at center, rgb(255 255 255 / 7%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
-    var(--canvas-deep);
-}
-
-.compare-teaser {
-  border-top: 1px solid var(--hairline);
-  background:
-    linear-gradient(180deg, rgb(125 211 199 / 7%), transparent 34%),
-    radial-gradient(circle at center, rgb(255 255 255 / 7%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
-    var(--canvas-deep);
-}
-
-.signed-strip {
-  background:
-    radial-gradient(circle at center, rgb(255 255 255 / 6%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
-    var(--canvas-deep);
-  border-block: 1px solid var(--hairline);
-  padding-block: clamp(56px, 7vw, 96px);
-}
-
-.channel-section {
-  background:
-    radial-gradient(circle at center, rgb(255 255 255 / 6%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
-    var(--canvas-deep);
-}
-
-.faq-section {
   border-top: 1px solid var(--hairline);
 }
 
@@ -1263,13 +1224,6 @@ main section[id] {
  * Mac advisor                                                 *
  * ---------------------------------------------------------- */
 
-.mac-advisor-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-  align-items: stretch;
-  gap: clamp(28px, 5vw, 64px);
-}
-
 .mac-advisor-tool {
   display: grid;
   grid-template-columns: minmax(240px, 0.86fr) minmax(0, 1.14fr);
@@ -1617,147 +1571,13 @@ main section[id] {
  * Signed strip                                                *
  * ---------------------------------------------------------- */
 
-.signed-head {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 32px;
-  max-width: 720px;
-}
-
-.signed-head h2 {
-  margin: 0;
-  font-family: var(--display);
-  font-size: clamp(28px, 3.2vw, 42px);
-  font-weight: 850;
-  line-height: 1.02;
-  letter-spacing: -0.05em;
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-.signed-grid {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.signed-cell {
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  padding: 24px 24px 22px;
-}
-
-.signed-cell-label {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.signed-cell-value {
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: clamp(17px, 1.7vw, 21px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.012em;
-}
-
-.signed-cell-value code {
-  font-family: var(--mono);
-  font-size: 0.82em;
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-
-.signed-footnote {
-  margin: 24px 0 0;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-
-.signed-footnote a {
-  color: var(--ink);
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-.signed-footnote a:hover {
-  color: var(--accent);
-}
-
 /* ---------------------------------------------------------- *
  * Distribution                                                *
  * ---------------------------------------------------------- */
 
-.language-section {
-  border-block: 1px solid var(--hairline);
-}
-
-.locale-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-}
-
-.locale-list a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  border: 1px solid rgb(255 255 255 / 14%);
-  border-radius: var(--radius-pill);
-  background: rgb(255 255 255 / 5%);
-  padding: 9px 14px;
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 750;
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.locale-list a:hover {
-  border-color: rgb(125 211 199 / 42%);
-  background: rgb(125 211 199 / 11%);
-  transform: translateY(-1px);
-}
-
-.language-note {
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
 /* ---------------------------------------------------------- *
  * FAQ                                                         *
  * ---------------------------------------------------------- */
-
-.faq-shell {
-  max-width: 980px;
-}
-
-.faq-shell .section-heading {
-  margin: 0 0 36px;
-  max-width: none;
-}
 
 .faq-grid {
   display: grid;
@@ -2487,50 +2307,6 @@ main section[id] {
   margin-top: auto;
 }
 
-.compare-teaser-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 28px;
-}
-
-.compare-teaser-grid a {
-  min-height: 142px;
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 8px;
-  background: rgb(20 28 27 / 72%);
-  padding: 16px;
-  text-decoration: none;
-  transition:
-    border-color 160ms ease,
-    background-color 160ms ease,
-    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.compare-teaser-grid a:hover {
-  border-color: rgb(125 211 199 / 42%);
-  background: rgb(125 211 199 / 8%);
-  transform: translateY(-2px);
-}
-
-.compare-teaser-grid span {
-  display: block;
-  color: var(--accent);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  font-weight: 650;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.compare-teaser-grid strong {
-  display: block;
-  margin-top: 18px;
-  color: var(--ink);
-  font-size: 15px;
-  line-height: 1.28;
-}
-
 /* ---------------------------------------------------------- *
  * Footer                                                      *
  * ---------------------------------------------------------- */
@@ -2615,52 +2391,6 @@ main section[id] {
  * Cloud Fast upgrade page                                    *
  * ---------------------------------------------------------- */
 
-.cloud-flow {
-  padding-block: 86px;
-}
-
-.cloud-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 38px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.cloud-steps li {
-  min-height: 260px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-lg);
-  background: rgb(10 17 16 / 66%);
-  padding: 26px;
-}
-
-.cloud-steps span {
-  display: inline-grid;
-  width: 44px;
-  height: 44px;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 14px;
-  color: #f0c77e;
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.cloud-steps strong {
-  display: block;
-  margin-top: 26px;
-  font-size: 22px;
-  line-height: 1.1;
-}
-
-.cloud-steps p {
-  margin: 12px 0 0;
-  color: var(--muted);
-}
-
 /* ---------------------------------------------------------- *
  * Responsive                                                  *
  * ---------------------------------------------------------- */
@@ -2742,7 +2472,6 @@ main section[id] {
   }
 
   .trust-grid,
-.signed-grid,
 .download-grid,
 .pricing-head,
 .pricing-band,
@@ -2750,9 +2479,7 @@ main section[id] {
 .compare-choice-grid,
 .compare-cta,
 .compare-hub-grid,
-.mac-advisor-layout,
-.mac-advisor-tool,
-.cloud-steps {
+.mac-advisor-tool {
     grid-template-columns: 1fr;
   }
 
@@ -2777,10 +2504,6 @@ main section[id] {
 
   .download-card {
     min-height: 290px;
-  }
-
-  .compare-teaser-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .compare-cta-actions {
@@ -2835,14 +2558,8 @@ main section[id] {
   }
 
   .pricing-section,
-.mac-advisor-section,
 .download-band,
-.signed-strip,
-.channel-section,
-.faq-section,
-.compare-teaser,
-.trust-section,
-.cloud-flow {
+.trust-section {
     padding-block: 56px;
   }
 
@@ -2879,10 +2596,6 @@ main section[id] {
 
   .trust-column {
     padding: 24px 22px 26px;
-  }
-
-  .signed-cell {
-    padding: 20px;
   }
 
   .faq-item summary {
@@ -2930,10 +2643,6 @@ main section[id] {
     padding: 18px;
   }
 
-  .compare-teaser-grid {
-    grid-template-columns: 1fr;
-  }
-
   .compare-cta-actions {
     display: grid;
   }
@@ -2950,8 +2659,7 @@ main section[id] {
     text-align: left;
   }
 
-  .download-card,
-.cloud-steps li {
+  .download-card {
     padding: 18px;
   }
 

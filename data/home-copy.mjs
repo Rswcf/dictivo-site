@@ -16,7 +16,6 @@ export const HOME_COPY = {
       menu: "Menu",
     },
     language: {
-      label: "Language",
       aria: "Change site display language",
     },
     hero: {
@@ -109,88 +108,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Windows version",
     },
-    signed: {
-      title: "Start today and decide after the trial.",
-      cells: [
-        [
-          "Verify it yourself",
-          "Run the open network test: dictate in Local mode and watch zero audio leave your device",
-        ],
-        [
-          "Native and notarized",
-          "Notarized on macOS, a {dmgSizeMb} MB download - with signed automatic updates",
-        ],
-        ["No account, ever", "Local mode never asks for an email or login"],
-        ["Risk-free", "14-day refund on purchases, and Tiny stays free forever"],
-      ],
-      footnote: "Download Dictivo, try the full Local experience, and buy only if it fits your workflow.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Display language choices for global desktop users.",
-      body: "Dictivo can present the site and product interface in Deutsch, Français, Español, Italiano, Nederlands, Português, plus 简体中文, 繁體中文, 日本語, 한국어. Speech language detection remains automatic.",
-      note: "Display language changes the interface. Dictation language detection stays automatic.",
-    },
-    workflow: {
-      title: "The workflow is intentionally simple.",
-      body: "Dictivo is designed for the moment you need words out of your head and into the app in front of you.",
-      steps: [
-        [
-          "01",
-          "Download Dictivo",
-          "Start with Tiny free forever and 14 days of every local model. No cloud transcription account is required for Local mode.",
-        ],
-        [
-          "02",
-          "Press the hotkey",
-          "Speak from any app, stop recording, and get the transcript back into your workflow.",
-        ],
-        [
-          "03",
-          "Switch only when needed",
-          "Stay Local for private work. Use Cloud Fast when the recording is not sensitive and speed matters.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Questions before you download.",
-      body: "Short answers about privacy, pricing, Cloud Fast, languages, and availability.",
-      items: [
-        [
-          "Does my voice leave my device?",
-          "In Local mode, no. Audio and transcripts stay on your device. In Cloud Fast mode, the recording you choose is uploaded for faster transcription.",
-        ],
-        [
-          "What is included for free?",
-          "Tiny Local dictation is free forever. New installs also get a 14-day full Local trial with every local model unlocked, plus 10 lifetime Cloud Fast minutes on that device.",
-        ],
-        [
-          "When should I buy Dictivo Local?",
-          "Buy Local if you want stronger on-device models, 12 months of updates, and private dictation without relying on cloud transcription.",
-        ],
-        [
-          "What is Cloud Fast?",
-          "Cloud Fast is the optional speed mode. It uploads selected recordings for faster transcription when local-only processing is not the priority.",
-        ],
-        [
-          "Do I choose a dictation language manually?",
-          "No. Dictation language detection is automatic. The language menu only changes the website and interface display language.",
-        ],
-        [
-          "Is this a subscription?",
-          "No. Dictivo Local is {{price.local.inline}} once. The license is perpetual: the version you buy keeps working forever. After 12 months of included updates you can optionally renew for {{price.renewal.inline}} a year - or keep using what you have. Cloud Fast is a separate, optional add-on at {{price.cloudFast.inline}} a month.",
-        ],
-        [
-          "How can I verify that Local mode uploads nothing?",
-          "Run the open network test: start a system network monitor, dictate in Local mode, and watch for outbound traffic. The step-by-step guide is on the privacy proof pages.",
-        ],
-        [
-          "What if it doesn't fit my workflow?",
-          "Every purchase has a 14-day no-questions refund, and Tiny Local stays free forever either way.",
-        ],
-        ["Is Windows available?", "Yes. Dictivo is available for macOS and Windows x64."],
-      ],
-    },
     seo: {
       privacyProofLabel: "Privacy proof",
     },
@@ -206,7 +123,6 @@ export const HOME_COPY = {
       menu: "Menü",
     },
     language: {
-      label: "Sprache",
       aria: "Anzeigesprache der Website ändern",
     },
     hero: {
@@ -298,88 +214,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Windows-Version",
     },
-    signed: {
-      title: "Heute starten und nach dem Test entscheiden.",
-      cells: [
-        [
-          "Selbst nachprüfen",
-          "Führen Sie den offenen Netzwerktest durch: Diktieren Sie im lokalen Modus und sehen Sie selbst, dass kein Audio Ihr Gerät verlässt",
-        ],
-        [
-          "Nativ und notarisiert",
-          "Auf macOS von Apple notarisiert, ein Download von {dmgSizeMb} MB - mit signierten automatischen Updates",
-        ],
-        ["Nie ein Konto nötig", "Der lokale Modus fragt nie nach E-Mail oder Login"],
-        ["Ohne Risiko", "14 Tage Erstattung für jeden Kauf, und Tiny bleibt dauerhaft gratis"],
-      ],
-      footnote: "Dictivo herunterladen, Local vollständig testen und nur kaufen, wenn es in Ihren Workflow passt.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Anzeigesprachen für globale Desktop-Nutzer.",
-      body: "Dictivo kann Website und Oberfläche in Deutsch, Français, Español, Italiano, Nederlands, Português sowie 简体中文, 繁體中文, 日本語, 한국어 anzeigen. Die Erkennung der gesprochenen Sprache bleibt automatisch.",
-      note: "Die Anzeigesprache ändert die Oberfläche. Die Diktatsprache wird weiter automatisch erkannt.",
-    },
-    workflow: {
-      title: "Der Ablauf bleibt bewusst einfach.",
-      body: "Dictivo ist für den Moment gebaut, in dem Gedanken schnell als Text in der aktuellen App landen sollen.",
-      steps: [
-        [
-          "01",
-          "Dictivo herunterladen",
-          "Starten Sie mit dem kostenlosen lokalen Modell. Für Lokal ist kein Cloud-Konto nötig.",
-        ],
-        [
-          "02",
-          "Hotkey drücken",
-          "Sprechen Sie aus jeder App, stoppen Sie die Aufnahme und übernehmen Sie das Transkript.",
-        ],
-        [
-          "03",
-          "Nur bei Bedarf wechseln",
-          "Bleiben Sie lokal für Privates. Nutzen Sie Cloud Fast, wenn die Aufnahme wenig sensibel ist und Tempo zählt.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Fragen vor dem Download.",
-      body: "Kurze Antworten zu Datenschutz, Preisen, Cloud Fast, Sprachen und Verfügbarkeit.",
-      items: [
-        [
-          "Verlässt meine Stimme mein Gerät?",
-          "Im lokalen Modus nein. Audio und Transkripte bleiben auf Ihrem Gerät. Im Cloud Fast Modus wird die gewählte Aufnahme für schnellere Transkription hochgeladen.",
-        ],
-        [
-          "Was ist kostenlos enthalten?",
-          "Tiny Local bleibt dauerhaft gratis. Neue Installationen erhalten außerdem 14 Tage vollen Local-Test mit allen lokalen Modellen sowie 10 lebenslange Cloud-Fast-Minuten auf diesem Gerät.",
-        ],
-        [
-          "Wann sollte ich Dictivo Local kaufen?",
-          "Kaufen Sie Local, wenn Sie stärkere lokale Modelle, 12 Monate Updates und privates Diktieren ohne Cloud-Abhängigkeit möchten.",
-        ],
-        [
-          "Was ist Cloud Fast?",
-          "Cloud Fast ist der optionale Geschwindigkeitsmodus. Er lädt ausgewählte Aufnahmen für schnellere Transkription hoch.",
-        ],
-        [
-          "Wähle ich die Diktatsprache manuell?",
-          "Nein. Die Diktatsprache wird automatisch erkannt. Das Sprachmenü ändert nur Website und Oberfläche.",
-        ],
-        ["Gibt es Windows?", "Ja. Dictivo ist für macOS und Windows x64 verfügbar."],
-        [
-          "Ist das ein Abo?",
-          "Nein. Sie zahlen {{price.local.inline}} einmalig für Dictivo Local. Die Lizenz gilt dauerhaft: Die gekaufte Version läuft unbegrenzt weiter. Die ersten 12 Monate Updates sind enthalten; danach können Sie optional für {{price.renewal.inline}} pro Jahr verlängern - oder einfach mit Ihrer Version weiterarbeiten. Cloud Fast ist ein separates, optionales Add-on für {{price.cloudFast.inline}} pro Monat.",
-        ],
-        [
-          "Wie kann ich prüfen, dass der lokale Modus nichts hochlädt?",
-          "Führen Sie den offenen Netzwerktest durch: Starten Sie einen Netzwerkmonitor Ihres Systems, diktieren Sie im lokalen Modus und achten Sie auf ausgehenden Datenverkehr. Die Schritt-für-Schritt-Anleitung steht auf den Seiten zum Datenschutznachweis.",
-        ],
-        [
-          "Was, wenn es nicht in meinen Workflow passt?",
-          "Für jeden Kauf gibt es 14 Tage Erstattung ohne Fragen, und Tiny Local bleibt so oder so dauerhaft gratis.",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "Datenschutznachweis",
     },
@@ -395,7 +229,6 @@ export const HOME_COPY = {
       menu: "Menu",
     },
     language: {
-      label: "Langue",
       aria: "Changer la langue d'affichage du site",
     },
     hero: {
@@ -487,88 +320,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Version Windows",
     },
-    signed: {
-      title: "Commencez aujourd'hui, puis décidez après l'essai.",
-      cells: [
-        [
-          "Vérifiez par vous-même",
-          "Faites le test réseau vous-même : dictez en mode Local et constatez qu'aucun audio ne quitte votre appareil",
-        ],
-        [
-          "Natif et notarisé",
-          "Notarisé sur macOS - {dmgSizeMb} Mo à télécharger, avec mises à jour automatiques signées",
-        ],
-        ["Jamais de compte", "Le mode Local ne demande jamais d'e-mail ni d'identifiant"],
-        ["Sans risque", "Remboursement 14 jours sur les achats, et Tiny reste gratuit à vie"],
-      ],
-      footnote: "Téléchargez Dictivo, essayez Local en entier et achetez seulement si cela convient à votre workflow.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Des langues d'affichage pour les utilisateurs desktop du monde entier.",
-      body: "Dictivo peut afficher le site et l'interface en Deutsch, Français, Español, Italiano, Nederlands, Português, ainsi qu'en 简体中文, 繁體中文, 日本語, 한국어. La détection de la langue dictée reste automatique.",
-      note: "La langue d'affichage change l'interface. La langue de dictée reste détectée automatiquement.",
-    },
-    workflow: {
-      title: "Le flux reste volontairement simple.",
-      body: "Dictivo est conçu pour transformer rapidement vos idées en texte dans l'app où vous travaillez.",
-      steps: [
-        [
-          "01",
-          "Télécharger Dictivo",
-          "Commencez avec le modèle local gratuit. Aucun compte cloud n'est requis en mode Local.",
-        ],
-        [
-          "02",
-          "Appuyer sur le raccourci",
-          "Parlez depuis n'importe quelle app, arrêtez l'enregistrement et récupérez le texte.",
-        ],
-        [
-          "03",
-          "Changer seulement si nécessaire",
-          "Restez en Local pour le privé. Utilisez Cloud Fast quand l'enregistrement est peu sensible et que la vitesse compte.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Questions avant le téléchargement.",
-      body: "Réponses courtes sur confidentialité, tarifs, Cloud Fast, langues et disponibilité.",
-      items: [
-        [
-          "Ma voix quitte-t-elle mon appareil?",
-          "En mode Local, non. Audio et transcriptions restent sur l'appareil. En mode Cloud Fast, l'enregistrement choisi est envoyé pour une transcription plus rapide.",
-        ],
-        [
-          "Qu'est-ce qui est gratuit?",
-          "Tiny Local est gratuit à vie. Les nouvelles installations reçoivent aussi 14 jours d'essai Local complet avec tous les modèles locaux débloqués, plus 10 minutes Cloud Fast à vie sur cet appareil.",
-        ],
-        [
-          "Quand acheter Dictivo Local?",
-          "Achetez Local si vous voulez des modèles embarqués plus forts, 12 mois de mises à jour et une dictée privée sans dépendre du cloud.",
-        ],
-        [
-          "Qu'est-ce que Cloud Fast?",
-          "Cloud Fast est le mode vitesse optionnel. Il téléverse certains enregistrements pour une transcription plus rapide.",
-        ],
-        [
-          "Dois-je choisir la langue de dictée?",
-          "Non. La langue de dictée est détectée automatiquement. Le menu de langue ne change que le site et l'interface.",
-        ],
-        ["Windows est-il disponible?", "Oui. Dictivo est disponible pour macOS et Windows x64."],
-        [
-          "Est-ce un abonnement?",
-          "Non. Dictivo Local est un paiement unique de {{price.local.inline}}. La licence est perpétuelle : la version achetée continue de fonctionner indéfiniment. Après 12 mois de mises à jour incluses, vous pouvez renouveler pour {{price.renewal.inline}} par an - ou simplement continuer avec ce que vous avez. Cloud Fast est une option séparée à {{price.cloudFast.inline}} par mois.",
-        ],
-        [
-          "Comment vérifier que le mode Local n'envoie rien?",
-          "Faites le test réseau vous-même : lancez un moniteur réseau, dictez en mode Local et surveillez le trafic sortant. Le guide pas à pas se trouve sur nos pages de preuve de confidentialité.",
-        ],
-        [
-          "Et si cela ne convient pas à mon workflow?",
-          "Chaque achat bénéficie d'un remboursement 14 jours, sans question, et Tiny Local reste gratuit à vie dans tous les cas.",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "Preuve confidentialité",
     },
@@ -584,7 +335,6 @@ export const HOME_COPY = {
       menu: "Menú",
     },
     language: {
-      label: "Idioma",
       aria: "Cambiar idioma de visualización del sitio",
     },
     hero: {
@@ -676,88 +426,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Versión para Windows",
     },
-    signed: {
-      title: "Empieza hoy y decide después de la prueba.",
-      cells: [
-        [
-          "Compruébalo tú mismo",
-          "Haz la prueba de red: dicta en modo Local con un monitor de red abierto y comprueba que no sale audio de tu dispositivo",
-        ],
-        [
-          "Nativa y notarizada",
-          "Notarizada en macOS, una descarga de {dmgSizeMb} MB - con actualizaciones automáticas firmadas",
-        ],
-        ["Sin cuenta, nunca", "El modo Local nunca pide correo ni inicio de sesión"],
-        ["Sin riesgo", "Reembolso de 14 días en las compras, y Tiny sigue gratis para siempre"],
-      ],
-      footnote: "Descarga Dictivo, prueba Local completo y compra solo si encaja con tu flujo.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Idiomas de visualización para usuarios de escritorio en todo el mundo.",
-      body: "Dictivo puede mostrar el sitio y la interfaz en Deutsch, Français, Español, Italiano, Nederlands, Português, además de 简体中文, 繁體中文, 日本語, 한국어. La detección del idioma dictado sigue siendo automática.",
-      note: "El idioma de visualización cambia la interfaz. El idioma de dictado se detecta automáticamente.",
-    },
-    workflow: {
-      title: "El flujo es deliberadamente simple.",
-      body: "Dictivo está diseñado para pasar tus palabras a la app en la que trabajas justo cuando lo necesitas.",
-      steps: [
-        [
-          "01",
-          "Descargar Dictivo",
-          "Empieza con el modelo local gratuito. No hace falta cuenta cloud para el modo Local.",
-        ],
-        [
-          "02",
-          "Pulsa el atajo",
-          "Habla desde cualquier app, detén la grabación y recupera la transcripción.",
-        ],
-        [
-          "03",
-          "Cambia solo cuando haga falta",
-          "Mantente en Local para lo privado. Usa Cloud Fast cuando la grabación no sea sensible y la velocidad importe.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Preguntas antes de descargar.",
-      body: "Respuestas breves sobre privacidad, precios, Cloud Fast, idiomas y disponibilidad.",
-      items: [
-        [
-          "¿Mi voz sale de mi dispositivo?",
-          "En modo Local, no. Audio y transcripciones quedan en el dispositivo. En Cloud Fast, la grabación elegida se sube para transcribir más rápido.",
-        ],
-        [
-          "¿Qué incluye gratis?",
-          "Tiny Local es gratis para siempre. Las nuevas instalaciones también reciben 14 días de prueba Local completa con todos los modelos locales desbloqueados, más 10 minutos de Cloud Fast de por vida en ese dispositivo.",
-        ],
-        [
-          "¿Cuándo comprar Dictivo Local?",
-          "Compra Local si quieres modelos en el dispositivo más potentes, 12 meses de actualizaciones y dictado privado sin depender de la nube.",
-        ],
-        [
-          "¿Qué es Cloud Fast?",
-          "Cloud Fast es el modo rápido opcional. Sube grabaciones seleccionadas para transcripción más veloz.",
-        ],
-        [
-          "¿Elijo manualmente el idioma de dictado?",
-          "No. El idioma de dictado se detecta automáticamente. El menú de idioma solo cambia el sitio y la interfaz.",
-        ],
-        ["¿Está disponible Windows?", "Sí. Dictivo está disponible para macOS y Windows x64."],
-        [
-          "¿Es una suscripción?",
-          "No. Dictivo Local cuesta {{price.local.inline}} una sola vez. La licencia es perpetua: la versión que compras sigue funcionando para siempre. Después de los 12 meses de actualizaciones incluidas puedes renovar opcionalmente por {{price.renewal.inline}} al año - o seguir usando lo que ya tienes. Cloud Fast es un complemento opcional aparte, por {{price.cloudFast.inline}} al mes.",
-        ],
-        [
-          "¿Cómo puedo comprobar que el modo Local no sube nada?",
-          "Haz la prueba de red: abre un monitor de red, dicta en modo Local y comprueba si hay tráfico saliente. La guía paso a paso está en las páginas de prueba de privacidad.",
-        ],
-        [
-          "¿Y si no encaja con mi flujo?",
-          "Cada compra tiene un reembolso de 14 días, sin preguntas, y Tiny Local sigue siendo gratis para siempre en cualquier caso.",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "Prueba de privacidad",
     },
@@ -773,7 +441,6 @@ export const HOME_COPY = {
       menu: "Menu",
     },
     language: {
-      label: "Lingua",
       aria: "Cambia lingua di visualizzazione del sito",
     },
     hero: {
@@ -865,88 +532,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Versione Windows",
     },
-    signed: {
-      title: "Inizia oggi e decidi dopo la prova.",
-      cells: [
-        [
-          "Verificalo tu stesso",
-          "Esegui il test di rete aperto: detta in modalità Local e osserva che nessun audio lascia il tuo dispositivo",
-        ],
-        [
-          "App nativa e notarizzata",
-          "Notarizzata su macOS, download da {dmgSizeMb} MB con aggiornamenti automatici firmati",
-        ],
-        ["Nessun account, mai", "La modalità Local non chiede mai email o login"],
-        ["Senza rischi", "Rimborso entro 14 giorni sugli acquisti e Tiny resta gratis per sempre"],
-      ],
-      footnote: "Scarica Dictivo, prova Local completo e acquista solo se si adatta al tuo flusso.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Lingue di visualizzazione per utenti desktop in tutto il mondo.",
-      body: "Dictivo può mostrare sito e interfaccia in Deutsch, Français, Español, Italiano, Nederlands, Português, oltre a 简体中文, 繁體中文, 日本語, 한국어. Il rilevamento della lingua parlata resta automatico.",
-      note: "La lingua di visualizzazione cambia l'interfaccia. La lingua dettata viene rilevata automaticamente.",
-    },
-    workflow: {
-      title: "Il flusso è volutamente semplice.",
-      body: "Dictivo è progettato per trasformare rapidamente le parole in testo nell'app in cui stai lavorando.",
-      steps: [
-        [
-          "01",
-          "Scarica Dictivo",
-          "Inizia con il modello locale gratuito. In modalità Local non serve un account cloud.",
-        ],
-        [
-          "02",
-          "Premi la scorciatoia",
-          "Parla da qualsiasi app, ferma la registrazione e riporta la trascrizione nel flusso.",
-        ],
-        [
-          "03",
-          "Cambia solo quando serve",
-          "Resta in Local per il privato. Usa Cloud Fast quando la registrazione è poco sensibile e serve velocità.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Domande prima del download.",
-      body: "Risposte brevi su privacy, prezzi, Cloud Fast, lingue e disponibilità.",
-      items: [
-        [
-          "La mia voce lascia il dispositivo?",
-          "In modalità Local, no. Audio e trascrizioni restano sul dispositivo. In Cloud Fast, la registrazione scelta viene caricata per trascrivere più velocemente.",
-        ],
-        [
-          "Cosa è incluso gratis?",
-          "Tiny Local resta gratis per sempre. Le nuove installazioni ricevono anche 14 giorni di prova Local completa con ogni modello locale sbloccato, più 10 minuti Cloud Fast a vita su quel dispositivo.",
-        ],
-        [
-          "Quando dovrei comprare Dictivo Local?",
-          "Compra Local se vuoi modelli on-device più potenti, 12 mesi di aggiornamenti e dettatura privata senza dipendere dal cloud.",
-        ],
-        [
-          "Che cos'è Cloud Fast?",
-          "Cloud Fast è la modalità veloce opzionale. Carica registrazioni selezionate per una trascrizione più rapida.",
-        ],
-        [
-          "Devo scegliere manualmente la lingua di dettatura?",
-          "No. La lingua di dettatura viene rilevata automaticamente. Il menu lingua cambia solo sito e interfaccia.",
-        ],
-        ["Windows è disponibile?", "Sì. Dictivo è disponibile per macOS e Windows x64."],
-        [
-          "È un abbonamento?",
-          "No. Dictivo Local costa {{price.local.inline}} una tantum. La licenza è perpetua: la versione che acquisti continua a funzionare per sempre. Dopo i 12 mesi di aggiornamenti inclusi puoi rinnovare a {{price.renewal.inline}} all'anno, oppure continuare a usare quello che hai. Cloud Fast è un componente aggiuntivo separato e opzionale a {{price.cloudFast.inline}} al mese.",
-        ],
-        [
-          "Come posso verificare che la modalità Local non carichi nulla?",
-          "Esegui il test di rete aperto: avvia un monitor di rete, detta in modalità Local e controlla il traffico in uscita. La guida passo passo è nelle pagine Prova privacy.",
-        ],
-        [
-          "E se non si adatta al mio flusso?",
-          "Ogni acquisto prevede un rimborso entro 14 giorni, senza domande, e in ogni caso Tiny Local resta gratis per sempre.",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "Prova privacy",
     },
@@ -962,7 +547,6 @@ export const HOME_COPY = {
       menu: "Menu",
     },
     language: {
-      label: "Taal",
       aria: "Weergavetaal van de site wijzigen",
     },
     hero: {
@@ -1054,88 +638,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Windows-versie",
     },
-    signed: {
-      title: "Begin vandaag en beslis na de proef.",
-      cells: [
-        [
-          "Controleer het zelf",
-          "Voer de open netwerktest uit: dicteer in Local-modus en je ziet dat er geen audio je apparaat verlaat",
-        ],
-        [
-          "Native en genotariseerd",
-          "Door Apple genotariseerd op macOS, een download van {dmgSizeMb} MB - met ondertekende automatische updates",
-        ],
-        ["Nooit een account", "Local-modus vraagt nooit om een e-mailadres of login"],
-        ["Zonder risico", "14 dagen terugbetaling op aankopen, en Tiny blijft altijd gratis"],
-      ],
-      footnote: "Download Dictivo, probeer Local volledig en koop alleen als het bij je workflow past.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Weergavetalen voor desktopgebruikers wereldwijd.",
-      body: "Dictivo kan de site en interface tonen in Deutsch, Français, Español, Italiano, Nederlands, Português, plus 简体中文, 繁體中文, 日本語, 한국어. Spraaktaaldetectie blijft automatisch.",
-      note: "De weergavetaal wijzigt de interface. De dicteertaal blijft automatisch gedetecteerd.",
-    },
-    workflow: {
-      title: "De workflow is bewust eenvoudig.",
-      body: "Dictivo is gemaakt voor het moment waarop je woorden snel in de app voor je nodig hebt.",
-      steps: [
-        [
-          "01",
-          "Download Dictivo",
-          "Begin met het gratis lokale model. Voor Local is geen cloud-account nodig.",
-        ],
-        [
-          "02",
-          "Druk op de sneltoets",
-          "Spreek vanuit elke app, stop de opname en krijg de transcriptie terug in je workflow.",
-        ],
-        [
-          "03",
-          "Schakel alleen wanneer nodig",
-          "Blijf Local gebruiken voor privéwerk. Gebruik Cloud Fast wanneer de opname minder gevoelig is en snelheid telt.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Vragen voordat je downloadt.",
-      body: "Korte antwoorden over privacy, prijzen, Cloud Fast, talen en beschikbaarheid.",
-      items: [
-        [
-          "Verlaat mijn stem mijn apparaat?",
-          "In Local-modus niet. Audio en transcripties blijven op je apparaat. In Cloud Fast wordt de gekozen opname geüpload voor snellere transcriptie.",
-        ],
-        [
-          "Wat is gratis inbegrepen?",
-          "Tiny Local-dictatie blijft altijd gratis. Nieuwe installaties krijgen ook een volledige Local-proef van 14 dagen met elk lokaal model ontgrendeld, plus 10 levenslange Cloud Fast-minuten op dat apparaat.",
-        ],
-        [
-          "Wanneer koop ik Dictivo Local?",
-          "Koop Local als je sterkere on-device modellen, 12 maanden updates en privé dicteren zonder cloudafhankelijkheid wilt.",
-        ],
-        [
-          "Wat is Cloud Fast?",
-          "Cloud Fast is de optionele snelheidsmodus. Hij uploadt gekozen opnames voor snellere transcriptie.",
-        ],
-        [
-          "Kies ik de dicteertaal handmatig?",
-          "Nee. De dicteertaal wordt automatisch gedetecteerd. Het taalmenu verandert alleen site en interface.",
-        ],
-        ["Is Windows beschikbaar?", "Ja. Dictivo is beschikbaar voor macOS en Windows x64."],
-        [
-          "Is dit een abonnement?",
-          "Nee. Dictivo Local kost eenmalig {{price.local.inline}}. De licentie is permanent: de versie die je koopt blijft altijd werken. Na de 12 maanden inbegrepen updates kun je optioneel verlengen voor {{price.renewal.inline}} per jaar - of gewoon verder met wat je hebt. Cloud Fast is een aparte, optionele add-on van {{price.cloudFast.inline}} per maand.",
-        ],
-        [
-          "Hoe controleer ik dat Local-modus niets uploadt?",
-          "Voer de open netwerktest uit: start een netwerkmonitor op je systeem, dicteer in Local-modus en let op uitgaand verkeer. De stapsgewijze uitleg staat op de privacybewijspagina's.",
-        ],
-        [
-          "Wat als het niet bij mijn workflow past?",
-          "Bij elke aankoop geldt een terugbetaling binnen 14 dagen, zonder vragen - en Tiny Local blijft hoe dan ook altijd gratis.",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "Privacybewijs",
     },
@@ -1151,7 +653,6 @@ export const HOME_COPY = {
       menu: "Menu",
     },
     language: {
-      label: "Idioma",
       aria: "Alterar idioma de exibição do site",
     },
     hero: {
@@ -1243,88 +744,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Versão Windows",
     },
-    signed: {
-      title: "Comece hoje e decida depois do teste.",
-      cells: [
-        [
-          "Verifique você mesmo",
-          "Faça o teste de rede aberto: dite no modo Local e veja que nenhum áudio sai do seu dispositivo",
-        ],
-        [
-          "Nativo e notarizado",
-          "Notarizado pela Apple no macOS, download de {dmgSizeMb} MB - com atualizações automáticas assinadas",
-        ],
-        ["Sem conta, nunca", "O modo Local nunca pede e-mail nem login"],
-        ["Sem risco", "Reembolso de 14 dias nas compras, e Tiny fica grátis para sempre"],
-      ],
-      footnote: "Baixe o Dictivo, teste o Local completo e compre só se fizer sentido para seu fluxo.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "Idiomas de exibição para usuários de desktop no mundo todo.",
-      body: "Dictivo pode exibir o site e a interface em Deutsch, Français, Español, Italiano, Nederlands, Português, além de 简体中文, 繁體中文, 日本語, 한국어. A detecção do idioma falado continua automática.",
-      note: "O idioma de exibição muda a interface. O idioma do ditado continua com detecção automática.",
-    },
-    workflow: {
-      title: "O fluxo é intencionalmente simples.",
-      body: "Dictivo foi feito para quando você precisa transformar fala em texto dentro do app em que está trabalhando.",
-      steps: [
-        [
-          "01",
-          "Baixar Dictivo",
-          "Comece com o modelo local gratuito. O modo Local não exige conta em nuvem.",
-        ],
-        [
-          "02",
-          "Pressione o atalho",
-          "Fale em qualquer app, pare a gravação e receba a transcrição no seu fluxo.",
-        ],
-        [
-          "03",
-          "Troque só quando precisar",
-          "Fique em Local para trabalho privado. Use Cloud Fast quando a gravação for pouco sensível e velocidade importar.",
-        ],
-      ],
-    },
-    faq: {
-      title: "Perguntas antes de baixar.",
-      body: "Respostas rápidas sobre privacidade, preços, Cloud Fast, idiomas e disponibilidade.",
-      items: [
-        [
-          "Minha voz sai do dispositivo?",
-          "No modo Local, não. Áudio e transcrições ficam no dispositivo. No Cloud Fast, a gravação escolhida é enviada para transcrição mais rápida.",
-        ],
-        [
-          "O que está incluído grátis?",
-          "O ditado Tiny Local fica grátis para sempre. Novas instalações também recebem teste Local completo de 14 dias com todos os modelos locais desbloqueados, mais 10 minutos vitalícios de Cloud Fast nesse dispositivo.",
-        ],
-        [
-          "Quando devo comprar Dictivo Local?",
-          "Compre Local se quiser modelos no dispositivo mais fortes, 12 meses de atualizações e ditado privado sem depender da nuvem.",
-        ],
-        [
-          "O que é Cloud Fast?",
-          "Cloud Fast é o modo rápido opcional. Ele envia gravações escolhidas para transcrição mais rápida.",
-        ],
-        [
-          "Eu escolho manualmente o idioma do ditado?",
-          "Não. O idioma do ditado é detectado automaticamente. O menu de idioma muda apenas site e interface.",
-        ],
-        ["Windows está disponível?", "Sim. O Dictivo está disponível para macOS e Windows x64."],
-        [
-          "Isso é uma assinatura?",
-          "Não. Dictivo Local custa {{price.local.inline}} uma vez. A licença é perpétua: a versão que você comprar continua funcionando para sempre. Depois dos 12 meses de atualizações incluídas, você pode renovar por {{price.renewal.inline}} por ano se quiser - ou continuar com o que já tem. O Cloud Fast é um complemento opcional à parte, por {{price.cloudFast.inline}} por mês.",
-        ],
-        [
-          "Como posso verificar que o modo Local não envia nada?",
-          "Faça o teste de rede aberto: abra um monitor de rede do sistema, dite no modo Local e observe se aparece algum tráfego de saída. O guia passo a passo está nas páginas de prova de privacidade.",
-        ],
-        [
-          "E se não se encaixar no meu fluxo?",
-          "Toda compra tem reembolso de 14 dias, sem perguntas - e, de qualquer forma, o ditado Tiny Local fica grátis para sempre.",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "Prova de privacidade",
     },
@@ -1340,7 +759,6 @@ export const HOME_COPY = {
       menu: "菜单",
     },
     language: {
-      label: "语言",
       aria: "切换网站显示语言",
     },
     hero: {
@@ -1414,52 +832,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Windows 版本",
     },
-    signed: {
-      title: "今天开始试用，试用后再决定。",
-      cells: [
-        ["自己动手验证", "运行公开网络测试：用本地模式听写，确认没有音频离开你的设备"],
-        ["原生应用，已公证", "macOS 版经 Apple 公证，安装包 {dmgSizeMb} MB - 自动更新同样带签名"],
-        ["永不需要账号", "本地模式从不索取邮箱，也不需要登录"],
-        ["零风险", "购买后 14 天无理由退款，Tiny 永久免费"],
-      ],
-      footnote: "下载 Dictivo，完整试用 Local，只在适合你的工作流时购买。",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "面向全球桌面用户的显示语言选项。",
-      body: "Dictivo 可以用 Deutsch, Français, Español, Italiano, Nederlands, Português，以及 简体中文, 繁體中文, 日本語, 한국어 显示网站和产品界面。听写语言检测仍然自动完成。",
-      note: "显示语言只改变界面。听写语言仍然自动检测。",
-    },
-    workflow: {
-      title: "工作流刻意保持简单。",
-      body: "Dictivo 适合在你需要把脑中的话快速放进当前应用的那一刻使用。",
-      steps: [
-        ["01", "下载 Dictivo", "先使用免费的本地模型。本地模式不需要云端转录账号。"],
-        ["02", "按下快捷键", "在任何应用中说话，停止录音，然后把转录结果带回你的工作流。"],
-        ["03", "只在需要时切换", "私密工作使用本地模式。录音敏感度低且速度重要时使用 Cloud Fast。"],
-      ],
-    },
-    faq: {
-      title: "下载前的常见问题。",
-      body: "关于隐私、价格、Cloud Fast、语言和可用性的简短回答。",
-      items: [
-        ["我的声音会离开本设备吗？", "本地模式不会。音频和转录文本都留在设备上。Cloud Fast 模式会上传你选择的录音以获得更快转录。"],
-        [
-          "免费版本包含什么？",
-          "Tiny Local 听写永久免费。新安装还会获得 14 天完整 Local 试用，解锁所有本地模型，并在本设备上获得终身 10 分钟 Cloud Fast 免费额度。",
-        ],
-        ["什么时候应该购买 Dictivo Local？", "如果你需要更强的本地模型、12 个月更新以及不依赖云端的私密听写，就适合购买 Local。"],
-        ["什么是 Cloud Fast？", "Cloud Fast 是可选的加速模式，会上传所选录音以获得更快转录。"],
-        ["需要手动选择听写语言吗？", "不需要。听写语言会自动检测。语言菜单只改变网站和界面显示语言。"],
-        ["Windows 可用吗？", "可以。Dictivo 已支持 macOS 与 Windows x64。"],
-        [
-          "这是订阅制吗？",
-          "不是。Dictivo Local 一次买断 {{price.local.inline}}。许可证永久有效：你买到的那个版本可以一直用下去。包含的 12 个月更新期结束后，可以选择每年 {{price.renewal.inline}} 续订，也可以继续使用手上的版本。 Cloud Fast 是单独的可选附加服务，每月 {{price.cloudFast.inline}}。",
-        ],
-        ["我怎么验证本地模式确实没有上传？", "运行公开网络测试：打开系统网络监控工具，用本地模式听写，观察有没有对外流量。隐私证明页面上有分步指南。"],
-        ["如果不适合我的工作流怎么办？", "每笔购买都有 14 天无理由退款；无论如何，Tiny Local 听写都永久免费。"],
-      ],
-    },
     seo: {
       privacyProofLabel: "隐私证明",
     },
@@ -1475,7 +847,6 @@ export const HOME_COPY = {
       menu: "メニュー",
     },
     language: {
-      label: "言語",
       aria: "サイトの表示言語を変更",
     },
     hero: {
@@ -1567,64 +938,6 @@ export const HOME_COPY = {
       windowsTop: ["Windows"],
       windowsTitle: "Windows 版",
     },
-    signed: {
-      title: "今日始めて、トライアル後に判断できます。",
-      cells: [
-        ["自分で検証できます", "公開ネットワークテストを実行すれば、Local モードの音声入力で音声が一切デバイスから出ないことを確認できます"],
-        ["ネイティブアプリ", "macOS 版は公証済みで、ダウンロードは {dmgSizeMb} MB - 自動アップデートも署名付きです"],
-        ["アカウントは一切不要", "Local モードがメールアドレスやログインを求めることはありません"],
-        ["リスクなし", "購入には 14 日間の返金保証が付き、Tiny は永久無料のままです"],
-      ],
-      footnote: "Dictivo をダウンロードし、Local をしっかり試して、合う場合だけ購入できます。",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "世界中のデスクトップユーザー向け表示言語。",
-      body: "Dictivo は Deutsch, Français, Español, Italiano, Nederlands, Português に加え、简体中文, 繁體中文, 日本語, 한국어 でサイトと製品 UI を表示できます。音声入力の言語検出は自動のままです。",
-      note: "表示言語はインターフェースだけを変更します。音声入力の言語は自動検出されます。",
-    },
-    workflow: {
-      title: "ワークフローは意図的にシンプルです。",
-      body: "Dictivo は、頭の中の言葉を今使っているアプリへすぐ入れたい瞬間のために設計されています。",
-      steps: [
-        ["01", "Dictivo をダウンロード", "無料のローカルモデルから始められます。Local モードにはクラウドアカウントは不要です。"],
-        ["02", "ショートカットを押す", "どのアプリからでも話し、録音を止め、文字起こしを作業へ戻せます。"],
-        ["03", "必要な時だけ切り替える", "プライベートな作業は Local。低機密で速度が必要な時だけ Cloud Fast を使います。"],
-      ],
-    },
-    faq: {
-      title: "ダウンロード前のよくある質問。",
-      body: "プライバシー、料金、Cloud Fast、言語、対応状況についての短い回答です。",
-      items: [
-        [
-          "声はデバイスから外へ出ますか？",
-          "Local モードでは出ません。音声と文字起こしはデバイスに残ります。Cloud Fast では選択した録音を高速文字起こしのためにアップロードします。",
-        ],
-        [
-          "無料版には何が含まれますか？",
-          "Tiny Local 音声入力は永久無料です。新規インストールでは全ローカルモデルを使える 14 日間の完全 Local トライアルと、その端末で使える Cloud Fast 10 分が付属します。",
-        ],
-        [
-          "いつ Dictivo Local を買うべきですか？",
-          "より強力なオンデバイスモデル、12 か月の更新、クラウドに依存しないプライベート音声入力が必要なら Local が適しています。",
-        ],
-        ["Cloud Fast とは何ですか？", "Cloud Fast は任意の高速モードです。選択した録音をアップロードしてより速く文字起こしします。"],
-        ["音声入力の言語を手動で選びますか？", "いいえ。音声入力の言語は自動検出です。言語メニューはサイトと UI の表示言語だけを変更します。"],
-        ["Windows は利用できますか？", "はい。Dictivo は macOS と Windows x64 で利用できます。"],
-        [
-          "これはサブスクリプションですか？",
-          "いいえ。Dictivo Local は {{price.local.inline}} の買い切りです。ライセンスは永続で、購入したバージョンはずっと使い続けられます。12 か月のアップデート期間が終わったあとは、アップデートを受け取り続けたい場合のみ任意で年 {{price.renewal.inline}} で更新できます。更新しない場合も、手元のバージョンはそのまま使えます。 Cloud Fast は別売りのオプションで、月額 {{price.cloudFast.inline}} です。",
-        ],
-        [
-          "Local モードが何もアップロードしていないことを、どうすれば確認できますか？",
-          "公開ネットワークテストを実行してください。Little Snitch や LuLu などのネットワークモニターを起動し、Local モードで音声入力して、音声が外部に送信されないことを確認するだけです。手順はプライバシー証明ページで順を追って説明しています。",
-        ],
-        [
-          "ワークフローに合わなかった場合はどうなりますか？",
-          "購入にはすべて 14 日間の返金保証が付き、理由は問いません。合わなかった場合でも、Tiny Local は永久無料のまま使えます。",
-        ],
-      ],
-    },
     seo: {
       privacyProofLabel: "プライバシー証明",
     },
@@ -1640,7 +953,6 @@ export const HOME_COPY = {
       menu: "메뉴",
     },
     language: {
-      label: "언어",
       aria: "사이트 표시 언어 변경",
     },
     hero: {
@@ -1731,64 +1043,6 @@ export const HOME_COPY = {
       versionNote: (version) => `버전 ${version} - macOS 유니버설.`,
       windowsTop: ["Windows"],
       windowsTitle: "Windows 버전",
-    },
-    signed: {
-      title: "오늘 시작하고 체험 후 결정하세요.",
-      cells: [
-        ["직접 확인", "공개 네트워크 테스트로 Local 모드에서 오디오가 기기 밖으로 나가지 않는지 확인할 수 있습니다"],
-        ["네이티브 앱, 공증 완료", "macOS에서 공증된 {dmgSizeMb} MB 설치 파일이며 자동 업데이트도 서명됩니다"],
-        ["계정 불필요", "Local 모드는 이메일이나 로그인을 요구하지 않습니다"],
-        ["부담 없는 구매", "구매 후 14일 환불이 가능하고 Tiny는 영구 무료입니다"],
-      ],
-      footnote: "Dictivo를 다운로드하고 Local을 충분히 체험한 뒤, 워크플로에 맞을 때만 구매하세요.",
-      footnoteHref: "/privacy/local-dictation-network-test/",
-    },
-    languages: {
-      title: "전 세계 데스크톱 사용자를 위한 표시 언어.",
-      body: "Dictivo는 Deutsch, Français, Español, Italiano, Nederlands, Português 및 简体中文, 繁體中文, 日本語, 한국어로 사이트와 제품 UI를 표시할 수 있습니다. 받아쓰기 언어 감지는 계속 자동입니다.",
-      note: "표시 언어는 인터페이스만 바꿉니다. 받아쓰기 언어는 계속 자동 감지됩니다.",
-    },
-    workflow: {
-      title: "워크플로는 의도적으로 단순합니다.",
-      body: "Dictivo는 머릿속의 말을 지금 사용하는 앱으로 바로 넣어야 하는 순간을 위해 설계되었습니다.",
-      steps: [
-        ["01", "Dictivo 다운로드", "무료 로컬 모델로 시작하세요. Local 모드에는 클라우드 계정이 필요 없습니다."],
-        ["02", "단축키 누르기", "어떤 앱에서든 말하고 녹음을 멈춘 뒤 전사문을 작업 흐름으로 가져옵니다."],
-        ["03", "필요할 때만 전환", "개인 작업은 Local을 유지하세요. 민감도가 낮고 속도가 중요할 때 Cloud Fast를 사용하세요."],
-      ],
-    },
-    faq: {
-      title: "다운로드 전 자주 묻는 질문.",
-      body: "개인정보, 가격, Cloud Fast, 언어, 사용 가능 여부에 대한 짧은 답변입니다.",
-      items: [
-        [
-          "내 목소리가 기기 밖으로 나가나요?",
-          "Local 모드에서는 아닙니다. 오디오와 전사문은 기기에 남습니다. Cloud Fast에서는 선택한 녹음이 더 빠른 전사를 위해 업로드됩니다.",
-        ],
-        [
-          "무료에는 무엇이 포함되나요?",
-          "Tiny Local 받아쓰기는 영구 무료입니다. 새 설치에는 모든 로컬 모델을 여는 14일 전체 Local 체험과 해당 기기의 Cloud Fast 10분 평생 무료 사용이 포함됩니다.",
-        ],
-        [
-          "언제 Dictivo Local을 구매해야 하나요?",
-          "더 강력한 온디바이스 모델, 12개월 업데이트, 클라우드에 의존하지 않는 비공개 받아쓰기가 필요하면 Local이 적합합니다.",
-        ],
-        ["Cloud Fast란 무엇인가요?", "Cloud Fast는 선택형 속도 모드입니다. 선택한 녹음을 업로드해 더 빠르게 전사합니다."],
-        ["받아쓰기 언어를 수동으로 선택하나요?", "아니요. 받아쓰기 언어는 자동 감지됩니다. 언어 메뉴는 사이트와 UI 표시 언어만 변경합니다."],
-        ["Windows를 사용할 수 있나요?", "예. Dictivo는 macOS와 Windows x64에서 사용할 수 있습니다."],
-        [
-          "구독인가요?",
-          "아니요. Dictivo Local은 {{price.local.inline}} 한 번 결제입니다. 라이선스는 영구적이라 구매한 버전은 계속 사용할 수 있습니다. 포함된 12개월 업데이트 기간이 끝난 뒤에는 원하면 연 {{price.renewal.inline}}에 갱신하거나, 쓰던 버전을 그대로 사용하면 됩니다. Cloud Fast는 별도의 선택 사항으로 월 {{price.cloudFast.inline}}입니다.",
-        ],
-        [
-          "Local 모드가 아무것도 업로드하지 않는지 어떻게 확인하나요?",
-          "공개 네트워크 테스트를 해 보세요. 시스템 네트워크 모니터를 켜고 Local 모드로 받아쓰기한 뒤 외부로 나가는 트래픽이 있는지 확인하면 됩니다. 단계별 안내는 개인정보 증명 페이지에 있습니다.",
-        ],
-        [
-          "내 워크플로에 맞지 않으면 어떻게 하나요?",
-          "모든 구매에는 이유를 묻지 않는 14일 환불이 적용되며, 어떤 경우에도 Tiny Local 받아쓰기는 영구 무료로 유지됩니다.",
-        ],
-      ],
     },
     seo: {
       privacyProofLabel: "개인정보 증명",
