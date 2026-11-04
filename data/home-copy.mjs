@@ -114,7 +114,7 @@ export const HOME_COPY = {
   },
   de: {
     metaTitle: "Offline-Diktier-App für Mac & Windows - einmal kaufen | Dictivo",
-    metaDescription: "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per offenem Netzwerktest überprüfbar. Einmal kaufen, für immer Ihres.",
+    metaDescription: "Dictivo tippt, was Sie sagen - in jeder Mac- und Windows-App. Lokal bleibt Audio auf Ihrem Gerät, per Netzwerktest überprüfbar. Einmal kaufen, für immer Ihres.",
     skip: "Zum Inhalt springen",
     nav: {
       pricing: "Preise",
@@ -220,7 +220,7 @@ export const HOME_COPY = {
   },
   fr: {
     metaTitle: "App de dictée hors ligne pour Mac et Windows - achat unique | Dictivo",
-    metaDescription: "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. Achat unique, à vous pour toujours.",
+    metaDescription: "Dictivo tape ce que vous dictez dans toute app Mac ou Windows. En local, l'audio reste sur votre appareil, vérifiable par test réseau. Achat unique, à vous.",
     skip: "Aller au contenu",
     nav: {
       pricing: "Tarifs",
@@ -644,7 +644,7 @@ export const HOME_COPY = {
   },
   pt: {
     metaTitle: "Digitação por voz offline para Mac e Windows | Dictivo",
-    metaDescription: "Transforme voz em texto no Mac e Windows. Use digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 14 dias.",
+    metaDescription: "Voz em texto no Mac e Windows: digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 14 dias.",
     skip: "Ir para o conteúdo",
     nav: {
       pricing: "Preços",

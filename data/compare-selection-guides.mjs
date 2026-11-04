@@ -3,7 +3,7 @@
 export const COMPARE_SELECTION_GUIDES = {
   fr: {
     hubMetaTitle: "Logiciel de dictée vocale pour Mac et Windows : choisir | Dictivo",
-    hubMetaDescription: "Choisissez un logiciel de dictée vocale selon votre usage : saisie en direct, traitement local ou cloud, essai et plateformes. Comparez les alternatives à Dictivo.",
+    hubMetaDescription: "Choisissez un logiciel de dictée vocale selon votre usage : saisie en direct, traitement local ou cloud, essai et plateformes. Comparez les alternatives.",
     hubH1: "Quel logiciel de dictée vocale choisir sur Mac ou Windows ?",
     hubLede: "Partez de votre tâche de rédaction, puis comparez les outils. Voici les points à vérifier avant de choisir Dictivo ou une autre application de dictée.",
     title: "Cinq points à vérifier avant de choisir",
@@ -37,7 +37,7 @@ export const COMPARE_SELECTION_GUIDES = {
   },
   de: {
     hubMetaTitle: "Diktiersoftware für Mac und Windows auswählen | Dictivo",
-    hubMetaDescription: "Diktiersoftware nach Aufgabe, Plattform, lokaler Verarbeitung und Testbedingungen auswählen. Vergleichen Sie Dictivo mit anderen Diktier-Tools für Ihren Schreiballtag.",
+    hubMetaDescription: "Diktiersoftware nach Aufgabe, Plattform, lokaler Verarbeitung und Testbedingungen auswählen. Vergleichen Sie Dictivo mit anderen Diktier-Tools.",
     hubH1: "Diktiersoftware auswählen: Spracheingabe auf Mac und Windows",
     hubLede: "Gehen Sie von Ihrer Schreibaufgabe aus. Prüfen Sie diese Fragen, bevor Sie Dictivo oder ein anderes Diktierprogramm wählen, und vergleichen Sie anschließend die passenden Anwendungen.",
     title: "Fünf Fragen vor der Entscheidung",

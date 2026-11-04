@@ -823,7 +823,7 @@ const COMPARE_I18N = {
     hubGridLabel: "Pages de comparaison Dictivo",
     cardTitle: "Alternative à {competitor}",
     cardCta: "Comparer Dictivo avec {competitor}",
-    pageTitle: "Alternative à {competitor} : dictée locale Mac avec Dictivo",
+    pageTitle: "Alternative à {competitor} : dictée locale avec Dictivo",
     pageMeta:
       "Comparez Dictivo avec {competitor} : confidentialité, prix, plateformes et flux de dictée locale sur Mac.",
     pageH1: "Alternative à {competitor} pour la dictée locale sur Mac",
@@ -959,7 +959,7 @@ Object.assign(COMPARE_I18N, {
     hubGridLabel: "Páginas comparativas de Dictivo",
     cardTitle: "Alternativa a {competitor}",
     cardCta: "Comparar Dictivo con {competitor}",
-    pageTitle: "Alternativa a {competitor}: dictado local para Mac con Dictivo",
+    pageTitle: "Alternativa a {competitor}: dictado local con Dictivo",
     pageMeta:
       "Compara Dictivo con {competitor}: privacidad, precio, plataformas y flujo de dictado local en Mac.",
     pageH1: "Alternativa a {competitor} para dictado local en Mac",
@@ -1452,7 +1452,7 @@ Object.assign(COMPARE_I18N, {
     hubGridLabel: "Páginas de comparação do Dictivo",
     cardTitle: "Alternativa ao {competitor}",
     cardCta: "Comparar Dictivo com {competitor}",
-    pageTitle: "Alternativa ao {competitor}: ditado local no Mac com Dictivo",
+    pageTitle: "Alternativa ao {competitor}: ditado local com Dictivo",
     pageMeta:
       "Compare o Dictivo com {competitor}: privacidade, preço, plataformas e fluxo de ditado local no Mac.",
     pageH1: "Alternativa ao {competitor} para ditado local no Mac",
