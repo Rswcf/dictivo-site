@@ -5,6 +5,15 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Titles and descriptions trimmed — 2026-11-04
+
+G12, after the Bing baseline. Four titles were over 70 characters and six descriptions over 160.
+The French, Spanish and Portuguese comparison title templates lost the platform word ("Mac",
+rewritten to "ordinateur", "escritorio", "desktop" at build time), so every comparison page in
+those three languages has a new title. The German, French and Portuguese homepage descriptions,
+the German and French comparison hub descriptions and the `/demo/` description lost a clause.
+No page is now over either limit.
+
 ## Homepage cut to four sections — 2026-11-04
 
 The homepage kept the hero, privacy, pricing and downloads sections. Removed: the workflow steps,
