@@ -5,6 +5,15 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## IndexNow retries a dropped connection — 2026-11-04
+
+The deploy of eef30be failed in its IndexNow step: yandex.com closed the socket before any
+response. The site deployed, but the 11 re-dated homepages were not sent, and the next deploy
+would not resend them because it diffs against the new live sitemap. They were resubmitted by
+hand (HTTP 202), with the 21 fr/es/pt comparison, compare hub and `/demo/` pages whose titles or
+descriptions changed without a new lastmod (HTTP 200). `submit-indexnow.mjs` now retries a network
+error twice (2 s, then 4 s). An HTTP response is still final.
+
 ## Hero steps and pricing intro removed — 2026-11-04
 
 The hero's three-step list repeated its lede in every language ("Press your shortcut, speak, and
