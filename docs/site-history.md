@@ -5,6 +5,16 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+
+## Orphan assets removed — 2026-11-04
+
+Fifteen files that no page referenced are deleted: `dictivo-cinematic-demo.mp4` (13.4 MB) and
+its `.vtt`, `dictivo-demo-local-poster.jpg`, and the 11 screenshots in `assets/ui/` (1.8 MB). The
+Cloudflare GraphQL Analytics API showed 0 requests to any of them from 2026-10-28 to 2026-11-04
+(the free plan keeps about 7 days and hides referers). In case an old embed still points at the
+film, `/assets/dictivo-cinematic-demo.mp4` now 301s to the current film. The `/assets/ui/*`
+cache rule is gone with the folder. `dictivo-demo-poster.jpg` stays: `security.html` uses it as
+its social image.
 ## Kickers and eyebrows removed — 2026-11-04
 
 Every page lost the small label above its h1 (`doc-eyebrow`, 176 pages) and the labels above

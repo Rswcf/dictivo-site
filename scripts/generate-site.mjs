@@ -5520,6 +5520,7 @@ function renderRedirects() {
 /security.html /security/ 301
 /changelog /changelog/ 301
 /changelog.html /changelog/ 301
+/assets/dictivo-cinematic-demo.mp4 ${PRODUCT_FILM.video} 301
 /checkout/local ${localCheckoutTarget} 302
 /checkout/cloud-fast ${cloudFastCheckoutTarget} 302
 /checkout/local-renewal ${localRenewalCheckoutTarget} 302

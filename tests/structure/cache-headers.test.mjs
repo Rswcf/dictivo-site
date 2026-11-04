@@ -65,7 +65,7 @@ test("long-lived /assets/ rules come after /assets/* and detach its Cache-Contro
   const generic = rules.findIndex((rule) => rule.path === "/assets/*");
   assert.ok(generic >= 0, "the /assets/* rule is missing");
   const specific = rules.filter((rule) => rule.path !== "/assets/*" && rule.path.startsWith("/assets/") && rule.set["cache-control"]);
-  assert.ok(specific.length >= 5, "fonts, ui, favicon and the two fingerprinted files need their own rule");
+  assert.ok(specific.length >= 4, "fonts, favicon and the two fingerprinted files need their own rule");
   for (const rule of specific) {
     assert.ok(rules.indexOf(rule) > generic, `${rule.path}: must come after /assets/*`);
     assert.ok(rule.unset.includes("cache-control"), `${rule.path}: must detach the Cache-Control of /assets/*`);
@@ -79,8 +79,8 @@ test("fingerprinted site.css and site.js are cached for a year as immutable, the
   for (const name of ["/assets/site.css", "/assets/site.js"]) assert.equal(cacheControl(name), "public, max-age=300, must-revalidate", name);
 });
 
-test("fonts, UI screenshots and the favicon send one immutable Cache-Control", () => {
-  for (const path of ["/assets/fonts/inter-latin.woff2", "/assets/ui/05-history.png", "/assets/favicon.svg"]) {
+test("fonts and the favicon send one immutable Cache-Control", () => {
+  for (const path of ["/assets/fonts/inter-latin.woff2", "/assets/favicon.svg"]) {
     assert.equal(cacheControl(path), IMMUTABLE, path);
   }
 });
