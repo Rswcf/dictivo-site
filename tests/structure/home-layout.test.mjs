@@ -46,3 +46,15 @@ test("the footer groups its links into three columns and drops the tagline", () 
     assert.doesNotMatch(footer, /footer-tagline|footer-beta/, home);
   }
 });
+
+// 2026-11-04: workflow, Mac advisor, trust strip, comparison cards, language list and FAQ left the
+// homepage. The advisor lives on /mac-model-guide/, comparisons and languages in the footer and header.
+test("the homepage has four sections and no FAQPage node", () => {
+  for (const home of homes) {
+    const html = read(home);
+    const main = html.match(/<main[\s\S]*?<\/main>/)[0];
+    const ids = [...main.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(ids, ["demo", "privacy", "pricing", "downloads"], home);
+    assert.doesNotMatch(html, /"FAQPage"/, home);
+  }
+});

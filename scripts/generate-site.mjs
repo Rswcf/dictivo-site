@@ -2282,23 +2282,9 @@ function softwareApplicationSchema(code, t) {
 }
 
 function renderSchema(currentCode, t) {
-  const faqEntities = t.faq.items.map(([question, answer]) => ({
-    "@type": "Question",
-    name: question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: answer,
-    },
-  }));
-
   const schema = [
     organizationSchema(),
     softwareApplicationSchema(currentCode, t),
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqEntities,
-    },
     productFilmSchema(),
   ];
 
@@ -2736,30 +2722,6 @@ ${COMPARE_PAGES.map(
   });
 }
 
-function renderCompareTeaser(currentCode = "en") {
-  const copy = compareCopy(currentCode);
-  return `<section class="compare-teaser reveal" id="compare" aria-labelledby="compare-teaser-title">
-        <div class="section-shell">
-          <div class="section-heading section-heading-left">
-            <h2 id="compare-teaser-title">${html(copy.teaserTitle)}</h2>
-            <p>${html(copy.teaserBody)}</p>
-          </div>
-          <div class="compare-teaser-grid">
-${COMPARE_NAV_LINKS.map(
-  (link) => `            <a href="${attr(localizedComparePath(currentCode, link.slug))}">
-              <span>${html(link.competitor)}</span>
-              <strong>${html(currentCode === "en" ? link.title : fillCompareTemplate(copy.footerAlternative, { competitor: link.competitor }))}</strong>
-            </a>`,
-).join("\n")}
-            <a href="${attr(offlineDictationGuidePath(currentCode))}">
-              <span>${html(offlineDictationGuideCopy(currentCode).eyebrow)}</span>
-              <strong>${html(offlineDictationGuideCopy(currentCode).navLabel)}</strong>
-            </a>
-          </div>
-        </div>
-      </section>`;
-}
-
 function macAdvisorCopy(code) {
   return MAC_ADVISOR_COPY[code] || MAC_ADVISOR_COPY.en;
 }
@@ -2892,21 +2854,6 @@ function renderMacAdvisorTool(currentCode = "en") {
             </article>
             <script type="application/json" data-mac-advisor-json>${jsonForScript(localizedMacAdvisorData(currentCode))}</script>
           </div>`;
-}
-
-function renderMacAdvisorSection(currentCode = "en") {
-  const copy = macAdvisorCopy(currentCode);
-  return `<section class="mac-advisor-section reveal" id="mac-advisor" aria-labelledby="mac-advisor-title">
-        <div class="section-shell">
-          <div class="mac-advisor-layout">
-            <div class="section-heading section-heading-left">
-              <h2 id="mac-advisor-title">${html(copy.sectionTitle)}</h2>
-              <p>${html(copy.sectionBody)}</p>
-            </div>
-            ${renderMacAdvisorTool(currentCode)}
-          </div>
-        </div>
-      </section>`;
 }
 
 function renderMacGuideSchema(currentCode = "en") {
@@ -4448,7 +4395,7 @@ function renderPricingPage(code = "en") {
   });
 }
 
-// Three columns: product, guides, privacy and company. They need no headings to read as groups.
+// Three columns: product, privacy and company, guides. They need no headings to read as groups.
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const columns = [
@@ -4457,6 +4404,7 @@ function renderHomeFooterLinks(currentCode, t) {
       `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
       `<a href="/changelog/">${html(HOME_CONVERSION_COPY[currentCode].changelog)}</a>`,
       `<a href="/security/">${html(ui.footer.security)}</a>`,
+      `<a href="${attr(localizedComparePath(currentCode))}">${html(compareCopy(currentCode).hubEyebrow)}</a>`,
       currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
     ],
     [
@@ -4513,13 +4461,8 @@ function renderHome(currentCode) {
   const locale = localeByCode(currentCode);
   const t = HOME_COPY[currentCode];
   if (!t) throw new Error(`Missing home copy for locale ${currentCode}`);
-  const compareTeaser = `${renderCompareTeaser(currentCode)}\n\n`;
   const liveWindowsCopy = windowsDownloadCopy(currentCode);
   const conversion = HOME_CONVERSION_COPY[currentCode];
-
-  const languagePills = LOCALES.map(
-    (item) => `<a href="${attr(languageChoiceHref(item.path, item.code))}" lang="${attr(item.htmlLang)}" hreflang="${attr(item.htmlLang)}">${html(item.nativeName)}</a>`,
-  ).join("\n                ");
 
   return `<!doctype html>
 <html lang="${attr(locale.htmlLang)}">
@@ -4600,27 +4543,6 @@ function renderHome(currentCode) {
         </div>
       </section>
 
-      <section class="cloud-flow reveal" id="workflow" aria-labelledby="workflow-title">
-        <div class="section-shell">
-          <div class="section-heading">
-            <h2 id="workflow-title">${html(t.workflow.title)}</h2>
-            <p>${html(t.workflow.body)}</p>
-          </div>
-
-          <ol class="cloud-steps">
-            ${t.workflow.steps
-              .map(
-                ([number, title, body]) => `<li>
-              <span>${html(number)}</span>
-              <strong>${html(title)}</strong>
-              <p>${html(body)}</p>
-            </li>`,
-              )
-              .join("\n")}
-          </ol>
-        </div>
-      </section>
-
       <section class="pricing-section reveal" id="pricing" aria-labelledby="pricing-title">
         <div class="section-shell">
           <div class="pricing-head">
@@ -4637,27 +4559,6 @@ function renderHome(currentCode) {
             <strong>${html(t.pricing.checkoutTitle)}</strong>
             <p>${html(t.pricing.checkoutBody)}</p>
           </div>
-        </div>
-      </section>
-
-      ${renderMacAdvisorSection(currentCode)}
-
-      <section class="signed-strip reveal" aria-labelledby="signed-title">
-        <div class="section-shell">
-          <div class="signed-head">
-            <h2 id="signed-title">${html(t.signed.title)}</h2>
-          </div>
-          <div class="signed-grid">
-            ${t.signed.cells
-              .map(
-                ([label, value]) => `<article class="signed-cell">
-              <p class="signed-cell-label">${html(label)}</p>
-              <p class="signed-cell-value">${html(value.replace("{version}", release.version).replace("{dmgSizeMb}", dmgSizeMb))}</p>
-            </article>`,
-              )
-              .join("\n")}
-          </div>
-          <p class="signed-footnote">${t.signed.footnoteHref ? `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.signed.footnote)}</a>` : html(t.signed.footnote)}</p>
         </div>
       </section>
 
@@ -4688,45 +4589,6 @@ function renderHome(currentCode) {
               </div>
               <p class="download-note">${html(liveWindowsCopy.note(release.version))}</p>
             </article>` : ""}
-          </div>
-        </div>
-      </section>
-
-${compareTeaser}
-      <section class="channel-section language-section reveal" id="languages" aria-labelledby="languages-title">
-        <div class="section-shell">
-          <div class="section-heading section-heading-left">
-            <h2 id="languages-title">${html(t.languages.title)}</h2>
-            <p>${html(t.languages.body)}</p>
-          </div>
-          <div class="locale-list" aria-label="${attr(t.language.label)}">
-            ${languagePills}
-          </div>
-          <p class="language-note">${html(t.languages.note)}</p>
-        </div>
-      </section>
-
-      <section class="faq-section reveal" id="faq" aria-labelledby="faq-title">
-        <div class="section-shell faq-shell">
-          <div class="section-heading section-heading-left">
-            <h2 id="faq-title">${html(t.faq.title)}</h2>
-            <p>${html(t.faq.body)}</p>
-          </div>
-
-          <div class="faq-grid">
-            ${t.faq.items
-              .map(
-                ([question, answer]) => `<details class="faq-item">
-              <summary>
-                <span class="faq-question">${html(question)}</span>
-                <span class="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="faq-answer">
-                <p class="faq-answer-body">${html(answer)}</p>
-              </div>
-            </details>`,
-              )
-              .join("\n")}
           </div>
         </div>
       </section>

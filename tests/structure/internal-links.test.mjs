@@ -37,15 +37,16 @@ test("the English Dragon comparison answers what happened to MacSpeech Dictate",
   assert.ok(read("de/compare/dragon-alternative/index.html").includes('datetime="2026-10-09"'));
 });
 
-test("each homepage's comparison teaser links to its own offline dictation guide", () => {
-  for (const [home, guide, label] of [
-    ["de/index.html", "/de/guides/offline-dictation-on-mac/", "Offline-Diktat für Mac"],
-    ["ja/index.html", "/ja/guides/offline-dictation-on-mac/", "Mac オフライン音声入力"],
-    ["index.html", "/guides/offline-dictation-on-mac/", "Offline Mac dictation"],
+test("each homepage footer links to the comparison hub and its own offline dictation guide", () => {
+  for (const [home, hub, guide, label] of [
+    ["de/index.html", "/de/compare/", "/de/guides/offline-dictation-on-mac/", "Offline-Diktat für Mac"],
+    ["ja/index.html", "/ja/compare/", "/ja/guides/offline-dictation-on-mac/", "Mac オフライン音声入力"],
+    ["index.html", "/compare/", "/guides/offline-dictation-on-mac/", "Offline Mac dictation"],
   ]) {
     const html = read(home);
-    const teaser = html.split('id="compare-teaser-title"')[1].split("</section>")[0];
-    assert.match(teaser, new RegExp(`<a href="${guide}">[\\s\\S]*?<strong>${label}</strong>`), home);
+    const footer = html.slice(html.lastIndexOf('<footer class="site-footer"'));
+    assert.ok(footer.includes(`<a href="${hub}">`), `${home}: hub`);
+    assert.ok(footer.includes(`<a href="${guide}">${label}</a>`), `${home}: guide`);
   }
 });
 

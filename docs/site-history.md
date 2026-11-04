@@ -5,6 +5,16 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Homepage cut to four sections — 2026-11-04
+
+The homepage kept the hero, privacy, pricing and downloads sections. Removed: the workflow steps,
+the Mac advisor (it stays on `/mac-model-guide/`), the trust strip, the comparison cards, the
+language list and the FAQ with its FAQPage node. The footer gained a link to the comparison hub;
+the header language menu already lists every language. 1440 px height went from about 10,390 px
+to 4,268 px. Bing baseline taken first (3 months to 11-01: 115 impressions, 197 Copilot citations,
+185 of them on `/guides/offline-dictation-on-windows/`, which this change does not touch). Every
+other FAQPage node matches a visible FAQ, so G5 needed no further change.
+
 ## `.html` twin pages removed — 2026-11-04
 
 The build wrote nine pages twice: `slug/index.html` and `slug.html` (privacy, terms, refund,
