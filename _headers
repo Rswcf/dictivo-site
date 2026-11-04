@@ -12,10 +12,6 @@
 # Pages applies every matching rule in file order and joins a header set twice with a comma.
 # These files never change in place, so their rules come after /assets/* and detach its
 # Cache-Control ("! ") before setting their own.
-/assets/ui/*
-  ! Cache-Control
-  Cache-Control: public, max-age=31536000, immutable
-
 /assets/favicon.svg
   ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
