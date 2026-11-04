@@ -1,5 +1,5 @@
 // Outcome and trial details sit together above the first download buttons.
-export const HOME_CONVERSION_LASTMOD = "2026-09-10";
+export const HOME_CONVERSION_LASTMOD = "2026-11-04";
 export const HOME_CONVERSION_LOCALE_LASTMOD = { ja: "2026-10-17", zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
 // The last body edit shared by every homepage: on 2026-10-09 the pricing introduction and
 // checkout note in all eleven languages (purchase wording, subscription price comparison,
@@ -11,70 +11,60 @@ export const HOME_CONVERSION_COPY = {
     title: "Speak your next draft.", emphasis: "Keep your audio local.",
     lede: "Press your shortcut, speak, and paste into the app you're using. Write emails, notes, and AI prompts with on-device dictation.",
     trial: "Try all local models free for 14 days. No card. No Dictivo account.",
-    steps: ["Press your shortcut", "Speak in Local mode", "Review and paste"],
     changelog: "What's new",
   },
   de: {
     title: "Sprechen Sie Ihren nächsten Entwurf.", emphasis: "Ihr Audio bleibt lokal.",
     lede: "Tastenkürzel drücken, sprechen und den Text in die aktuelle App einfügen. Diktieren Sie E-Mails, Notizen und KI-Prompts direkt auf Ihrem Gerät.",
     trial: "Alle lokalen Modelle 14 Tage kostenlos testen. Ohne Kreditkarte oder Dictivo-Konto.",
-    steps: ["Tastenkürzel drücken", "Im Local-Modus sprechen", "Prüfen und einfügen"],
     changelog: "Neuigkeiten",
   },
   fr: {
     title: "Dictez votre prochain brouillon.", emphasis: "Gardez l'audio en local.",
     lede: "Appuyez sur le raccourci, parlez et collez le texte dans votre application. Dictez e-mails, notes et prompts IA directement sur votre appareil.",
     trial: "Essayez tous les modèles locaux gratuitement pendant 14 jours. Sans carte bancaire ni compte Dictivo.",
-    steps: ["Appuyez sur le raccourci", "Parlez en mode Local", "Relisez et collez"],
     changelog: "Nouveautés",
   },
   es: {
     title: "Dicta tu próximo borrador.", emphasis: "Mantén el audio en tu equipo.",
     lede: "Pulsa el atajo, habla y pega el texto en la aplicación que estés usando. Dicta correos, notas y prompts de IA en tu dispositivo.",
     trial: "Prueba todos los modelos locales gratis durante 14 días. Sin tarjeta ni cuenta de Dictivo.",
-    steps: ["Pulsa el atajo", "Habla en modo Local", "Revisa y pega"],
     changelog: "Novedades",
   },
   it: {
     title: "Detta la tua prossima bozza.", emphasis: "L'audio resta sul dispositivo.",
     lede: "Premi la scorciatoia, parla e incolla il testo nell'app che stai usando. Detta email, note e prompt IA sul tuo dispositivo.",
     trial: "Prova tutti i modelli locali gratis per 14 giorni. Senza carta né account Dictivo.",
-    steps: ["Premi la scorciatoia", "Parla in modalità Local", "Rileggi e incolla"],
     changelog: "Novità",
   },
   nl: {
     title: "Spreek je volgende concept in.", emphasis: "Houd je audio lokaal.",
     lede: "Druk op je sneltoets, spreek en plak de tekst in de app die je gebruikt. Dicteer e-mails, notities en AI-prompts op je eigen apparaat.",
     trial: "Probeer alle lokale modellen 14 dagen gratis. Zonder betaalkaart of Dictivo-account.",
-    steps: ["Druk op je sneltoets", "Spreek in Local-modus", "Controleer en plak"],
     changelog: "Wat is er nieuw",
   },
   pt: {
     title: "Dite o seu próximo rascunho.", emphasis: "Mantenha o áudio local.",
     lede: "Pressione o atalho, fale e cole o texto no aplicativo que está usando. Use digitação por voz para escrever e-mails, notas e prompts de IA no seu dispositivo.",
     trial: "Experimente todos os modelos locais grátis por 14 dias. Sem cartão nem conta Dictivo.",
-    steps: ["Pressione o atalho", "Fale no modo Local", "Revise e cole"],
     changelog: "Novidades",
   },
   zh: {
     title: "把下一段草稿说出来。", emphasis: "音频留在本机。",
     lede: "按下快捷键，说出内容，再粘贴到正在使用的应用。用本地语音输入起草邮件、笔记和 AI 提示词。",
     trial: "全部本地模型免费试用 14 天，无需银行卡或 Dictivo 账号。",
-    steps: ["按下快捷键", "在 Local 模式下说话", "检查文字并粘贴"],
     changelog: "更新记录",
   },
   ja: {
     title: "次の下書きは、声で。", emphasis: "音声はデバイス内に。",
     lede: "Mac・Windows x64で使える音声入力アプリ。ショートカットを押して話し、メール、メモ、AIへの指示を入力できます。Localモードは、モデルのダウンロード後にオフラインで使えます。",
     trial: "すべてのローカルモデルを14日間無料体験。カード登録・Dictivoアカウント不要。",
-    steps: ["ショートカットを押す", "Localモードで話す", "確認して貼り付ける"],
     changelog: "更新履歴",
   },
   ko: {
     title: "다음 초안은 말로 쓰세요.", emphasis: "음성은 기기에 남깁니다.",
     lede: "단축키를 누르고 말한 뒤, 사용 중인 앱에 붙여넣으세요. 기기에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요.",
     trial: "모든 로컬 모델을 14일 무료 체험하세요. 카드나 Dictivo 계정이 필요 없습니다.",
-    steps: ["단축키 누르기", "Local 모드로 말하기", "확인하고 붙여넣기"],
     changelog: "업데이트 내역",
   },
 };

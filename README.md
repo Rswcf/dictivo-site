@@ -65,7 +65,7 @@ not follow. Three things still change the text on the way to `dist/`:
 3. `assets/site.js` changes text in the browser, for example the Windows download promotion.
 
 `HOME_CONVERSION_COPY` in `data/home-conversion.mjs` holds the fields only the homepage uses: the
-H1, lede, three workflow steps, trial terms, purchase note and changelog label. It shares no field with
+H1, lede, trial terms, purchase note and changelog label. It shares no field with
 `HOME_COPY`. `HOME_CONVERSION_LASTMOD` advances homepage sitemap dates when this copy changes; a
 newer release date still takes precedence.
 
