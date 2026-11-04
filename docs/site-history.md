@@ -5,6 +5,15 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Hero steps and pricing intro removed — 2026-11-04
+
+The hero's three-step list repeated its lede in every language ("Press your shortcut, speak, and
+paste…"), so the list and its copy are gone. `/pricing/` lost "The same three plans as on the
+homepage. The table below sets them side by side.", which described the layout. The other
+`/pricing/` sections stay: each states a fact the table does not (the 1,500 Cloud Fast minutes,
+what happens when the trial ends, the licence terms). `HOME_CONVERSION_LASTMOD` moved to
+2026-11-04 for this change and the four-section homepage.
+
 ## Titles and descriptions trimmed — 2026-11-04
 
 G12, after the Bing baseline. Four titles were over 70 characters and six descriptions over 160.

@@ -4373,7 +4373,6 @@ function renderPricingPage(code = "en") {
 
       <section class="doc-section" aria-labelledby="pricing-plans">
         <h2 id="pricing-plans">${html(copy.plansTitle)}</h2>
-        <p>${html(copy.plansIntro)}</p>
       </section>
       <div class="pricing-band" role="list" aria-labelledby="pricing-plans">
             ${tiers.map((tier, index) => renderTier(tier, index, { plainLinks: true })).join("\n")}
@@ -4490,7 +4489,6 @@ function renderHome(currentCode) {
             <div class="hero-statement">
               <h1 id="hero-title">${html(conversion.title)} <em>${html(conversion.emphasis)}</em></h1>
               <p class="hero-lede">${html(conversion.lede)}</p>
-              <ol class="hero-steps">${conversion.steps.map((step) => `<li>${html(step)}</li>`).join("")}</ol>
               <div class="hero-actions hero-actions--top" aria-label="Download Dictivo" data-platform-downloads>
                 <a class="button button-light download-link" href="${attr(downloadUrl("macos", "hero_top_mac"))}"${downloadData("macos", "hero_top_mac")}>${html(t.hero.download)}</a>
                 ${hasWindowsRelease ? `<a class="button button-outline download-link" href="${attr(downloadUrl("windows", "hero_top_windows"))}"${downloadData("windows", "hero_top_windows")}>${html(liveWindowsCopy.exeButton)}</a>` : ""}
