@@ -11,7 +11,7 @@ const raw = () => readFileSync(`${dist}security/index.html`, "utf8");
 const page = () => flat(raw());
 
 test("security page is the same bytes at both paths", () => {
-  assert.equal(readFileSync(`${dist}security.html`, "utf8"), raw());
+  assert.equal(readFileSync(`${dist}security/index.html`, "utf8"), raw());
 });
 
 test("the false 'do not silently switch' sentence is gone (M10, Push A)", () => {

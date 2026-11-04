@@ -32,7 +32,7 @@ test("a current release note with ' and \" passes the public output check", () =
 
     const generate = run(work, "generate-site.mjs");
     assert.equal(generate.status, 0, generate.stderr);
-    const changelog = readFileSync(join(work, "dist/changelog.html"), "utf8");
+    const changelog = readFileSync(join(work, "dist/changelog/index.html"), "utf8");
     assert.ok(changelog.includes("Microsoft's &quot;Visual C++&quot; files &amp; needs"), "the generator did not render the test bullet");
 
     const check = run(work, "check-public-output.mjs");

@@ -5,6 +5,12 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## `.html` twin pages removed — 2026-11-04
+
+The build wrote nine pages twice: `slug/index.html` and `slug.html` (privacy, terms, refund,
+contact, about, security, changelog and the two privacy articles). Only the slug form is written
+now. The existing `_redirects` lines already send each `slug.html` to `/slug/` with a 301, so old
+links keep working. `tests/structure/html-twins.test.mjs` checks all three facts per page.
 
 ## Orphan assets removed — 2026-11-04
 
@@ -15,6 +21,7 @@ Cloudflare GraphQL Analytics API showed 0 requests to any of them from 2026-10-2
 film, `/assets/dictivo-cinematic-demo.mp4` now 301s to the current film. The `/assets/ui/*`
 cache rule is gone with the folder. `dictivo-demo-poster.jpg` stays: `security.html` uses it as
 its social image.
+
 ## Kickers and eyebrows removed — 2026-11-04
 
 Every page lost the small label above its h1 (`doc-eyebrow`, 176 pages) and the labels above
