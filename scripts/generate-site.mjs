@@ -6373,7 +6373,6 @@ copyFileSync(resolve(root, "_headers"), resolve(outDir, "_headers"));
 copyFileSync(resolve(root, "robots.txt"), resolve(outDir, "robots.txt"));
 copyFileSync(resolve(root, "a466589ed8677749e2b7fdd18c7ddcf6.txt"), resolve(outDir, "a466589ed8677749e2b7fdd18c7ddcf6.txt"));
 copyFileSync(resolve(root, "BingSiteAuth.xml"), resolve(outDir, "BingSiteAuth.xml"));
-copyFileSync(resolve(root, "security.html"), resolve(outDir, "security.html"));
 write("security/index.html", readFileSync(resolve(root, "security.html"), "utf8"));
 
 for (const locale of LOCALES) {
@@ -6415,7 +6414,6 @@ for (const locale of LOCALES) {
 write("downloads.json", renderDownloadsJson());
 write("_redirects", renderRedirects());
 write("sitemap.xml", renderSitemap());
-write("changelog.html", renderChangelog());
 write("changelog/index.html", renderChangelog());
 if (!IMPRESSUM_READY) {
   console.warn(
@@ -6427,7 +6425,6 @@ if (!IMPRESSUM_READY) {
 }
 
 for (const page of TRUST_PAGES) {
-  write(`${page.slug}.html`, renderTrustPage(page, "en"));
   write(`${page.slug}/index.html`, renderTrustPage(page, "en"));
   if (hasLocalizedTrustPage(page)) {
     for (const locale of LOCALES.filter((item) => item.code !== "en")) {

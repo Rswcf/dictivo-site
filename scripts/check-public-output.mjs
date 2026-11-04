@@ -105,7 +105,6 @@ const publicWindowsLaunchContentSource = [
   /Windows용 다운로드/,
 ];
 const homeFiles = ["index.html", "de/index.html", "fr/index.html", "es/index.html", "it/index.html", "nl/index.html", "pt/index.html", "zh/index.html", "ja/index.html", "ko/index.html", "zh-hant/index.html"];
-const requiredTrustFiles = ["privacy.html", "terms.html", "refund.html", "contact.html", "about.html"];
 const requiredLocalizedTrustFiles = TRUST_PAGES.filter((page) => page.locales).flatMap((page) =>
   LOCALES.filter((locale) => locale.code !== "en").map((locale) => `${locale.code}/${page.slug}/index.html`),
 );
@@ -206,12 +205,6 @@ if (!existsSync(publicRoot)) {
 }
 
 const failures = [];
-
-for (const file of requiredTrustFiles) {
-  if (!existsSync(resolve(publicRoot, file))) {
-    failures.push(`${file}: required trust page is missing`);
-  }
-}
 
 for (const file of requiredCleanTrustFiles) {
   if (!existsSync(resolve(publicRoot, file))) {
@@ -465,9 +458,9 @@ function verifyWindowsDownloads() {
 }
 
 function verifyReleaseNotes() {
-  const changelogPath = resolve(publicRoot, "changelog.html");
+  const changelogPath = resolve(publicRoot, "changelog/index.html");
   if (!existsSync(changelogPath)) {
-    failures.push("changelog.html: missing release notes page");
+    failures.push("changelog/index.html: missing release notes page");
     return;
   }
 
@@ -476,7 +469,7 @@ function verifyReleaseNotes() {
   // Escape with the generator's own html(): body text keeps ' as is, so "Microsoft's" must match.
   for (const text of [current.title, ...current.bullets]) {
     if (!changelog.includes(html(text))) {
-      failures.push(`changelog.html: missing current release note ${JSON.stringify(text)}`);
+      failures.push(`changelog/index.html: missing current release note ${JSON.stringify(text)}`);
     }
   }
 

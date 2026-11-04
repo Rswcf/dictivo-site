@@ -50,7 +50,10 @@ Do not run these scripts locally unless the task is about them:
 - `site.css` styles only classes that a built page or `assets/site.js` uses.
   `tests/structure/css-classes.test.mjs` fails otherwise; delete the rule with the markup.
 - Edit Simplified Chinese (`zh`) copy only. The build converts it to `zh-hant`.
-- `security.html` at the root is hand-maintained and copied as is. It gets no shared header or footer.
+- `security.html` at the root is hand-maintained and copied as is to `/security/`. It gets no shared
+  header or footer.
+- Pages live at `slug/index.html` only. Old `slug.html` addresses get a 301 from the build
+  (`tests/structure/html-twins.test.mjs`).
 - The root `_redirects` holds only the three checkout lines. The build writes every other rule.
 - "Last updated" stamps, `dateModified` and sitemap `lastmod` come from `*_LASTMOD` constants. Bump
   the constant when the content it stamps changes. README lists them.

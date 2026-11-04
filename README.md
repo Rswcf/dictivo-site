@@ -38,7 +38,7 @@ Release-specific changelog copy lives in `data/release-notes.mjs`, keyed by the
 exact desktop version. Unknown future versions render a deliberately generic
 entry instead of inheriting details from the previous release. Add the new
 version's notes in the desktop release preparation PR, then verify the generated
-`dist/changelog.html` after release metadata sync.
+`dist/changelog/index.html` after release metadata sync.
 
 This is not a style preference. Until 2026-11-03 homepage copy passed through six override stages,
 and an audit that read the first one reported about 178 Mac-only strings as live defects. None of
@@ -171,7 +171,7 @@ carries any other date, so the constant cannot drift away from what is rendered.
 ### `security.html` is hand-maintained, not generated
 
 `security.html` at the repository root is copied verbatim by `scripts/generate-site.mjs` to
-`dist/security.html`, and the same bytes are written to `dist/security/index.html`. Edit the root
+`dist/security/index.html` (served at `/security/`; `/security.html` redirects there). Edit the root
 file. Nothing in `data/` produces it, and it does not inherit the shared header, footer, locale
 switcher or asset fingerprinting that generated pages get — so a change to those has to be made
 here by hand as well.
