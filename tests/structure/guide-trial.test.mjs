@@ -9,6 +9,7 @@ import { SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD } from "../../data/speech-to-text-mac-
 import { ONE_TIME_LICENSE_GUIDE_LASTMOD } from "../../data/one-time-license-guide.mjs";
 import { NO_SUBSCRIPTION_GUIDE_LASTMOD } from "../../data/no-subscription-guide.mjs";
 import { CLAUDE_CODE_GUIDE_LASTMOD } from "../../data/claude-code-guide.mjs";
+import { readyDocsEntries } from "../../data/docs-index.mjs";
 
 const read = path => readFileSync(new URL(`../../dist/${path}`, import.meta.url), "utf8");
 const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
@@ -20,6 +21,10 @@ const cases = [
   ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD],
   ["guides/dictation-app-mac-windows-one-time-license/", "/", "both", "one_time_guide_mac", ONE_TIME_LICENSE_GUIDE_LASTMOD],
   ["guides/dictate-into-claude-code-and-cursor-on-mac/", "/", "macos", "claude_code_guide_mac", CLAUDE_CODE_GUIDE_LASTMOD],
+  // Docs pages with a trial panel (the install page), once built (data/docs-index.mjs).
+  ...readyDocsEntries({ windows: hasWindowsRelease })
+    .filter((entry) => entry.trialSource)
+    .map((entry) => [`docs/${entry.slug}/`, "/", "both", `${entry.trialSource}_mac`, entry.lastmod]),
 ];
 
 test("comparison guide readers can download the right platform and reach localized setup and terms", () => {

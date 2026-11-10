@@ -22,6 +22,15 @@ export const FIRST_PUBLISHED = Object.freeze({
   "guides/best-dictation-software": "2026-10-10", // English only
   "guides/dictation-app-mac-windows-one-time-license": "2026-11-10", // English only
   "guides/dictate-into-claude-code-and-cursor-on-mac": "2026-11-10", // English only
+  // The docs section (Batch B2), English only. Placeholder: the release commit sets the merge day.
+  "docs/system-requirements": "2026-11-10",
+  "docs/install-and-uninstall": "2026-11-10",
+  "docs/macos-permissions": "2026-11-10",
+  "docs/models-and-languages": "2026-11-10",
+  "docs/offline": "2026-11-10",
+  "docs/connections": "2026-11-10",
+  "docs/license-and-devices": "2026-11-10",
+  "docs/updates-and-renewal": "2026-11-10",
   "privacy/where-dictation-audio-goes": "2026-06-07", // b431ef4, all ten languages
   "privacy/local-dictation-network-test": "2026-06-07", // b431ef4, all ten languages
   compare: "2026-05-25", // e3b0593 (English) and 61a8a25 (localized), the first five comparisons

@@ -7,6 +7,7 @@ import { html } from "./lib/html.mjs";
 import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { LOCAL_OFFER, introPriceExpired } from "../data/local-offer.mjs";
+import { readyDocsEntries } from "../data/docs-index.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
@@ -169,6 +170,9 @@ const requiredGeoFiles = [
   "ja/guides/mac-dictation-not-working/index.html",
   "media-kit/index.html",
   "pricing/index.html",
+  // The docs index and every docs page whose copy says ready: true (data/docs-index.mjs).
+  "docs/index.html",
+  ...readyDocsEntries({ windows: hasWindowsRelease }).map((entry) => `docs/${entry.slug}/index.html`),
 ];
 
 // Traditional Chinese pages are converted from Simplified copy, so guard both scripts.
