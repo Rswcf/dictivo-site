@@ -16,7 +16,10 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   license_cloud_fast_session and cloud_fast_deactivate_device, App.tsx and SettingsView.tsx (when
 //   the entitlement is refreshed), serviceHosts.ts (pre-0.3.51 use);
 // - api.lemonsqueezy.com: license.rs (activate, validate, deactivate; instance_name on activation,
-//   instance_id afterwards), lib.rs restore_from_credential_store;
+//   instance_id afterwards), lib.rs restore_from_credential_store. The instance_name is a label the
+//   app builds, "Dictivo on <navigator.platform>" (SettingsView.tsx handleActivate, App.tsx
+//   localInstanceName), not the computer's name; the in-app Connections row says otherwise;
+// - the Cloud Fast device label: license.rs cloud_fast_device_label ("Dictivo on <os> <arch>");
 // - huggingface.co: private_fast.rs (second download source), model_download.rs (tried after the first);
 // - Run check: network_diagnostics.rs (four probes, the placeholder key);
 // - the in-app wording of When / What it sends / If your network blocks it: displayLanguage.ts
@@ -97,14 +100,14 @@ export function docsConnectionsCopy({ windows }) {
                 `${code("/health")} (Run check)`,
               ].join("; ") },
               "Only for Cloud Fast: checking your subscription or free minutes while Cloud Fast is selected or after you change a Cloud Fast license, starting a Cloud Fast session, transcribing a Cloud Fast recording, and signing a device out of Cloud Fast. Also when you open Account & Billing with a Cloud Fast license stored, and Run check. Versions before 0.3.51 also used it for trial reports, statistics and purchase claims.",
-              "For a transcription: the recording itself, how long it is, its language, its audio format and the output style, for example email. Alongside: a session id, your Cloud Fast license key and its activation id if you have one, this device's id and name, and your platform and app version.",
+              "For a transcription: the recording itself, how long it is, its language, its audio format and the output style, for example email. Alongside: a session id, your Cloud Fast license key and its activation id if you have one, this device's id, a short device label that Dictivo creates, and your platform and app version.",
               "Local dictation keeps working. Cloud Fast does not.",
             ],
             [
               "api.lemonsqueezy.com",
               { html: [code("/v1/licenses/activate"), code("/v1/licenses/validate"), code("/v1/licenses/deactivate")].join("; ") },
               "When you activate, refresh or remove a license, Local or Cloud Fast, and once after a reinstall restores one. Run check. Not at every launch.",
-              "Your license key and this computer's name. A refresh or a removal sends the license key and its activation id.",
+              "Your license key and a short device label that Dictivo creates. A refresh or a removal sends the license key and its activation id.",
               "Dictivo keeps working with a license that is already active. Activating, refreshing or removing one, or restoring one after a reinstall, needs this connection.",
             ],
             [

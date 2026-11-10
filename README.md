@@ -137,6 +137,54 @@ answer, the tables, the schema and the banned words. `tests/structure/b1-links.t
 English footer and compare hub links and that every related-table and `/guides/` link on the five
 pages lands on a built page. Tests import B1 dates from the data files; they never type one.
 
+### Docs section
+
+`/docs/` and eight English reference pages at `/docs/<slug>/` describe how the desktop app works:
+system requirements, install and uninstall, macOS permissions, models and languages, offline
+behavior, network connections, license and devices, updates and renewal. They are English only;
+other languages get no docs page and no docs footer link.
+
+One registry, `data/docs-index.mjs`, lists the pages in the order a new user needs them
+(`DOCS_PAGES`). Every shared surface iterates it: the write loop, the sitemap, `llms.txt`, the
+"All Dictivo docs" section at the end of each page, the index list, the English footer link (column
+1, after Security), `scripts/check-public-output.mjs` and `tests/structure/docs-pages.test.mjs`. Each
+page has one data file, `data/docs-<slug>.mjs`, that exports a copy function and its
+`DOCS_*_LASTMOD`. A page reaches `dist/` only when its copy says `ready: true`; a page that is not
+ready is not built, listed or linked. All eight are ready, and the test asserts it.
+
+Pages render through `renderDocsPage(entry)`, a thin wrapper around `renderDictationGuidePage()`:
+the method line in `doc-environment`, a short answer, an optional quick-reference table, the
+sections, the generated docs nav, a visible FAQ and the sources. The index has its own
+`renderDocsIndexPage()` with `CollectionPage`, `ItemList` and a two-crumb breadcrumb. Each page
+carries `Organization`, `TechArticle`, `FAQPage` and a three-crumb breadcrumb (Home › Docs › page).
+The `FAQPage` node is a deliberate exception to "newer guides carry a visible FAQ but no FAQ
+schema": it is built from the same array as the visible FAQ, so the two cannot differ.
+
+Every fact comes from the desktop app's source at a release tag, or from a page this site already
+publishes. `DOCS_CHECKED` and `DOCS_CHECKED_VERSION` in `data/docs-shared.mjs` are the day and the
+tag the facts were read from, and the method line prints them. Pages never print
+`release.version`: a deploy rewrites `data/release.json`, and a page would then name a build nobody
+read. If you re-read the facts against a newer tag, bump both constants. Each data file lists its
+source lines in its header comment.
+
+The banned strings of `scripts/check-public-output.mjs` shape the copy. Name the license host only
+as the hostname `api.lemonsqueezy.com`, never the merchant's brand. Name the model fallback only as
+the host `huggingface.co`, never its URL path, because the path names the speech engine. Write "the
+local speech engine". Only the license page and the updates page show a price, each once, as a price
+token; their sitemap `lastmod` is at least `PRICING_LASTMOD`. Only the install page carries the trial
+panel (`docs_install`).
+
+To add a page:
+
+1. Write `data/docs-<slug>.mjs` on the model of `data/docs-updates-and-renewal.mjs`.
+2. Add it to `DOCS_PAGES` in `data/docs-index.mjs`.
+3. Add its route to `data/first-published.mjs`.
+4. Add `tests/wording/docs-<slug>.test.mjs`.
+5. Add its constant to the table under "Last-updated constants".
+
+If the page starts with `ready: false`, the all-ready assertion and the in-site link check in
+`tests/structure/docs-pages.test.mjs` need a skip for it until it ships.
+
 ### Homepage copy assumes Windows is public
 
 `data/home-copy.mjs` states that Mac and Windows x64 are available. Until 2026-11-03 a
@@ -275,6 +323,15 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `ONE_TIME_LICENSE_GUIDE_LASTMOD` | `data/one-time-license-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/dictation-app-mac-windows-one-time-license/`, never older than `PRICING_LASTMOD`; `ONE_TIME_LICENSE_GUIDE_CHECKED` dates the competitor rows |
 | `NO_SUBSCRIPTION_GUIDE_LASTMOD` | `data/no-subscription-guide.mjs` | the same for `/guides/mac-dictation-app-no-subscription/`; `NO_SUBSCRIPTION_GUIDE_CHECKED` dates the competitor rows |
 | `CLAUDE_CODE_GUIDE_LASTMOD` | `data/claude-code-guide.mjs` | the same for `/guides/dictate-into-claude-code-and-cursor-on-mac/`; `CLAUDE_CODE_GUIDE_CHECKED` dates the rows read from the Claude Code and Cursor documentation |
+| `DOCS_INDEX_LASTMOD` | `data/docs-index.mjs` | visible stamp + sitemap + `dateModified` for `/docs/` |
+| `DOCS_SYSTEM_REQUIREMENTS_LASTMOD` | `data/docs-system-requirements.mjs` | visible stamp + sitemap + `dateModified` for `/docs/system-requirements/` |
+| `DOCS_INSTALL_LASTMOD` | `data/docs-install-and-uninstall.mjs` | the same for `/docs/install-and-uninstall/` |
+| `DOCS_PERMISSIONS_LASTMOD` | `data/docs-macos-permissions.mjs` | the same for `/docs/macos-permissions/` |
+| `DOCS_MODELS_LASTMOD` | `data/docs-models-and-languages.mjs` | the same for `/docs/models-and-languages/` |
+| `DOCS_OFFLINE_LASTMOD` | `data/docs-offline.mjs` | the same for `/docs/offline/` |
+| `DOCS_CONNECTIONS_LASTMOD` | `data/docs-connections.mjs` | the same for `/docs/connections/` |
+| `DOCS_LICENSE_LASTMOD` | `data/docs-license-and-devices.mjs` | the same for `/docs/license-and-devices/`; the sitemap reports at least `PRICING_LASTMOD` |
+| `DOCS_UPDATES_LASTMOD` | `data/docs-updates-and-renewal.mjs` | the same for `/docs/updates-and-renewal/`; the sitemap reports at least `PRICING_LASTMOD`. `DOCS_CHECKED` and `DOCS_CHECKED_VERSION` (`data/docs-shared.mjs`) date the facts of all nine docs pages and name the app tag they were read from |
 | `COMPARE_HUB_LOCALE_LASTMOD` | `data/compare-hub-guidance.mjs` | sitemap for `/compare/` per language, with `COMPARE_HUB_GUIDANCE_LASTMOD` and the comparison pages it lists |
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |

@@ -5,6 +5,57 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Batch B2 docs section — 2026-11-10
+
+The site has a docs section with nine new English URLs: `/docs/`, `/docs/system-requirements/`,
+`/docs/install-and-uninstall/`, `/docs/macos-permissions/`, `/docs/models-and-languages/`,
+`/docs/offline/`, `/docs/connections/`, `/docs/license-and-devices/` and
+`/docs/updates-and-renewal/`. They are reference pages about the desktop app, not comparisons.
+
+The pages render through `renderDictationGuidePage()` behind a thin `renderDocsPage()` wrapper,
+not through `renderAnswerGuidePage()`: a reference page needs no intent table, fact table or
+"What is Dictivo?" block. The index has its own `renderDocsIndexPage()`. One registry,
+`data/docs-index.mjs`, feeds the write loop, the sitemap, `llms.txt`, the docs nav, the index, the
+footer link and the output check. A page is built only when its data file says `ready: true`; all
+eight do. Each page has a three-crumb breadcrumb and a `FAQPage` node built from its visible FAQ.
+
+Every fact was read from the desktop app's source at tag `v0.3.57` or from a page the site already
+publishes. `DOCS_CHECKED` (2026-11-10) and `DOCS_CHECKED_VERSION` (0.3.57) record the day and the
+tag; the method line on every page prints them. Nobody tested the app by hand for these pages. The
+minimum macOS version is stated as "the app declares macOS 10.13 or later": the source pins none,
+so it was read from `LSMinimumSystemVersion` in the installed 0.3.57 `Info.plist`. Start at login
+needs macOS 13 or later. One fact stays open: what the Windows uninstaller leaves behind has no
+check in the Windows test VM. The install page names only `%LOCALAPPDATA%\Dictivo` and the Credential
+Manager entries.
+
+The English footer links `/docs/` in column 1, after Security. `/security/` gets three edits in
+its network section: one sentence links `/docs/connections/` for paths, triggers and blocked
+behavior per host; the licence-service row says the app sends a short device label it creates,
+not the machine name; and the trial-milestones item says that from 0.3.56 the trial reports also
+carry the acquisition channel if you agree to share it. Its "Last reviewed" date moved to
+2026-11-10. Its sitemap `lastmod` still follows `release.updatedAt`. The stale "first signed build
+is 0.3.55" comment in `data/release-notes.mjs` is gone.
+
+Not changed: every B1 and earlier page, its data file and its date (only the footer under the
+generated pages changed), the Windows offline guide's `<main>`, the homepages, `/pricing/` and
+`assets/`.
+
+Follow-ups for the desktop app (not changed here):
+
+- Settings › Privacy › Connections says licence activation sends "this computer's name". The code
+  sends a label it builds, "Dictivo on" plus the platform name (`SettingsView.tsx` handleActivate,
+  `App.tsx` localInstanceName). The Cloud Fast row says "this device's id and name"; the code sends
+  a label of the form "Dictivo on macos aarch64" (`license.rs` cloud_fast_device_label).
+- The app.dictivo.app row in the same table does not mention the acquisition channel that the
+  trial reports carry after you agree to "Share how you found Dictivo (optional)"
+  (`trialCensus.ts:71`).
+
+Follow-up for the site (not changed in this batch): the Homebrew FAQ of the English offline Mac
+guide (`data/offline-dictation-guide.mjs`, around line 314) says
+`brew uninstall --zap --cask dictivo` removes the app with its settings, license file and models.
+The zap leaves the Keychain items named `com.dictivo.desktop`, which hold backup copies of the
+licenses. `/docs/install-and-uninstall/` says so.
+
 ## Batch B1 answer pages — 2026-11-10
 
 Five English guides now share one answer-page shape and one renderer, `renderAnswerGuidePage()`.

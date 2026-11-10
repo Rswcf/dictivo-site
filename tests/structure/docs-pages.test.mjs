@@ -40,10 +40,6 @@ function builtFile(href) {
   return `${dist}${path.slice(1)}${path.endsWith("/") ? "index.html" : ""}`;
 }
 
-// A page task may link a sibling whose own task has not landed yet. Task 9 removes this skip once
-// every entry is ready.
-const pendingSibling = (href) => notReady.some((entry) => href.replace(BASE, "").startsWith(docsPath(entry.slug)));
-
 const ORDER = [
   "system-requirements",
   "install-and-uninstall",
@@ -76,6 +72,9 @@ test("the registry lists eight pages in the order a new user needs them, each wi
     assert.ok(firstPublished(entry.route, "en"), entry.slug);
   }
   assert.ok(ready.length >= 1, "no docs page is ready");
+  // All eight pages shipped together (Task 9). A new page may start with ready: false, but then this
+  // assertion and the sibling-link check below need a skip again.
+  assert.deepEqual(notReady.map((entry) => entry.slug), [], "every docs page is ready");
 });
 
 test("a page that is not ready is not built, listed or linked", () => {
@@ -234,7 +233,7 @@ test("every in-site link on a docs page lands on a built page", () => {
   for (const file of ["docs/index.html", ...ready.map((entry) => fileOf(entry.slug))]) {
     for (const href of hrefs(read(file))) {
       const built = builtFile(href);
-      if (!built || pendingSibling(href)) continue;
+      if (!built) continue;
       assert.ok(existsSync(built), `${file}: ${href} has no built page`);
     }
   }

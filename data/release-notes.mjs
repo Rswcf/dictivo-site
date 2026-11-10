@@ -8,7 +8,6 @@ export const RELEASE_NOTES = Object.freeze({
       "Paste Last now tells you whether the text was sent to the active app or copied for manual paste. Mac keeps its existing automatic paste behavior.",
     ]),
   }),
-  // Desktop 0.3.54 (spec 2026-10-09 §8.2 step 4). No Windows signing bullet: the first signed build is 0.3.55.
   "0.3.54": Object.freeze({
     date: "2026-10-10",
     title: "An optional reminder before your Local trial ends.",
