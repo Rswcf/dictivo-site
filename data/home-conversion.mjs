@@ -1,11 +1,12 @@
 // Outcome and trial details sit together above the first download buttons.
 export const HOME_CONVERSION_LASTMOD = "2026-11-04";
 export const HOME_CONVERSION_LOCALE_LASTMOD = { ja: "2026-10-17", zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
-// The last body edit shared by every homepage: on 2026-10-09 the pricing introduction and
-// checkout note in all eleven languages (purchase wording, subscription price comparison,
-// license key, refund). Before that, the contextual offline-guide link (2026-09-29, d78a233).
+// The last body edit shared by every homepage: on 2026-11-10 the compare hub link in the header
+// and under the pricing tiers. Before that, the pricing introduction and checkout note in all
+// eleven languages (2026-10-09: purchase wording, subscription price comparison, license key,
+// refund) and the contextual offline-guide link (2026-09-29, d78a233).
 // Track shared body edits independently of the hero copy and desktop releases.
-export const HOME_SHARED_CONTENT_LASTMOD = "2026-10-09";
+export const HOME_SHARED_CONTENT_LASTMOD = "2026-11-10";
 export const HOME_CONVERSION_COPY = {
   en: {
     title: "Speak your next draft.", emphasis: "Keep your audio local.",

@@ -2144,6 +2144,7 @@ function renderHeader(currentCode, t, options = {}) {
       <nav class="nav-links" id="site-nav" aria-label="Site navigation">
         <a href="${attr(pricingHref(currentCode))}">${html(t.nav.pricing)}</a>
         <a href="${attr(macGuidePath(currentCode))}">${html(macAdvisorCopy(currentCode).navLabel)}</a>
+        <a href="${attr(localizedComparePath(currentCode))}">${html(t.nav.compare)}</a>
       </nav>
       <div class="header-actions">
         ${renderLanguageMenu(currentCode, t, options.hrefForLocale)}
@@ -4429,6 +4430,14 @@ function renderPricingPage(code = "en") {
 }
 
 // Three columns: product, privacy and company, guides. They need no headings to read as groups.
+// The second footnote under the homepage tiers, for visitors still choosing an app. Each link
+// text is the heading of the page it opens: the compare hub's h1, and in English the buyer guide.
+function renderHomeBuyerLinks(currentCode) {
+  const links = [`<a href="${attr(localizedComparePath(currentCode))}">${html(compareHubCopy(currentCode).hubH1)}</a>`];
+  if (currentCode === "en") links.push(`<a href="${attr(bestDictationSoftwarePath())}">${html(bestDictationSoftwareCopyForRender().navLabel)}</a>`);
+  return `<p class="pricing-footnote">${links.join(" · ")}</p>`;
+}
+
 function renderHomeFooterLinks(currentCode, t) {
   const ui = trustUiCopy(currentCode);
   const columns = [
@@ -4587,6 +4596,7 @@ function renderHome(currentCode) {
           </div>
 
           <p class="pricing-footnote">${html(t.pricing.footnote)}</p>
+          ${renderHomeBuyerLinks(currentCode)}
           <div class="checkout-pending" id="checkout-local-pending" tabindex="-1" role="status">
             <strong>${html(t.pricing.checkoutTitle)}</strong>
             <p>${html(t.pricing.checkoutBody)}</p>
