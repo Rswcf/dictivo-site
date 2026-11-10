@@ -5,6 +5,53 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Batch B3 Japanese buyer pages — 2026-11-11
+
+Two new Japanese answer pages, each paired by hreflang with its English twin:
+`/ja/guides/best-speech-to-text-apps-for-mac/` (twin `/guides/best-speech-to-text-apps-for-mac/`, a
+ten-row fact table) and `/ja/guides/mac-dictation-app-no-subscription/` (twin
+`/guides/mac-dictation-app-no-subscription/`, the 買い切り page, twelve rows). Both render through
+`renderAnswerGuidePage()` with code `ja` and have the B1 shape: a dated answer, the "What is
+Dictivo?" block, intent rows, a fact table with a check date per row, a method note signed
+「Dictivo チーム」, the trial panel, sections, a FAQ, related pages and references. Each page shows
+the Homebrew command once. The copy was written in Japanese, not translated sentence by sentence.
+
+Each pair is registered the way the troubleshooting guides were on 2026-10-09: a `*_PATHS` map,
+`translatedGuideHeadTags()` on both pages, `translatedGuideSitemapAlternates()` on both sitemap
+entries and the language menu through `hrefForLocale`. The `ja` path is registered only while the
+data file's `JA_SPEECH_GUIDE_READY` or `JA_NO_SUBSCRIPTION_GUIDE_READY` is true; both are true now.
+The English twins kept their `<main>`, their `*_LASTMOD` and their `datePublished`; only their head
+and sitemap entry gained the `ja` alternate. The Japanese pages are linked from the Japanese footer,
+`/ja/llms.txt` (the speech-to-text page replaces the English line there) and the Japanese offline
+guide, which gained one link to each page in sections 2 and 3. Both pages were first published and
+last updated on 2026-11-11.
+
+Competitor facts come from the competitor facts file and the price spot-check of 2026-11-10
+(`JA_*_CHECKED`); the Voice Type row keeps the site's 2026-09-29 facts. No source covers other apps'
+Japanese support, so only Dictivo's is stated. Gaps read 記載なし. Dictivo prices come from price
+tokens. The UI labels were read from the desktop app at `v0.3.57`: マイク（必須）, アクセシビリティ
+（推奨） and 「言語を自動検出」. 「Set up Local」 stays in English because the app shows it in English.
+
+Voibe fix: the `de`, `zh` (and so `zh-hant`) and `ja` offline Mac guides showed Voibe prices of
+2026-09-29. They now show the 2026-11-10 spot-check ($9.90 a month, $99 a year or $199 once per
+seat) with a per-row check date (`OFFLINE_GUIDE_VOIBE_CHECKED`) and a matching Voibe pricing
+reference. These four pages and the English one were re-dated to 2026-11-11. The six offline guides
+without a price column (`fr es it nl pt ko`) show no Voibe price, keep the shared reference list and
+were not re-dated.
+
+`--zap` fix: the English offline Mac guide's Homebrew FAQ said `brew uninstall --zap --cask dictivo`
+removes the app with its settings, license file and models. It now says the zap moves five folders
+to the Trash and the Keychain items named `com.dictivo.desktop`, which hold backup copies of the
+licenses, stay. A related row links `/docs/install-and-uninstall/`. This closes the B2 follow-up.
+
+Not changed: the Windows offline guide's `<main>` and date, the homepages, `/pricing/`, the
+comparison pages, the English B1 and B2 copy, `OFFLINE_DICTATION_GUIDE_LASTMOD` and
+`OFFLINE_GUIDE_PRICES_CHECKED` (both 2026-09-29).
+
+Evidence weakness: Google Search Console shows only troubleshooting queries for Japan. The buyer
+demand evidence is one AI-answer probe (P8), asked in Japanese, which three engines answered without
+Dictivo. Nobody sampled Japanese search results; the intent rows are unverified phrasings.
+
 ## Batch B2 docs section — 2026-11-10
 
 The site has a docs section with nine new English URLs: `/docs/`, `/docs/system-requirements/`,

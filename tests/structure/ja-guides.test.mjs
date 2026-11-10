@@ -23,7 +23,8 @@ import {
 // Batch B3: two Japanese answer guides, each paired by hreflang with its English twin. A pair is
 // registered behind its data file's *_READY flag: while it is false nothing Japanese is built and
 // the English twin keeps its English-only head; once it is true the Japanese page must meet the
-// shared contract below. Wording tests per page live in tests/wording/ja-*.test.mjs.
+// shared contract below. Both B3 pairs are released; the not-ready branch stays for future pairs.
+// Wording tests per page live in tests/wording/ja-*.test.mjs.
 const dist = new URL("../../dist/", import.meta.url).pathname;
 const read = (path) => readFileSync(`${dist}${path}`, "utf8");
 const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
@@ -78,7 +79,22 @@ const PAIRS = [
     jaLlmsEnglishLine: false,
   },
 ];
-const unbuiltJaPaths = () => PAIRS.filter((pair) => !pair.ready).map((pair) => pair.jaPath);
+
+// Every in-site href (`/…` or `https://dictivo.app/…`, query and fragment stripped) lands on a file in dist/.
+const assertInSiteLinksResolve = (body) => {
+  for (const [, href] of body.matchAll(/href="([^"]+)"/g)) {
+    if (!href.startsWith("/") && !href.startsWith("https://dictivo.app/")) continue;
+    if (href.startsWith("//")) continue;
+    const path = href.replace(/^https:\/\/dictivo\.app/, "").replaceAll("&amp;", "&").split("#")[0].split("?")[0];
+    const file = `${dist}${path.slice(1)}${path.endsWith("/") ? "index.html" : ""}`;
+    assert.ok(existsSync(file), `${href} does not resolve`);
+  }
+};
+
+test("both Batch B3 Japanese answer guides are released", () => {
+  assert.equal(JA_SPEECH_GUIDE_READY, true, "JA_SPEECH_GUIDE_READY");
+  assert.equal(JA_NO_SUBSCRIPTION_GUIDE_READY, true, "JA_NO_SUBSCRIPTION_GUIDE_READY");
+});
 
 for (const pair of PAIRS) {
   const { route, enPath, jaPath, ready, lastmod, checked, copy, idPrefix, introSource, trialSource, enNavLabel, enLastmod, jaLlmsEnglishLine } = pair;
@@ -268,16 +284,7 @@ for (const pair of PAIRS) {
   });
 
   test(`${jaPath}: every in-site link lands on a built page`, { skip: !ready }, () => {
-    const skipped = unbuiltJaPaths();
-    for (const [, href] of main(page()).matchAll(/href="([^"]+)"/g)) {
-      if (!href.startsWith("/") && !href.startsWith("https://dictivo.app/")) continue;
-      if (href.startsWith("//")) continue;
-      const path = href.replace(/^https:\/\/dictivo\.app/, "").replaceAll("&amp;", "&").split("#")[0].split("?")[0];
-      // A pair whose page is not built yet (the other page task's worktree). Task 5 removes this.
-      if (skipped.includes(path)) continue;
-      const file = `${dist}${path.slice(1)}${path.endsWith("/") ? "index.html" : ""}`;
-      assert.ok(existsSync(file), `${href} does not resolve`);
-    }
+    assertInSiteLinksResolve(main(page()));
   });
 
   test(`${jaPath}: downloads carry the page's attribution`, { skip: !ready }, () => {
@@ -290,3 +297,9 @@ for (const pair of PAIRS) {
     assert.equal(new URL(link).searchParams.get("utm_content"), trialSource);
   });
 }
+
+test("the Japanese offline guide's in-site links, including both Japanese answer guides, land on built pages", () => {
+  const body = main(read("ja/guides/offline-dictation-on-mac/index.html"));
+  for (const { jaPath } of PAIRS) assert.ok(body.includes(`href="${jaPath}"`), jaPath);
+  assertInSiteLinksResolve(body);
+});
