@@ -363,7 +363,7 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
     // 2026-10-10: the Dictivo fit section links the cross-platform dictation software guide.
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
     // 2026-11-10 (Batch B1): rebuilt in the answer-page shape.
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-11",
   };
 }
 
@@ -439,7 +439,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     // Batch B3: the Voibe price was re-read on its own day.
     rowChecked: { Voibe: OFFLINE_GUIDE_VOIBE_CHECKED },
     // 2026-11-10 (Batch B3): new Voibe price, check date and reference label.
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-11",
   },
   fr: {
     navLabel: "Dictée Mac hors ligne",
@@ -811,7 +811,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     // Batch B3: the Voibe price was re-read on its own day.
     rowChecked: { Voibe: OFFLINE_GUIDE_VOIBE_CHECKED },
     // 2026-11-10 (Batch B3): new Voibe price, check date and reference label (zh-hant follows).
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-11",
   },
   ja: {
     "navLabel": "Mac オフライン音声入力",
@@ -988,7 +988,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     // 2026-10-17: the trial steps link directly to the Japanese practice page.
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
     // 2026-11-10 (Batch B3): new Voibe price and check date; links to the Japanese answer guides.
-    "lastUpdated": "2026-11-10"
+    "lastUpdated": "2026-11-11"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",

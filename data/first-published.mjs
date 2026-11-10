@@ -6,9 +6,9 @@
 export const FIRST_PUBLISHED = Object.freeze({
   "guides/offline-dictation-on-mac": "2026-06-07", // b431ef4, all ten languages
   // English 2026-06-07 (330ab94), unchanged; Japanese (Batch B3) is a placeholder until release.
-  "guides/best-speech-to-text-apps-for-mac": Object.freeze({ en: "2026-06-07", ja: "2026-11-10" }),
+  "guides/best-speech-to-text-apps-for-mac": Object.freeze({ en: "2026-06-07", ja: "2026-11-11" }),
   // English 2026-11-10, unchanged; Japanese (Batch B3) is a placeholder until release.
-  "guides/mac-dictation-app-no-subscription": Object.freeze({ en: "2026-11-10", ja: "2026-11-10" }),
+  "guides/mac-dictation-app-no-subscription": Object.freeze({ en: "2026-11-10", ja: "2026-11-11" }),
   "guides/mac-dictation-benchmark-method": "2026-06-07", // 75c3ee6
   "guides/offline-dictation-on-windows": "2026-07-12", // 79e0da2
   "guides/first-local-dictation": "2026-09-10", // 8d9f594, English and Japanese
