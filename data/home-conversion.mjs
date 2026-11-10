@@ -1,6 +1,6 @@
 // Outcome and trial details sit together above the first download buttons.
-export const HOME_CONVERSION_LASTMOD = "2026-11-04";
-export const HOME_CONVERSION_LOCALE_LASTMOD = { ja: "2026-10-17", zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
+export const HOME_CONVERSION_LASTMOD = "2026-11-10";
+export const HOME_CONVERSION_LOCALE_LASTMOD = { ja: "2026-11-10", zh: "2026-09-18", "zh-hant": "2026-09-18", ko: "2026-09-18", pt: "2026-09-18" };
 // The last body edit shared by every homepage: on 2026-11-10 the compare hub link in the header
 // and under the pricing tiers. Before that, the pricing introduction and checkout note in all
 // eleven languages (2026-10-09: purchase wording, subscription price comparison, license key,
@@ -10,7 +10,7 @@ export const HOME_SHARED_CONTENT_LASTMOD = "2026-11-10";
 export const HOME_CONVERSION_COPY = {
   en: {
     title: "Speak your next draft.", emphasis: "Keep your audio local.",
-    lede: "Press your shortcut, speak, and paste into the app you're using. Write emails, notes, and AI prompts with on-device dictation.",
+    lede: "Press your shortcut, speak, and paste into the app you're using. On-device dictation for emails, notes, and AI prompts. Dictivo Local is a one-time purchase for Mac and Windows, with no subscription.",
     trial: "Try all local models free for 14 days. No card. No Dictivo account.",
     changelog: "What's new",
   },
@@ -58,7 +58,7 @@ export const HOME_CONVERSION_COPY = {
   },
   ja: {
     title: "次の下書きは、声で。", emphasis: "音声はデバイス内に。",
-    lede: "Mac・Windows x64で使える音声入力アプリ。ショートカットを押して話し、メール、メモ、AIへの指示を入力できます。Localモードは、モデルのダウンロード後にオフラインで使えます。",
+    lede: "Mac・Windows x64で使える買い切りの音声入力アプリ。ショートカットを押して話し、メール、メモ、AIへの指示を入力できます。Localモードは、モデルのダウンロード後にオフラインで使えます。",
     trial: "すべてのローカルモデルを14日間無料体験。カード登録・Dictivoアカウント不要。",
     changelog: "更新履歴",
   },

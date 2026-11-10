@@ -6,8 +6,8 @@ import { pricingAnchor } from "./local-offer-copy.mjs";
 // at build time (scripts/lib/hant.mjs).
 export const HOME_COPY = {
   en: {
-    metaTitle: "Offline Dictation App for Mac & Windows - Buy Once | Dictivo",
-    metaDescription: "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. Buy once, yours to keep.",
+    metaTitle: "Offline Dictation App for Mac & Windows - One-Time Purchase | Dictivo",
+    metaDescription: "Offline dictation app for Mac and Windows. Dictivo Local is a one-time purchase, no subscription. Local mode keeps audio on your device - verify it yourself.",
     skip: "Skip to content",
     nav: {
       pricing: "Pricing",
