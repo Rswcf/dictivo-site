@@ -164,6 +164,7 @@ const requiredGeoFiles = [
   "guides/wispr-flow-pricing/index.html",
   "guides/windows-voice-typing-not-working/index.html",
   "guides/best-dictation-software/index.html",
+  "guides/dictation-app-mac-windows-one-time-license/index.html",
   "ja/guides/mac-dictation-not-working/index.html",
   "media-kit/index.html",
   "pricing/index.html",

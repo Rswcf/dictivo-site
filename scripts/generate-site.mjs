@@ -53,6 +53,12 @@ import {
   OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES,
 } from "../data/offline-dictation-windows-guide.mjs";
 import {
+  ONE_TIME_LICENSE_GUIDE_CHECKED,
+  ONE_TIME_LICENSE_GUIDE_LASTMOD,
+  ONE_TIME_LICENSE_GUIDE_REFERENCES,
+  oneTimeLicenseGuideCopy,
+} from "../data/one-time-license-guide.mjs";
+import {
   JA_MAC_DICTATION_TROUBLESHOOTING_COPY,
   JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD,
   JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES,
@@ -347,6 +353,18 @@ function offlineDictationWindowsGuidePath() {
 
 function offlineDictationWindowsGuideUrl() {
   return absoluteUrl(offlineDictationWindowsGuidePath());
+}
+
+function oneTimeLicenseGuidePath() {
+  return "/guides/dictation-app-mac-windows-one-time-license/";
+}
+
+function oneTimeLicenseGuideUrl() {
+  return absoluteUrl(oneTimeLicenseGuidePath());
+}
+
+function oneTimeLicenseGuideCopyForRender() {
+  return oneTimeLicenseGuideCopy({ windows: hasWindowsRelease });
 }
 
 // The Mac dictation troubleshooting guide exists in English and Japanese; English is the
@@ -3699,6 +3717,32 @@ function renderAnswerGuidePage({
   });
 }
 
+function renderOneTimeLicenseGuidePage() {
+  const copy = oneTimeLicenseGuideCopyForRender();
+  const factTable = {
+    title: copy.factTitle,
+    caption: copy.factCaption,
+    headers: copy.factHeaders,
+    rows: copy.factRows.map((row) => [...row, checkedCell(ONE_TIME_LICENSE_GUIDE_CHECKED)]),
+  };
+  return renderAnswerGuidePage({
+    path: oneTimeLicenseGuidePath(),
+    url: oneTimeLicenseGuideUrl(),
+    copy,
+    lastmod: ONE_TIME_LICENSE_GUIDE_LASTMOD,
+    route: "guides/dictation-app-mac-windows-one-time-license",
+    idPrefix: "one-time-license",
+    mainId: "one-time-license-guide",
+    about: ["dictation app Mac and Windows", "one-time license dictation", "cross-platform dictation app", "no subscription"],
+    references: ONE_TIME_LICENSE_GUIDE_REFERENCES,
+    introSource: "one_time_guide_intro",
+    trialPlatform: "both",
+    trialSource: "one_time_guide",
+    factTable,
+    itemList: { name: "Dictation apps for Mac and Windows with a one-time license", rows: factTable.rows.map((row) => [row[0], row[1]]) },
+  });
+}
+
 function renderMediaKitSchema() {
   const copy = MEDIA_KIT_COPY;
   const pageUrl = mediaKitUrl();
@@ -5418,6 +5462,7 @@ function renderLlmsEnglishFacts() {
     ["Which Mac dictation apps are one-time purchases, and what do they cost?", `${offline}: price table`, `${offlineDictationGuideUrl("en")}#offline-guide-table`],
     ["Which Mac dictation apps process speech locally in Japanese, German or Chinese?", `${offline} (each language's llms.txt lists its translated guide)`, offlineDictationGuideUrl("en")],
     ["Which Windows dictation apps transcribe locally without uploading recordings?", OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
+    ["Which dictation apps work on both Mac and Windows with a one-time license?", oneTimeLicenseGuideCopyForRender().navLabel, oneTimeLicenseGuideUrl()],
     ["Which speech-to-text app fits my Mac workflow?", speechToTextMacGuideCopyForRender().navLabel, speechToTextMacGuideUrl()],
     ["Which Mac dictation apps have no subscription?", noSubscriptionGuideCopyForRender().navLabel, noSubscriptionGuideUrl()],
     ["What is a local alternative to Wispr Flow?", "Wispr Flow alternative", localizedCompareUrl("en", "wispr-flow-alternative")],
@@ -5467,6 +5512,7 @@ function renderLlmsTxt(currentCode = "en") {
     [speechToTextMacGuideCopyForRender().navLabel, speechToTextMacGuideUrl()],
     ...(currentCode === "en" ? [[noSubscriptionGuideCopyForRender().navLabel, noSubscriptionGuideUrl()]] : []),
     [OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
+    ...(currentCode === "en" ? [[oneTimeLicenseGuideCopyForRender().navLabel, oneTimeLicenseGuideUrl()]] : []),
     ...(currentCode === "en"
       ? [
           [macDictationNotWorkingCopyForRender().navLabel, macDictationNotWorkingUrl()],
@@ -5909,6 +5955,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${offlineDictationWindowsGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const oneTimeLicenseGuideEntry = `  <url>
+    <loc>${oneTimeLicenseGuideUrl()}</loc>
+    <lastmod>${latestDate(ONE_TIME_LICENSE_GUIDE_LASTMOD, PRICING_LASTMOD)}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${oneTimeLicenseGuideUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${oneTimeLicenseGuideUrl()}" />
+    <priority>0.85</priority>
+  </url>`;
   const macDictationTroubleshootingAlternates = translatedGuideSitemapAlternates(MAC_DICTATION_TROUBLESHOOTING_PATHS);
   const macDictationShortcutAlternates = translatedGuideSitemapAlternates(MAC_DICTATION_SHORTCUT_PATHS);
   const macDictationNotWorkingEntry = `  <url>
@@ -6038,6 +6091,7 @@ ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
 ${noSubscriptionGuideEntry}
 ${offlineDictationWindowsGuideEntry}
+${oneTimeLicenseGuideEntry}
 ${macDictationNotWorkingEntry}
 ${jaMacDictationTroubleshootingEntry}
 ${macDictationShortcutEntry}
@@ -6434,6 +6488,7 @@ write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodG
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
 write(`${noSubscriptionGuidePath().slice(1)}index.html`, renderNoSubscriptionGuidePage());
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
+write("guides/dictation-app-mac-windows-one-time-license/index.html", renderOneTimeLicenseGuidePage());
 write(`${macDictationNotWorkingPath().slice(1)}index.html`, renderMacDictationNotWorkingPage());
 write(`${macDictationShortcutPath().slice(1)}index.html`, renderMacDictationShortcutPage());
 write(`${windowsVoiceTypingPath().slice(1)}index.html`, renderWindowsVoiceTypingPage());
