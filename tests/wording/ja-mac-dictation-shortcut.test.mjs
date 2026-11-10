@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { firstPublished } from "../../data/first-published.mjs";
 import { JA_MAC_DICTATION_SHORTCUT_LASTMOD, jaMacDictationShortcutCopy } from "../../data/ja-mac-dictation-shortcut-guide.mjs";
+import { offlineDictationGuideLastmod } from "../../data/offline-dictation-guide.mjs";
 import { formatPrice } from "../../data/price-display.mjs";
 import { INTRO_OFFER, INTRO_PHRASES, REGULAR_OFFER } from "../helpers/offer-states.mjs";
 
@@ -185,7 +186,8 @@ test("the Japanese offline guide links the shortcut guide from its built-in dict
   const offline = read("ja/guides/offline-dictation-on-mac/index.html");
   const section = between(offline, 'id="offline-guide-section-1"', "</section>");
   assert.ok(section.includes(`<a href="${path}">Macの音声入力ショートカットを確認・変更する方法</a>`));
-  assert.ok(offline.includes('<time datetime="2026-11-10">'), "redated for the Dictivo block after the answer");
+  // Re-dated for the Dictivo block after the answer, then for Batch B3 (date from the guide's data).
+  assert.ok(offline.includes(`<time datetime="${offlineDictationGuideLastmod("ja")}">`), "the offline guide shows its own date");
   // Its title and its shortcut question stay until the 2026-11-08 review of both pages in Search Console.
   assert.ok(offline.includes("<title>Macのオフライン音声入力：設定・ショートカット・アプリ比較</title>"));
   assert.ok(offline.includes("Macの音声入力のショートカットは？"));

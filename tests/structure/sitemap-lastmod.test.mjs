@@ -79,7 +79,9 @@ test("Guide dates reflect scoped trial improvements without redating unchanged s
     // 2026-10-17 (Japanese): the trial steps link the practice page.
     // 2026-10-10 (English): the Dictivo fit section links the dictation software guide.
     // 2026-11-10 (English and Japanese): a "What is Dictivo?" block with downloads follows the answer.
-    ["/ja/guides/offline-dictation-on-mac/", "2026-11-10"],
+    // Batch B3 (Japanese): new Voibe price and links to the Japanese answer guides; the date comes
+    // from the guide's data (re-dated at integration).
+    ["/ja/guides/offline-dictation-on-mac/", offlineDictationGuideLastmod("ja")],
     // Batch B1: the English date comes from the guide's data (re-dated at integration).
     ["/guides/offline-dictation-on-mac/", offlineDictationGuideLastmod("en")],
     ["/ja/guides/first-local-dictation/", "2026-09-18"],
