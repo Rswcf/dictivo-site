@@ -2,9 +2,10 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 
 // 2026-11-10 (Batch B1): new answer page for "dictation app mac no subscription". Twelve rows,
-// alphabetical with Dictivo last. Every competitor row except Voibe and Voice Type was read on
-// NO_SUBSCRIPTION_GUIDE_CHECKED (competitor facts file of that date in the desktop repository);
-// Voibe and Voice Type keep the site's OFFLINE_GUIDE_PRICES_CHECKED facts. No app was tested by
+// alphabetical with Dictivo last. Every competitor row except Voice Type was read on
+// NO_SUBSCRIPTION_GUIDE_CHECKED (competitor facts file of that date in the desktop repository, and
+// a live price spot-check the same day for Spokenly Pro and Voibe); Voice Type keeps the site's
+// OFFLINE_GUIDE_PRICES_CHECKED facts. No app was tested by
 // hand: the facts come from vendor pages and documentation. The Mac and Windows license question
 // belongs to /guides/dictation-app-mac-windows-one-time-license/, so the H1, title, description,
 // intent rows and headings avoid "Windows", "cross-platform" and "offline".
@@ -24,6 +25,7 @@ export const NO_SUBSCRIPTION_GUIDE_REFERENCES = [
   [`MacWhisper: features and pricing ${checkedLabel}`, "https://macwhisper.com/"],
   [`MacWhisper licensing and devices ${checkedLabel}`, "https://docs.macwhisper.com/article/39-licensing"],
   [`Spokenly pricing ${checkedLabel}`, "https://spokenly.app/pricing"],
+  [`Spokenly: plans and monthly price ${checkedLabel}`, "https://spokenly.app/"],
   [`Superwhisper plans ${checkedLabel}`, "https://superwhisper.com/docs/billing/plans"],
   [`Superwhisper platforms and local models ${checkedLabel}`, "https://superwhisper.com/"],
   [`VoiceInk pricing and requirements ${checkedLabel}`, "https://tryvoiceink.com/pricing"],
@@ -31,7 +33,7 @@ export const NO_SUBSCRIPTION_GUIDE_REFERENCES = [
   [`Voicetypr platforms and local processing ${checkedLabel}`, "https://voicetypr.com/"],
   [`Wispr Flow pricing ${checkedLabel}`, "https://wisprflow.ai/pricing"],
   [`Wispr Flow: What is Flow ${checkedLabel}`, "https://docs.wisprflow.ai/articles/2772472373-what-is-flow"],
-  ["Voibe pricing, checked 2026-09-29", "https://www.getvoibe.com/pricing/"],
+  [`Voibe pricing and platforms ${checkedLabel}`, "https://www.getvoibe.com/pricing/"],
   ["Voibe security", "https://www.getvoibe.com/security/"],
   ["Voice Type App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/voice-type-offline-dictation/id6736525125?mt=12"],
   ["Dictivo Homebrew tap", "https://github.com/deepviewsdev/homebrew-tap"],
@@ -43,7 +45,7 @@ const formatDate = (isoDate) =>
 const DICTIVO = "Dictivo (this site's product)";
 
 // Rows that keep the site's 2026-09-29 facts (OFFLINE_DICTATION_GUIDE_COPY.en) instead of a re-read.
-const SITE_CHECKED_ROWS = ["Voibe", "Voice Type"];
+const SITE_CHECKED_ROWS = ["Voice Type"];
 
 // [App, Mac requirement, How you pay, One-time price, Updates included, Transcribes on the Mac by
 // default?]. The generator adds the "Checked" cell. The ItemList description is "How you pay".
@@ -85,7 +87,7 @@ function factRows(windows) {
       "Spokenly",
       "Not stated",
       "Free tier + one-time Local+ (Pro is a subscription)",
-      "Local+ $29 once. Pro is $12 a month or $144 a year.",
+      "Local+ $29 once. Pro is $15 a month, or $144 a year ($12 a month billed yearly).",
       "Not stated",
       "Yes on the free plan, which uses on-device models. Your own API keys or Pro send audio to a cloud provider.",
     ],
@@ -101,8 +103,8 @@ function factRows(windows) {
       "Voibe",
       "Not stated",
       "Subscription or one-time lifetime",
-      "$149 once for lifetime access",
-      "Not stated",
+      "$199 per seat once for lifetime access. Also $9.90 a month or $99 a year.",
+      "Every future update of the lifetime plan included (vendor statement)",
       "On-Device Mode only; Intel Macs use cloud transcription",
     ],
     [
@@ -169,7 +171,7 @@ export function noSubscriptionGuideCopy({ windows, checked = NO_SUBSCRIPTION_GUI
     lede: `Dictivo writes this page, and Dictivo is this site's product. The table shows ${rows.length} Mac dictation options: how you pay, what a one-time price costs, which updates it includes and where speech is turned into text.`,
     lastUpdated: lastmod,
     answerTitle: "Short answer",
-    answer: `Of the ${rows.length} Mac dictation options in the table, ${free} need no subscription; only Wispr Flow is subscription-only. The lowest one-time prices are JesType Personal at €14.95 and Voice Type at $19.99 on the App Store. Dictivo Local, this site's product, is a one-time purchase that includes 12 months of updates. Most rows were checked on ${checkedOn}; Voice Type and Voibe on ${siteCheckedOn}.`,
+    answer: `Of the ${rows.length} Mac dictation options in the table, ${free} need no subscription; only Wispr Flow is subscription-only. The lowest one-time prices are JesType Personal at €14.95 and Voice Type at $19.99 on the App Store. Dictivo Local, this site's product, is a one-time purchase that includes 12 months of updates. Most rows were checked on ${checkedOn}; Voice Type on ${siteCheckedOn}.`,
     intentTitle: "Which no-subscription question are you asking?",
     intentCaption: "Common ways people search for a Mac dictation app without a subscription, and what to check for each",
     intentHeaders: ["How people ask", "Short answer", "What to check"],
@@ -222,7 +224,7 @@ export function noSubscriptionGuideCopy({ windows, checked = NO_SUBSCRIPTION_GUI
         title: "No subscription is not the same as updates forever",
         paragraphs: [
           "A one-time price buys the app. It does not always buy every future version. Read what each vendor says about updates before you pay.",
-          "JesType, MacWhisper, VoiceInk and Voicetypr say their one-time price includes all updates; their own word is \"lifetime\". Superwhisper says Lifetime keys never expire, but its plans page does not state update terms. Spokenly, Voibe and Voice Type do not state update terms on the pages we read.",
+          "JesType, MacWhisper, VoiceInk and Voicetypr say their one-time price includes all updates; their own word is \"lifetime\". Voibe says its lifetime seat includes every future update of that plan. Superwhisper says Lifetime keys never expire, but its plans page does not state update terms. Spokenly and Voice Type do not state update terms on the pages we read.",
           "Dictivo Local includes 12 months of updates. After that, renewal is optional. The version you bought keeps working without it.",
         ],
       },
@@ -230,8 +232,8 @@ export function noSubscriptionGuideCopy({ windows, checked = NO_SUBSCRIPTION_GUI
         title: "Mac-only, or also on a PC?",
         paragraphs: [
           "Apple Dictation, MacWhisper and VoiceInk are Mac apps. MacWhisper and VoiceInk also mention iPhone or iPad versions.",
-          `Handy, JesType, Spokenly, Superwhisper, Voicetypr and Wispr Flow also run on Windows. ${dictivoPlatforms}`,
-          "For Voibe and Voice Type, this page uses their Mac listings only.",
+          `Handy, JesType, Spokenly, Superwhisper, Voibe, Voicetypr and Wispr Flow also run on Windows. ${dictivoPlatforms}`,
+          "For Voice Type, this page uses its Mac listing only.",
         ],
         link: {
           label: "Need one license for Mac and Windows? Compare dictation apps with a one-time license for both",

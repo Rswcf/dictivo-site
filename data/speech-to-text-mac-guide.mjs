@@ -3,9 +3,10 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // 2026-10-09: Related pages gained the Mac dictation troubleshooting and shortcut guides.
 // 2026-10-10: Related pages gained the cross-platform dictation software guide.
 // 2026-11-10 (Batch B1): rebuilt in the answer-page shape of the Windows offline guide. Ten rows;
-// Handy and Spokenly are new. Every row except Voice Type and Voibe was re-read on
-// SPEECH_TO_TEXT_MAC_GUIDE_CHECKED (competitor facts file of that date in the desktop repository);
-// Voice Type and Voibe keep the site's OFFLINE_GUIDE_PRICES_CHECKED facts. The title's year is the
+// Handy and Spokenly are new. Every row except Voice Type was re-read on
+// SPEECH_TO_TEXT_MAC_GUIDE_CHECKED (competitor facts file of that date in the desktop repository,
+// and a live price spot-check the same day for Spokenly Pro and Voibe); Voice Type keeps the site's
+// OFFLINE_GUIDE_PRICES_CHECKED facts. The title's year is the
 // year of SPEECH_TO_TEXT_MAC_GUIDE_CHECKED.
 export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-10";
 export const SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10";
@@ -26,7 +27,7 @@ export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
   ["VoiceInk pricing, checked 2026-09-29", "https://tryvoiceink.com/pricing"],
   ["Voice Type App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/voice-type-offline-dictation/id6736525125?mt=12"],
   ["Voibe on-device and cloud modes", "https://www.getvoibe.com/security/"],
-  ["Voibe pricing, checked 2026-09-29", "https://www.getvoibe.com/pricing/"],
+  [`Voibe pricing (checked ${SPEECH_TO_TEXT_MAC_GUIDE_CHECKED})`, "https://www.getvoibe.com/pricing/"],
   ["Aiko US App Store listing and price, checked 2026-09-29", "https://apps.apple.com/us/app/aiko/id1672085276?platform=mac"],
   ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
   [`Apple: Use Dictation on Mac, macOS 14 guide (checked ${SPEECH_TO_TEXT_MAC_GUIDE_CHECKED})`, "https://support.apple.com/en-us/guide/mac-help/mh40584/14.0/mac/14.0"],
@@ -106,13 +107,13 @@ const APP_ROWS = [
 ];
 
 // Rows that keep the site's 2026-09-29 facts (OFFLINE_DICTATION_GUIDE_COPY.en) instead of a re-read.
-const SITE_CHECKED_ROWS = ["Voice Type", "Voibe"];
+const SITE_CHECKED_ROWS = ["Voice Type"];
 
 // Price cells for apps without an entry in the generator's GUIDE_PRICE_SOURCES, as the vendor
 // shows them on SPEECH_TO_TEXT_MAC_GUIDE_CHECKED.
 const HAND_PRICES = {
   Handy: "Free and open source (MIT license)",
-  Spokenly: "Free; Local+ $29 once; Pro $12 a month or $144 a year",
+  Spokenly: "Free; Local+ $29 once; Pro $15 a month, or $144 a year ($12 a month billed yearly)",
 };
 
 export function speechToTextMacGuideCopy({ windows, checked = SPEECH_TO_TEXT_MAC_GUIDE_CHECKED } = {}) {

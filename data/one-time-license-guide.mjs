@@ -96,7 +96,7 @@ function factRows(windows) {
       "Spokenly",
       "macOS, Windows, Linux, iPhone",
       "Yes. Local+ works on every supported device where you sign in with the same Spokenly account.",
-      "$29 once (Local+). Also a free plan, and Pro at $12 a month or $144 a year.",
+      "$29 once (Local+). Also a free plan, and Pro at $15 a month, or $144 a year ($12 a month billed yearly).",
       "Every supported device signed in to one Spokenly account",
       "Not stated",
       "Yes. The free plan uses on-device models and works offline. Your own API keys or Pro use cloud providers.",

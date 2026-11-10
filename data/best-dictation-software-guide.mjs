@@ -13,10 +13,16 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
 export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-11-10";
 export const BEST_DICTATION_SOFTWARE_CHECKED = "2026-10-10";
+// 2026-11-10: a live spot-check re-read the Spokenly Pro and Voibe prices only. Their price cells
+// and their pricing references carry this date; every other fact keeps BEST_DICTATION_SOFTWARE_CHECKED.
+export const BEST_DICTATION_SOFTWARE_PRICES_RECHECKED = "2026-11-10";
 
 const year = BEST_DICTATION_SOFTWARE_CHECKED.slice(0, 4);
 const checked = `(checked ${BEST_DICTATION_SOFTWARE_CHECKED})`;
-const checkedOn = new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${BEST_DICTATION_SOFTWARE_CHECKED}T00:00:00Z`));
+const formatDate = (isoDate) => new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${isoDate}T00:00:00Z`));
+const checkedOn = formatDate(BEST_DICTATION_SOFTWARE_CHECKED);
+const recheckedOn = formatDate(BEST_DICTATION_SOFTWARE_PRICES_RECHECKED);
+const rechecked = `(checked ${BEST_DICTATION_SOFTWARE_PRICES_RECHECKED})`;
 
 export const BEST_DICTATION_SOFTWARE_SOURCES = {
   appleMac: "https://support.apple.com/guide/mac-help/mh40584/mac",
@@ -60,7 +66,7 @@ export const BEST_DICTATION_SOFTWARE_REFERENCES = [
   [`Handy ${checked}`, S.handy],
   [`Handy on GitHub: README and license ${checked}`, S.handyGithub],
   [`MacWhisper: features and pricing ${checked}`, S.macwhisper],
-  [`Spokenly: plans and pricing ${checked}`, S.spokenly],
+  [`Spokenly: plans and pricing ${rechecked}`, S.spokenly],
   [`Spokenly for Windows ${checked}`, S.spokenlyWindows],
   [`Superwhisper: plans and pricing ${checked}`, S.superwhisperPlans],
   [`Superwhisper: speech recognition models ${checked}`, S.superwhisperModels],
@@ -68,7 +74,7 @@ export const BEST_DICTATION_SOFTWARE_REFERENCES = [
   [`Superwhisper: languages ${checked}`, S.superwhisper],
   [`VoiceInk: pricing ${checked}`, S.voiceinkPricing],
   [`VoiceInk: privacy and open source ${checked}`, S.voiceink],
-  [`Voibe: pricing ${checked}`, S.voibePricing],
+  [`Voibe: pricing ${rechecked}`, S.voibePricing],
   [`Voibe: security, on-device and cloud modes ${checked}`, S.voibeSecurity],
   [`Wispr Flow: pricing ${checked}`, S.wisprPricing],
   [`Wispr Flow: data controls ${checked}`, S.wisprData],
@@ -115,12 +121,12 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
     lede:
       "This guide is written by Dictivo, which makes one of the apps listed. It groups dictation software for Mac and Windows by what you need, with each product's platforms, where it turns speech into text and its price, as each vendor publishes them.",
     environmentLabel: "Checked",
-    environment: `each vendor's own product, pricing and help pages, read on ${checkedOn} and linked under References. No vendor paid to be listed. Nothing here is an accuracy or speed ranking: the apps were not tested against each other for this page.`,
+    environment: `each vendor's own product, pricing and help pages, read on ${checkedOn} (Spokenly and Voibe prices on ${recheckedOn}) and linked under References. No vendor paid to be listed. Nothing here is an accuracy or speed ranking: the apps were not tested against each other for this page.`,
     answerTitle: "Short answer",
     answer: `The right dictation software depends on your computer and on whether your voice may leave it. To pay nothing extra, start with what is built in: Dictation in macOS, voice typing (Windows key + H) or voice access in Windows 11, and voice typing in Google Docs. For free dictation that stays on your computer on Mac, Windows and Linux, Handy is free and open source, and Superwhisper and Spokenly have free local models. To buy once instead of subscribing, VoiceInk and MacWhisper (Mac) and Dictivo (${dictivoPlatforms}) sell one-time licenses, and Superwhisper and Voibe offer lifetime licenses beside their subscriptions. For dictation on a phone as well as a computer, Wispr Flow runs in the cloud on Mac, Windows, iPhone and Android. Dragon Professional is still sold for Windows, through Nuance's sales team.`,
     quickReference: {
       title: "Dictation software at a glance",
-      caption: `Built-in tools first, then apps in alphabetical order, with Dictivo (this site's product) last. Prices in each vendor's currency, as published on its own site, checked on ${checkedOn}.`,
+      caption: `Built-in tools first, then apps in alphabetical order, with Dictivo (this site's product) last. Prices in each vendor's currency, as published on its own site, checked on ${checkedOn}; the Spokenly and Voibe prices on ${recheckedOn}.`,
       headers: ["Software", "Runs on", "Where speech becomes text", "Free option", "Paid price"],
       rows: [
         ["macOS Dictation", "Mac", "Keyboard settings show whether it is processed on your Mac", "Built into macOS", "No separate price"],
@@ -131,9 +137,9 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ["Dragon Professional v16", "Windows 10 and 11", "Installed on the PC", "No", "No public price: sales contact only"],
         ["Handy", "Mac, Windows and Linux", "On your computer; works offline", "Free and open source (MIT license)", "None"],
         ["MacWhisper", "Mac", "Local models on the Mac; remote models optional", "Free version", "€64 once for Pro, with lifetime updates"],
-        ["Spokenly", "Mac, Windows, Linux and iPhone", "Local models offline; Pro adds cloud models", "Local models, with no account", "Pro $9.99 a month or $99.99 a year"],
+        ["Spokenly", "Mac, Windows, Linux and iPhone", "Local models offline; Pro adds cloud models", "Local models, with no account", "Pro $15 a month, or $144 a year ($12 a month billed yearly)"],
         ["Superwhisper", "Mac, Windows, iPhone and Android", "Local models on the device; Pro adds cloud models", "Unlimited dictation with local Whisper models", "Pro $8.49 a month, $84.99 a year or $249.99 once"],
-        ["Voibe", "Mac and Windows", "On the Mac in On-Device Mode; Windows and Intel Macs use a zero-retention cloud mode", "Voibe Free: limited words on one device", "Dictation $7.50 a month, $75 a year or $149 once, per seat"],
+        ["Voibe", "Mac and Windows", "On the Mac in On-Device Mode; Windows and Intel Macs use a zero-retention cloud mode", "Voibe Free: limited words on one device", "Dictation $9.90 a month, $99 a year or $199 once, per seat"],
         ["VoiceInk", "Mac with Apple silicon, macOS 14.4 or later", "On the Mac; optional Cloud Enhancement sends text, not audio", "Free trial", "$25 once for 1 Mac, $39 for 2, $49 for 3"],
         ["Wispr Flow", "Mac, Windows, iPhone and Android", "In the cloud", "2,000 words a week on desktop, 1,000 on mobile", "Pro $15 a month, or $12 a month billed annually, per user"],
         ["Dictivo (this site's product)", windows ? "Mac and Windows x64" : "Mac", "On the computer in Local mode; optional Cloud Fast uploads only the recordings you send", "Tiny model; 14-day full Local trial", dictivoPrice],
@@ -223,7 +229,7 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
           "VoiceInk is currently listed at $25 for one Mac, $39 for two or $49 for three, with lifetime updates and a 14-day money-back guarantee.",
           "MacWhisper Pro is €64 per license, with lifetime updates.",
           "Superwhisper Pro Lifetime is $249.99 once; monthly and annual plans also exist.",
-          "Voibe Dictation is $149 per seat once for lifetime access, which Voibe marks as a limited-time option.",
+          "Voibe Dictation is $199 per seat once for lifetime access; Voibe says that includes every future update of the plan.",
           `Dictivo Local is ${dictivoPrice}`,
         ],
         notes: ["Wispr Flow and Spokenly Pro are monthly or annual subscriptions, and Dragon Professional has no public price."],
@@ -293,7 +299,7 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
           {
             title: "Spokenly",
             paragraphs: [
-              "Dictation for Mac, Windows, Linux and iPhone. Its local Whisper and Parakeet models are free with no word cap, no trial clock and no account, and work offline; you can also connect your own API keys without paying Spokenly. Pro, at $9.99 a month or $99.99 a year, adds Spokenly's cloud models and AI text cleanup. It suits people who want free local dictation with an optional cloud upgrade.",
+              "Dictation for Mac, Windows, Linux and iPhone. Its local Whisper and Parakeet models are free with no word cap, no trial clock and no account, and work offline; you can also connect your own API keys without paying Spokenly. Pro, at $15 a month or $144 a year ($12 a month billed yearly), adds Spokenly's cloud models and AI text cleanup. It suits people who want free local dictation with an optional cloud upgrade.",
             ],
           },
           {
@@ -305,7 +311,7 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
           {
             title: "Voibe",
             paragraphs: [
-              "Dictation for Mac and Windows, with a Voibe Work plan that adds meeting notes. On the Mac, On-Device Mode transcribes locally; Windows and Intel Macs use a zero-retention cloud mode. Voibe Free allows limited words on one device; Voibe Dictation is $7.50 a month, $75 a year or $149 once per seat, with a 30-day money-back guarantee. It suits people who want one seat to cover a Mac and a Windows PC.",
+              "Dictation for Mac and Windows, with a Voibe Work plan that adds meeting notes. On the Mac, On-Device Mode transcribes locally; Windows and Intel Macs use a zero-retention cloud mode. Voibe Free allows limited words on one device; Voibe Dictation is $9.90 a month, $99 a year or $199 once per seat, with a 30-day money-back guarantee. It suits people who want one seat to cover a Mac and a Windows PC.",
             ],
           },
           {
@@ -372,7 +378,7 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
       ],
       [
         "Which dictation apps are a one-time purchase?",
-        "VoiceInk ($25 to $49), MacWhisper Pro (€64), Superwhisper Pro Lifetime ($249.99), Voibe Dictation Lifetime ($149 per seat) and Dictivo Local are sold once. Wispr Flow and Spokenly Pro are subscriptions.",
+        "VoiceInk ($25 to $49), MacWhisper Pro (€64), Superwhisper Pro Lifetime ($249.99), Voibe Dictation Lifetime ($199 per seat) and Dictivo Local are sold once. Wispr Flow and Spokenly Pro are subscriptions.",
       ],
     ],
     referencesTitle: "References",

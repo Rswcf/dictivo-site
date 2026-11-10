@@ -54,8 +54,9 @@ const INTENTS = [
 ];
 const HEADERS = ["App", "Does speech stay on the Mac?", "Cloud or workflow caveat", "Best fit", "Price / purchase model", "Checked on"];
 const APPS = ["Dictivo Local", "Apple Dictation", "Handy", "VoiceInk", "Superwhisper", "MacWhisper", "Voice Type", "Voibe", "Aiko", "Wispr Flow"];
-// Voice Type, Voibe and Aiko keep the site's own check; every other row was re-read for this page.
-const SITE_CHECKED = ["Voice Type", "Voibe", "Aiko"];
+// Voice Type and Aiko keep the site's own check; every other row was re-read for this page (Voibe's
+// price in a live spot-check the same day).
+const SITE_CHECKED = ["Voice Type", "Aiko"];
 const LOCALIZED = ["de", "fr", "es", "it", "nl", "pt", "zh", "zh-hant", "ja", "ko"];
 const BREW = "<code>brew install --cask deepviewsdev/tap/dictivo</code>";
 // The query words other B1 pages target stay out of this page's headings and intent rows.

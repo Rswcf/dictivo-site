@@ -24,8 +24,11 @@ Not changed: the Windows offline guide (its `<main>` and its 2026-10-17 date; on
 it changed), the ten translated offline guides, the homepages, `/pricing/` and the comparison pages.
 
 Competitor facts were checked on 2026-11-10 against vendor pages and documentation, using the
-competitor facts file of that date. The Voice Type, Voibe and Aiko rows keep the site's 2026-09-29
-facts. The Claude Code and Cursor rows come from their official documentation, read on 2026-11-10.
+competitor facts file of that date. A live price spot-check the same day corrected two English
+facts: Spokenly Pro is $15 a month or $144 a year, and Voibe is $9.90 a month, $99 a year or $199
+once. The fix also covers `/guides/best-dictation-software/`; there only the Spokenly and Voibe
+prices carry the new date. The translated offline guides keep their 2026-09-29 Voibe prices. The
+Voice Type and Aiko rows keep the site's 2026-09-29 facts. The Claude Code and Cursor rows come from their official documentation, read on 2026-11-10.
 Dictivo facts come from the site data and the app source. Nobody tested the apps by hand for these
 pages. Spokenly and Voxtira were added to the allowlist in `tests/facts/price-output.test.mjs`,
 because some of their prices equal Dictivo figures.

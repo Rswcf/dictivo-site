@@ -59,8 +59,9 @@ const HOW_YOU_PAY = [
   "Subscription only",
   "One-time (Dictivo Local)",
 ];
-// Voibe and Voice Type keep the site's own check; every other competitor row was re-read for this page.
-const SITE_CHECKED = ["Voibe", "Voice Type"];
+// Voice Type keeps the site's own check; every other competitor row was re-read for this page
+// (Spokenly Pro and Voibe prices in a live spot-check the same day).
+const SITE_CHECKED = ["Voice Type"];
 const FAQS = [
   "Which Mac dictation apps have no subscription?",
   "Is Dictivo a subscription?",
@@ -182,6 +183,9 @@ test("the fact table lists twelve apps alphabetically with Dictivo last, dated p
   assert.equal(cell("Voibe", 5), "On-Device Mode only; Intel Macs use cloud transcription");
   assert.match(cell("JesType", 3), /€14\.95/);
   assert.match(cell("Voice Type", 3), /\$19\.99/);
+  assert.equal(cell("Spokenly", 3), "Local+ $29 once. Pro is $15 a month, or $144 a year ($12 a month billed yearly).");
+  assert.equal(cell("Voibe", 3), "$199 per seat once for lifetime access. Also $9.90 a month or $99 a year.");
+  assert.equal(cell("Voibe", 4), "Every future update of the lifetime plan included (vendor statement)");
   assert.match(cell(DICTIVO, 1), /Apple Silicon and Intel/);
   assert.ok(cell(DICTIVO, 1).includes(hasWindowsRelease ? "Windows x64" : "temporarily unavailable"));
   assert.doesNotMatch(cell(DICTIVO, 4), /lifetime/i);
@@ -279,12 +283,12 @@ test("related pages and references", () => {
   const references = between(page(), 'id="no-subscription-references"', "</section>");
   const links = [...references.matchAll(/<li><a href="([^"]+)">([^<]+)<\/a><\/li>/g)].map(([, href, label]) => [href, text(label)]);
   assert.ok(links.some(([href]) => href === "https://github.com/deepviewsdev/homebrew-tap"), "Homebrew tap");
-  for (const host of ["support.apple.com", "github.com/cjpais/Handy", "jestype.com", "macwhisper.com", "spokenly.app", "superwhisper.com", "tryvoiceink.com", "voicetypr.com", "wisprflow.ai"]) {
-    const link = links.find(([href]) => href.includes(host));
+  for (const host of ["support.apple.com", "github.com/cjpais/Handy", "jestype.com", "macwhisper.com", "spokenly.app/pricing", "https://spokenly.app/", "superwhisper.com", "tryvoiceink.com", "voicetypr.com", "wisprflow.ai", "getvoibe.com/pricing"]) {
+    const link = links.find(([href]) => href === host) || links.find(([href]) => href.includes(host));
     assert.ok(link, host);
     assert.ok(link[1].includes(`(checked ${NO_SUBSCRIPTION_GUIDE_CHECKED})`), `${host} is not dated`);
   }
-  for (const host of ["getvoibe.com/pricing", "apps.apple.com/us/app/voice-type"]) {
+  for (const host of ["apps.apple.com/us/app/voice-type"]) {
     const link = links.find(([href]) => href.includes(host));
     assert.ok(link, host);
     assert.ok(link[1].includes(OFFLINE_GUIDE_PRICES_CHECKED), `${host} keeps the site's check date`);

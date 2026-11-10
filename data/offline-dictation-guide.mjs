@@ -32,15 +32,18 @@ export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
 
 // 2026-11-10 (Batch B1): the English guide is rebuilt in the answer-page shape of the Windows
 // offline guide; the other ten languages keep their objects below and their old shape. Ten rows;
-// Handy is new. Every row except Voice Type, Voibe and Aiko was re-read on
+// Handy is new. Every row except Voice Type and Aiko was re-read on
 // OFFLINE_DICTATION_GUIDE_EN_CHECKED (competitor facts file of that date in the desktop
-// repository); those three keep the site's OFFLINE_GUIDE_PRICES_CHECKED facts.
+// repository; Voibe's price from a live spot-check the same day); those two keep the site's
+// OFFLINE_GUIDE_PRICES_CHECKED facts. The translated Voibe prices stay at their 2026-09-29 check.
 export const OFFLINE_DICTATION_GUIDE_EN_CHECKED = "2026-11-10";
 
 // The English references: the shared list (the translated guides keep exactly that list) plus the
 // pages read for the rebuild.
 export const OFFLINE_DICTATION_GUIDE_EN_REFERENCES = [
-  ...OFFLINE_DICTATION_GUIDE_REFERENCES,
+  ...OFFLINE_DICTATION_GUIDE_REFERENCES.map(([label, url]) =>
+    url === "https://www.getvoibe.com/pricing/" ? [`Voibe pricing (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, url] : [label, url],
+  ),
   [`Handy on GitHub: README and license (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://github.com/cjpais/Handy"],
   [`Handy downloads (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://handy.computer/download"],
   [`Apple: Use Dictation on Mac, macOS 14 guide (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://support.apple.com/en-us/guide/mac-help/mh40584/14.0/mac/14.0"],
@@ -117,7 +120,7 @@ const EN_ROWS = [
 ];
 
 // Rows that keep the site's 2026-09-29 facts instead of a re-read.
-const EN_SITE_CHECKED_ROWS = ["Voice Type", "Voibe", "Aiko"];
+const EN_SITE_CHECKED_ROWS = ["Voice Type", "Aiko"];
 
 // Price cells for apps without an entry in the generator's GUIDE_PRICE_SOURCES, as the vendor
 // shows them on OFFLINE_DICTATION_GUIDE_EN_CHECKED.
@@ -182,7 +185,7 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
     purchaseModels: { once: "One-time purchase", subscription: "Subscription", both: "Subscription or one-time", included: "Included with macOS" },
     prices: {
       "Dictivo Local": guideLocalPrice("en"),
-      Voibe: "Voibe Dictation: $9.90 a month list price (shown discounted to $7.50 on the checked date), $75 a year, or $149 once for lifetime access.",
+      Voibe: "Voibe Dictation, per seat: $9.90 a month, $99 a year, or $199 once for lifetime access.",
       "Voice Type": "Free for 7 days, then $19.99 once for lifetime access (App Store in-app purchase).",
       Aiko: "US Mac App Store: $24.",
     },
@@ -192,7 +195,7 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
     methodTitle: "How this page was checked",
     method: [
       "We read each vendor's own pages on the date in the Checked on column. The pages are listed under References. Prices are shown as each vendor shows them, in its own currency.",
-      `The Voice Type, Voibe and Aiko rows keep the facts this site read on ${formatEnDate(OFFLINE_GUIDE_PRICES_CHECKED)}.`,
+      `The Voice Type and Aiko rows keep the facts this site read on ${formatEnDate(OFFLINE_GUIDE_PRICES_CHECKED)}.`,
       "Dictivo facts come from Dictivo's own documentation and the app's source code.",
       "This page does not measure speed or error rates, and it does not score the apps against each other.",
     ],

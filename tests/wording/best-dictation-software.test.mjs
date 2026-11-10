@@ -9,6 +9,7 @@ import { SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD } from "../../data/speech-to-text-mac-
 import { INTRO_OFFER, REGULAR_OFFER } from "../helpers/offer-states.mjs";
 import {
   BEST_DICTATION_SOFTWARE_CHECKED,
+  BEST_DICTATION_SOFTWARE_PRICES_RECHECKED,
   BEST_DICTATION_SOFTWARE_LASTMOD,
   BEST_DICTATION_SOFTWARE_ORDER,
   bestDictationSoftwareCopy,
@@ -105,9 +106,10 @@ test("other products' prices match what the vendor and the site's other pages st
     ["Wispr Flow", pricing("wispr-flow-alternative")],
   ];
   for (const [app, source] of same) assert.deepEqual(figures(rows.get(app)[4]), figures(source), app);
-  // Voibe: the Mac offline guide also gives the struck-through list price.
+  // Voibe: the English Mac offline guide states the same prices (both re-read 2026-11-10).
+  assert.deepEqual(figures(rows.get("Voibe")[4]), ["$199", "$9.90", "$99"]);
   for (const figure of figures(rows.get("Voibe")[4])) assert.ok(OFFLINE_DICTATION_GUIDE_COPY.en.prices.Voibe.includes(figure), `Voibe ${figure}`);
-  assert.deepEqual(figures(rows.get("Spokenly")[4]), ["$9.99", "$99.99"]);
+  assert.deepEqual(figures(rows.get("Spokenly")[4]), ["$12", "$144", "$15"]);
   assert.ok(rows.get("Wispr Flow")[3].includes("2,000 words a week on desktop, 1,000 on mobile"));
   // Dragon: no price in the table; the one sentence, with its archive date, in the note.
   assert.equal(rows.get("Dragon Professional v16")[4], "No public price: sales contact only");
@@ -203,7 +205,9 @@ test("every reference is a vendor's own page with the check date", () => {
   ];
   for (const [, href, label] of references) {
     assert.ok(hosts.includes(new URL(href).hostname), href);
-    assert.ok(label.endsWith(`(checked ${BEST_DICTATION_SOFTWARE_CHECKED})`), label);
+    // The Spokenly and Voibe pricing pages were re-read on their own date; every other page keeps CHECKED.
+    const date = ["https://spokenly.app/pricing", "https://www.getvoibe.com/pricing/"].includes(href) ? BEST_DICTATION_SOFTWARE_PRICES_RECHECKED : BEST_DICTATION_SOFTWARE_CHECKED;
+    assert.ok(label.endsWith(`(checked ${date})`), label);
   }
 });
 

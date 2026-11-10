@@ -44,8 +44,9 @@ const INTENTS = [
 ];
 const HEADERS = ["Option", "Best fit", "Privacy or platform caveat", "When to choose it", "Price / purchase model", "Checked on"];
 const OPTIONS = ["Dictivo Local", "Apple Dictation", "Handy", "MacWhisper", "Spokenly", "Superwhisper", "VoiceInk", "Voice Type", "Voibe", "Wispr Flow"];
-// Voice Type and Voibe keep the site's own check; every other row was re-read for this page.
-const SITE_CHECKED = ["Voice Type", "Voibe"];
+// Voice Type keeps the site's own check; every other row was re-read for this page (Spokenly Pro
+// and Voibe prices in a live spot-check the same day).
+const SITE_CHECKED = ["Voice Type"];
 const NEW_PAGES = [
   "https://dictivo.app/guides/offline-dictation-on-windows/",
   "https://dictivo.app/guides/dictation-app-mac-windows-one-time-license/",
@@ -125,6 +126,8 @@ test("the fact table prices and dates every option and keeps Dictivo prices in p
   assert.equal(text(handy[4]).trim(), "Free and open source (MIT license)");
   const spokenly = body.find((row) => row[0] === "Spokenly");
   assert.match(text(spokenly[4]), /\$29 once/);
+  assert.match(text(spokenly[4]), /Pro \$15 a month, or \$144 a year \(\$12 a month billed yearly\)/);
+  assert.match(text(body.find((row) => row[0] === "Voibe")[4]), /\$9\.90 a month, \$99 a year, or \$199 once/);
 });
 
 test("the method note is signed by the Dictivo team with the check date", () => {
