@@ -171,15 +171,30 @@ export const COMPARE_PAGES = [
       "https://wisprflow.ai/data-controls",
       "https://wisprflow.ai/privacy"
     ],
+    // 2026-11-10 (Japanese): own title and description instead of the shared template.
+    "localizedCopy": {
+      "ja": {
+        "title": "Wispr Flowの代替：買い切り・オフラインのDictivo",
+        "metaDescription": "Wispr Flowは文字起こしをクラウドで行い、有料プランは月額・年額制です。Dictivo Localは端末内で処理する買い切りアプリ。プライバシー、料金、対応OSの違いを比較します。"
+      }
+    },
     // 2026-10-09: English prices and limits re-checked against wisprflow.ai; links the pricing page.
     "lastUpdated": {
       "all": "2026-09-18",
-      "en": "2026-10-09"
+      "en": "2026-10-09",
+      "ja": "2026-11-10"
     }
   },
   {
     slug: "superwhisper-alternative",
-    lastUpdated: { all: "2026-09-18" },
+    lastUpdated: { all: "2026-09-18", ja: "2026-11-10" },
+    // 2026-11-10 (Japanese): own title and description instead of the shared template.
+    localizedCopy: {
+      ja: {
+        title: "Superwhisperの代替：Dictivoと料金・機能を比較",
+        metaDescription: "Superwhisperはローカルモデルとクラウドモデルを選べ、月額・年額・買い切りのプランがあります。Dictivo Localとの料金、無料で使える範囲、対応OSの違いを比較します。",
+      },
+    },
     competitor: "Superwhisper",
     title: "Superwhisper Alternative: Local Dictation & Pricing | Dictivo",
     metaDescription:
@@ -272,8 +287,13 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macwhisper-alternative",
-    lastUpdated: { en: "2026-09-18", de: "2026-10-04" },
+    lastUpdated: { en: "2026-09-18", de: "2026-10-04", ja: "2026-11-10" },
     localizedCopy: {
+      // 2026-11-10 (Japanese): own title and description instead of the shared template.
+      ja: {
+        title: "MacWhisperの代替：Dictivoと機能・料金を比較",
+        metaDescription: "MacWhisperはmacOS専用で、音声入力に加えてファイルの文字起こしもできます。DictivoはMacとWindows x64に対応する音声入力アプリ。機能、料金、更新の扱いを比較します。",
+      },
       de: {
         title: "MacWhisper-Alternative: Diktat, Dateien und Kosten | Dictivo",
         metaDescription: "MacWhisper und Dictivo im Vergleich: Diktat in Apps, Dateitranskription, Offline-Modus und Lizenzkosten. Wann passt Dictivo auf Mac oder Windows?",
@@ -378,6 +398,14 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "voiceink-alternative",
+    lastUpdated: { ja: "2026-11-10" },
+    // 2026-11-10 (Japanese): own title and description instead of the shared template.
+    localizedCopy: {
+      ja: {
+        title: "VoiceInkの代替：Dictivoと料金・対応OSを比較",
+        metaDescription: "VoiceInkはApple Silicon搭載Mac向けの買い切りアプリです。DictivoはMacとWindows x64に対応し、1つのライセンスで両方に使えます。料金、試用、対応環境の違いを比較します。",
+      },
+    },
     competitor: "VoiceInk",
     title: "VoiceInk Alternative: Local Setup, Features and Cost",
     metaDescription:
@@ -493,7 +521,14 @@ export const COMPARE_PAGES = [
   {
     slug: "macos-dictation-alternative",
     // 2026-10-09: the English page links the Mac dictation troubleshooting guide.
-    lastUpdated: { en: "2026-10-09" },
+    lastUpdated: { en: "2026-10-09", ja: "2026-11-10" },
+    // 2026-11-10 (Japanese): own title and description instead of the shared template.
+    localizedCopy: {
+      ja: {
+        title: "Mac標準の音声入力の代替：Dictivoとの違いを比較",
+        metaDescription: "Macに標準搭載の音声入力は無料で使えます。Dictivoは履歴、辞書、スニペットを備えたローカル音声入力アプリで、Windows x64にも対応。処理の場所と機能の違いを比較します。",
+      },
+    },
     competitor: "macOS Dictation",
     title: "A macOS Dictation Alternative with Local Model Choice",
     metaDescription:
@@ -608,6 +643,14 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "dragon-alternative",
+    // 2026-11-10 (Japanese): own title and description. The date stays 2026-10-09: it records the
+    // Dragon price check (tests/facts/dragon-price-status.test.mjs).
+    localizedCopy: {
+      ja: {
+        title: "Dragonの代替：Mac対応・買い切りのDictivo",
+        metaDescription: "Dragon ProfessionalはWindows専用で、Mac版は2018年に終了しました。Dictivo LocalはMacとWindows x64で使える買い切りの音声入力アプリ。処理方法、料金、対応OSを比較します。",
+      },
+    },
     competitor: "Dragon Professional",
     title: "Dragon Alternative: Local, Train-Free Dictation Bought Once",
     metaDescription:
