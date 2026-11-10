@@ -5,6 +5,18 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Japanese vendor update wording — 2026-11-11
+
+The shared Japanese templates said MacWhisper Pro and VoiceInk come with 「無期限のアップデート」 and
+called VoiceInk's tiers a 「現在の価格」. The vendors' pages say "lifetime updates" and show no offer
+wording (spot-check 2026-11-10). The Japanese cells now read 「すべてのアップデート込み（ベンダー表記は
+「lifetime」）」, the VoiceInk price cell starts with 「買い切り：」, and the VoiceInk decision text and
+FAQ attribute the promise to the vendor the same way. This matches the B3 rule for vendor update
+promises. Affected pages: `/ja/compare/macwhisper-alternative/` and `/ja/compare/voiceink-alternative/`
+(Japanese dates 2026-11-11; `/ja/compare/` follows its newest child), plus the price cells of
+`/ja/guides/best-speech-to-text-apps-for-mac/` and `/ja/guides/offline-dictation-on-mac/` (already dated
+2026-11-11). The other languages still say "Current offer" or its translation for VoiceInk; not changed.
+
 ## Batch B3 Japanese buyer pages — 2026-11-11
 
 Two new Japanese answer pages, each paired by hreflang with its English twin:

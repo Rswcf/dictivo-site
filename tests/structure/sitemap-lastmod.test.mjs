@@ -49,14 +49,15 @@ test("comparison refresh is scoped to changed pages and languages", () => {
     // those titles. The Dragon comparison keeps 2026-10-09, the date of its price check.
     const ja = locale === "ja/";
     // English 2026-10-09: the Dragon comparison title it lists changed; 2026-10-10: it links the
-    // dictation software guide; Batch B1: it also links the one-time license guide.
-    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(ja ? "2026-11-10" : locale === "de/" ? "2026-10-04" : locale === "" ? COMPARE_HUB_LOCALE_LASTMOD.en : "2026-09-20"));
+    // dictation software guide; Batch B1: it also links the one-time license guide. Japanese
+    // 2026-11-11: the hub takes its newest child (MacWhisper and VoiceInk update wording).
+    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(ja ? "2026-11-11" : locale === "de/" ? "2026-10-04" : locale === "" ? COMPARE_HUB_LOCALE_LASTMOD.en : "2026-09-20"));
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
     assert.equal(dates.get(superPath), atLeastPricing(ja ? "2026-11-10" : "2026-09-18"));
-    const macDate = ja ? "2026-11-10" : locale === "de/" ? "2026-10-04" : locale ? "2026-09-12" : "2026-09-18";
+    const macDate = ja ? "2026-11-11" : locale === "de/" ? "2026-10-04" : locale ? "2026-09-12" : "2026-09-18";
     assert.equal(dates.get(macPath), atLeastPricing(macDate));
-    assert.equal(dates.get(`/${locale}compare/voiceink-alternative/`), atLeastPricing(ja ? "2026-11-10" : "2026-09-12"));
+    assert.equal(dates.get(`/${locale}compare/voiceink-alternative/`), atLeastPricing(ja ? "2026-11-11" : "2026-09-12"));
     if (ja) {
       for (const slug of ["wispr-flow-alternative", "macos-dictation-alternative"]) {
         assert.equal(dates.get(`/ja/compare/${slug}/`), atLeastPricing("2026-11-10"), slug);
