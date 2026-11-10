@@ -10,6 +10,8 @@ import { ONE_TIME_LICENSE_GUIDE_LASTMOD } from "../../data/one-time-license-guid
 import { NO_SUBSCRIPTION_GUIDE_LASTMOD } from "../../data/no-subscription-guide.mjs";
 import { CLAUDE_CODE_GUIDE_LASTMOD } from "../../data/claude-code-guide.mjs";
 import { readyDocsEntries } from "../../data/docs-index.mjs";
+import { JA_SPEECH_GUIDE_READY, JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD } from "../../data/ja-speech-to-text-mac-guide.mjs";
+import { JA_NO_SUBSCRIPTION_GUIDE_LASTMOD, JA_NO_SUBSCRIPTION_GUIDE_READY } from "../../data/ja-no-subscription-guide.mjs";
 
 const read = path => readFileSync(new URL(`../../dist/${path}`, import.meta.url), "utf8");
 const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
@@ -21,6 +23,9 @@ const cases = [
   ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD],
   ["guides/dictation-app-mac-windows-one-time-license/", "/", "both", "one_time_guide_mac", ONE_TIME_LICENSE_GUIDE_LASTMOD],
   ["guides/dictate-into-claude-code-and-cursor-on-mac/", "/", "macos", "claude_code_guide_mac", CLAUDE_CODE_GUIDE_LASTMOD],
+  // The Japanese answer guides (Batch B3), once built.
+  ...(JA_SPEECH_GUIDE_READY ? [["ja/guides/best-speech-to-text-apps-for-mac/", "/ja/", "macos", "ja_speech_guide_mac", JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD]] : []),
+  ...(JA_NO_SUBSCRIPTION_GUIDE_READY ? [["ja/guides/mac-dictation-app-no-subscription/", "/ja/", "macos", "ja_no_subscription_guide_mac", JA_NO_SUBSCRIPTION_GUIDE_LASTMOD]] : []),
   // Docs pages with a trial panel (the install page), once built (data/docs-index.mjs).
   ...readyDocsEntries({ windows: hasWindowsRelease })
     .filter((entry) => entry.trialSource)

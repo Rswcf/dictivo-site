@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCAL_OFFER, introOfferActive, offerDate } from "../../data/local-offer.mjs";
-import { OFFLINE_DICTATION_GUIDE_EN_CHECKED } from "../../data/offline-dictation-guide.mjs";
+import { OFFLINE_DICTATION_GUIDE_EN_CHECKED, OFFLINE_GUIDE_VOIBE_CHECKED } from "../../data/offline-dictation-guide.mjs";
 import { SPEECH_TO_TEXT_MAC_GUIDE_CHECKED } from "../../data/speech-to-text-mac-guide.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
@@ -60,7 +60,10 @@ test("offline guides with a price column show a price, a purchase model and a ch
     for (const row of body) {
       assert.equal(row.length, 6, `${code}: ${row[0]}`);
       assert.ok(text(row[4]).length > 6, `${code}: ${row[0]} has no price`);
-      const checked = code === "en" && !EN_SITE_CHECKED.includes(row[0]) ? OFFLINE_DICTATION_GUIDE_EN_CHECKED : CHECKED;
+      // Batch B3: the translated Voibe rows carry their own 2026-11-10 spot-check date.
+      const checked = code === "en"
+        ? (EN_SITE_CHECKED.includes(row[0]) ? CHECKED : OFFLINE_DICTATION_GUIDE_EN_CHECKED)
+        : (row[0] === "Voibe" ? OFFLINE_GUIDE_VOIBE_CHECKED : CHECKED);
       assert.ok(row[5].includes(`<time datetime="${checked}">`), `${code}: ${row[0]} has no check date`);
     }
     if (code === "en") {
@@ -81,15 +84,11 @@ test("offline guides with a price column show a price, a purchase model and a ch
     const cell = (app) => text(body.find((row) => row[0] === app)[4]);
     assert.match(cell("VoiceInk"), /\$25.*\$39.*\$49/, code);
     assert.match(cell("Voice Type"), /\$19\.99/, code);
-    if (code === "en") {
-      // English, re-read 2026-11-10: no discount shown, new yearly and lifetime prices.
-      assert.match(cell("Voibe"), /\$9\.90.*\$99 a year.*\$199/, code);
-      assert.doesNotMatch(cell("Voibe"), /\$7\.50|\$75|\$149/, code);
-    } else {
-      // 2026-09-29: Voibe showed $7.50 beside a struck-through $9.90: state the list price, then the discount.
-      assert.match(cell("Voibe"), /\$9\.90.*\$7\.50.*\$75.*\$149/, code);
-      assert.match(cell("Voibe"), /discount|reduziert|折扣|割引/, code);
-    }
+    // Re-read 2026-11-10 (English in Batch B1, the translations in Batch B3): no discount shown,
+    // new yearly and lifetime prices.
+    assert.match(cell("Voibe"), /\$9\.90.*\$99.*\$199/, code);
+    assert.doesNotMatch(cell("Voibe"), /\$7\.50|\$75|\$149|discount|reduziert|折扣|割引/, code);
+    if (code === "en") assert.match(cell("Voibe"), /\$99 a year/, code);
     assert.match(cell("Aiko"), /\$24/, code);
     assert.match(cell("Superwhisper"), /\$8\.49.*\$84\.99.*\$249\.99/, code);
     assert.match(cell("MacWhisper"), /€64/, code);
@@ -112,8 +111,14 @@ test("languages without a price column keep the four-column table", () => {
 });
 
 test("references list each vendor price page with the date it was read", () => {
-  // The English pages re-read Voibe's pricing in Batch B1; the translated guides keep CHECKED.
-  for (const [html, voibeChecked] of [[guide(""), OFFLINE_DICTATION_GUIDE_EN_CHECKED], [bestSpeech(), SPEECH_TO_TEXT_MAC_GUIDE_CHECKED], [guide("de/"), CHECKED]]) {
+  // The English pages re-read Voibe's pricing in Batch B1, the priced translations in Batch B3; an
+  // unpriced translation (fr) keeps the shared list and CHECKED.
+  for (const [html, voibeChecked] of [
+    [guide(""), OFFLINE_DICTATION_GUIDE_EN_CHECKED],
+    [bestSpeech(), SPEECH_TO_TEXT_MAC_GUIDE_CHECKED],
+    [guide("de/"), OFFLINE_GUIDE_VOIBE_CHECKED],
+    [guide("fr/"), CHECKED],
+  ]) {
     for (const url of [
       "https://tryvoiceink.com/pricing",
       "https://www.getvoibe.com/pricing/",

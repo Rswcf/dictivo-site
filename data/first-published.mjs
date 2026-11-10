@@ -5,8 +5,10 @@
 // publication date. They never move: the "Last updated" constants drive dateModified.
 export const FIRST_PUBLISHED = Object.freeze({
   "guides/offline-dictation-on-mac": "2026-06-07", // b431ef4, all ten languages
-  "guides/best-speech-to-text-apps-for-mac": "2026-06-07", // 330ab94
-  "guides/mac-dictation-app-no-subscription": "2026-11-10", // English only
+  // English 2026-06-07 (330ab94), unchanged; Japanese 2026-11-11 (Batch B3 release).
+  "guides/best-speech-to-text-apps-for-mac": Object.freeze({ en: "2026-06-07", ja: "2026-11-11" }),
+  // English 2026-11-10, unchanged; Japanese 2026-11-11 (Batch B3 release).
+  "guides/mac-dictation-app-no-subscription": Object.freeze({ en: "2026-11-10", ja: "2026-11-11" }),
   "guides/mac-dictation-benchmark-method": "2026-06-07", // 75c3ee6
   "guides/offline-dictation-on-windows": "2026-07-12", // 79e0da2
   "guides/first-local-dictation": "2026-09-10", // 8d9f594, English and Japanese

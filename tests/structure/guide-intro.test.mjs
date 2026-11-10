@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { JA_SPEECH_GUIDE_READY } from "../../data/ja-speech-to-text-mac-guide.mjs";
+import { JA_NO_SUBSCRIPTION_GUIDE_READY } from "../../data/ja-no-subscription-guide.mjs";
 
 // Twelve guide pages open with a disclosed "What is Dictivo?" block right after the short answer:
 // what the product is, a pricing link and the Mac (and Windows) download. Every other guide, and
@@ -22,6 +24,9 @@ const PAGES = [
   ["/guides/dictate-into-claude-code-and-cursor-on-mac/", "en", "claude-code", "claude_code_guide_intro"],
   ["/guides/offline-dictation-on-mac/", "en", "offline-guide", "offline_guide_intro"],
   ["/ja/guides/offline-dictation-on-mac/", "ja", "offline-guide", "offline_guide_intro"],
+  // The Japanese answer guides (Batch B3), once built.
+  ...(JA_SPEECH_GUIDE_READY ? [["/ja/guides/best-speech-to-text-apps-for-mac/", "ja", "ja-speech-to-text-mac", "ja_speech_guide_intro"]] : []),
+  ...(JA_NO_SUBSCRIPTION_GUIDE_READY ? [["/ja/guides/mac-dictation-app-no-subscription/", "ja", "ja-no-subscription", "ja_no_subscription_guide_intro"]] : []),
   ["/guides/dictation-app-mac-windows-one-time-license/", "en", "one-time-license", "one_time_guide_intro"],
 ];
 const WITHOUT_BLOCK = [

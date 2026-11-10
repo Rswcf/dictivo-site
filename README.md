@@ -131,11 +131,42 @@ The Windows guide keeps its own renderer, data file and date.
 translated offline guides keep their old shape: the renderer branches on a field that only the
 English object has.
 
+Two English guides have a Japanese twin (Batch B3): `/ja/guides/best-speech-to-text-apps-for-mac/`
+(`data/ja-speech-to-text-mac-guide.mjs`) and `/ja/guides/mac-dictation-app-no-subscription/`
+(`data/ja-no-subscription-guide.mjs`). Both render through `renderAnswerGuidePage()` with code
+`ja`. A pair is registered like the troubleshooting pair above: a `*_PATHS` map in the generator
+(`SPEECH_TO_TEXT_MAC_GUIDE_PATHS`, `NO_SUBSCRIPTION_GUIDE_PATHS`), `translatedGuideHeadTags()` on
+both pages, `translatedGuideSitemapAlternates()` on both sitemap entries, and `hrefForLocale` for the
+language menu. English is the x-default; other languages in the Japanese page's menu go to their
+homepage. The `ja` path enters the map only while the data file's `*_READY` flag
+(`JA_SPEECH_GUIDE_READY`, `JA_NO_SUBSCRIPTION_GUIDE_READY`) is `true`. With the flag `false`, nothing
+Japanese is built and the English twin keeps its English-only head. The English twins keep their own
+`*_LASTMOD`, `<main>` and `datePublished`; only their head and sitemap entry gain the `ja` alternate.
+`data/first-published.mjs` holds per-language objects for both routes. Besides the language menu,
+three places link the Japanese pages: the Japanese footer, `/ja/llms.txt` and the Japanese offline
+guide (sections 2 and 3). In `/ja/llms.txt` the speech-to-text guide replaces the English line, and
+the no-subscription guide is a new line with no English counterpart; no other `llms.txt` names them. A Japanese copy object sets `relatedHeaders` for
+the related table (the renderer defaults to the English headers). Facts about other apps come from
+the competitor facts file of the page's `*_CHECKED` date; the Voice Type row keeps the Japanese
+offline guide's facts and `OFFLINE_GUIDE_PRICES_CHECKED` through `rowChecked`.
+
+A translated offline guide table reads its "Checked on" date per row from `copy.rowChecked` and falls
+back to `OFFLINE_GUIDE_PRICES_CHECKED`. Today only `de`, `zh` and `ja` set it, for Voibe
+(`OFFLINE_GUIDE_VOIBE_CHECKED`, the 2026-11-10 price spot-check). `offlineDictationGuideReferences(code)`
+then dates the Voibe pricing reference the same way; the six languages without a price column
+(`fr es it nl pt ko`) keep the shared reference list. `offlineDictationGuideLastmod(code)` and
+`offlineDictationGuideReferences(code)` resolve `zh-hant` to `zh`: the build copies the `zh` object
+to `zh-hant`, but a test process imports the data file without that copy.
+
 Tests: one wording test per page in `tests/wording/` (`speech-to-text-mac`,
-`offline-dictation-mac`, `one-time-license`, `no-subscription`, `claude-code-cursor`) pins the
-answer, the tables, the schema and the banned words. `tests/structure/b1-links.test.mjs` checks the
-English footer and compare hub links and that every related-table and `/guides/` link on the five
-pages lands on a built page. Tests import B1 dates from the data files; they never type one.
+`offline-dictation-mac`, `one-time-license`, `no-subscription`, `claude-code-cursor`,
+`ja-speech-to-text-mac`, `ja-no-subscription`) pins the answer, the tables, the schema and the
+banned words. `tests/structure/b1-links.test.mjs` checks the English footer and compare hub links
+and that every related-table and `/guides/` link on the five English pages lands on a built page.
+`tests/structure/ja-guides.test.mjs` holds the shared contract of the Japanese pairs: hreflang,
+language menus, locale routing, sitemap, footer, `llms.txt`, schema, and that every in-site link of
+both pages and of the Japanese offline guide resolves. It also keeps a not-ready branch for a future
+pair. Tests import B1 and B3 dates from the data files; they never type one.
 
 ### Docs section
 
@@ -309,7 +340,7 @@ content it stamps actually changes — that is the only thing that moves a date.
 | --- | --- | --- |
 | `MAC_ADVISOR_LASTMOD` | `data/mac-model-advisor.mjs` | sitemap for `/mac-model-guide/` (all locales) |
 | `PRIVACY_PROOF_LASTMOD` | `data/privacy-proof-pages.mjs` | sitemap + `dateModified` for `/privacy-proof/` |
-| `OFFLINE_DICTATION_GUIDE_LASTMOD` | `data/offline-dictation-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/offline-dictation-on-mac/` in a language whose copy object has no `lastUpdated`; the English and Japanese objects carry their own `lastUpdated`. `OFFLINE_DICTATION_GUIDE_EN_CHECKED` dates the English rows read from the competitor facts; `OFFLINE_GUIDE_PRICES_CHECKED` dates the Voice Type, Voibe and Aiko rows and the translated tables |
+| `OFFLINE_DICTATION_GUIDE_LASTMOD` | `data/offline-dictation-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/offline-dictation-on-mac/` in a language whose copy object has no `lastUpdated`; the `en`, `de`, `zh` (and so `zh-hant`) and `ja` objects carry their own `lastUpdated`. `OFFLINE_DICTATION_GUIDE_EN_CHECKED` dates the English rows read from the competitor facts; `OFFLINE_GUIDE_PRICES_CHECKED` dates the English Voice Type, Voibe and Aiko rows and every translated row except Voibe in `de`, `zh` and `ja`; `OFFLINE_GUIDE_VOIBE_CHECKED` dates those three Voibe rows and their Voibe pricing reference |
 | `OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD` | `data/offline-dictation-windows-guide.mjs` | visible stamp + sitemap for `/guides/offline-dictation-on-windows/` |
 | `BENCHMARK_METHOD_GUIDE_LASTMOD` | `data/benchmark-method-guide.mjs` | visible stamp + sitemap for `/guides/mac-dictation-benchmark-method/` |
 | `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/speech-to-text-mac-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/best-speech-to-text-apps-for-mac/`, never older than `PRICING_LASTMOD`; `SPEECH_TO_TEXT_MAC_GUIDE_CHECKED` dates the rows read from the competitor facts and sets the title's year |
@@ -323,6 +354,8 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `ONE_TIME_LICENSE_GUIDE_LASTMOD` | `data/one-time-license-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/dictation-app-mac-windows-one-time-license/`, never older than `PRICING_LASTMOD`; `ONE_TIME_LICENSE_GUIDE_CHECKED` dates the competitor rows |
 | `NO_SUBSCRIPTION_GUIDE_LASTMOD` | `data/no-subscription-guide.mjs` | the same for `/guides/mac-dictation-app-no-subscription/`; `NO_SUBSCRIPTION_GUIDE_CHECKED` dates the competitor rows |
 | `CLAUDE_CODE_GUIDE_LASTMOD` | `data/claude-code-guide.mjs` | the same for `/guides/dictate-into-claude-code-and-cursor-on-mac/`; `CLAUDE_CODE_GUIDE_CHECKED` dates the rows read from the Claude Code and Cursor documentation |
+| `JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/ja-speech-to-text-mac-guide.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/best-speech-to-text-apps-for-mac/` while `JA_SPEECH_GUIDE_READY` is true, never older than `PRICING_LASTMOD`; `JA_SPEECH_TO_TEXT_MAC_GUIDE_CHECKED` dates the competitor rows, the answer and the method note |
+| `JA_NO_SUBSCRIPTION_GUIDE_LASTMOD` | `data/ja-no-subscription-guide.mjs` | the same for `/ja/guides/mac-dictation-app-no-subscription/` while `JA_NO_SUBSCRIPTION_GUIDE_READY` is true; `JA_NO_SUBSCRIPTION_GUIDE_CHECKED` dates the competitor rows, the answer and the method note |
 | `DOCS_INDEX_LASTMOD` | `data/docs-index.mjs` | visible stamp + sitemap + `dateModified` for `/docs/` |
 | `DOCS_SYSTEM_REQUIREMENTS_LASTMOD` | `data/docs-system-requirements.mjs` | visible stamp + sitemap + `dateModified` for `/docs/system-requirements/` |
 | `DOCS_INSTALL_LASTMOD` | `data/docs-install-and-uninstall.mjs` | the same for `/docs/install-and-uninstall/` |

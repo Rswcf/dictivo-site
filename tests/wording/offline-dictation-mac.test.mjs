@@ -266,6 +266,7 @@ test("the translated offline guides keep their own shape", () => {
     assert.ok(!html.includes("offline-guide-method"), `${code}: method note`);
     assert.ok(html.includes('id="offline-guide-table"'), `${code}: table id`);
   }
-  // The Japanese guide's own date; it does not move with the English rebuild.
-  assert.ok(read(`ja${path}index.html`).includes('<time datetime="2026-11-10">'));
+  // The Japanese guide's own date (from its data; re-dated at integration); it does not move with
+  // the English rebuild.
+  assert.ok(read(`ja${path}index.html`).includes(`<time datetime="${offlineDictationGuideLastmod("ja")}">`));
 });

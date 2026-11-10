@@ -7,8 +7,16 @@ export const OFFLINE_DICTATION_GUIDE_LASTMOD = "2026-09-29";
 // comparison pages and were re-read the same day). Never copy a price from a third-party list.
 export const OFFLINE_GUIDE_PRICES_CHECKED = "2026-09-29";
 
+// Batch B3: the de, zh (and so zh-hant) and ja Voibe prices come from the live spot-check of this
+// day (raw/price-spotcheck-2026-11-10.md): "$9.90 per seat per month, $99 per seat per year, or
+// $199 per seat once for lifetime access"; the lifetime seat includes every future update of that
+// plan; paid seats cover Mac & Windows. Every other translated row keeps OFFLINE_GUIDE_PRICES_CHECKED.
+export const OFFLINE_GUIDE_VOIBE_CHECKED = "2026-11-10";
+
+// zh-hant follows zh: the build copies the zh object to zh-hant (addHant), the test process does not.
 export function offlineDictationGuideLastmod(code) {
-  return OFFLINE_DICTATION_GUIDE_COPY[code]?.lastUpdated || OFFLINE_DICTATION_GUIDE_LASTMOD;
+  const key = code === "zh-hant" ? "zh" : code;
+  return OFFLINE_DICTATION_GUIDE_COPY[key]?.lastUpdated || OFFLINE_DICTATION_GUIDE_LASTMOD;
 }
 
 export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
@@ -30,12 +38,23 @@ export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
 ];
 
+// The reference list of a translated guide (the old shape). A language whose Voibe row carries its
+// own check date (Batch B3: de, zh, zh-hant, ja) dates the Voibe pricing reference the same way;
+// every other language shares OFFLINE_DICTATION_GUIDE_REFERENCES unchanged.
+export function offlineDictationGuideReferences(code) {
+  const key = code === "zh-hant" ? "zh" : code;
+  if (!OFFLINE_DICTATION_GUIDE_COPY[key]?.rowChecked?.Voibe) return OFFLINE_DICTATION_GUIDE_REFERENCES;
+  return OFFLINE_DICTATION_GUIDE_REFERENCES.map(([label, url]) =>
+    url === "https://www.getvoibe.com/pricing/" ? [`Voibe pricing, checked ${OFFLINE_GUIDE_VOIBE_CHECKED}`, url] : [label, url],
+  );
+}
+
 // 2026-11-10 (Batch B1): the English guide is rebuilt in the answer-page shape of the Windows
 // offline guide; the other ten languages keep their objects below and their old shape. Ten rows;
 // Handy is new. Every row except Voice Type and Aiko was re-read on
 // OFFLINE_DICTATION_GUIDE_EN_CHECKED (competitor facts file of that date in the desktop
 // repository; Voibe's price from a live spot-check the same day); those two keep the site's
-// OFFLINE_GUIDE_PRICES_CHECKED facts. The translated Voibe prices stay at their 2026-09-29 check.
+// OFFLINE_GUIDE_PRICES_CHECKED facts. The de, zh and ja Voibe prices use OFFLINE_GUIDE_VOIBE_CHECKED (Batch B3).
 export const OFFLINE_DICTATION_GUIDE_EN_CHECKED = "2026-11-10";
 
 // The English references: the shared list (the translated guides keep exactly that list) plus the
@@ -311,7 +330,7 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
       ],
       [
         "Can I install Dictivo with Homebrew?",
-        "Yes. Run brew install --cask deepviewsdev/tap/dictivo. The cask installs the same signed, notarized universal app as the download button. Dictivo updates itself, and brew upgrade --cask dictivo also works. To remove the app with its settings, license file and models, run brew uninstall --zap --cask dictivo.",
+        "Yes. Run brew install --cask deepviewsdev/tap/dictivo. The cask installs the same signed, notarized universal app as the download button. Dictivo updates itself, and brew upgrade --cask dictivo also works. brew uninstall --zap --cask dictivo removes the app and moves five Dictivo folders in ~/Library to the Trash: settings, caches, license files, history and downloaded models. The Keychain items named com.dictivo.desktop, which hold backup copies of your licenses, stay. The install and uninstall docs page lists the folders and the items.",
       ],
       [
         "How can I check that a dictation app does not upload my audio?",
@@ -338,12 +357,14 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
       ["Where dictation audio goes", "See where Dictivo processes audio in Local and Cloud Fast modes.", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
       ["Local dictation network test", "Repeat a network check against Dictivo's Local mode.", "https://dictivo.app/privacy/local-dictation-network-test/"],
       ["Wispr Flow alternative", "Compare local-first Mac dictation with a cloud AI voice workflow.", "https://dictivo.app/compare/wispr-flow-alternative/"],
+      ["Install and uninstall", "Homebrew tap, brew uninstall --zap, and the Keychain items that stay.", "https://dictivo.app/docs/install-and-uninstall/"],
     ],
     referenceTitle: "References",
     // 2026-10-10: the Dictivo fit section links the cross-platform dictation software guide.
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
     // 2026-11-10 (Batch B1): rebuilt in the answer-page shape.
-    lastUpdated: "2026-11-10",
+    // 2026-11-11 (Batch B3): the Homebrew --zap FAQ says the Keychain items stay; install docs row.
+    lastUpdated: "2026-11-11",
   };
 }
 
@@ -367,7 +388,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     purchaseModels: { once: "Einmalkauf", subscription: "Abo", both: "Abo oder Einmalkauf", included: "In macOS enthalten" },
     prices: {
       "Dictivo Local": guideLocalPrice("de"),
-      Voibe: "Voibe Dictation: Listenpreis $9.90 pro Monat (am Prüfdatum auf $7.50 reduziert angezeigt), $75 pro Jahr oder einmalig $149 für lebenslangen Zugang.",
+      Voibe: "Voibe Dictation, pro Arbeitsplatz: $9.90 pro Monat, $99 pro Jahr oder einmalig $199 für lebenslangen Zugang.",
       "Voice Type": "7 Tage kostenlos, danach einmalig $19.99 für lebenslangen Zugang (In-App-Kauf im App Store).",
       Aiko: "Mac App Store: $24 (US-Preis).",
     },
@@ -416,6 +437,10 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["Welche Apps verarbeiten aufgenommene Dateien?", "MacWhisper unterstützt Diktat und Dateien; Aiko transkribiert Aufnahmen."],
     ],
     referenceTitle: "Referenzen",
+    // Batch B3: the Voibe price was re-read on its own day.
+    rowChecked: { Voibe: OFFLINE_GUIDE_VOIBE_CHECKED },
+    // 2026-11-10 (Batch B3): new Voibe price, check date and reference label.
+    lastUpdated: "2026-11-11",
   },
   fr: {
     navLabel: "Dictée Mac hors ligne",
@@ -735,7 +760,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     purchaseModels: { once: "一次性购买", subscription: "订阅", both: "订阅或一次性购买", included: "macOS 自带" },
     prices: {
       "Dictivo Local": guideLocalPrice("zh"),
-      Voibe: "Voibe Dictation：标价每月 $9.90（核对日显示折扣价 $7.50）、每年 $75，或 $149 一次性购买终身使用。",
+      Voibe: "Voibe Dictation（按席位）：每月 $9.90、每年 $99，或 $199 一次性购买终身使用。",
       "Voice Type": "免费试用 7 天，之后 $19.99 一次性购买终身使用（App Store 应用内购买）。",
       Aiko: "美国 Mac App Store：$24。",
     },
@@ -784,6 +809,10 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ["哪些应用支持转录录音文件？", "MacWhisper 支持听写和文件转录；Aiko 转录录音。"],
     ],
     referenceTitle: "参考资料",
+    // Batch B3: the Voibe price was re-read on its own day.
+    rowChecked: { Voibe: OFFLINE_GUIDE_VOIBE_CHECKED },
+    // 2026-11-10 (Batch B3): new Voibe price, check date and reference label (zh-hant follows).
+    lastUpdated: "2026-11-11",
   },
   ja: {
     "navLabel": "Mac オフライン音声入力",
@@ -799,7 +828,7 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     "purchaseModels": { "once": "買い切り", "subscription": "サブスク", "both": "サブスク／買い切り", "included": "macOSに付属" },
     "prices": {
       "Dictivo Local": guideLocalPrice("ja"),
-      "Voibe": "Voibe Dictation：通常価格は月額$9.90（確認日には割引価格$7.50と表示）、年額$75、または$149でライフタイム利用。",
+      "Voibe": "Voibe Dictation（1席あたり）：月額$9.90、年額$99、または$199の買い切りでライフタイム利用。",
       "Voice Type": "7日間無料、その後$19.99で永続利用（App Storeのアプリ内課金）。",
       "Aiko": "米国Mac App Store：$24。"
     },
@@ -889,7 +918,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
           "ローカル/オフラインとは、モデル導入後に音声がMac上で処理されることです。",
           "ゼロ保持とは、リモート処理後にデータを保存しないとベンダーが説明することです。",
           "個人メモ、顧客業務、日記、下書き、機密会議では、アップロード経路がない状態が安全な初期値です。"
-        ]
+        ],
+        "link": { "label": "用途別にMacの音声入力アプリを比較する", "href": "/ja/guides/best-speech-to-text-apps-for-mac/" }
       },
       {
         "kicker": "Dictivoの適合",
@@ -902,7 +932,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
           "日常の機密音声入力には、アクティブなデスクトップアプリへDictivo Localを使います。",
           "Cloud Fastは、低機密の選択録音で速度が重要なときだけ使います。",
           "継続的なクラウド音声入力より一回払いのLocalライセンスを選びたい場合にDictivoが合います。"
-        ]
+        ],
+        "link": { "label": "買い切りで使えるMacの音声入力アプリを比較する", "href": "/ja/guides/mac-dictation-app-no-subscription/" }
       },
       {
         "kicker": "実際に試す",
@@ -953,9 +984,12 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       ]
     ],
     "referenceTitle": "参考資料",
+    // Batch B3: the Voibe price was re-read on its own day.
+    "rowChecked": { "Voibe": OFFLINE_GUIDE_VOIBE_CHECKED },
     // 2026-10-17: the trial steps link directly to the Japanese practice page.
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
-    "lastUpdated": "2026-11-10"
+    // 2026-11-10 (Batch B3): new Voibe price and check date; links to the Japanese answer guides.
+    "lastUpdated": "2026-11-11"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",

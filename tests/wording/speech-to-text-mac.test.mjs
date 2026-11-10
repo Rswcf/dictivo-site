@@ -9,6 +9,7 @@ import {
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
   speechToTextMacGuideCopy,
 } from "../../data/speech-to-text-mac-guide.mjs";
+import { JA_SPEECH_GUIDE_READY } from "../../data/ja-speech-to-text-mac-guide.mjs";
 
 // The Mac speech-to-text guide in the answer-page shape (Batch B1): the query as H1, a short
 // dated answer, the "What is Dictivo?" block, the ways people ask, a dated fact table, a signed
@@ -61,7 +62,8 @@ test("the Mac speech-to-text guide is a self-canonical English page with the que
   assert.ok(html.includes(`<h1>Best speech-to-text and dictation apps for Mac in ${year}, by workflow</h1>`));
   assert.ok(html.includes(`<title>Best Speech-to-Text and Dictation Apps for Mac (${year})</title>`));
   assert.ok(html.includes(`<link rel="canonical" href="${url}" />`));
-  assert.deepEqual(alternates(html), [["en", url], ["x-default", url]]);
+  // The Japanese twin (Batch B3) joins the alternates once it is built.
+  assert.deepEqual(alternates(html), [["en", url], ...(JA_SPEECH_GUIDE_READY ? [["ja", `https://dictivo.app/ja${path}`]] : []), ["x-default", url]]);
   assert.equal(copy.navLabel, "Speech-to-text apps for Mac");
 });
 
