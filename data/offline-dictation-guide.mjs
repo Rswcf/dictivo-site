@@ -54,7 +54,7 @@ export function offlineDictationGuideReferences(code) {
 // Handy is new. Every row except Voice Type and Aiko was re-read on
 // OFFLINE_DICTATION_GUIDE_EN_CHECKED (competitor facts file of that date in the desktop
 // repository; Voibe's price from a live spot-check the same day); those two keep the site's
-// OFFLINE_GUIDE_PRICES_CHECKED facts. The translated Voibe prices stay at their 2026-09-29 check.
+// OFFLINE_GUIDE_PRICES_CHECKED facts. The de, zh and ja Voibe prices use OFFLINE_GUIDE_VOIBE_CHECKED (Batch B3).
 export const OFFLINE_DICTATION_GUIDE_EN_CHECKED = "2026-11-10";
 
 // The English references: the shared list (the translated guides keep exactly that list) plus the
@@ -363,6 +363,7 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
     // 2026-10-10: the Dictivo fit section links the cross-platform dictation software guide.
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
     // 2026-11-10 (Batch B1): rebuilt in the answer-page shape.
+    // 2026-11-11 (Batch B3): the Homebrew --zap FAQ says the Keychain items stay; install docs row.
     lastUpdated: "2026-11-11",
   };
 }
