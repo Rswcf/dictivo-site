@@ -5,6 +5,20 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Batch A entry-page fixes — 2026-11-10
+
+Six changes from the Mac search plan, one commit each. Eight guides (the six dictation guides and
+the English and Japanese offline guide) get a "What is Dictivo?" block right after the answer, with
+the pricing link and the downloads; the first Mac download link moved from 52–81% of the body to
+under 15%. `/pricing/` gets the same download pair. The header gains a third link to the compare
+hub, and the homepage pricing section links the hub (in English also the buyer guide). The English
+title, description and hero lede and the Japanese lede now say "one-time purchase" / 「買い切り」;
+the H1 is unchanged. Five Japanese comparison pages get their own title and description (they
+shared one template before); the Japanese Dragon page gets them too but keeps its 2026-10-09 date,
+which `tests/facts/dragon-price-status.test.mjs` pins, so its sitemap lastmod did not move.
+`/refund/` has a longer description. The hero has a `mailto:` link, shown on touch devices only,
+that lets a phone visitor mail the homepage to themselves; it has no recipient and no script.
+
 ## IndexNow retries a dropped connection — 2026-11-04
 
 The deploy of eef30be failed in its IndexNow step: yandex.com closed the socket before any

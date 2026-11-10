@@ -43,15 +43,24 @@ test("comparison refresh is scoped to changed pages and languages", () => {
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   const locales = ["", "de/", "fr/", "es/", "it/", "nl/", "pt/", "zh/", "zh-hant/", "ja/", "ko/"];
   for (const locale of locales) {
+    // Japanese 2026-11-10: each comparison has its own title and description, and the hub lists
+    // those titles. The Dragon comparison keeps 2026-10-09, the date of its price check.
+    const ja = locale === "ja/";
     // English 2026-10-09: the Dragon comparison title it lists changed; 2026-10-10: it links the
     // dictation software guide.
-    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(locale === "de/" ? "2026-10-04" : locale === "" ? "2026-10-10" : "2026-09-20"));
+    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(ja ? "2026-11-10" : locale === "de/" ? "2026-10-04" : locale === "" ? "2026-10-10" : "2026-09-20"));
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
-    assert.equal(dates.get(superPath), atLeastPricing("2026-09-18"));
-    const macDate = locale === "de/" ? "2026-10-04" : locale ? "2026-09-12" : "2026-09-18";
+    assert.equal(dates.get(superPath), atLeastPricing(ja ? "2026-11-10" : "2026-09-18"));
+    const macDate = ja ? "2026-11-10" : locale === "de/" ? "2026-10-04" : locale ? "2026-09-12" : "2026-09-18";
     assert.equal(dates.get(macPath), atLeastPricing(macDate));
-    assert.equal(dates.get(`/${locale}compare/voiceink-alternative/`), atLeastPricing("2026-09-12"));
+    assert.equal(dates.get(`/${locale}compare/voiceink-alternative/`), atLeastPricing(ja ? "2026-11-10" : "2026-09-12"));
+    if (ja) {
+      for (const slug of ["wispr-flow-alternative", "macos-dictation-alternative"]) {
+        assert.equal(dates.get(`/ja/compare/${slug}/`), atLeastPricing("2026-11-10"), slug);
+      }
+      assert.equal(dates.get("/ja/compare/dragon-alternative/"), atLeastPricing("2026-10-09"));
+    }
     for (const path of [superPath, macPath]) {
       const body = readFileSync(`${dist}${path.slice(1)}index.html`, "utf8");
       const date = body.match(/<time datetime="([^"]+)"/)[1];
@@ -67,8 +76,9 @@ test("Guide dates reflect scoped trial improvements without redating unchanged s
     // 2026-09-29: the answer comes first and the table gained price and check-date columns.
     // 2026-10-17 (Japanese): the trial steps link the practice page.
     // 2026-10-10 (English): the Dictivo fit section links the dictation software guide.
-    ["/ja/guides/offline-dictation-on-mac/", "2026-10-17"],
-    ["/guides/offline-dictation-on-mac/", "2026-10-10"],
+    // 2026-11-10 (English and Japanese): a "What is Dictivo?" block with downloads follows the answer.
+    ["/ja/guides/offline-dictation-on-mac/", "2026-11-10"],
+    ["/guides/offline-dictation-on-mac/", "2026-11-10"],
     ["/ja/guides/first-local-dictation/", "2026-09-18"],
     ["/guides/first-local-dictation/", "2026-09-11"],
   ]) {

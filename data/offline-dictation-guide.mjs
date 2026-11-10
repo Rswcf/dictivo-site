@@ -107,7 +107,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     referenceTitle: "References",
     // 2026-10-10: the Dictivo fit section links the cross-platform dictation software guide.
-    lastUpdated: "2026-10-10",
+    // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
+    lastUpdated: "2026-11-10",
   },
   de: {
     navLabel: "Offline-Diktat für Mac",
@@ -714,7 +715,8 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
     ],
     "referenceTitle": "参考資料",
     // 2026-10-17: the trial steps link directly to the Japanese practice page.
-    "lastUpdated": "2026-10-17"
+    // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
+    "lastUpdated": "2026-11-10"
   },
   ko: {
     navLabel: "Mac 오프라인 받아쓰기",

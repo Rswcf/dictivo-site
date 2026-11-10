@@ -4,7 +4,7 @@
 // those pages, never translated from the English guide. Apple names only two choices of the
 // Shortcut pop-up menu, so this page names only those. Dictivo appears only in the third column
 // of the quick reference, in its own disclosed section and in the last FAQ.
-export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-10-17"; // set to the publishing commit's date
+export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-10"; // set to the publishing commit's date
 
 // The day the Apple pages below were read for this guide.
 export const JA_MAC_DICTATION_SHORTCUT_CHECKED = "2026-10-09";

@@ -6,14 +6,15 @@ import { pricingAnchor } from "./local-offer-copy.mjs";
 // at build time (scripts/lib/hant.mjs).
 export const HOME_COPY = {
   en: {
-    metaTitle: "Offline Dictation App for Mac & Windows - Buy Once | Dictivo",
-    metaDescription: "Dictivo types what you say into any Mac or Windows app. Local mode keeps audio on your device - verify it with an open network test. Buy once, yours to keep.",
+    metaTitle: "Offline Dictation App for Mac & Windows - One-Time Purchase | Dictivo",
+    metaDescription: "Offline dictation app for Mac and Windows. Dictivo Local is a one-time purchase, no subscription. Local mode keeps audio on your device - verify it yourself.",
     skip: "Skip to content",
     nav: {
       pricing: "Pricing",
       downloads: "Downloads",
       download: "Downloads",
       menu: "Menu",
+      compare: "Compare",
     },
     language: {
       aria: "Change site display language",
@@ -121,6 +122,7 @@ export const HOME_COPY = {
       downloads: "Downloads",
       download: "Downloads",
       menu: "Menü",
+      compare: "Vergleich",
     },
     language: {
       aria: "Anzeigesprache der Website ändern",
@@ -227,6 +229,7 @@ export const HOME_COPY = {
       downloads: "Téléchargements",
       download: "Téléchargements",
       menu: "Menu",
+      compare: "Comparatif",
     },
     language: {
       aria: "Changer la langue d'affichage du site",
@@ -333,6 +336,7 @@ export const HOME_COPY = {
       downloads: "Descargas",
       download: "Descargas",
       menu: "Menú",
+      compare: "Comparar",
     },
     language: {
       aria: "Cambiar idioma de visualización del sitio",
@@ -439,6 +443,7 @@ export const HOME_COPY = {
       downloads: "Scaricamenti",
       download: "Download",
       menu: "Menu",
+      compare: "Confronto",
     },
     language: {
       aria: "Cambia lingua di visualizzazione del sito",
@@ -545,6 +550,7 @@ export const HOME_COPY = {
       downloads: "Downloads",
       download: "Downloads",
       menu: "Menu",
+      compare: "Vergelijken",
     },
     language: {
       aria: "Weergavetaal van de site wijzigen",
@@ -651,6 +657,7 @@ export const HOME_COPY = {
       downloads: "Downloads",
       download: "Downloads",
       menu: "Menu",
+      compare: "Comparar",
     },
     language: {
       aria: "Alterar idioma de exibição do site",
@@ -757,6 +764,7 @@ export const HOME_COPY = {
       downloads: "下载",
       download: "下载",
       menu: "菜单",
+      compare: "对比",
     },
     language: {
       aria: "切换网站显示语言",
@@ -845,6 +853,7 @@ export const HOME_COPY = {
       downloads: "ダウンロード",
       download: "ダウンロード",
       menu: "メニュー",
+      compare: "比較",
     },
     language: {
       aria: "サイトの表示言語を変更",
@@ -951,6 +960,7 @@ export const HOME_COPY = {
       downloads: "다운로드",
       download: "다운로드",
       menu: "메뉴",
+      compare: "비교",
     },
     language: {
       aria: "사이트 표시 언어 변경",

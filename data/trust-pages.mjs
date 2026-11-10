@@ -1426,7 +1426,7 @@ export const TRUST_PAGES = [
     eyebrow: "Refunds",
     metaTitle: "Refund Policy · Dictivo",
     metaDescription:
-      "How to request a Dictivo refund for Local purchases and Cloud Fast subscriptions.",
+      "How to request a Dictivo refund. Dictivo Local purchases can be refunded within 14 days by email. Also covers Cloud Fast cancellation and EU withdrawal rights.",
     lede:
       "Buying desktop software should not feel risky. If Dictivo does not fit your workflow, contact support and we will handle the request plainly.",
     lastModified: LEGAL_LASTMOD,
