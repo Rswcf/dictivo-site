@@ -4398,6 +4398,11 @@ function renderPricingPage(code = "en") {
       <section class="doc-section" aria-labelledby="pricing-answer">
         <h2 id="pricing-answer">${html(copy.answerTitle)}</h2>
         <p>${html(pricingPageAnswer(code))}</p>
+        <div class="compare-intro-actions" data-platform-downloads>
+          <a class="button button-light download-link" href="${attr(downloadUrl("macos", "pricing_page_mac"))}"${downloadData("macos", "pricing_page_mac")}>${html(t.hero.download)}</a>${hasWindowsRelease ? `
+          <a class="button button-outline download-link" href="${attr(downloadUrl("windows", "pricing_page_windows"))}"${downloadData("windows", "pricing_page_windows")}>${html(windowsDownloadCopy(code).exeButton)}</a>` : ""}
+        </div>
+        <p class="compare-trial">${html(HOME_CONVERSION_COPY[code].trial)}</p>
       </section>
 
       <section class="doc-section" aria-labelledby="pricing-plans">
