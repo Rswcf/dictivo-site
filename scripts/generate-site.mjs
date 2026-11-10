@@ -101,6 +101,8 @@ import {
 } from "../data/local-offer-copy.mjs";
 import { PRICING_PAGE_COPY, PRICING_PAGE_LASTMOD } from "../data/pricing-page.mjs";
 import { firstPublished } from "../data/first-published.mjs";
+import { DOCS_INDEX_COPY, DOCS_INDEX_LASTMOD, docsEntries } from "../data/docs-index.mjs";
+import { DOCS_SHARED, docsEnvironment, docsPath } from "../data/docs-shared.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const outDir = resolve(root, "dist");
@@ -522,6 +524,25 @@ function claudeCodeGuideUrl() {
 
 function claudeCodeGuideCopyForRender() {
   return claudeCodeGuideCopy({ windows: hasWindowsRelease });
+}
+
+// The docs section (data/docs-index.mjs): every entry, and the ones whose copy says ready: true.
+// Only ready pages are written, listed and linked.
+function docsEntriesForRender() {
+  return docsEntries({ windows: hasWindowsRelease });
+}
+
+function readyDocsEntriesForRender() {
+  return docsEntriesForRender().filter((entry) => entry.ready);
+}
+
+function docsUrl(slug = "") {
+  return absoluteUrl(docsPath(slug));
+}
+
+// A docs page that shows a Dictivo price reports at least PRICING_LASTMOD in the sitemap.
+function docsPageLastmod(entry) {
+  return latestDate(entry.lastmod, showsPrice(entry) && PRICING_LASTMOD);
 }
 
 function mediaKitPath() {
@@ -4079,7 +4100,7 @@ const LABEL_SEPARATOR = { ja: "：" };
 // Also the schema of the hand-built guides (offline, benchmark method, speech to text, Windows),
 // which keep their FAQPage node and may add an ItemList of the apps they compare.
 function renderDictationGuideSchema(guide) {
-  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema, itemList } = guide;
+  const { code, url, copy, lastmod, route, headline, about, legacyFaqSchema, itemList, parent } = guide;
   const inLanguage = localeByCode(code).htmlLang;
   const schema = [
     organizationSchema(),
@@ -4129,10 +4150,17 @@ function renderDictationGuideSchema(guide) {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      itemListElement: [
-        homeBreadcrumb(code),
-        { "@type": "ListItem", position: 2, name: copy.navLabel, item: url },
-      ],
+      // A page inside a section (the docs) names the section as the middle crumb.
+      itemListElement: parent
+        ? [
+            homeBreadcrumb(code),
+            { "@type": "ListItem", position: 2, name: parent.name, item: parent.item },
+            { "@type": "ListItem", position: 3, name: copy.navLabel, item: url },
+          ]
+        : [
+            homeBreadcrumb(code),
+            { "@type": "ListItem", position: 2, name: copy.navLabel, item: url },
+          ],
     },
   ];
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
@@ -4362,6 +4390,133 @@ function renderWindowsInstallHelpPage(code) {
     route: "guides/windows-installer-blocked", headline: copy.metaTitle,
     about: ["Windows installation", "Microsoft Defender SmartScreen", "Smart App Control"],
     legacyFaqSchema: false,
+  });
+}
+
+// The docs section (Batch B2, English only; data/docs-index.mjs). Each page renders through
+// renderDictationGuidePage(): the method line in doc-environment, a short answer, an optional
+// quick-reference table, the sections, a generated "All Dictivo docs" section last, a visible FAQ
+// that is also the FAQPage node, and the sources. The breadcrumb names /docs/ as the middle crumb.
+function docsNavSection(currentSlug) {
+  const links = [
+    [DOCS_INDEX_COPY.navLabel, docsPath()],
+    ...readyDocsEntriesForRender()
+      .filter((entry) => entry.slug !== currentSlug)
+      .map((entry) => [entry.navLabel, docsPath(entry.slug)]),
+  ];
+  return {
+    title: DOCS_SHARED.navTitle,
+    bullets: links.map(([label, href]) => ({ html: `<a href="${attr(href)}">${html(label)}</a>` })),
+  };
+}
+
+function renderDocsPage(entry) {
+  const url = docsUrl(entry.slug);
+  const copy = {
+    ...DOCS_SHARED,
+    ...entry,
+    environment: docsEnvironment({ windows: hasWindowsRelease }),
+    sections: [...entry.sections, docsNavSection(entry.slug)],
+    dictivo: null,
+    fieldTest: null,
+  };
+  return renderDictationGuidePage({
+    code: "en",
+    path: docsPath(entry.slug),
+    url,
+    copy,
+    lastmod: entry.lastmod,
+    references: entry.references,
+    headTags: enOnlyHeadTags(url),
+    platform: "both",
+    showTrial: entry.showTrial === true,
+    trialSource: entry.trialSource,
+    idPrefix: entry.idPrefix,
+    mainId: entry.mainId,
+    mainClass: entry.wide ? "doc-page offline-guide-page" : "doc-page",
+    quickReference: entry.quickReference,
+    route: entry.route,
+    headline: entry.metaTitle,
+    about: entry.about,
+    legacyFaqSchema: true,
+    parent: { name: DOCS_INDEX_COPY.navLabel, item: docsUrl() },
+  });
+}
+
+function renderDocsIndexSchema(entries) {
+  const copy = DOCS_INDEX_COPY;
+  const url = docsUrl();
+  const schema = [
+    organizationSchema(),
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: copy.metaTitle,
+      url,
+      description: copy.metaDescription,
+      inLanguage: "en",
+      dateModified: DOCS_INDEX_LASTMOD,
+      isPartOf: { "@type": "WebSite", name: "Dictivo", url: `${BASE_URL}/` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: copy.itemListName,
+      itemListElement: entries.map((entry, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: entry.navLabel,
+        url: docsUrl(entry.slug),
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [homeBreadcrumb("en"), { "@type": "ListItem", position: 2, name: copy.navLabel, item: url }],
+    },
+  ];
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderDocsIndexPage() {
+  const copy = DOCS_INDEX_COPY;
+  const url = docsUrl();
+  const entries = readyDocsEntriesForRender();
+  const t = HOME_COPY.en;
+  return renderLayout({
+    lang: "en",
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url }),
+      enOnlyHeadTags(url),
+      assetTags(),
+      renderDocsIndexSchema(entries),
+    ],
+    skip: { href: "#docs-index", label: copy.navLabel },
+    header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? docsPath() : localePath(item.code)) }),
+    footer: renderFooterOnly("en"),
+    main: `<main class="doc-page" id="docs-index">
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(DOCS_INDEX_LASTMOD)}">${html(formatLocalizedDate(DOCS_INDEX_LASTMOD, "en"))}</time></p>
+      <p class="doc-environment">${html(DOCS_SHARED.environmentLabel)}: ${html(docsEnvironment({ windows: hasWindowsRelease }))}</p>
+
+      <section class="doc-section" aria-labelledby="docs-index-answer">
+        <h2 id="docs-index-answer">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      <section class="doc-section" aria-labelledby="docs-index-pages">
+        <h2 id="docs-index-pages">${html(copy.pagesTitle)}</h2>
+        ${renderDocBullets(entries.map((entry) => ({ html: `<a href="${attr(docsPath(entry.slug))}">${html(entry.navLabel)}</a> — ${html(entry.summary)}` })))}
+      </section>
+
+      <section class="doc-section" aria-labelledby="docs-index-related">
+        <h2 id="docs-index-related">${html(copy.relatedTitle)}</h2>
+        ${renderDocBullets(copy.relatedLinks.map(([label, href]) => ({ html: `<a href="${attr(href)}">${html(label)}</a>` })))}
+      </section>
+    </main>`,
   });
 }
 
@@ -4645,6 +4800,7 @@ function renderHomeFooterLinks(currentCode, t) {
       `<a href="${attr(localePath(currentCode, "#downloads"))}">${html(t.nav.downloads)}</a>`,
       `<a href="/changelog/">${html(HOME_CONVERSION_COPY[currentCode].changelog)}</a>`,
       `<a href="/security/">${html(ui.footer.security)}</a>`,
+      currentCode === "en" ? `<a href="${attr(docsPath())}">${html(DOCS_INDEX_COPY.navLabel)}</a>` : "",
       `<a href="${attr(localizedComparePath(currentCode))}">${html(compareCopy(currentCode).hubEyebrow)}</a>`,
       currentCode === "en" ? `<a href="${attr(mediaKitPath())}">${html(MEDIA_KIT_COPY.navLabel)}</a>` : "",
     ],
@@ -5517,6 +5673,7 @@ function renderLlmsEnglishFacts() {
     ["What do Wispr Flow's plans cost, and what does the free plan include?", wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
     ["Which dictation software is free, works offline, or runs on Windows as well as Mac?", bestDictationSoftwareCopyForRender().navLabel, bestDictationSoftwareUrl()],
     ["How can I dictate prompts into Claude Code or Cursor on a Mac?", claudeCodeGuideCopyForRender().navLabel, claudeCodeGuideUrl()],
+    ...readyDocsEntriesForRender().map((entry) => [entry.llmsQuestion, entry.navLabel, docsUrl(entry.slug)]),
   ];
   return `
 ## Prices and license
@@ -5562,6 +5719,8 @@ function renderLlmsTxt(currentCode = "en") {
           [wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
           [bestDictationSoftwareCopyForRender().navLabel, bestDictationSoftwareUrl()],
           [claudeCodeGuideCopyForRender().navLabel, claudeCodeGuideUrl()],
+          [DOCS_INDEX_COPY.navLabel, docsUrl()],
+          ...readyDocsEntriesForRender().map((entry) => [entry.navLabel, docsUrl(entry.slug)]),
         ]
       : []),
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
@@ -6064,6 +6223,22 @@ ${translatedGuideSitemapAlternates(WINDOWS_INSTALL_HELP_PATHS)}
     <xhtml:link rel="alternate" hreflang="x-default" href="${claudeCodeGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const docsEntriesXml = [
+    `  <url>
+    <loc>${docsUrl()}</loc>
+    <lastmod>${DOCS_INDEX_LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${docsUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${docsUrl()}" />
+    <priority>0.75</priority>
+  </url>`,
+    ...readyDocsEntriesForRender().map((entry) => `  <url>
+    <loc>${docsUrl(entry.slug)}</loc>
+    <lastmod>${docsPageLastmod(entry)}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${docsUrl(entry.slug)}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${docsUrl(entry.slug)}" />
+    <priority>0.7</priority>
+  </url>`),
+  ].join("\n");
   const jaMacDictationTroubleshootingEntry = `  <url>
     <loc>${jaMacDictationTroubleshootingUrl()}</loc>
     <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
@@ -6150,6 +6325,7 @@ ${dragonPricingEntry}
 ${wisprFlowPricingEntry}
 ${bestDictationSoftwareEntry}
 ${claudeCodeGuideEntry}
+${docsEntriesXml}
 ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
@@ -6546,6 +6722,8 @@ write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${wisprFlowPricingPath().slice(1)}index.html`, renderWisprFlowPricingPage());
 write(`${bestDictationSoftwarePath().slice(1)}index.html`, renderBestDictationSoftwarePage());
 write(`${claudeCodeGuidePath().slice(1)}index.html`, renderClaudeCodeGuidePage());
+write(`${docsPath().slice(1)}index.html`, renderDocsIndexPage());
+for (const entry of readyDocsEntriesForRender()) write(`${docsPath(entry.slug).slice(1)}index.html`, renderDocsPage(entry));
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write(`${jaMacDictationShortcutPath().slice(1)}index.html`, renderJaMacDictationShortcutPage());
 write("media-kit/index.html", renderMediaKitPage());

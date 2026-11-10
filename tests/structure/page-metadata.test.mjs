@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { readyDocsEntries } from "../../data/docs-index.mjs";
+
+const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
+const windows = release.publicWindowsDownloads === true && Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
 
 // Pages added since the 2026-10-08 audit, which found 118 of 237 titles or descriptions
 // outside these limits. New pages are held to them by test.
@@ -17,6 +21,9 @@ const PAGES = [
   ["guides/mac-dictation-app-no-subscription/index.html", "https://dictivo.app/guides/mac-dictation-app-no-subscription/", "en"],
   ["ja/guides/mac-dictation-shortcut/index.html", "https://dictivo.app/ja/guides/mac-dictation-shortcut/", "ja"],
   ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "https://dictivo.app/guides/dictate-into-claude-code-and-cursor-on-mac/", "en"],
+  ["docs/index.html", "https://dictivo.app/docs/", "en"],
+  // Every docs page that is built (data/docs-index.mjs), so a page task edits no list here.
+  ...readyDocsEntries({ windows }).map((entry) => [`docs/${entry.slug}/index.html`, `https://dictivo.app/docs/${entry.slug}/`, "en"]),
 ];
 
 // Characters, as JavaScript counts them. Japanese search results show about 30 full-width

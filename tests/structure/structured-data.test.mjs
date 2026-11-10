@@ -6,6 +6,7 @@ import { LOCALES } from "../../data/site-content.mjs";
 import { LOCAL_OFFER, introOfferActive } from "../../data/local-offer.mjs";
 import { COMPARE_PAGES } from "../../data/compare-pages.mjs";
 import { firstPublished } from "../../data/first-published.mjs";
+import { readyDocsEntries } from "../../data/docs-index.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
 const ORG_ID = "https://dictivo.app/#org";
@@ -27,6 +28,8 @@ const walk = (value, visit, key = "") => {
   }
 };
 const prefix = (code) => (code === "en" ? "" : `${code}/`);
+const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
+const windows = release.publicWindowsDownloads === true && Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
 const page = (path) => `${dist}${path}`;
 
 const LOGO = { "@type": "ImageObject", "@id": "https://dictivo.app/#logo", url: "https://dictivo.app/assets/favicon.svg", contentUrl: "https://dictivo.app/assets/favicon.svg", caption: "Dictivo" };
@@ -157,6 +160,8 @@ const publishedRoutes = () => [
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ["ja/guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "ja"],
   ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "guides/dictate-into-claude-code-and-cursor-on-mac", "en"],
+  // Every docs page that is built (data/docs-index.mjs).
+  ...readyDocsEntries({ windows }).map((entry) => [`${entry.route}/index.html`, entry.route, "en"]),
   ...LOCALES.flatMap((locale) => [
     ...COMPARE_PAGES.map((compare) => [`${prefix(locale.code)}compare/${compare.slug}/index.html`, `compare/${compare.slug}`, locale.code]),
     ...["privacy/where-dictation-audio-goes", "privacy/local-dictation-network-test"].map((slug) => [`${prefix(locale.code)}${slug}/index.html`, slug, locale.code]),
