@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-// Nine guide pages open with a disclosed "What is Dictivo?" block right after the short answer:
+// Twelve guide pages open with a disclosed "What is Dictivo?" block right after the short answer:
 // what the product is, a pricing link and the Mac (and Windows) download. Every other guide, and
 // every language without intro copy, renders no block.
 const dist = new URL("../../dist/", import.meta.url).pathname;

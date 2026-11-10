@@ -2,8 +2,9 @@
 export const COMPARE_HUB_GUIDANCE_LASTMOD = "2026-09-20";
 // Per-language hub changes that come from the comparison pages it lists. 2026-10-09: the English
 // Dragon comparison's title no longer names a Dragon Professional price. 2026-10-10 (English): a
-// line under the introduction links the cross-platform dictation software guide.
-export const COMPARE_HUB_LOCALE_LASTMOD = Object.freeze({ en: "2026-10-10" });
+// line under the introduction links the cross-platform dictation software guide. 2026-11-10
+// (English): the same line also links the one-time license guide for Mac and Windows.
+export const COMPARE_HUB_LOCALE_LASTMOD = Object.freeze({ en: "2026-11-10" });
 const slugs = ["wispr-flow-alternative", "superwhisper-alternative", "macwhisper-alternative", "voiceink-alternative", "macos-dictation-alternative", "dragon-alternative"];
 const rows = {
   en: {

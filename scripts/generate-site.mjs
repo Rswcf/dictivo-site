@@ -2744,7 +2744,7 @@ function renderCompareHub(currentCode = "en") {
       <section class="compare-hero" aria-labelledby="compare-hub-title">
         <h1 id="compare-hub-title">${html(copy.hubH1)}</h1>
         <p class="doc-lede">${html(copy.hubLede)}</p>${currentCode === "en" ? `
-        <p><a href="${attr(BEST_DICTATION_SOFTWARE_HUB_LINK.href)}">${html(BEST_DICTATION_SOFTWARE_HUB_LINK.label)}</a></p>` : ""}${COMPARE_SELECTION_GUIDES[currentCode] ? `
+        <p><a href="${attr(BEST_DICTATION_SOFTWARE_HUB_LINK.href)}">${html(BEST_DICTATION_SOFTWARE_HUB_LINK.label)}</a> · <a href="${attr(oneTimeLicenseGuidePath())}">${html(oneTimeLicenseGuideCopyForRender().navLabel)}</a></p>` : ""}${COMPARE_SELECTION_GUIDES[currentCode] ? `
         <div class="hero-actions">
           <a class="button button-light" href="${attr(firstDictationPath(currentCode))}">${html(copy.practice)}</a>
           <a class="button button-outline" href="#compare-apps">${html(copy.compare)}</a>
@@ -4674,6 +4674,9 @@ function renderHomeFooterLinks(currentCode, t) {
       currentCode === "en" ? `<a href="${attr(windowsVoiceTypingPath())}">${html(windowsVoiceTypingCopyForRender().navLabel)}</a>` : "",
       currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
       currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(speechToTextMacGuideCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(oneTimeLicenseGuidePath())}">${html(oneTimeLicenseGuideCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(noSubscriptionGuidePath())}">${html(noSubscriptionGuideCopyForRender().navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(claudeCodeGuidePath())}">${html(claudeCodeGuideCopyForRender().navLabel)}</a>` : "",
     ],
   ];
   return columns

@@ -5,6 +5,7 @@ import { PRICING_LASTMOD } from "../../data/local-offer.mjs";
 import { LOCALES } from "../../data/site-content.mjs";
 import { HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD, HOME_SHARED_CONTENT_LASTMOD } from "../../data/home-conversion.mjs";
 import { offlineDictationGuideLastmod } from "../../data/offline-dictation-guide.mjs";
+import { COMPARE_HUB_LOCALE_LASTMOD } from "../../data/compare-hub-guidance.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
 // A page that shows a Dictivo price reports at least PRICING_LASTMOD in the sitemap (see renderSitemap),
@@ -48,8 +49,8 @@ test("comparison refresh is scoped to changed pages and languages", () => {
     // those titles. The Dragon comparison keeps 2026-10-09, the date of its price check.
     const ja = locale === "ja/";
     // English 2026-10-09: the Dragon comparison title it lists changed; 2026-10-10: it links the
-    // dictation software guide.
-    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(ja ? "2026-11-10" : locale === "de/" ? "2026-10-04" : locale === "" ? "2026-10-10" : "2026-09-20"));
+    // dictation software guide; Batch B1: it also links the one-time license guide.
+    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(ja ? "2026-11-10" : locale === "de/" ? "2026-10-04" : locale === "" ? COMPARE_HUB_LOCALE_LASTMOD.en : "2026-09-20"));
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
     assert.equal(dates.get(superPath), atLeastPricing(ja ? "2026-11-10" : "2026-09-18"));

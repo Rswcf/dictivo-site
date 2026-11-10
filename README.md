@@ -101,6 +101,42 @@ with (`legacyFaqSchema`); newer guides carry a visible FAQ but no FAQ schema. It
 are unchanged since 2026-09-26. The Japanese offline guide's troubleshooting section is
 Dictivo-specific and links here, so the two pages do not target the same heading.
 
+### Answer guides
+
+Five English guides share one shape and one renderer, `renderAnswerGuidePage()` in the generator:
+`/guides/offline-dictation-on-mac/` (English only), `/guides/best-speech-to-text-apps-for-mac/`,
+`/guides/dictation-app-mac-windows-one-time-license/`, `/guides/mac-dictation-app-no-subscription/`
+and `/guides/dictate-into-claude-code-and-cursor-on-mac/`. The shape copies the Windows offline guide:
+the query as the H1, a short dated answer, the "What is Dictivo?" block with the downloads, a table
+of the ways people ask, a fact table, a method note signed "Dictivo team", the trial panel,
+sections, a FAQ, related pages and references.
+
+Each page has one data file (`data/offline-dictation-guide.mjs` for the English object only,
+`data/speech-to-text-mac-guide.mjs`, `data/one-time-license-guide.mjs`,
+`data/no-subscription-guide.mjs`, `data/claude-code-guide.mjs`). A data file exports the copy
+function, its `*_LASTMOD` and `*_CHECKED` dates and its references. The `FAQPage` node is built from
+the visible FAQ. The `ItemList` node is built from the fact table: each row header and its "When to
+choose it" cell.
+
+Fact rule: every cell about another product comes from a dated source. The source is the
+competitor facts file of the date in the page's `*_CHECKED` constant, or a fact the site already
+publishes with its own check date. Each competitor row has its own "Checked on" cell. A fact that
+no source states reads `Not stated`. Competitor prices are written by hand in the vendor's currency.
+Dictivo prices come only from price tokens (`guideLocalPrice()`), never typed. When a competitor
+price equals a Dictivo figure, `tests/facts/price-output.test.mjs` needs that vendor in its
+allowlist.
+
+The Windows guide keeps its own renderer, data file and date.
+`tests/structure/windows-guide-frozen.test.mjs` fails if its `<main>` or date changes. The ten
+translated offline guides keep their old shape: the renderer branches on a field that only the
+English object has.
+
+Tests: one wording test per page in `tests/wording/` (`speech-to-text-mac`,
+`offline-dictation-mac`, `one-time-license`, `no-subscription`, `claude-code-cursor`) pins the
+answer, the tables, the schema and the banned words. `tests/structure/b1-links.test.mjs` checks the
+English footer and compare hub links and that every related-table and `/guides/` link on the five
+pages lands on a built page. Tests import B1 dates from the data files; they never type one.
+
 ### Homepage copy assumes Windows is public
 
 `data/home-copy.mjs` states that Mac and Windows x64 are available. Until 2026-11-03 a
@@ -225,10 +261,10 @@ content it stamps actually changes — that is the only thing that moves a date.
 | --- | --- | --- |
 | `MAC_ADVISOR_LASTMOD` | `data/mac-model-advisor.mjs` | sitemap for `/mac-model-guide/` (all locales) |
 | `PRIVACY_PROOF_LASTMOD` | `data/privacy-proof-pages.mjs` | sitemap + `dateModified` for `/privacy-proof/` |
-| `OFFLINE_DICTATION_GUIDE_LASTMOD` | `data/offline-dictation-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/offline-dictation-on-mac/` |
+| `OFFLINE_DICTATION_GUIDE_LASTMOD` | `data/offline-dictation-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/offline-dictation-on-mac/` in a language whose copy object has no `lastUpdated`; the English and Japanese objects carry their own `lastUpdated`. `OFFLINE_DICTATION_GUIDE_EN_CHECKED` dates the English rows read from the competitor facts; `OFFLINE_GUIDE_PRICES_CHECKED` dates the Voice Type, Voibe and Aiko rows and the translated tables |
 | `OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD` | `data/offline-dictation-windows-guide.mjs` | visible stamp + sitemap for `/guides/offline-dictation-on-windows/` |
 | `BENCHMARK_METHOD_GUIDE_LASTMOD` | `data/benchmark-method-guide.mjs` | visible stamp + sitemap for `/guides/mac-dictation-benchmark-method/` |
-| `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/speech-to-text-mac-guide.mjs` | visible stamp + sitemap for `/guides/best-speech-to-text-apps-for-mac/` |
+| `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` | `data/speech-to-text-mac-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/best-speech-to-text-apps-for-mac/`, never older than `PRICING_LASTMOD`; `SPEECH_TO_TEXT_MAC_GUIDE_CHECKED` dates the rows read from the competitor facts and sets the title's year |
 | `PRICING_PAGE_LASTMOD` | `data/pricing-page.mjs` | visible stamp + sitemap for `/pricing/`, never older than `PRICING_LASTMOD` |
 | `MAC_DICTATION_SHORTCUT_LASTMOD` | `data/mac-dictation-shortcut-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-shortcut/` |
 | `MAC_DICTATION_NOT_WORKING_LASTMOD` | `data/mac-dictation-not-working-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/mac-dictation-not-working/` |
@@ -236,6 +272,10 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `WISPR_FLOW_PRICING_LASTMOD` | `data/wispr-flow-pricing-guide.mjs` | the same for `/guides/wispr-flow-pricing/`; `WISPR_FLOW_PRICING_CHECKED` dates the references |
 | `WINDOWS_VOICE_TYPING_LASTMOD` | `data/windows-voice-typing-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/windows-voice-typing-not-working/` |
 | `BEST_DICTATION_SOFTWARE_LASTMOD` | `data/best-dictation-software-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/best-dictation-software/`, never older than `PRICING_LASTMOD`; `BEST_DICTATION_SOFTWARE_CHECKED` dates the references and sets the title's year |
+| `ONE_TIME_LICENSE_GUIDE_LASTMOD` | `data/one-time-license-guide.mjs` | visible stamp + sitemap + `dateModified` for `/guides/dictation-app-mac-windows-one-time-license/`, never older than `PRICING_LASTMOD`; `ONE_TIME_LICENSE_GUIDE_CHECKED` dates the competitor rows |
+| `NO_SUBSCRIPTION_GUIDE_LASTMOD` | `data/no-subscription-guide.mjs` | the same for `/guides/mac-dictation-app-no-subscription/`; `NO_SUBSCRIPTION_GUIDE_CHECKED` dates the competitor rows |
+| `CLAUDE_CODE_GUIDE_LASTMOD` | `data/claude-code-guide.mjs` | the same for `/guides/dictate-into-claude-code-and-cursor-on-mac/`; `CLAUDE_CODE_GUIDE_CHECKED` dates the rows read from the Claude Code and Cursor documentation |
+| `COMPARE_HUB_LOCALE_LASTMOD` | `data/compare-hub-guidance.mjs` | sitemap for `/compare/` per language, with `COMPARE_HUB_GUIDANCE_LASTMOD` and the comparison pages it lists |
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |

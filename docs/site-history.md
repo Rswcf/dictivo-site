@@ -5,6 +5,31 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Batch B1 answer pages — 2026-11-10
+
+Five English guides now share one answer-page shape and one renderer, `renderAnswerGuidePage()`.
+Two are rebuilt: `/guides/best-speech-to-text-apps-for-mac/` and the English
+`/guides/offline-dictation-on-mac/`. Three are new: `/guides/dictation-app-mac-windows-one-time-license/`,
+`/guides/mac-dictation-app-no-subscription/` and `/guides/dictate-into-claude-code-and-cursor-on-mac/`.
+Each page has the query as its H1, a short dated answer, a table of the ways people ask, a fact
+table with a "Checked on" date per row, a method note signed "Dictivo team", and `FAQPage` and
+`ItemList` nodes that repeat visible text. The offline Mac guide and the Claude Code page show the
+Homebrew command `brew install --cask deepviewsdev/tap/dictivo`.
+
+The English footer links the three new pages. The English compare hub links the one-time license
+page under its introduction, so `COMPARE_HUB_LOCALE_LASTMOD.en` moved to 2026-11-10. `llms.txt`
+lists all three.
+
+Not changed: the Windows offline guide (its `<main>` and its 2026-10-17 date; only the footer under
+it changed), the ten translated offline guides, the homepages, `/pricing/` and the comparison pages.
+
+Competitor facts were checked on 2026-11-10 against vendor pages and documentation, using the
+competitor facts file of that date. The Voice Type, Voibe and Aiko rows keep the site's 2026-09-29
+facts. The Claude Code and Cursor rows come from their official documentation, read on 2026-11-10.
+Dictivo facts come from the site data and the app source. Nobody tested the apps by hand for these
+pages. Spokenly and Voxtira were added to the allowlist in `tests/facts/price-output.test.mjs`,
+because some of their prices equal Dictivo figures.
+
 ## Batch A entry-page fixes — 2026-11-10
 
 Six changes from the Mac search plan, one commit each. Eight guides (the six dictation guides and
