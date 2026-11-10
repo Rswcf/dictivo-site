@@ -5,6 +5,7 @@ import { firstPublished } from "../../data/first-published.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD, introOfferActive, offerDate } from "../../data/local-offer.mjs";
 import { COMPARE_PAGES } from "../../data/compare-pages.mjs";
 import { OFFLINE_DICTATION_GUIDE_COPY } from "../../data/offline-dictation-guide.mjs";
+import { SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD } from "../../data/speech-to-text-mac-guide.mjs";
 import { INTRO_OFFER, REGULAR_OFFER } from "../helpers/offer-states.mjs";
 import {
   BEST_DICTATION_SOFTWARE_CHECKED,
@@ -253,7 +254,7 @@ test("readers reach the guide from the Mac list, both offline guides and the Eng
   // The guide links back to the Mac list with a descriptive anchor, so the two split the work.
   assert.ok(section(page(), 4).includes('<a href="/guides/best-speech-to-text-apps-for-mac/">Best speech-to-text apps for Mac, compared by workflow</a>'));
   const sitemap = read("sitemap.xml");
-  for (const [loc, date] of [["guides/best-speech-to-text-apps-for-mac/", "2026-10-10"], ["guides/offline-dictation-on-windows/", "2026-10-17"], ["guides/offline-dictation-on-mac/", "2026-11-10"]]) {
+  for (const [loc, date] of [["guides/best-speech-to-text-apps-for-mac/", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD], ["guides/offline-dictation-on-windows/", "2026-10-17"], ["guides/offline-dictation-on-mac/", "2026-11-10"]]) {
     const lastmod = date > PRICING_LASTMOD ? date : PRICING_LASTMOD;
     assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${loc}</loc>\\s*<lastmod>${lastmod}</lastmod>`), loc);
   }

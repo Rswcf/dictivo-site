@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCAL_OFFER, introOfferActive, offerDate } from "../../data/local-offer.mjs";
+import { SPEECH_TO_TEXT_MAC_GUIDE_CHECKED } from "../../data/speech-to-text-mac-guide.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
 const CHECKED = "2026-09-29";
@@ -107,20 +108,26 @@ test("references list each vendor price page with the date it was read", () => {
   }
 });
 
-test("the Mac speech-to-text guide leads with a verdict and prices every option", () => {
+test("the Mac speech-to-text guide prices and dates every option", () => {
   const html = bestSpeech();
-  const answer = text(html.match(/id="speech-to-text-mac-answer">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]);
-  for (const app of ["Dictivo Local", "Superwhisper", "VoiceInk", "Voice Type", "Voibe", "MacWhisper", "Aiko", "Wispr Flow", "Apple Dictation"]) {
-    assert.ok(answer.includes(app), `answer does not name ${app}`);
-  }
-  const [header, ...body] = rows(tableAfter(html, "speech-to-text-mac-apps"));
-  assert.deepEqual(header.slice(4), ["Price / purchase model", "Checked on"]);
+  const [header, ...body] = rows(tableAfter(html, "speech-to-text-mac-table"));
+  assert.deepEqual(header, ["Option", "Best fit", "Privacy or platform caveat", "When to choose it", "Price / purchase model", "Checked on"]);
+  assert.deepEqual(body.map((row) => row[0]), ["Dictivo Local", "Apple Dictation", "Handy", "MacWhisper", "Spokenly", "Superwhisper", "VoiceInk", "Voice Type", "Voibe", "Wispr Flow"]);
   for (const row of body) {
     assert.equal(row.length, 6, row[0]);
-    assert.ok(row[5].includes(`<time datetime="${CHECKED}">`), row[0]);
+    // Voice Type and Voibe keep the offline guide's prices; the other rows were re-read for this page.
+    const date = ["Voice Type", "Voibe"].includes(row[0]) ? CHECKED : SPEECH_TO_TEXT_MAC_GUIDE_CHECKED;
+    assert.ok(row[5].includes(`<time datetime="${date}">`), row[0]);
   }
-  const merged = text(body.find((row) => row[0].startsWith("VoiceInk"))[4]);
-  assert.match(merged, /VoiceInk.*\$25.*Voice Type.*\$19\.99.*Voibe.*\$149/);
+  const price = (app) => text(body.find((row) => row[0] === app)[4]);
+  assert.match(price("VoiceInk"), /\$25.*\$39.*\$49/);
+  assert.match(price("Voice Type"), /\$19\.99/);
+  assert.match(price("Voibe"), /\$149/);
+  assert.match(price("MacWhisper"), /€64/);
+  assert.match(price("Superwhisper"), /\$249\.99/);
+  assert.equal(price("Handy"), "Free and open source (MIT license)");
+  assert.match(price("Spokenly"), /\$29 once/);
+  for (const row of body.slice(1)) assert.doesNotMatch(row[4], /US\$|<span class="price">/, row[0]);
   assert.equal((body[0][4].match(/<span class="price">/g) || []).length, DICTIVO_PRICES, "Dictivo prices must come from price placeholders");
   assert.match(body[0][4], DICTIVO_SPAN(LOCAL_OFFER.price), "no Local price");
 });

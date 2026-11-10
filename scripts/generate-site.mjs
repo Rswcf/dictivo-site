@@ -36,9 +36,9 @@ import { localizedComparisonSections, localizedComparisonFaqs } from "../data/co
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
 import { PRODUCT_FILM, FILM_COPY, FILM_CHAPTERS } from "../data/product-film.mjs";
 import {
-  SPEECH_TO_TEXT_MAC_GUIDE_COPY,
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
   SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES,
+  speechToTextMacGuideCopy,
 } from "../data/speech-to-text-mac-guide.mjs";
 import {
   OFFLINE_DICTATION_WINDOWS_GUIDE_COPY,
@@ -316,6 +316,10 @@ function speechToTextMacGuidePath() {
 
 function speechToTextMacGuideUrl() {
   return absoluteUrl(speechToTextMacGuidePath());
+}
+
+function speechToTextMacGuideCopyForRender() {
+  return speechToTextMacGuideCopy({ windows: hasWindowsRelease });
 }
 
 function offlineDictationWindowsGuidePath() {
@@ -2037,10 +2041,6 @@ function benchmarkMethodGuideHreflangTags() {
   return enOnlyHeadTags(benchmarkMethodGuideUrl());
 }
 
-function speechToTextMacGuideHreflangTags() {
-  return enOnlyHeadTags(speechToTextMacGuideUrl());
-}
-
 function offlineDictationWindowsGuideHreflangTags() {
   return enOnlyHeadTags(offlineDictationWindowsGuideUrl());
 }
@@ -2514,7 +2514,7 @@ function renderCompareLinks(page, currentCode, copy) {
 
   return `<nav class="compare-resource-links" aria-label="${attr(copy.resourceAria)}">
               <a href="${attr(pricingHref(currentCode))}">${html(copy.resourcePricing)}</a>
-              ${currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : ""}
+              ${currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(speechToTextMacGuideCopyForRender().navLabel)}</a>` : ""}
               ${currentCode === "en" ? `<a href="${attr(offlineDictationWindowsGuidePath())}">${html(OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel)}</a>` : ""}
               ${relatedLinks}
             </nav>`;
@@ -2998,8 +2998,13 @@ function guidePriceCell(app, code) {
   return model === "included" ? text : `<strong>${html(offlineDictationGuideCopy(code).purchaseModels[model])}</strong><br />${text}`;
 }
 
+// A "Checked on" table cell: the date a row's facts were read, as a <time>.
+function checkedCell(isoDate, code = "en") {
+  return { html: `<time datetime="${attr(isoDate)}">${html(formatLocalizedDate(isoDate, code))}</time>` };
+}
+
 function guideCheckedCell(code) {
-  return `<time datetime="${attr(OFFLINE_GUIDE_PRICES_CHECKED)}">${html(formatLocalizedDate(OFFLINE_GUIDE_PRICES_CHECKED, code))}</time>`;
+  return checkedCell(OFFLINE_GUIDE_PRICES_CHECKED, code).html;
 }
 
 function renderOfflineGuideTable(copy, code) {
@@ -3031,17 +3036,22 @@ ${copy.rows
           </div>`;
 }
 
+// An item is a string, or { html } for markup escaped by hand (as table cells allow).
+function renderDocItem(item) {
+  return typeof item === "object" ? item.html : html(item);
+}
+
 function renderDocBullets(items) {
   if (!items?.length) return "";
   return `<ul>
-${items.map((item) => `            <li>${html(item)}</li>`).join("\n")}
+${items.map((item) => `            <li>${renderDocItem(item)}</li>`).join("\n")}
           </ul>`;
 }
 
 function renderDocSteps(items) {
   if (!items?.length) return "";
   return `<ol>
-${items.map((item) => `            <li>${html(item)}</li>`).join("\n")}
+${items.map((item) => `            <li>${renderDocItem(item)}</li>`).join("\n")}
           </ol>`;
 }
 
@@ -3409,27 +3419,19 @@ ${copy.steps.map((step) => `          <li>${html(step)}</li>`).join("\n")}
   });
 }
 
-function renderSpeechToTextMacGuideSchema() {
-  const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
-  return renderDictationGuideSchema({
-    code: "en",
-    url: speechToTextMacGuideUrl(),
-    copy,
-    lastmod: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
-    route: "guides/best-speech-to-text-apps-for-mac",
-    headline: copy.metaTitle,
-    about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
-    legacyFaqSchema: true,
-    itemList: { name: "Mac speech-to-text app categories", rows: copy.appRows },
-  });
-}
-
-// The shortlist groups three local apps in one row; price each of them by name.
-function speechToTextPriceCell(option) {
-  if (GUIDE_PRICE_SOURCES[option]) return guidePriceCell(option, "en");
-  const apps = option.replace(/,? and /, ", ").split(", ");
-  if (!apps.every((app) => GUIDE_PRICE_SOURCES[app])) throw new Error(`No price source for ${option}`);
-  return apps.map((app) => `<strong>${html(app)}</strong> (${html(OFFLINE_DICTATION_GUIDE_COPY.en.purchaseModels[GUIDE_PRICE_SOURCES[app].model])}): ${html(guidePriceText(app, "en"))}`).join("<br />");
+// The fact table's price and "Checked on" cells: a price from GUIDE_PRICE_SOURCES, or the
+// hand-written vendor price for an app without one (Handy, Spokenly).
+function speechToTextMacFactTable(copy) {
+  return {
+    title: copy.appTitle,
+    caption: copy.appCaption,
+    headers: copy.appHeaders,
+    rows: copy.appRows.map((row) => {
+      const [option] = row;
+      const price = copy.handPrices[option] ? html(copy.handPrices[option]) : guidePriceCell(option, "en");
+      return [...row, { html: price }, checkedCell(copy.rowChecked[option])];
+    }),
+  };
 }
 
 // The related-pages table of the speech-to-text and Windows guides.
@@ -3464,54 +3466,23 @@ ${copy.relatedRows
 }
 
 function renderSpeechToTextMacGuidePage() {
-  const copy = SPEECH_TO_TEXT_MAC_GUIDE_COPY;
-  const t = HOME_COPY.en;
-  const canonical = speechToTextMacGuideUrl();
-  return renderLayout({
-    lang: "en",
-    title: copy.metaTitle,
-    description: copy.metaDescription,
-    head: [
-      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url: canonical, htmlLang: "en", type: "article" }),
-      speechToTextMacGuideHreflangTags(),
-      assetTags(),
-      renderSpeechToTextMacGuideSchema(),
-    ],
-    skip: { href: "#speech-to-text-mac-guide", label: copy.navLabel },
-    header: renderHeader("en", t, { hrefForLocale: (item) => (item.code === "en" ? speechToTextMacGuidePath() : localePath(item.code)) }),
-    footer: renderFooterOnly("en"),
-    main: `<main class="doc-page offline-guide-page" id="speech-to-text-mac-guide">
-      <h1>${html(copy.title)}</h1>
-      <p class="doc-lede">${html(copy.lede)}</p>
-      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD)}">${html(formatLocalizedDate(SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD, "en"))}</time></p>
-
-      <section class="doc-section" aria-labelledby="speech-to-text-mac-answer">
-        <h2 id="speech-to-text-mac-answer">${html(copy.answerTitle)}</h2>
-        <p>${html(copy.answer)}</p>
-        <p>${html(copy.trialNote)}</p>
-        <p><a href="${attr(firstDictationPath("en"))}">${html(copy.trialLink)}</a> · <a href="#speech-to-text-mac-apps">${html(copy.compareLink)}</a></p>
-      </section>
-
-      <section class="doc-section" aria-labelledby="speech-to-text-mac-intents">
-        <h2 id="speech-to-text-mac-intents">${html(copy.intentTitle)}</h2>
-        ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
-      </section>
-
-      <section class="doc-section" aria-labelledby="speech-to-text-mac-apps">
-        <h2 id="speech-to-text-mac-apps">${html(copy.appTitle)}</h2>
-        ${renderBenchmarkMethodTable(copy.appCaption, copy.appHeaders, copy.appRows.map((row) => [...row, { html: speechToTextPriceCell(row[0]) }, { html: guideCheckedCell("en") }]))}
-      </section>
-
-      ${renderGuideTrial("en", "macos", "speech_guide_mac")}
-
-      ${copy.sections.map(renderGuideSection("speech-to-text-mac")).join("\n\n      ")}
-
-      ${renderGuideFaq("speech-to-text-mac", copy.faqTitle, copy.faqs)}
-
-      ${renderGuideRelated(copy, "speech-to-text-mac")}
-
-      ${renderGuideReferences("speech-to-text-mac", copy.referencesTitle, SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES)}
-    </main>`,
+  const copy = speechToTextMacGuideCopyForRender();
+  const factTable = speechToTextMacFactTable(copy);
+  return renderAnswerGuidePage({
+    path: speechToTextMacGuidePath(),
+    url: speechToTextMacGuideUrl(),
+    copy,
+    lastmod: SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
+    route: "guides/best-speech-to-text-apps-for-mac",
+    idPrefix: "speech-to-text-mac",
+    mainId: "speech-to-text-mac-guide",
+    about: ["speech to text Mac", "dictation app for Mac", "voice to text app", "offline dictation"],
+    references: SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES,
+    introSource: "speech_guide_intro",
+    trialPlatform: "macos",
+    trialSource: "speech_guide_mac",
+    factTable,
+    itemList: { name: "Mac speech-to-text apps by workflow", rows: factTable.rows.map((row) => [row[0], row[3]]) },
   });
 }
 
@@ -3576,6 +3547,70 @@ function renderOfflineDictationWindowsGuidePage() {
       ${renderGuideRelated(copy, "offline-dictation-windows")}
 
       ${renderGuideReferences("offline-dictation-windows", copy.referencesTitle, OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES)}
+    </main>`,
+  });
+}
+
+// The Batch B1 answer-page shape, modelled on the Windows offline guide (which keeps its own
+// renderer): the query as H1, a dated short answer, the "What is Dictivo?" block, the ways people
+// ask, a fact table with a "Checked on" cell per row, a method note signed by the Dictivo team,
+// then the trial panel, sections, FAQ, related pages and references. The FAQPage and ItemList
+// nodes repeat visible text: the FAQ and, per row, the row header and its "When to choose it" cell.
+// factTable rows hold strings or { html } cells; cell 0 is the row header.
+function renderAnswerGuidePage({
+  code = "en", path, url, copy, lastmod, route, idPrefix, mainId, about, references,
+  introSource, trialPlatform = "macos", trialSource, factTable, itemList,
+}) {
+  return renderLayout({
+    lang: localeByCode(code).htmlLang,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    head: [
+      socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: localeByCode(code).htmlLang, type: "article" }),
+      enOnlyHeadTags(url),
+      assetTags(),
+      renderDictationGuideSchema({ code, url, copy, lastmod, route, headline: copy.metaTitle, about, legacyFaqSchema: true, itemList }),
+    ],
+    skip: { href: `#${mainId}`, label: copy.navLabel },
+    header: renderHeader(code, HOME_COPY[code], { hrefForLocale: (item) => (item.code === code ? path : localePath(item.code)) }),
+    footer: renderFooterOnly(code),
+    main: `<main class="doc-page offline-guide-page" id="${attr(mainId)}">
+      <h1>${html(copy.title)}</h1>
+      <p class="doc-lede">${html(copy.lede)}</p>
+      <p class="doc-meta">${html(trustUiCopy(code).lastUpdated)} <time datetime="${attr(lastmod)}">${html(formatLocalizedDate(lastmod, code))}</time></p>
+
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-answer`)}">
+        <h2 id="${attr(`${idPrefix}-answer`)}">${html(copy.answerTitle)}</h2>
+        <p>${html(copy.answer)}</p>
+      </section>
+
+      ${renderGuideIntro(code, idPrefix, introSource)}
+
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-intents`)}">
+        <h2 id="${attr(`${idPrefix}-intents`)}">${html(copy.intentTitle)}</h2>
+        ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-table`)}">
+        <h2 id="${attr(`${idPrefix}-table`)}">${html(factTable.title)}</h2>
+        ${renderBenchmarkMethodTable(factTable.caption, factTable.headers, factTable.rows)}
+      </section>
+
+      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-method`)}">
+        <h2 id="${attr(`${idPrefix}-method`)}">${html(copy.methodTitle)}</h2>
+        ${copy.method.map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
+        <p>${html(copy.methodSignature)}</p>
+      </section>
+
+      ${renderGuideTrial(code, trialPlatform, trialSource)}
+
+      ${copy.sections.map(renderGuideSection(idPrefix)).join("\n\n      ")}
+
+      ${renderGuideFaq(idPrefix, copy.faqTitle, copy.faqs)}
+
+      ${renderGuideRelated(copy, idPrefix)}
+
+      ${renderGuideReferences(idPrefix, copy.referencesTitle ?? copy.referenceTitle, references)}
     </main>`,
   });
 }
@@ -4474,7 +4509,7 @@ function renderHomeFooterLinks(currentCode, t) {
       currentCode === "en" ? `<a href="${attr(macDictationShortcutPath())}">${html(macDictationShortcutCopyForRender().navLabel)}</a>` : "",
       currentCode === "en" ? `<a href="${attr(windowsVoiceTypingPath())}">${html(windowsVoiceTypingCopyForRender().navLabel)}</a>` : "",
       currentCode === "en" ? `<a href="${attr(benchmarkMethodGuidePath())}">${html(BENCHMARK_METHOD_GUIDE_COPY.navLabel)}</a>` : "",
-      currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel)}</a>` : "",
+      currentCode === "en" ? `<a href="${attr(speechToTextMacGuidePath())}">${html(speechToTextMacGuideCopyForRender().navLabel)}</a>` : "",
     ],
   ];
   return columns
@@ -5299,7 +5334,7 @@ function renderLlmsEnglishFacts() {
     ["Which Mac dictation apps are one-time purchases, and what do they cost?", `${offline}: price table`, `${offlineDictationGuideUrl("en")}#offline-guide-table`],
     ["Which Mac dictation apps process speech locally in Japanese, German or Chinese?", `${offline} (each language's llms.txt lists its translated guide)`, offlineDictationGuideUrl("en")],
     ["Which Windows dictation apps transcribe locally without uploading recordings?", OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
-    ["Which speech-to-text app fits my Mac workflow?", SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel, speechToTextMacGuideUrl()],
+    ["Which speech-to-text app fits my Mac workflow?", speechToTextMacGuideCopyForRender().navLabel, speechToTextMacGuideUrl()],
     ["What is a local alternative to Wispr Flow?", "Wispr Flow alternative", localizedCompareUrl("en", "wispr-flow-alternative")],
     ["Is there a one-time-purchase alternative to Superwhisper or MacWhisper?", "Superwhisper alternative", localizedCompareUrl("en", "superwhisper-alternative"), ["MacWhisper alternative", localizedCompareUrl("en", "macwhisper-alternative")]],
     ["How can I check whether a dictation app sends my audio to a server?", "Network test", localizedTrustUrl("en", "privacy/local-dictation-network-test")],
@@ -5344,7 +5379,7 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.downloads, `${localeUrl(currentCode)}#downloads`],
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
     [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
-    [SPEECH_TO_TEXT_MAC_GUIDE_COPY.navLabel, speechToTextMacGuideUrl()],
+    [speechToTextMacGuideCopyForRender().navLabel, speechToTextMacGuideUrl()],
     [OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
     ...(currentCode === "en"
       ? [
