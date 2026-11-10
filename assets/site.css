@@ -523,6 +523,24 @@ main section[id] {
   text-align: center;
 }
 
+/* "Email this link to yourself": a mailto: link for phone visitors, set like .first-dictation-link. */
+.send-link {
+  display: none;
+  margin: 10px 0 16px;
+  font-size: 14px;
+}
+
+.send-link a {
+  color: var(--mint, #bfe6cd);
+  text-underline-offset: 4px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .send-link {
+    display: block;
+  }
+}
+
 .compare-intro-actions {
   display: flex;
   flex-wrap: wrap;

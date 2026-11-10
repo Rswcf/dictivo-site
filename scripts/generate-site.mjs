@@ -4495,6 +4495,16 @@ const HERO_POSTER = Object.freeze({
   sizes: "(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 52vw, 720px",
 });
 
+// A phone visitor cannot install the desktop app, so the hero offers to mail them this homepage.
+// A plain mailto: link with no recipient and no script: the site learns nothing when it is tapped.
+// site.css shows it only on touch-first devices. attr() writes the & between the fields as &amp;.
+function renderSendLink(code) {
+  const { label, subject, body } = HOME_CONVERSION_COPY[code].sendLink;
+  const url = `${BASE_URL}${localePath(code)}?utm_source=send_to_self&utm_medium=email`;
+  const href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${body}\n${url}`)}`;
+  return `<p class="send-link"><a href="${attr(href)}">${html(label)}</a></p>`;
+}
+
 function heroPosterPreload() {
   return `<link rel="preload" as="image" href="${attr(HERO_POSTER.src)}" imagesrcset="${attr(HERO_POSTER.srcset)}" imagesizes="${attr(HERO_POSTER.sizes)}" fetchpriority="high" />`;
 }
@@ -4538,6 +4548,7 @@ function renderHome(currentCode) {
               </div>
               ${hasWindowsRelease ? renderWindowsInstallHelpLink(currentCode, "hero", { hidden: true }) : ""}
               <p class="hero-trial">${html(conversion.trial)}</p>
+              ${renderSendLink(currentCode)}
               ${renderFirstDictationLink(currentCode)}
             </div>
           </div>
