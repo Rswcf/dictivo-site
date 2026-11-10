@@ -19,6 +19,7 @@ const PAGES = [
   ["/guides/mac-dictation-app-no-subscription/", "en", "no-subscription", "no_subscription_guide_intro"],
   ["/ja/guides/mac-dictation-not-working/", "ja", "ja-troubleshooting", "ja_troubleshooting_intro"],
   ["/ja/guides/mac-dictation-shortcut/", "ja", "ja-shortcut", "ja_shortcut_intro"],
+  ["/guides/dictate-into-claude-code-and-cursor-on-mac/", "en", "claude-code", "claude_code_guide_intro"],
   ["/guides/offline-dictation-on-mac/", "en", "offline-guide", "offline_guide_intro"],
   ["/ja/guides/offline-dictation-on-mac/", "ja", "offline-guide", "offline_guide_intro"],
   ["/guides/dictation-app-mac-windows-one-time-license/", "en", "one-time-license", "one_time_guide_intro"],

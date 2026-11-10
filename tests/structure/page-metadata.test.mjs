@@ -16,6 +16,7 @@ const PAGES = [
   ["guides/best-speech-to-text-apps-for-mac/index.html", "https://dictivo.app/guides/best-speech-to-text-apps-for-mac/", "en"],
   ["guides/mac-dictation-app-no-subscription/index.html", "https://dictivo.app/guides/mac-dictation-app-no-subscription/", "en"],
   ["ja/guides/mac-dictation-shortcut/index.html", "https://dictivo.app/ja/guides/mac-dictation-shortcut/", "ja"],
+  ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "https://dictivo.app/guides/dictate-into-claude-code-and-cursor-on-mac/", "en"],
 ];
 
 // Characters, as JavaScript counts them. Japanese search results show about 30 full-width

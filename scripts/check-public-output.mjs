@@ -160,6 +160,7 @@ const requiredGeoFiles = [
   "guides/mac-dictation-not-working/index.html",
   "guides/mac-dictation-shortcut/index.html",
   "ja/guides/mac-dictation-shortcut/index.html",
+  "guides/dictate-into-claude-code-and-cursor-on-mac/index.html",
   "guides/dragon-pricing/index.html",
   "guides/wispr-flow-pricing/index.html",
   "guides/windows-voice-typing-not-working/index.html",

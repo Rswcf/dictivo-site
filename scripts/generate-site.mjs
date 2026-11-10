@@ -81,6 +81,7 @@ import {
 import { DRAGON_PRICING_LASTMOD, DRAGON_PRICING_REFERENCES, dragonPricingCopy } from "../data/dragon-pricing-guide.mjs";
 import { WISPR_FLOW_PRICING_LASTMOD, WISPR_FLOW_PRICING_REFERENCES, wisprFlowPricingCopy } from "../data/wispr-flow-pricing-guide.mjs";
 import { BEST_DICTATION_SOFTWARE_HUB_LINK, BEST_DICTATION_SOFTWARE_LASTMOD, BEST_DICTATION_SOFTWARE_REFERENCES, bestDictationSoftwareCopy } from "../data/best-dictation-software-guide.mjs";
+import { CLAUDE_CODE_GUIDE_LASTMOD, CLAUDE_CODE_GUIDE_REFERENCES, claudeCodeGuideCopy } from "../data/claude-code-guide.mjs";
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
 import { WINDOWS_INSTALL_ENTRY_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, WINDOWS_INSTALL_HELP_PATHS, WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_HELP_REFERENCES, WINDOWS_INSTALL_ENTRY_COPY, windowsInstallHelpPath } from "../data/windows-installer-help.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
@@ -509,6 +510,18 @@ function bestDictationSoftwareCopyForRender() {
 // The page quotes Dictivo's price, so its date never precedes PRICING_LASTMOD.
 function bestDictationSoftwareLastmod() {
   return latestDate(BEST_DICTATION_SOFTWARE_LASTMOD, PRICING_LASTMOD);
+}
+
+function claudeCodeGuidePath() {
+  return "/guides/dictate-into-claude-code-and-cursor-on-mac/";
+}
+
+function claudeCodeGuideUrl() {
+  return absoluteUrl(claudeCodeGuidePath());
+}
+
+function claudeCodeGuideCopyForRender() {
+  return claudeCodeGuideCopy({ windows: hasWindowsRelease });
 }
 
 function mediaKitPath() {
@@ -3743,6 +3756,29 @@ function renderOneTimeLicenseGuidePage() {
   });
 }
 
+// Dictate into Claude Code and Cursor on a Mac: every row is dated by CLAUDE_CODE_GUIDE_CHECKED.
+// The ItemList description is the "Speech processed on the Mac?" cell.
+function renderClaudeCodeGuidePage() {
+  const copy = claudeCodeGuideCopyForRender();
+  const factTable = { ...copy.factTable, rows: copy.factTable.rows.map((row) => [...row, checkedCell(copy.checked)]) };
+  return renderAnswerGuidePage({
+    path: claudeCodeGuidePath(),
+    url: claudeCodeGuideUrl(),
+    copy,
+    lastmod: CLAUDE_CODE_GUIDE_LASTMOD,
+    route: "guides/dictate-into-claude-code-and-cursor-on-mac",
+    idPrefix: "claude-code",
+    mainId: "claude-code-guide",
+    about: ["dictate into Claude Code", "Cursor voice input Mac", "voice prompts coding Mac", "terminal dictation Mac"],
+    references: CLAUDE_CODE_GUIDE_REFERENCES,
+    introSource: "claude_code_guide_intro",
+    trialPlatform: "macos",
+    trialSource: "claude_code_guide_mac",
+    factTable,
+    itemList: { name: copy.itemListName, rows: factTable.rows.map((row) => [row[0], row[3]]) },
+  });
+}
+
 function renderMediaKitSchema() {
   const copy = MEDIA_KIT_COPY;
   const pageUrl = mediaKitUrl();
@@ -5477,6 +5513,7 @@ function renderLlmsEnglishFacts() {
     ["How much does Dragon cost, and can you still buy Dragon for Mac?", dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
     ["What do Wispr Flow's plans cost, and what does the free plan include?", wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
     ["Which dictation software is free, works offline, or runs on Windows as well as Mac?", bestDictationSoftwareCopyForRender().navLabel, bestDictationSoftwareUrl()],
+    ["How can I dictate prompts into Claude Code or Cursor on a Mac?", claudeCodeGuideCopyForRender().navLabel, claudeCodeGuideUrl()],
   ];
   return `
 ## Prices and license
@@ -5521,6 +5558,7 @@ function renderLlmsTxt(currentCode = "en") {
           [dragonPricingCopyForRender().navLabel, dragonPricingUrl()],
           [wisprFlowPricingCopyForRender().navLabel, wisprFlowPricingUrl()],
           [bestDictationSoftwareCopyForRender().navLabel, bestDictationSoftwareUrl()],
+          [claudeCodeGuideCopyForRender().navLabel, claudeCodeGuideUrl()],
         ]
       : []),
     [MEDIA_KIT_COPY.navLabel, mediaKitUrl()],
@@ -6016,6 +6054,13 @@ ${translatedGuideSitemapAlternates(WINDOWS_INSTALL_HELP_PATHS)}
     <xhtml:link rel="alternate" hreflang="x-default" href="${bestDictationSoftwareUrl()}" />
     <priority>0.8</priority>
   </url>`;
+  const claudeCodeGuideEntry = `  <url>
+    <loc>${claudeCodeGuideUrl()}</loc>
+    <lastmod>${latestDate(CLAUDE_CODE_GUIDE_LASTMOD, PRICING_LASTMOD)}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${claudeCodeGuideUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${claudeCodeGuideUrl()}" />
+    <priority>0.85</priority>
+  </url>`;
   const jaMacDictationTroubleshootingEntry = `  <url>
     <loc>${jaMacDictationTroubleshootingUrl()}</loc>
     <lastmod>${JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD}</lastmod>
@@ -6101,6 +6146,7 @@ ${windowsInstallHelpEntries}
 ${dragonPricingEntry}
 ${wisprFlowPricingEntry}
 ${bestDictationSoftwareEntry}
+${claudeCodeGuideEntry}
 ${mediaKitEntry}
   <url><loc>${BASE_URL}${PRODUCT_FILM.path}</loc><lastmod>${PRODUCT_FILM.lastmod}</lastmod><xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${PRODUCT_FILM.path}" /><xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${PRODUCT_FILM.path}" /></url>
 ${Object.keys(FIRST_DICTATION_COPY).map(code => `  <url>
@@ -6496,6 +6542,7 @@ for (const code of Object.keys(WINDOWS_INSTALL_HELP_PATHS)) write(`${windowsInst
 write(`${dragonPricingPath().slice(1)}index.html`, renderDragonPricingPage());
 write(`${wisprFlowPricingPath().slice(1)}index.html`, renderWisprFlowPricingPage());
 write(`${bestDictationSoftwarePath().slice(1)}index.html`, renderBestDictationSoftwarePage());
+write(`${claudeCodeGuidePath().slice(1)}index.html`, renderClaudeCodeGuidePage());
 write(`${jaMacDictationTroubleshootingPath().slice(1)}index.html`, renderJaMacDictationTroubleshootingPage());
 write(`${jaMacDictationShortcutPath().slice(1)}index.html`, renderJaMacDictationShortcutPage());
 write("media-kit/index.html", renderMediaKitPage());

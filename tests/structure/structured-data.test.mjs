@@ -156,6 +156,7 @@ const publishedRoutes = () => [
   ["guides/dictation-app-mac-windows-one-time-license/index.html", "guides/dictation-app-mac-windows-one-time-license", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ["ja/guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "ja"],
+  ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "guides/dictate-into-claude-code-and-cursor-on-mac", "en"],
   ...LOCALES.flatMap((locale) => [
     ...COMPARE_PAGES.map((compare) => [`${prefix(locale.code)}compare/${compare.slug}/index.html`, `compare/${compare.slug}`, locale.code]),
     ...["privacy/where-dictation-audio-goes", "privacy/local-dictation-network-test"].map((slug) => [`${prefix(locale.code)}${slug}/index.html`, slug, locale.code]),

@@ -8,6 +8,7 @@ import { OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD } from "../../data/offline-dict
 import { SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD } from "../../data/speech-to-text-mac-guide.mjs";
 import { ONE_TIME_LICENSE_GUIDE_LASTMOD } from "../../data/one-time-license-guide.mjs";
 import { NO_SUBSCRIPTION_GUIDE_LASTMOD } from "../../data/no-subscription-guide.mjs";
+import { CLAUDE_CODE_GUIDE_LASTMOD } from "../../data/claude-code-guide.mjs";
 
 const read = path => readFileSync(new URL(`../../dist/${path}`, import.meta.url), "utf8");
 const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
@@ -18,6 +19,7 @@ const cases = [
   ["guides/mac-dictation-app-no-subscription/", "/", "macos", "no_subscription_guide_mac", NO_SUBSCRIPTION_GUIDE_LASTMOD],
   ["guides/offline-dictation-on-windows/", "/", "windows", "offline_guide_windows", OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD],
   ["guides/dictation-app-mac-windows-one-time-license/", "/", "both", "one_time_guide_mac", ONE_TIME_LICENSE_GUIDE_LASTMOD],
+  ["guides/dictate-into-claude-code-and-cursor-on-mac/", "/", "macos", "claude_code_guide_mac", CLAUDE_CODE_GUIDE_LASTMOD],
 ];
 
 test("comparison guide readers can download the right platform and reach localized setup and terms", () => {
