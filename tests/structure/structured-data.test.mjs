@@ -6,6 +6,8 @@ import { LOCALES } from "../../data/site-content.mjs";
 import { LOCAL_OFFER, introOfferActive } from "../../data/local-offer.mjs";
 import { COMPARE_PAGES } from "../../data/compare-pages.mjs";
 import { firstPublished } from "../../data/first-published.mjs";
+import { JA_SPEECH_GUIDE_READY } from "../../data/ja-speech-to-text-mac-guide.mjs";
+import { JA_NO_SUBSCRIPTION_GUIDE_READY } from "../../data/ja-no-subscription-guide.mjs";
 import { readyDocsEntries } from "../../data/docs-index.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
@@ -159,6 +161,9 @@ const publishedRoutes = () => [
   ["guides/dictation-app-mac-windows-one-time-license/index.html", "guides/dictation-app-mac-windows-one-time-license", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ["ja/guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "ja"],
+  // The Japanese answer guides (Batch B3), once built.
+  ...(JA_SPEECH_GUIDE_READY ? [["ja/guides/best-speech-to-text-apps-for-mac/index.html", "guides/best-speech-to-text-apps-for-mac", "ja"]] : []),
+  ...(JA_NO_SUBSCRIPTION_GUIDE_READY ? [["ja/guides/mac-dictation-app-no-subscription/index.html", "guides/mac-dictation-app-no-subscription", "ja"]] : []),
   ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "guides/dictate-into-claude-code-and-cursor-on-mac", "en"],
   // Every docs page that is built (data/docs-index.mjs).
   ...readyDocsEntries({ windows }).map((entry) => [`${entry.route}/index.html`, entry.route, "en"]),

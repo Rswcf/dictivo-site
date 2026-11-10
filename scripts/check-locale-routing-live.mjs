@@ -1,6 +1,9 @@
 // Live language-routing checks. Usage:
 //   node scripts/check-locale-routing-live.mjs https://dictivo.app
 //   node scripts/check-locale-routing-live.mjs https://<branch>.dictivo-app.pages.dev --country-override
+import { JA_SPEECH_GUIDE_READY } from "../data/ja-speech-to-text-mac-guide.mjs";
+import { JA_NO_SUBSCRIPTION_GUIDE_READY } from "../data/ja-no-subscription-guide.mjs";
+
 const base = process.argv[2] || "https://dictivo.app";
 const override = process.argv.includes("--country-override");
 const CHROME = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36";
@@ -72,6 +75,9 @@ if (override) {
     ["JP", "", "", "/guides/first-local-dictation/", "/ja/guides/first-local-dictation/"],
     ["JP", "", "", "/guides/mac-dictation-not-working/", "/ja/guides/mac-dictation-not-working/"],
     ["JP", "", "", "/guides/mac-dictation-shortcut/", "/ja/guides/mac-dictation-shortcut/"],
+    // The Japanese answer guides (Batch B3) are routed once they are built.
+    ...(JA_SPEECH_GUIDE_READY ? [["JP", "", "", "/guides/best-speech-to-text-apps-for-mac/", "/ja/guides/best-speech-to-text-apps-for-mac/"]] : []),
+    ...(JA_NO_SUBSCRIPTION_GUIDE_READY ? [["JP", "", "", "/guides/mac-dictation-app-no-subscription/", "/ja/guides/mac-dictation-app-no-subscription/"]] : []),
     ["TW", "", "", "/privacy/where-dictation-audio-goes/", "/zh-hant/privacy/where-dictation-audio-goes/"],
   ];
   for (const [country, region, acceptLanguage, path, target] of redirects) {
@@ -79,7 +85,7 @@ if (override) {
     await expect(label, visit(path, { country, region, headers: acceptLanguage ? { "accept-language": acceptLanguage } : {} }), (r) => [status(r, 302), location(r, target)]);
   }
 
-  const stays = [["CA", "/"], ["SG", "/"], ["US", "/"], ["GB", "/"], ["IN", "/"], ["XX", "/"], ["FR", "/de/"], ["DE", "/about/"], ["DE", "/guides/first-local-dictation/"], ["DE", "/guides/mac-dictation-not-working/"], ["DE", "/guides/mac-dictation-shortcut/"]];
+  const stays = [["CA", "/"], ["SG", "/"], ["US", "/"], ["GB", "/"], ["IN", "/"], ["XX", "/"], ["FR", "/de/"], ["DE", "/about/"], ["DE", "/guides/first-local-dictation/"], ["DE", "/guides/mac-dictation-not-working/"], ["DE", "/guides/mac-dictation-shortcut/"], ["DE", "/guides/best-speech-to-text-apps-for-mac/"], ["DE", "/guides/mac-dictation-app-no-subscription/"]];
   for (const [country, path] of stays) {
     await expect(`${country} ${path} stays`, visit(path, { country }), (r) => [status(r, 200), noPrompt(r)]);
   }

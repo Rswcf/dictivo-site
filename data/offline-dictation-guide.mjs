@@ -30,6 +30,12 @@ export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
 ];
 
+// The reference list of a translated guide (the old shape). Every language shares
+// OFFLINE_DICTATION_GUIDE_REFERENCES for now.
+export function offlineDictationGuideReferences(code) {
+  return OFFLINE_DICTATION_GUIDE_REFERENCES;
+}
+
 // 2026-11-10 (Batch B1): the English guide is rebuilt in the answer-page shape of the Windows
 // offline guide; the other ten languages keep their objects below and their old shape. Ten rows;
 // Handy is new. Every row except Voice Type and Aiko was re-read on

@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { readyDocsEntries } from "../../data/docs-index.mjs";
+import { JA_SPEECH_GUIDE_READY } from "../../data/ja-speech-to-text-mac-guide.mjs";
+import { JA_NO_SUBSCRIPTION_GUIDE_READY } from "../../data/ja-no-subscription-guide.mjs";
 
 const release = JSON.parse(readFileSync(new URL("../../data/release.json", import.meta.url), "utf8"));
 const windows = release.publicWindowsDownloads === true && Boolean(release.windows?.exe?.url && release.windows?.msi?.url);
@@ -20,6 +22,9 @@ const PAGES = [
   ["guides/best-speech-to-text-apps-for-mac/index.html", "https://dictivo.app/guides/best-speech-to-text-apps-for-mac/", "en"],
   ["guides/mac-dictation-app-no-subscription/index.html", "https://dictivo.app/guides/mac-dictation-app-no-subscription/", "en"],
   ["ja/guides/mac-dictation-shortcut/index.html", "https://dictivo.app/ja/guides/mac-dictation-shortcut/", "ja"],
+  // The Japanese answer guides (Batch B3), once built.
+  ...(JA_SPEECH_GUIDE_READY ? [["ja/guides/best-speech-to-text-apps-for-mac/index.html", "https://dictivo.app/ja/guides/best-speech-to-text-apps-for-mac/", "ja"]] : []),
+  ...(JA_NO_SUBSCRIPTION_GUIDE_READY ? [["ja/guides/mac-dictation-app-no-subscription/index.html", "https://dictivo.app/ja/guides/mac-dictation-app-no-subscription/", "ja"]] : []),
   ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "https://dictivo.app/guides/dictate-into-claude-code-and-cursor-on-mac/", "en"],
   ["docs/index.html", "https://dictivo.app/docs/", "en"],
   // Every docs page that is built (data/docs-index.mjs), so a page task edits no list here.

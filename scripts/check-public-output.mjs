@@ -8,6 +8,8 @@ import { releaseNotesFor } from "../data/release-notes.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { LOCAL_OFFER, introPriceExpired } from "../data/local-offer.mjs";
 import { readyDocsEntries } from "../data/docs-index.mjs";
+import { JA_SPEECH_GUIDE_READY } from "../data/ja-speech-to-text-mac-guide.mjs";
+import { JA_NO_SUBSCRIPTION_GUIDE_READY } from "../data/ja-no-subscription-guide.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const publicRoot = resolve(root, "dist");
@@ -161,6 +163,9 @@ const requiredGeoFiles = [
   "guides/mac-dictation-not-working/index.html",
   "guides/mac-dictation-shortcut/index.html",
   "ja/guides/mac-dictation-shortcut/index.html",
+  // The Japanese answer guides (Batch B3), once their data files say ready.
+  ...(JA_SPEECH_GUIDE_READY ? ["ja/guides/best-speech-to-text-apps-for-mac/index.html"] : []),
+  ...(JA_NO_SUBSCRIPTION_GUIDE_READY ? ["ja/guides/mac-dictation-app-no-subscription/index.html"] : []),
   "guides/dictate-into-claude-code-and-cursor-on-mac/index.html",
   "guides/dragon-pricing/index.html",
   "guides/wispr-flow-pricing/index.html",

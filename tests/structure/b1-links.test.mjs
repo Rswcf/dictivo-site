@@ -40,7 +40,8 @@ test("the English footer links the three new guides in order; the German footer 
   }
   for (const path of ["de/index.html", "ja/index.html"]) {
     const links = footer(read(path));
-    for (const page of NEW_PAGES) assert.ok(!links.includes(page), `${path}: footer links ${page}`);
+    // An exact href: /ja/guides/mac-dictation-app-no-subscription/ contains the English path.
+    for (const page of NEW_PAGES) assert.ok(!links.includes(`href="${page}"`), `${path}: footer links ${page}`);
   }
 });
 
