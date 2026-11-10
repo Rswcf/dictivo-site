@@ -1,7 +1,7 @@
 // Japanese-only guide for built-in macOS dictation that does not work.
 // Every statement here must be backed by one of the references below or by `fieldTest`,
 // which holds results from an actual Mac and stays null until those results exist.
-export const JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD = "2026-10-17";
+export const JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD = "2026-11-10";
 
 export const JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES = [
   ["Apple サポート：Macでメッセージや書類を音声入力する", "https://support.apple.com/ja-jp/guide/mac-help/mh40584/mac"],

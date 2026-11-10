@@ -79,7 +79,7 @@ test("the page states Wispr Flow's own prices, limits and terms, with both state
 
 test("Dictivo appears only in its disclosed section and the trial panel", () => {
   const html = page();
-  const sections = between(html, 'id="wispr-pricing-answer"', 'id="wispr-pricing-dictivo"');
+  const sections = between(html.replace(/<section[^>]*data-guide-intro[^>]*>[\s\S]*?<\/section>/, ""), 'id="wispr-pricing-answer"', 'id="wispr-pricing-dictivo"');
   assert.ok(!sections.includes("Dictivo"), "the Wispr Flow sections do not name Dictivo");
   const faq = between(html, 'id="wispr-pricing-faq"', "</section>");
   assert.ok(!faq.includes("Dictivo"), "the FAQ does not name Dictivo");

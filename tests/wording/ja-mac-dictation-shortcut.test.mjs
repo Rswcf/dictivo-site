@@ -101,7 +101,7 @@ test("the answer and the table name Apple's settings, and Dictivo's column holds
 
 test("Dictivo appears only in the table's own column and its disclosed section", () => {
   const html = page();
-  for (const part of [between(html, 'id="ja-shortcut-answer"', 'id="ja-shortcut-quick-reference"'), between(html, 'id="ja-shortcut-section-1"', 'id="ja-shortcut-dictivo"')]) {
+  for (const part of [between(html.replace(/<section[^>]*data-guide-intro[^>]*>[\s\S]*?<\/section>/, ""), 'id="ja-shortcut-answer"', 'id="ja-shortcut-quick-reference"'), between(html, 'id="ja-shortcut-section-1"', 'id="ja-shortcut-dictivo"')]) {
     assert.ok(!part.includes("Dictivo"), "the macOS sections do not name Dictivo");
   }
   const dictivo = between(html, 'id="ja-shortcut-dictivo"', "</section>");
@@ -185,7 +185,7 @@ test("the Japanese offline guide links the shortcut guide from its built-in dict
   const offline = read("ja/guides/offline-dictation-on-mac/index.html");
   const section = between(offline, 'id="offline-guide-section-1"', "</section>");
   assert.ok(section.includes(`<a href="${path}">Macの音声入力ショートカットを確認・変更する方法</a>`));
-  assert.ok(offline.includes('<time datetime="2026-10-17">'), "redated for the later trial path");
+  assert.ok(offline.includes('<time datetime="2026-11-10">'), "redated for the Dictivo block after the answer");
   // Its title and its shortcut question stay until the 2026-11-08 review of both pages in Search Console.
   assert.ok(offline.includes("<title>Macのオフライン音声入力：設定・ショートカット・アプリ比較</title>"));
   assert.ok(offline.includes("Macの音声入力のショートカットは？"));

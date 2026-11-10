@@ -2,7 +2,7 @@
 // sections must be backed by one of the references below (read on MAC_DICTATION_GUIDES_CHECKED)
 // or by `fieldTest`, which holds results from an actual Mac and stays null until those results
 // exist. Dictivo appears only in the closing section, disclosed as this site's product.
-export const MAC_DICTATION_NOT_WORKING_LASTMOD = "2026-10-09";
+export const MAC_DICTATION_NOT_WORKING_LASTMOD = "2026-11-10";
 
 // The day the Apple and Google help pages below were read for both Mac dictation guides.
 export const MAC_DICTATION_GUIDES_CHECKED = "2026-10-09";

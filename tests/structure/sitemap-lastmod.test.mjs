@@ -67,8 +67,9 @@ test("Guide dates reflect scoped trial improvements without redating unchanged s
     // 2026-09-29: the answer comes first and the table gained price and check-date columns.
     // 2026-10-17 (Japanese): the trial steps link the practice page.
     // 2026-10-10 (English): the Dictivo fit section links the dictation software guide.
-    ["/ja/guides/offline-dictation-on-mac/", "2026-10-17"],
-    ["/guides/offline-dictation-on-mac/", "2026-10-10"],
+    // 2026-11-10 (English and Japanese): a "What is Dictivo?" block with downloads follows the answer.
+    ["/ja/guides/offline-dictation-on-mac/", "2026-11-10"],
+    ["/guides/offline-dictation-on-mac/", "2026-11-10"],
     ["/ja/guides/first-local-dictation/", "2026-09-18"],
     ["/guides/first-local-dictation/", "2026-09-11"],
   ]) {

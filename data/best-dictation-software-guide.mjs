@@ -11,7 +11,7 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 // The year in the title is the year of the last full check, so it changes only when every price
 // is re-read (first re-check of 2027: 4 January).
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
-export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-10-10";
+export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-11-10";
 export const BEST_DICTATION_SOFTWARE_CHECKED = "2026-10-10";
 
 const year = BEST_DICTATION_SOFTWARE_CHECKED.slice(0, 4);

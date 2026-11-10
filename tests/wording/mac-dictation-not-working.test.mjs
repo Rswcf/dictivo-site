@@ -79,7 +79,7 @@ test("the answer names Voice Control and Microphone source; Dictivo appears only
   assert.ok(dictivo.includes('href="/pricing/"') && dictivo.includes('href="/guides/first-local-dictation/"'));
   assert.equal(dictivo.includes("Ctrl+Shift+Space"), hasWindowsRelease, "Windows shortcut only while Windows is public");
   const symptoms = between(html, 'id="troubleshooting-section-1"', 'id="troubleshooting-dictivo"');
-  const quickReference = between(html, 'id="troubleshooting-answer"', "<nav");
+  const quickReference = between(html.replace(/<section[^>]*data-guide-intro[^>]*>[\s\S]*?<\/section>/, ""), 'id="troubleshooting-answer"', "<nav");
   for (const part of [symptoms, quickReference]) assert.ok(!part.includes("Dictivo"), "symptom sections do not name Dictivo");
 });
 

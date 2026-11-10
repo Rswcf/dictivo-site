@@ -30,6 +30,7 @@ import { localizedCompetitorFact } from "../data/compare-fact-locales.mjs";
 import { COMPARISON_EVIDENCE_COPY, COMPARISON_SOURCE_KINDS } from "../data/comparison-evidence.mjs";
 import { HOME_CONVERSION_COPY, HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD, HOME_SHARED_CONTENT_LASTMOD } from "../data/home-conversion.mjs";
 import { FIRST_DICTATION_COPY, firstDictationLastmod } from "../data/first-dictation-guide.mjs";
+import { GUIDE_INTRO_COPY } from "../data/guide-intro.mjs";
 import { LOCAL_SPEECH_EVIDENCE } from "../data/local-speech-evidence.mjs";
 import { localizedComparisonSections, localizedComparisonFaqs } from "../data/comparison-decision-locales.mjs";
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
@@ -3053,6 +3054,28 @@ function renderOfflineGuideSection(section, index) {
       </section>`;
 }
 
+// "What is Dictivo?" right after a guide's answer (data/guide-intro.mjs): the disclosure, the
+// pricing link and the downloads (`<source>_mac`, and `<source>_windows` while Windows downloads
+// are public). Nothing for a language without copy or a guide without a source. It carries no
+// data-guide-trial: the trial panel further down stays the page's one trial panel.
+function renderGuideIntro(code, idPrefix, source) {
+  const c = GUIDE_INTRO_COPY[code];
+  if (!c || !source) return "";
+  const t = HOME_COPY[code];
+  const mac = `${source}_mac`;
+  const windows = `${source}_windows`;
+  const id = `${idPrefix}-about`;
+  return `<section class="doc-section" data-guide-intro aria-labelledby="${attr(id)}">
+        <h2 id="${attr(id)}">${html(c.title)}</h2>
+        <p>${html(c.body)} <a href="${attr(pricingHref(code))}">${html(c.pricingLink)}</a></p>
+        <div class="compare-intro-actions" data-platform-downloads>
+          <a class="button button-light download-link" href="${attr(downloadUrl("macos", mac))}"${downloadData("macos", mac)}>${html(t.hero.download)}</a>${hasWindowsRelease ? `
+          <a class="button button-outline download-link" href="${attr(downloadUrl("windows", windows))}"${downloadData("windows", windows)}>${html(windowsDownloadCopy(code).exeButton)}</a>` : ""}
+        </div>
+        <p class="compare-trial">${html(HOME_CONVERSION_COPY[code].trial)}</p>
+      </section>`;
+}
+
 // Keep a platform-specific trial action beside the decision table, without new tracking.
 // platform "both" (a page about Mac and Windows) offers the Mac download and, while Windows
 // downloads are public, the Windows one: `<source>_mac` / `<source>_windows`. site.js moves the
@@ -3120,7 +3143,7 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
         <p>${html(copy.answer)}</p>
       </section>
 
-      ${renderFirstDictationLink(currentCode)}
+      ${GUIDE_INTRO_COPY[currentCode] ? `${renderGuideIntro(currentCode, "offline-guide", "offline_guide_intro")}\n\n      ` : ""}${renderFirstDictationLink(currentCode)}
       ${currentCode === "ja" ? `<nav aria-label="このガイドの目次"><p><a href="#offline-guide-section-1-title">標準機能の設定</a> · <a href="#offline-guide-section-4-title">Dictivoで試す</a> · <a href="#offline-guide-section-5-title">Dictivoで入力できないとき</a> · <a href="#offline-guide-table">アプリ比較</a></p></nav>` : ""}
 
       <section class="doc-section" aria-labelledby="offline-guide-table">
@@ -4056,7 +4079,7 @@ function renderDictationGuidePage(guide) {
         <h2 id="${attr(`${idPrefix}-answer`)}">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>${renderDictationGuideLinks(copy.answerLinks)}
       </section>
-${renderDictationGuideQuickReference(quickReference, idPrefix)}
+${guide.introSource ? `\n      ${renderGuideIntro(code, idPrefix, guide.introSource)}\n` : ""}${renderDictationGuideQuickReference(quickReference, idPrefix)}
       ${renderDictationGuideContents(copy, idPrefix, Boolean(quickReference))}
 
       ${copy.sections.map(renderDictationGuideSection(idPrefix)).join("\n\n      ")}
@@ -4087,6 +4110,7 @@ function renderMacDictationNotWorkingPage() {
     headTags: macDictationTroubleshootingHeadTags("en"),
     hrefForLocale: macDictationTroubleshootingHrefForLocale,
     trialSource: "troubleshooting_mac",
+    introSource: "troubleshooting_intro",
     mainClass: "doc-page",
     idPrefix: "troubleshooting",
     mainId: "mac-dictation-not-working",
@@ -4111,6 +4135,7 @@ function renderMacDictationShortcutPage() {
     headTags: macDictationShortcutHeadTags("en"),
     hrefForLocale: macDictationShortcutHrefForLocale,
     trialSource: "shortcut_mac",
+    introSource: "shortcut_intro",
     mainClass: "doc-page",
     idPrefix: "shortcut",
     mainId: "mac-dictation-shortcut",
@@ -4202,6 +4227,7 @@ function renderWisprFlowPricingPage() {
     references: WISPR_FLOW_PRICING_REFERENCES,
     headTags: enOnlyHeadTags(url),
     trialSource: "wispr_pricing",
+    introSource: "wispr_pricing_intro",
     mainClass: "doc-page",
     idPrefix: "wispr-pricing",
     mainId: "wispr-flow-pricing",
@@ -4229,6 +4255,7 @@ function renderBestDictationSoftwarePage() {
     // A page about Mac and Windows: both downloads, Windows first for Windows visitors.
     platform: "both",
     trialSource: "best_software",
+    introSource: "best_software_intro",
     // `doc-page` alone: the five-column table fits the desktop column without scrolling.
     mainClass: "doc-page",
     idPrefix: "best-software",
@@ -4254,6 +4281,7 @@ function renderJaMacDictationTroubleshootingPage() {
     headTags: macDictationTroubleshootingHeadTags("ja"),
     hrefForLocale: macDictationTroubleshootingHrefForLocale,
     trialSource: "ja_troubleshooting_mac",
+    introSource: "ja_troubleshooting_intro",
     idPrefix: "ja-troubleshooting",
     mainId: "ja-mac-dictation-troubleshooting",
     route: "guides/mac-dictation-not-working",
@@ -4276,6 +4304,7 @@ function renderJaMacDictationShortcutPage() {
     headTags: macDictationShortcutHeadTags("ja"),
     hrefForLocale: macDictationShortcutHrefForLocale,
     trialSource: "ja_shortcut_mac",
+    introSource: "ja_shortcut_intro",
     mainClass: "doc-page",
     idPrefix: "ja-shortcut",
     mainId: "ja-mac-dictation-shortcut",
