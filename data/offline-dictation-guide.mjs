@@ -30,21 +30,154 @@ export const OFFLINE_DICTATION_GUIDE_REFERENCES = [
   ["Apple Dictation support", "https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac"],
 ];
 
-export const OFFLINE_DICTATION_GUIDE_COPY = {
-  en: {
+// 2026-11-10 (Batch B1): the English guide is rebuilt in the answer-page shape of the Windows
+// offline guide; the other ten languages keep their objects below and their old shape. Ten rows;
+// Handy is new. Every row except Voice Type, Voibe and Aiko was re-read on
+// OFFLINE_DICTATION_GUIDE_EN_CHECKED (competitor facts file of that date in the desktop
+// repository); those three keep the site's OFFLINE_GUIDE_PRICES_CHECKED facts.
+export const OFFLINE_DICTATION_GUIDE_EN_CHECKED = "2026-11-10";
+
+// The English references: the shared list (the translated guides keep exactly that list) plus the
+// pages read for the rebuild.
+export const OFFLINE_DICTATION_GUIDE_EN_REFERENCES = [
+  ...OFFLINE_DICTATION_GUIDE_REFERENCES,
+  [`Handy on GitHub: README and license (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://github.com/cjpais/Handy"],
+  [`Handy downloads (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://handy.computer/download"],
+  [`Apple: Use Dictation on Mac, macOS 14 guide (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://support.apple.com/en-us/guide/mac-help/mh40584/14.0/mac/14.0"],
+  [`Wispr Flow: What is Flow (checked ${OFFLINE_DICTATION_GUIDE_EN_CHECKED})`, "https://docs.wisprflow.ai/articles/2772472373-what-is-flow"],
+  ["Dictivo Homebrew tap", "https://github.com/deepviewsdev/homebrew-tap"],
+];
+
+const formatEnDate = (isoDate) =>
+  new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${isoDate}T00:00:00Z`));
+
+// [App, Does speech stay on the Mac?, Cloud or workflow caveat, Best fit]. The generator adds the
+// price and "Checked on" cells. The ItemList description is the "Best fit" cell.
+const EN_ROWS = [
+  [
+    "Dictivo Local",
+    "Yes in Local mode. Audio is transcribed on the Mac after the model download and is not uploaded.",
+    "Optional Cloud Fast, a separate paid add-on, uploads the selected recording. Updates and license checks use the network.",
+    "Hotkey dictation into the app you are using, with a clear Local vs Cloud Fast boundary.",
+  ],
+  [
+    "Apple Dictation",
+    "On a Mac with Apple silicon, yes for supported languages, with no internet connection needed. On an Intel Mac, no: speech is sent to Apple.",
+    "Languages without on-device support are also sent to Apple. On-device processing covers general dictation, not dictation into a search box.",
+    "Occasional dictation with no extra app.",
+  ],
+  [
+    "Handy",
+    "Yes. It transcribes on the computer with local Whisper or Parakeet models.",
+    "The project describes no cloud transcription. Builds exist for Apple Silicon and Intel Macs, Windows and Linux.",
+    "A free local app whose source code you can read.",
+  ],
+  [
+    "VoiceInk",
+    "Yes. Its site says all transcription runs on the device.",
+    "Optional Cloud Enhancement sends text, not audio. Runs only on Apple Silicon Macs.",
+    "Local dictation on an Apple Silicon Mac, from an app that is open source under GPL-3.0.",
+  ],
+  [
+    "Superwhisper",
+    "Yes with local models. The free plan uses local models only.",
+    "Pro adds cloud voice models and AI modes, so check which model each mode uses. Its offline models run best on Apple Silicon.",
+    "Power users who want modes and a choice of local or cloud models.",
+  ],
+  [
+    "MacWhisper",
+    "Yes by default. It transcribes with local models.",
+    "Remote models are optional. You can switch to models from providers such as OpenAI, Anthropic or Google Gemini.",
+    "Live dictation plus audio and video file transcription.",
+  ],
+  [
+    "Voice Type",
+    "Yes. Its App Store listing says no internet is required and audio stays on the device.",
+    "May contact Apple for receipt validation. Check optional rewriting features separately.",
+    "Simple hold-to-talk dictation in any text field.",
+  ],
+  [
+    "Voibe",
+    "Only in On-Device Mode. Intel Macs use cloud transcription.",
+    "It still collects account identifiers, usage analytics and crash reports, but says dictated content is not included.",
+    "A simple workflow, if you can use On-Device Mode.",
+  ],
+  [
+    "Aiko",
+    "Yes for transcription. Its App Store listing says Whisper runs locally on your device.",
+    "It transcribes recordings more than it handles live system-wide dictation.",
+    "Private transcription of recordings and files.",
+  ],
+  [
+    "Wispr Flow",
+    "No. Its documentation says transcription needs an internet connection.",
+    "Setup includes creating an account or signing in. The free plan has a weekly word limit.",
+    "Cloud voice typing when uploading speech is acceptable.",
+  ],
+];
+
+// Rows that keep the site's 2026-09-29 facts instead of a re-read.
+const EN_SITE_CHECKED_ROWS = ["Voice Type", "Voibe", "Aiko"];
+
+// Price cells for apps without an entry in the generator's GUIDE_PRICE_SOURCES, as the vendor
+// shows them on OFFLINE_DICTATION_GUIDE_EN_CHECKED.
+const EN_HAND_PRICES = {
+  Handy: "Free and open source (MIT license)",
+};
+
+// The English guide. `windows` is the generator's hasWindowsRelease; the copy map below holds the
+// default result, which the footer, llms.txt, the dates and the price lookups read.
+export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_DICTATION_GUIDE_EN_CHECKED } = {}) {
+  const checkedOn = formatEnDate(checked);
+  const platforms = windows
+    ? "One Dictivo Local license covers both desktop platforms, macOS and Windows x64, at the same price."
+    : "macOS is available. Windows x64 downloads are temporarily unavailable.";
+  return {
     navLabel: "Offline Mac dictation",
-    metaTitle: "Offline Dictation App for Mac: Local Audio Comparison",
+    metaTitle: "Offline Dictation on Mac: Local Speech-to-Text Compared",
     metaDescription:
-      "Compare Mac dictation apps that keep audio local or offline: Dictivo, VoiceInk, Voice Type, Voibe, Superwhisper, MacWhisper, Aiko, and Apple Dictation.",
-    eyebrow: "Offline dictation guide",
-    title: "Which Mac dictation apps keep audio local?",
-    lede:
-      "Use this guide when the deciding factor is where dictation audio is processed. It separates local/offline dictation from cloud transcription with retention controls.",
+      "Which Mac dictation apps turn speech into text locally and which upload it: Dictivo, Apple Dictation, VoiceInk, Superwhisper, MacWhisper and more, with prices.",
+    title: "Offline dictation on Mac: which apps keep speech on your Mac?",
+    lede: "Use this guide when the deciding factor is where your speech is processed. It separates apps that transcribe on the Mac from apps that upload audio to a cloud service.",
     answerTitle: "Short answer",
-    answer:
-      "For system-wide Mac dictation that keeps audio on the device, choose Dictivo Local for hotkey dictation with a clear Local vs Cloud Fast boundary, VoiceInk for local-first dictation with optional enhancement modes, Voice Type for simple hold-to-talk dictation in any text field, or Voibe in On-Device Mode for a polished, simple workflow (Intel Macs use cloud transcription). Superwhisper suits power users who want modes and automation, and keeps audio local only with local voice models selected. MacWhisper suits live dictation plus audio and video files; Aiko suits private transcription of recordings. Apple Dictation is the free built-in baseline; your Mac settings show whether it processes on the device. Wispr Flow is not an offline pick: its public docs say transcription occurs in the cloud. Dictivo Local, VoiceInk, Voice Type, MacWhisper Pro and Aiko are one-time purchases; Superwhisper and Voibe offer subscriptions or a one-time lifetime license; Wispr Flow Pro is a subscription.",
+    answer: `The table compares ${EN_ROWS.length} Mac dictation apps by where speech is processed; most rows were checked on ${checkedOn}. Dictivo Local, this site's product, transcribes on the Mac after a model download. Apple Dictation processes supported languages on Macs with Apple silicon, but sends speech to Apple on Intel Macs. Handy is a free, open-source local option. Wispr Flow needs an internet connection for transcription.`,
+    intentTitle: "Which offline dictation question are you asking?",
+    intentCaption: "Common ways people search for offline Mac dictation, and what to check for each",
+    intentHeaders: ["How people ask", "Short answer", "What to check"],
+    intentRows: [
+      [
+        "offline dictation mac",
+        "Use an app that transcribes on the Mac after a model download, such as Dictivo Local, Handy, VoiceInk, or Superwhisper with local models.",
+        "Whether the default mode is local, and which features still use the network.",
+      ],
+      [
+        "dictation app mac without internet",
+        "Install the model while you are online. After that, a local app transcribes with Wi-Fi off.",
+        "Turn off Wi-Fi and dictate one sentence before you rely on it.",
+      ],
+      [
+        "which Mac dictation apps process audio locally",
+        "Dictivo Local, Handy, VoiceInk, MacWhisper, Voice Type and Aiko by default; Superwhisper and Voibe in their local modes; Apple Dictation on Apple silicon for supported languages.",
+        "The vendor's privacy page and the mode you select.",
+      ],
+      [
+        "private dictation app for mac",
+        "A local app keeps audio on the Mac. A cloud app with zero retention still uploads it.",
+        "Optional cloud features that send text or audio, such as AI cleanup.",
+      ],
+      [
+        "does Apple Dictation work offline",
+        "On a Mac with Apple silicon, for supported languages. On an Intel Mac, speech is sent to Apple.",
+        "Your Mac's chip and your dictation language.",
+      ],
+      [
+        "free offline dictation mac",
+        "Apple Dictation on Apple silicon, Handy, and the free versions of Superwhisper and MacWhisper. Dictivo includes the Tiny model free forever.",
+        "The limits of the free version and which models it includes.",
+      ],
+    ],
     tableCaption: "Mac dictation apps compared by whether dictation audio stays local",
-    headers: ["App", "Does dictation audio stay local?", "Cloud or workflow caveat", "Best fit"],
+    headers: ["App", "Does speech stay on the Mac?", "Cloud or workflow caveat", "Best fit"],
     priceHeaders: ["Price / purchase model", "Checked on"],
     purchaseModels: { once: "One-time purchase", subscription: "Subscription", both: "Subscription or one-time", included: "Included with macOS" },
     prices: {
@@ -53,28 +186,28 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
       "Voice Type": "Free for 7 days, then $19.99 once for lifetime access (App Store in-app purchase).",
       Aiko: "US Mac App Store: $24.",
     },
-    rows: [
-      ["Dictivo Local", "Yes in Local mode. Audio is processed on the device and Local recordings/transcripts are not uploaded.", "Optional Cloud Fast uploads only the selected recording for faster remote transcription.", "Local-first hotkey dictation with a clear Local vs Cloud Fast boundary."],
-      ["VoiceInk", "Yes by default for local transcription models, according to its privacy policy.", "Optional cloud enhancement can send text to a provider. Review enabled features before using sensitive material.", "Local-first dictation with optional advanced enhancement modes."],
-      ["Voice Type", "Yes. Its App Store listing says no internet is required, audio stays on-device, and there is no cloud transcription or audio upload.", "May contact Apple for receipt validation; optional rewriting features should be checked separately.", "Simple hold-to-talk dictation in any text field."],
-      ["Voibe", "Only in On-Device Mode. Intel Macs use cloud transcription.", "It still collects account identifiers, usage analytics, and crash reports, but says dictated content is not included.", "Polished offline dictation for users who want a simple workflow."],
-      ["Superwhisper", "Yes if configured with local voice models.", "Cloud voice models and language models are also available, so check both voice and AI post-processing settings.", "Power users who want modes, local/cloud choice, and richer automation."],
-      ["MacWhisper", "Yes by default for transcription.", "Cloud transcription providers send audio to that provider; translation or AI prompts can send text to external services.", "Live dictation plus audio/video file transcription."],
-      ["Aiko", "Yes for transcription. Its App Store listing says Whisper runs locally on your device.", "It is more of a transcription app than live system-wide dictation.", "Private transcription of recordings and files."],
-      ["Apple Dictation", "Sometimes. Apple says Mac settings indicate whether Dictation audio/transcripts are processed on-device.", "Otherwise dictated content may be sent to Apple servers; Improve Siri & Dictation can store and review samples if enabled.", "Built-in baseline when you want no extra app."],
-      ["Wispr Flow", "No for offline transcription. Its docs describe transcription as cloud-based.", "Model-improvement sharing and cloud storage have separate controls; transcription still runs in the cloud.", "Cloud AI dictation when remote processing is acceptable."],
+    rows: EN_ROWS,
+    handPrices: EN_HAND_PRICES,
+    rowChecked: Object.fromEntries(EN_ROWS.map(([name]) => [name, EN_SITE_CHECKED_ROWS.includes(name) ? OFFLINE_GUIDE_PRICES_CHECKED : checked])),
+    methodTitle: "How this page was checked",
+    method: [
+      "We read each vendor's own pages on the date in the Checked on column. The pages are listed under References. Prices are shown as each vendor shows them, in its own currency.",
+      `The Voice Type, Voibe and Aiko rows keep the facts this site read on ${formatEnDate(OFFLINE_GUIDE_PRICES_CHECKED)}.`,
+      "Dictivo facts come from Dictivo's own documentation and the app's source code.",
+      "This page does not measure speed or error rates, and it does not score the apps against each other.",
     ],
+    methodSignature: `Dictivo team, ${checkedOn}.`,
     sections: [
       {
-        title: "Do not confuse local audio with zero retention",
+        title: "Local audio is not the same as zero retention",
         paragraphs: [
-          "A local/offline dictation app keeps the speech recognition path on the device. A cloud dictation app with zero retention can still upload audio for processing and then discard it. Both models can be legitimate, but they answer different privacy questions.",
-          "When the audio is sensitive, use a local model path. When speed, mobile sync, or cloud rewriting matter more, a cloud product with strong retention controls may be acceptable.",
+          "A local dictation app transcribes speech on the Mac. A cloud app with zero retention uploads the audio, processes it and then deletes it. Both can be legitimate, but they answer different privacy questions.",
+          "Use a local model when the audio is sensitive. A cloud product with strong retention controls may be acceptable when speed, mobile sync or cloud rewriting matter more.",
         ],
         bullets: [
-          "Local/offline means audio is processed on the Mac after the model is installed.",
-          "Zero retention means the vendor says the remote service does not store data after processing.",
-          "For private notes, client work, journals, drafts, or confidential meetings, the safer default is no upload path.",
+          "Local means the Mac processes the audio after the model is installed.",
+          "Zero retention means the vendor says its remote service does not store data after processing.",
+          "For private notes, client work, journals, drafts or confidential meetings, the safer default is no upload path.",
         ],
         link: {
           label: "Moving off cloud transcription? Compare a local workflow with Wispr Flow",
@@ -82,34 +215,137 @@ export const OFFLINE_DICTATION_GUIDE_COPY = {
         },
       },
       {
-        title: "When Dictivo is the stronger answer",
+        title: "Apple Dictation: on-device on Apple Silicon, sent to Apple on Intel",
         paragraphs: [
-          "Dictivo is the strongest fit when the user wants system-wide hotkey dictation, local audio by default, no Dictivo account for Local mode, and a visible choice between Local and optional Cloud Fast.",
-          "Try a short email or note in Local mode after installing the model. Turn off the network, check that transcription still completes, then review and paste the result into your usual app. Keep optional cloud processing off during this test.",
+          "Apple Dictation is built into macOS. Apple's macOS 14 guide says a Mac with Apple silicon handles dictation in supported languages on the device, with no internet connection needed.",
+          "On an Intel-based Mac, or in a language without on-device support, Apple says your speech is sent to Apple for processing. The on-device path also does not cover dictation into a search box.",
+          "Dictation is not available in every language or region. Apple's troubleshooting page adds that Dictation may need an internet connection. If Dictation does not work offline, check your Mac's chip and your dictation language first.",
+        ],
+        link: {
+          label: "Mac Dictation not working? Check the settings symptom by symptom",
+          href: "/guides/mac-dictation-not-working/",
+        },
+      },
+      {
+        title: "Where Dictivo fits on a Mac",
+        paragraphs: [
+          "Dictivo is this site's product. It is a dictation app for Apple Silicon and Intel Macs. Press Cmd+Shift+Space, speak, and press the shortcut again. Dictivo copies the text to the clipboard and pastes it into the app you are using. If the paste keystroke cannot be sent, the text stays on the clipboard for a manual paste.",
+          "Local mode transcribes on the Mac after the model download. Dictivo does not send Local dictation audio to a transcription server. Cloud Fast is a separate, optional paid add-on that uploads the selected recording for remote transcription. Updates, license checks and optional Cloud Fast use the network.",
+          `Local needs no Dictivo account: you activate it with the license key from your purchase email. ${platforms}`,
         ],
         bullets: [
-          "Use Dictivo Local for sensitive everyday dictation into the current desktop app.",
+          "Use Dictivo Local for sensitive everyday dictation into the current app.",
           "Use Cloud Fast only for selected low-sensitivity recordings where speed matters.",
-          "Use Dictivo when a one-time Local license is easier to justify than recurring cloud dictation.",
+          "Dictivo is for live dictation and does not import recorded files.",
         ],
         link: {
           label: "Need Windows or a free option too? See the best dictation software by need",
           href: "/guides/best-dictation-software/",
         },
       },
+      {
+        title: "How to verify a 'local' claim instead of trusting it",
+        paragraphs: [
+          "Any app can say 'private' on its website. The question you can check is whether dictation audio leaves the Mac. Open the Network tab in Activity Monitor, or run nettop in Terminal, and watch the app while you dictate. A local app should show no upload during speech.",
+          "Dictivo publishes a network test that you can repeat against its Local mode. It also documents where dictation audio goes in each mode.",
+        ],
+        bullets: [
+          "Watch network activity while you dictate: local processing means no audio upload.",
+          "Turn off Wi-Fi and dictate again. A local app still produces text.",
+          "Apply the same test to any app in this guide, including Dictivo.",
+        ],
+        link: {
+          label: "Run the local dictation network test",
+          href: "/privacy/local-dictation-network-test/",
+        },
+      },
+      {
+        title: "Try one offline sentence on your Mac",
+        paragraphs: [
+          "Dictivo is this site's product. Use the 14-day full Local trial to check your microphone, your writing app and how much editing the text needs. The trial needs no account or card.",
+        ],
+        steps: [
+          "Install Dictivo with the download button on this page.",
+          { html: "Or install with Homebrew: <code>brew install --cask deepviewsdev/tap/dictivo</code>. The cask installs the same signed, notarized universal app." },
+          "Open Dictivo, choose Set up Local and download the recommended model while you are online.",
+          "Allow Microphone access. Allow Accessibility when macOS asks, so that the shortcut and the paste work reliably.",
+          "Click a text field and press Cmd+Shift+Space. Speak one sentence, then press the shortcut again to stop.",
+          "Check the sentence for names, numbers and punctuation. If no text appears, paste it with Cmd+V: Dictivo leaves it on the clipboard.",
+          "Turn off Wi-Fi and repeat. Keep Local selected; Cloud Fast is a separate online mode.",
+        ],
+        link: {
+          label: "Open the first-dictation guide and private practice field",
+          href: "/guides/first-local-dictation/",
+        },
+      },
+      {
+        title: "When is paid offline dictation worth it on a Mac?",
+        paragraphs: [
+          "Start with a task you already do: a short email, a work note or an AI prompt. Dictate the same text with Apple Dictation or a free app, then with Dictivo Local. Count the time you spend correcting names, numbers and punctuation, and test the paste in your real writing app. Results depend on your Mac, your microphone and your speech. This page does not claim a measured advantage.",
+          "Keep Apple Dictation if it works offline on your Mac and meets your needs. Keep Dictivo's free Tiny model if its results are usable. Consider paid Local only if a larger model from the 14-day trial saves you enough editing.",
+          "Dictivo Local is a one-time purchase that includes 12 months of updates. Renewing updates is optional. One license works on up to 3 personal devices. Cloud Fast is a separate monthly add-on and is not needed for Local. Read the current price and the refund terms before checkout.",
+        ],
+        link: { label: "Check Local pricing, license and refund terms", href: "/pricing/" },
+      },
     ],
     faqTitle: "Offline dictation questions",
     faqs: [
-      ["What is the best offline dictation app for Mac?", "For everyday system-wide dictation, compare Dictivo Local, VoiceInk, Voice Type, and Voibe (On-Device Mode) first. Superwhisper is also a good local-capable option if you configure local models."],
-      ["Is Wispr Flow an offline dictation app?", "No. Wispr Flow's public docs describe transcription as cloud-based. Its Model-improvement sharing and cloud storage have separate controls; transcription still runs in the cloud."],
-      ["Is Dictivo fully offline?", "Dictivo Local mode keeps dictation audio on the device after the local model is installed. The app can still use the network for updates, license or billing actions, support, and optional Cloud Fast."],
-      ["Which apps handle recorded files?", "MacWhisper supports dictation and files; Aiko transcribes recordings."],
+      [
+        "Is Dictivo fully offline?",
+        "Dictivo Local transcribes on the Mac after the local model is installed, so dictation works with no internet connection. The app still uses the network for updates, license checks and optional Cloud Fast.",
+      ],
+      [
+        "Does Apple Dictation work offline on a Mac?",
+        "On a Mac with Apple silicon, Apple says dictation in supported languages is processed on the device and needs no internet connection. On an Intel-based Mac, or in other languages, speech is sent to Apple.",
+      ],
+      [
+        "Which Mac dictation apps keep speech on the Mac?",
+        "In this guide's table: Dictivo Local, Handy, VoiceInk, MacWhisper, Voice Type and Aiko by default; Superwhisper with local models; Voibe in On-Device Mode; and Apple Dictation on Apple silicon for supported languages. Several of these apps have optional cloud features, so check the settings you use.",
+      ],
+      [
+        "Is Wispr Flow an offline dictation app?",
+        "No. Wispr Flow's documentation says transcription needs an internet connection, and setup includes an account. Use it when cloud processing is acceptable.",
+      ],
+      [
+        "Can I install Dictivo with Homebrew?",
+        "Yes. Run brew install --cask deepviewsdev/tap/dictivo. The cask installs the same signed, notarized universal app as the download button. Dictivo updates itself, and brew upgrade --cask dictivo also works. To remove the app with its settings, license file and models, run brew uninstall --zap --cask dictivo.",
+      ],
+      [
+        "How can I check that a dictation app does not upload my audio?",
+        "Watch the app in the Network tab of Activity Monitor, or with nettop in Terminal, while you dictate. A local app shows no upload during speech. Then turn off Wi-Fi and dictate again: a local app still produces text.",
+      ],
+      [
+        "Do I need an Apple Silicon Mac for offline dictation?",
+        "Not for every app. Dictivo and Handy run on Apple Silicon and Intel Macs. VoiceInk runs only on Apple Silicon, Voibe uses cloud transcription on Intel Macs, and Superwhisper says its offline models run best on Apple Silicon. Apple Dictation sends speech to Apple on an Intel Mac.",
+      ],
+      [
+        "Which apps handle recorded files?",
+        "MacWhisper transcribes audio and video files as well as live dictation. Aiko transcribes recordings. Dictivo is for live dictation and does not import recorded files.",
+      ],
+    ],
+    relatedTitle: "Related Dictivo pages",
+    relatedRows: [
+      ["Offline dictation on Windows", "Compare Windows dictation tools by where audio is processed.", "https://dictivo.app/guides/offline-dictation-on-windows/"],
+      ["Best speech-to-text apps for Mac", "Compare Mac speech-to-text apps by workflow.", "https://dictivo.app/guides/best-speech-to-text-apps-for-mac/"],
+      ["Mac dictation apps with no subscription", "Compare Mac dictation apps you can buy once.", "https://dictivo.app/guides/mac-dictation-app-no-subscription/"],
+      ["Dictation apps for Mac and Windows with a one-time license", "Compare apps where one purchase covers both desktop platforms.", "https://dictivo.app/guides/dictation-app-mac-windows-one-time-license/"],
+      ["Dictate into Claude Code and Cursor", "Speak prompts into coding tools on a Mac.", "https://dictivo.app/guides/dictate-into-claude-code-and-cursor-on-mac/"],
+      ["Best dictation software", "Cross-platform picks by need: free, fully local, Windows, several languages and buy-once.", "https://dictivo.app/guides/best-dictation-software/"],
+      ["Benchmark method", "Hear a 25-second human-speech sample and see how Dictivo maps local model fit.", "https://dictivo.app/guides/mac-dictation-benchmark-method/#human-speech-example"],
+      ["Where dictation audio goes", "See where Dictivo processes audio in Local and Cloud Fast modes.", "https://dictivo.app/privacy/where-dictation-audio-goes/"],
+      ["Local dictation network test", "Repeat a network check against Dictivo's Local mode.", "https://dictivo.app/privacy/local-dictation-network-test/"],
+      ["Wispr Flow alternative", "Compare local-first Mac dictation with a cloud AI voice workflow.", "https://dictivo.app/compare/wispr-flow-alternative/"],
     ],
     referenceTitle: "References",
     // 2026-10-10: the Dictivo fit section links the cross-platform dictation software guide.
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
+    // 2026-11-10 (Batch B1): rebuilt in the answer-page shape.
     lastUpdated: "2026-11-10",
-  },
+  };
+}
+
+export const OFFLINE_DICTATION_GUIDE_COPY = {
+  en: offlineDictationGuideEnCopy(),
   de: {
     navLabel: "Offline-Diktat für Mac",
     metaTitle: "Offline-Diktat-App für Mac: lokales Audio im Vergleich",

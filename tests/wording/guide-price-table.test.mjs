@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCAL_OFFER, introOfferActive, offerDate } from "../../data/local-offer.mjs";
+import { OFFLINE_DICTATION_GUIDE_EN_CHECKED } from "../../data/offline-dictation-guide.mjs";
 import { SPEECH_TO_TEXT_MAC_GUIDE_CHECKED } from "../../data/speech-to-text-mac-guide.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
@@ -15,6 +16,8 @@ const rows = (table) => [...table.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(([, row
 const text = (cell) => cell.replace(/<[^>]+>/g, "").replace(/\s+/g, " ");
 // The Dictivo cell prices Local and the renewal, plus the regular price while the introductory offer runs.
 const DICTIVO_PRICES = introOfferActive() ? 3 : 2;
+// English rows that keep the site's CHECKED facts; the other English rows were re-read in Batch B1.
+const EN_SITE_CHECKED = ["Voice Type", "Voibe", "Aiko"];
 const DICTIVO_SPAN = (dollars) => new RegExp(`<span class="price">[^<]*(?<![\\d.,])${dollars}(?![\\d.,])[^<]*</span>`);
 
 test("the short answer comes straight after the heading, lede and date", () => {
@@ -33,14 +36,16 @@ test("the short answer comes straight after the heading, lede and date", () => {
   }
 });
 
-test("the English answer is a verdict that names each app and who it suits", () => {
+// Batch B1: the English answer is a short dated answer (tests/wording/offline-dictation-mac.test.mjs).
+test("the English answer is 50 to 70 words, names Dictivo and carries the check date", () => {
   const html = guide("");
-  const answer = text(html.match(/id="offline-guide-answer">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]);
-  for (const app of ["Dictivo Local", "VoiceInk", "Voice Type", "Voibe", "Superwhisper", "MacWhisper", "Aiko", "Apple Dictation", "Wispr Flow"]) {
-    assert.ok(answer.includes(app), `answer does not name ${app}`);
-  }
-  assert.match(answer, /Intel Macs use cloud transcription/);
-  assert.match(answer, /transcription (runs|occurs) in the cloud/);
+  const answer = text(html.match(/id="offline-guide-answer">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]).trim();
+  const words = answer.split(/\s+/).length;
+  assert.ok(words >= 50 && words <= 70, `${words} words: ${answer}`);
+  assert.ok(answer.includes("Dictivo"));
+  assert.match(answer, /\d/);
+  const checkedOn = new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${OFFLINE_DICTATION_GUIDE_EN_CHECKED}T00:00:00Z`));
+  assert.ok(answer.includes(checkedOn), checkedOn);
   assert.doesNotMatch(answer, /accura/i);
 });
 
@@ -49,11 +54,18 @@ test("offline guides with a price column show a price, a purchase model and a ch
     const table = tableAfter(guide(prefix), "offline-guide-table");
     const [header, ...body] = rows(table);
     assert.equal(header.length, 6, `${code}: header`);
-    assert.equal(body.length, 9, `${code}: rows`);
+    // Batch B1: the English table has ten rows (Handy is new) and a check date per row.
+    assert.equal(body.length, code === "en" ? 10 : 9, `${code}: rows`);
     for (const row of body) {
       assert.equal(row.length, 6, `${code}: ${row[0]}`);
       assert.ok(text(row[4]).length > 6, `${code}: ${row[0]} has no price`);
-      assert.ok(row[5].includes(`<time datetime="${CHECKED}">`), `${code}: ${row[0]} has no check date`);
+      const checked = code === "en" && !EN_SITE_CHECKED.includes(row[0]) ? OFFLINE_DICTATION_GUIDE_EN_CHECKED : CHECKED;
+      assert.ok(row[5].includes(`<time datetime="${checked}">`), `${code}: ${row[0]} has no check date`);
+    }
+    if (code === "en") {
+      assert.deepEqual(header, ["App", "Does speech stay on the Mac?", "Cloud or workflow caveat", "Best fit", "Price / purchase model", "Checked on"]);
+      assert.equal(text(body.find((row) => row[0] === "Handy")[4]), "Free and open source (MIT license)");
+      for (const app of ["Handy", "Apple Dictation"]) assert.ok(body.find((row) => row[0] === app)[5].includes(`<time datetime="${OFFLINE_DICTATION_GUIDE_EN_CHECKED}">`), app);
     }
     const dictivo = body.find((row) => row[0] === "Dictivo Local")[4];
     assert.equal((dictivo.match(/<span class="price">/g) || []).length, DICTIVO_PRICES, `${code}: Dictivo prices must come from price placeholders`);

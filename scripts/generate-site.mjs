@@ -18,6 +18,8 @@ import {
 } from "../data/mac-model-advisor.mjs";
 import {
   OFFLINE_DICTATION_GUIDE_COPY,
+  OFFLINE_DICTATION_GUIDE_EN_REFERENCES,
+  offlineDictationGuideEnCopy,
   offlineDictationGuideLastmod,
   OFFLINE_DICTATION_GUIDE_REFERENCES,
   OFFLINE_GUIDE_PRICES_CHECKED,
@@ -3036,6 +3038,16 @@ ${copy.rows
           </div>`;
 }
 
+// The English offline guide's fact table (answer-page shape): a price from GUIDE_PRICE_SOURCES,
+// or the hand-written vendor price for an app without one (Handy), and each row's check date.
+function offlineGuideEnFactRows(copy) {
+  return copy.rows.map((row) => {
+    const [app] = row;
+    const price = copy.handPrices[app] ? html(copy.handPrices[app]) : guidePriceCell(app, "en");
+    return [...row, { html: price }, checkedCell(copy.rowChecked[app])];
+  });
+}
+
 // An item is a string, or { html } for markup escaped by hand (as table cells allow).
 function renderDocItem(item) {
   return typeof item === "object" ? item.html : html(item);
@@ -3131,6 +3143,30 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
   const locale = localeByCode(currentCode);
   const t = HOME_COPY[currentCode];
   const copy = offlineDictationGuideCopy(currentCode);
+  // Only the English guide has the answer-page shape (Batch B1); the translations keep theirs.
+  if (copy.intentRows) {
+    const enCopy = offlineDictationGuideEnCopy({ windows: hasWindowsRelease });
+    const rows = offlineGuideEnFactRows(enCopy);
+    return renderAnswerGuidePage({
+      code: currentCode,
+      path: offlineDictationGuidePath(currentCode),
+      url: offlineDictationGuideUrl(currentCode),
+      copy: enCopy,
+      lastmod: offlineDictationGuideLastmod(currentCode),
+      route: "guides/offline-dictation-on-mac",
+      idPrefix: "offline-guide",
+      mainId: "offline-dictation-guide",
+      about: ["offline dictation", "local dictation", "Mac dictation privacy"],
+      references: OFFLINE_DICTATION_GUIDE_EN_REFERENCES,
+      introSource: "offline_guide_intro",
+      trialPlatform: "macos",
+      trialSource: "offline_guide_mac",
+      factTable: { title: enCopy.tableCaption, caption: enCopy.tableCaption, headers: [...enCopy.headers, ...enCopy.priceHeaders], rows },
+      itemList: { name: "Mac dictation apps by whether speech stays on the Mac", rows: rows.map((row) => [row[0], row[3]]) },
+      headTags: offlineDictationGuideHreflangTags(currentCode),
+      hrefForLocale: (item) => offlineDictationGuidePath(item.code),
+    });
+  }
   return renderLayout({
     lang: locale.htmlLang,
     title: copy.metaTitle,
@@ -3556,10 +3592,13 @@ function renderOfflineDictationWindowsGuidePage() {
 // ask, a fact table with a "Checked on" cell per row, a method note signed by the Dictivo team,
 // then the trial panel, sections, FAQ, related pages and references. The FAQPage and ItemList
 // nodes repeat visible text: the FAQ and, per row, the row header and its "When to choose it" cell.
-// factTable rows hold strings or { html } cells; cell 0 is the row header.
+// factTable rows hold strings or { html } cells; cell 0 is the row header. headTags and
+// hrefForLocale default to an English-only page; a translated guide passes its own.
 function renderAnswerGuidePage({
   code = "en", path, url, copy, lastmod, route, idPrefix, mainId, about, references,
   introSource, trialPlatform = "macos", trialSource, factTable, itemList,
+  headTags = enOnlyHeadTags(url),
+  hrefForLocale = (item) => (item.code === code ? path : localePath(item.code)),
 }) {
   return renderLayout({
     lang: localeByCode(code).htmlLang,
@@ -3567,12 +3606,12 @@ function renderAnswerGuidePage({
     description: copy.metaDescription,
     head: [
       socialMeta({ title: copy.metaTitle, description: copy.metaDescription, url, htmlLang: localeByCode(code).htmlLang, type: "article" }),
-      enOnlyHeadTags(url),
+      headTags,
       assetTags(),
       renderDictationGuideSchema({ code, url, copy, lastmod, route, headline: copy.metaTitle, about, legacyFaqSchema: true, itemList }),
     ],
     skip: { href: `#${mainId}`, label: copy.navLabel },
-    header: renderHeader(code, HOME_COPY[code], { hrefForLocale: (item) => (item.code === code ? path : localePath(item.code)) }),
+    header: renderHeader(code, HOME_COPY[code], { hrefForLocale }),
     footer: renderFooterOnly(code),
     main: `<main class="doc-page offline-guide-page" id="${attr(mainId)}">
       <h1>${html(copy.title)}</h1>
