@@ -142,6 +142,7 @@ test("breadcrumbs start at the language's homepage with its own label", () => {
 const publishedRoutes = () => [
   ...LOCALES.map((locale) => [`${prefix(locale.code)}guides/offline-dictation-on-mac/index.html`, "guides/offline-dictation-on-mac", locale.code]),
   ["guides/best-speech-to-text-apps-for-mac/index.html", "guides/best-speech-to-text-apps-for-mac", "en"],
+  ["guides/mac-dictation-app-no-subscription/index.html", "guides/mac-dictation-app-no-subscription", "en"],
   ["guides/mac-dictation-benchmark-method/index.html", "guides/mac-dictation-benchmark-method", "en"],
   ["guides/offline-dictation-on-windows/index.html", "guides/offline-dictation-on-windows", "en"],
   ["guides/first-local-dictation/index.html", "guides/first-local-dictation", "en"],
@@ -152,8 +153,10 @@ const publishedRoutes = () => [
   ["guides/wispr-flow-pricing/index.html", "guides/wispr-flow-pricing", "en"],
   ["guides/windows-voice-typing-not-working/index.html", "guides/windows-voice-typing-not-working", "en"],
   ["guides/best-dictation-software/index.html", "guides/best-dictation-software", "en"],
+  ["guides/dictation-app-mac-windows-one-time-license/index.html", "guides/dictation-app-mac-windows-one-time-license", "en"],
   ["ja/guides/mac-dictation-not-working/index.html", "guides/mac-dictation-not-working", "ja"],
   ["ja/guides/mac-dictation-shortcut/index.html", "guides/mac-dictation-shortcut", "ja"],
+  ["guides/dictate-into-claude-code-and-cursor-on-mac/index.html", "guides/dictate-into-claude-code-and-cursor-on-mac", "en"],
   ...LOCALES.flatMap((locale) => [
     ...COMPARE_PAGES.map((compare) => [`${prefix(locale.code)}compare/${compare.slug}/index.html`, `compare/${compare.slug}`, locale.code]),
     ...["privacy/where-dictation-audio-goes", "privacy/local-dictation-network-test"].map((slug) => [`${prefix(locale.code)}${slug}/index.html`, slug, locale.code]),

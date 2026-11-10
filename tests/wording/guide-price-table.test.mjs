@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCAL_OFFER, introOfferActive, offerDate } from "../../data/local-offer.mjs";
+import { OFFLINE_DICTATION_GUIDE_EN_CHECKED } from "../../data/offline-dictation-guide.mjs";
+import { SPEECH_TO_TEXT_MAC_GUIDE_CHECKED } from "../../data/speech-to-text-mac-guide.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
 const CHECKED = "2026-09-29";
@@ -14,6 +16,9 @@ const rows = (table) => [...table.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(([, row
 const text = (cell) => cell.replace(/<[^>]+>/g, "").replace(/\s+/g, " ");
 // The Dictivo cell prices Local and the renewal, plus the regular price while the introductory offer runs.
 const DICTIVO_PRICES = introOfferActive() ? 3 : 2;
+// English rows that keep the site's CHECKED facts; the other English rows were re-read in Batch B1
+// (Voibe's price in a live spot-check the same day).
+const EN_SITE_CHECKED = ["Voice Type", "Aiko"];
 const DICTIVO_SPAN = (dollars) => new RegExp(`<span class="price">[^<]*(?<![\\d.,])${dollars}(?![\\d.,])[^<]*</span>`);
 
 test("the short answer comes straight after the heading, lede and date", () => {
@@ -32,14 +37,16 @@ test("the short answer comes straight after the heading, lede and date", () => {
   }
 });
 
-test("the English answer is a verdict that names each app and who it suits", () => {
+// Batch B1: the English answer is a short dated answer (tests/wording/offline-dictation-mac.test.mjs).
+test("the English answer is 50 to 70 words, names Dictivo and carries the check date", () => {
   const html = guide("");
-  const answer = text(html.match(/id="offline-guide-answer">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]);
-  for (const app of ["Dictivo Local", "VoiceInk", "Voice Type", "Voibe", "Superwhisper", "MacWhisper", "Aiko", "Apple Dictation", "Wispr Flow"]) {
-    assert.ok(answer.includes(app), `answer does not name ${app}`);
-  }
-  assert.match(answer, /Intel Macs use cloud transcription/);
-  assert.match(answer, /transcription (runs|occurs) in the cloud/);
+  const answer = text(html.match(/id="offline-guide-answer">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]).trim();
+  const words = answer.split(/\s+/).length;
+  assert.ok(words >= 50 && words <= 70, `${words} words: ${answer}`);
+  assert.ok(answer.includes("Dictivo"));
+  assert.match(answer, /\d/);
+  const checkedOn = new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${OFFLINE_DICTATION_GUIDE_EN_CHECKED}T00:00:00Z`));
+  assert.ok(answer.includes(checkedOn), checkedOn);
   assert.doesNotMatch(answer, /accura/i);
 });
 
@@ -48,11 +55,18 @@ test("offline guides with a price column show a price, a purchase model and a ch
     const table = tableAfter(guide(prefix), "offline-guide-table");
     const [header, ...body] = rows(table);
     assert.equal(header.length, 6, `${code}: header`);
-    assert.equal(body.length, 9, `${code}: rows`);
+    // Batch B1: the English table has ten rows (Handy is new) and a check date per row.
+    assert.equal(body.length, code === "en" ? 10 : 9, `${code}: rows`);
     for (const row of body) {
       assert.equal(row.length, 6, `${code}: ${row[0]}`);
       assert.ok(text(row[4]).length > 6, `${code}: ${row[0]} has no price`);
-      assert.ok(row[5].includes(`<time datetime="${CHECKED}">`), `${code}: ${row[0]} has no check date`);
+      const checked = code === "en" && !EN_SITE_CHECKED.includes(row[0]) ? OFFLINE_DICTATION_GUIDE_EN_CHECKED : CHECKED;
+      assert.ok(row[5].includes(`<time datetime="${checked}">`), `${code}: ${row[0]} has no check date`);
+    }
+    if (code === "en") {
+      assert.deepEqual(header, ["App", "Does speech stay on the Mac?", "Cloud or workflow caveat", "Best fit", "Price / purchase model", "Checked on"]);
+      assert.equal(text(body.find((row) => row[0] === "Handy")[4]), "Free and open source (MIT license)");
+      for (const app of ["Handy", "Apple Dictation"]) assert.ok(body.find((row) => row[0] === app)[5].includes(`<time datetime="${OFFLINE_DICTATION_GUIDE_EN_CHECKED}">`), app);
     }
     const dictivo = body.find((row) => row[0] === "Dictivo Local")[4];
     assert.equal((dictivo.match(/<span class="price">/g) || []).length, DICTIVO_PRICES, `${code}: Dictivo prices must come from price placeholders`);
@@ -67,9 +81,15 @@ test("offline guides with a price column show a price, a purchase model and a ch
     const cell = (app) => text(body.find((row) => row[0] === app)[4]);
     assert.match(cell("VoiceInk"), /\$25.*\$39.*\$49/, code);
     assert.match(cell("Voice Type"), /\$19\.99/, code);
-    // Voibe showed $7.50 beside a struck-through $9.90: state the list price, then the discount.
-    assert.match(cell("Voibe"), /\$9\.90.*\$7\.50.*\$75.*\$149/, code);
-    assert.match(cell("Voibe"), /discount|reduziert|折扣|割引/, code);
+    if (code === "en") {
+      // English, re-read 2026-11-10: no discount shown, new yearly and lifetime prices.
+      assert.match(cell("Voibe"), /\$9\.90.*\$99 a year.*\$199/, code);
+      assert.doesNotMatch(cell("Voibe"), /\$7\.50|\$75|\$149/, code);
+    } else {
+      // 2026-09-29: Voibe showed $7.50 beside a struck-through $9.90: state the list price, then the discount.
+      assert.match(cell("Voibe"), /\$9\.90.*\$7\.50.*\$75.*\$149/, code);
+      assert.match(cell("Voibe"), /discount|reduziert|折扣|割引/, code);
+    }
     assert.match(cell("Aiko"), /\$24/, code);
     assert.match(cell("Superwhisper"), /\$8\.49.*\$84\.99.*\$249\.99/, code);
     assert.match(cell("MacWhisper"), /€64/, code);
@@ -92,7 +112,8 @@ test("languages without a price column keep the four-column table", () => {
 });
 
 test("references list each vendor price page with the date it was read", () => {
-  for (const html of [guide(""), bestSpeech()]) {
+  // The English pages re-read Voibe's pricing in Batch B1; the translated guides keep CHECKED.
+  for (const [html, voibeChecked] of [[guide(""), OFFLINE_DICTATION_GUIDE_EN_CHECKED], [bestSpeech(), SPEECH_TO_TEXT_MAC_GUIDE_CHECKED], [guide("de/"), CHECKED]]) {
     for (const url of [
       "https://tryvoiceink.com/pricing",
       "https://www.getvoibe.com/pricing/",
@@ -101,26 +122,33 @@ test("references list each vendor price page with the date it was read", () => {
     ]) {
       const link = html.match(new RegExp(`<li><a href="${url.replace(/[?.]/g, "\\$&")}">([^<]+)</a></li>`));
       assert.ok(link, `missing reference ${url}`);
-      assert.ok(link[1].includes(CHECKED), `${url}: reference is not dated`);
+      assert.ok(link[1].includes(url.includes("getvoibe") ? voibeChecked : CHECKED), `${url}: reference is not dated`);
     }
     assert.doesNotMatch(html, /apps\.apple\.com\/ga\//, "Irish App Store link left in place");
   }
 });
 
-test("the Mac speech-to-text guide leads with a verdict and prices every option", () => {
+test("the Mac speech-to-text guide prices and dates every option", () => {
   const html = bestSpeech();
-  const answer = text(html.match(/id="speech-to-text-mac-answer">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]);
-  for (const app of ["Dictivo Local", "Superwhisper", "VoiceInk", "Voice Type", "Voibe", "MacWhisper", "Aiko", "Wispr Flow", "Apple Dictation"]) {
-    assert.ok(answer.includes(app), `answer does not name ${app}`);
-  }
-  const [header, ...body] = rows(tableAfter(html, "speech-to-text-mac-apps"));
-  assert.deepEqual(header.slice(4), ["Price / purchase model", "Checked on"]);
+  const [header, ...body] = rows(tableAfter(html, "speech-to-text-mac-table"));
+  assert.deepEqual(header, ["Option", "Best fit", "Privacy or platform caveat", "When to choose it", "Price / purchase model", "Checked on"]);
+  assert.deepEqual(body.map((row) => row[0]), ["Dictivo Local", "Apple Dictation", "Handy", "MacWhisper", "Spokenly", "Superwhisper", "VoiceInk", "Voice Type", "Voibe", "Wispr Flow"]);
   for (const row of body) {
     assert.equal(row.length, 6, row[0]);
-    assert.ok(row[5].includes(`<time datetime="${CHECKED}">`), row[0]);
+    // Voice Type keeps the offline guide's 2026-09-29 price; the other rows were re-read for this page.
+    const date = row[0] === "Voice Type" ? CHECKED : SPEECH_TO_TEXT_MAC_GUIDE_CHECKED;
+    assert.ok(row[5].includes(`<time datetime="${date}">`), row[0]);
   }
-  const merged = text(body.find((row) => row[0].startsWith("VoiceInk"))[4]);
-  assert.match(merged, /VoiceInk.*\$25.*Voice Type.*\$19\.99.*Voibe.*\$149/);
+  const price = (app) => text(body.find((row) => row[0] === app)[4]);
+  assert.match(price("VoiceInk"), /\$25.*\$39.*\$49/);
+  assert.match(price("Voice Type"), /\$19\.99/);
+  assert.match(price("Voibe"), /\$199/);
+  assert.match(price("MacWhisper"), /€64/);
+  assert.match(price("Superwhisper"), /\$249\.99/);
+  assert.equal(price("Handy"), "Free and open source (MIT license)");
+  assert.match(price("Spokenly"), /\$29 once/);
+  assert.match(price("Spokenly"), /Pro \$15 a month, or \$144 a year \(\$12 a month billed yearly\)/);
+  for (const row of body.slice(1)) assert.doesNotMatch(row[4], /US\$|<span class="price">/, row[0]);
   assert.equal((body[0][4].match(/<span class="price">/g) || []).length, DICTIVO_PRICES, "Dictivo prices must come from price placeholders");
   assert.match(body[0][4], DICTIVO_SPAN(LOCAL_OFFER.price), "no Local price");
 });

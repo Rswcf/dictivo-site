@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-// Eight guide pages open with a disclosed "What is Dictivo?" block right after the short answer:
+// Twelve guide pages open with a disclosed "What is Dictivo?" block right after the short answer:
 // what the product is, a pricing link and the Mac (and Windows) download. Every other guide, and
 // every language without intro copy, renders no block.
 const dist = new URL("../../dist/", import.meta.url).pathname;
@@ -15,10 +15,14 @@ const PAGES = [
   ["/guides/mac-dictation-shortcut/", "en", "shortcut", "shortcut_intro"],
   ["/guides/wispr-flow-pricing/", "en", "wispr-pricing", "wispr_pricing_intro"],
   ["/guides/best-dictation-software/", "en", "best-software", "best_software_intro"],
+  ["/guides/best-speech-to-text-apps-for-mac/", "en", "speech-to-text-mac", "speech_guide_intro"],
+  ["/guides/mac-dictation-app-no-subscription/", "en", "no-subscription", "no_subscription_guide_intro"],
   ["/ja/guides/mac-dictation-not-working/", "ja", "ja-troubleshooting", "ja_troubleshooting_intro"],
   ["/ja/guides/mac-dictation-shortcut/", "ja", "ja-shortcut", "ja_shortcut_intro"],
+  ["/guides/dictate-into-claude-code-and-cursor-on-mac/", "en", "claude-code", "claude_code_guide_intro"],
   ["/guides/offline-dictation-on-mac/", "en", "offline-guide", "offline_guide_intro"],
   ["/ja/guides/offline-dictation-on-mac/", "ja", "offline-guide", "offline_guide_intro"],
+  ["/guides/dictation-app-mac-windows-one-time-license/", "en", "one-time-license", "one_time_guide_intro"],
 ];
 const WITHOUT_BLOCK = [
   ...["de", "fr", "es", "it", "nl", "pt", "zh", "zh-hant", "ko"].map((code) => `/${code}/guides/offline-dictation-on-mac/`),

@@ -77,8 +77,10 @@ test("every Dictivo price on the site comes from a placeholder", () => {
     for (const match of text.matchAll(DICTIVO_FIGURE)) {
       // Whisperstream ($29), VoiceInk ($25 / $39 / $49) and Aiko ($24) share figures with Dictivo.
       // Aiko's guide cell reads "… Mac App Store: $24"; the anchor admits only a figure right after it.
+      // Spokenly: competitor prices that coincide with Dictivo figures (Local+ $29 once).
+      // Voxtira: Single License $29 (one device) on the one-time license guide.
       const before = text.slice(Math.max(0, match.index - 300), match.index);
-      assert.match(before, /Whisperstream|VoiceInk|\$25|\$39|Aiko|Mac App Store[:：] ?$/, `${file}: unconverted "${match[0]}" after "…${before.slice(-50)}"`);
+      assert.match(before, /Whisperstream|VoiceInk|\$25|\$39|Aiko|Spokenly|Voxtira|Mac App Store[:：] ?$/, `${file}: unconverted "${match[0]}" after "…${before.slice(-50)}"`);
     }
   }
 });
