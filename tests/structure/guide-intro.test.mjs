@@ -16,6 +16,7 @@ const PAGES = [
   ["/guides/wispr-flow-pricing/", "en", "wispr-pricing", "wispr_pricing_intro"],
   ["/guides/best-dictation-software/", "en", "best-software", "best_software_intro"],
   ["/guides/best-speech-to-text-apps-for-mac/", "en", "speech-to-text-mac", "speech_guide_intro"],
+  ["/guides/mac-dictation-app-no-subscription/", "en", "no-subscription", "no_subscription_guide_intro"],
   ["/ja/guides/mac-dictation-not-working/", "ja", "ja-troubleshooting", "ja_troubleshooting_intro"],
   ["/ja/guides/mac-dictation-shortcut/", "ja", "ja-shortcut", "ja_shortcut_intro"],
   ["/guides/offline-dictation-on-mac/", "en", "offline-guide", "offline_guide_intro"],

@@ -142,6 +142,7 @@ test("breadcrumbs start at the language's homepage with its own label", () => {
 const publishedRoutes = () => [
   ...LOCALES.map((locale) => [`${prefix(locale.code)}guides/offline-dictation-on-mac/index.html`, "guides/offline-dictation-on-mac", locale.code]),
   ["guides/best-speech-to-text-apps-for-mac/index.html", "guides/best-speech-to-text-apps-for-mac", "en"],
+  ["guides/mac-dictation-app-no-subscription/index.html", "guides/mac-dictation-app-no-subscription", "en"],
   ["guides/mac-dictation-benchmark-method/index.html", "guides/mac-dictation-benchmark-method", "en"],
   ["guides/offline-dictation-on-windows/index.html", "guides/offline-dictation-on-windows", "en"],
   ["guides/first-local-dictation/index.html", "guides/first-local-dictation", "en"],

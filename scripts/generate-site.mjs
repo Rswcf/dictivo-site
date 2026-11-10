@@ -43,6 +43,11 @@ import {
   speechToTextMacGuideCopy,
 } from "../data/speech-to-text-mac-guide.mjs";
 import {
+  NO_SUBSCRIPTION_GUIDE_LASTMOD,
+  NO_SUBSCRIPTION_GUIDE_REFERENCES,
+  noSubscriptionGuideCopy,
+} from "../data/no-subscription-guide.mjs";
+import {
   OFFLINE_DICTATION_WINDOWS_GUIDE_COPY,
   OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD,
   OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES,
@@ -322,6 +327,18 @@ function speechToTextMacGuideUrl() {
 
 function speechToTextMacGuideCopyForRender() {
   return speechToTextMacGuideCopy({ windows: hasWindowsRelease });
+}
+
+function noSubscriptionGuidePath() {
+  return "/guides/mac-dictation-app-no-subscription/";
+}
+
+function noSubscriptionGuideUrl() {
+  return absoluteUrl(noSubscriptionGuidePath());
+}
+
+function noSubscriptionGuideCopyForRender() {
+  return noSubscriptionGuideCopy({ windows: hasWindowsRelease });
 }
 
 function offlineDictationWindowsGuidePath() {
@@ -3522,6 +3539,34 @@ function renderSpeechToTextMacGuidePage() {
   });
 }
 
+// The no-subscription guide: hand-written cells (Dictivo's price from guideLocalPrice) plus a
+// "Checked" cell per row. The ItemList description is the "How you pay" cell.
+function renderNoSubscriptionGuidePage() {
+  const copy = noSubscriptionGuideCopyForRender();
+  const factTable = {
+    title: copy.factTitle,
+    caption: copy.factCaption,
+    headers: copy.factHeaders,
+    rows: copy.factRows.map((row) => [...row, checkedCell(copy.rowChecked[row[0]])]),
+  };
+  return renderAnswerGuidePage({
+    path: noSubscriptionGuidePath(),
+    url: noSubscriptionGuideUrl(),
+    copy,
+    lastmod: NO_SUBSCRIPTION_GUIDE_LASTMOD,
+    route: "guides/mac-dictation-app-no-subscription",
+    idPrefix: "no-subscription",
+    mainId: "no-subscription-guide",
+    about: ["Mac dictation app no subscription", "one-time purchase dictation Mac", "lifetime license dictation", "buy once dictation app"],
+    references: NO_SUBSCRIPTION_GUIDE_REFERENCES,
+    introSource: "no_subscription_guide_intro",
+    trialPlatform: "macos",
+    trialSource: "no_subscription_guide_mac",
+    factTable,
+    itemList: { name: "Mac dictation apps with no subscription", rows: factTable.rows.map((row) => [row[0], row[2]]) },
+  });
+}
+
 function renderOfflineDictationWindowsGuideSchema() {
   const copy = OFFLINE_DICTATION_WINDOWS_GUIDE_COPY;
   return renderDictationGuideSchema({
@@ -5374,6 +5419,7 @@ function renderLlmsEnglishFacts() {
     ["Which Mac dictation apps process speech locally in Japanese, German or Chinese?", `${offline} (each language's llms.txt lists its translated guide)`, offlineDictationGuideUrl("en")],
     ["Which Windows dictation apps transcribe locally without uploading recordings?", OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
     ["Which speech-to-text app fits my Mac workflow?", speechToTextMacGuideCopyForRender().navLabel, speechToTextMacGuideUrl()],
+    ["Which Mac dictation apps have no subscription?", noSubscriptionGuideCopyForRender().navLabel, noSubscriptionGuideUrl()],
     ["What is a local alternative to Wispr Flow?", "Wispr Flow alternative", localizedCompareUrl("en", "wispr-flow-alternative")],
     ["Is there a one-time-purchase alternative to Superwhisper or MacWhisper?", "Superwhisper alternative", localizedCompareUrl("en", "superwhisper-alternative"), ["MacWhisper alternative", localizedCompareUrl("en", "macwhisper-alternative")]],
     ["How can I check whether a dictation app sends my audio to a server?", "Network test", localizedTrustUrl("en", "privacy/local-dictation-network-test")],
@@ -5419,6 +5465,7 @@ function renderLlmsTxt(currentCode = "en") {
     [copy.pageLabels.macGuide, macGuideUrl(currentCode)],
     [BENCHMARK_METHOD_GUIDE_COPY.navLabel, benchmarkMethodGuideUrl()],
     [speechToTextMacGuideCopyForRender().navLabel, speechToTextMacGuideUrl()],
+    ...(currentCode === "en" ? [[noSubscriptionGuideCopyForRender().navLabel, noSubscriptionGuideUrl()]] : []),
     [OFFLINE_DICTATION_WINDOWS_GUIDE_COPY.navLabel, offlineDictationWindowsGuideUrl()],
     ...(currentCode === "en"
       ? [
@@ -5848,6 +5895,13 @@ ${offlineGuideXDefault}
     <xhtml:link rel="alternate" hreflang="x-default" href="${speechToTextMacGuideUrl()}" />
     <priority>0.85</priority>
   </url>`;
+  const noSubscriptionGuideEntry = `  <url>
+    <loc>${noSubscriptionGuideUrl()}</loc>
+    <lastmod>${latestDate(NO_SUBSCRIPTION_GUIDE_LASTMOD, PRICING_LASTMOD)}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${noSubscriptionGuideUrl()}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${noSubscriptionGuideUrl()}" />
+    <priority>0.85</priority>
+  </url>`;
   const offlineDictationWindowsGuideEntry = `  <url>
     <loc>${offlineDictationWindowsGuideUrl()}</loc>
     <lastmod>${latestDate(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD, PRICING_LASTMOD)}</lastmod>
@@ -5982,6 +6036,7 @@ ${privacyProofEntries}
 ${offlineGuideEntries}
 ${benchmarkMethodEntry}
 ${speechToTextMacGuideEntry}
+${noSubscriptionGuideEntry}
 ${offlineDictationWindowsGuideEntry}
 ${macDictationNotWorkingEntry}
 ${jaMacDictationTroubleshootingEntry}
@@ -6377,6 +6432,7 @@ for (const locale of LOCALES) {
 
 write("guides/mac-dictation-benchmark-method/index.html", renderBenchmarkMethodGuidePage());
 write("guides/best-speech-to-text-apps-for-mac/index.html", renderSpeechToTextMacGuidePage());
+write(`${noSubscriptionGuidePath().slice(1)}index.html`, renderNoSubscriptionGuidePage());
 write("guides/offline-dictation-on-windows/index.html", renderOfflineDictationWindowsGuidePage());
 write(`${macDictationNotWorkingPath().slice(1)}index.html`, renderMacDictationNotWorkingPage());
 write(`${macDictationShortcutPath().slice(1)}index.html`, renderMacDictationShortcutPage());
