@@ -43,7 +43,6 @@ test("the network test answers the general question with tools named as instruct
     assert.ok(sections.length >= 5, `${code}: expected the tools section`);
     const tools = sections[2];
     assert.equal((tools.match(/<li>/g) || []).length, 5, `${code}: tool list`);
-    assert.doesNotMatch(text, /\bwe (tested|used|ran)\b/i, `${code}: must not claim a test with these tools`);
   }
   assert.match(visible(read("en")), /Resource Monitor/);
   assert.match(visible(read("en")), /Activity Monitor/);
@@ -74,4 +73,39 @@ test("the observation procedure still fills the second section", () => {
     const localized = code === "en" ? page : page.locales[code];
     assert.deepEqual(localized.sections[1].paragraphs, NETWORK_TEST_METHOD[code], code);
   }
+});
+
+// Our capture of 11 November 2026 (data/network-test-measurement.mjs). The page may claim a
+// measurement only with the numbers in the published JSON and with its limits next to it.
+test("the measurement section matches the published data and states its limits", () => {
+  const data = JSON.parse(readFileSync(`${dist}assets/evidence/local-network-2026-11-11/results.json`, "utf8"));
+  const byPhase = Object.fromEntries(data.phases.map((phase) => [phase.phase, phase]));
+  for (const phase of ["idle", "dictate", "after"]) {
+    assert.equal(byPhase[phase].dictivo_connections.length, 0, `${phase}: Local phase must show no Dictivo connection`);
+    assert.match(byPhase[phase].mode, /^Private Local/, `${phase}: mode`);
+  }
+  const upload = byPhase["cloud-fast-comparison"].dictivo_connections;
+  assert.equal(upload.length, 1);
+  assert.equal(upload[0].bytes_sent, 910683);
+  assert.deepEqual([byPhase.idle.seconds, byPhase.dictate.seconds, byPhase.after.seconds], [120, 90, 180]);
+
+  for (const code of LOCALES) {
+    const html = read(code);
+    const text = visible(html);
+    const section = html.match(/<section class="doc-section" id="our-measurement"[\s\S]*?<\/section>/);
+    assert.ok(section, `${code}: measurement section missing`);
+    assert.equal((section[0].match(/<li>/g) || []).length, 4, `${code}: four results`);
+    assert.match(visible(section[0]), /910[,.   ]683/, `${code}: Cloud Fast byte count`);
+    for (const fact of ["0.3.57", "Mac16,7", "27.0.1", "Large v3", "nettop", "lsof", "say"]) {
+      assert.ok(section[0].includes(fact), `${code}: ${fact} missing from the setup`);
+    }
+    assert.ok(html.includes('href="/assets/evidence/local-network-2026-11-11/results.json"'), `${code}: data link missing`);
+    // The tool list still comes before the result.
+    assert.ok(text.indexOf("Wireshark") < text.indexOf("910"), `${code}: measurement placed before the procedure`);
+  }
+  const en = visible(read("en"));
+  for (const limit of ["We did not block the network in this session", "one Mac, one app version and one short English sample", "An earlier attempt the same day was discarded"]) {
+    assert.ok(en.includes(limit), `en: limit missing: ${limit}`);
+  }
+  assert.doesNotMatch(en, /not a published measurement/, "en: method still denies that a measurement exists");
 });

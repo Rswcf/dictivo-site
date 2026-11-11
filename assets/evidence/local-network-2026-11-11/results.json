@@ -1,0 +1,78 @@
+{
+  "title": "Dictivo full-app network capture, 11 November 2026",
+  "run_by": "Dictivo team (vendor-run)",
+  "app": "Dictivo 0.3.57",
+  "machine": {
+    "hardware_model": "Mac16,7",
+    "chip": "Apple silicon",
+    "os": "macOS 27.0.1"
+  },
+  "method": {
+    "tools": [
+      "nettop -n -x -s 1 (every connection on the Mac, sampled once per second)",
+      "lsof -nP -i (every two seconds)"
+    ],
+    "filter": "connections owned by the process named dictivo",
+    "byte_counting": "nettop counters are cumulative per connection: a connection open at the first sample counts last minus first; a connection opened during the window counts its last value",
+    "speech": "three fixed English sentences played by the macOS say command through the built-in speakers and picked up by the built-in microphone",
+    "sentences": [
+      "This is network test sentence one, the weather is mild today.",
+      "Sentence two, please add milk and bread to the list.",
+      "Sentence three, the meeting moves to Thursday at ten."
+    ],
+    "hotkey": "Command+P, toggle (press once to start, once to stop)"
+  },
+  "phases": [
+    {
+      "phase": "idle",
+      "mode": "Private Local, Quality profile, Large v3, Cloud Fast not locked",
+      "started_at": "2026-11-11T18:36:53+00:00",
+      "seconds": 120,
+      "dictivo_connections": [],
+      "transcript": null
+    },
+    {
+      "phase": "dictate",
+      "mode": "Private Local, Quality profile, Large v3, Cloud Fast not locked",
+      "started_at": "2026-11-11T18:39:01+00:00",
+      "seconds": 90,
+      "dictivo_connections": [],
+      "transcript": "correct; saved in Dictivo history as provider local-whisper, privacy mode local-only"
+    },
+    {
+      "phase": "after",
+      "mode": "Private Local, Quality profile, Large v3, Cloud Fast not locked",
+      "started_at": "2026-11-11T18:40:40+00:00",
+      "seconds": 180,
+      "dictivo_connections": [],
+      "transcript": null
+    },
+    {
+      "phase": "cloud-fast-comparison",
+      "mode": "Cloud Fast",
+      "started_at": "2026-11-11T18:35:40+00:00",
+      "seconds": 45,
+      "dictivo_connections": [
+        {
+          "remote": "2606:4700:3035::6815:47f7.443",
+          "bytes_sent": 910683,
+          "bytes_received": 2826
+        }
+      ],
+      "transcript": "correct; text inserted in TextEdit"
+    }
+  ],
+  "not_tested": [
+    "network blocked (offline) and reconnect phases",
+    "Cloud Fast locked",
+    "languages other than English",
+    "other Macs, macOS versions or app versions"
+  ],
+  "discarded": "An earlier run the same day (15:57 to 16:09 UTC) was discarded: Dictivo's history held no session from that window, so no Dictivo transcription took place during it.",
+  "notes": [
+    "Byte counts do not show content.",
+    "The destination address is shared by several Dictivo hosts, so the address alone does not name the host.",
+    "One-second sampling can miss a very brief connection."
+  ],
+  "license": "CC BY 4.0"
+}

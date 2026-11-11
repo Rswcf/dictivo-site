@@ -5982,7 +5982,7 @@ function renderTrustPage(sourcePage, currentCode = "en") {
 
   const sectionHtml = page.sections
     .map(
-      (section, index) => `<section class="doc-section" aria-labelledby="${attr(`${pageId}-${index + 1}`)}">
+      (section, index) => `<section class="doc-section"${section.id ? ` id="${attr(section.id)}"` : ""} aria-labelledby="${attr(`${pageId}-${index + 1}`)}">
         <h2 id="${attr(`${pageId}-${index + 1}`)}">${html(section.title)}</h2>
         ${(section.paragraphs || []).map((paragraph) => `<p>${html(paragraph)}</p>`).join("\n        ")}
         ${section.bullets ? `<ul>
