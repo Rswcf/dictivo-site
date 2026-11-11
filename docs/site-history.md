@@ -5,6 +5,18 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Releases repository on the install page — 2026-11-11
+
+The public repository https://github.com/deepviewsdev/dictivo-releases went live the same day. A
+daily GitHub Action copies each installer from downloads.dictivo.app into a GitHub release, checks
+its SHA-256 against downloads.json, attaches a SHA256SUMS file and the release notes from
+`data/release-notes.mjs`. It holds no source code. `/docs/install-and-uninstall/` gained the section
+"Check a download" (the repository, `shasum -a 256` and `Get-FileHash`, compare with SHA256SUMS,
+a matching checksum does not make the Windows installer signed) and a reference entry
+(`DOCS_INSTALL_LASTMOD` 2026-11-11). The page still names no `downloads.json` (public output check),
+keeps six FAQs (docs shape test) and adds no `sameAs`. When the Windows installer gets signed, update
+the repository's README and `scripts/sync-release.mjs` too: both say it is not Authenticode-signed.
+
 ## VoiceInk "current offer" wording, all languages — 2026-11-11
 
 VoiceInk's pricing page shows Solo $25, Personal $39 and Extended $49 with no sale wording

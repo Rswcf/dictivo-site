@@ -24,7 +24,12 @@ import { docsCheckedLabel } from "./docs-shared.mjs";
 // - after installing: data/first-dictation-guide.mjs, LOCAL_OFFER.trialDays.
 // Decision 4 (founder) is open: the page names no uninstaller data option and no Windows
 // settings-storage path beyond the identifier.
-export const DOCS_INSTALL_LASTMOD = "2026-11-10";
+// 2026-11-11: the section "Check a download" names the public releases repository
+// deepviewsdev/dictivo-releases. Its daily Action copies each installer from downloads.dictivo.app,
+// checks the SHA-256 against downloads.json and attaches SHA256SUMS; it holds no source code.
+export const DOCS_INSTALL_LASTMOD = "2026-11-11";
+
+const RELEASES_REPO = "https://github.com/deepviewsdev/dictivo-releases";
 
 const ZAP_FOLDERS = [
   "~/Library/Application Support/com.dictivo.desktop",
@@ -188,6 +193,25 @@ export function docsInstallCopy({ windows }) {
           "Settings › Privacy › Where your data lives on this device lists the folders Dictivo uses on your computer.",
         ],
       },
+      {
+        title: "Check a download",
+        paragraphs: [
+          "Every Dictivo installer is also published on GitHub, in the deepviewsdev/dictivo-releases repository. Each release there has the same DMG, EXE and MSI files as dictivo.app, and a SHA256SUMS file. The repository holds installers and release notes only. The app's source code is not public.",
+          "To check a file you downloaded from dictivo.app or from GitHub:",
+        ],
+        steps: [
+          { html: "On a Mac, open Terminal and run <code>shasum -a 256</code> followed by the path of the file." },
+          { html: "On Windows, open PowerShell and run <code>Get-FileHash</code> followed by the path of the file." },
+          "Compare the result with the line for that file in the SHA256SUMS file of the same version on GitHub.",
+        ],
+        notes: [
+          "A matching checksum shows that the file is the one Dictivo published. It does not make the Windows installer signed.",
+        ],
+        links: [
+          ["Dictivo releases on GitHub", `${RELEASES_REPO}/releases`],
+          ["How the installers are signed", "/security/#installer-integrity"],
+        ],
+      },
     ],
     faqs: [
       [
@@ -217,6 +241,7 @@ export function docsInstallCopy({ windows }) {
     ],
     references: [
       [docsCheckedLabel("Dictivo Homebrew tap"), "https://github.com/deepviewsdev/homebrew-tap"],
+      ["Dictivo releases on GitHub (checked 2026-11-11)", RELEASES_REPO],
       [docsCheckedLabel("Homebrew Cask Cookbook: the zap stanza"), "https://docs.brew.sh/Cask-Cookbook#stanza-zap"],
       [docsCheckedLabel("Homebrew: Tap Trust"), "https://docs.brew.sh/Tap-Trust"],
       [docsCheckedLabel("Microsoft: Uninstall or remove apps and programs in Windows"), "https://support.microsoft.com/en-us/windows/uninstall-or-remove-apps-and-programs-in-windows-4b55f974-2cc6-2d2b-d092-5905080eaf98"],
