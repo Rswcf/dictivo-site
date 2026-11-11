@@ -27,6 +27,7 @@ const SECTIONS = [
   "After installing",
   "Uninstall on a Mac",
   "Uninstall on Windows",
+  "Check a download",
   "All Dictivo docs",
 ];
 
@@ -120,4 +121,20 @@ test("the install FAQ asks six questions in the planned order", () => {
   assert.equal(copy.faqs[0][0], "Is the Homebrew version the same app as the download?");
   assert.equal(copy.faqs.at(-1)[0], "Does uninstalling free my license seat?");
   assert.ok(copy.faqs.some(([question]) => question === "What does brew uninstall --zap remove, and what stays?"));
+});
+
+// 2026-11-11: the public releases repository. It mirrors the installers from downloads.dictivo.app
+// with their SHA-256 checksums and holds no source code; the page must say so and not imply the
+// Windows installer becomes signed.
+test("the install page names the releases repository and how to check a checksum", () => {
+  const body = main(page());
+  const check = text(section(body, 7));
+  assert.ok(body.includes('<a href="https://github.com/deepviewsdev/dictivo-releases/releases">Dictivo releases on GitHub</a>'));
+  assert.ok(section(body, 7).includes('href="/security/#installer-integrity"'));
+  assert.match(check, /source code is not public/);
+  assert.match(check, /shasum -a 256/);
+  assert.match(check, /Get-FileHash/);
+  assert.match(check, /does not make the Windows installer signed/);
+  assert.match(check, /SHA256SUMS file of the same version on GitHub/);
+  assert.ok(copy.references.some(([, href]) => href === "https://github.com/deepviewsdev/dictivo-releases"));
 });
