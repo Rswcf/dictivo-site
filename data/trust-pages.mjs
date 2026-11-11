@@ -1,5 +1,10 @@
 import { TRIAL_MILESTONE_COPY, TRIAL_MILESTONE_LASTMOD, trialNetworkCopy } from "./trial-milestone-copy.mjs";
 import { NETWORK_TEST_LASTMOD, NETWORK_TEST_METHOD } from "./network-test-method.mjs";
+import {
+  NETWORK_TEST_MEASUREMENT,
+  NETWORK_TEST_MEASUREMENT_ID,
+  NETWORK_TEST_MEASUREMENT_ROOT,
+} from "./network-test-measurement.mjs";
 import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
 
 /**
@@ -1550,6 +1555,18 @@ for (const [locale, method] of Object.entries(NETWORK_TEST_METHOD)) {
   const page = locale === "en" ? networkTestPage : networkTestPage.locales[locale];
   page.lastModified = NETWORK_TEST_LASTMOD;
   page.sections[1].paragraphs = method;
+}
+
+// Our own capture follows the tool list, so the procedure reads first and the result second.
+for (const [locale, copy] of Object.entries(NETWORK_TEST_MEASUREMENT)) {
+  const page = locale === "en" ? networkTestPage : networkTestPage.locales[locale];
+  page.sections.splice(
+    3,
+    0,
+    { id: NETWORK_TEST_MEASUREMENT_ID, title: copy.title, paragraphs: [copy.setup], bullets: copy.results },
+    { title: copy.scopeTitle, paragraphs: [copy.shows, copy.limits] },
+  );
+  page.relatedLinks.push({ label: copy.linkLabel, href: `${NETWORK_TEST_MEASUREMENT_ROOT}/results.json` });
 }
 
 // Keep dates aligned with the corrected disclosure, including localized pages.

@@ -5,6 +5,21 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Our own network capture on the network test page — 2026-11-11
+
+`/privacy/local-dictation-network-test/` used to say it was "a test procedure, not a published
+measurement". It now carries two sections after the tool list, in every language: "Our measurement
+on 11 November 2026" (`id="our-measurement"`) and "What the measurement shows and what it does not".
+Copy lives in `data/network-test-measurement.mjs`; the data is
+`assets/evidence/local-network-2026-11-11/results.json`, linked from each locale's related links.
+Setup: Dictivo 0.3.57, Mac16,7, macOS 27.0.1, Private Local with Quality / Large v3, Cloud Fast not
+locked, nettop every second plus lsof every two seconds, three fixed English sentences played by
+`say` through the built-in speakers. Result: idle 120 s, dictation 90 s and the 180 s after showed
+no Dictivo connection; the Cloud Fast comparison showed one connection sending 910,683 bytes. Not
+tested: the offline and reconnect phases. A first run the same day was discarded because Dictivo's
+history had no session from it. A competitor study was planned and dropped by the founder the same
+day. Trust-page sections now accept an optional `id`. `NETWORK_TEST_LASTMOD` 2026-11-11.
+
 ## Releases repository on the install page — 2026-11-11
 
 The public repository https://github.com/deepviewsdev/dictivo-releases went live the same day. A
