@@ -287,7 +287,7 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macwhisper-alternative",
-    lastUpdated: { en: "2026-09-18", de: "2026-10-04", ja: "2026-11-10" },
+    lastUpdated: { en: "2026-09-18", de: "2026-10-04", ja: "2026-11-11" },
     localizedCopy: {
       // 2026-11-10 (Japanese): own title and description instead of the shared template.
       ja: {
@@ -398,7 +398,7 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "voiceink-alternative",
-    lastUpdated: { ja: "2026-11-10" },
+    lastUpdated: { ja: "2026-11-11" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
