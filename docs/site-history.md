@@ -5,6 +5,19 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## VoiceInk "current offer" wording, all languages — 2026-11-11
+
+VoiceInk's pricing page shows Solo $25, Personal $39 and Extended $49 with no sale wording
+(spot-check 2026-11-10). The English comparison row, body and FAQ, and the shared translated price
+cell (`data/compare-fact-locales.mjs`: de fr es it nl pt zh ko, zh-hant by conversion) no longer call
+these prices a "current offer" ("Aktuelles Angebot", "Offre actuelle", "当前优惠", "현재 할인", ...).
+They now say the tiers are paid once. Prices and the "lifetime updates" statement are unchanged.
+Affected pages: `/compare/voiceink-alternative/` in the ten non-Japanese languages (dates 2026-11-11;
+the hubs keep their dates), `/guides/best-speech-to-text-apps-for-mac/`
+(`SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD` 2026-11-11), and the VoiceInk cells of the en, de, zh and zh-hant
+`/guides/offline-dictation-on-mac/` pages (already dated 2026-11-11; the de and zh row check date
+stays 2026-09-29). `tests/wording/voiceink-pricing-wording.test.mjs` pins it.
+
 ## Japanese vendor update wording — 2026-11-11
 
 The shared Japanese templates said MacWhisper Pro and VoiceInk come with 「無期限のアップデート」 and
@@ -15,7 +28,8 @@ FAQ attribute the promise to the vendor the same way. This matches the B3 rule f
 promises. Affected pages: `/ja/compare/macwhisper-alternative/` and `/ja/compare/voiceink-alternative/`
 (Japanese dates 2026-11-11; `/ja/compare/` follows its newest child), plus the price cells of
 `/ja/guides/best-speech-to-text-apps-for-mac/` and `/ja/guides/offline-dictation-on-mac/` (already dated
-2026-11-11). The other languages still say "Current offer" or its translation for VoiceInk; not changed.
+2026-11-11). The other languages still said "Current offer" or its translation for VoiceInk; fixed
+the same day (note above).
 
 ## Batch B3 Japanese buyer pages — 2026-11-11
 

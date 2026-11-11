@@ -66,7 +66,9 @@ test("only the Japanese comparison dates move", () => {
     for (const prefix of ["", "de/"]) {
       const other = visibleDate(read(`${prefix}compare/${slug}/index.html`));
       assert.ok(other, `${prefix || "en/"}${slug}: visible date`);
-      assert.ok(!["2026-11-10", "2026-11-11"].includes(other), `${prefix || "en/"}${slug}: date must not move`);
+      // 2026-11-11: the VoiceInk page moved in every language (no "current offer" wording).
+      if (slug === "voiceink-alternative") assert.equal(other, "2026-11-11", `${prefix || "en/"}${slug}`);
+      else assert.ok(!["2026-11-10", "2026-11-11"].includes(other), `${prefix || "en/"}${slug}: date must not move`);
     }
   }
 });

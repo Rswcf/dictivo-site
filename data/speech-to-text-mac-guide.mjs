@@ -8,7 +8,9 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // and a live price spot-check the same day for Spokenly Pro and Voibe); Voice Type keeps the site's
 // OFFLINE_GUIDE_PRICES_CHECKED facts. The title's year is the
 // year of SPEECH_TO_TEXT_MAC_GUIDE_CHECKED.
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-10";
+// 2026-11-11: the VoiceInk row (shared with the comparison page) no longer calls its prices a
+// "current offer"; the vendor page shows no sale wording. Prices unchanged.
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-11";
 export const SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
