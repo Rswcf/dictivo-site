@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import vm from "node:vm";
 import { LOCALES } from "../../data/site-content.mjs";
-import { PRODUCT_FILM } from "../../data/product-film.mjs";
+import { PRODUCT_FILM, RETIRED_FILM_URLS } from "../../data/product-film.mjs";
 
 // The homepage film used to sit in the page as a hidden <video>, and its poster="poster.jpg"
 // (74 KB) downloaded on every visit next to the poster <img> the visitor actually sees.
@@ -35,6 +35,32 @@ test("each homepage keeps the film player out of the page until play, with a nat
     assert.deepEqual([...order].sort((a, b) => a - b), order, `${home}: button, template, noscript, figcaption order`);
     assert.ok(order.every((at) => at >= 0), `${home}: missing part ${order}`);
   }
+});
+
+test("each homepage poster and its preload come from the current film", () => {
+  const srcset = `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w`;
+  for (const home of homes) {
+    const html = readFileSync(`${dist}${home}`, "utf8");
+    const img = /<img\b[^>]*>/.exec(heroFigure(html))?.[0] ?? "";
+    assert.ok(img.includes(`src="${PRODUCT_FILM.poster}"`) && img.includes(`srcset="${srcset}"`), `${home}: ${img}`);
+    assert.ok(html.includes(`imagesrcset="${srcset}"`), `${home}: the poster preload must match the <img>`);
+    assert.doesNotMatch(html, /film-v08/, home);
+  }
+  for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
+});
+
+// 2026-11-12: the 68-second film replaced the 35-second film-v08 files. Old embeds and shared links
+// follow a 301 to the file that replaced them.
+test("every public film-v08 URL is a 301 to a film file that exists", () => {
+  const rules = readFileSync(`${dist}_redirects`, "utf8").split("\n");
+  const names = ["dictivo-film-1080p.mp4", "dictivo-film-4k.mp4", "poster.jpg", "poster-800.webp", "captions.en.vtt", "captions.zh-CN.vtt", "captions.zh-Hant.vtt", "CREDITS.txt"];
+  assert.deepEqual(RETIRED_FILM_URLS.map(([from]) => from), names.map((name) => `/assets/film-v08/${name}`));
+  for (const [from, to] of RETIRED_FILM_URLS) {
+    assert.ok(to.endsWith(`/${from.split("/").pop()}`) && to !== from, `${from} → ${to}`);
+    assert.ok(rules.includes(`${from} ${to} 301`), `${from} has no 301`);
+    assert.ok(existsSync(`${dist}${to.slice(1)}`), `${to} is not in dist/`);
+  }
+  assert.ok(!existsSync(`${dist}assets/film-v08`), "the old film folder is still published");
 });
 
 // Run initHeroFilm from site.js against a minimal stand-in for the figure.

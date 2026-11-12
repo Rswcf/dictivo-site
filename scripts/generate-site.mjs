@@ -1,4 +1,4 @@
-import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { COMPARE_HUB, compareLastUpdated, COMPARE_NAV_LINKS, COMPARE_PAGES } from "../data/compare-pages.mjs";
 import { COMPARE_HUB_GUIDANCE, COMPARE_HUB_GUIDANCE_LASTMOD, COMPARE_HUB_LOCALE_LASTMOD } from "../data/compare-hub-guidance.mjs";
@@ -36,7 +36,7 @@ import { GUIDE_INTRO_COPY } from "../data/guide-intro.mjs";
 import { LOCAL_SPEECH_EVIDENCE } from "../data/local-speech-evidence.mjs";
 import { localizedComparisonSections, localizedComparisonFaqs } from "../data/comparison-decision-locales.mjs";
 import { NATIVE_DEMO } from "../data/native-demo.mjs";
-import { PRODUCT_FILM, FILM_COPY, FILM_CHAPTERS } from "../data/product-film.mjs";
+import { PRODUCT_FILM, FILM_COPY, FILM_CHAPTERS, RETIRED_FILM_URLS } from "../data/product-film.mjs";
 import {
   SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD,
   SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES,
@@ -4071,9 +4071,14 @@ function productFilmTracks(code = "en") {
     <track kind="subtitles" srclang="zh-Hant" label="繁體中文" src="${PRODUCT_FILM.chineseTraditional}"${isDefault("zh-Hant")} />`;
 }
 
+// Download sizes come from the files, so a new film cannot leave an old size on /demo/.
+function filmFileSize(path) {
+  return `${(statSync(resolve(root, path.slice(1))).size / 1e6).toFixed(1)} MB`;
+}
+
 function renderProductFilmPage() {
   const t = HOME_COPY.en;
-  const title = "Watch Dictivo: Your Voice, On Your Device | 35-Second Demo";
+  const title = "Watch Dictivo: Your Voice, On Your Device | 68-Second Demo";
   const url = `${BASE_URL}${PRODUCT_FILM.path}`;
   const schema = [productFilmSchema(), { "@context": "https://schema.org", "@type": "WebPage", url, name: title, description: PRODUCT_FILM.description, inLanguage: "en", mainEntity: { "@id": `${BASE_URL}/demo/#film` } }];
   return `<!doctype html><html lang="en"><head>
@@ -4090,10 +4095,10 @@ function renderProductFilmPage() {
       <h1>Your voice. On your device.</h1>
       <p class="doc-lede">Turn a thought into words. Keep your audio local. Choose Cloud Fast when it suits your work.</p>
       <figure class="hero-film film-watch">
-        <video id="product-film" controls playsinline preload="none" poster="${PRODUCT_FILM.poster}" src="${PRODUCT_FILM.video}" width="1920" height="1080" aria-label="Dictivo — Keep your flow, 35-second product film">
+        <video id="product-film" controls playsinline preload="none" poster="${PRODUCT_FILM.poster}" src="${PRODUCT_FILM.video}" width="1920" height="1080" aria-label="Dictivo — Keep your flow, 68-second product film">
           ${productFilmTracks()}<p><a href="${PRODUCT_FILM.video}">Download the film</a></p>
         </video>
-        <figcaption>English audio · English and Chinese subtitles · <a href="${PRODUCT_FILM.credits}">Human recordings: CSTR VCTK · CC BY 4.0</a></figcaption>
+        <figcaption>English audio · English and Chinese subtitles · <a href="${PRODUCT_FILM.credits}">${html(FILM_COPY.en.credit)}</a></figcaption>
       </figure>
       <nav class="film-chapters" aria-label="Film chapters">${FILM_CHAPTERS.map(c => `<a href="?t=${c.start}" data-film-time="${c.start}"><span>${Math.floor(c.start / 60)}:${String(c.start % 60).padStart(2, "0")}</span> ${html(c.title)}</a>`).join("")}</nav>
       <div class="compare-intro-actions" data-platform-downloads>
@@ -4106,17 +4111,22 @@ function renderProductFilmPage() {
         ${FILM_CHAPTERS.map(c => `<h3>${html(c.title)}</h3><p>${html(c.description)}</p>`).join("")}
       </section>
       <section class="doc-section" aria-labelledby="film-transcript"><h2 id="film-transcript">Spoken transcript</h2>
-        <ol class="film-transcript"><li><time>0:02</time> Say it.</li><li><time>0:04</time> I would like to see the figures for the second quarter.</li><li><time>0:09</time> Make it happen.</li><li><time>0:13</time> Your voice. On your device.</li><li><time>0:21</time> Everyone deserves to share in this success.</li><li><time>0:32</time> Keep your flow.</li></ol>
+        <p>The voice says two lines. Everything else in the film is on-screen text, sound effects and music.</p>
+        <ol class="film-transcript"><li><time>0:11</time> Hi Maya, Thursday works for me. Please send the updated agenda before our meeting.</li><li><time>0:50</time> Quick update: the launch moved to Tuesday.</li></ol>
       </section>
       <section class="doc-section" aria-labelledby="film-details"><h2 id="film-details">About this demonstration</h2>
-        <p>The two dictation examples use original human recordings. Their displayed text comes from actual Local and Cloud Fast transcription. The film presents those results in a designed interface with shortened waits. Scene titles illustrate use cases; this is a product film, not a continuous screen recording or an accuracy comparison.</p>
+        <p>The app scenes are real screen recordings of Dictivo 0.3.57 on macOS: Mail, Notes, the Dictivo main window and the Companion. Titles, the keycap drawing and the check list are motion graphics; a few cards are still frames from the recordings. The text on screen is the text Dictivo pasted, and the word counts are the app’s own. The Mail scene and the first two Notes scenes used Local. The last Notes scene used Cloud Fast.</p>
+        <p>The dictated voice is generated with ElevenLabs text-to-speech. The film contains no recording of a human voice. During recording, the voice files played through the Mac’s speakers, and Dictivo transcribed them from the built-in microphone. Software sent the shortcut presses and the clicks. The music and the sound effects are also generated with ElevenLabs. The key, click and tone sounds are editorial, not the app’s own sounds.</p>
+        <p>The film is edited. It is a product film, not a continuous screen recording, a speed test or an accuracy comparison. Nothing plays faster than normal speed. Silent pauses after speech are shortened, and each wait is shown for at most 0.5 s. Real time from the stop to the pasted text: Mail with Local 0.23 s, shown in full; the note with Local 2.73 s; the prompt with Local 3.27 s; the note with Cloud Fast 1.67 s. The last three are each shown as 0.30 s.</p>
+        <p>The sender address in Mail is hidden. The Companion was recorded beside the Mail window; the film places its frames from the same moment onto the window. The Local note and prompt scenes in Notes play without the dictated voice. One Notes take is not in the film because the app repeated a clause; it is kept on record.</p>
+        <p>The titles name no key. The keycap drawing shows Dictivo’s default shortcut: Cmd+Shift+Space on Mac, Ctrl+Shift+Space on Windows. The recordings show ⌘P, because ⌘P was the shortcut set on the recording Mac. You can change the shortcut in Dictivo.</p>
         <p>Local processes dictation audio on your computer after a model is installed. Cloud Fast uploads the recording you choose for cloud transcription. <a href="/privacy/where-dictation-audio-goes/">See how each mode handles audio</a>.</p>
-        <p>Human recordings: CSTR VCTK v0.92, Yamagishi, Veaux and MacDonald (2019), University of Edinburgh. © 2019 Junichi Yamagishi. <a href="https://doi.org/10.7488/ds/2645">Recording collection</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Decoded to WAV, gain adjusted, gently compressed and mixed with music. No change to the words, voice speed or pitch. No endorsement. Music and brand narration are AI-generated.</p>
+        <p>Screen recordings, titles and editing: Dictivo team. Voice: ElevenLabs text-to-speech, stock voice. Music: ElevenLabs Music. Sound effects: ElevenLabs sound generation.</p>
         <p><a href="${PRODUCT_FILM.credits}">Full film credits</a> · <a href="/media-kit/#native-example-title">Actual app captures and test conditions</a></p>
       </section>
       <section class="doc-section" aria-labelledby="film-downloads"><h2 id="film-downloads">Download the film</h2>
-        <p><a href="${PRODUCT_FILM.video}" download>1080p film · 3.7 MB</a> · <a href="${PRODUCT_FILM.master}" download>4K film · 10.2 MB</a> · <a href="${PRODUCT_FILM.captions}" download>English captions</a> · <a href="${PRODUCT_FILM.chinese}" download>Chinese subtitles</a></p>
-        <p>When sharing the film, include the <a href="${PRODUCT_FILM.credits}">recording attribution and license</a> in the accompanying description.</p>
+        <p><a href="${PRODUCT_FILM.video}" download>1080p film · ${filmFileSize(PRODUCT_FILM.video)}</a> · <a href="${PRODUCT_FILM.master}" download>4K film · ${filmFileSize(PRODUCT_FILM.master)}</a> · <a href="${PRODUCT_FILM.captions}" download>English captions</a> · <a href="${PRODUCT_FILM.chinese}" download>Chinese subtitles</a></p>
+        <p>When you share the film, link the <a href="${PRODUCT_FILM.credits}">film credits</a>. They say what is recorded, what is generated and how the film was edited.</p>
       </section>
     </main>${renderFooterOnly("en")}</body></html>`;
 }
@@ -4146,7 +4156,7 @@ function renderMediaKitPage() {
         <h2 id="media-kit-answer">${html(copy.answerTitle)}</h2>
         <p>${html(copy.answer)}</p>
       </section>
-      <section class="doc-section" aria-labelledby="product-film-title"><h2 id="product-film-title">Product film: Keep your flow</h2><p>35 seconds. Local privacy, optional Cloud Fast, and real human dictation recordings.</p><p><a href="${PRODUCT_FILM.path}">Watch the film and read the transcript</a> · <a href="${PRODUCT_FILM.master}" download>Download 4K</a> · <a href="${PRODUCT_FILM.credits}">Film credits and reuse attribution</a></p></section>
+      <section class="doc-section" aria-labelledby="product-film-title"><h2 id="product-film-title">Product film: Keep your flow</h2><p>68 seconds. Real screen recordings of Dictivo in Mail and Notes on a Mac: Local keeps audio on the device, Cloud Fast when you choose it. The voice and the music are AI-generated.</p><p><a href="${PRODUCT_FILM.path}">Watch the film and read the transcript</a> · <a href="${PRODUCT_FILM.master}" download>Download 4K</a> · <a href="${PRODUCT_FILM.credits}">Film credits: what is recorded and what is generated</a></p></section>
       ${renderNativeExample("en")}
 
       <section class="doc-section" aria-labelledby="media-kit-facts">
@@ -4949,7 +4959,7 @@ function renderHomeFooterLinks(currentCode, t) {
 // <img> keep the same URLs after deployment.
 const HERO_POSTER = Object.freeze({
   src: PRODUCT_FILM.poster,
-  srcset: `/assets/film-v08/poster-800.webp 800w, ${PRODUCT_FILM.poster} 1600w`,
+  srcset: `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w`,
   sizes: "(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 52vw, 720px",
 });
 
@@ -5907,6 +5917,7 @@ function renderRedirects() {
 /changelog /changelog/ 301
 /changelog.html /changelog/ 301
 /assets/dictivo-cinematic-demo.mp4 ${PRODUCT_FILM.video} 301
+${RETIRED_FILM_URLS.map(([from, to]) => `${from} ${to} 301`).join("\n")}
 /checkout/local ${localCheckoutTarget} 302
 /checkout/cloud-fast ${cloudFastCheckoutTarget} 302
 /checkout/local-renewal ${localRenewalCheckoutTarget} 302

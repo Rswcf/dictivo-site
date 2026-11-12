@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import * as OpenCC from "opencc-js";
+import { PRODUCT_FILM } from "../../data/product-film.mjs";
 
 // Character-only conversion finds leftover Simplified characters without judging phrase choices.
 const toTraditionalCharacters = OpenCC.Converter({ from: "cn", to: "tw" });
@@ -51,5 +52,7 @@ test("hreflang, OG locale, sitemap and film captions include zh-Hant", () => {
   assert.match(home, /og:locale" content="zh_TW"/);
   assert.match(home, /srclang="zh-Hant" label="繁體中文" src="[^"]+" default/);
   assert.match(readFileSync(join(dist, "sitemap.xml"), "utf8"), /<loc>https:\/\/dictivo\.app\/zh-hant\/<\/loc>/);
-  assert.ok(existsSync(join(dist, "assets/film-v08/captions.zh-Hant.vtt")));
+  const captions = join(dist, PRODUCT_FILM.chineseTraditional.slice(1));
+  assert.ok(existsSync(captions));
+  assert.match(readFileSync(captions, "utf8"), /^WEBVTT[\s\S]*開會/, "the zh-Hant captions are converted from the Simplified file");
 });

@@ -29,6 +29,7 @@ test("the media kit states the Local price from placeholders, dated only while t
     assert.equal(count(claim, '<span class="price">'), 1, claim);
     for (const text of [row, claim]) assert.doesNotMatch(text, /introductory|until|2026/i, text);
   }
-  assert.equal(MEDIA_KIT_LASTMOD, "2026-09-29");
+  // 2026-11-12: the product film section describes the 68-second film.
+  assert.equal(MEDIA_KIT_LASTMOD, "2026-11-12");
   assert.ok(page.includes(`"dateModified":"${MEDIA_KIT_LASTMOD}"`));
 });

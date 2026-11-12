@@ -5,6 +5,27 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## 68-second film replaces the 35-second film — 2026-11-12
+
+All eleven homepages and `/demo/` play the new 68-second film (cut v2.4) from `assets/film-v09/`:
+1080p 6.9 MB, 4K 19.5 MB, posters, English and Chinese captions and `CREDITS.txt`, copied from the
+033 film package with matching md5 sums. The app scenes are real screen recordings of Dictivo
+0.3.57 on macOS (Mail, Notes, the main window, the Companion); the dictated voice, the music and the
+sound effects are ElevenLabs-generated. The film has no human recording, so the CSTR VCTK /
+CC BY 4.0 credit left the homepage caption (`FILM_COPY.credit`, all languages), `/demo/`, the media
+kit film section and AGENTS.md. `assets/film-v08/` is deleted, `VCTK-license.txt` with it: no built
+page linked its public URL (the benchmark evidence ZIP carries its own copy, and the benchmark
+method guide keeps its own VCTK credit). The build writes a 301 from each of the eight old film
+URLs to its film-v09 file (`RETIRED_FILM_URLS`). `/demo/` has the new chapters, the two spoken
+lines, the edit facts (no speed change, pauses shortened, waits shown at most 0.5 s with the real
+values, sender address hidden, Companion placed onto Mail, Notes scenes without the voice) and the
+shortcut note (titles name no key; the keycap shows Cmd+Shift+Space; the recordings show ⌘P). Its
+download sizes come from the files. `check-product-film.mjs` reads the duration from the data and
+fails when a homepage, `/demo/` or the media kit film section names film-v08, VCTK or CC BY.
+`PRODUCT_FILM.lastmod` and `MEDIA_KIT_LASTMOD` 2026-11-12; `tests/facts/media-kit-price.test.mjs`
+pins the new media kit date. `uploadedAt` is the PR date; set it to the first production deploy
+time if that falls on a later day. Not checked: playback of the new files in a browser.
+
 ## Local dictation needs macOS 15.4 in 0.3.57 — 2026-11-12
 
 `/docs/system-requirements/` said only "the app declares macOS 10.13 or later". That is the

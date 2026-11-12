@@ -1,6 +1,6 @@
 import { mediaKitLocalFacts } from "./local-offer-copy.mjs";
 
-export const MEDIA_KIT_LASTMOD = "2026-09-29";
+export const MEDIA_KIT_LASTMOD = "2026-11-12";
 
 const localFacts = mediaKitLocalFacts();
 
