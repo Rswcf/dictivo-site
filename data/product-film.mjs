@@ -32,18 +32,20 @@ export const RETIRED_FILM_URLS = Object.freeze([
   ["/assets/film-v08/CREDITS.txt", PRODUCT_FILM.credits],
 ]);
 
-// Labels describe the same English-language film on every localized homepage.
+// Labels for the same English-language film in each language. `play` and `alt` label the homepage
+// player; `link` names /demo/ in each llms.txt. Only the English `credit` is used, in the /demo/
+// caption: the homepage film has had no caption since 2026-11-12.
 export const FILM_COPY = {
   en: { play: "Watch the film · 68 sec", alt: "A new Mail message with a dictated sentence. The Dictivo Companion shows Pasted and 14 words saved.", link: "Film, transcript & credits", credit: "Real screen recordings · AI-generated voice and music" },
-  de: { play: "Film ansehen · 68 Sek.", alt: "Eine neue Nachricht in Mail mit einem diktierten Satz. Der Dictivo Companion meldet: eingefügt, 14 Wörter gespart.", link: "Film, Transkript & Credits (EN)", credit: "Echte Bildschirmaufnahmen · Stimme und Musik KI-generiert" },
-  fr: { play: "Voir le film · 68 s", alt: "Un nouveau message dans Mail avec une phrase dictée. Le Dictivo Companion indique que le texte est collé et que 14 mots ont été économisés.", link: "Film, transcription et crédits (EN)", credit: "Vraies captures d’écran · Voix et musique générées par IA" },
-  es: { play: "Ver el vídeo · 68 s", alt: "Un mensaje nuevo en Mail con una frase dictada. Dictivo Companion indica que el texto se ha pegado y que se han ahorrado 14 palabras.", link: "Vídeo, transcripción y créditos (EN)", credit: "Grabaciones de pantalla reales · Voz y música generadas por IA" },
-  it: { play: "Guarda il video · 68 s", alt: "Un nuovo messaggio in Mail con una frase dettata. Dictivo Companion indica che il testo è stato incollato e che sono state risparmiate 14 parole.", link: "Video, trascrizione e crediti (EN)", credit: "Registrazioni dello schermo reali · Voce e musica generate dall’IA" },
-  nl: { play: "Bekijk de film · 68 sec", alt: "Een nieuw bericht in Mail met een gedicteerde zin. De Dictivo Companion meldt dat de tekst is geplakt en dat 14 woorden zijn bespaard.", link: "Film, transcript en credits (EN)", credit: "Echte schermopnamen · Stem en muziek door AI gegenereerd" },
-  pt: { play: "Ver o vídeo · 68 s", alt: "Uma nova mensagem no Mail com uma frase ditada. O Dictivo Companion indica que o texto foi colado e que 14 palavras foram economizadas.", link: "Vídeo, transcrição e créditos (EN)", credit: "Gravações de tela reais · Voz e música geradas por IA" },
-  zh: { play: "观看短片 · 68 秒", alt: "Mail 中的一封新邮件，里面是一句口述的话。Dictivo Companion 显示“已粘贴”和“省下 14 个词”。", link: "短片、文字稿与署名（英语）", credit: "真实录屏 · 语音和配乐由 AI 生成" },
-  ja: { play: "動画を見る・68秒", alt: "Mailの新規メッセージに、音声入力した一文が入っています。Dictivo Companionには、貼り付けが完了し14語を節約したことが表示されています。", link: "動画・文字起こし・クレジット（英語）", credit: "実際の画面録画 · 音声と音楽はAI生成" },
-  ko: { play: "영상 보기 · 68초", alt: "Mail의 새 메시지에 받아쓴 문장이 들어 있습니다. Dictivo Companion이 붙여넣기가 끝났고 14단어를 절약했다고 표시합니다.", link: "영상, 대본 및 크레딧 (영어)", credit: "실제 화면 녹화 · 음성과 음악은 AI 생성" },
+  de: { play: "Film ansehen · 68 Sek.", alt: "Eine neue Nachricht in Mail mit einem diktierten Satz. Der Dictivo Companion meldet: eingefügt, 14 Wörter gespart.", link: "Film, Transkript & Credits (EN)" },
+  fr: { play: "Voir le film · 68 s", alt: "Un nouveau message dans Mail avec une phrase dictée. Le Dictivo Companion indique que le texte est collé et que 14 mots ont été économisés.", link: "Film, transcription et crédits (EN)" },
+  es: { play: "Ver el vídeo · 68 s", alt: "Un mensaje nuevo en Mail con una frase dictada. Dictivo Companion indica que el texto se ha pegado y que se han ahorrado 14 palabras.", link: "Vídeo, transcripción y créditos (EN)" },
+  it: { play: "Guarda il video · 68 s", alt: "Un nuovo messaggio in Mail con una frase dettata. Dictivo Companion indica che il testo è stato incollato e che sono state risparmiate 14 parole.", link: "Video, trascrizione e crediti (EN)" },
+  nl: { play: "Bekijk de film · 68 sec", alt: "Een nieuw bericht in Mail met een gedicteerde zin. De Dictivo Companion meldt dat de tekst is geplakt en dat 14 woorden zijn bespaard.", link: "Film, transcript en credits (EN)" },
+  pt: { play: "Ver o vídeo · 68 s", alt: "Uma nova mensagem no Mail com uma frase ditada. O Dictivo Companion indica que o texto foi colado e que 14 palavras foram economizadas.", link: "Vídeo, transcrição e créditos (EN)" },
+  zh: { play: "观看短片 · 68 秒", alt: "Mail 中的一封新邮件，里面是一句口述的话。Dictivo Companion 显示“已粘贴”和“省下 14 个词”。", link: "短片、文字稿与署名（英语）" },
+  ja: { play: "動画を見る・68秒", alt: "Mailの新規メッセージに、音声入力した一文が入っています。Dictivo Companionには、貼り付けが完了し14語を節約したことが表示されています。", link: "動画・文字起こし・クレジット（英語）" },
+  ko: { play: "영상 보기 · 68초", alt: "Mail의 새 메시지에 받아쓴 문장이 들어 있습니다. Dictivo Companion이 붙여넣기가 끝났고 14단어를 절약했다고 표시합니다.", link: "영상, 대본 및 크레딧 (영어)" },
 };
 
 export const FILM_CHAPTERS = [

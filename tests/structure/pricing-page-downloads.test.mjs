@@ -52,7 +52,7 @@ test("the answer stays the section's first paragraph and the page is redated", (
   const first = section.match(/<p>([\s\S]*?)<\/p>/);
   assert.equal(visible(first[1]), resolved(pricingPageAnswer("en")));
   assert.ok(first.index < section.indexOf("data-platform-downloads"), "answer before the buttons");
-  assert.equal(html.match(/<time datetime="([^"]+)">/)[1], "2026-11-10");
+  assert.equal(html.match(/<time datetime="([^"]+)">/)[1], "2026-11-12");
 });
 
 test("the first Mac download link sits in the first quarter of the pricing page", () => {

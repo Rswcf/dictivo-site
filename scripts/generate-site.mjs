@@ -156,7 +156,6 @@ const blankJpeg = Buffer.from(
 const WINDOWS_DOWNLOAD_COPY = {
   en: {
     badge: "Available",
-    body: "Windows x64 is available with the same Local, Cloud Fast, license, and update flow as the desktop app.",
     exeButton: "Download for Windows",
     msiButton: "MSI installer",
     note: (version) => `Version ${version} - Windows x64.`,
@@ -164,7 +163,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   de: {
     badge: "Verfügbar",
-    body: "Windows x64 ist mit demselben Local-, Cloud-Fast-, Lizenz- und Update-Ablauf wie die Desktop-App verfügbar.",
     exeButton: "Für Windows herunterladen",
     msiButton: "MSI-Installer",
     note: (version) => `Version ${version} - Windows x64.`,
@@ -172,7 +170,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   fr: {
     badge: "Disponible",
-    body: "Windows x64 est disponible avec le même flux Local, Cloud Fast, licence et mise à jour que l'app de bureau.",
     exeButton: "Télécharger pour Windows",
     msiButton: "Installateur MSI",
     note: (version) => `Version ${version} - Windows x64.`,
@@ -180,7 +177,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   es: {
     badge: "Disponible",
-    body: "Windows x64 está disponible con el mismo flujo de Local, Cloud Fast, licencia y actualizaciones que la app de escritorio.",
     exeButton: "Descargar para Windows",
     msiButton: "Instalador MSI",
     note: (version) => `Versión ${version} - Windows x64.`,
@@ -188,7 +184,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   it: {
     badge: "Disponibile",
-    body: "Windows x64 è disponibile con lo stesso flusso Local, Cloud Fast, licenza e aggiornamenti dell'app desktop.",
     exeButton: "Scarica per Windows",
     msiButton: "Installer MSI",
     note: (version) => `Versione ${version} - Windows x64.`,
@@ -196,7 +191,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   nl: {
     badge: "Beschikbaar",
-    body: "Windows x64 is beschikbaar met dezelfde Local-, Cloud Fast-, licentie- en updateflow als de desktop-app.",
     exeButton: "Download voor Windows",
     msiButton: "MSI-installer",
     note: (version) => `Versie ${version} - Windows x64.`,
@@ -204,7 +198,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   pt: {
     badge: "Disponível",
-    body: "Windows x64 está disponível com o mesmo fluxo de Local, Cloud Fast, licença e atualizações do app para desktop.",
     exeButton: "Baixar para Windows",
     msiButton: "Instalador MSI",
     note: (version) => `Versão ${version} - Windows x64.`,
@@ -212,7 +205,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   zh: {
     badge: "可用",
-    body: "Windows x64 版本现已可用，包含与 Mac 版一致的 Local、Cloud Fast、许可证和更新流程。",
     exeButton: "下载 Windows 版",
     msiButton: "MSI 安装包",
     note: (version) => `版本 ${version} - Windows x64。`,
@@ -220,7 +212,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   ja: {
     badge: "利用可能",
-    body: "Windows x64 版が利用可能です。Local、Cloud Fast、ライセンス、更新フローはデスクトップ版と同じです。",
     exeButton: "Windows 版をダウンロード",
     msiButton: "MSI インストーラ",
     note: (version) => `バージョン ${version} - Windows x64。`,
@@ -228,7 +219,6 @@ const WINDOWS_DOWNLOAD_COPY = {
   },
   ko: {
     badge: "사용 가능",
-    body: "Windows x64 버전을 사용할 수 있습니다. Local, Cloud Fast, 라이선스, 업데이트 흐름은 데스크톱 앱과 동일합니다.",
     exeButton: "Windows용 다운로드",
     msiButton: "MSI 설치 파일",
     note: (version) => `버전 ${version} - Windows x64.`,
@@ -5023,7 +5013,6 @@ function renderHome(currentCode) {
               ${hasWindowsRelease ? renderWindowsInstallHelpLink(currentCode, "hero", { hidden: true }) : ""}
               <p class="hero-trial">${html(conversion.trial)}</p>
               ${renderSendLink(currentCode)}
-              ${renderFirstDictationLink(currentCode)}
             </div>
           </div>
 
@@ -5034,7 +5023,6 @@ function renderHome(currentCode) {
             </button>
             <template>${heroFilmPlayer(currentCode)}</template>
             <noscript>${heroFilmPlayer(currentCode)}</noscript>
-            <figcaption><a href="${PRODUCT_FILM.path}">${html(FILM_COPY[currentCode].link)}</a><br><a href="${PRODUCT_FILM.credits}">${html(FILM_COPY[currentCode].credit)}</a></figcaption>
           </figure>
 
         </div>
@@ -5044,14 +5032,12 @@ function renderHome(currentCode) {
         <div class="section-shell">
           <div class="section-heading section-heading-left trust-heading">
             <h2 id="privacy-title">${html(t.privacy.title)}</h2>
-            <p>${html(t.privacy.body)}</p>
           </div>
 
           <div class="trust-grid">
             <article class="trust-column trust-column--local">
               <header class="trust-column-head">
                 <span class="trust-tag trust-tag--local"><span class="trust-dot trust-dot--local" aria-hidden="true"></span>${html(t.privacy.localTitle)}</span>
-                <p class="trust-column-lede">${html(t.privacy.localLead)}</p>
               </header>
               ${renderList(t.privacy.localItems, "trust-list")}
             </article>
@@ -5059,7 +5045,6 @@ function renderHome(currentCode) {
             <article class="trust-column trust-column--network" id="cloud-fast">
               <header class="trust-column-head">
                 <span class="trust-tag trust-tag--network"><span class="trust-dot trust-dot--network" aria-hidden="true"></span>${html(t.privacy.cloudTitle)}</span>
-                <p class="trust-column-lede">${html(t.privacy.cloudLead)}</p>
               </header>
               ${renderList(t.privacy.cloudItems, "trust-list trust-list--network")}
             </article>
@@ -5080,7 +5065,6 @@ function renderHome(currentCode) {
             ${t.pricing.tiers.map((tier, index) => renderTier(tier, index)).join("\n")}
           </div>
 
-          <p class="pricing-footnote">${html(t.pricing.footnote)}</p>
           ${renderHomeBuyerLinks(currentCode)}
           <div class="checkout-pending" id="checkout-local-pending" tabindex="-1" role="status">
             <strong>${html(t.pricing.checkoutTitle)}</strong>
@@ -5093,7 +5077,6 @@ function renderHome(currentCode) {
         <div class="section-shell">
           <div class="section-heading">
             <h2 id="downloads-title">${html(t.downloads.title)}</h2>
-            <p>${html(t.downloads.body)}</p>
           </div>
 
           <div class="download-grid" data-layout="${hasWindowsRelease ? "multi" : "single"}" aria-label="${attr(t.downloads.available)}">
@@ -5108,7 +5091,6 @@ function renderHome(currentCode) {
             ${hasWindowsRelease ? `<article class="download-card" data-platform-card="windows">
               <div class="card-topline"><span>${html(t.downloads.windowsTop[0])}</span><span>${html(liveWindowsCopy.badge)}</span></div>
               <h3>${html(t.downloads.windowsTitle)}</h3>
-              <p>${html(liveWindowsCopy.body)}</p>
               <div class="download-actions">
                 <a class="button button-dark download-link" href="${attr(downloadUrl("windows", "downloads_windows_exe"))}"${downloadData("windows", "downloads_windows_exe")}>${html(liveWindowsCopy.exeButton)}</a>
                 ${renderWindowsInstallHelpLink(currentCode, "download")}

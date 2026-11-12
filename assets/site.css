@@ -567,9 +567,11 @@ main section[id] {
 }
 
 /* As wide as the headline column, and never taller than the window: a visitor who scrolls to the
-   film sees the whole frame and its controls. The 140px leave room for the caption; the header is
-   not fixed, so it takes none. The 480px floor keeps a short window from shrinking the film to
-   nothing. The first line is for browsers without svh. */
+   film sees the whole frame and its controls. The 140px keep that much of the window height free
+   around the film (they were set when a caption sat under it; the homepage caption left on
+   2026-11-12 and the value stayed). The header is not fixed, so it takes none. The 480px floor
+   keeps a short window from shrinking the film to nothing. The first line is for browsers without
+   svh. /demo/ (.film-watch) sets its own width. */
 .hero-film {
   width: min(100%, 1080px, max(480px, calc((100vh - 140px) * 16 / 9)));
   width: min(100%, 1080px, max(480px, calc((100svh - 140px) * 16 / 9)));
@@ -689,6 +691,7 @@ main section[id] {
   border-left: 11px solid currentColor;
 }
 
+/* The /demo/ caption (figure.hero-film.film-watch). The homepage film has none. */
 .hero-film figcaption {
   margin: 11px 0 0;
   color: rgb(255 255 255 / 52%);
@@ -962,13 +965,6 @@ main section[id] {
 .trust-dot--local {
   background: var(--signal);
   box-shadow: 0 0 8px rgb(125 211 199 / 72%);
-}
-
-.trust-column-lede {
-  margin: 0;
-  color: rgb(255 255 255 / 64%);
-  font-size: 14.5px;
-  line-height: 1.55;
 }
 
 .trust-list {
@@ -1520,10 +1516,13 @@ main section[id] {
   margin-top: auto;
 }
 
+/* The Windows card has no text under its title since 2026-11-12. The padding keeps the 16px that
+   the text's margin gave; the auto margin still pushes the buttons to the card's bottom. */
 .download-actions {
   display: grid;
   gap: 8px;
   margin-top: auto;
+  padding-top: 16px;
 }
 
 .download-actions .button {

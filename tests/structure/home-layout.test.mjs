@@ -4,7 +4,6 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { LOCALES } from "../../data/site-content.mjs";
 import { FILM_COPY, PRODUCT_FILM } from "../../data/product-film.mjs";
-import { HANT, toHant } from "../../scripts/lib/hant.mjs";
 import { html as escape } from "../../scripts/lib/html.mjs";
 
 // Homepage layout from the 2026-11-03 simplification (P2). It reads only dist/.
@@ -33,19 +32,48 @@ test("the hero Windows install help starts hidden; site.js shows it to Windows v
   assert.match(script, /visitorPlatform === "windows"[\s\S]{0,120}\[data-windows-install-help\]\[hidden\]/);
 });
 
-// 2026-11-12: the 68-second film has no human recordings, so the credit says what is real and what
-// is generated and links the film credits; the CC BY 4.0 / VCTK credit of the old film is gone.
-test("the hero has no eyebrow and the film caption keeps only the watch link and the credit", () => {
-  for (const locale of LOCALES) {
-    const home = locale.code === "en" ? "index.html" : `${locale.code}/index.html`;
-    const copy = locale.code === HANT ? toHant(FILM_COPY.zh) : FILM_COPY[locale.code];
+// 2026-11-12: the homepage film lost its caption (watch link and credit) and the hero its
+// first-sentence link. /demo/ keeps the disclosure: real screen recordings, AI-generated voice and
+// music, and a link to the film credits. The CC BY 4.0 / VCTK credit of the old film is gone.
+test("the hero has no eyebrow, no first-sentence link and no film caption", () => {
+  for (const home of homes) {
     const html = read(home);
     const hero = html.match(/<section class="hero[\s\S]*?<\/section>/)[0];
     assert.doesNotMatch(hero, /class="eyebrow"/, home);
-    const caption = `<figcaption><a href="/demo/">${escape(copy.link)}</a><br><a href="${PRODUCT_FILM.credits}">${escape(copy.credit)}</a></figcaption>`;
-    assert.ok(html.includes(caption), `${home}: ${caption}`);
-    assert.match(copy.credit, /\b(?:AI|KI|IA)\b/, `${home}: the credit says the voice and music are generated`);
+    assert.doesNotMatch(hero, /class="first-dictation-link"/, home);
+    const figure = hero.match(/<figure class="hero-film" id="demo-video">[\s\S]*?<\/figure>/)?.[0];
+    assert.ok(figure, `${home}: hero film missing`);
+    assert.doesNotMatch(figure, /<figcaption/, home);
     assert.doesNotMatch(html, /CC BY|VCTK/, home);
+  }
+});
+
+test("/demo/ keeps the film disclosure and the link to the film credits", () => {
+  const html = read("demo/index.html");
+  const figure = html.match(/<figure class="hero-film film-watch">[\s\S]*?<\/figure>/)?.[0] ?? "";
+  const caption = figure.match(/<figcaption>([\s\S]*?)<\/figcaption>/)?.[1] ?? "";
+  assert.ok(caption.includes(`<a href="${PRODUCT_FILM.credits}">${escape(FILM_COPY.en.credit)}</a>`), caption);
+  assert.match(FILM_COPY.en.credit, /\bAI-generated voice and music\b/);
+  assert.doesNotMatch(html, /CC BY|VCTK/);
+});
+
+test("the privacy, pricing and download sections carry no introductions or explanatory notes", () => {
+  for (const home of homes) {
+    const html = read(home);
+    const section = (id) => html.match(new RegExp(`<section\\b[^>]*\\bid="${id}"[\\s\\S]*?<\\/section>`))[0];
+    const privacy = section("privacy");
+    assert.match(privacy, /<h2 id="privacy-title">[^<]*<\/h2>\s*<\/div>/, `${home}: privacy heading stands alone`);
+    assert.doesNotMatch(privacy, /trust-column-lede/, home);
+    const columns = [...privacy.matchAll(/<ul class="trust-list[^"]*">([\s\S]*?)<\/ul>/g)].map((match) => (match[1].match(/<li>/g) || []).length);
+    assert.deepEqual(columns, [3, 3], `${home}: bullets per privacy column`);
+    assert.equal((section("pricing").match(/class="pricing-footnote"/g) || []).length, 1, home);
+    const downloads = section("downloads");
+    assert.match(downloads, /<h2 id="downloads-title">[^<]*<\/h2>\s*<\/div>/, `${home}: downloads heading stands alone`);
+    const mac = downloads.match(/<article class="download-card" data-platform-card="macos">([\s\S]*?)<\/article>/)[1];
+    const macBody = mac.match(/<\/h3>\s*<p>([^<]*)<\/p>/)?.[1] ?? "";
+    assert.equal(macBody.split(/[.。](?:\s|$)|。/).filter((part) => part.trim()).length, 1, `${home}: Mac card body "${macBody}"`);
+    const windows = downloads.match(/<article class="download-card" data-platform-card="windows">([\s\S]*?)<\/article>/)?.[1];
+    if (windows) assert.match(windows, /<\/h3>\s*<div class="download-actions">/, `${home}: Windows card body paragraph`);
   }
 });
 

@@ -74,8 +74,8 @@ newer release date still takes precedence.
 `data/first-dictation-guide.mjs` supplies the English and Japanese guides at
 `/guides/first-local-dictation/` and `/ja/guides/first-local-dictation/`. Other
 language-menu choices return to their own homepage; hreflang only lists the two
-actual guide translations. Relevant homepages, comparisons, offline guides and
-footers link to the guide.
+actual guide translations. Comparisons, offline guides and footers link to the
+guide; homepages link it from the footer only (the hero link left on 2026-11-12).
 
 The practice field is a plain textarea for desktop dictation/paste. The page does
 not capture microphone audio, transcribe, send, or store its text. Switching
@@ -218,15 +218,18 @@ If the page starts with `ready: false`, the all-ready assertion and the in-site 
 
 ### Homepage copy assumes Windows is public
 
-`data/home-copy.mjs` states that Mac and Windows x64 are available. Until 2026-11-03 a
-`WINDOWS_HOME_COPY` layer and a `WINDOWS_UNAVAILABLE_HOME_COPY` fallback switched that wording
-with `hasWindowsRelease`; both were removed (decision G9). If Windows downloads are withdrawn,
-`scripts/check-public-output.mjs` fails the build on the Windows launch strings in every homepage,
-so rewrite those strings in `data/home-copy.mjs` first.
+`data/home-copy.mjs` presents Windows as available: the meta title and description, the downloads
+heading and the Windows card title. Until 2026-11-03 a `WINDOWS_HOME_COPY` layer and a
+`WINDOWS_UNAVAILABLE_HOME_COPY` fallback switched that wording with `hasWindowsRelease`; both were
+removed (decision G9). If Windows downloads are withdrawn, rewrite those strings in
+`data/home-copy.mjs` first. `scripts/check-public-output.mjs` fails the build on its list of
+Windows launch strings, but since the availability footnote left the homepage (2026-11-12) the
+only homepage copy on that list is the Japanese downloads heading. It does not catch the other
+languages.
 
-`WINDOWS_DOWNLOAD_COPY` in `scripts/generate-site.mjs` supplies the download card badge and body,
-the EXE and MSI button labels, the version note, and the SmartScreen warning shown because the
-Windows installers are not Authenticode-signed.
+`WINDOWS_DOWNLOAD_COPY` in `scripts/generate-site.mjs` supplies the download card badge, the EXE
+and MSI button labels, the version note, and the SmartScreen warning shown because the Windows
+installers are not Authenticode-signed.
 
 ### `hasWindowsRelease`
 
@@ -702,8 +705,9 @@ The 4K file is a download option, not the default player source.
 The app scenes are real screen recordings of Dictivo 0.3.57; the dictated voice, the music and the
 sound effects are AI-generated. The film is edited (shortened pauses and waits), so it does not
 replace the continuous native-app evidence at `/media-kit/#native-example-title`; keep that link.
-Every homepage caption and `/demo/` say that the voice and music are generated and link
-`CREDITS.txt`.
+The `/demo/` caption says that the voice and music are generated and links `CREDITS.txt`. The
+homepage film has no caption and no link to `/demo/` since 2026-11-12; `FILM_COPY[*].link` still
+names `/demo/` in each `llms.txt`.
 
 A new film goes into a new folder (`film-v10/`, …). Add the old public paths to
 `RETIRED_FILM_URLS` in `data/product-film.mjs`; the build writes a 301 for each to `_redirects`
