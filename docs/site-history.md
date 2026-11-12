@@ -25,6 +25,8 @@ Safari or Firefox. LCP was not measured again. No `*_LASTMOD` change: the copy d
 While the language prompt (`.locale-suggestion`) is open, the label stops 134px above the window's
 bottom edge (181px below 768px), at least 12px above the tallest prompt measured in Chromium; on
 short phone screens it can still sit under the prompt, at the poster's top.
+When the window cuts the player, pressing play now also centres it in the window (`initHeroFilm`,
+after `play()`; smooth through html's `scroll-behavior`, instant for reduced motion).
 
 ## 68-second film replaces the 35-second film — 2026-11-12
 
