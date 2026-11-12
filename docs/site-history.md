@@ -5,6 +5,20 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Local dictation needs macOS 15.4 in 0.3.57 — 2026-11-12
+
+`/docs/system-requirements/` said only "the app declares macOS 10.13 or later". That is the
+`LSMinimumSystemVersion` of the app, not of its local engine. The engine of 0.3.35 to 0.3.57 was
+built without a deployment target, so it declares macOS 26.0 and imports libc++
+`std::bad_function_call` (both slices), which macOS has from 15.4, and on arm64
+`MTLResidencySetDescriptor` (from 15.0). The page and the Japanese no-subscription guide
+(`/ja/guides/mac-dictation-app-no-subscription/`) now say that Local dictation in 0.3.57 needs
+macOS 15.4 or later; the declared 10.13 stays as a second fact. Tested: the 0.3.57 engine starts and
+transcribes on macOS 15.8.2 (GitHub macos-15 runner, CPU only). Not tested: any macOS below 15.4;
+"does not start" there is inferred from the imports. The desktop fix builds the engine for macOS
+13.3; when a release carries it, change `MAC_LOCAL_MINIMUM` and the ja strings again.
+`DOCS_SYSTEM_REQUIREMENTS_LASTMOD` and `JA_NO_SUBSCRIPTION_GUIDE_LASTMOD` 2026-11-12.
+
 ## Our own network capture on the network test page — 2026-11-11
 
 `/privacy/local-dictation-network-test/` used to say it was "a test procedure, not a published

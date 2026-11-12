@@ -16,7 +16,7 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // Japanese for this page, not translated sentence by sentence from the English twin. The title, H1
 // and intent rows target 買い切り; オフライン appears once in the intent column as a qualifier.
 export const JA_NO_SUBSCRIPTION_GUIDE_READY = true;
-export const JA_NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-11"; // the release day
+export const JA_NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-12"; // Local needs macOS 15.4 in 0.3.57
 export const JA_NO_SUBSCRIPTION_GUIDE_CHECKED = "2026-11-10"; // the competitor facts file and price spot-check date
 
 const checkedLabel = (iso) => `（${iso}確認）`;
@@ -154,8 +154,8 @@ function factRows(windows) {
     [
       DICTIVO,
       windows
-        ? "Apple SiliconとIntel。アプリの宣言値は macOS 10.13 以降。同じライセンスでWindows x64も使えます。"
-        : "Apple SiliconとIntel。アプリの宣言値は macOS 10.13 以降。Windows x64 のダウンロードは一時的に利用できません。",
+        ? "Apple SiliconとIntel。ローカル音声入力は macOS 15.4 以降（Dictivo 0.3.57）。同じライセンスでWindows x64も使えます。"
+        : "Apple SiliconとIntel。ローカル音声入力は macOS 15.4 以降（Dictivo 0.3.57）。Windows x64 のダウンロードは一時的に利用できません。",
       "買い切り（Dictivo Local）",
       guideLocalPrice("ja"),
       "12か月分を含み、その後の更新は任意。買った版はそのまま使えます。",
@@ -267,7 +267,7 @@ export function jaNoSubscriptionGuideCopy({ windows, checked = JA_NO_SUBSCRIPTIO
           "Voibe は、Intel Mac ではクラウドで文字起こしします。",
           "Mac標準の音声入力は、Intel Mac では音声を Apple に送ります。",
           "Handy は、Apple Silicon 用と Intel 用のビルドを別々に用意しています。",
-          "Dictivo は Apple Silicon と Intel の Mac で使えます。アプリの宣言値は macOS 10.13 以降です。",
+          "Dictivo は Apple Silicon と Intel の Mac で使えます。ただし Dictivo 0.3.57 のローカル音声入力には macOS 15.4 以降が必要です。それより古い macOS では、ローカルエンジンが起動しません。",
         ],
         link: { label: "オフラインで使うための設定とアプリ比較", href: "/ja/guides/offline-dictation-on-mac/" },
       },

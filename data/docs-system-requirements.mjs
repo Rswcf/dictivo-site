@@ -7,6 +7,14 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   (`defaults read /Applications/Dictivo.app/Contents/Info.plist LSMinimumSystemVersion` → 10.13;
 //   `lipo -archs …/MacOS/dictivo` → x86_64 arm64). The source pins no minimum; the built app does.
 //   The page says what the app declares, not which versions anyone ran it on;
+// - minimum macOS for Local dictation: read on 2026-11-12 from the engine in the 0.3.57 release
+//   (`Contents/Resources/private-fast/bin/whisper-cli`). `nm -u` shows imports of
+//   std::bad_function_call on both slices; the macOS SDK's libc++ `__configuration/availability.h`
+//   marks them introduced in macOS 15.4 (LLVM 19). The arm64 slice also needs
+//   MTLResidencySetDescriptor (macOS 15.0). That engine started and transcribed on macOS 15.8.2
+//   (GitHub macos-15 runner, desktop PR "build the macOS engine for macOS 13.3"). That it does not
+//   start below 15.4 is inferred from the imports; nobody ran it there. Releases 0.3.35 to 0.3.57
+//   carry the same imports;
 // - Start at login: autostart.rs (SMAppService, "Start at login needs macOS 13 or later", the
 //   Applications-folder rule; Windows Startup apps);
 // - Developer ID signed and notarized Mac build; x64-only Windows build, EXE and MSI, not
@@ -26,9 +34,10 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   displayLanguage.ts permissions; temporary recordings: displayLanguage.ts storage rows;
 // - Intel Macs and larger models: data/mac-model-advisor.mjs notes.intel.
 // No price on this page.
-export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-10";
+export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-12";
 
 const MAC_MINIMUM = "10.13";
+const MAC_LOCAL_MINIMUM = "15.4";
 const LOGIN_MINIMUM = "13";
 
 export function docsSystemRequirementsCopy({ windows }) {
@@ -52,7 +61,7 @@ export function docsSystemRequirementsCopy({ windows }) {
     lastmod: DOCS_SYSTEM_REQUIREMENTS_LASTMOD,
     title: "Dictivo system requirements for Mac and Windows",
     lede: "Reference facts about what the Dictivo desktop app needs on a Mac and on a Windows x64 PC: processor, operating system, memory, disk space, microphone and network.",
-    answer: `Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. The app declares macOS ${MAC_MINIMUM} or later. Dictivo for Windows is an x64 installer for Windows 10 and 11. You need a microphone and disk space for the app plus one model, from about 75 MB to about 3.1 GB. Local dictation needs no network. The first model download, updates and license activation do.`,
+    answer: `Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. In Dictivo ${DOCS_CHECKED_VERSION}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. Dictivo for Windows is an x64 installer for Windows 10 and 11. You need a microphone and disk space for the app plus one model, from about 75 MB to about 3.1 GB. Local dictation needs no network. The first model download, updates and license activation do.`,
     answerLinks: [
       ["Which Mac suits the larger models", "/mac-model-guide/"],
       ["The seven local models", "/docs/models-and-languages/"],
@@ -66,7 +75,7 @@ export function docsSystemRequirementsCopy({ windows }) {
         ["Processor", "Apple Silicon or Intel. One universal app runs on both.", "x64. There is no ARM build."],
         [
           "Operating system",
-          `The app declares macOS ${MAC_MINIMUM} or later. Start at login needs macOS ${LOGIN_MINIMUM} or later.`,
+          `Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, the local engine does not start. The app declares macOS ${MAC_MINIMUM} or later. Start at login needs macOS ${LOGIN_MINIMUM} or later.`,
           "Windows 10 and 11, as the Windows installation guide states.",
         ],
         ["Memory for the default models", memoryCell, memoryCell],
@@ -92,7 +101,8 @@ export function docsSystemRequirementsCopy({ windows }) {
         title: "Mac",
         paragraphs: [
           "Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. The same download runs on both.",
-          `The app declares macOS ${MAC_MINIMUM} or later. This is the minimum written into the app. Start at login needs macOS ${LOGIN_MINIMUM} or later, and Dictivo must run from the Applications folder for it.`,
+          `In Dictivo ${DOCS_CHECKED_VERSION}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, its local engine does not start.`,
+          `The app declares macOS ${MAC_MINIMUM} or later. This is the minimum written into the app, not the minimum for Local dictation. Start at login needs macOS ${LOGIN_MINIMUM} or later, and Dictivo must run from the Applications folder for it.`,
           "On Apple Silicon, the local engine uses the GPU through Metal. On Intel Macs, it uses the CPU engine.",
           "The Mac model guide notes that older Intel MacBooks are usable, but not the best fit for the larger local models.",
           "The Mac app is signed with an Apple Developer ID and notarized by Apple.",
@@ -167,11 +177,11 @@ export function docsSystemRequirementsCopy({ windows }) {
     faqs: [
       [
         "Does Dictivo run on Intel Macs?",
-        "Yes. Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. On Intel Macs, the local engine uses the CPU. The Mac model guide helps you pick a model for your Mac.",
+        `Yes. Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. On Intel Macs, the local engine uses the CPU. In Dictivo ${DOCS_CHECKED_VERSION}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later on every Mac. The Mac model guide helps you pick a model for your Mac.`,
       ],
       [
         "Which macOS version do I need?",
-        `The app declares macOS ${MAC_MINIMUM} or later. Start at login needs macOS ${LOGIN_MINIMUM} or later, with Dictivo in the Applications folder.`,
+        `For Local dictation in Dictivo ${DOCS_CHECKED_VERSION}, macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, the local engine does not start. The app declares macOS ${MAC_MINIMUM} or later. Start at login needs macOS ${LOGIN_MINIMUM} or later, with Dictivo in the Applications folder.`,
       ],
       [
         "Does Dictivo run on Windows on ARM?",
