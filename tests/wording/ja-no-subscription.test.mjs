@@ -160,8 +160,8 @@ test("the fact table lists twelve apps alphabetically with Dictivo last, dated p
   assert.equal(
     cell(DICTIVO, 1),
     hasWindowsRelease
-      ? "Apple SiliconとIntel。アプリの宣言値は macOS 10.13 以降。同じライセンスでWindows x64も使えます。"
-      : "Apple SiliconとIntel。アプリの宣言値は macOS 10.13 以降。Windows x64 のダウンロードは一時的に利用できません。",
+      ? "Apple SiliconとIntel。ローカル音声入力は macOS 15.4 以降（Dictivo 0.3.57）。同じライセンスでWindows x64も使えます。"
+      : "Apple SiliconとIntel。ローカル音声入力は macOS 15.4 以降（Dictivo 0.3.57）。Windows x64 のダウンロードは一時的に利用できません。",
   );
   assert.ok(cell(DICTIVO, 4).includes("12か月") && cell(DICTIVO, 4).includes("任意"), "Dictivo updates");
   assert.doesNotMatch(cell(DICTIVO, 4), FOREVER_UPDATES);
