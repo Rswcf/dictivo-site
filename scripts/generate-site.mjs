@@ -4824,11 +4824,7 @@ function renderPricingPage(code = "en") {
   const lastmod = pricingPageLastmod();
   // The plan cards sit outside .doc-section, whose paragraph, list and link rules would restyle
   // them. The Free card leaves this page for the homepage downloads, which list every platform.
-  // The Cloud Fast card keeps the switch bullet that the homepage dropped on 2026-11-12.
-  const withSwitch = (features) => (copy.cloudFastSwitchFeature ? [...features.slice(0, -1), copy.cloudFastSwitchFeature, ...features.slice(-1)] : features);
-  const tiers = t.pricing.tiers.map((tier, index) =>
-    index === 0 ? { ...tier, href: localePath(code, "#downloads"), dataAttr: "" } : tier.name === "Cloud Fast" ? { ...tier, features: withSwitch(tier.features) } : tier,
-  );
+  const tiers = t.pricing.tiers.map((tier, index) => (index === 0 ? { ...tier, href: localePath(code, "#downloads"), dataAttr: "" } : tier));
   const rows = copy.tableRows(hasWindowsRelease).map(([label, ...cells]) => [label, ...cells.map((cell) => cell ?? pricingPlanPrice(code))]);
   const priceChange = pricingPriceChangeSection(code);
   const sections = copy.sections.flatMap((section) =>

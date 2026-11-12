@@ -23,9 +23,8 @@ The homepage should sell, not explain. These notes left all eleven homepages (`z
   model"; Cloud Fast column bullets "Designed for low-sensitivity recordings" and "Local remains
   available whenever privacy matters more". Each column keeps three bullets.
 - The Cloud Fast tier bullet "One simple Cloud Fast switch in the app". `/pricing/` reuses
-  `HOME_COPY.en.pricing.tiers`, so it now takes the bullet from
-  `PRICING_PAGE_COPY.en.cloudFastSwitchFeature` and its card is unchanged. `PRICING_PAGE_LASTMOD`
-  stays 2026-11-10.
+  `HOME_COPY.en.pricing.tiers`, so its Cloud Fast card lost the same bullet. `PRICING_PAGE_LASTMOD`
+  2026-11-12.
 - The pricing footnote "Mac and Windows x64 are available now." (`pricing.footnote`). The compare
   hub footnote is now the only one.
 - The downloads introduction (`downloads.body`), the second sentence of the Mac card ("Start with

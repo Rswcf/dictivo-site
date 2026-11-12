@@ -6,7 +6,7 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 // those sentences come from the pricing functions in data/local-offer-copy.mjs, which follow
 // the 2026-11-01 rollover by themselves. Renewal and Cloud Fast prices do not change then and
 // stay placeholders here.
-export const PRICING_PAGE_LASTMOD = "2026-11-10";
+export const PRICING_PAGE_LASTMOD = "2026-11-12";
 
 const { includedUpdateMonths: months, personalDevices: devices, trialDays } = LOCAL_OFFER;
 
@@ -21,9 +21,6 @@ export const PRICING_PAGE_COPY = {
     lede: "Prices are in US dollars, tax included: the total you see is the total you pay at checkout. Nothing on this page needs a Dictivo account to read or to try.",
     answerTitle: "Short answer",
     plansTitle: "Free, Local and Cloud Fast",
-    // The plan cards reuse the homepage tiers. The homepage dropped this Cloud Fast bullet on
-    // 2026-11-12; /pricing/ keeps it, before the last Cloud Fast bullet.
-    cloudFastSwitchFeature: "One simple Cloud Fast switch in the app",
     tableTitle: "The three options side by side",
     tableCaption: (checked) => `Dictivo plans compared. Prices in US dollars, tax included. Checked on ${checked}.`,
     tableHeaders: ["", "Free Local", "Dictivo Local", "Cloud Fast"],
