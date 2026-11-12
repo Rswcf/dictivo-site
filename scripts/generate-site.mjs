@@ -4950,17 +4950,23 @@ function renderHomeFooterLinks(currentCode, t) {
     .join("\n");
 }
 
-// The homepage hero's film poster is the largest contentful paint at 768, 1440 and 1440@2x
-// (measured 2026-10-09), and on a 390px phone for the Chinese homepages, whose headline is
-// shorter; on English and Japanese phones the headline is. The <img> already loads eagerly at high
+// The homepage hero's film poster was the largest contentful paint at 768, 1440 and 1440@2x
+// (measured 2026-10-09, when the film was 720px wide), and on a 390px phone for the Chinese
+// homepages, whose headline is shorter; on English and Japanese phones the headline was. LCP has not
+// been measured since the film grew to 1080px (2026-11-12). The <img> already loads eagerly at high
 // priority, so preloading it everywhere costs no extra bytes. The <img> and its preload
 // share these strings so the browser picks the same candidate for both and fetches it once.
 // inject-asset-version.mjs rewrites only site.css and site.js, so the preload and the
 // <img> keep the same URLs after deployment.
+// sizes follows .hero-film in site.css: the content box of .hero-inner, at most 1080px.
+// .hero-inner pads clamp(24px, 5vw, 56px) on each side, so the content box is 100vw - 48px up to
+// 480px, 90vw up to 1120px and 100vw - 112px above. sizes leaves out the window-height cap, which
+// only makes the film narrower, so a short window may get a larger candidate than it needs. A 1x
+// desktop now gets poster.jpg instead of poster-800.webp; a 2x desktop gets poster-2160.webp.
 const HERO_POSTER = Object.freeze({
   src: PRODUCT_FILM.poster,
-  srcset: `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w`,
-  sizes: "(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 52vw, 720px",
+  srcset: `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w, ${PRODUCT_FILM.posterLarge} 2160w`,
+  sizes: "(max-width: 480px) calc(100vw - 48px), (max-width: 1120px) 90vw, (max-width: 1192px) calc(100vw - 112px), 1080px",
 });
 
 // A phone visitor cannot install the desktop app, so the hero offers to mail them this homepage.

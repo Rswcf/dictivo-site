@@ -27,7 +27,7 @@ for (const { code } of LOCALES) {
   assert(page.includes(`href="${film.path}"`));
   assert(page.includes(film.captions) && page.includes(film.chinese) && page.includes(film.chineseTraditional) && page.includes(film.credits));
   const figure = page.match(/<figure class="hero-film" id="demo-video">[\s\S]*?<\/figure>/)?.[0] ?? '';
-  assert(figure.includes(`${film.posterSmall} 800w`), `${code}: the hero poster srcset must use the current film`);
+  assert(figure.includes(`${film.posterSmall} 800w`) && figure.includes(`${film.posterLarge} 2160w`), `${code}: the hero poster srcset must use the current film`);
   assert(figure.includes(`${seconds}`) && figure.includes(`href="${film.credits}"`), `${code}: the play label must say ${seconds} and the caption must link the film credits`);
   assert.doesNotMatch(page, retired, `${code}: the homepage still names the previous film or its recordings`);
 }
@@ -57,7 +57,7 @@ assert(mediaKit.includes('href="/demo/"'));
 const filmSection = mediaKit.match(/<section[^>]*aria-labelledby="product-film-title"[\s\S]*?<\/section>/)?.[0] ?? '';
 assert(filmSection.includes(`${seconds} seconds`), '/media-kit/: the film section must state the duration');
 assert.doesNotMatch(filmSection, retired, '/media-kit/: the film section still names the previous film or its recordings');
-for (const path of [film.video, film.master, film.poster, film.posterSmall, film.captions, film.chinese, film.chineseTraditional, film.credits]) {
+for (const path of [film.video, film.master, film.poster, film.posterSmall, film.posterLarge, film.captions, film.chinese, film.chineseTraditional, film.credits]) {
   const size = statSync(new URL(path.slice(1), root)).size;
   assert(size > 0 && size < 25 * 1024 * 1024, `${path}: file missing or above Pages limit`);
 }

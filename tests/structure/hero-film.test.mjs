@@ -38,7 +38,7 @@ test("each homepage keeps the film player out of the page until play, with a nat
 });
 
 test("each homepage poster and its preload come from the current film", () => {
-  const srcset = `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w`;
+  const srcset = `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w, ${PRODUCT_FILM.posterLarge} 2160w`;
   for (const home of homes) {
     const html = readFileSync(`${dist}${home}`, "utf8");
     const img = /<img\b[^>]*>/.exec(heroFigure(html))?.[0] ?? "";
@@ -46,7 +46,7 @@ test("each homepage poster and its preload come from the current film", () => {
     assert.ok(html.includes(`imagesrcset="${srcset}"`), `${home}: the poster preload must match the <img>`);
     assert.doesNotMatch(html, /film-v08/, home);
   }
-  for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
+  for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall, PRODUCT_FILM.posterLarge]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
 });
 
 // 2026-11-12: the 68-second film replaced the 35-second film-v08 files. Old embeds and shared links
@@ -63,26 +63,33 @@ test("every public film-v08 URL is a 301 to a film file that exists", () => {
   assert.ok(!existsSync(`${dist}assets/film-v08`), "the old film folder is still published");
 });
 
-// Run initHeroFilm from site.js against a minimal stand-in for the figure.
-function runInitHeroFilm(film) {
+// Run initHeroFilm from site.js against a minimal stand-in for the figure and the window.
+function runInitHeroFilm(film, { innerHeight = 779 } = {}) {
   const script = readFileSync(new URL("../../assets/site.js", import.meta.url), "utf8");
   const start = script.indexOf("\nfunction initHeroFilm(");
   assert.ok(start >= 0, "site.js must define a top-level function initHeroFilm(film)");
-  const context = vm.createContext({});
+  const context = vm.createContext({ window: { innerHeight } });
   vm.runInContext(script.slice(start, script.indexOf("\n}\n", start) + 3), context);
   context.initHeroFilm(film);
 }
 
-function fakeFilm({ withTemplate = true } = {}) {
+// box: where the <video> lands once it replaces the template (getBoundingClientRect).
+function fakeFilm({ withTemplate = true, box = { top: 89, bottom: 696 } } = {}) {
   const calls = [];
-  const clone = { play: () => { calls.push("play"); return Promise.resolve(); }, focus: () => calls.push("focus") };
+  const scrolls = [];
+  const clone = {
+    play: () => { calls.push("play"); return Promise.resolve(); },
+    focus: () => calls.push("focus"),
+    getBoundingClientRect: () => box,
+    scrollIntoView: (options) => { calls.push("scroll"); scrolls.push(options); },
+  };
   const button = { hidden: true, listeners: {}, addEventListener(type, fn) { this.listeners[type] = fn; } };
   const template = {
     content: { querySelector: (selector) => (selector === "video" ? { cloneNode: (deep) => { assert.equal(deep, true); return clone; } } : null) },
     replaceWith: (node) => calls.push(node === clone ? "replace" : "replace-other"),
   };
   const film = { querySelector: (selector) => (selector === ".hero-video-poster" ? button : selector === "template" && withTemplate ? template : null) };
-  return { film, button, calls };
+  return { film, button, calls, scrolls };
 }
 
 test("pressing play puts the player where the template was and starts it in the same click", () => {
@@ -94,6 +101,29 @@ test("pressing play puts the player where the template was and starts it in the 
   assert.equal(button.hidden, true);
   // play() must run inside the click so browsers count it as started by the visitor.
   assert.deepEqual(calls, ["replace", "focus", "play"]);
+});
+
+// 2026-11-12: the 1080px film can run below the window (1440 x 779: 47 % of it in view), so the
+// visitor would start it without seeing its lower half or its controls.
+test("pressing play scrolls the player into view, centred, when the window cuts it", () => {
+  for (const box of [{ top: 496, bottom: 1104 }, { top: -40, bottom: 568 }]) {
+    const { film, button, calls, scrolls } = fakeFilm({ box });
+    runInitHeroFilm(film, { innerHeight: 779 });
+    button.listeners.click();
+    // The scroll comes after play(), so it cannot delay the start.
+    assert.deepEqual(calls, ["replace", "focus", "play", "scroll"], JSON.stringify(box));
+    // No behavior option: html's scroll-behavior in site.css decides smooth or instant (reduced motion).
+    assert.deepEqual({ ...scrolls[0] }, { block: "center" });
+  }
+});
+
+test("pressing play does not scroll when the whole player is already in the window", () => {
+  for (const box of [{ top: 89, bottom: 696 }, { top: 0, bottom: 779 }]) {
+    const { film, button, calls } = fakeFilm({ box });
+    runInitHeroFilm(film, { innerHeight: 779 });
+    button.listeners.click();
+    assert.deepEqual(calls, ["replace", "focus", "play"], JSON.stringify(box));
+  }
 });
 
 test("a figure without a template, like the /demo/ player, is left alone", () => {

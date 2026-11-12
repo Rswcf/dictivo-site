@@ -10,6 +10,8 @@ export const PRODUCT_FILM = {
   master: "/assets/film-v09/dictivo-film-4k.mp4",
   poster: "/assets/film-v09/poster.jpg",
   posterSmall: "/assets/film-v09/poster-800.webp",
+  // 2160 x 1215, for the 1080px homepage film on 2x screens. No film-v08 file matches it.
+  posterLarge: "/assets/film-v09/poster-2160.webp",
   captions: "/assets/film-v09/captions.en.vtt",
   chinese: "/assets/film-v09/captions.zh-CN.vtt",
   chineseTraditional: "/assets/film-v09/captions.zh-Hant.vtt",

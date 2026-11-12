@@ -1,5 +1,6 @@
 // The homepage film player waits in a <template>, so its poster and captions download only
 // when the visitor presses play. play() runs inside the click, which counts as user activation.
+// If the window cuts the player, the same click then scrolls all of it into view.
 function initHeroFilm(film) {
   const posterButton = film.querySelector(".hero-video-poster");
   const template = film.querySelector("template");
@@ -21,6 +22,13 @@ function initHeroFilm(film) {
       playPromise.catch(() => {
         video.focus({ preventScroll: true });
       });
+    }
+
+    // The 1080px player can run below the window; centre it so its controls show. No behavior
+    // option: html's scroll-behavior in site.css makes this smooth, or instant for reduced motion.
+    const box = video.getBoundingClientRect();
+    if (box.top < 0 || box.bottom > window.innerHeight) {
+      video.scrollIntoView({ block: "center" });
     }
   }, { once: true });
 }
