@@ -5,6 +5,45 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Homepage notes trim — 2026-11-12
+
+The homepage should sell, not explain. These notes left all eleven homepages (`zh-hant` follows
+`zh`):
+
+- The film caption under the hero film: the "Film, transcript & credits" link to `/demo/` and the
+  "Real screen recordings · AI-generated voice and music" link to `CREDITS.txt`. No homepage links
+  `/demo/` now; `/media-kit/`, the sitemap and each `llms.txt` still do. `FILM_COPY[*].credit` is
+  gone except in English, which the `/demo/` caption uses. `FILM_COPY[*].link` stays: it names
+  `/demo/` in each `llms.txt`.
+- The hero link "Try your first sentence →". The guides and the footer keep their links to the
+  first-dictation guide.
+- The privacy introduction (`privacy.body`) and both column ledes (`privacy.localLead`,
+  `privacy.cloudLead`; the `.trust-column-lede` rule went with them).
+- Local column bullets "Tiny stays free forever" and "14-day full Local trial unlocks every local
+  model"; Cloud Fast column bullets "Designed for low-sensitivity recordings" and "Local remains
+  available whenever privacy matters more". Each column keeps three bullets.
+- The Cloud Fast tier bullet "One simple Cloud Fast switch in the app". `/pricing/` reuses
+  `HOME_COPY.en.pricing.tiers`, so it now takes the bullet from
+  `PRICING_PAGE_COPY.en.cloudFastSwitchFeature` and its card is unchanged. `PRICING_PAGE_LASTMOD`
+  stays 2026-11-10.
+- The pricing footnote "Mac and Windows x64 are available now." (`pricing.footnote`). The compare
+  hub footnote is now the only one.
+- The downloads introduction (`downloads.body`), the second sentence of the Mac card ("Start with
+  Tiny free forever and a 14-day full Local trial.") and the Windows card text
+  (`WINDOWS_DOWNLOAD_COPY[*].body`, used nowhere else).
+
+Without its text, the Windows card title touched the first button (0px, Chromium 1440px), so
+`.download-actions` gained `padding-top: 16px`, the margin the text had. Checked in the built-in
+browser at 1440px and 375px only: privacy columns and download cards.
+
+`/demo/` keeps the film disclosure unchanged: its caption, the credit line and the `CREDITS.txt`
+link. AGENTS.md now asks for the disclosure on `/demo/` only. The `.hero-film` height cap keeps
+`100svh - 140px`, although the 1080px note below gives the caption as the reason for the 140px.
+`.hero-film figcaption` stays: it styles the `/demo/` caption. `check-public-output.mjs` keeps its
+Windows launch patterns; the footnote patterns in it now match no homepage.
+`HOME_SHARED_CONTENT_LASTMOD` 2026-11-12; the homepage sitemap dates do not move, because
+`PRODUCT_FILM.lastmod` is already 2026-11-12.
+
 ## Homepage film 1080px wide — 2026-11-12
 
 The homepage film was at most 720px wide, so the dictated text in it was about 9-10px on a wide

@@ -57,8 +57,9 @@ Do not run these scripts locally unless the task is about them:
 - The root `_redirects` holds only the three checkout lines. The build writes every other rule.
 - "Last updated" stamps, `dateModified` and sitemap `lastmod` come from `*_LASTMOD` constants. Bump
   the constant when the content it stamps changes. README lists them.
-- The hero film caption links the film credits (`CREDITS.txt`) and says that the film is real screen
-  recordings with an AI-generated voice and music. Keep it on every homepage and `/demo/`.
+- The `/demo/` film caption links the film credits (`CREDITS.txt`) and says that the film is real
+  screen recordings with an AI-generated voice and music. Keep it on `/demo/`. Since 2026-11-12 the
+  homepage film has no caption.
 - The build prints an Impressum warning on every run. It is expected until `data/impressum.json` is filled.
 
 ## Do not break

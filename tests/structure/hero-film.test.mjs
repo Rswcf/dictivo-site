@@ -31,9 +31,11 @@ test("each homepage keeps the film player out of the page until play, with a nat
     assert.ok(player.includes(PRODUCT_FILM.captions), `${home}: captions missing`);
     assert.equal(inner(figure, "noscript"), player, `${home}: the <noscript> player must match the <template> player`);
 
-    const order = ["hero-video-poster", "<template", "<noscript>", "<figcaption"].map((part) => figure.indexOf(part));
-    assert.deepEqual([...order].sort((a, b) => a - b), order, `${home}: button, template, noscript, figcaption order`);
+    const order = ["hero-video-poster", "<template", "<noscript>"].map((part) => figure.indexOf(part));
+    assert.deepEqual([...order].sort((a, b) => a - b), order, `${home}: button, template, noscript order`);
     assert.ok(order.every((at) => at >= 0), `${home}: missing part ${order}`);
+    // 2026-11-12: the homepage film has no caption; /demo/ keeps its own.
+    assert.doesNotMatch(figure, /<figcaption/, `${home}: the homepage film has a caption`);
   }
 });
 

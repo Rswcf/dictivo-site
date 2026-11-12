@@ -24,11 +24,12 @@ for (const { code } of LOCALES) {
   assert.equal(schema.contentUrl, `https://dictivo.app${film.video}`);
   assert.equal(schema.thumbnailUrl, `https://dictivo.app${film.poster}`);
   assert(!schema.embedUrl, 'The watch page is not a separate embeddable player');
-  assert(page.includes(`href="${film.path}"`));
-  assert(page.includes(film.captions) && page.includes(film.chinese) && page.includes(film.chineseTraditional) && page.includes(film.credits));
+  assert(page.includes(film.captions) && page.includes(film.chinese) && page.includes(film.chineseTraditional));
   const figure = page.match(/<figure class="hero-film" id="demo-video">[\s\S]*?<\/figure>/)?.[0] ?? '';
   assert(figure.includes(`${film.posterSmall} 800w`) && figure.includes(`${film.posterLarge} 2160w`), `${code}: the hero poster srcset must use the current film`);
-  assert(figure.includes(`${seconds}`) && figure.includes(`href="${film.credits}"`), `${code}: the play label must say ${seconds} and the caption must link the film credits`);
+  assert(figure.includes(`${seconds}`), `${code}: the play label must say ${seconds}`);
+  // Since 2026-11-12 the homepage film has no caption; /demo/ carries the disclosure and the credits link.
+  assert(!figure.includes('<figcaption'), `${code}: the homepage film must have no caption`);
   assert.doesNotMatch(page, retired, `${code}: the homepage still names the previous film or its recordings`);
 }
 for (const code of Object.keys(FILM_COPY)) {
@@ -44,7 +45,8 @@ assert(page.includes(`${seconds}-second product film`) && page.includes(`${secon
 // Disclosures of the 68-second film: generated voice, the default shortcut and the ⌘P recordings.
 assert(page.includes('The dictated voice is generated') && page.includes('no recording of a human voice'), '/demo/: the voice is generated');
 assert(page.includes('Cmd+Shift+Space') && page.includes('Ctrl+Shift+Space') && page.includes('⌘P'), '/demo/: the shortcut note');
-assert(page.includes(FILM_COPY.en.credit), '/demo/: the film caption credit');
+const caption = page.match(/<figure class="hero-film film-watch">[\s\S]*?<figcaption>([\s\S]*?)<\/figcaption>/)?.[1] ?? '';
+assert(caption.includes(`<a href="${film.credits}">${FILM_COPY.en.credit}</a>`), '/demo/: the film caption must link the film credits with the credit line');
 assert.doesNotMatch(page, retired, '/demo/ still names the previous film or its recordings');
 for (const path of [film.video, film.master]) {
   const mb = `${(statSync(new URL(path.slice(1), root)).size / 1e6).toFixed(1)} MB`;
@@ -70,4 +72,4 @@ for (const [from, to] of RETIRED_FILM_URLS) {
 assert(get(film.captions).includes('Quick update: the launch moved to Tuesday.'));
 assert(get(film.chineseTraditional).includes('Local 模式') && !get(film.chineseTraditional).includes('开会'), 'zh-Hant captions are converted from the Simplified file');
 assert(get(film.credits).includes('no recording of a human voice') && !retired.test(get(film.credits)));
-console.log(`Product film: ${LOCALES.length} homepages, native fallback, captions, privacy scope, generated-voice and shortcut disclosures, credits, watch-page metadata, sitemap, ${RETIRED_FILM_URLS.length} film-v08 redirects and asset limits passed.`);
+console.log(`Product film: ${LOCALES.length} homepages (native fallback, caption tracks, no figcaption), privacy scope, generated-voice and shortcut disclosures, /demo/ credits caption, watch-page metadata, sitemap, ${RETIRED_FILM_URLS.length} film-v08 redirects and asset limits passed.`);

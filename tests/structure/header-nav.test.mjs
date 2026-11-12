@@ -42,25 +42,27 @@ test("the header nav holds three links; the third opens the language's compare h
   }
 });
 
-test("each homepage pricing section links its compare hub in a second footnote", () => {
+// 2026-11-12: the first footnote ("Mac and Windows x64 are available now.") left the homepage, so the
+// compare hub footnote is the only one.
+test("each homepage pricing section links its compare hub in its only footnote", () => {
   for (const locale of LOCALES) {
     const path = `${prefix(locale.code)}index.html`;
     const html = read(path);
     const pricing = /<section class="pricing-section[^"]*" id="pricing"[\s\S]*?<\/section>/.exec(html)?.[0];
     assert.ok(pricing, `${path}: no #pricing section`);
     const footnotes = [...pricing.matchAll(/<p class="pricing-footnote">([\s\S]*?)<\/p>/g)].map((match) => match[1]);
-    assert.equal(footnotes.length, 2, `${path}: ${footnotes.length} pricing footnotes`);
-    const items = links(footnotes[1]);
+    assert.equal(footnotes.length, 1, `${path}: ${footnotes.length} pricing footnotes`);
+    const items = links(footnotes[0]);
     // The link text is the hub page's own heading, so the reader lands on what the link promised.
     const hubHeading = decode(/<h1 id="compare-hub-title">([^<]*)<\/h1>/.exec(read(`${prefix(locale.code)}compare/index.html`))?.[1] ?? "");
     assert.ok(hubHeading, `${locale.code}: compare hub has no heading`);
     assert.deepEqual(items[0], { href: hubPath(locale.code), label: hubHeading }, `${path}: compare hub link`);
     if (locale.code === "en") {
-      assert.equal(items.length, 2, `${path}: ${items.length} links in the second footnote`);
+      assert.equal(items.length, 2, `${path}: ${items.length} links in the footnote`);
       assert.deepEqual(items[1], { href: "/guides/best-dictation-software/", label: "Best dictation software" }, path);
-      assert.match(footnotes[1], /<\/a> · <a /, `${path}: links separated by " · "`);
+      assert.match(footnotes[0], /<\/a> · <a /, `${path}: links separated by " · "`);
     } else {
-      assert.equal(items.length, 1, `${path}: ${items.length} links in the second footnote`);
+      assert.equal(items.length, 1, `${path}: ${items.length} links in the footnote`);
     }
   }
   assert.ok(!read("de/index.html").includes("/pricing/"), "the German homepage links no /pricing/ page");
