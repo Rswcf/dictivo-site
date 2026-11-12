@@ -2885,6 +2885,21 @@ main section[id] {
   outline-offset: 3px;
 }
 
+/* While the prompt is open, the homepage film's sticky play label stops at least 12px above it.
+   The middleware puts the prompt first in <body>; it leaves on navigation, so no script is needed.
+   The prompt sits 16px above the window's bottom edge. Measured in Chromium (2026-11-12): at most
+   105.2px tall while it is 680px wide (Dutch and Portuguese wrap to two rows), at most 152.4px on
+   phones (three rows). 16 + 105.2 + 12 = 133.2; 16 + 152.4 + 12 = 180.4. */
+body:has(> .locale-suggestion) .hero-video-play {
+  bottom: 134px;
+}
+
+@media (max-width: 767px) {
+  body:has(> .locale-suggestion) .hero-video-play {
+    bottom: 181px;
+  }
+}
+
 /* Trial actions remain readable inside long comparison guides. */
 .guide-trial {
   border: 1px solid rgb(125 211 199 / 28%);

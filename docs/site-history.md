@@ -22,6 +22,9 @@ New poster candidate `assets/film-v09/poster-2160.webp` (2160 x 1215, 44,302 byt
 and a 2x 768px tablet `poster.jpg` (they loaded `poster-800.webp` before). Phones keep the same
 film size. Measured in Chromium only (built-in browser and Playwright Chromium); not checked in
 Safari or Firefox. LCP was not measured again. No `*_LASTMOD` change: the copy did not change.
+While the language prompt (`.locale-suggestion`) is open, the label stops 134px above the window's
+bottom edge (181px below 768px), at least 12px above the tallest prompt measured in Chromium; on
+short phone screens it can still sit under the prompt, at the poster's top.
 
 ## 68-second film replaces the 35-second film — 2026-11-12
 
