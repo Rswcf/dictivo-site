@@ -52,9 +52,9 @@ test("the quick reference has seven rows for Mac and Windows, and the Mac row gi
     assert.equal(row.length, 3, row[0]);
     for (const cell of row) assert.ok(cell.length > 0 && !/TODO/.test(cell), row[0]);
   }
-  // The 0.3.57 engine imports libc++ symbols from macOS 15.4, so Local needs 15.4; the app still declares 10.13.
+  // From 0.3.58 the engine is built for macOS 13.3; the app still declares 10.13.
   const [, macOs, windowsOs] = table[1];
-  assert.match(macOs, /^Local dictation needs macOS 15\.4 or later\. On older macOS, the local engine does not start\./);
+  assert.match(macOs, /^Local dictation needs macOS 13\.3 or later\. On older macOS, the local engine does not start\./);
   assert.match(macOs, /declares macOS 10\.13 or later/);
   assert.match(macOs, /macOS 13 or later/);
   assert.doesNotMatch(macOs, /not published/);
@@ -75,7 +75,8 @@ test("the page states the platforms, engines and limits as the source states the
   const body = text(main(page()));
   for (const phrase of [
     "universal app for Apple Silicon and Intel Macs",
-    "In Dictivo 0.3.57, Local dictation needs macOS 15.4 or later",
+    "From Dictivo 0.3.58, Local dictation needs macOS 13.3 or later",
+    "Versions 0.3.35 to 0.3.57 needed macOS 15.4",
     "The app declares macOS 10.13 or later",
     "not the minimum for Local dictation",
     "Start at login needs macOS 13 or later",
@@ -112,12 +113,12 @@ test("the FAQ asks five questions, from Intel Macs to the GPU", () => {
   assert.equal(copy.faqs[0][0], "Does Dictivo run on Intel Macs?");
   assert.equal(copy.faqs.at(-1)[0], "Do I need a GPU?");
   const macOs = copy.faqs.find(([question]) => question === "Which macOS version do I need?");
-  assert.match(macOs[1], /^For Local dictation in Dictivo 0\.3\.57, macOS 15\.4 or later\./);
+  assert.match(macOs[1], /^For Local dictation from Dictivo 0\.3\.58, macOS 13\.3 or later\./);
   assert.match(macOs[1], /declares macOS 10\.13 or later/);
   const intel = copy.faqs.find(([question]) => question === "Does Dictivo run on Intel Macs?");
-  assert.match(intel[1], /Local dictation needs macOS 15\.4 or later on every Mac/);
+  assert.match(intel[1], /Local dictation needs macOS 13\.3 or later on every Mac/);
   // The answer box no longer leads with the declared minimum.
-  assert.match(copy.answer, /In Dictivo 0\.3\.57, Local dictation needs macOS 15\.4 or later\./);
+  assert.match(copy.answer, /From Dictivo 0\.3\.58, Local dictation needs macOS 13\.3 or later\./);
   assert.doesNotMatch(copy.answer, /10\.13/);
   const arm = copy.faqs.find(([question]) => question === "Does Dictivo run on Windows on ARM?");
   assert.match(arm[1], /no ARM build/);

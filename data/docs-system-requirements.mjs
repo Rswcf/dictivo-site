@@ -14,7 +14,9 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   MTLResidencySetDescriptor (macOS 15.0). That engine started and transcribed on macOS 15.8.2
 //   (GitHub macos-15 runner, desktop PR "build the macOS engine for macOS 13.3"). That it does not
 //   start below 15.4 is inferred from the imports; nobody ran it there. Releases 0.3.35 to 0.3.57
-//   carry the same imports;
+//   carry the same imports. From 0.3.58 the engine is built for macOS 13.3 (vtool minos 13.3 on
+//   both slices; desktop scripts/prepare-private-fast-engine.mjs MACOS_ENGINE_DEPLOYMENT_TARGET).
+//   Below 13.3 it imports Accelerate's cblas_sgemm that macOS has from 13.3;
 // - Start at login: autostart.rs (SMAppService, "Start at login needs macOS 13 or later", the
 //   Applications-folder rule; Windows Startup apps);
 // - Developer ID signed and notarized Mac build; x64-only Windows build, EXE and MSI, not
@@ -37,7 +39,9 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-12";
 
 const MAC_MINIMUM = "10.13";
-const MAC_LOCAL_MINIMUM = "15.4";
+const MAC_LOCAL_MINIMUM = "13.3";
+// The first release whose engine is built for MAC_LOCAL_MINIMUM.
+const MAC_LOCAL_SINCE = "0.3.58";
 const LOGIN_MINIMUM = "13";
 
 export function docsSystemRequirementsCopy({ windows }) {
@@ -61,7 +65,7 @@ export function docsSystemRequirementsCopy({ windows }) {
     lastmod: DOCS_SYSTEM_REQUIREMENTS_LASTMOD,
     title: "Dictivo system requirements for Mac and Windows",
     lede: "Reference facts about what the Dictivo desktop app needs on a Mac and on a Windows x64 PC: processor, operating system, memory, disk space, microphone and network.",
-    answer: `Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. In Dictivo ${DOCS_CHECKED_VERSION}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. Dictivo for Windows is an x64 installer for Windows 10 and 11. You need a microphone and disk space for the app plus one model, from about 75 MB to about 3.1 GB. Local dictation needs no network. The first model download, updates and license activation do.`,
+    answer: `Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. From Dictivo ${MAC_LOCAL_SINCE}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. Dictivo for Windows is an x64 installer for Windows 10 and 11. You need a microphone and disk space for the app plus one model, from about 75 MB to about 3.1 GB. Local dictation needs no network. The first model download, updates and license activation do.`,
     answerLinks: [
       ["Which Mac suits the larger models", "/mac-model-guide/"],
       ["The seven local models", "/docs/models-and-languages/"],
@@ -101,7 +105,7 @@ export function docsSystemRequirementsCopy({ windows }) {
         title: "Mac",
         paragraphs: [
           "Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. The same download runs on both.",
-          `In Dictivo ${DOCS_CHECKED_VERSION}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, its local engine does not start.`,
+          `From Dictivo ${MAC_LOCAL_SINCE}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, its local engine does not start. Versions 0.3.35 to 0.3.57 needed macOS 15.4 for it: update Dictivo if Local does not start on macOS ${MAC_LOCAL_MINIMUM} to 15.3.`,
           `The app declares macOS ${MAC_MINIMUM} or later. This is the minimum written into the app, not the minimum for Local dictation. Start at login needs macOS ${LOGIN_MINIMUM} or later, and Dictivo must run from the Applications folder for it.`,
           "On Apple Silicon, the local engine uses the GPU through Metal. On Intel Macs, it uses the CPU engine.",
           "The Mac model guide notes that older Intel MacBooks are usable, but not the best fit for the larger local models.",
@@ -177,11 +181,11 @@ export function docsSystemRequirementsCopy({ windows }) {
     faqs: [
       [
         "Does Dictivo run on Intel Macs?",
-        `Yes. Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. On Intel Macs, the local engine uses the CPU. In Dictivo ${DOCS_CHECKED_VERSION}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later on every Mac. The Mac model guide helps you pick a model for your Mac.`,
+        `Yes. Dictivo for Mac is one universal app for Apple Silicon and Intel Macs. On Intel Macs, the local engine uses the CPU. From Dictivo ${MAC_LOCAL_SINCE}, Local dictation needs macOS ${MAC_LOCAL_MINIMUM} or later on every Mac. The Mac model guide helps you pick a model for your Mac.`,
       ],
       [
         "Which macOS version do I need?",
-        `For Local dictation in Dictivo ${DOCS_CHECKED_VERSION}, macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, the local engine does not start. The app declares macOS ${MAC_MINIMUM} or later. Start at login needs macOS ${LOGIN_MINIMUM} or later, with Dictivo in the Applications folder.`,
+        `For Local dictation from Dictivo ${MAC_LOCAL_SINCE}, macOS ${MAC_LOCAL_MINIMUM} or later. On older macOS, the local engine does not start. The app declares macOS ${MAC_MINIMUM} or later. Start at login needs macOS ${LOGIN_MINIMUM} or later, with Dictivo in the Applications folder.`,
       ],
       [
         "Does Dictivo run on Windows on ARM?",
