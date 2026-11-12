@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { LOCALES } from "../../data/site-content.mjs";
+import { FILM_COPY, PRODUCT_FILM } from "../../data/product-film.mjs";
+import { HANT, toHant } from "../../scripts/lib/hant.mjs";
+import { html as escape } from "../../scripts/lib/html.mjs";
 
 // Homepage layout from the 2026-11-03 simplification (P2). It reads only dist/.
 const dist = new URL("../../dist/", import.meta.url).pathname;
@@ -30,12 +33,19 @@ test("the hero Windows install help starts hidden; site.js shows it to Windows v
   assert.match(script, /visitorPlatform === "windows"[\s\S]{0,120}\[data-windows-install-help\]\[hidden\]/);
 });
 
+// 2026-11-12: the 68-second film has no human recordings, so the credit says what is real and what
+// is generated and links the film credits; the CC BY 4.0 / VCTK credit of the old film is gone.
 test("the hero has no eyebrow and the film caption keeps only the watch link and the credit", () => {
-  for (const home of homes) {
+  for (const locale of LOCALES) {
+    const home = locale.code === "en" ? "index.html" : `${locale.code}/index.html`;
+    const copy = locale.code === HANT ? toHant(FILM_COPY.zh) : FILM_COPY[locale.code];
     const html = read(home);
     const hero = html.match(/<section class="hero[\s\S]*?<\/section>/)[0];
     assert.doesNotMatch(hero, /class="eyebrow"/, home);
-    assert.match(html, /<figcaption><a href="\/demo\/">[^<]+<\/a><br><a href="[^"]+CREDITS\.txt">[^<]*CC BY 4\.0<\/a><\/figcaption>/, home);
+    const caption = `<figcaption><a href="/demo/">${escape(copy.link)}</a><br><a href="${PRODUCT_FILM.credits}">${escape(copy.credit)}</a></figcaption>`;
+    assert.ok(html.includes(caption), `${home}: ${caption}`);
+    assert.match(copy.credit, /\b(?:AI|KI|IA)\b/, `${home}: the credit says the voice and music are generated`);
+    assert.doesNotMatch(html, /CC BY|VCTK/, home);
   }
 });
 

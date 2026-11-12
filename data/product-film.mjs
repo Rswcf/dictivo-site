@@ -1,37 +1,54 @@
 export const PRODUCT_FILM = {
   path: "/demo/",
-  lastmod: "2026-09-12",
-  // First successful production deployment, GitHub Actions run 34593761455.
-  uploadedAt: "2026-09-11T11:24:06Z",
+  lastmod: "2026-11-12",
+  // The date of the pull request that published this film. If the first production deploy with
+  // the film-v09 files falls on a later day, set this to the time of that deploy.
+  uploadedAt: "2026-11-12T16:00:00Z",
   name: "Dictivo — Keep your flow",
-  description: "Watch Dictivo turn a spoken draft into text. Local keeps audio on your device; Cloud Fast is there when you choose it. A 35-second film with human dictation.",
-  video: "/assets/film-v08/dictivo-film-1080p.mp4",
-  master: "/assets/film-v08/dictivo-film-4k.mp4",
-  poster: "/assets/film-v08/poster.jpg",
-  captions: "/assets/film-v08/captions.en.vtt",
-  chinese: "/assets/film-v08/captions.zh-CN.vtt",
-  chineseTraditional: "/assets/film-v08/captions.zh-Hant.vtt",
-  credits: "/assets/film-v08/CREDITS.txt",
-  duration: "PT35S",
+  description: "Watch Dictivo turn speech into text in Mail and Notes on a Mac: Local keeps audio on your device, and Cloud Fast is there when you choose it. A 68-second film made from real screen recordings.",
+  video: "/assets/film-v09/dictivo-film-1080p.mp4",
+  master: "/assets/film-v09/dictivo-film-4k.mp4",
+  poster: "/assets/film-v09/poster.jpg",
+  posterSmall: "/assets/film-v09/poster-800.webp",
+  captions: "/assets/film-v09/captions.en.vtt",
+  chinese: "/assets/film-v09/captions.zh-CN.vtt",
+  chineseTraditional: "/assets/film-v09/captions.zh-Hant.vtt",
+  credits: "/assets/film-v09/CREDITS.txt",
+  duration: "PT68S",
 };
+
+// Public URLs of the previous film (film-v08, 2026-09-11 to 2026-11-12). The build writes a 301
+// from each one to the file that replaces it, so old embeds and shared links keep working.
+export const RETIRED_FILM_URLS = Object.freeze([
+  ["/assets/film-v08/dictivo-film-1080p.mp4", PRODUCT_FILM.video],
+  ["/assets/film-v08/dictivo-film-4k.mp4", PRODUCT_FILM.master],
+  ["/assets/film-v08/poster.jpg", PRODUCT_FILM.poster],
+  ["/assets/film-v08/poster-800.webp", PRODUCT_FILM.posterSmall],
+  ["/assets/film-v08/captions.en.vtt", PRODUCT_FILM.captions],
+  ["/assets/film-v08/captions.zh-CN.vtt", PRODUCT_FILM.chinese],
+  ["/assets/film-v08/captions.zh-Hant.vtt", PRODUCT_FILM.chineseTraditional],
+  ["/assets/film-v08/CREDITS.txt", PRODUCT_FILM.credits],
+]);
 
 // Labels describe the same English-language film on every localized homepage.
 export const FILM_COPY = {
-  en: { play: "Watch the film · 35 sec", alt: "Dictivo Local with a transcribed draft and the words Your voice. On your device.", link: "Film, transcript & credits", credit: "Human recordings: CSTR VCTK · CC BY 4.0" },
-  de: { play: "Film ansehen · 35 Sek.", alt: "Dictivo Local mit einem transkribierten Entwurf und dem Hinweis, dass Audio auf dem Gerät bleibt.", link: "Film, Transkript & Credits (EN)", credit: "Menschliche Sprachaufnahmen: CSTR VCTK · CC BY 4.0" },
-  fr: { play: "Voir le film · 35 s", alt: "Dictivo Local affiche un brouillon transcrit et indique que l’audio reste sur l’appareil.", link: "Film, transcription et crédits (EN)", credit: "Enregistrements de voix humaines : CSTR VCTK · CC BY 4.0" },
-  es: { play: "Ver el vídeo · 35 s", alt: "Dictivo Local muestra un borrador transcrito y señala que el audio permanece en el dispositivo.", link: "Vídeo, transcripción y créditos (EN)", credit: "Grabaciones de voces humanas: CSTR VCTK · CC BY 4.0" },
-  it: { play: "Guarda il video · 35 s", alt: "Dictivo Local mostra una bozza trascritta e indica che l’audio rimane sul dispositivo.", link: "Video, trascrizione e crediti (EN)", credit: "Registrazioni di voci umane: CSTR VCTK · CC BY 4.0" },
-  nl: { play: "Bekijk de film · 35 sec", alt: "Dictivo Local toont een uitgeschreven concept en vermeldt dat audio op het apparaat blijft.", link: "Film, transcript en credits (EN)", credit: "Menselijke stemopnamen: CSTR VCTK · CC BY 4.0" },
-  pt: { play: "Ver o vídeo · 35 s", alt: "Dictivo Local mostra um rascunho transcrito e indica que o áudio fica no dispositivo.", link: "Vídeo, transcrição e créditos (EN)", credit: "Gravações de vozes humanas: CSTR VCTK · CC BY 4.0" },
-  zh: { play: "观看短片 · 35 秒", alt: "Dictivo Local 展示口述草稿的转录结果，并说明声音留在设备上。", link: "短片、文字稿与署名（英语）", credit: "真人录音：CSTR VCTK · CC BY 4.0" },
-  ja: { play: "動画を見る・35秒", alt: "Dictivo Localが下書きの文字起こし結果と、音声をデバイス内で処理することを示しています。", link: "動画・文字起こし・クレジット（英語）", credit: "人間の音声録音：CSTR VCTK · CC BY 4.0" },
-  ko: { play: "영상 보기 · 35초", alt: "Dictivo Local이 초안의 받아쓰기 결과와 음성이 기기에 남는다는 안내를 보여 줍니다.", link: "영상, 대본 및 크레딧 (영어)", credit: "사람의 음성 녹음: CSTR VCTK · CC BY 4.0" },
+  en: { play: "Watch the film · 68 sec", alt: "A new Mail message with a dictated sentence. The Dictivo Companion shows Pasted and 14 words saved.", link: "Film, transcript & credits", credit: "Real screen recordings · AI-generated voice and music" },
+  de: { play: "Film ansehen · 68 Sek.", alt: "Eine neue Nachricht in Mail mit einem diktierten Satz. Der Dictivo Companion meldet: eingefügt, 14 Wörter gespart.", link: "Film, Transkript & Credits (EN)", credit: "Echte Bildschirmaufnahmen · Stimme und Musik KI-generiert" },
+  fr: { play: "Voir le film · 68 s", alt: "Un nouveau message dans Mail avec une phrase dictée. Le Dictivo Companion indique que le texte est collé et que 14 mots ont été économisés.", link: "Film, transcription et crédits (EN)", credit: "Vraies captures d’écran · Voix et musique générées par IA" },
+  es: { play: "Ver el vídeo · 68 s", alt: "Un mensaje nuevo en Mail con una frase dictada. Dictivo Companion indica que el texto se ha pegado y que se han ahorrado 14 palabras.", link: "Vídeo, transcripción y créditos (EN)", credit: "Grabaciones de pantalla reales · Voz y música generadas por IA" },
+  it: { play: "Guarda il video · 68 s", alt: "Un nuovo messaggio in Mail con una frase dettata. Dictivo Companion indica che il testo è stato incollato e che sono state risparmiate 14 parole.", link: "Video, trascrizione e crediti (EN)", credit: "Registrazioni dello schermo reali · Voce e musica generate dall’IA" },
+  nl: { play: "Bekijk de film · 68 sec", alt: "Een nieuw bericht in Mail met een gedicteerde zin. De Dictivo Companion meldt dat de tekst is geplakt en dat 14 woorden zijn bespaard.", link: "Film, transcript en credits (EN)", credit: "Echte schermopnamen · Stem en muziek door AI gegenereerd" },
+  pt: { play: "Ver o vídeo · 68 s", alt: "Uma nova mensagem no Mail com uma frase ditada. O Dictivo Companion indica que o texto foi colado e que 14 palavras foram economizadas.", link: "Vídeo, transcrição e créditos (EN)", credit: "Gravações de tela reais · Voz e música geradas por IA" },
+  zh: { play: "观看短片 · 68 秒", alt: "Mail 中的一封新邮件，里面是一句口述的话。Dictivo Companion 显示“已粘贴”和“省下 14 个词”。", link: "短片、文字稿与署名（英语）", credit: "真实录屏 · 语音和配乐由 AI 生成" },
+  ja: { play: "動画を見る・68秒", alt: "Mailの新規メッセージに、音声入力した一文が入っています。Dictivo Companionには、貼り付けが完了し14語を節約したことが表示されています。", link: "動画・文字起こし・クレジット（英語）", credit: "実際の画面録画 · 音声と音楽はAI生成" },
+  ko: { play: "영상 보기 · 68초", alt: "Mail의 새 메시지에 받아쓴 문장이 들어 있습니다. Dictivo Companion이 붙여넣기가 끝났고 14단어를 절약했다고 표시합니다.", link: "영상, 대본 및 크레딧 (영어)", credit: "실제 화면 녹화 · 음성과 음악은 AI 생성" },
 };
 
 export const FILM_CHAPTERS = [
-  { start: 0, end: 12, title: "Say it", description: "A human voice says: ‘I would like to see the figures for the second quarter.’ Dictivo’s Local transcription appears as a draft." },
-  { start: 12, end: 19, title: "Your voice. On your device.", description: "Local is the default. Once a model is installed, dictation audio is processed on your computer without uploading it." },
-  { start: 19, end: 29, title: "Cloud, when you choose", description: "A new draft opens, then Cloud Fast is selected. A second human recording says: ‘Everyone deserves to share in this success.’ Cloud Fast sends the selected recording for cloud transcription." },
-  { start: 29, end: 35, title: "Keep your flow", description: "Try Dictivo on Mac or Windows. All local models are free to try for 14 days, without a card or Dictivo account." },
+  { start: 0, end: 10, title: "Say it", description: "“Typing is slow.” is typed and deleted. The film names what you can say instead: emails, notes, prompts, your next draft. Dictivo: on-device dictation." },
+  { start: 10, end: 26, title: "Dictate into Mail", description: "In a Mail draft, the shortcut starts Dictivo in Local mode. A generated voice says: ‘Hi Maya, Thursday works for me. Please send the updated agenda before our meeting.’ Dictivo pastes the sentence, and the Companion shows 14 words saved." },
+  { start: 26, end: 34, title: "In the app you’re using", description: "The same shortcut pastes a note and an AI prompt into Notes, both transcribed in Local mode." },
+  { start: 34, end: 48, title: "Where does your voice go?", description: "In Local mode, dictation audio stays on your computer. The app shows “Private Local is ready” and “Audio stays on this device.” No cloud upload, no Dictivo account, and a network test at dictivo.app/privacy/local-dictation-network-test." },
+  { start: 48, end: 56, title: "Cloud Fast, when you choose", description: "One click switches to Cloud Fast, which uploads the recording you choose: ‘Quick update: the launch moved to Tuesday.’ One click switches back to Private Local." },
+  { start: 56, end: 68, title: "Keep your flow", description: "Dictivo Local: pay once, keep it forever, no subscription. Every local model is free to try for 14 days, without a card or Dictivo account. Download for Mac or Windows." },
 ];

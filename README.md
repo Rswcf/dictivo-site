@@ -690,18 +690,24 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 
 ## Product film
 
-`data/product-film.mjs` is the metadata and localization source for the 35-second
-film on all eleven homepages and `/demo/`. The watch page includes native playback,
-English captions, Chinese subtitles, chapter URLs (`/demo/?t=12`), a spoken
-transcript, clear Local/Cloud audio boundaries, and recording attribution.
+`data/product-film.mjs` is the metadata and localization source for the 68-second
+film on all eleven homepages and `/demo/`. The files live in `assets/film-v09/`. The watch page
+includes native playback, English captions, Chinese subtitles, chapter URLs (`/demo/?t=10`), the
+two spoken lines, clear Local/Cloud audio boundaries, and the edit and shortcut disclosures. Its
+download sizes are read from the files at build time.
 Homepage playback uses a static video `src` with `preload="none"`; JavaScript
 enhances the poster button, while a native player remains usable without it.
 The 4K file is a download option, not the default player source.
 
-Retain the original native-app evidence at `/media-kit/#native-example-title`.
-The commercial film is a designed presentation of actual file transcriptions,
-not a replacement for continuous screen-capture evidence. Keep recording credits
-and CC BY 4.0 license links with every publication of the film.
+The app scenes are real screen recordings of Dictivo 0.3.57; the dictated voice, the music and the
+sound effects are AI-generated. The film is edited (shortened pauses and waits), so it does not
+replace the continuous native-app evidence at `/media-kit/#native-example-title`; keep that link.
+Every homepage caption and `/demo/` say that the voice and music are generated and link
+`CREDITS.txt`.
+
+A new film goes into a new folder (`film-v10/`, …). Add the old public paths to
+`RETIRED_FILM_URLS` in `data/product-film.mjs`; the build writes a 301 for each to `_redirects`
+(`/assets/film-v08/*` now 301s to `film-v09`).
 
 Run `node scripts/check-product-film.mjs` after generation. Test chapter links
 with a preview server that supports HTTP byte ranges. Plain Python http.server and

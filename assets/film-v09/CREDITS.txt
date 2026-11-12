@@ -1,0 +1,59 @@
+Dictivo — Keep your flow. (68 seconds, 2026-11-12)
+
+What is real
+- Screen recordings of Dictivo 0.3.57 on macOS, made on 2026-11-12: Mail (a new
+  message), Notes (three notes) and the Dictivo main window, with the Dictivo
+  Companion.
+- Every dictated text on screen is the text Dictivo pasted. The Mail scene and
+  the first two Notes scenes used Local mode. The last Notes scene used
+  Cloud Fast. The word counts in the Companion are the app's own.
+- The main window scenes show real clicks from Private Local to Cloud Fast and
+  back to Private Local.
+- During recording, the generated voice files played through the Mac's
+  speakers, and Dictivo transcribed them from the built-in microphone.
+  Software sent the shortcut presses and the clicks.
+
+What is generated
+- Dictated voice: ElevenLabs text-to-speech, model eleven_v4, stock voice
+  "Jessica". The film contains no recording of a human voice.
+- Music: ElevenLabs Music, model music_v2_5.
+- Sound effects (typing, key presses, clicks, tones): ElevenLabs sound
+  generation, default model. They are editorial sounds, not the app's own
+  sounds.
+
+How the recordings were edited
+- No speed change. Every recorded part plays at normal speed.
+- Silent pauses after the speech were shortened. In Mail, 3.77 s of silent
+  listening after the last word was cut and 0.80 s remains. The Notes and
+  Prompts scenes show only the last 0.5 s of each dictation. The Cloud Fast
+  scene shows the whole sentence.
+- Waits are shown for at most 0.5 s. Time from the stop to the pasted text,
+  real and shown:
+    Mail, Local          0.23 s, shown in full
+    Notes, Local         2.73 s, shown as 0.30 s
+    Prompts, Local       3.27 s, shown as 0.30 s
+    Notes, Cloud Fast    1.67 s, shown as 0.30 s
+- The sender address in Mail is hidden under a box in the row's own colour.
+  The "From:" label stays.
+- In the Mail recording, the Companion sat to the right of the Mail window.
+  Its frames from the same moment are placed over the empty lower right of
+  the Mail window. Nothing in them is retimed or redrawn.
+- The Notes and Prompts scenes play without the dictated voice.
+- One Notes take was rejected: the app repeated the last clause (21 words
+  instead of 15). It is not in the film. The file is kept on record.
+- Titles, the keycap drawing and the check list are motion graphics. The
+  cards at 32-34 s and the Companion avatar at 22-26 s and in the end card
+  are still frames from the recordings.
+
+Shortcut
+- The titles name no key.
+- The keycap drawing shows Dictivo's default dictation shortcut on Mac,
+  Cmd+Shift+Space. On Windows the default is Ctrl+Shift+Space.
+- The recordings show ⌘P, because ⌘P was the dictation shortcut set on the
+  recording Mac.
+- You can change the shortcut in Dictivo.
+
+Local keeps dictation audio on the device after setup. Cloud Fast uploads the
+recording you choose for transcription.
+
+Dictivo team
