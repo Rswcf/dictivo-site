@@ -5,6 +5,24 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Homepage film 1080px wide — 2026-11-12
+
+The homepage film was at most 720px wide, so the dictated text in it was about 9-10px on a wide
+window. `.hero-film` is now as wide as the headline column, at most 1080px, and never taller than
+the window: the width is capped at `(100svh - 140px) * 16 / 9`, at least 480px. The 140px leave
+room for the caption; the header is `position: absolute`, so it takes none. The film may now run
+below the first screen. The play label sticks 20px above the window's bottom edge while the poster
+runs below it, and returns to 20px above the poster's bottom once the poster is in view. CSS only:
+the poster button is a one-cell grid, the label is `position: sticky`, and `.hero` and the poster
+use `overflow: clip` (browsers without it keep `hidden` and the label stays at the poster's bottom).
+New poster candidate `assets/film-v09/poster-2160.webp` (2160 x 1215, 44,302 bytes,
+`PRODUCT_FILM.posterLarge`): film frame 523 rendered at 3840 x 2160 and scaled the same way as
+`poster.jpg`, which the same render reproduces byte for byte; the From-row mask check passed.
+`HERO_POSTER.sizes` follows the new width. A 2x desktop now loads `poster-2160.webp`, a 1x desktop
+and a 2x 768px tablet `poster.jpg` (they loaded `poster-800.webp` before). Phones keep the same
+film size. Measured in Chromium only (built-in browser and Playwright Chromium); not checked in
+Safari or Firefox. LCP was not measured again. No `*_LASTMOD` change: the copy did not change.
+
 ## 68-second film replaces the 35-second film — 2026-11-12
 
 All eleven homepages and `/demo/` play the new 68-second film (cut v2.4) from `assets/film-v09/`:

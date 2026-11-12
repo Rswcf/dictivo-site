@@ -38,7 +38,7 @@ test("each homepage keeps the film player out of the page until play, with a nat
 });
 
 test("each homepage poster and its preload come from the current film", () => {
-  const srcset = `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w`;
+  const srcset = `${PRODUCT_FILM.posterSmall} 800w, ${PRODUCT_FILM.poster} 1600w, ${PRODUCT_FILM.posterLarge} 2160w`;
   for (const home of homes) {
     const html = readFileSync(`${dist}${home}`, "utf8");
     const img = /<img\b[^>]*>/.exec(heroFigure(html))?.[0] ?? "";
@@ -46,7 +46,7 @@ test("each homepage poster and its preload come from the current film", () => {
     assert.ok(html.includes(`imagesrcset="${srcset}"`), `${home}: the poster preload must match the <img>`);
     assert.doesNotMatch(html, /film-v08/, home);
   }
-  for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
+  for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall, PRODUCT_FILM.posterLarge]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
 });
 
 // 2026-11-12: the 68-second film replaced the 35-second film-v08 files. Old embeds and shared links

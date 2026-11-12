@@ -463,7 +463,10 @@ main section[id] {
     radial-gradient(circle at center, rgb(255 255 255 / 7%) 1.1px, transparent 1.7px) 0 0 / 28px 28px,
     var(--canvas);
   color: var(--ink);
+  /* clip, not hidden: a scroll container here would stop the sticky play label on the film poster.
+     Browsers without overflow: clip keep hidden, and the label stays at the poster's bottom. */
   overflow: hidden;
+  overflow: clip;
 }
 
 .hero-inner {
@@ -563,15 +566,19 @@ main section[id] {
   margin-top: 0;
 }
 
+/* As wide as the headline column, and never taller than the window: a visitor who scrolls to the
+   film sees the whole frame and its controls. The 140px leave room for the caption; the header is
+   not fixed, so it takes none. The 480px floor keeps a short window from shrinking the film to
+   nothing. The first line is for browsers without svh. */
 .hero-film {
-  width: min(100%, 720px);
+  width: min(100%, 1080px, max(480px, calc((100vh - 140px) * 16 / 9)));
+  width: min(100%, 1080px, max(480px, calc((100svh - 140px) * 16 / 9)));
   margin: 0;
   align-self: center;
 }
 
 .hero-video-poster,
 .hero-film video {
-  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 1px solid rgb(255 255 255 / 14%);
@@ -585,6 +592,7 @@ main section[id] {
 
 /* HTML video dimensions reserve space; CSS must scale both axes together. */
 .hero-film video {
+  display: block;
   height: auto;
 }
 
@@ -597,17 +605,30 @@ main section[id] {
    scripting the <noscript> player takes the space instead. */
 @media (scripting: enabled) {
   .hero-film:has(> template) > .hero-video-poster[hidden] {
-    display: block;
+    display: grid;
     visibility: hidden;
   }
 }
 
+/* One grid cell holds the image and the play label. While the poster runs below the window, the
+   label sticks 20px above the window's bottom edge; it never leaves the poster. overflow: clip
+   keeps the button from being a scroll container, which would stop the sticky label; min-height: 0
+   then keeps the box at exactly 16:9, the box the <video> takes on play. */
 .hero-video-poster {
   position: relative;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  min-height: 0;
   overflow: hidden;
+  overflow: clip;
   padding: 0;
   color: var(--ink);
   cursor: pointer;
+}
+
+.hero-video-poster img,
+.hero-video-play {
+  grid-area: 1 / 1;
 }
 
 .hero-video-poster img {
@@ -638,15 +659,16 @@ main section[id] {
 }
 
 .hero-video-play {
-  position: absolute;
+  position: sticky;
   z-index: 1;
-  left: 50%;
   bottom: 20px;
-  display: inline-flex;
+  align-self: end;
+  justify-self: center;
+  display: flex;
   align-items: center;
   gap: 10px;
   min-height: 50px;
-  transform: translateX(-50%);
+  margin-bottom: 20px;
   border: 1px solid rgb(255 255 255 / 20%);
   border-radius: var(--radius-pill);
   background: rgb(5 8 7 / 74%);
