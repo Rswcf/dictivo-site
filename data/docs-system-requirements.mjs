@@ -36,7 +36,7 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   displayLanguage.ts permissions; temporary recordings: displayLanguage.ts storage rows;
 // - Intel Macs and larger models: data/mac-model-advisor.mjs notes.intel.
 // No price on this page.
-export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-12";
+export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-21";
 
 const MAC_MINIMUM = "10.13";
 const MAC_LOCAL_MINIMUM = "13.3";
