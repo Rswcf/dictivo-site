@@ -97,9 +97,10 @@ import { CLAUDE_CODE_GUIDE_LASTMOD, CLAUDE_CODE_GUIDE_REFERENCES, claudeCodeGuid
 import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsVoiceTypingCopy } from "../data/windows-voice-typing-guide.mjs";
 import { WINDOWS_INSTALL_ENTRY_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, WINDOWS_INSTALL_HELP_PATHS, WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_HELP_REFERENCES, WINDOWS_INSTALL_ENTRY_COPY, windowsInstallHelpPath } from "../data/windows-installer-help.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
+import { MAS_PRIVACY_LASTMOD, MAS_PRIVACY_LINKS, MAS_PRIVACY_PAGE, MAS_PRIVACY_PATH } from "../data/mas-privacy-page.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
-import { attr, html } from "./lib/html.mjs";
+import { attr, escapeHtml, html } from "./lib/html.mjs";
 import { priceText, priceToken, resolvePriceTokens, schemaPrice } from "./lib/price-tokens.mjs";
 import { buildLocaleRoutes, buildRoutesConfig, languageChoicePaths } from "../lib/locale-routing/build-routes.mjs";
 import { LOCAL_OFFER, PRICING_LASTMOD } from "../data/local-offer.mjs";
@@ -6047,6 +6048,67 @@ function renderTrustPage(sourcePage, currentCode = "en") {
   });
 }
 
+// /privacy/mac-app-store/ is bare on purpose (data/mas-privacy-page.mjs): App Review opens it, so
+// it does not use renderLayout() and has no shared head, header, footer, skip link, site.js or
+// JSON-LD, and no link to another dictivo.app page. Every address sits inside email_off, as in
+// security.html, so the edge's email obfuscation adds no script.
+const MAS_PRIVACY_EMAIL = "support@dictivo.app";
+
+function masPrivacyInline(text) {
+  const out = escapeHtml(text)
+    .replaceAll(MAS_PRIVACY_EMAIL, `<!--email_off--><a href="mailto:${MAS_PRIVACY_EMAIL}">${MAS_PRIVACY_EMAIL}</a><!--/email_off-->`)
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_match, label, href) => {
+      if (!MAS_PRIVACY_LINKS.includes(href)) throw new Error(`${MAS_PRIVACY_PATH}: link target ${href} is not allowed`);
+      return `<a href="${attr(href)}">${label}</a>`;
+    })
+    .replace(/`([^`]+)`/g, "<code>$1</code>");
+  if (/[`[\]]/.test(out)) throw new Error(`${MAS_PRIVACY_PATH}: unparsed markup in ${JSON.stringify(text)}`);
+  return out;
+}
+
+function renderMasPrivacyPage() {
+  const page = MAS_PRIVACY_PAGE;
+  const sections = page.sections
+    .map((section, index) => {
+      const id = `mas-privacy-${index + 1}`;
+      const blocks = section.blocks
+        .map((block) => (block.ul
+          ? `<ul>
+          ${block.ul.map((item) => `<li>${masPrivacyInline(item)}</li>`).join("\n          ")}
+        </ul>`
+          : `<p>${masPrivacyInline(block.p)}</p>`))
+        .join("\n        ");
+      return `<section class="doc-section" aria-labelledby="${id}">
+        <h2 id="${id}">${html(section.title)}</h2>
+        ${blocks}
+      </section>`;
+    })
+    .join("\n\n      ");
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>${html(page.title)}</title>
+    <meta name="description" content="${attr(page.metaDescription)}" />
+    <link rel="canonical" href="${attr(`${BASE_URL}${MAS_PRIVACY_PATH}`)}" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/site.css?v=local" />
+  </head>
+  <body>
+    <main class="doc-page">
+      <h1>${html(page.title)}</h1>
+      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(MAS_PRIVACY_LASTMOD)}">${html(formatLocalizedDate(MAS_PRIVACY_LASTMOD, "en"))}</time></p>
+      <p class="doc-lede">${html(page.intro)}</p>
+
+      ${sections}
+    </main>
+  </body>
+</html>
+`;
+}
+
 function privacyProofCopy(currentCode = "en") {
   return PRIVACY_PROOF_COPY[currentCode] || PRIVACY_PROOF_COPY.en;
 }
@@ -6880,6 +6942,8 @@ for (const page of TRUST_PAGES) {
     }
   }
 }
+// English only, noindex, and in no sitemap, llms.txt or link until the App Store edition ships.
+write(`${MAS_PRIVACY_PATH.slice(1)}index.html`, renderMasPrivacyPage());
 write("404.html", renderNotFound());
 
 // Locale routing reads the finished pages, so it runs after every HTML file is written.

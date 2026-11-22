@@ -5,6 +5,33 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Mac App Store privacy page — 2026-11-22
+
+New page `/privacy/mac-app-store/`: the privacy policy of the Mac App Store edition of Dictivo,
+which is not released yet. The app will link to this exact URL from its Settings, so the URL must
+not change. The text and `MAS_PRIVACY_LASTMOD` are in `data/mas-privacy-page.mjs`. Every sentence
+was checked against the app's code, and `tests/facts/mas-privacy-page.test.mjs` pins them all.
+
+The page is bare. App Review opens it, and Guideline 3.1.1(a) forbids links that lead to other
+ways to buy. The shared header and footer link Pricing, Download and checkout paths, so the page
+does not use `renderLayout()`. It has its own minimal head, no header, nav or footer, and no script
+(the policy says "This page runs no scripts"). Its body links only to `mailto:support@dictivo.app`
+and `https://www.apple.com/legal/privacy/`. Each address sits inside `<!--email_off-->`, so
+Cloudflare email obfuscation does not add a decode script. It reuses the `.doc-page` classes; no
+CSS was added.
+
+It is hidden until the App Store edition is released: `noindex`, not in `sitemap.xml` or any
+`llms.txt`, and no other page links to it. It is English only and has no hreflang, so the language
+Function passes it through for every visitor (`unmapped`). No `.html` 301 was added; those exist
+only for the nine pages that were once written twice.
+
+At release:
+
+1. Remove `<meta name="robots" content="noindex" />` from `renderMasPrivacyPage()`.
+2. Add the page to `renderSitemap()` with `MAS_PRIVACY_LASTMOD` as its `lastmod`.
+3. Link it from `/privacy/` (`relatedLinks` of the `privacy` entry in `data/trust-pages.mjs`).
+4. Update `tests/structure/mas-privacy-page.test.mjs`, which asserts all three are absent.
+
 ## Homepage notes trim — 2026-11-12
 
 The homepage should sell, not explain. These notes left all eleven homepages (`zh-hant` follows
