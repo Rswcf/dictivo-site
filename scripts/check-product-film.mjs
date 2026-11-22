@@ -8,8 +8,9 @@ const seconds = film.duration.match(/^PT(\d+)S$/)?.[1];
 assert(seconds, `${film.duration}: expected PT<seconds>S`);
 // The 35-second film (film-v08) used human VCTK recordings under CC BY 4.0. The 68-second film has
 // none, so no film surface may still name them. The benchmark method guide cites VCTK for its own
-// audio and is not a film surface.
-const retired = /film-v08|VCTK|CC BY|35[ -]sec|PT35S/i;
+// audio and is not a film surface. film-v09 is the 68-second film with the 14-day trial cards
+// (cut v2.4); film-v10 (cut v2.5) replaced it on 2026-11-22.
+const retired = /film-v08|film-v09|VCTK|CC BY|35[ -]sec|PT35S/i;
 for (const { code } of LOCALES) {
   const page = get(code === 'en' ? 'index.html' : `${code}/index.html`);
   // The player itself waits in a <template>; browsers without JavaScript get the <noscript> copy.
@@ -64,12 +65,20 @@ for (const path of [film.video, film.master, film.poster, film.posterSmall, film
   assert(size > 0 && size < 25 * 1024 * 1024, `${path}: file missing or above Pages limit`);
 }
 const redirects = get('_redirects').split('\n');
-assert.equal(RETIRED_FILM_URLS.length, 8);
+const sources = new Set(redirects.map(line => line.trim().split(/\s+/)[0]).filter(Boolean));
+const folder = film.video.slice(0, film.video.lastIndexOf('/') + 1);
+// 8 film-v08 URLs and 9 film-v09 URLs (the build-written captions.zh-Hant.vtt included).
+assert.equal(RETIRED_FILM_URLS.length, 17);
 for (const [from, to] of RETIRED_FILM_URLS) {
   assert(redirects.includes(`${from} ${to} 301`), `_redirects: ${from} must 301 to ${to}`);
+  // One hop: the target is a current film file, not another redirect.
+  assert(to.startsWith(folder) && !sources.has(to), `_redirects: ${from} must go straight to a ${folder} file, not ${to}`);
   statSync(new URL(to.slice(1), root));
 }
 assert(get(film.captions).includes('Quick update: the launch moved to Tuesday.'));
 assert(get(film.chineseTraditional).includes('Local 模式') && !get(film.chineseTraditional).includes('开会'), 'zh-Hant captions are converted from the Simplified file');
+// 2026-11-22: the trial is 7 days. "省下 14 个词" is the dictated word count, not the trial.
+assert(get(film.chinese).includes('免费试用 7 天') && !/14 天/.test(get(film.chinese)), 'zh-CN captions must name the 7-day trial');
+assert(get(film.chineseTraditional).includes('免費試用 7 天') && !/14 天/.test(get(film.chineseTraditional)), 'zh-Hant captions must name the 7-day trial');
 assert(get(film.credits).includes('no recording of a human voice') && !retired.test(get(film.credits)));
-console.log(`Product film: ${LOCALES.length} homepages (native fallback, caption tracks, no figcaption), privacy scope, generated-voice and shortcut disclosures, /demo/ credits caption, watch-page metadata, sitemap, ${RETIRED_FILM_URLS.length} film-v08 redirects and asset limits passed.`);
+console.log(`Product film: ${LOCALES.length} homepages (native fallback, caption tracks, no figcaption), privacy scope, generated-voice and shortcut disclosures, /demo/ credits caption, watch-page metadata, sitemap, ${RETIRED_FILM_URLS.length} one-hop redirects from film-v08 and film-v09, 7-day trial captions and asset limits passed.`);

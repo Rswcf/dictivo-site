@@ -1,26 +1,32 @@
 export const PRODUCT_FILM = {
   path: "/demo/",
-  lastmod: "2026-11-12",
-  // The date of the pull request that published this film. If the first production deploy with
-  // the film-v09 files falls on a later day, set this to the time of that deploy.
-  uploadedAt: "2026-11-12T16:00:00Z",
+  // film-v10 (cut v2.5) is the 68-second film with the 7-day trial cards. Both dates below are the
+  // day of its pull request, 2026-11-22. The PR merges later, on a day not known yet, together with
+  // the 7-day app release and the site-wide 7-day copy. Whoever merges it sets `lastmod` to the
+  // day of the first production deploy with the film-v10 files and `uploadedAt` to its time.
+  lastmod: "2026-11-22",
+  uploadedAt: "2026-11-22T21:00:00Z",
   name: "Dictivo — Keep your flow",
   description: "Watch Dictivo turn speech into text in Mail and Notes on a Mac: Local keeps audio on your device, and Cloud Fast is there when you choose it. A 68-second film made from real screen recordings.",
-  video: "/assets/film-v09/dictivo-film-1080p.mp4",
-  master: "/assets/film-v09/dictivo-film-4k.mp4",
-  poster: "/assets/film-v09/poster.jpg",
-  posterSmall: "/assets/film-v09/poster-800.webp",
+  video: "/assets/film-v10/dictivo-film-1080p.mp4",
+  master: "/assets/film-v10/dictivo-film-4k.mp4",
+  poster: "/assets/film-v10/poster.jpg",
+  posterSmall: "/assets/film-v10/poster-800.webp",
   // 2160 x 1215, for the 1080px homepage film on 2x screens. No film-v08 file matches it.
-  posterLarge: "/assets/film-v09/poster-2160.webp",
-  captions: "/assets/film-v09/captions.en.vtt",
-  chinese: "/assets/film-v09/captions.zh-CN.vtt",
-  chineseTraditional: "/assets/film-v09/captions.zh-Hant.vtt",
-  credits: "/assets/film-v09/CREDITS.txt",
+  posterLarge: "/assets/film-v10/poster-2160.webp",
+  captions: "/assets/film-v10/captions.en.vtt",
+  chinese: "/assets/film-v10/captions.zh-CN.vtt",
+  chineseTraditional: "/assets/film-v10/captions.zh-Hant.vtt",
+  credits: "/assets/film-v10/CREDITS.txt",
   duration: "PT68S",
 };
 
-// Public URLs of the previous film (film-v08, 2026-09-11 to 2026-11-12). The build writes a 301
-// from each one to the file that replaces it, so old embeds and shared links keep working.
+// Public URLs of the previous films. The build writes a 301 from each one straight to the current
+// file that replaces it (one hop, no chain), so old embeds and shared links keep working.
+// - film-v08: the 35-second film, 2026-09-11 to 2026-11-12.
+// - film-v09: the 68-second film with the 14-day trial cards (cut v2.4), from 2026-11-12 until
+//   film-v10 goes live. captions.zh-Hant.vtt is not in assets/: the build writes it from the
+//   Simplified file, so it was public too.
 export const RETIRED_FILM_URLS = Object.freeze([
   ["/assets/film-v08/dictivo-film-1080p.mp4", PRODUCT_FILM.video],
   ["/assets/film-v08/dictivo-film-4k.mp4", PRODUCT_FILM.master],
@@ -30,6 +36,15 @@ export const RETIRED_FILM_URLS = Object.freeze([
   ["/assets/film-v08/captions.zh-CN.vtt", PRODUCT_FILM.chinese],
   ["/assets/film-v08/captions.zh-Hant.vtt", PRODUCT_FILM.chineseTraditional],
   ["/assets/film-v08/CREDITS.txt", PRODUCT_FILM.credits],
+  ["/assets/film-v09/dictivo-film-1080p.mp4", PRODUCT_FILM.video],
+  ["/assets/film-v09/dictivo-film-4k.mp4", PRODUCT_FILM.master],
+  ["/assets/film-v09/poster.jpg", PRODUCT_FILM.poster],
+  ["/assets/film-v09/poster-800.webp", PRODUCT_FILM.posterSmall],
+  ["/assets/film-v09/poster-2160.webp", PRODUCT_FILM.posterLarge],
+  ["/assets/film-v09/captions.en.vtt", PRODUCT_FILM.captions],
+  ["/assets/film-v09/captions.zh-CN.vtt", PRODUCT_FILM.chinese],
+  ["/assets/film-v09/captions.zh-Hant.vtt", PRODUCT_FILM.chineseTraditional],
+  ["/assets/film-v09/CREDITS.txt", PRODUCT_FILM.credits],
 ]);
 
 // Labels for the same English-language film in each language. `play` and `alt` label the homepage
@@ -54,5 +69,5 @@ export const FILM_CHAPTERS = [
   { start: 26, end: 34, title: "In the app you’re using", description: "The same shortcut pastes a note and an AI prompt into Notes, both transcribed in Local mode." },
   { start: 34, end: 48, title: "Where does your voice go?", description: "In Local mode, dictation audio stays on your computer. The app shows “Private Local is ready” and “Audio stays on this device.” No cloud upload, no Dictivo account, and a network test at dictivo.app/privacy/local-dictation-network-test." },
   { start: 48, end: 56, title: "Cloud Fast, when you choose", description: "One click switches to Cloud Fast, which uploads the recording you choose: ‘Quick update: the launch moved to Tuesday.’ One click switches back to Private Local." },
-  { start: 56, end: 68, title: "Keep your flow", description: "Dictivo Local: pay once, keep it forever, no subscription. Every local model is free to try for 14 days, without a card or Dictivo account. Download for Mac or Windows." },
+  { start: 56, end: 68, title: "Keep your flow", description: "Dictivo Local: pay once, keep it forever, no subscription. Every local model is free to try for 7 days, without a card or Dictivo account. Download for Mac or Windows." },
 ];
