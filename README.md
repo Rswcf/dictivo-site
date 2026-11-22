@@ -294,16 +294,21 @@ file. Nothing in `data/` produces it, and it does not inherit the shared header,
 switcher or asset fingerprinting that generated pages get — so a change to those has to be made
 here by hand as well.
 
-### `/privacy/mac-app-store/` is bare on purpose
+### The Mac App Store pages are bare on purpose
 
-The privacy policy of the Mac App Store edition. The app links to this exact URL, and App Review
-opens it. Guideline 3.1.1(a) forbids links to other ways to buy, so `renderMasPrivacyPage()` does
-not use `renderLayout()`: the page has its own head, no shared header or footer, no `site.js`, no
-JSON-LD, and links only to `mailto:support@dictivo.app` and Apple's privacy policy. Its text is in
-`data/mas-privacy-page.mjs`. Do not give it the shared layout or a script, because the policy says
-"This page runs no scripts". Until the App Store edition is released, it is also `noindex`, outside
-the sitemap and `llms.txt`, and linked from no page. `tests/structure/mas-privacy-page.test.mjs`
-and `tests/facts/mas-privacy-page.test.mjs` hold both rules.
+`/privacy/mac-app-store/` is the privacy policy of the Mac App Store edition; the app links to it.
+`/support/mac-app-store/` is its support page; App Store Connect carries it as the Support URL.
+App Review opens both, and neither address ever changes. Guideline 3.1.1(a) forbids links to other
+ways to buy, so `renderBarePage()` does not use `renderLayout()`: each page has its own head, no
+shared header or footer, no `site.js` and no JSON-LD. Each body links only to its allow list
+(`MAS_PRIVACY_LINKS`, `MAS_SUPPORT_LINKS`). The privacy page links to `mailto:support@dictivo.app`
+and Apple's privacy policy. The support page links to the same address, `reportaproblem.apple.com`
+and the privacy page. The text is in `data/mas-privacy-page.mjs` and `data/mas-support-page.mjs`.
+Do not give them the shared layout or a script, because both say "This page runs no scripts".
+Until the App Store edition is released, both are also `noindex` and outside the sitemap and
+`llms.txt`. No page links to them, except the support page's link to the privacy page. The
+`mas-privacy-page` and `mas-support-page` tests in `tests/structure/` and `tests/facts/` hold these
+rules.
 
 ### The Impressum is fail-closed
 
@@ -384,6 +389,7 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
 | `MAS_PRIVACY_LASTMOD` | `data/mas-privacy-page.mjs` | visible stamp for `/privacy/mac-app-store/` only: the page has no sitemap entry and no JSON-LD |
+| `MAS_SUPPORT_LASTMOD` | `data/mas-support-page.mjs` | visible stamp for `/support/mac-app-store/` only: the page has no sitemap entry and no JSON-LD |
 | `COMPARE_LAST_UPDATED` | `data/compare-pages.mjs` | visible stamp + sitemap for every `/compare/` page, and a build gate |
 
 Every page that shows a Dictivo price (homepages, `/pricing/`, comparison pages and hubs, the
