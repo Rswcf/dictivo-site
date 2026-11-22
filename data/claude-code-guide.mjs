@@ -7,7 +7,8 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 // same date in the desktop repository (Apple's and Superwhisper's own pages). Dictivo's paste,
 // shortcuts and permissions come from the app source (settingsStore.ts, clipboard.rs,
 // displayLanguage.ts, SettingsView.tsx). No hands-on test was run; the method note says so.
-export const CLAUDE_CODE_GUIDE_LASTMOD = "2026-11-10";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const CLAUDE_CODE_GUIDE_LASTMOD = "2026-11-22";
 export const CLAUDE_CODE_GUIDE_CHECKED = "2026-11-10";
 
 const checkedLabel = `(checked ${CLAUDE_CODE_GUIDE_CHECKED})`;
@@ -229,7 +230,7 @@ export function claudeCodeGuideCopy({ windows, checked = CLAUDE_CODE_GUIDE_CHECK
       ],
       [
         "Do I need an account to dictate into Claude Code with Dictivo?",
-        "No. Dictivo Local needs no Dictivo account. A license key from the purchase email activates it, and the 14-day trial needs no card. You still sign in to Claude Code as usual. Only Claude Code's own /voice feature needs a Claude.ai account.",
+        "No. Dictivo Local needs no Dictivo account. A license key from the purchase email activates it, and the 7-day trial needs no card. You still sign in to Claude Code as usual. Only Claude Code's own /voice feature needs a Claude.ai account.",
       ],
       [
         "Can I install Dictivo with Homebrew?",

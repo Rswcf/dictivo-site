@@ -21,7 +21,8 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 // - hosts and when: displayLanguage.ts Connections rows; Lock Cloud Fast: displayLanguage.ts
 //   privacy.networkAudio and the site's /security/#lock-cloud-fast.
 // No price on this page.
-export const DOCS_OFFLINE_LASTMOD = "2026-11-10";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const DOCS_OFFLINE_LASTMOD = "2026-11-22";
 
 const trialDays = LOCAL_OFFER.trialDays;
 

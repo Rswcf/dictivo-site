@@ -33,8 +33,9 @@ test("the English Dragon comparison answers what happened to MacSpeech Dictate",
     .find((item) => item["@type"] === "FAQPage");
   assert.ok(faq.mainEntity.some((q) => q.name === "What happened to MacSpeech Dictate?"));
   // 2026-10-09, every language: the Dragon Professional price wording changed.
-  assert.ok(en.includes('datetime="2026-10-09"'));
-  assert.ok(read("de/compare/dragon-alternative/index.html").includes('datetime="2026-10-09"'));
+  // 2026-11-22, every language: the Local trial is 7 days instead of 14.
+  assert.ok(en.includes('datetime="2026-11-22"'));
+  assert.ok(read("de/compare/dragon-alternative/index.html").includes('datetime="2026-11-22"'));
 });
 
 test("each homepage footer links to the comparison hub and its own offline dictation guide", () => {
@@ -63,9 +64,11 @@ test("English pages link to the pricing page; other languages keep the homepage 
   assert.ok(!de.includes("/pricing/"));
 });
 
-test("the macOS Dictation comparison is dated for English only after gaining the troubleshooting link", () => {
-  assert.ok(read("compare/macos-dictation-alternative/index.html").includes('datetime="2026-10-09"'));
-  assert.ok(!read("de/compare/macos-dictation-alternative/index.html").includes('datetime="2026-10-09"'));
+// 2026-10-09 (English only): the page gained the troubleshooting link. 2026-11-22, every
+// language: the Local trial is 7 days instead of 14, so English and German share that date.
+test("the macOS Dictation comparison carries the trial change date in English and German", () => {
+  assert.ok(read("compare/macos-dictation-alternative/index.html").includes('datetime="2026-11-22"'));
+  assert.ok(read("de/compare/macos-dictation-alternative/index.html").includes('datetime="2026-11-22"'));
 });
 
 test("no English page still sends Pricing links to the homepage section", () => {

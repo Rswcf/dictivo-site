@@ -1,6 +1,7 @@
 import { mediaKitLocalFacts } from "./local-offer-copy.mjs";
 
-export const MEDIA_KIT_LASTMOD = "2026-11-12";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const MEDIA_KIT_LASTMOD = "2026-11-22";
 
 const localFacts = mediaKitLocalFacts();
 
@@ -26,7 +27,7 @@ export const MEDIA_KIT_COPY = {
     ["Not built for", "Meeting recording, call recording, cloud-first collaboration, or regulated compliance claims without separate review."],
     ["Local mode", "Processes dictation audio on the device and does not require a Dictivo account."],
     ["Cloud Fast", "Optional speed mode that uploads only the selected recording for remote transcription."],
-    ["Free path", "Tiny Local dictation is free forever. New installs include a 14-day full Local trial."],
+    ["Free path", "Tiny Local dictation is free forever. New installs include a 7-day full Local trial."],
     ["Paid Local", localFacts.paidLocal],
     ["Cloud Fast price", "{{price.cloudFast.inline}} a month for optional Cloud Fast minutes."],
     ["Support", "support@dictivo.app"],
@@ -37,7 +38,7 @@ export const MEDIA_KIT_COPY = {
     ["Short listing", "Dictivo is a local-first desktop dictation app for macOS and Windows, built for private hotkey voice typing, with optional Cloud Fast when speed matters more than keeping audio local."],
     ["Directory description", "Dictivo turns speech into text in the active desktop app on macOS and Windows x64. Local mode runs on-device after a local model is installed, while optional Cloud Fast is a separate path for selected low-sensitivity recordings that need faster turnaround."],
     ["Comparison description", "Dictivo fits users comparing Wispr Flow, Superwhisper, MacWhisper, VoiceInk, and macOS Dictation who want a supported local-first desktop dictation workflow, a one-time Local license, and a clear boundary between Local and Cloud Fast."],
-    ["First task", "Try one email, note or AI prompt with Dictivo Local. Set up a local model, use your dictation shortcut, then review the result in the app you write in. The full Local trial lasts 14 days and needs no Dictivo account or card."],
+    ["First task", "Try one email, note or AI prompt with Dictivo Local. Set up a local model, use your dictation shortcut, then review the result in the app you write in. The full Local trial lasts 7 days and needs no Dictivo account or card."],
   ],
   categoriesTitle: "Suggested directory categories",
   categories: [

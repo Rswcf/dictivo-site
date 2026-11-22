@@ -11,7 +11,8 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 // The year in the title is the year of the last full check, so it changes only when every price
 // is re-read (first re-check of 2027: 4 January).
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
-export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-11-10";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-11-22";
 export const BEST_DICTATION_SOFTWARE_CHECKED = "2026-10-10";
 // 2026-11-10: a live spot-check re-read the Spokenly Pro and Voibe prices only. Their price cells
 // and their pricing references carry this date; every other fact keeps BEST_DICTATION_SOFTWARE_CHECKED.
@@ -142,7 +143,7 @@ export function bestDictationSoftwareCopy({ windows, offer = LOCAL_OFFER }) {
         ["Voibe", "Mac and Windows", "On the Mac in On-Device Mode; Windows and Intel Macs use a zero-retention cloud mode", "Voibe Free: limited words on one device", "Dictation $9.90 a month, $99 a year or $199 once, per seat"],
         ["VoiceInk", "Mac with Apple silicon, macOS 14.4 or later", "On the Mac; optional Cloud Enhancement sends text, not audio", "Free trial", "$25 once for 1 Mac, $39 for 2, $49 for 3"],
         ["Wispr Flow", "Mac, Windows, iPhone and Android", "In the cloud", "2,000 words a week on desktop, 1,000 on mobile", "Pro $15 a month, or $12 a month billed annually, per user"],
-        ["Dictivo (this site's product)", windows ? "Mac and Windows x64" : "Mac", "On the computer in Local mode; optional Cloud Fast uploads only the recordings you send", "Tiny model; 14-day full Local trial", dictivoPrice],
+        ["Dictivo (this site's product)", windows ? "Mac and Windows x64" : "Mac", "On the computer in Local mode; optional Cloud Fast uploads only the recordings you send", "Tiny model; 7-day full Local trial", dictivoPrice],
       ],
     },
     tocLabel: "On this page",

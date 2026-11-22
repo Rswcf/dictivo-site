@@ -1,5 +1,6 @@
 // Task-oriented summaries. Product-specific factual detail stays in the linked comparisons.
-export const COMPARE_HUB_GUIDANCE_LASTMOD = "2026-09-20";
+// 2026-11-22, every language: the trial guidance says 7 days instead of 14.
+export const COMPARE_HUB_GUIDANCE_LASTMOD = "2026-11-22";
 // Per-language hub changes that come from the comparison pages it lists. 2026-10-09: the English
 // Dragon comparison's title no longer names a Dragon Professional price. 2026-10-10 (English): a
 // line under the introduction links the cross-platform dictation software guide. 2026-11-10
@@ -9,7 +10,7 @@ const slugs = ["wispr-flow-alternative", "superwhisper-alternative", "macwhisper
 const rows = {
   en: {
     title: "Test the task you actually do",
-    body: "Try all Local models for 14 days without a card or Dictivo account. Download a model, dictate a short email or note, then check the text in the app you normally use. Compare the same sentence and workflow before switching.",
+    body: "Try all Local models for 7 days without a card or Dictivo account. Download a model, dictate a short email or note, then check the text in the app you normally use. Compare the same sentence and workflow before switching.",
     download: "Download and try Dictivo", pricing: "Review pricing and trial terms",
     cards: [
       ["Cloud and local workflows", "Compare audio processing, free-plan limits and the devices you use. Check whether your workflow needs cloud editing, mobile access or local dictation."],
@@ -22,7 +23,7 @@ const rows = {
   },
   de: {
     title: "Testen Sie Ihre tatsächliche Schreibaufgabe",
-    body: "Testen Sie alle Local-Modelle 14 Tage ohne Zahlungskarte oder Dictivo-Konto. Laden Sie ein Modell herunter, diktieren Sie eine kurze E-Mail oder Notiz und prüfen Sie den Text in Ihrer üblichen App. Vergleichen Sie vor einem Wechsel denselben Satz und Ablauf.",
+    body: "Testen Sie alle Local-Modelle 7 Tage ohne Zahlungskarte oder Dictivo-Konto. Laden Sie ein Modell herunter, diktieren Sie eine kurze E-Mail oder Notiz und prüfen Sie den Text in Ihrer üblichen App. Vergleichen Sie vor einem Wechsel denselben Satz und Ablauf.",
     download: "Dictivo herunterladen und testen", pricing: "Preise und Testbedingungen ansehen",
     cards: [
       ["Cloud oder lokale Verarbeitung", "Vergleichen Sie Audioverarbeitung, Grenzen des Gratisangebots und Ihre Geräte. Prüfen Sie, ob Sie Cloud-Bearbeitung, mobile Nutzung oder lokales Diktieren brauchen."],
@@ -35,7 +36,7 @@ const rows = {
   },
   fr: {
     title: "Testez votre véritable tâche de rédaction",
-    body: "Essayez tous les modèles Local pendant 14 jours, sans carte bancaire ni compte Dictivo. Téléchargez un modèle, dictez un court e-mail ou une note, puis vérifiez le texte dans votre application habituelle. Comparez la même phrase et le même parcours avant de changer.",
+    body: "Essayez tous les modèles Local pendant 7 jours, sans carte bancaire ni compte Dictivo. Téléchargez un modèle, dictez un court e-mail ou une note, puis vérifiez le texte dans votre application habituelle. Comparez la même phrase et le même parcours avant de changer.",
     download: "Télécharger et essayer Dictivo", pricing: "Voir les tarifs et conditions d'essai",
     cards: [
       ["Traitement local ou dans le cloud", "Comparez le traitement audio, les limites de l'offre gratuite et vos appareils. Déterminez si vous avez besoin de retouche cloud, d'un accès mobile ou de dictée locale."],
@@ -48,7 +49,7 @@ const rows = {
   },
   es: {
     title: "Prueba la tarea que realizas de verdad",
-    body: "Prueba todos los modelos Local durante 14 días sin tarjeta ni cuenta de Dictivo. Descarga un modelo, dicta un correo o una nota breve y revisa el texto en tu aplicación habitual. Compara la misma frase y el mismo proceso antes de cambiar.",
+    body: "Prueba todos los modelos Local durante 7 días sin tarjeta ni cuenta de Dictivo. Descarga un modelo, dicta un correo o una nota breve y revisa el texto en tu aplicación habitual. Compara la misma frase y el mismo proceso antes de cambiar.",
     download: "Descargar y probar Dictivo", pricing: "Ver precios y condiciones de prueba",
     cards: [
       ["Procesamiento local o en la nube", "Compara dónde se procesa el audio, los límites gratuitos y tus dispositivos. Decide si necesitas edición en la nube, uso móvil o dictado local."],
@@ -61,7 +62,7 @@ const rows = {
   },
   it: {
     title: "Prova la tua vera attività di scrittura",
-    body: "Prova tutti i modelli Local per 14 giorni senza carta di pagamento né account Dictivo. Scarica un modello, detta una breve email o nota e controlla il testo nell'app che usi normalmente. Confronta la stessa frase e lo stesso procedimento prima di cambiare.",
+    body: "Prova tutti i modelli Local per 7 giorni senza carta di pagamento né account Dictivo. Scarica un modello, detta una breve email o nota e controlla il testo nell'app che usi normalmente. Confronta la stessa frase e lo stesso procedimento prima di cambiare.",
     download: "Scarica e prova Dictivo", pricing: "Consulta prezzi e condizioni della prova",
     cards: [
       ["Elaborazione locale o cloud", "Confronta elaborazione audio, limiti gratuiti e dispositivi. Verifica se ti servono modifiche nel cloud, uso mobile o dettatura locale."],
@@ -74,7 +75,7 @@ const rows = {
   },
   nl: {
     title: "Test de schrijftaak die je echt uitvoert",
-    body: "Probeer alle Local-modellen 14 dagen zonder betaalkaart of Dictivo-account. Download een model, dicteer een korte e-mail of notitie en controleer de tekst in je gewone app. Vergelijk dezelfde zin en werkwijze voordat je overstapt.",
+    body: "Probeer alle Local-modellen 7 dagen zonder betaalkaart of Dictivo-account. Download een model, dicteer een korte e-mail of notitie en controleer de tekst in je gewone app. Vergelijk dezelfde zin en werkwijze voordat je overstapt.",
     download: "Dictivo downloaden en proberen", pricing: "Bekijk prijzen en proefvoorwaarden",
     cards: [
       ["Lokale verwerking of cloud", "Vergelijk audioverwerking, gratis limieten en de apparaten die je gebruikt. Bepaal of je cloudbewerking, mobiel gebruik of lokaal dicteren nodig hebt."],
@@ -87,7 +88,7 @@ const rows = {
   },
   pt: {
     title: "Teste a tarefa de escrita que você realmente faz",
-    body: "Experimente todos os modelos Local por 14 dias sem cartão ou conta Dictivo. Baixe um modelo, dite um email ou uma nota curta e confira o texto no aplicativo que costuma usar. Compare a mesma frase e o mesmo processo antes de trocar.",
+    body: "Experimente todos os modelos Local por 7 dias sem cartão ou conta Dictivo. Baixe um modelo, dite um email ou uma nota curta e confira o texto no aplicativo que costuma usar. Compare a mesma frase e o mesmo processo antes de trocar.",
     download: "Baixar e experimentar o Dictivo", pricing: "Ver preços e condições do teste",
     cards: [
       ["Processamento local ou na nuvem", "Compare o processamento do áudio, os limites gratuitos e seus dispositivos. Veja se precisa de edição na nuvem, acesso móvel ou digitação por voz local."],
@@ -100,7 +101,7 @@ const rows = {
   },
   zh: {
     title: "用你真正要写的内容试一次",
-    body: "全部 Local 模型可免费试用 14 天，无需银行卡或 Dictivo 账号。下载模型后，说一封简短邮件或一条笔记，再到平时使用的应用里检查文字。换工具前，用同一句话和同一套操作比较。",
+    body: "全部 Local 模型可免费试用 7 天，无需银行卡或 Dictivo 账号。下载模型后，说一封简短邮件或一条笔记，再到平时使用的应用里检查文字。换工具前，用同一句话和同一套操作比较。",
     download: "下载并试用 Dictivo", pricing: "查看价格和试用条款",
     cards: [
       ["云端与本地输入", "比较音频处理位置、免费额度和常用设备。先明确你需要云端改写、移动端使用，还是本地语音输入。"],
@@ -113,7 +114,7 @@ const rows = {
   },
   "zh-hant": {
     title: "用你真正要寫的內容試一次",
-    body: "全部 Local 模型可免費試用 14 天，無需信用卡或 Dictivo 帳號。下載模型後，說一封簡短郵件或一則筆記，再到平常使用的應用程式裡檢查文字。換工具前，用同一句話和同一套操作比較。",
+    body: "全部 Local 模型可免費試用 7 天，無需信用卡或 Dictivo 帳號。下載模型後，說一封簡短郵件或一則筆記，再到平常使用的應用程式裡檢查文字。換工具前，用同一句話和同一套操作比較。",
     download: "下載並試用 Dictivo", pricing: "查看價格與試用條款",
     cards: [
       ["雲端與本機輸入", "比較音訊處理位置、免費額度與常用裝置。先確認你需要雲端改寫、行動裝置使用，還是本機語音輸入。"],
@@ -126,7 +127,7 @@ const rows = {
   },
   ja: {
     title: "普段の作業で試してから選ぶ",
-    body: "すべてのLocalモデルを14日間、カードやDictivoアカウントなしで試せます。モデルをダウンロードし、短いメールやメモを話して、普段使うアプリで文字を確認してください。同じ文章と操作で比較してから乗り換えましょう。",
+    body: "すべてのLocalモデルを7日間、カードやDictivoアカウントなしで試せます。モデルをダウンロードし、短いメールやメモを話して、普段使うアプリで文字を確認してください。同じ文章と操作で比較してから乗り換えましょう。",
     download: "Dictivoをダウンロードして試す", pricing: "料金と試用条件を確認",
     cards: [
       ["クラウド処理とローカル処理", "音声の処理場所、無料枠、使用する端末を比較。クラウドでの編集、モバイル利用、ローカル音声入力のどれが必要かを確認します。"],
@@ -139,7 +140,7 @@ const rows = {
   },
   ko: {
     title: "실제로 하는 글쓰기 작업으로 비교하세요",
-    body: "카드나 Dictivo 계정 없이 모든 Local 모델을 14일간 사용해 보세요. 모델을 다운로드한 뒤 짧은 이메일이나 메모를 말하고 평소 쓰는 앱에서 결과를 확인하세요. 바꾸기 전에 같은 문장과 작업 과정으로 비교하세요.",
+    body: "카드나 Dictivo 계정 없이 모든 Local 모델을 7일간 사용해 보세요. 모델을 다운로드한 뒤 짧은 이메일이나 메모를 말하고 평소 쓰는 앱에서 결과를 확인하세요. 바꾸기 전에 같은 문장과 작업 과정으로 비교하세요.",
     download: "Dictivo 다운로드 및 체험", pricing: "가격과 체험 조건 확인",
     cards: [
       ["클라우드와 기기 내 처리", "음성 처리 위치, 무료 사용 한도, 사용하는 기기를 비교하세요. 클라우드 편집, 모바일 사용, 로컬 음성 입력 중 필요한 기능을 확인하세요."],

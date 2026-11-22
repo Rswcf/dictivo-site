@@ -27,7 +27,8 @@ import { docsCheckedLabel } from "./docs-shared.mjs";
 // 2026-11-11: the section "Check a download" names the public releases repository
 // deepviewsdev/dictivo-releases. Its daily Action copies each installer from downloads.dictivo.app,
 // checks the SHA-256 against downloads.json and attaches SHA256SUMS; it holds no source code.
-export const DOCS_INSTALL_LASTMOD = "2026-11-11";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const DOCS_INSTALL_LASTMOD = "2026-11-22";
 
 const RELEASES_REPO = "https://github.com/deepviewsdev/dictivo-releases";
 

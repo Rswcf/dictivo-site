@@ -40,7 +40,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Start free. Pay once if it fits.",
-      body: `Try every local model free for 14 days, with 10 Cloud Fast minutes included. ${pricingAnchor("en")}`,
+      body: `Try every local model free for 7 days, with 10 Cloud Fast minutes included. ${pricingAnchor("en")}`,
       tiers: [
         {
           name: "Free Local",
@@ -51,7 +51,7 @@ export const HOME_COPY = {
             "Local dictation on your device",
             "Tiny on-device model included",
             "Global hotkey and local history",
-            "14-day full Local trial unlocks every local model",
+            "7-day full Local trial unlocks every local model",
             "No cloud upload in Local mode",
           ],
           button: "See downloads",
@@ -138,7 +138,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Kostenlos starten. Erst upgraden, wenn Grenzen stören.",
-      body: `Starten Sie mit Tiny dauerhaft gratis, testen Sie jedes lokale Modell 14 Tage kostenlos und nutzen Sie 10 kostenlose Cloud-Fast-Minuten auf diesem Gerät, bevor Sie etwas kaufen. ${pricingAnchor("de")}`,
+      body: `Starten Sie mit Tiny dauerhaft gratis, testen Sie jedes lokale Modell 7 Tage kostenlos und nutzen Sie 10 kostenlose Cloud-Fast-Minuten auf diesem Gerät, bevor Sie etwas kaufen. ${pricingAnchor("de")}`,
       tiers: [
         {
           name: "Free Local",
@@ -149,7 +149,7 @@ export const HOME_COPY = {
             "Lokales Diktieren auf Ihrem Gerät",
             "Tiny On-Device-Modell enthalten",
             "Globaler Hotkey und lokaler Verlauf",
-            "14 Tage voller Local-Test schalten jedes lokale Modell frei",
+            "7 Tage voller Local-Test schalten jedes lokale Modell frei",
             "Kein Cloud-Upload im lokalen Modus",
           ],
           button: "Downloads ansehen",
@@ -235,7 +235,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Commencez gratuitement. Payez seulement quand les limites comptent.",
-      body: `Commencez avec Tiny gratuit à vie, essayez chaque modèle local gratuitement pendant 14 jours et utilisez 10 minutes Cloud Fast gratuites sur cet appareil avant tout achat. ${pricingAnchor("fr")}`,
+      body: `Commencez avec Tiny gratuit à vie, essayez chaque modèle local gratuitement pendant 7 jours et utilisez 10 minutes Cloud Fast gratuites sur cet appareil avant tout achat. ${pricingAnchor("fr")}`,
       tiers: [
         {
           name: "Free Local",
@@ -246,7 +246,7 @@ export const HOME_COPY = {
             "Dictée locale sur votre appareil",
             "Modèle Tiny embarqué inclus",
             "Raccourci global et historique local",
-            "L'essai Local complet de 14 jours débloque tous les modèles locaux",
+            "L'essai Local complet de 7 jours débloque tous les modèles locaux",
             "Aucun envoi cloud en mode Local",
           ],
           button: "Voir les téléchargements",
@@ -332,7 +332,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Empieza gratis. Mejora solo cuando los límites importen.",
-      body: `Empieza con Tiny gratis para siempre, prueba todos los modelos locales gratis durante 14 días y usa 10 minutos gratis de Cloud Fast en este dispositivo antes de comprar nada. ${pricingAnchor("es")}`,
+      body: `Empieza con Tiny gratis para siempre, prueba todos los modelos locales gratis durante 7 días y usa 10 minutos gratis de Cloud Fast en este dispositivo antes de comprar nada. ${pricingAnchor("es")}`,
       tiers: [
         {
           name: "Free Local",
@@ -343,7 +343,7 @@ export const HOME_COPY = {
             "Dictado local en tu dispositivo",
             "Modelo Tiny en el dispositivo incluido",
             "Atajo global e historial local",
-            "La prueba Local completa de 14 días desbloquea todos los modelos locales",
+            "La prueba Local completa de 7 días desbloquea todos los modelos locales",
             "Sin subida a la nube en modo Local",
           ],
           button: "Ver descargas",
@@ -429,7 +429,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Inizia gratis. Aggiorna solo quando i limiti contano.",
-      body: `Inizia con Tiny gratis per sempre, prova ogni modello locale gratis per 14 giorni e usa 10 minuti Cloud Fast gratuiti su questo dispositivo prima di acquistare. ${pricingAnchor("it")}`,
+      body: `Inizia con Tiny gratis per sempre, prova ogni modello locale gratis per 7 giorni e usa 10 minuti Cloud Fast gratuiti su questo dispositivo prima di acquistare. ${pricingAnchor("it")}`,
       tiers: [
         {
           name: "Free Local",
@@ -440,7 +440,7 @@ export const HOME_COPY = {
             "Dettatura locale sul tuo dispositivo",
             "Modello Tiny on-device incluso",
             "Scorciatoia globale e cronologia locale",
-            "La prova Local completa di 14 giorni sblocca ogni modello locale",
+            "La prova Local completa di 7 giorni sblocca ogni modello locale",
             "Nessun upload cloud in modalità Local",
           ],
           button: "Vedi download",
@@ -526,7 +526,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Begin gratis. Upgrade pas wanneer limieten ertoe doen.",
-      body: `Begin met Tiny altijd gratis, probeer elk lokaal model 14 dagen gratis en gebruik 10 gratis Cloud Fast-minuten op dit apparaat voordat je iets koopt. ${pricingAnchor("nl")}`,
+      body: `Begin met Tiny altijd gratis, probeer elk lokaal model 7 dagen gratis en gebruik 10 gratis Cloud Fast-minuten op dit apparaat voordat je iets koopt. ${pricingAnchor("nl")}`,
       tiers: [
         {
           name: "Free Local",
@@ -537,7 +537,7 @@ export const HOME_COPY = {
             "Lokaal dicteren op je apparaat",
             "Tiny on-device model inbegrepen",
             "Globale sneltoets en lokale geschiedenis",
-            "De volledige Local-proef van 14 dagen ontgrendelt elk lokaal model",
+            "De volledige Local-proef van 7 dagen ontgrendelt elk lokaal model",
             "Geen cloud-upload in Local-modus",
           ],
           button: "Bekijk downloads",
@@ -590,7 +590,7 @@ export const HOME_COPY = {
   },
   pt: {
     metaTitle: "Digitação por voz offline para Mac e Windows | Dictivo",
-    metaDescription: "Voz em texto no Mac e Windows: digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 14 dias.",
+    metaDescription: "Voz em texto no Mac e Windows: digitação por voz para e-mails, notas e prompts de IA. O modo Local processa o áudio no dispositivo. Teste por 7 dias.",
     skip: "Ir para o conteúdo",
     nav: {
       pricing: "Preços",
@@ -623,7 +623,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "Comece grátis. Faça upgrade só quando os limites importarem.",
-      body: `Comece com Tiny grátis para sempre, teste todos os modelos locais grátis por 14 dias e use 10 minutos grátis de Cloud Fast neste dispositivo antes de comprar. ${pricingAnchor("pt")}`,
+      body: `Comece com Tiny grátis para sempre, teste todos os modelos locais grátis por 7 dias e use 10 minutos grátis de Cloud Fast neste dispositivo antes de comprar. ${pricingAnchor("pt")}`,
       tiers: [
         {
           name: "Free Local",
@@ -634,7 +634,7 @@ export const HOME_COPY = {
             "Ditado local no seu dispositivo",
             "Modelo Tiny no dispositivo incluído",
             "Atalho global e histórico local",
-            "O teste Local completo de 14 dias desbloqueia todos os modelos locais",
+            "O teste Local completo de 7 dias desbloqueia todos os modelos locais",
             "Sem envio para nuvem no modo Local",
           ],
           button: "Ver downloads",
@@ -687,7 +687,7 @@ export const HOME_COPY = {
   },
   zh: {
     metaTitle: "Mac 和 Windows 离线语音输入软件 - 语音转文字 | Dictivo",
-    metaDescription: "用 Dictivo 在 Mac 和 Windows 上把语音转成文字，起草邮件、笔记和 AI 提示词。Local 模式在本机处理音频，安装模型后可离线语音输入。全部本地模型免费试用 14 天，无需账号或银行卡。",
+    metaDescription: "用 Dictivo 在 Mac 和 Windows 上把语音转成文字，起草邮件、笔记和 AI 提示词。Local 模式在本机处理音频，安装模型后可离线语音输入。全部本地模型免费试用 7 天，无需账号或银行卡。",
     skip: "跳到正文",
     nav: {
       pricing: "价格",
@@ -712,14 +712,14 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "先免费开始。只有限制影响使用时再升级。",
-      body: `先从 Tiny 永久免费开始，14 天免费试用所有本地模型，并在购买前使用本设备 10 分钟免费 Cloud Fast 额度。${pricingAnchor("zh")}`,
+      body: `先从 Tiny 永久免费开始，7 天免费试用所有本地模型，并在购买前使用本设备 10 分钟免费 Cloud Fast 额度。${pricingAnchor("zh")}`,
       tiers: [
         {
           name: "Free Local",
           sub: "在桌面端试用隐私优先的流程。",
           price: "免费",
           small: "本地档",
-          features: ["在本设备上本地听写", "包含 Tiny 设备端模型", "全局快捷键和本地历史记录", "14 天完整 Local 试用可解锁所有本地模型", "本地模式不会上传到云端"],
+          features: ["在本设备上本地听写", "包含 Tiny 设备端模型", "全局快捷键和本地历史记录", "7 天完整 Local 试用可解锁所有本地模型", "本地模式不会上传到云端"],
           button: "查看下载",
           href: "#downloads",
           dataAttr: "",
@@ -803,7 +803,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "無料で始めて、必要になった時だけアップグレード。",
-      body: `Tiny は永久無料で始められます。14 日間すべてのローカルモデルを無料で試し、この端末で Cloud Fast 10 分を無料で使ってから購入を決められます。${pricingAnchor("ja")}`,
+      body: `Tiny は永久無料で始められます。7 日間すべてのローカルモデルを無料で試し、この端末で Cloud Fast 10 分を無料で使ってから購入を決められます。${pricingAnchor("ja")}`,
       tiers: [
         {
           name: "Free Local",
@@ -814,7 +814,7 @@ export const HOME_COPY = {
             "デバイス上でのローカル音声入力",
             "Tiny オンデバイスモデルを含む",
             "グローバルショートカットとローカル履歴",
-            "14 日間の完全 Local トライアルで全ローカルモデルを利用できます",
+            "7 日間の完全 Local トライアルで全ローカルモデルを利用できます",
             "Local モードではクラウドアップロードなし",
           ],
           button: "ダウンロードを見る",
@@ -867,7 +867,7 @@ export const HOME_COPY = {
   },
   ko: {
     metaTitle: "Mac·Windows 음성 텍스트 변환 · 오프라인 음성 입력 | Dictivo",
-    metaDescription: "Mac과 Windows에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요. Local 모드는 기기에서 음성을 처리합니다. 모든 로컬 모델을 14일 무료로 체험하세요.",
+    metaDescription: "Mac과 Windows에서 음성을 텍스트로 변환해 이메일, 메모, AI 프롬프트를 작성하세요. Local 모드는 기기에서 음성을 처리합니다. 모든 로컬 모델을 7일 무료로 체험하세요.",
     skip: "본문으로 이동",
     nav: {
       pricing: "가격",
@@ -900,7 +900,7 @@ export const HOME_COPY = {
     },
     pricing: {
       title: "무료로 시작하고, 제한이 중요해질 때만 업그레이드하세요.",
-      body: `Tiny는 영구 무료로 시작할 수 있습니다. 14일 동안 모든 로컬 모델을 무료로 체험하고, 구매 전에 이 기기에서 Cloud Fast 10분을 무료로 사용할 수 있습니다. ${pricingAnchor("ko")}`,
+      body: `Tiny는 영구 무료로 시작할 수 있습니다. 7일 동안 모든 로컬 모델을 무료로 체험하고, 구매 전에 이 기기에서 Cloud Fast 10분을 무료로 사용할 수 있습니다. ${pricingAnchor("ko")}`,
       tiers: [
         {
           name: "Free Local",
@@ -911,7 +911,7 @@ export const HOME_COPY = {
             "기기에서 로컬 받아쓰기",
             "Tiny 온디바이스 모델 포함",
             "전역 단축키와 로컬 기록",
-            "14일 전체 Local 체험으로 모든 로컬 모델을 사용할 수 있습니다",
+            "7일 전체 Local 체험으로 모든 로컬 모델을 사용할 수 있습니다",
             "Local 모드에서는 클라우드 업로드 없음",
           ],
           button: "다운로드 보기",

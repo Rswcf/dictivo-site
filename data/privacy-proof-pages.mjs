@@ -1,5 +1,8 @@
 import { TRIAL_MILESTONE_COPY, TRIAL_MILESTONE_LASTMOD } from "./trial-milestone-copy.mjs";
-export const PRIVACY_PROOF_LASTMOD = TRIAL_MILESTONE_LASTMOD;
+// The page shows the trial milestone copy, so its date is the later of that copy's date and its own.
+// 2026-11-22: the Local trial is 7 days instead of 14.
+const PRIVACY_PROOF_OWN_LASTMOD = "2026-11-22";
+export const PRIVACY_PROOF_LASTMOD = TRIAL_MILESTONE_LASTMOD > PRIVACY_PROOF_OWN_LASTMOD ? TRIAL_MILESTONE_LASTMOD : PRIVACY_PROOF_OWN_LASTMOD;
 
 export const PRIVACY_PROOF_COPY = {
   en: {
@@ -26,7 +29,7 @@ export const PRIVACY_PROOF_COPY = {
           "Microphone audio stays on the device in Local mode.",
           "Transcripts, history, dictionary terms, snippets, and settings stay local.",
           "No Dictivo account is required for Local dictation.",
-          "Tiny stays free forever, and the 14-day full Local trial uses the same Local boundary.",
+          "Tiny stays free forever, and the 7-day full Local trial uses the same Local boundary.",
         ],
       },
       {
@@ -87,7 +90,7 @@ export const PRIVACY_PROOF_COPY = {
           "Mikrofonaudio bleibt im Local Mode auf dem Gerät.",
           "Transkripte, Verlauf, Wörterbuchbegriffe, Textbausteine und Einstellungen bleiben lokal.",
           "Für lokales Diktieren ist kein Dictivo-Konto erforderlich.",
-          "Tiny bleibt dauerhaft gratis; der 14-tägige volle Local-Test nutzt dieselbe Grenze.",
+          "Tiny bleibt dauerhaft gratis; der 7-tägige volle Local-Test nutzt dieselbe Grenze.",
         ],
       },
       {
@@ -148,7 +151,7 @@ export const PRIVACY_PROOF_COPY = {
           "L'audio du micro reste sur l'appareil en mode Local.",
           "Transcriptions, historique, dictionnaire, extraits et réglages restent locaux.",
           "Aucun compte Dictivo n'est requis pour la dictée Local.",
-          "Tiny reste gratuit à vie, et l'essai Local complet de 14 jours utilise la même frontière.",
+          "Tiny reste gratuit à vie, et l'essai Local complet de 7 jours utilise la même frontière.",
         ],
       },
       {
@@ -209,7 +212,7 @@ export const PRIVACY_PROOF_COPY = {
           "El audio del micrófono queda en el dispositivo en modo Local.",
           "Transcripciones, historial, diccionario, fragmentos y ajustes quedan locales.",
           "No se requiere cuenta de Dictivo para el dictado Local.",
-          "Tiny es gratis para siempre, y la prueba Local completa de 14 días usa la misma frontera.",
+          "Tiny es gratis para siempre, y la prueba Local completa de 7 días usa la misma frontera.",
         ],
       },
       {
@@ -270,7 +273,7 @@ export const PRIVACY_PROOF_COPY = {
           "L'audio del microfono resta sul dispositivo in modalità Local.",
           "Trascrizioni, cronologia, dizionario, snippet e impostazioni restano locali.",
           "Non serve un account Dictivo per la dettatura Local.",
-          "Tiny resta gratis per sempre e la prova Local completa di 14 giorni usa lo stesso confine.",
+          "Tiny resta gratis per sempre e la prova Local completa di 7 giorni usa lo stesso confine.",
         ],
       },
       {
@@ -331,7 +334,7 @@ export const PRIVACY_PROOF_COPY = {
           "Microfoonaudio blijft in Local-modus op het apparaat.",
           "Transcripties, geschiedenis, woordenboektermen, snippets en instellingen blijven lokaal.",
           "Voor Local-dictatie is geen Dictivo-account nodig.",
-          "Tiny blijft altijd gratis en de volledige Local-proef van 14 dagen gebruikt dezelfde grens.",
+          "Tiny blijft altijd gratis en de volledige Local-proef van 7 dagen gebruikt dezelfde grens.",
         ],
       },
       {
@@ -392,7 +395,7 @@ export const PRIVACY_PROOF_COPY = {
           "O áudio do microfone fica no dispositivo no modo Local.",
           "Transcrições, histórico, termos do dicionário, snippets e configurações ficam locais.",
           "Nenhuma conta Dictivo é necessária para ditado Local.",
-          "Tiny fica grátis para sempre, e o teste Local completo de 14 dias usa a mesma fronteira.",
+          "Tiny fica grátis para sempre, e o teste Local completo de 7 dias usa a mesma fronteira.",
         ],
       },
       {
@@ -453,7 +456,7 @@ export const PRIVACY_PROOF_COPY = {
           "Local 模式下麦克风音频留在本设备。",
           "转录文本、历史记录、词典条目、文本片段和设置留在本地。",
           "Local 听写不需要 Dictivo 账号。",
-          "Tiny 永久免费，14 天完整 Local 试用也使用同样的本地边界。",
+          "Tiny 永久免费，7 天完整 Local 试用也使用同样的本地边界。",
         ],
       },
       {
@@ -514,7 +517,7 @@ export const PRIVACY_PROOF_COPY = {
           "Local モードではマイク音声がデバイス上に残ります。",
           "文字起こし、履歴、辞書語句、スニペット、設定はローカルに残ります。",
           "Local 音声入力に Dictivo アカウントは不要です。",
-          "Tiny は永久無料で、14 日間の完全 Local トライアルも同じ境界を使います。",
+          "Tiny は永久無料で、7 日間の完全 Local トライアルも同じ境界を使います。",
         ],
       },
       {
@@ -575,7 +578,7 @@ export const PRIVACY_PROOF_COPY = {
           "Local 모드에서는 마이크 오디오가 기기에 남습니다.",
           "전사문, 기록, 사전 용어, 스니펫, 설정은 로컬에 남습니다.",
           "Local 받아쓰기에는 Dictivo 계정이 필요 없습니다.",
-          "Tiny는 영구 무료이며 14일 전체 Local 체험도 같은 경계를 사용합니다.",
+          "Tiny는 영구 무료이며 7일 전체 Local 체험도 같은 경계를 사용합니다.",
         ],
       },
       {

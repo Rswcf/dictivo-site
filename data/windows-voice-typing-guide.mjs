@@ -4,7 +4,8 @@
 // document (registry edits, system file repair, third-party tools) is suggested. Dictivo appears
 // only in the closing section, disclosed as this site's product, and only while Windows
 // downloads are public: without them the section is null and the trial panel is not rendered.
-export const WINDOWS_VOICE_TYPING_LASTMOD = "2026-10-17";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const WINDOWS_VOICE_TYPING_LASTMOD = "2026-11-22";
 export const WINDOWS_VOICE_TYPING_CHECKED = "2026-10-09";
 
 const checked = `(checked ${WINDOWS_VOICE_TYPING_CHECKED})`;
@@ -179,7 +180,7 @@ export function windowsVoiceTypingCopy({ windows, offlineGuidePath }) {
             "It is a desktop app, so Windows' Let desktop apps access your microphone setting applies to it too, and it cannot help if Windows does not detect your microphone at all. If voice typing already does what you need, you do not need another app.",
           ],
           steps: [
-            "Install Dictivo on Windows x64 and choose Set up Local. Download the recommended model while online; the 14-day full Local trial needs no account or card.",
+            "Install Dictivo on Windows x64 and choose Set up Local. Download the recommended model while online; the 7-day full Local trial needs no account or card.",
             "Allow desktop apps to access the microphone, select Local in Dictivo, and click the text field you want to write in. Use Ctrl+Shift+Space to start and stop, or release it to stop if you selected hold-to-talk.",
             "Check one short sentence for names, numbers and punctuation, then repeat in your normal writing app. If text appears in Dictivo but not the field, use Copy and paste it manually with Ctrl+V. Confirm the workflow saves editing time before buying.",
           ],

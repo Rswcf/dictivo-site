@@ -9,7 +9,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "Schon eingerichtet? Zum Übungsfeld", link: "Den ersten Satz ausprobieren →", setupTitle: "Dictivo vorbereiten",
     steps: [
       ["Installieren und starten", "Mac: Öffnen Sie die DMG, ziehen Sie Dictivo in Programme und starten Sie es dort. Windows x64: Verwenden Sie den Installer von dictivo.app. Der Windows-Installer ist noch nicht codesigniert; prüfen Sie die Quelle, bevor Sie ihn ausführen."],
-      ["Local einrichten", "Wählen Sie Set up Local und laden Sie das für Ihren Rechner empfohlene Modell herunter. Der erste Download benötigt Internet. Der vollständige Local-Test dauert 14 Tage, ohne Zahlungskarte oder Dictivo-Konto."],
+      ["Local einrichten", "Wählen Sie Set up Local und laden Sie das für Ihren Rechner empfohlene Modell herunter. Der erste Download benötigt Internet. Der vollständige Local-Test dauert 7 Tage, ohne Zahlungskarte oder Dictivo-Konto."],
       ["Mikrofon und Tastenkürzel prüfen", "Erlauben Sie den Mikrofonzugriff und testen Sie das in Dictivo angezeigte Tastenkürzel. Prüfen Sie, ob Sie zum Umschalten drücken oder zum Sprechen gedrückt halten. Wählen Sie Local und klicken Sie vor der Aufnahme in das Übungsfeld. Für automatisches Einfügen auf dem Mac kann die Bedienungshilfen-Berechtigung nötig sein."],
     ],
     practiceTitle: "Sprechen, lesen, korrigieren", practiceIntro: "Lesen Sie ein Beispiel vor oder verwenden Sie einen eigenen kurzen Satz. Starten Sie mit Ihrem Dictivo-Tastenkürzel. Drücken Sie erneut zum Stoppen oder lassen Sie bei gedrückt gehaltener Aufnahme los. Warten Sie auf den Text.",
@@ -32,7 +32,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "Déjà prêt ? Passer à l’exercice", link: "Essayer une première phrase →", setupTitle: "Préparer Dictivo",
     steps: [
       ["Installer et ouvrir", "Sur Mac, ouvrez le DMG, glissez Dictivo dans Applications et lancez-le depuis ce dossier. Sur Windows x64, utilisez l’installateur de dictivo.app. Celui-ci n’a pas encore de signature de code ; vérifiez sa provenance avant de l’exécuter."],
-      ["Configurer Local", "Choisissez Set up Local et téléchargez le modèle conseillé pour votre ordinateur. Ce premier téléchargement nécessite internet. L’essai complet de Local dure 14 jours, sans carte bancaire ni compte Dictivo."],
+      ["Configurer Local", "Choisissez Set up Local et téléchargez le modèle conseillé pour votre ordinateur. Ce premier téléchargement nécessite internet. L’essai complet de Local dure 7 jours, sans carte bancaire ni compte Dictivo."],
       ["Vérifier le microphone et le raccourci", "Autorisez le microphone et testez le raccourci affiché dans Dictivo. Vérifiez si vous devez appuyer pour démarrer et arrêter, ou maintenir la touche pendant la dictée. Choisissez Local et cliquez dans le champ avant de parler. Sur Mac, le collage automatique peut nécessiter l’autorisation Accessibilité."],
     ], practiceTitle: "Parlez, relisez, corrigez", practiceIntro: "Lisez un exemple ou une courte phrase personnelle. Démarrez avec votre raccourci Dictivo, puis appuyez à nouveau pour arrêter, ou relâchez la touche en mode maintien. Attendez le texte avant de le modifier.",
     samples: [["E-mail", "Bonjour Alex, peut-on déplacer notre rendez-vous à jeudi à quinze heures ? Merci de m’envoyer les notes mises à jour avant l’appel."], ["Instruction à une IA", "Prépare un petit site pour une librairie avec les horaires, les événements à venir et un lien de contact clair."]],
@@ -52,7 +52,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "¿Ya está listo? Ir a la práctica", link: "Prueba tu primera frase →", setupTitle: "Prepara Dictivo",
     steps: [
       ["Instala y abre", "En Mac, abre el DMG, arrastra Dictivo a Aplicaciones y ábrelo desde allí. En Windows x64, usa el instalador de dictivo.app. El instalador de Windows aún no tiene firma de código; comprueba su procedencia antes de ejecutarlo."],
-      ["Configura Local", "Elige Set up Local y descarga el modelo recomendado para tu equipo. La primera descarga requiere internet. La prueba completa de Local dura 14 días, sin tarjeta ni cuenta de Dictivo."],
+      ["Configura Local", "Elige Set up Local y descarga el modelo recomendado para tu equipo. La primera descarga requiere internet. La prueba completa de Local dura 7 días, sin tarjeta ni cuenta de Dictivo."],
       ["Comprueba el micrófono y el atajo", "Permite el acceso al micrófono y prueba el atajo indicado en Dictivo. Comprueba si debes pulsar para iniciar y detener o mantener pulsado mientras hablas. Elige Local y haz clic en el campo antes de grabar. En Mac, el pegado automático puede requerir el permiso de Accesibilidad."],
     ], practiceTitle: "Habla, lee y corrige", practiceIntro: "Lee un ejemplo o una frase breve propia. Inicia con el atajo de Dictivo; vuelve a pulsar para detener o suelta la tecla si usas el modo de mantener pulsado. Espera el texto antes de editarlo.",
     samples: [["Correo", "Hola Alex, ¿podemos cambiar la reunión al jueves a las tres? Envíame las notas actualizadas antes de la llamada."], ["Instrucción para IA", "Planifica una web pequeña para una librería con horarios, próximos eventos y un enlace de contacto claro."]],
@@ -72,7 +72,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "Già pronto? Vai alla prova", link: "Prova la prima frase →", setupTitle: "Prepara Dictivo",
     steps: [
       ["Installa e apri", "Su Mac, apri il DMG, trascina Dictivo in Applicazioni e avvialo da lì. Su Windows x64, usa l’installer di dictivo.app. L’installer Windows non ha ancora una firma del codice: verifica la provenienza prima di eseguirlo."],
-      ["Configura Local", "Scegli Set up Local e scarica il modello consigliato per il computer. Il primo download richiede internet. La prova completa di Local dura 14 giorni, senza carta di pagamento né account Dictivo."],
+      ["Configura Local", "Scegli Set up Local e scarica il modello consigliato per il computer. Il primo download richiede internet. La prova completa di Local dura 7 giorni, senza carta di pagamento né account Dictivo."],
       ["Controlla microfono e scorciatoia", "Consenti l’accesso al microfono e prova la scorciatoia indicata in Dictivo. Controlla se devi premere per avviare e fermare oppure tenere premuto mentre parli. Scegli Local e fai clic nel campo prima di registrare. Su Mac, l’inserimento automatico può richiedere il permesso Accessibilità."],
     ], practiceTitle: "Parla, leggi e correggi", practiceIntro: "Leggi un esempio o una tua frase breve. Avvia con la scorciatoia di Dictivo, poi premi di nuovo per fermare o rilascia il tasto nella modalità a pressione continua. Attendi il testo prima di modificarlo.",
     samples: [["Email", "Ciao Alex, possiamo spostare la riunione a giovedì alle tre? Mandami gli appunti aggiornati prima della chiamata."], ["Istruzione per l’IA", "Progetta un piccolo sito per una libreria con orari, prossimi eventi e un collegamento chiaro ai contatti."]],
@@ -92,7 +92,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "Al ingesteld? Naar het oefenveld", link: "Probeer je eerste zin →", setupTitle: "Dictivo voorbereiden",
     steps: [
       ["Installeren en openen", "Open op Mac de DMG, sleep Dictivo naar Apps en start het daar. Gebruik op Windows x64 het installatiebestand van dictivo.app. Dat Windows-bestand is nog niet digitaal ondertekend; controleer de herkomst voordat je het uitvoert."],
-      ["Local instellen", "Kies Set up Local en download het aanbevolen model voor je computer. De eerste download heeft internet nodig. Je kunt alle Local-modellen 14 dagen proberen, zonder betaalkaart of Dictivo-account."],
+      ["Local instellen", "Kies Set up Local en download het aanbevolen model voor je computer. De eerste download heeft internet nodig. Je kunt alle Local-modellen 7 dagen proberen, zonder betaalkaart of Dictivo-account."],
       ["Microfoon en sneltoets controleren", "Geef toegang tot de microfoon en test de sneltoets die Dictivo toont. Controleer of je één keer drukt om te starten en nogmaals om te stoppen, of de toets ingedrukt houdt. Kies Local en klik vóór de opname in het oefenveld. Automatisch plakken op Mac kan toestemming voor Toegankelijkheid vereisen."],
     ], practiceTitle: "Spreek, lees en verbeter", practiceIntro: "Lees een voorbeeld of een eigen korte zin. Start met je Dictivo-sneltoets. Druk opnieuw om te stoppen of laat los als je de toets ingedrukt houdt. Wacht op de tekst voordat je die bewerkt.",
     samples: [["E-mail", "Hoi Alex, kunnen we onze afspraak verzetten naar donderdag om drie uur? Stuur me de bijgewerkte notities vóór het gesprek."], ["AI-opdracht", "Bedenk een kleine website voor een boekwinkel met openingstijden, komende evenementen en een duidelijke contactlink."]],
@@ -112,7 +112,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "Já configurou? Ir para a prática", link: "Experimente a primeira frase →", setupTitle: "Prepare o Dictivo",
     steps: [
       ["Instale e abra", "No Mac, abra o DMG, arraste o Dictivo para Aplicativos e abra por lá. No Windows x64, use o instalador de dictivo.app. O instalador do Windows ainda não tem assinatura de código; verifique a origem antes de executar."],
-      ["Configure o Local", "Escolha Set up Local e baixe o modelo recomendado para seu computador. O primeiro download precisa de internet. O teste completo do Local dura 14 dias, sem cartão nem conta do Dictivo."],
+      ["Configure o Local", "Escolha Set up Local e baixe o modelo recomendado para seu computador. O primeiro download precisa de internet. O teste completo do Local dura 7 dias, sem cartão nem conta do Dictivo."],
       ["Verifique o microfone e o atalho", "Permita o acesso ao microfone e teste o atalho mostrado no Dictivo. Confira se você deve pressionar para iniciar e parar ou manter a tecla pressionada enquanto fala. Escolha Local e clique no campo antes de gravar. No Mac, a inserção automática pode exigir a permissão de Acessibilidade."],
     ], practiceTitle: "Fale, leia e corrija", practiceIntro: "Leia um exemplo ou uma frase curta sua. Inicie pelo atalho do Dictivo; pressione novamente para parar ou solte a tecla no modo de manter pressionado. Aguarde o texto antes de editar.",
     samples: [["E-mail", "Oi Alex, podemos mudar a reunião para quinta-feira às três? Envie as notas atualizadas antes da chamada."], ["Instrução para IA", "Planeje um site pequeno para uma livraria com horários, próximos eventos e um link de contato claro."]],
@@ -132,7 +132,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "已完成设置？开始练习", link: "试着输入第一句话 →", setupTitle: "准备好 Dictivo",
     steps: [
       ["安装并打开", "Mac：打开 DMG，将 Dictivo 拖入“应用程序”，再从该文件夹启动。Windows x64：使用 dictivo.app 提供的安装程序。Windows 安装程序尚未进行代码签名，请核对来源后自行决定是否运行。"],
-      ["设置 Local", "选择 Set up Local，下载适合电脑硬件的推荐模型。首次下载需要联网。完整 Local 试用为 14 天，无需付款卡或 Dictivo 账号。"],
+      ["设置 Local", "选择 Set up Local，下载适合电脑硬件的推荐模型。首次下载需要联网。完整 Local 试用为 7 天，无需付款卡或 Dictivo 账号。"],
       ["检查麦克风和快捷键", "允许麦克风访问，测试 Dictivo 中显示的快捷键，并确认采用按一下开始／再按停止，还是按住说话模式。选择 Local，录音前点击练习框。Mac 自动粘贴到其他应用时可能需要辅助功能权限。"],
     ], practiceTitle: "说一句，读一遍，再修正", practiceIntro: "朗读示例或自己的短句。用 Dictivo 快捷键开始；切换模式下再按一次停止，按住模式下松开停止。等文字生成后再编辑。",
     samples: [["邮件", "小林，我们把会议改到周四下午三点可以吗？请在通话前把更新后的笔记发给我。"], ["AI 指令", "请为一家书店规划一个小型网站，包含营业时间、近期活动和清晰的联系方式。"]],
@@ -152,7 +152,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "已完成設定？開始練習", link: "試著輸入第一句話 →", setupTitle: "準備好 Dictivo",
     steps: [
       ["安裝並開啟", "Mac：開啟 DMG，將 Dictivo 拖入「應用程式」，再從該資料夾啟動。Windows x64：使用 dictivo.app 提供的安裝程式。Windows 安裝程式尚未進行程式碼簽章，請核對來源後自行決定是否執行。"],
-      ["設定 Local", "選擇 Set up Local，下載適合電腦硬體的建議模型。首次下載需要連網。完整 Local 試用為 14 天，無需付款卡或 Dictivo 帳號。"],
+      ["設定 Local", "選擇 Set up Local，下載適合電腦硬體的建議模型。首次下載需要連網。完整 Local 試用為 7 天，無需付款卡或 Dictivo 帳號。"],
       ["檢查麥克風和快捷鍵", "允許麥克風存取，測試 Dictivo 中顯示的快捷鍵，並確認採用按一下開始／再按停止，還是按住說話模式。選擇 Local，錄音前點選練習欄。Mac 自動貼上到其他應用程式時可能需要輔助使用權限。"],
     ], practiceTitle: "說一句，讀一遍，再修正", practiceIntro: "朗讀範例或自己的短句。用 Dictivo 快捷鍵開始；切換模式下再按一次停止，按住模式下放開停止。等文字產生後再編輯。",
     samples: [["電子郵件", "小林，我們把會議改到週四下午三點可以嗎？請在通話前把更新後的筆記寄給我。"], ["AI 指令", "請為一家書店規劃一個小型網站，包含營業時間、近期活動和清楚的聯絡方式。"]],
@@ -172,7 +172,7 @@ export const FIRST_DICTATION_LOCALES = {
     jump: "설정을 마쳤다면 연습하기", link: "첫 문장 입력해 보기 →", setupTitle: "Dictivo 준비하기",
     steps: [
       ["설치하고 열기", "Mac에서는 DMG를 열고 Dictivo를 응용 프로그램 폴더로 옮긴 뒤 실행하세요. Windows x64에서는 dictivo.app의 설치 파일을 사용하세요. Windows 설치 파일에는 아직 코드 서명이 없으므로 출처를 확인하고 실행 여부를 판단하세요."],
-      ["Local 설정하기", "Set up Local을 선택하고 컴퓨터에 권장되는 모델을 다운로드하세요. 첫 다운로드에는 인터넷이 필요합니다. 전체 Local 체험은 14일이며 결제 카드나 Dictivo 계정이 필요하지 않습니다."],
+      ["Local 설정하기", "Set up Local을 선택하고 컴퓨터에 권장되는 모델을 다운로드하세요. 첫 다운로드에는 인터넷이 필요합니다. 전체 Local 체험은 7일이며 결제 카드나 Dictivo 계정이 필요하지 않습니다."],
       ["마이크와 단축키 확인하기", "마이크 접근을 허용하고 Dictivo에 표시된 단축키를 시험하세요. 한 번 눌러 시작하고 다시 눌러 멈추는 방식인지, 누른 채 말하는 방식인지 확인하세요. Local을 선택하고 녹음 전에 연습 칸을 클릭하세요. Mac의 자동 붙여넣기에는 손쉬운 사용 권한이 필요할 수 있습니다."],
     ], practiceTitle: "말하고 읽고 수정하기", practiceIntro: "예문이나 자신의 짧은 문장을 읽어 보세요. Dictivo 단축키로 시작한 뒤 다시 눌러 멈추거나, 누른 채 말하기 모드에서는 키를 놓으세요. 텍스트가 나올 때까지 기다린 후 수정하세요.",
     samples: [["이메일", "민수님, 회의를 목요일 오후 세 시로 옮길 수 있을까요? 통화 전에 수정한 메모를 보내 주세요."], ["AI 지시문", "서점의 작은 웹사이트를 계획해 주세요. 영업시간, 예정된 행사, 명확한 연락처 링크를 포함해 주세요."]],
@@ -187,4 +187,4 @@ export const FIRST_DICTATION_LOCALES = {
   },
 };
 
-for (const copy of Object.values(FIRST_DICTATION_LOCALES)) copy.lastUpdated = "2026-09-20";
+for (const copy of Object.values(FIRST_DICTATION_LOCALES)) copy.lastUpdated = "2026-11-22";

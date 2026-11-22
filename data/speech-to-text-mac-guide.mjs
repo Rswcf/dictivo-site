@@ -10,7 +10,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // year of SPEECH_TO_TEXT_MAC_GUIDE_CHECKED.
 // 2026-11-11: the VoiceInk row (shared with the comparison page) no longer calls its prices a
 // "current offer"; the vendor page shows no sale wording. Prices unchanged.
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-11";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-22";
 export const SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
@@ -193,7 +194,7 @@ export function speechToTextMacGuideCopy({ windows, checked = SPEECH_TO_TEXT_MAC
         title: "What can you try without buying a Mac dictation app?",
         paragraphs: [
           "Start with Apple Dictation for occasional input in a text field. Handy is free and open source. Spokenly and Superwhisper have free plans with local models, and MacWhisper's free version transcribes files with local models. Check the limits and features in your installed version.",
-          "Dictivo offers Tiny free forever and a 14-day full Local trial. Use that time to compare the editing effort on your own Mac. A paid local license is useful only if its workflow saves enough work for you. This guide does not rank paid apps above free ones.",
+          "Dictivo offers Tiny free forever and a 7-day full Local trial. Use that time to compare the editing effort on your own Mac. A paid local license is useful only if its workflow saves enough work for you. This guide does not rank paid apps above free ones.",
         ],
         bullets: [
           "For an existing audio file, test an app with file import and the export format you need. Do not assume a live dictation app replaces a meeting-transcription tool.",
@@ -273,7 +274,7 @@ export function speechToTextMacGuideCopy({ windows, checked = SPEECH_TO_TEXT_MAC
       ],
       [
         "Is there a free speech-to-text app for Mac?",
-        "Yes. Apple Dictation is included with macOS. Handy is free and open source. Spokenly and Superwhisper have free plans with local models, and MacWhisper has a free version. Dictivo includes Tiny free forever and a 14-day full Local trial. Compare each option's workflow and limits before paying.",
+        "Yes. Apple Dictation is included with macOS. Handy is free and open source. Spokenly and Superwhisper have free plans with local models, and MacWhisper has a free version. Dictivo includes Tiny free forever and a 7-day full Local trial. Compare each option's workflow and limits before paying.",
       ],
       [
         "What is the best dictation app for Mac?",

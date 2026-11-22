@@ -153,8 +153,12 @@ test("the pricing page answer and plan price state one undated price after the r
     assert.equal(count(answer, "{{price.renewal.inline}}"), 1, answer);
     assert.equal(count(answer, "{{price.cloudFast.inline}}"), 1, answer);
   }
-  const changed = pricingPageAnswer("en", { ...AFTER, includedUpdateMonths: 18, personalDevices: 5, trialDays: 7 });
-  for (const expected of ["18 months", "up to 5 personal devices", "7-day full Local trial"]) assert.ok(changed.includes(expected), changed);
+  // Every override differs from data/local-offer.mjs, so the copy can only pass by reading the offer.
+  const override = { includedUpdateMonths: 18, personalDevices: 5, trialDays: 9 };
+  for (const [key, value] of Object.entries(override)) assert.notEqual(value, LOCAL_OFFER[key], key);
+  const changed = pricingPageAnswer("en", { ...AFTER, ...override });
+  for (const expected of ["18 months", "up to 5 personal devices", "9-day full Local trial"]) assert.ok(changed.includes(expected), changed);
+  assert.ok(!changed.includes(`${LOCAL_OFFER.trialDays}-day full Local trial`), changed);
   assert.equal(pricingPlanPrice("en", BEFORE), guideLocalPrice("en", BEFORE));
   assert.equal(pricingPlanPrice("en", AFTER), guideLocalPrice("en", AFTER));
 });

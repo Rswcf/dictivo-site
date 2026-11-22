@@ -9,7 +9,7 @@ export const LOCAL_OFFER = Object.freeze({
   regularPriceFrom: null,
   updateRenewal: 24,
   includedUpdateMonths: 12,
-  trialDays: 14,
+  trialDays: 7,
   personalDevices: 3,
 });
 

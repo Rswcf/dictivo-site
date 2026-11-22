@@ -17,7 +17,8 @@ import { DOCS_CHECKED_VERSION, docsCheckedLabel } from "./docs-shared.mjs";
 // - the renewal key field and the window counted from the renewal purchase: SettingsView.tsx;
 // - Homebrew: the tap README.
 // The renewal price is the page's one price, a token in the Renewal section.
-export const DOCS_UPDATES_LASTMOD = "2026-11-10";
+// 2026-11-22: the Local trial is 7 days instead of 14.
+export const DOCS_UPDATES_LASTMOD = "2026-11-22";
 
 const months = LOCAL_OFFER.includedUpdateMonths;
 const trialDays = LOCAL_OFFER.trialDays;
