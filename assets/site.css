@@ -571,7 +571,8 @@ main section[id] {
    around the film (they were set when a caption sat under it; the homepage caption left on
    2026-11-12 and the value stayed). The header is not fixed, so it takes none. The 480px floor
    keeps a short window from shrinking the film to nothing. The first line is for browsers without
-   svh. /demo/ (.film-watch) sets its own width. */
+   svh. On the homepage the width includes the ring below, which makes the frame about 10px taller
+   than 16:9 (6px on phones); the 140px absorb that. /demo/ (.film-watch) sets its own width. */
 .hero-film {
   width: min(100%, 1080px, max(480px, calc((100vh - 140px) * 16 / 9)));
   width: min(100%, 1080px, max(480px, calc((100svh - 140px) * 16 / 9)));
@@ -579,6 +580,7 @@ main section[id] {
   align-self: center;
 }
 
+/* The plain film, as /demo/ shows it. The homepage ring below replaces this border and shadow. */
 .hero-video-poster,
 .hero-film video {
   width: 100%;
@@ -596,6 +598,54 @@ main section[id] {
 .hero-film video {
   display: block;
   height: auto;
+}
+
+/* The homepage film is a mostly light picture. Set straight on the near-black page, it looked
+   pasted on. A translucent ring frames it like a matte (10px of faint white gradient inside a 1px
+   light border), and a soft mint glow behind the ring ties it to the page. The width rule above
+   includes the ring, so the film inside is 22px narrower: 1058px in a 1080px frame. isolation keeps
+   the glow (z-index: -1) above the hero background and below the film. Every rule is scoped away
+   from .film-watch, so /demo/ keeps the plain film above. */
+.hero-film:not(.film-watch) {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 31px;
+  background: linear-gradient(180deg, rgb(255 255 255 / 18%), rgb(255 255 255 / 7%));
+  padding: 10px;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 12%) inset;
+}
+
+.hero-film:not(.film-watch)::before {
+  content: "";
+  position: absolute;
+  inset: -11% -13%;
+  z-index: -1;
+  background: radial-gradient(56% 60% at 50% 50%, rgb(125 211 199 / 62%), rgb(125 211 199 / 26%) 50%, transparent 76%);
+  filter: blur(54px);
+  pointer-events: none;
+}
+
+/* The glow paints over the ring's own background, so the film's box needs a dark fill of its own:
+   until site.js reveals the poster (invisible, but it keeps its box), the ring would frame a mint
+   hole. The fill covers exactly the film's box; the poster, the player and the <noscript> player
+   all paint over it. */
+.hero-film:not(.film-watch)::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: -1;
+  border-radius: 21px;
+  background: #050807;
+}
+
+/* Inside the ring the film needs no border or drop shadow, only a dark hairline. Its radius is the
+   ring's minus the 10px gap. */
+.hero-film:not(.film-watch) > .hero-video-poster,
+.hero-film:not(.film-watch) video {
+  border: 0;
+  border-radius: 21px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 25%);
 }
 
 .hero-video-poster[hidden],
@@ -2674,6 +2724,23 @@ main section[id] {
   }
 
   .hero-film video {
+    border-radius: 14px;
+  }
+
+  /* The homepage ring narrows to 6px. The poster takes the video's 14px, and the ring's radius is
+     6px larger (20px), as on wide screens (21px + 10px = 31px). */
+  .hero-film:not(.film-watch) {
+    border-radius: 20px;
+    padding: 6px;
+  }
+
+  .hero-film:not(.film-watch)::after {
+    inset: 6px;
+  }
+
+  .hero-film:not(.film-watch)::after,
+  .hero-film:not(.film-watch) > .hero-video-poster,
+  .hero-film:not(.film-watch) video {
     border-radius: 14px;
   }
 
