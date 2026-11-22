@@ -99,7 +99,7 @@ export const TRUST_PAGES = [
         paragraphs: [TRIAL_MILESTONE_COPY.en.reminder],
         bullets: [
           "Optional, and separate from the usage-statistics setting: nothing is stored unless you type an address and ask for the reminder.",
-          "One email, two days before the 14-day Local trial ends. No newsletter, no other messages.",
+          "One email, two days before your Local trial ends. No newsletter, no other messages.",
           "Cancel in the app, through the link in the email, or by writing to support@dictivo.app.",
         ],
       },

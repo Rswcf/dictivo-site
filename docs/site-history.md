@@ -21,15 +21,13 @@ These stay as they were:
 - The EU 14-day right of withdrawal and the "not later than 14 days" reimbursement sentence.
 - Competitor trials, refunds and guarantees on the comparison pages and guides.
 
-These are held. Their wording depends on a server rule that is not final:
-
-- The trial reminder email text in `data/trial-milestone-copy.mjs`, all languages.
-- The `/privacy/` bullet "One email, two days before the 14-day Local trial ends" in
-  `data/trust-pages.mjs`.
-- The assertion in `tests/facts/privacy-consistency.test.mjs` that the reminder names 14.
-
-Until the hold ends, `/privacy/` states the 7-day trial in one bullet and 14 days in the reminder
-text. The two `/privacy/` sub-pages of every language show the reminder text with 14 days.
+The trial reminder email text no longer names a trial length. From the 7-day release each trial
+keeps its own length: 7 days, or 14 days for a trial that started on an older version. The email is
+due two days before that trial ends, and a daily job sends it. So `data/trial-milestone-copy.mjs`
+(all languages) and the `/privacy/` bullet in `data/trust-pages.mjs` say "two days before your Local
+trial ends", and `tests/facts/privacy-consistency.test.mjs` asserts the two-day mark and no fixed
+length. `TRIAL_MILESTONE_LASTMOD` is 2026-11-22; the two `/privacy/` sub-pages of every language
+carry it.
 
 These did not change: the product film and its transcript on `/demo/` (`data/product-film.mjs`,
 re-rendered separately), the Mac App Store privacy and support pages (another pull request), and
