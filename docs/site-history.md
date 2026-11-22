@@ -9,13 +9,15 @@ A note records what changed on its date. README.md describes current behavior.
 
 The founder shortened the trial from 14 to 7 days on 2026-11-22. The 68-second film is re-rendered
 as cut v2.5 and published in the new folder `assets/film-v10/`. Only two on-screen cards changed:
-"free for 14 days." became "free for 7 days." (about 1:00 to 1:02), and the end card's small line
-"Free 14-day trial of every local model · dictivo.app" became "Free 7-day trial …" (from 1:04).
-Measured with ffmpeg `framemd5` against film-v09: the decoded 1080p frames differ only at frames
-1800–1859 and 1920–2039 (30 fps), the 4K frames only at 1828–1859 and 1920–2039. In 1080p, frames
-1800–1827 differ only at 80–85 dB PSNR, which is invisible; the visible change starts at frame 1828
-in both films. Both films still have 2040 frames and 68.000 s. The audio is unchanged: the decoded audio md5 is
-32b0c27570ba8d9ae09b4c00b93e1d4a in film-v09 and film-v10, 1080p and 4K.
+"free for 14 days." became "free for 7 days." (frames 1830–1859 at 30 fps, 1:01.0 to 1:02.0), and
+the end card's small line "Free 14-day trial of every local model · dictivo.app" became "Free 7-day
+trial …" (frames 1936–2039, from 1:04.5). In the render masters, 1080p and 4K, only these two
+ranges differ from cut v2.4; every other frame has SSIM 1.000000. The published H.264 files also
+differ a little in the frames next to them (ffmpeg `framemd5` against film-v09: 1080p frames
+1800–1859 and 1920–2039, 4K frames 1828–1859 and 1920–2039). That is encoder noise, not a picture
+change; in 1080p, frames 1800–1827 differ at 80–85 dB PSNR. Both films still have 2040 frames and
+68.000 s. The audio is unchanged: the decoded audio md5 is 32b0c27570ba8d9ae09b4c00b93e1d4a in
+film-v09 and film-v10, 1080p and 4K.
 
 - `dictivo-film-1080p.mp4`: 6,928,313 bytes, md5 7fb4f1d58108666c33e2c4f171aeaa8c.
 - `dictivo-film-4k.mp4`: 19,495,820 bytes, md5 5eaf4c76d8e9498ec0428068bfd10502.
