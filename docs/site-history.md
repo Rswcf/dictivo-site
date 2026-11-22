@@ -5,6 +5,35 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Mac App Store support page — 2026-11-22
+
+New page `/support/mac-app-store/`: the support page of the Mac App Store edition of Dictivo, which
+is not released yet. App Store Connect will carry this exact URL as the app's Support URL, and App
+Review opens it, so the URL must not change. The text and `MAS_SUPPORT_LASTMOD` are in
+`data/mas-support-page.mjs`. `tests/facts/mas-support-page.test.mjs` pins every sentence.
+
+The page is bare for the same reason as the privacy page below: Guideline 3.1.1(a) forbids links
+that lead to other ways to buy. `/contact/` carries the shared header and footer with Pricing,
+Download and checkout paths, so it cannot be the Support URL. The page has its own minimal head, no
+header, nav or footer, and no script. Its body links only to `mailto:support@dictivo.app`,
+`https://reportaproblem.apple.com/` and `/privacy/mac-app-store/`. That link is now the one link to
+the privacy page; `tests/structure/mas-privacy-page.test.mjs` allows exactly this file. Both pages
+now render through `renderBarePage()`; the privacy page's output did not change by one byte. No CSS
+was added.
+
+It is hidden until the App Store edition is released: `noindex`, not in `sitemap.xml` or any
+`llms.txt`, and no other page links to it. It is English only and has no hreflang. `/support/` is a
+new top-level section that `_routes.json` does not include, so the language Function never runs for
+it; no `_redirects` rule matches it either.
+
+At release:
+
+1. Drop `noindex: true` from `renderMasSupportPage()`.
+2. Add the page to `renderSitemap()` with `MAS_SUPPORT_LASTMOD` as its `lastmod`.
+3. Update `tests/structure/mas-support-page.test.mjs`, which asserts both are absent.
+
+For the privacy page's step 1 below, drop `noindex: true` from `renderMasPrivacyPage()`.
+
 ## Mac App Store privacy page — 2026-11-22
 
 New page `/privacy/mac-app-store/`: the privacy policy of the Mac App Store edition of Dictivo,

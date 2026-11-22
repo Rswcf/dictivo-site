@@ -5,7 +5,7 @@
  * Guideline 3.1.1(a) forbids links that lead to other ways to buy. The page is therefore bare:
  * renderMasPrivacyPage() in scripts/generate-site.mjs writes its own <head>, no shared header or
  * footer, no script, and no link to any other dictivo.app page. It is noindex, outside the sitemap
- * and llms.txt, and unlinked until the App Store edition is released (docs/site-history.md,
+ * and llms.txt, and linked only from /support/mac-app-store/ until the App Store edition is released (docs/site-history.md,
  * 2026-11-22). tests/facts/mas-privacy-page.test.mjs pins every sentence.
  *
  * Inline markup in the text: `host` becomes <code>, [label](url) becomes a link, and

@@ -98,6 +98,7 @@ import { WINDOWS_VOICE_TYPING_LASTMOD, WINDOWS_VOICE_TYPING_REFERENCES, windowsV
 import { WINDOWS_INSTALL_ENTRY_LASTMOD, WINDOWS_INSTALL_HELP_LASTMOD, WINDOWS_INSTALL_HELP_PATHS, WINDOWS_INSTALL_HELP_COPY, WINDOWS_INSTALL_HELP_REFERENCES, WINDOWS_INSTALL_ENTRY_COPY, windowsInstallHelpPath } from "../data/windows-installer-help.mjs";
 import { TRUST_PAGES } from "../data/trust-pages.mjs";
 import { MAS_PRIVACY_LASTMOD, MAS_PRIVACY_LINKS, MAS_PRIVACY_PAGE, MAS_PRIVACY_PATH } from "../data/mas-privacy-page.mjs";
+import { MAS_SUPPORT_LASTMOD, MAS_SUPPORT_LINKS, MAS_SUPPORT_PAGE, MAS_SUPPORT_PATH } from "../data/mas-support-page.mjs";
 import { IMPRESSUM_READY, IMPRESSUM_LABEL } from "../data/impressum.mjs";
 import { HANT, addHant, toHant } from "./lib/hant.mjs";
 import { attr, escapeHtml, html } from "./lib/html.mjs";
@@ -6048,36 +6049,48 @@ function renderTrustPage(sourcePage, currentCode = "en") {
   });
 }
 
-// /privacy/mac-app-store/ is bare on purpose (data/mas-privacy-page.mjs): App Review opens it, so
-// it does not use renderLayout() and has no shared head, header, footer, skip link, site.js or
-// JSON-LD, and no link to another dictivo.app page. Every address sits inside email_off, as in
-// security.html, so the edge's email obfuscation adds no script.
-const MAS_PRIVACY_EMAIL = "support@dictivo.app";
+// The bare pages of the Mac App Store edition, /privacy/mac-app-store/ (data/mas-privacy-page.mjs)
+// and /support/mac-app-store/ (data/mas-support-page.mjs), are bare on purpose: App Review opens
+// them, so they do not use renderLayout() and have no shared head, header, footer, skip link,
+// site.js or JSON-LD. Each links only to the targets in its own allow list. Every address sits
+// inside email_off, as in security.html, so the edge's email obfuscation adds no script.
+const BARE_PAGE_EMAIL = "support@dictivo.app";
 
-function masPrivacyInline(text) {
+function barePageInline(text, { path, links }) {
   const out = escapeHtml(text)
-    .replaceAll(MAS_PRIVACY_EMAIL, `<!--email_off--><a href="mailto:${MAS_PRIVACY_EMAIL}">${MAS_PRIVACY_EMAIL}</a><!--/email_off-->`)
+    .replaceAll(BARE_PAGE_EMAIL, `<!--email_off--><a href="mailto:${BARE_PAGE_EMAIL}">${BARE_PAGE_EMAIL}</a><!--/email_off-->`)
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_match, label, href) => {
-      if (!MAS_PRIVACY_LINKS.includes(href)) throw new Error(`${MAS_PRIVACY_PATH}: link target ${href} is not allowed`);
+      if (!links.includes(href)) throw new Error(`${path}: link target ${href} is not allowed`);
       return `<a href="${attr(href)}">${label}</a>`;
     })
     .replace(/`([^`]+)`/g, "<code>$1</code>");
-  if (/[`[\]]/.test(out)) throw new Error(`${MAS_PRIVACY_PATH}: unparsed markup in ${JSON.stringify(text)}`);
+  if (/[`[\]]/.test(out)) throw new Error(`${path}: unparsed markup in ${JSON.stringify(text)}`);
   return out;
 }
 
-function renderMasPrivacyPage() {
-  const page = MAS_PRIVACY_PAGE;
+// page: { title, metaDescription, intro, sections: [{ title, blocks }] }. A block is { p }, { ul }
+// (a list of sentences) or { qa } (a list of { q, a }: the question in <strong>, then the answer).
+// noindex stays true until the App Store edition is released (docs/site-history.md, 2026-11-22).
+function renderBarePage({ page, path, lastmod, links, idPrefix, noindex }) {
+  const inline = (text) => barePageInline(text, { path, links });
+  const renderBlock = (block) => {
+    if (block.ul) {
+      return `<ul>
+          ${block.ul.map((item) => `<li>${inline(item)}</li>`).join("\n          ")}
+        </ul>`;
+    }
+    if (block.qa) {
+      return `<ul>
+          ${block.qa.map(({ q, a }) => `<li><strong>${inline(q)}</strong> ${inline(a)}</li>`).join("\n          ")}
+        </ul>`;
+    }
+    if (typeof block.p !== "string") throw new Error(`${path}: unknown block ${JSON.stringify(block)}`);
+    return `<p>${inline(block.p)}</p>`;
+  };
   const sections = page.sections
     .map((section, index) => {
-      const id = `mas-privacy-${index + 1}`;
-      const blocks = section.blocks
-        .map((block) => (block.ul
-          ? `<ul>
-          ${block.ul.map((item) => `<li>${masPrivacyInline(item)}</li>`).join("\n          ")}
-        </ul>`
-          : `<p>${masPrivacyInline(block.p)}</p>`))
-        .join("\n        ");
+      const id = `${idPrefix}-${index + 1}`;
+      const blocks = section.blocks.map(renderBlock).join("\n        ");
       return `<section class="doc-section" aria-labelledby="${id}">
         <h2 id="${id}">${html(section.title)}</h2>
         ${blocks}
@@ -6089,17 +6102,16 @@ function renderMasPrivacyPage() {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>${html(page.title)}</title>
+${noindex ? `    <meta name="robots" content="noindex" />\n` : ""}    <title>${html(page.title)}</title>
     <meta name="description" content="${attr(page.metaDescription)}" />
-    <link rel="canonical" href="${attr(`${BASE_URL}${MAS_PRIVACY_PATH}`)}" />
+    <link rel="canonical" href="${attr(`${BASE_URL}${path}`)}" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/site.css?v=local" />
   </head>
   <body>
     <main class="doc-page">
       <h1>${html(page.title)}</h1>
-      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(MAS_PRIVACY_LASTMOD)}">${html(formatLocalizedDate(MAS_PRIVACY_LASTMOD, "en"))}</time></p>
+      <p class="doc-meta">${html(trustUiCopy("en").lastUpdated)} <time datetime="${attr(lastmod)}">${html(formatLocalizedDate(lastmod, "en"))}</time></p>
       <p class="doc-lede">${html(page.intro)}</p>
 
       ${sections}
@@ -6107,6 +6119,14 @@ function renderMasPrivacyPage() {
   </body>
 </html>
 `;
+}
+
+function renderMasPrivacyPage() {
+  return renderBarePage({ page: MAS_PRIVACY_PAGE, path: MAS_PRIVACY_PATH, lastmod: MAS_PRIVACY_LASTMOD, links: MAS_PRIVACY_LINKS, idPrefix: "mas-privacy", noindex: true });
+}
+
+function renderMasSupportPage() {
+  return renderBarePage({ page: MAS_SUPPORT_PAGE, path: MAS_SUPPORT_PATH, lastmod: MAS_SUPPORT_LASTMOD, links: MAS_SUPPORT_LINKS, idPrefix: "mas-support", noindex: true });
 }
 
 function privacyProofCopy(currentCode = "en") {
@@ -6943,7 +6963,9 @@ for (const page of TRUST_PAGES) {
   }
 }
 // English only, noindex, and in no sitemap, llms.txt or link until the App Store edition ships.
+// The support page links to the privacy page; nothing else links to either.
 write(`${MAS_PRIVACY_PATH.slice(1)}index.html`, renderMasPrivacyPage());
+write(`${MAS_SUPPORT_PATH.slice(1)}index.html`, renderMasSupportPage());
 write("404.html", renderNotFound());
 
 // Locale routing reads the finished pages, so it runs after every HTML file is written.

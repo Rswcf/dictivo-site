@@ -12,7 +12,8 @@ import { onRequest } from "../../functions/_middleware.js";
 // opens it, and Guideline 3.1.1(a) forbids links that lead to other ways to buy, so the page is
 // bare: no shared header, nav or footer, no script, and no link to another dictivo.app page. Until
 // the App Store edition ships it is also hidden: noindex, outside the sitemap and llms.txt, and
-// linked from no other page. These tests read only dist/.
+// linked only from /support/mac-app-store/, a page as bare and as hidden as this one
+// (mas-support-page.test.mjs). These tests read only dist/.
 const root = new URL("../../", import.meta.url).pathname;
 const dist = join(root, "dist");
 const PATH = "/privacy/mac-app-store/";
@@ -95,7 +96,7 @@ test("the Last updated stamp reads MAS_PRIVACY_LASTMOD in the legal pages' forma
   assert.ok(body.includes(`<p class="doc-meta">Last updated <time datetime="${MAS_PRIVACY_LASTMOD}">${shown}</time></p>`), shown);
 });
 
-test("the page is hidden: not in the sitemap or any llms.txt, and no other file links to it", () => {
+test("the page is hidden: not in the sitemap or any llms.txt, and only the App Store support page links to it", () => {
   const sitemap = readFileSync(join(dist, "sitemap.xml"), "utf8");
   assert.ok(!sitemap.includes("mac-app-store"), "sitemap.xml names the page");
   const llms = files(dist).filter((file) => file.endsWith("llms.txt"));
@@ -108,7 +109,7 @@ test("the page is hidden: not in the sitemap or any llms.txt, and no other file 
     assert.ok(text.includes(join(dist, name)), `${name} is not searched`);
   }
   const naming = text.filter((file) => readFileSync(file, "utf8").includes("/privacy/mac-app-store"));
-  assert.deepEqual(naming.map((file) => relative(dist, file)), []);
+  assert.deepEqual(naming.map((file) => relative(dist, file)), ["support/mac-app-store/index.html"]);
 });
 
 // The Function (functions/_middleware.js) takes every /privacy/* request, because the two /privacy/
