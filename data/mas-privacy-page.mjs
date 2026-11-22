@@ -51,7 +51,7 @@ export const MAS_PRIVACY_PAGE = Object.freeze({
       title: "Purchases",
       blocks: [
         {
-          p: "Apple processes the 14-day trial, the purchase of Dictivo Local, and restores. We do not receive your name, your email address or your payment details. Apple reports sales to us as totals. If you chose in macOS to share analytics with app developers, Apple may also give us usage and crash reports that do not identify you. [Apple's privacy policy](https://www.apple.com/legal/privacy/) applies to the data that Apple holds.",
+          p: "Apple processes the 7-day trial, the purchase of Dictivo Local, and restores. We do not receive your name, your email address or your payment details. Apple reports sales to us as totals. If you chose in macOS to share analytics with app developers, Apple may also give us usage and crash reports that do not identify you. [Apple's privacy policy](https://www.apple.com/legal/privacy/) applies to the data that Apple holds.",
         },
       ],
     },
