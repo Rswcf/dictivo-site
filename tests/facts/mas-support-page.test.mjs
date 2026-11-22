@@ -24,7 +24,7 @@ const SUPPORT = [
   "Contact",
   "Write to support@dictivo.app. Tell us your macOS version and what you did before the problem appeared.",
   "Purchases",
-  "The 14-day Trial and Dictivo Local are App Store purchases. Apple processes them.",
+  "The 7-day Trial and Dictivo Local are App Store purchases. Apple processes them.",
   "To get a purchase back on a new Mac or after you reinstall Dictivo, open Settings › Purchases in Dictivo and click Restore Purchases. Sign in to the App Store with the Apple Account that made the purchase.",
   "Purchases need an internet connection. If Dictivo cannot reach the App Store, try again later. The Tiny model works without a purchase.",
   "Refunds",
@@ -72,7 +72,7 @@ test("each common question leads its answer in bold", () => {
 test("the key statements are on the page", () => {
   for (const [statement, sentence] of [
     ["one support address", "Write to support@dictivo.app."],
-    ["Apple processes the purchases", "The 14-day Trial and Dictivo Local are App Store purchases. Apple processes them."],
+    ["Apple processes the purchases", "The 7-day Trial and Dictivo Local are App Store purchases. Apple processes them."],
     ["restore through the App Store", "open Settings › Purchases in Dictivo and click Restore Purchases."],
     ["the Tiny model is free", "The Tiny model works without a purchase."],
     ["Apple handles refunds", "Apple handles refunds for App Store purchases."],

@@ -36,7 +36,7 @@ export const MAS_SUPPORT_PAGE = Object.freeze({
     {
       title: "Purchases",
       blocks: [
-        { p: "The 14-day Trial and Dictivo Local are App Store purchases. Apple processes them." },
+        { p: "The 7-day Trial and Dictivo Local are App Store purchases. Apple processes them." },
         { p: "To get a purchase back on a new Mac or after you reinstall Dictivo, open Settings › Purchases in Dictivo and click Restore Purchases. Sign in to the App Store with the Apple Account that made the purchase." },
         { p: "Purchases need an internet connection. If Dictivo cannot reach the App Store, try again later. The Tiny model works without a purchase." },
       ],

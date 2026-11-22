@@ -42,6 +42,19 @@ show the trial. `PRIVACY_PROOF_LASTMOD` is now the later of its own date and
 2026-11-01: it records price and tax wording, and `/terms/`, the one priced page with no trial
 sentence, did not change. `/about/` has no date constant, and `/demo/` keeps `PRODUCT_FILM.lastmod`.
 
+## Mac App Store pages say "7-day trial" — 2026-11-22
+
+The Mac App Store edition, which is not released yet, will ship with a 7-day trial instead of a
+14-day trial (decided on 2026-11-22). Its in-app purchase is named "7-day Trial". The two bare pages
+name the trial once each, so both sentences changed: "Apple processes the 7-day trial, …" on
+`/privacy/mac-app-store/` and "The 7-day Trial and Dictivo Local are App Store purchases." on
+`/support/mac-app-store/`. `tests/facts/mas-privacy-page.test.mjs` and
+`tests/facts/mas-support-page.test.mjs` pin the new sentences. `MAS_PRIVACY_LASTMOD` and
+`MAS_SUPPORT_LASTMOD` already carry this date. Nothing else on the site changed: the direct
+edition's trial stays at 14 days.
+
+
+
 ## Mac App Store support page — 2026-11-22
 
 New page `/support/mac-app-store/`: the support page of the Mac App Store edition of Dictivo, which
