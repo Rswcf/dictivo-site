@@ -294,6 +294,17 @@ file. Nothing in `data/` produces it, and it does not inherit the shared header,
 switcher or asset fingerprinting that generated pages get — so a change to those has to be made
 here by hand as well.
 
+### `/privacy/mac-app-store/` is bare on purpose
+
+The privacy policy of the Mac App Store edition. The app links to this exact URL, and App Review
+opens it. Guideline 3.1.1(a) forbids links to other ways to buy, so `renderMasPrivacyPage()` does
+not use `renderLayout()`: the page has its own head, no shared header or footer, no `site.js`, no
+JSON-LD, and links only to `mailto:support@dictivo.app` and Apple's privacy policy. Its text is in
+`data/mas-privacy-page.mjs`. Do not give it the shared layout or a script, because the policy says
+"This page runs no scripts". Until the App Store edition is released, it is also `noindex`, outside
+the sitemap and `llms.txt`, and linked from no page. `tests/structure/mas-privacy-page.test.mjs`
+and `tests/facts/mas-privacy-page.test.mjs` hold both rules.
+
 ### The Impressum is fail-closed
 
 `data/impressum.json` holds the § 5 DDG operator details. `data/impressum.mjs` walks the file and,
@@ -372,6 +383,7 @@ content it stamps actually changes — that is the only thing that moves a date.
 | `JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD` | `data/ja-mac-dictation-troubleshooting.mjs` | visible stamp + sitemap + `dateModified` for `/ja/guides/mac-dictation-not-working/` |
 | `MEDIA_KIT_LASTMOD` | `data/media-kit.mjs` | sitemap + `dateModified` for `/media-kit/` |
 | `LEGAL_LASTMOD` | `data/trust-pages.mjs` | visible stamp + sitemap + `dateModified` for `/privacy/`, `/terms/`, `/refund/` |
+| `MAS_PRIVACY_LASTMOD` | `data/mas-privacy-page.mjs` | visible stamp for `/privacy/mac-app-store/` only: the page has no sitemap entry and no JSON-LD |
 | `COMPARE_LAST_UPDATED` | `data/compare-pages.mjs` | visible stamp + sitemap for every `/compare/` page, and a build gate |
 
 Every page that shows a Dictivo price (homepages, `/pricing/`, comparison pages and hubs, the

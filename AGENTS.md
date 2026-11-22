@@ -45,8 +45,11 @@ Do not run these scripts locally unless the task is about them:
   language. Only `{{price.*}}` tokens, the zh to zh-hant conversion and `assets/site.js` change it
   later. README ("Homepage copy") has the details.
 - Every price comes from `data/local-offer.mjs` through price tokens. Do not type a price into copy.
-- Every page except the homepage and `/demo/` is wrapped by `renderLayout()` in the generator. Change
-  the shared head, header or footer there, not in one renderer.
+- Every page except the homepage, `/demo/` and `/privacy/mac-app-store/` is wrapped by `renderLayout()`
+  in the generator. Change the shared head, header or footer there, not in one renderer.
+- `/privacy/mac-app-store/` is bare on purpose: the Mac App Store edition links to it and App Review
+  opens it. It has no shared layout, no script and no link to another page of this site. Its address
+  never changes. README ("`/privacy/mac-app-store/` is bare on purpose") has the details.
 - `site.css` styles only classes that a built page or `assets/site.js` uses.
   `tests/structure/css-classes.test.mjs` fails otherwise; delete the rule with the markup.
 - Edit Simplified Chinese (`zh`) copy only. The build converts it to `zh-hant`.
