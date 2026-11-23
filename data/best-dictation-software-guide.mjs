@@ -11,8 +11,8 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 // The year in the title is the year of the last full check, so it changes only when every price
 // is re-read (first re-check of 2027: 4 January).
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const BEST_DICTATION_SOFTWARE_LASTMOD = "2026-11-24";
 export const BEST_DICTATION_SOFTWARE_CHECKED = "2026-10-10";
 // 2026-11-10: a live spot-check re-read the Spokenly Pro and Voibe prices only. Their price cells
 // and their pricing references carry this date; every other fact keeps BEST_DICTATION_SOFTWARE_CHECKED.

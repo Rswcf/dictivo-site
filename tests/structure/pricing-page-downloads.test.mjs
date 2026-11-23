@@ -52,8 +52,8 @@ test("the answer stays the section's first paragraph and the page is redated", (
   const first = section.match(/<p>([\s\S]*?)<\/p>/);
   assert.equal(visible(first[1]), resolved(pricingPageAnswer("en")));
   assert.ok(first.index < section.indexOf("data-platform-downloads"), "answer before the buttons");
-  // 2026-11-22: the Local trial is 7 days instead of 14.
-  assert.equal(html.match(/<time datetime="([^"]+)">/)[1], "2026-11-22");
+  // 2026-11-24: the Local trial is 7 days instead of 14.
+  assert.equal(html.match(/<time datetime="([^"]+)">/)[1], "2026-11-24");
 });
 
 test("the first Mac download link sits in the first quarter of the pricing page", () => {

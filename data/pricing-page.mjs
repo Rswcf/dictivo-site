@@ -6,8 +6,8 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 // those sentences come from the pricing functions in data/local-offer-copy.mjs, which follow
 // the 2026-11-01 rollover by themselves. Renewal and Cloud Fast prices do not change then and
 // stay placeholders here.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const PRICING_PAGE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const PRICING_PAGE_LASTMOD = "2026-11-24";
 
 const { includedUpdateMonths: months, personalDevices: devices, trialDays } = LOCAL_OFFER;
 

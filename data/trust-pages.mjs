@@ -14,9 +14,9 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * tell which version they agreed to.
  */
 const LEGAL_LASTMOD = "2026-08-01";
-// Revised for optional desktop acquisition-channel sharing (2026-10-17); 2026-11-22: the Local trial
+// Revised for optional desktop acquisition-channel sharing (2026-10-17); 2026-11-24: the Local trial
 // is 7 days instead of 14.
-const PRIVACY_LASTMOD = "2026-11-22";
+const PRIVACY_LASTMOD = "2026-11-24";
 // The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-26).
 const TERMS_LASTMOD = "2026-09-26";
 

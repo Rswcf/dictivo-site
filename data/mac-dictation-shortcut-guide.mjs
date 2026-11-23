@@ -6,8 +6,8 @@ import { APPLE_DICTATION_HELP, MAC_DICTATION_GUIDES_CHECKED, dictivoShortcutDefa
 // Customize; an actual Mac's menu may be added only with a screenshot. Dictivo's shortcuts are
 // its v0.3.52 defaults (DEFAULT_HOTKEYS in the desktop app) and appear only where labelled as
 // this site's product.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-24";
 
 const checked = `(checked ${MAC_DICTATION_GUIDES_CHECKED})`;
 const checkedOn = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${MAC_DICTATION_GUIDES_CHECKED}T00:00:00Z`));

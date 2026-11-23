@@ -9,8 +9,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // hand: the facts come from vendor pages and documentation. The Mac and Windows license question
 // belongs to /guides/dictation-app-mac-windows-one-time-license/, so the H1, title, description,
 // intent rows and headings avoid "Windows", "cross-platform" and "offline".
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-24";
 export const NO_SUBSCRIPTION_GUIDE_CHECKED = "2026-11-10";
 
 const checkedLabel = `(checked ${NO_SUBSCRIPTION_GUIDE_CHECKED})`;

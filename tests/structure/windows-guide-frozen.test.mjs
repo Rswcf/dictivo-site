@@ -17,10 +17,10 @@ const NEW_SLUGS = [
   "/guides/dictate-into-claude-code-and-cursor-on-mac/",
 ];
 
-// 2026-11-22: the only change since 2026-10-17 is the Local trial length (7 days instead of 14).
+// 2026-11-24: the only change since 2026-10-17 is the Local trial length (7 days instead of 14).
 test("the Windows offline guide keeps its date", () => {
-  assert.equal(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD, "2026-11-22");
-  assert.ok(main(page()).includes('datetime="2026-11-22"'));
+  assert.equal(OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD, "2026-11-24");
+  assert.ok(main(page()).includes('datetime="2026-11-24"'));
 });
 
 test("the Windows offline guide gains none of the answer-page parts", () => {

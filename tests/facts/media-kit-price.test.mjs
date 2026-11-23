@@ -30,7 +30,7 @@ test("the media kit states the Local price from placeholders, dated only while t
     for (const text of [row, claim]) assert.doesNotMatch(text, /introductory|until|2026/i, text);
   }
   // 2026-11-12: the product film section describes the 68-second film.
-  // 2026-11-22: the Local trial is 7 days instead of 14.
-  assert.equal(MEDIA_KIT_LASTMOD, "2026-11-22");
+  // 2026-11-24: the Local trial is 7 days instead of 14.
+  assert.equal(MEDIA_KIT_LASTMOD, "2026-11-24");
   assert.ok(page.includes(`"dateModified":"${MEDIA_KIT_LASTMOD}"`));
 });

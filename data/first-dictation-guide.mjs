@@ -1,7 +1,7 @@
 import { FIRST_DICTATION_LOCALES } from "./first-dictation-locales.mjs";
 
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const FIRST_DICTATION_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const FIRST_DICTATION_LASTMOD = "2026-11-24";
 export function firstDictationLastmod(code) {
   return FIRST_DICTATION_COPY[code]?.lastUpdated || FIRST_DICTATION_LASTMOD;
 }
@@ -128,6 +128,6 @@ export const FIRST_DICTATION_COPY = {
     "pricing": "購入条件を見る",
     "models": "Macのモデル選び",
     "offline": "オフライン音声入力を比較",
-    "lastUpdated": "2026-11-22"
+    "lastUpdated": "2026-11-24"
   },
 };

@@ -2,11 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-// 2026-11-22: every comparison page in every language moved (7-day Local trial).
+// 2026-11-24: every comparison page in every language moved (7-day Local trial).
 // 2026-11-11: the MacWhisper and VoiceInk pages moved again (vendor update wording).
 // 2026-11-10: each Japanese comparison page has its own title and description instead of the
 // shared template. The Dragon page kept its 2026-10-09 date, the Dragon price check, until
-// 2026-11-22; the price sentence still names that check (tests/facts/dragon-price-status.test.mjs).
+// 2026-11-24; the price sentence still names that check (tests/facts/dragon-price-status.test.mjs).
 const read = (path) => readFileSync(new URL(`../../dist/${path}`, import.meta.url), "utf8");
 const length = (s) => [...s].length;
 const jsonLd = (html) =>
@@ -15,12 +15,12 @@ const meta = (html, attribute, name) => html.match(new RegExp(`<meta ${attribute
 const visibleDate = (html) => html.match(/<time datetime="([^"]+)"/)?.[1];
 
 const JA_COMPARE_META = [
-  ["wispr-flow-alternative", "Wispr Flowの代替：買い切り・オフラインのDictivo", "Wispr Flowは文字起こしをクラウドで行い、有料プランは月額・年額制です。Dictivo Localは端末内で処理する買い切りアプリ。プライバシー、料金、対応OSの違いを比較します。", "2026-11-22"],
-  ["superwhisper-alternative", "Superwhisperの代替：Dictivoと料金・機能を比較", "Superwhisperはローカルモデルとクラウドモデルを選べ、月額・年額・買い切りのプランがあります。Dictivo Localとの料金、無料で使える範囲、対応OSの違いを比較します。", "2026-11-22"],
-  ["macwhisper-alternative", "MacWhisperの代替：Dictivoと機能・料金を比較", "MacWhisperはmacOS専用で、音声入力に加えてファイルの文字起こしもできます。DictivoはMacとWindows x64に対応する音声入力アプリ。機能、料金、更新の扱いを比較します。", "2026-11-22"],
-  ["voiceink-alternative", "VoiceInkの代替：Dictivoと料金・対応OSを比較", "VoiceInkはApple Silicon搭載Mac向けの買い切りアプリです。DictivoはMacとWindows x64に対応し、1つのライセンスで両方に使えます。料金、試用、対応環境の違いを比較します。", "2026-11-22"],
-  ["macos-dictation-alternative", "Mac標準の音声入力の代替：Dictivoとの違いを比較", "Macに標準搭載の音声入力は無料で使えます。Dictivoは履歴、辞書、スニペットを備えたローカル音声入力アプリで、Windows x64にも対応。処理の場所と機能の違いを比較します。", "2026-11-22"],
-  ["dragon-alternative", "Dragonの代替：Mac対応・買い切りのDictivo", "Dragon ProfessionalはWindows専用で、Mac版は2018年に終了しました。Dictivo LocalはMacとWindows x64で使える買い切りの音声入力アプリ。処理方法、料金、対応OSを比較します。", "2026-11-22"],
+  ["wispr-flow-alternative", "Wispr Flowの代替：買い切り・オフラインのDictivo", "Wispr Flowは文字起こしをクラウドで行い、有料プランは月額・年額制です。Dictivo Localは端末内で処理する買い切りアプリ。プライバシー、料金、対応OSの違いを比較します。", "2026-11-24"],
+  ["superwhisper-alternative", "Superwhisperの代替：Dictivoと料金・機能を比較", "Superwhisperはローカルモデルとクラウドモデルを選べ、月額・年額・買い切りのプランがあります。Dictivo Localとの料金、無料で使える範囲、対応OSの違いを比較します。", "2026-11-24"],
+  ["macwhisper-alternative", "MacWhisperの代替：Dictivoと機能・料金を比較", "MacWhisperはmacOS専用で、音声入力に加えてファイルの文字起こしもできます。DictivoはMacとWindows x64に対応する音声入力アプリ。機能、料金、更新の扱いを比較します。", "2026-11-24"],
+  ["voiceink-alternative", "VoiceInkの代替：Dictivoと料金・対応OSを比較", "VoiceInkはApple Silicon搭載Mac向けの買い切りアプリです。DictivoはMacとWindows x64に対応し、1つのライセンスで両方に使えます。料金、試用、対応環境の違いを比較します。", "2026-11-24"],
+  ["macos-dictation-alternative", "Mac標準の音声入力の代替：Dictivoとの違いを比較", "Macに標準搭載の音声入力は無料で使えます。Dictivoは履歴、辞書、スニペットを備えたローカル音声入力アプリで、Windows x64にも対応。処理の場所と機能の違いを比較します。", "2026-11-24"],
+  ["dragon-alternative", "Dragonの代替：Mac対応・買い切りのDictivo", "Dragon ProfessionalはWindows専用で、Mac版は2018年に終了しました。Dictivo LocalはMacとWindows x64で使える買い切りの音声入力アプリ。処理方法、料金、対応OSを比較します。", "2026-11-24"],
 ];
 
 const REFUND_DESCRIPTION =
@@ -57,7 +57,7 @@ test("the Japanese comparison hub lists each page under its own title", () => {
   }
 });
 
-// 2026-11-22, every language: the Local trial is 7 days instead of 14, so every comparison page
+// 2026-11-24, every language: the Local trial is 7 days instead of 14, so every comparison page
 // carries that date and the Japanese pages share it with their English and German twins.
 test("the Japanese comparison dates match their English and German twins", () => {
   for (const [slug, , , date] of JA_COMPARE_META) {

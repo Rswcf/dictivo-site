@@ -1,8 +1,8 @@
 import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./dragon-price-status.mjs";
 
 // 2026-10-17: Added a Local trial and purchase-evaluation path.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const OFFLINE_DICTATION_WINDOWS_GUIDE_LASTMOD = "2026-11-24";
 
 export const OFFLINE_DICTATION_WINDOWS_GUIDE_REFERENCES = [
   ["Microsoft: speech and typing privacy (Win+H)", "https://support.microsoft.com/en-us/windows/speech-voice-activation-inking-typing-and-privacy-149e0e60-7c93-dedd-a0d8-5731b71a4fef"],

@@ -258,7 +258,7 @@ test("readers reach the guide from the Mac list, both offline guides and the Eng
   // The guide links back to the Mac list with a descriptive anchor, so the two split the work.
   assert.ok(section(page(), 4).includes('<a href="/guides/best-speech-to-text-apps-for-mac/">Best speech-to-text apps for Mac, compared by workflow</a>'));
   const sitemap = read("sitemap.xml");
-  for (const [loc, date] of [["guides/best-speech-to-text-apps-for-mac/", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD], ["guides/offline-dictation-on-windows/", "2026-11-22"], ["guides/offline-dictation-on-mac/", offlineDictationGuideLastmod("en")]]) {
+  for (const [loc, date] of [["guides/best-speech-to-text-apps-for-mac/", SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD], ["guides/offline-dictation-on-windows/", "2026-11-24"], ["guides/offline-dictation-on-mac/", offlineDictationGuideLastmod("en")]]) {
     const lastmod = date > PRICING_LASTMOD ? date : PRICING_LASTMOD;
     assert.match(sitemap, new RegExp(`<loc>https://dictivo\\.app/${loc}</loc>\\s*<lastmod>${lastmod}</lastmod>`), loc);
   }

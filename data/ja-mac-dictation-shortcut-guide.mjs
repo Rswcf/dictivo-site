@@ -4,8 +4,8 @@
 // those pages, never translated from the English guide. Apple names only two choices of the
 // Shortcut pop-up menu, so this page names only those. Dictivo appears only in the third column
 // of the quick reference, in its own disclosed section and in the last FAQ.
-// 2026-11-10: the publishing commit's date. 2026-11-22: the Local trial is 7 days instead of 14.
-export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-22";
+// 2026-11-10: the publishing commit's date. 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-24";
 
 // The day the Apple pages below were read for this guide.
 export const JA_MAC_DICTATION_SHORTCUT_CHECKED = "2026-10-09";

@@ -14,8 +14,8 @@ import { JA_APPLE_DICTATION_HELP, JA_MAC_DICTATION_SHORTCUT_CHECKED } from "./ja
 // v0.3.57). Japanese UI labels are the app's own strings at v0.3.57. The copy is written in
 // Japanese, not translated sentence by sentence from the English guide.
 export const JA_SPEECH_GUIDE_READY = true;
-// 2026-11-11: the release day. 2026-11-22: the Local trial is 7 days instead of 14.
-export const JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-11: the release day. 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-24";
 export const JA_SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10"; // the competitor facts file and price spot-check date
 
 const checkedLabel = (iso) => `（${iso}確認）`;

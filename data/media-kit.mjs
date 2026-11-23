@@ -1,7 +1,7 @@
 import { mediaKitLocalFacts } from "./local-offer-copy.mjs";
 
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const MEDIA_KIT_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const MEDIA_KIT_LASTMOD = "2026-11-24";
 
 const localFacts = mediaKitLocalFacts();
 

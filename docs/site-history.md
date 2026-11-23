@@ -5,7 +5,7 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
-## Local trial is 7 days — 2026-11-22
+## Local trial is 7 days — 2026-11-24
 
 The full Local trial of the direct-download edition is 7 days instead of 14. The founder decided
 this on 2026-11-22. `trialDays` in `data/local-offer.mjs` is 7, and every sentence that follows it
@@ -26,14 +26,14 @@ keeps its own length: 7 days, or 14 days for a trial that started on an older ve
 due two days before that trial ends, and a daily job sends it. So `data/trial-milestone-copy.mjs`
 (all languages) and the `/privacy/` bullet in `data/trust-pages.mjs` say "two days before your Local
 trial ends", and `tests/facts/privacy-consistency.test.mjs` asserts the two-day mark and no fixed
-length. `TRIAL_MILESTONE_LASTMOD` is 2026-11-22; the two `/privacy/` sub-pages of every language
+length. `TRIAL_MILESTONE_LASTMOD` is 2026-11-24; the two `/privacy/` sub-pages of every language
 carry it.
 
 These did not change: the product film and its transcript on `/demo/` (`data/product-film.mjs`,
 re-rendered separately), the Mac App Store privacy and support pages (another pull request), and
 the past release note about "the 14-day trial" (`data/release-notes.mjs`).
 
-Every page whose text changed carries 2026-11-22: the homepages, `/pricing/`, every comparison page
+Every page whose text changed carries 2026-11-24: the homepages, `/pricing/`, every comparison page
 and hub in every language, `/privacy/`, `/privacy-proof/`, the media kit, five docs pages, the
 first-dictation and offline Mac guides in every language, and the English and Japanese guides that
 show the trial. `PRIVACY_PROOF_LASTMOD` is now the later of its own date and

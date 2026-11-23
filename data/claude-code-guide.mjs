@@ -7,8 +7,8 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 // same date in the desktop repository (Apple's and Superwhisper's own pages). Dictivo's paste,
 // shortcuts and permissions come from the app source (settingsStore.ts, clipboard.rs,
 // displayLanguage.ts, SettingsView.tsx). No hands-on test was run; the method note says so.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const CLAUDE_CODE_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const CLAUDE_CODE_GUIDE_LASTMOD = "2026-11-24";
 export const CLAUDE_CODE_GUIDE_CHECKED = "2026-11-10";
 
 const checkedLabel = `(checked ${CLAUDE_CODE_GUIDE_CHECKED})`;

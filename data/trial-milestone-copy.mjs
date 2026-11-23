@@ -3,10 +3,10 @@
 // permission outcomes) are separate from optional usage statistics; failed deliveries may
 // retry. From 0.3.51 they go to app.dictivo.app; earlier versions keep using
 // api.dictivo.app. `reminder` is the optional trial reminder email, sent only when asked for.
-// 2026-11-22: the reminder sentence no longer names a trial length. Each trial keeps its own
+// 2026-11-24: the reminder sentence no longer names a trial length. Each trial keeps its own
 // length (7 days from the 7-day release, 14 days for a trial started on an older version), and the
 // email is due two days before that trial ends.
-export const TRIAL_MILESTONE_LASTMOD = "2026-11-22";
+export const TRIAL_MILESTONE_LASTMOD = "2026-11-24";
 export const TRIAL_MILESTONE_COPY = {
   en: {
     usage: "Usage statistics are off unless you enable them in Settings.",

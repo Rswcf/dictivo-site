@@ -1,7 +1,7 @@
 import { TRIAL_MILESTONE_COPY, TRIAL_MILESTONE_LASTMOD } from "./trial-milestone-copy.mjs";
 // The page shows the trial milestone copy, so its date is the later of that copy's date and its own.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-const PRIVACY_PROOF_OWN_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+const PRIVACY_PROOF_OWN_LASTMOD = "2026-11-24";
 export const PRIVACY_PROOF_LASTMOD = TRIAL_MILESTONE_LASTMOD > PRIVACY_PROOF_OWN_LASTMOD ? TRIAL_MILESTONE_LASTMOD : PRIVACY_PROOF_OWN_LASTMOD;
 
 export const PRIVACY_PROOF_COPY = {

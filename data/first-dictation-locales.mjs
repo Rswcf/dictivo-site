@@ -187,4 +187,4 @@ export const FIRST_DICTATION_LOCALES = {
   },
 };
 
-for (const copy of Object.values(FIRST_DICTATION_LOCALES)) copy.lastUpdated = "2026-11-22";
+for (const copy of Object.values(FIRST_DICTATION_LOCALES)) copy.lastUpdated = "2026-11-24";

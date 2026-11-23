@@ -10,8 +10,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // year of SPEECH_TO_TEXT_MAC_GUIDE_CHECKED.
 // 2026-11-11: the VoiceInk row (shared with the comparison page) no longer calls its prices a
 // "current offer"; the vendor page shows no sale wording. Prices unchanged.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-24";
 export const SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [

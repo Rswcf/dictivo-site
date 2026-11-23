@@ -166,8 +166,8 @@ test("readers reach the Dragon pricing page from the Dragon comparison, the Wind
   assert.ok(html.includes(`data-platform="${hasWindowsRelease ? "windows" : "macos"}"`));
   const compare = read("compare/dragon-alternative/index.html");
   assert.ok(main(compare).includes(`href="${path}"`), "English Dragon comparison");
-  // 2026-10-09: re-dated with its Dragon price wording; 2026-11-22: the 7-day Local trial.
-  assert.ok(compare.includes('datetime="2026-11-22"'), "the comparison carries its latest date");
+  // 2026-10-09: re-dated with its Dragon price wording; 2026-11-24: the 7-day Local trial.
+  assert.ok(compare.includes('datetime="2026-11-24"'), "the comparison carries its latest date");
   assert.ok(!read("de/compare/dragon-alternative/index.html").includes(path), "German Dragon comparison");
   assert.ok(main(read("guides/offline-dictation-on-windows/index.html")).includes(`href="${url}"`), "Windows guide related pages");
   assert.ok(read("llms.txt").includes(url));

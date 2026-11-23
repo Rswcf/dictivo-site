@@ -22,8 +22,8 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 // - refunds: data/trust-pages.mjs (refund); a disabled key and the status check: license.rs
 //   friendly_activation_error, refresh_license_in_slot, local_license_unlocks_paid_models_from_license.
 // The Local price is the page's one price, a token in "What you buy".
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const DOCS_LICENSE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const DOCS_LICENSE_LASTMOD = "2026-11-24";
 
 const devices = LOCAL_OFFER.personalDevices;
 const months = LOCAL_OFFER.includedUpdateMonths;

@@ -8,8 +8,8 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 // vendor shows them, in its currency, never "US$". "Not stated" means the page read does not say
 // it. Rows are alphabetical; Dictivo is last and labelled. Dictivo's price comes from the Local
 // offer through price tokens. Mac-only apps belong on the no-subscription and offline Mac guides.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const ONE_TIME_LICENSE_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const ONE_TIME_LICENSE_GUIDE_LASTMOD = "2026-11-24";
 export const ONE_TIME_LICENSE_GUIDE_CHECKED = "2026-11-10";
 
 const checked = `(checked ${ONE_TIME_LICENSE_GUIDE_CHECKED})`;

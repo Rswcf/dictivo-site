@@ -1,6 +1,6 @@
 // Task-oriented summaries. Product-specific factual detail stays in the linked comparisons.
-// 2026-11-22, every language: the trial guidance says 7 days instead of 14.
-export const COMPARE_HUB_GUIDANCE_LASTMOD = "2026-11-22";
+// 2026-11-24, every language: the trial guidance says 7 days instead of 14.
+export const COMPARE_HUB_GUIDANCE_LASTMOD = "2026-11-24";
 // Per-language hub changes that come from the comparison pages it lists. 2026-10-09: the English
 // Dragon comparison's title no longer names a Dragon Professional price. 2026-10-10 (English): a
 // line under the introduction links the cross-platform dictation software guide. 2026-11-10

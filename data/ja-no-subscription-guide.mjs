@@ -16,8 +16,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // Japanese for this page, not translated sentence by sentence from the English twin. The title, H1
 // and intent rows target 買い切り; オフライン appears once in the intent column as a qualifier.
 export const JA_NO_SUBSCRIPTION_GUIDE_READY = true;
-// 2026-11-21: Local needs macOS 13.3 from 0.3.58. 2026-11-22: the Local trial is 7 days instead of 14.
-export const JA_NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-22";
+// 2026-11-21: Local needs macOS 13.3 from 0.3.58. 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-24";
 export const JA_NO_SUBSCRIPTION_GUIDE_CHECKED = "2026-11-10"; // the competitor facts file and price spot-check date
 
 const checkedLabel = (iso) => `（${iso}確認）`;

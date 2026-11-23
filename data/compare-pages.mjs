@@ -3,7 +3,7 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 export const COMPARE_LAST_UPDATED = {
   // `label` is no longer rendered; the stamp is formatted per locale from `iso`.
   label: "November 2026",
-  iso: "2026-11-22",
+  iso: "2026-11-24",
 };
 
 export function compareLastUpdated(page, code) {
@@ -179,15 +179,15 @@ export const COMPARE_PAGES = [
       }
     },
     // 2026-10-09: English prices and limits re-checked against wisprflow.ai; links the pricing page.
-    // 2026-11-22, every language: the Local trial is 7 days instead of 14.
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
     "lastUpdated": {
-      "all": "2026-11-22"
+      "all": "2026-11-24"
     }
   },
   {
     slug: "superwhisper-alternative",
-    // 2026-11-22, every language: the Local trial is 7 days instead of 14.
-    lastUpdated: { all: "2026-11-22" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
@@ -287,8 +287,8 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macwhisper-alternative",
-    // 2026-11-22, every language: the Local trial is 7 days instead of 14.
-    lastUpdated: { all: "2026-11-22" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     localizedCopy: {
       // 2026-11-10 (Japanese): own title and description instead of the shared template.
       ja: {
@@ -399,8 +399,8 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "voiceink-alternative",
-    // 2026-11-22, every language: the Local trial is 7 days instead of 14.
-    lastUpdated: { all: "2026-11-22" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
@@ -523,8 +523,8 @@ export const COMPARE_PAGES = [
   {
     slug: "macos-dictation-alternative",
     // 2026-10-09: the English page links the Mac dictation troubleshooting guide.
-    // 2026-11-22, every language: the Local trial is 7 days instead of 14.
-    lastUpdated: { all: "2026-11-22" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
@@ -774,8 +774,8 @@ export const COMPARE_PAGES = [
     ],
     // 2026-10-09, every language: Nuance no longer lists a Dragon Professional price; the copy
     // states that and the last archived list price (data/dragon-price-status.mjs).
-    // 2026-11-22, every language: the Local trial is 7 days instead of 14.
-    lastUpdated: { all: "2026-11-22" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
   },
 ];
 

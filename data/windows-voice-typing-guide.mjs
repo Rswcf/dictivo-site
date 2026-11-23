@@ -4,8 +4,8 @@
 // document (registry edits, system file repair, third-party tools) is suggested. Dictivo appears
 // only in the closing section, disclosed as this site's product, and only while Windows
 // downloads are public: without them the section is null and the trial panel is not rendered.
-// 2026-11-22: the Local trial is 7 days instead of 14.
-export const WINDOWS_VOICE_TYPING_LASTMOD = "2026-11-22";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const WINDOWS_VOICE_TYPING_LASTMOD = "2026-11-24";
 export const WINDOWS_VOICE_TYPING_CHECKED = "2026-10-09";
 
 const checked = `(checked ${WINDOWS_VOICE_TYPING_CHECKED})`;

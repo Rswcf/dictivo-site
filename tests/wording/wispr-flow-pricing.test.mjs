@@ -164,16 +164,16 @@ test("readers reach the Wispr Flow pricing page from the Wispr Flow comparison, 
   assert.ok(html.includes('data-platform="macos"'));
   const compare = read("compare/wispr-flow-alternative/index.html");
   assert.ok(main(compare).includes(`href="${path}"`), "English Wispr Flow comparison");
-  // English re-checked on 2026-10-09; 2026-11-22, every language: the 7-day Local trial.
-  assert.ok(compare.includes('datetime="2026-11-22"'), "English comparison carries the trial change date");
+  // English re-checked on 2026-10-09; 2026-11-24, every language: the 7-day Local trial.
+  assert.ok(compare.includes('datetime="2026-11-24"'), "English comparison carries the trial change date");
   const de = read("de/compare/wispr-flow-alternative/index.html");
   assert.ok(!de.includes(path), "German Wispr Flow comparison");
-  assert.ok(de.includes('datetime="2026-11-22"'), "German comparison carries the trial change date");
+  assert.ok(de.includes('datetime="2026-11-24"'), "German comparison carries the trial change date");
   assert.ok(main(read("guides/offline-dictation-on-windows/index.html")).includes(`href="${url}"`), "Windows guide related pages");
   assert.ok(read("llms.txt").includes(url));
   assert.ok(!read("de/llms.txt").includes(url));
   assert.match(read("sitemap.xml"), new RegExp(`<loc>${url.replaceAll(".", "\\.")}</loc>\\s*<lastmod>${expectedLastmod}</lastmod>`));
   // The comparison quotes Dictivo's price too, so its sitemap date never precedes PRICING_LASTMOD.
-  const compareLastmod = PRICING_LASTMOD > "2026-11-22" ? PRICING_LASTMOD : "2026-11-22";
+  const compareLastmod = PRICING_LASTMOD > "2026-11-24" ? PRICING_LASTMOD : "2026-11-24";
   assert.match(read("sitemap.xml"), new RegExp(`<loc>https://dictivo\\.app/compare/wispr-flow-alternative/</loc>\\s*<lastmod>${compareLastmod}</lastmod>`));
 });
