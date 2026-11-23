@@ -42,6 +42,29 @@ show the trial. `PRIVACY_PROOF_LASTMOD` is now the later of its own date and
 2026-11-01: it records price and tax wording, and `/terms/`, the one priced page with no trial
 sentence, did not change. `/about/` has no date constant, and `/demo/` keeps `PRODUCT_FILM.lastmod`.
 
+
+
+## Homepage film frame — 2026-11-22
+
+The homepage film is a mostly light picture, and set straight on the near-black page it looked
+pasted on. `site.css` now frames it on all 11 homepages: a translucent ring (10px of faint white
+gradient inside a 1px light border, outer radius 31px) and a soft mint glow behind the ring
+(`.hero-film::before`, blurred 54px). The founder chose this look from a mock-up. The figure keeps
+its width rule and now includes the ring, so the film inside is 22px narrower: 1058px in a 1080px
+frame at desktop. The frame is about 10px taller than 16:9; the height cap's 140px absorb it. The
+film lost its own border and drop shadow and has a dark 1px hairline at radius 21px. Phones (560px
+and below) use a 6px ring at radius 20px around a 14px film; the poster now takes the video's 14px
+there too. Until `site.js` reveals the poster, a dark fill (`.hero-film::after`, `#050807`) covers
+the film's box, so the ring never frames the glow. Every new rule is scoped to
+`.hero-film:not(.film-watch)`: `/demo/` is unchanged. `tests/structure/hero-film-frame.test.mjs`
+checks the scope and the rules. Style only: no markup, copy or script change, and no `*_LASTMOD`
+bump. Checked in headless Chrome only. The poster at 1440, 1280 x 650, 768 and 390px. Before
+`site.js`, playing and keyboard focus at 1440 and 390px. Play with scroll-into-view at 1280 x 650.
+The no-script player at 1440px. The `/demo/` screenshot is pixel-identical to main. Not checked in
+Safari or Firefox.
+
+
+
 ## Mac App Store pages say "7-day trial" — 2026-11-22
 
 The Mac App Store edition, which is not released yet, will ship with a 7-day trial instead of a
