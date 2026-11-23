@@ -5,6 +5,28 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Search-phrase tables removed from five English guides — 2026-11-24
+
+Five English answer guides lost their "How people ask" table: `/guides/offline-dictation-on-mac/`,
+`/guides/mac-dictation-app-no-subscription/`, `/guides/best-speech-to-text-apps-for-mac/`,
+`/guides/dictation-app-mac-windows-one-time-license/` and
+`/guides/dictate-into-claude-code-and-cursor-on-mac/`. Each table showed readers raw search
+phrasings ("dictation app mac no subscription") with a short answer per row. The phrasings were
+written for search and answer engines, not for people, and repeated the short answer and the fact
+table below them.
+
+Why: a Pangram AI-detection scan of all 48 English pages on 2026-11-24 labelled 97% of the words
+AI-generated (47 pages "AI", one "Mixed"). Rewording by a model did not change that score, so the
+change aims at what readers notice instead: text that is plainly written for a search engine.
+
+`renderAnswerGuidePage()` now renders the intent section only when the copy has `intentRows`, and
+the English offline guide is picked by its code (`en`) instead of by `copy.intentRows`. The two
+Japanese answer guides and `/guides/offline-dictation-on-windows/` keep their tables: the Windows
+guide carries most of the site's Bing AI citations. The five pages were re-dated to 2026-11-24
+(`CLAUDE_CODE_GUIDE_LASTMOD`, `SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD`, `NO_SUBSCRIPTION_GUIDE_LASTMOD`,
+`ONE_TIME_LICENSE_GUIDE_LASTMOD` and the English offline guide's `lastUpdated`).
+
+
 ## Homepage film frame — 2026-11-22
 
 The homepage film is a mostly light picture, and set straight on the near-black page it looked

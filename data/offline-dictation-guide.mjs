@@ -163,41 +163,6 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
     lede: "Use this guide when the deciding factor is where your speech is processed. It separates apps that transcribe on the Mac from apps that upload audio to a cloud service.",
     answerTitle: "Short answer",
     answer: `The table compares ${EN_ROWS.length} Mac dictation apps by where speech is processed; most rows were checked on ${checkedOn}. Dictivo Local, this site's product, transcribes on the Mac after a model download. Apple Dictation processes supported languages on Macs with Apple silicon, but sends speech to Apple on Intel Macs. Handy is a free, open-source local option. Wispr Flow needs an internet connection for transcription.`,
-    intentTitle: "Which offline dictation question are you asking?",
-    intentCaption: "Common ways people search for offline Mac dictation, and what to check for each",
-    intentHeaders: ["How people ask", "Short answer", "What to check"],
-    intentRows: [
-      [
-        "offline dictation mac",
-        "Use an app that transcribes on the Mac after a model download, such as Dictivo Local, Handy, VoiceInk, or Superwhisper with local models.",
-        "Whether the default mode is local, and which features still use the network.",
-      ],
-      [
-        "dictation app mac without internet",
-        "Install the model while you are online. After that, a local app transcribes with Wi-Fi off.",
-        "Turn off Wi-Fi and dictate one sentence before you rely on it.",
-      ],
-      [
-        "which Mac dictation apps process audio locally",
-        "Dictivo Local, Handy, VoiceInk, MacWhisper, Voice Type and Aiko by default; Superwhisper and Voibe in their local modes; Apple Dictation on Apple silicon for supported languages.",
-        "The vendor's privacy page and the mode you select.",
-      ],
-      [
-        "private dictation app for mac",
-        "A local app keeps audio on the Mac. A cloud app with zero retention still uploads it.",
-        "Optional cloud features that send text or audio, such as AI cleanup.",
-      ],
-      [
-        "does Apple Dictation work offline",
-        "On a Mac with Apple silicon, for supported languages. On an Intel Mac, speech is sent to Apple.",
-        "Your Mac's chip and your dictation language.",
-      ],
-      [
-        "free offline dictation mac",
-        "Apple Dictation on Apple silicon, Handy, and the free versions of Superwhisper and MacWhisper. Dictivo includes the Tiny model free forever.",
-        "The limits of the free version and which models it includes.",
-      ],
-    ],
     tableCaption: "Mac dictation apps compared by whether dictation audio stays local",
     headers: ["App", "Does speech stay on the Mac?", "Cloud or workflow caveat", "Best fit"],
     priceHeaders: ["Price / purchase model", "Checked on"],
@@ -364,7 +329,8 @@ export function offlineDictationGuideEnCopy({ windows = true, checked = OFFLINE_
     // 2026-11-10: a "What is Dictivo?" block with downloads follows the answer.
     // 2026-11-10 (Batch B1): rebuilt in the answer-page shape.
     // 2026-11-11 (Batch B3): the Homebrew --zap FAQ says the Keychain items stay; install docs row.
-    lastUpdated: "2026-11-11",
+    // 2026-11-24: the "How people ask" intent table is gone; see docs/site-history.md.
+    lastUpdated: "2026-11-24",
   };
 }
 

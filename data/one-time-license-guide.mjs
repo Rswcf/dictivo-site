@@ -8,7 +8,7 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 // vendor shows them, in its currency, never "US$". "Not stated" means the page read does not say
 // it. Rows are alphabetical; Dictivo is last and labelled. Dictivo's price comes from the Local
 // offer through price tokens. Mac-only apps belong on the no-subscription and offline Mac guides.
-export const ONE_TIME_LICENSE_GUIDE_LASTMOD = "2026-11-10";
+export const ONE_TIME_LICENSE_GUIDE_LASTMOD = "2026-11-24";
 export const ONE_TIME_LICENSE_GUIDE_CHECKED = "2026-11-10";
 
 const checked = `(checked ${ONE_TIME_LICENSE_GUIDE_CHECKED})`;
@@ -160,36 +160,6 @@ export function oneTimeLicenseGuideCopy({ windows, checked = ONE_TIME_LICENSE_GU
     lastUpdated: lastmod,
     answerTitle: "Short answer",
     answer,
-    intentTitle: "Which one-time license question are you asking?",
-    intentCaption: "Common ways people search for a Mac and Windows dictation app they buy once, and what to check for each",
-    intentHeaders: ["How people ask", "What they usually want", "What to check"],
-    intentRows: [
-      [
-        "dictation app for Mac and Windows one-time license",
-        "One purchase that works on a Mac and on a Windows PC.",
-        "Whether the license names both systems, and how many devices it covers.",
-      ],
-      [
-        "dictation software for both Mac and PC",
-        "The same dictation app on a Mac and on a Windows PC.",
-        "Whether both versions exist today, and whether each needs its own license.",
-      ],
-      [
-        "cross-platform dictation app buy once",
-        "A one-time price instead of a monthly fee, on both systems.",
-        "Which updates the price includes, and whether the default engine is in the cloud.",
-      ],
-      [
-        "one license for Mac and Windows dictation",
-        "One license key for a mix of Mac and Windows computers.",
-        "Whether the vendor counts licenses per platform, per device or per account.",
-      ],
-      [
-        "dictation app lifetime license Windows and Mac",
-        "A license that does not expire.",
-        "Whether the word lifetime covers the license, the updates, or both.",
-      ],
-    ],
     factTitle: "Mac and Windows dictation apps with a one-time license, compared",
     factCaption: "Dictation apps that run on Mac and Windows: license scope, one-time price, devices, updates and default processing, with check dates",
     factHeaders: ["Product", "Runs on", "One license covers Mac and Windows?", "One-time price", "Devices per license", "Updates included", "Transcribes on the device by default?", "Checked"],

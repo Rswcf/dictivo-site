@@ -89,7 +89,6 @@ test("the guide keeps the answer-page order", () => {
   const order = [
     'id="claude-code-answer"',
     "data-guide-intro",
-    'id="claude-code-intents"',
     'id="claude-code-table"',
     'id="claude-code-method"',
     "data-guide-trial",
@@ -113,14 +112,6 @@ test("the short answer is 50 to 70 words, names Dictivo, its paste and shortcut,
   for (const phrase of ["Dictivo", "macOS Dictation", "Cmd+V", "Cmd+Shift+Space", "Local mode"]) assert.ok(answer.includes(phrase), phrase);
   assert.match(answer, /\d/);
   assert.ok(answer.includes(checkedOn), checkedOn);
-});
-
-test("the intent table lists the ways people ask, in order", () => {
-  const [header, ...body] = rows(tableAfter(page(), "claude-code-intents"));
-  assert.equal(header.length, 3);
-  assert.equal(body.length, INTENTS.length);
-  for (const row of body) assert.equal(row.length, 3, row[0]);
-  assert.deepEqual(body.map((row) => text(row[0]).trim()), INTENTS);
 });
 
 test("the fact table dates every option and keeps Dictivo prices in placeholders", () => {

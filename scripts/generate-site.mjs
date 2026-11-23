@@ -3241,7 +3241,7 @@ function renderOfflineDictationGuidePage(currentCode = "en") {
   const t = HOME_COPY[currentCode];
   const copy = offlineDictationGuideCopy(currentCode);
   // Only the English guide has the answer-page shape (Batch B1); the translations keep theirs.
-  if (copy.intentRows) {
+  if (currentCode === "en") {
     const enCopy = offlineDictationGuideEnCopy({ windows: hasWindowsRelease });
     const rows = offlineGuideEnFactRows(enCopy);
     return renderAnswerGuidePage({
@@ -3812,10 +3812,10 @@ function renderAnswerGuidePage({
 
       ${renderGuideIntro(code, idPrefix, introSource)}
 
-      <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-intents`)}">
+      ${copy.intentRows?.length ? `<section class="doc-section" aria-labelledby="${attr(`${idPrefix}-intents`)}">
         <h2 id="${attr(`${idPrefix}-intents`)}">${html(copy.intentTitle)}</h2>
         ${renderBenchmarkMethodTable(copy.intentCaption, copy.intentHeaders, copy.intentRows)}
-      </section>
+      </section>` : ""}
 
       <section class="doc-section" aria-labelledby="${attr(`${idPrefix}-table`)}">
         <h2 id="${attr(`${idPrefix}-table`)}">${html(factTable.title)}</h2>
