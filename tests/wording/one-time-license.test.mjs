@@ -74,7 +74,6 @@ test("the guide keeps the answer-page order", () => {
   const order = [
     'id="one-time-license-answer"',
     "data-guide-intro",
-    'id="one-time-license-intents"',
     'id="one-time-license-table"',
     'id="one-time-license-method"',
     "data-guide-trial",
@@ -100,14 +99,6 @@ test("the short answer is 50 to 70 words, names Dictivo without a price and carr
   // The other Windows state keeps the answer within the limits too.
   const other = oneTimeLicenseGuideCopy({ windows: !hasWindowsRelease }).answer;
   assert.ok(words(other) >= 50 && words(other) <= 70, `${words(other)} words: ${other}`);
-});
-
-test("the intent table lists the ways people ask, in order", () => {
-  const [header, ...body] = rows(tableAfter(page(), "one-time-license-intents"));
-  assert.equal(header.length, 3);
-  assert.equal(body.length, INTENTS.length);
-  for (const row of body) assert.equal(row.length, 3, row[0]);
-  assert.deepEqual(body.map((row) => text(row[0]).trim()), INTENTS);
 });
 
 test("the fact table lists every product in order, dates every row and keeps Dictivo prices in placeholders", () => {

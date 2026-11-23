@@ -8,8 +8,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // OFFLINE_GUIDE_PRICES_CHECKED facts. No app was tested by
 // hand: the facts come from vendor pages and documentation. The Mac and Windows license question
 // belongs to /guides/dictation-app-mac-windows-one-time-license/, so the H1, title, description,
-// intent rows and headings avoid "Windows", "cross-platform" and "offline".
-export const NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-10";
+// headings avoid "Windows", "cross-platform" and "offline".
+export const NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-24";
 export const NO_SUBSCRIPTION_GUIDE_CHECKED = "2026-11-10";
 
 const checkedLabel = `(checked ${NO_SUBSCRIPTION_GUIDE_CHECKED})`;
@@ -172,41 +172,6 @@ export function noSubscriptionGuideCopy({ windows, checked = NO_SUBSCRIPTION_GUI
     lastUpdated: lastmod,
     answerTitle: "Short answer",
     answer: `Of the ${rows.length} Mac dictation options in the table, ${free} need no subscription; only Wispr Flow is subscription-only. The lowest one-time prices are JesType Personal at €14.95 and Voice Type at $19.99 on the App Store. Dictivo Local, this site's product, is a one-time purchase that includes 12 months of updates. Most rows were checked on ${checkedOn}; Voice Type on ${siteCheckedOn}.`,
-    intentTitle: "Which no-subscription question are you asking?",
-    intentCaption: "Common ways people search for a Mac dictation app without a subscription, and what to check for each",
-    intentHeaders: ["How people ask", "Short answer", "What to check"],
-    intentRows: [
-      [
-        "dictation app mac no subscription",
-        `${free} of the ${rows.length} options in the table need no subscription. Wispr Flow is subscription-only.`,
-        "Whether a one-time price includes future updates.",
-      ],
-      [
-        "one time purchase dictation app mac",
-        "JesType, VoiceInk, Voicetypr, Voice Type and Dictivo Local sell one-time licenses. MacWhisper, Spokenly, Superwhisper and Voibe sell one next to other plans.",
-        "Which plan the one-time price buys, and how many Macs it covers.",
-      ],
-      [
-        "lifetime license dictation mac",
-        "Superwhisper and Voibe sell a lifetime license next to their subscriptions.",
-        "A lifetime license is not always a promise of every future update. Read the update terms.",
-      ],
-      [
-        "mac dictation app buy once",
-        "One-time prices in the table start at €14.95 (JesType Personal) and $19.99 (Voice Type).",
-        "The device limit and the Mac chips the app supports.",
-      ],
-      [
-        "free dictation app mac no subscription",
-        "Apple Dictation is built in. Handy is free and open source. MacWhisper, Spokenly and Superwhisper have free tiers.",
-        "The limits of the free tier and where speech is processed.",
-      ],
-      [
-        "is Dictivo a subscription",
-        "No. Dictivo Local is a one-time purchase with 12 months of updates. Renewal is optional.",
-        "Cloud Fast is a separate monthly add-on. You do not need it to use Dictivo Local.",
-      ],
-    ],
     factTitle: "Mac dictation apps with no subscription, compared",
     factCaption: "Mac dictation apps by how you pay, one-time price, included updates and where speech is processed, with check dates",
     factHeaders: ["App", "Mac requirement", "How you pay", "One-time price", "Updates included", "Transcribes on the Mac by default?", "Checked"],

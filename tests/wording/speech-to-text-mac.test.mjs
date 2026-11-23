@@ -72,7 +72,6 @@ test("the guide keeps the answer-page order", () => {
   const order = [
     'id="speech-to-text-mac-answer"',
     "data-guide-intro",
-    'id="speech-to-text-mac-intents"',
     'id="speech-to-text-mac-table"',
     'id="speech-to-text-mac-method"',
     "data-guide-trial",
@@ -96,14 +95,6 @@ test("the short answer is 50 to 70 words, names Dictivo and carries a number and
   assert.match(answer, /\d/);
   assert.ok(answer.includes(checkedOn), checkedOn);
   assert.ok(answer.includes(String(OPTIONS.length)), "the number of apps compared");
-});
-
-test("the intent table lists the ways people ask, in order", () => {
-  const [header, ...body] = rows(tableAfter(page(), "speech-to-text-mac-intents"));
-  assert.deepEqual(header, ["How people ask", "Best-fit workflow", "What to check"]);
-  assert.equal(body.length, INTENTS.length);
-  for (const row of body) assert.equal(row.length, 3, row[0]);
-  assert.deepEqual(body.map((row) => text(row[0]).trim()), INTENTS);
 });
 
 test("the fact table prices and dates every option and keeps Dictivo prices in placeholders", () => {

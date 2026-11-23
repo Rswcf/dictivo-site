@@ -10,7 +10,7 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // year of SPEECH_TO_TEXT_MAC_GUIDE_CHECKED.
 // 2026-11-11: the VoiceInk row (shared with the comparison page) no longer calls its prices a
 // "current offer"; the vendor page shows no sale wording. Prices unchanged.
-export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-11";
+export const SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-24";
 export const SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10";
 
 export const SPEECH_TO_TEXT_MAC_GUIDE_REFERENCES = [
@@ -132,41 +132,6 @@ export function speechToTextMacGuideCopy({ windows, checked = SPEECH_TO_TEXT_MAC
     lede: "The right Mac speech-to-text app depends on the job: live dictation into the app you use, transcription of recorded files, cloud voice typing, or the dictation built into macOS.",
     answerTitle: "Short answer",
     answer: `The table compares ${APP_ROWS.length} speech-to-text and dictation apps for Mac and dates every row; most were checked on ${checkedOn}. Start with Apple Dictation, built into macOS. For live dictation into any app with audio kept on the Mac, try Dictivo Local, this site's product. For live dictation plus file transcription, try MacWhisper. Choose a cloud app such as Wispr Flow only when uploading speech is acceptable.`,
-    intentTitle: "Which speech-to-text question are you asking?",
-    intentCaption: "Common ways people search for a Mac speech-to-text app, and what to check for each",
-    intentHeaders: ["How people ask", "Best-fit workflow", "What to check"],
-    intentRows: [
-      [
-        "best dictation app for mac",
-        "A shortcut-driven app that puts live speech into the app you are using.",
-        "The shortcut, the permission setup, and whether the text lands where the cursor is.",
-      ],
-      [
-        "speech to text mac",
-        "Apple Dictation first; a dedicated app when you need more control.",
-        "Whether you need live dictation, file transcription, or both.",
-      ],
-      [
-        "voice to text mac app",
-        "Live dictation into Mail, notes, browsers and code editors.",
-        "Where audio is processed and how much editing the text needs.",
-      ],
-      [
-        "transcribe audio to text mac free",
-        "A file transcription app with a free version, such as MacWhisper.",
-        "Import and export formats, and which models the free version includes.",
-      ],
-      [
-        "dictation software for mac",
-        "A desktop dictation app with a global shortcut.",
-        "The purchase model, the update terms, and which Macs it supports.",
-      ],
-      [
-        "best free dictation app for mac",
-        "Apple Dictation, then a free app such as Handy or a free plan.",
-        "The limits of the free plan and whether speech leaves the Mac.",
-      ],
-    ],
     appTitle: "Mac speech-to-text apps compared",
     appCaption: "Mac dictation, transcription and voice typing apps by workflow, with prices and check dates",
     appHeaders: ["Option", "Best fit", "Privacy or platform caveat", "When to choose it", "Price / purchase model", "Checked on"],

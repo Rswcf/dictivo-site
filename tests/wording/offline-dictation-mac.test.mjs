@@ -59,7 +59,7 @@ const APPS = ["Dictivo Local", "Apple Dictation", "Handy", "VoiceInk", "Superwhi
 const SITE_CHECKED = ["Voice Type", "Aiko"];
 const LOCALIZED = ["de", "fr", "es", "it", "nl", "pt", "zh", "zh-hant", "ja", "ko"];
 const BREW = "<code>brew install --cask deepviewsdev/tap/dictivo</code>";
-// The query words other B1 pages target stay out of this page's headings and intent rows.
+// The query words other B1 pages target stay out of this page's headings.
 const OTHER_QUERIES = /subscription|one-time|lifetime|buy once|best dictation app/i;
 
 test("the English offline guide keeps its translations and has the query as its heading", () => {
@@ -75,7 +75,7 @@ test("the English offline guide keeps its translations and has the query as its 
   assert.deepEqual(links.find(([lang]) => lang === "x-default"), ["x-default", url]);
   for (const code of LOCALIZED) assert.ok(links.some(([, href]) => href === `https://dictivo.app/${code}${path}`), code);
   assert.equal(copy.navLabel, "Offline Mac dictation");
-  for (const heading of [copy.title, copy.metaTitle, copy.metaDescription, ...copy.sections.map((section) => section.title), ...copy.intentRows.map((row) => row[0])]) {
+  for (const heading of [copy.title, copy.metaTitle, copy.metaDescription, ...copy.sections.map((section) => section.title)]) {
     assert.doesNotMatch(heading, OTHER_QUERIES, heading);
   }
 });
@@ -85,7 +85,6 @@ test("the guide keeps the answer-page order", () => {
   const order = [
     'id="offline-guide-answer"',
     "data-guide-intro",
-    'id="offline-guide-intents"',
     'id="offline-guide-table"',
     'id="offline-guide-method"',
     "data-guide-trial",
@@ -112,14 +111,6 @@ test("the short answer is 50 to 70 words, names Dictivo and carries a number and
   assert.ok(answer.includes(checkedOn), checkedOn);
   assert.ok(answer.includes(String(APPS.length)), "the number of apps compared");
   assert.doesNotMatch(answer, /accura/i);
-});
-
-test("the intent table lists the ways people ask, in order", () => {
-  const [header, ...body] = rows(tableAfter(page(), "offline-guide-intents"));
-  assert.deepEqual(header, ["How people ask", "Short answer", "What to check"]);
-  assert.equal(body.length, INTENTS.length);
-  for (const row of body) assert.equal(row.length, 3, row[0]);
-  assert.deepEqual(body.map((row) => text(row[0]).trim()), INTENTS);
 });
 
 test("the fact table prices and dates every app and keeps Dictivo prices in placeholders", () => {

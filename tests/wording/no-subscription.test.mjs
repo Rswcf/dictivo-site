@@ -99,8 +99,7 @@ test("the guide does not target the Windows, cross-platform or offline queries",
   const h1 = body.match(/<h1>([^<]*)<\/h1>/)[1];
   const headings = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map(([, heading]) => text(heading).trim());
   assert.ok(headings.length >= SECTIONS + 7, `only ${headings.length} h2 headings`);
-  const [, ...intentRows] = rows(tableAfter(html, "no-subscription-intents"));
-  for (const value of [title, h1, description, ...headings, ...intentRows.map((row) => text(row[0]).trim())]) {
+  for (const value of [title, h1, description, ...headings]) {
     assert.doesNotMatch(value, OFF_TOPIC, value);
   }
   assert.doesNotMatch(text(body), OTHER_PAGE_PRODUCTS, "names only apps in its own table");
@@ -122,7 +121,6 @@ test("the guide keeps the answer-page order", () => {
   const order = [
     'id="no-subscription-answer"',
     "data-guide-intro",
-    'id="no-subscription-intents"',
     'id="no-subscription-table"',
     'id="no-subscription-method"',
     "data-guide-trial",
@@ -149,14 +147,6 @@ test("the short answer is 50 to 70 words, names Dictivo and carries the count, t
   assert.ok(answer.includes(String(APPS.length - 1)), "the number with no subscription");
   for (const fact of ["Wispr Flow", "JesType", "€14.95", "Voice Type", "$19.99", "12 months of updates"]) assert.ok(answer.includes(fact), fact);
   assert.ok(!answer.includes('<span class="price">') && !html.match(/id="no-subscription-answer">[\s\S]*?<\/section>/)[0].includes('class="price"'), "no Dictivo price in the answer");
-});
-
-test("the intent table lists the ways people ask, in order", () => {
-  const [header, ...body] = rows(tableAfter(page(), "no-subscription-intents"));
-  assert.equal(header.length, 3);
-  assert.equal(body.length, INTENTS.length);
-  for (const row of body) assert.equal(row.length, 3, row[0]);
-  assert.deepEqual(body.map((row) => text(row[0]).trim()), INTENTS);
 });
 
 test("the fact table lists twelve apps alphabetically with Dictivo last, dated per row", () => {

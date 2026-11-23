@@ -7,7 +7,7 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 // same date in the desktop repository (Apple's and Superwhisper's own pages). Dictivo's paste,
 // shortcuts and permissions come from the app source (settingsStore.ts, clipboard.rs,
 // displayLanguage.ts, SettingsView.tsx). No hands-on test was run; the method note says so.
-export const CLAUDE_CODE_GUIDE_LASTMOD = "2026-11-10";
+export const CLAUDE_CODE_GUIDE_LASTMOD = "2026-11-24";
 export const CLAUDE_CODE_GUIDE_CHECKED = "2026-11-10";
 
 const checkedLabel = `(checked ${CLAUDE_CODE_GUIDE_CHECKED})`;
@@ -95,36 +95,6 @@ export function claudeCodeGuideCopy({ windows, checked = CLAUDE_CODE_GUIDE_CHECK
     checked,
     answerTitle: "Short answer",
     answer: `Three ways work on a Mac: the built-in voice features of Claude Code and Cursor, macOS Dictation, or a dictation app that pastes into any app. Dictivo, this site's product, pastes with Cmd+V into the frontmost app and processes speech on the Mac in Local mode. Its default shortcut, Cmd+Shift+Space, matches the Cursor IDE's dictation shortcut, so change one. Checked on ${checkedOn}.`,
-    intentTitle: "Which voice question are you asking?",
-    intentCaption: "Common ways people ask about voice input for Claude Code and Cursor, and what to check for each",
-    intentHeaders: ["How people ask", "What they need", "What to check"],
-    intentRows: [
-      [
-        "dictate into Claude Code",
-        "Speak a prompt into the Claude Code CLI in a terminal.",
-        "Whether the option works in a terminal and where your speech is processed.",
-      ],
-      [
-        "voice to text for Cursor on Mac",
-        "Speak into Cursor's agent chat instead of typing.",
-        "Cursor's own dictation shortcut, and whether another app uses the same keys.",
-      ],
-      [
-        "Claude Code voice dictation offline",
-        "Dictate prompts without sending audio to a server.",
-        "Claude Code's /voice sends audio to Anthropic. A local dictation app keeps speech on the Mac.",
-      ],
-      [
-        "talk to the Cursor agent instead of typing",
-        "Give the agent instructions by voice.",
-        "Dictation puts text in the chat input. You still review the prompt and send it.",
-      ],
-      [
-        "dictation app for coding on a Mac",
-        "One shortcut that works in the terminal, the editor and every other app.",
-        "How the app gets text into the prompt, which macOS permissions it needs, and its shortcut.",
-      ],
-    ],
     factTable: {
       title: "Ways to dictate into Claude Code and Cursor compared",
       caption: "Voice options for Claude Code and Cursor on a Mac, with check dates",
