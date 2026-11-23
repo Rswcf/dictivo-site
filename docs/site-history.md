@@ -5,7 +5,7 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
-## Film re-render for the 7-day trial — 2026-11-22
+## Film re-render for the 7-day trial — 2026-11-24
 
 The founder shortened the trial from 14 to 7 days on 2026-11-22. The 68-second film is re-rendered
 as cut v2.5 and published in the new folder `assets/film-v10/`. Only two on-screen cards changed:
@@ -34,11 +34,11 @@ names film-v08 or film-v09 except as a `_redirects` source. `check-product-film.
 redirects and that both Chinese caption files name the 7-day trial. The last `FILM_CHAPTERS`
 description on `/demo/` now says "free to try for 7 days".
 
-`PRODUCT_FILM.lastmod` is 2026-11-22 and `uploadedAt` is 2026-11-22T21:00:00Z, the day of the pull
-request. The sitemap dates of the eleven homepages and `/demo/` follow `lastmod`. This PR must merge
-together with the site-wide 7-day copy PR and the 7-day app release, on a day not known yet. Whoever
-merges it sets `lastmod` to the day and `uploadedAt` to the time of the first production deploy
-with the film-v10 files. Until the copy PR lands, `/demo/` still shows "Try all local models free
+`PRODUCT_FILM.lastmod` is 2026-11-24 and `uploadedAt` is 2026-11-24T09:00:00Z: the planned day of
+the first production deploy with the film-v10 files, and a planned time on that day. The sitemap
+dates of the eleven homepages and `/demo/` follow `lastmod`. The film merges together with the
+site-wide 7-day copy and the 7-day app release. If that deploy happens on a later day, both values
+move to it. Until the copy PR lands, `/demo/` still shows "Try all local models free
 for 14 days." from `HOME_CONVERSION_COPY.en.trial`. Not checked: playback of the new files in a
 browser.
 

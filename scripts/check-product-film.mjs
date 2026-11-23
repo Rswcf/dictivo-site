@@ -9,7 +9,7 @@ assert(seconds, `${film.duration}: expected PT<seconds>S`);
 // The 35-second film (film-v08) used human VCTK recordings under CC BY 4.0. The 68-second film has
 // none, so no film surface may still name them. The benchmark method guide cites VCTK for its own
 // audio and is not a film surface. film-v09 is the 68-second film with the 14-day trial cards
-// (cut v2.4); film-v10 (cut v2.5) replaced it on 2026-11-22.
+// (cut v2.4); film-v10 (cut v2.5) replaced it on 2026-11-24.
 const retired = /film-v08|film-v09|VCTK|CC BY|35[ -]sec|PT35S/i;
 for (const { code } of LOCALES) {
   const page = get(code === 'en' ? 'index.html' : `${code}/index.html`);
@@ -77,7 +77,7 @@ for (const [from, to] of RETIRED_FILM_URLS) {
 }
 assert(get(film.captions).includes('Quick update: the launch moved to Tuesday.'));
 assert(get(film.chineseTraditional).includes('Local 模式') && !get(film.chineseTraditional).includes('开会'), 'zh-Hant captions are converted from the Simplified file');
-// 2026-11-22: the trial is 7 days. "省下 14 个词" is the dictated word count, not the trial.
+// 2026-11-24: the trial is 7 days. "省下 14 个词" is the dictated word count, not the trial.
 assert(get(film.chinese).includes('免费试用 7 天') && !/14 天/.test(get(film.chinese)), 'zh-CN captions must name the 7-day trial');
 assert(get(film.chineseTraditional).includes('免費試用 7 天') && !/14 天/.test(get(film.chineseTraditional)), 'zh-Hant captions must name the 7-day trial');
 assert(get(film.credits).includes('no recording of a human voice') && !retired.test(get(film.credits)));

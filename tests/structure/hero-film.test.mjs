@@ -51,7 +51,7 @@ test("each homepage poster and its preload come from the current film", () => {
   for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall, PRODUCT_FILM.posterLarge]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
 });
 
-// 2026-11-12: the 68-second film replaced the 35-second film-v08 files. 2026-11-22: film-v10
+// 2026-11-12: the 68-second film replaced the 35-second film-v08 files. 2026-11-24: film-v10
 // (cut v2.5, 7-day trial cards) replaced film-v09 (cut v2.4, 14-day trial cards). Old embeds and
 // shared links follow one 301 to the current file that replaced them.
 const CURRENT_FILM_FOLDER = "/assets/film-v10/";
