@@ -42,6 +42,42 @@ with the film-v10 files. Until the copy PR lands, `/demo/` still shows "Try all 
 for 14 days." from `HOME_CONVERSION_COPY.en.trial`. Not checked: playback of the new files in a
 browser.
 
+
+
+## Homepage film frame — 2026-11-22
+
+The homepage film is a mostly light picture, and set straight on the near-black page it looked
+pasted on. `site.css` now frames it on all 11 homepages: a translucent ring (10px of faint white
+gradient inside a 1px light border, outer radius 31px) and a soft mint glow behind the ring
+(`.hero-film::before`, blurred 54px). The founder chose this look from a mock-up. The figure keeps
+its width rule and now includes the ring, so the film inside is 22px narrower: 1058px in a 1080px
+frame at desktop. The frame is about 10px taller than 16:9; the height cap's 140px absorb it. The
+film lost its own border and drop shadow and has a dark 1px hairline at radius 21px. Phones (560px
+and below) use a 6px ring at radius 20px around a 14px film; the poster now takes the video's 14px
+there too. Until `site.js` reveals the poster, a dark fill (`.hero-film::after`, `#050807`) covers
+the film's box, so the ring never frames the glow. Every new rule is scoped to
+`.hero-film:not(.film-watch)`: `/demo/` is unchanged. `tests/structure/hero-film-frame.test.mjs`
+checks the scope and the rules. Style only: no markup, copy or script change, and no `*_LASTMOD`
+bump. Checked in headless Chrome only. The poster at 1440, 1280 x 650, 768 and 390px. Before
+`site.js`, playing and keyboard focus at 1440 and 390px. Play with scroll-into-view at 1280 x 650.
+The no-script player at 1440px. The `/demo/` screenshot is pixel-identical to main. Not checked in
+Safari or Firefox.
+
+
+
+## Mac App Store pages say "7-day trial" — 2026-11-22
+
+The Mac App Store edition, which is not released yet, will ship with a 7-day trial instead of a
+14-day trial (decided on 2026-11-22). Its in-app purchase is named "7-day Trial". The two bare pages
+name the trial once each, so both sentences changed: "Apple processes the 7-day trial, …" on
+`/privacy/mac-app-store/` and "The 7-day Trial and Dictivo Local are App Store purchases." on
+`/support/mac-app-store/`. `tests/facts/mas-privacy-page.test.mjs` and
+`tests/facts/mas-support-page.test.mjs` pin the new sentences. `MAS_PRIVACY_LASTMOD` and
+`MAS_SUPPORT_LASTMOD` already carry this date. Nothing else on the site changed: the direct
+edition's trial stays at 14 days.
+
+
+
 ## Mac App Store support page — 2026-11-22
 
 New page `/support/mac-app-store/`: the support page of the Mac App Store edition of Dictivo, which
