@@ -5,6 +5,41 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Film re-render for the 7-day trial — 2026-11-24
+
+The founder shortened the trial from 14 to 7 days on 2026-11-22. The 68-second film is re-rendered
+as cut v2.5 and published in the new folder `assets/film-v10/`. Only two on-screen cards changed:
+"free for 14 days." became "free for 7 days." (frames 1830–1859 at 30 fps, 1:01.0 to 1:02.0), and
+the end card's small line "Free 14-day trial of every local model · dictivo.app" became "Free 7-day
+trial …" (frames 1936–2039, from 1:04.5). In the render masters, 1080p and 4K, only these two
+ranges differ from cut v2.4; every other frame has SSIM 1.000000. The published H.264 files also
+differ a little in the frames next to them (ffmpeg `framemd5` against film-v09: 1080p frames
+1800–1859 and 1920–2039, 4K frames 1828–1859 and 1920–2039). That is encoder noise, not a picture
+change; in 1080p, frames 1800–1827 differ at 80–85 dB PSNR. Both films still have 2040 frames and
+68.000 s. The audio is unchanged: the decoded audio md5 is 32b0c27570ba8d9ae09b4c00b93e1d4a in
+film-v09 and film-v10, 1080p and 4K.
+
+- `dictivo-film-1080p.mp4`: 6,928,313 bytes, md5 7fb4f1d58108666c33e2c4f171aeaa8c.
+- `dictivo-film-4k.mp4`: 19,495,820 bytes, md5 5eaf4c76d8e9498ec0428068bfd10502.
+- `captions.zh-CN.vtt`: two cues now say "7 天" instead of "14 天". The build converts it to
+  `captions.zh-Hant.vtt` as before.
+- `captions.en.vtt`, `poster.jpg`, `poster-800.webp` and `CREDITS.txt` are byte-identical to the
+  film-v09 files; `poster-2160.webp` moved unchanged. The posters show the Mail scene (frame 523),
+  not a changed card.
+
+`assets/film-v09/` is deleted. `RETIRED_FILM_URLS` now holds 17 URLs: the 8 film-v08 URLs and the
+9 film-v09 URLs, including the build-written `captions.zh-Hant.vtt`. Each one is a single 301 to its
+film-v10 file. `tests/structure/hero-film.test.mjs` checks the one hop, and that no built text file
+names film-v08 or film-v09 except as a `_redirects` source. `check-product-film.mjs` checks the 17
+redirects and that both Chinese caption files name the 7-day trial. The last `FILM_CHAPTERS`
+description on `/demo/` now says "free to try for 7 days".
+
+`PRODUCT_FILM.lastmod` is 2026-11-24 and `uploadedAt` is 2026-11-24T14:00:00Z: the day and the
+approximate hour of the first production deploy with the film-v10 files. The sitemap dates of the
+eleven homepages and `/demo/` follow `lastmod`. The film merged on the same day as the site-wide
+7-day copy (the note below) and the 7-day app release, Dictivo 0.3.60. Not checked: playback of the
+new files in a browser.
+
 ## Local trial is 7 days — 2026-11-24
 
 The full Local trial of the direct-download edition is 7 days instead of 14. The founder decided

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import vm from "node:vm";
 import { LOCALES } from "../../data/site-content.mjs";
 import { PRODUCT_FILM, RETIRED_FILM_URLS } from "../../data/product-film.mjs";
@@ -46,23 +46,49 @@ test("each homepage poster and its preload come from the current film", () => {
     const img = /<img\b[^>]*>/.exec(heroFigure(html))?.[0] ?? "";
     assert.ok(img.includes(`src="${PRODUCT_FILM.poster}"`) && img.includes(`srcset="${srcset}"`), `${home}: ${img}`);
     assert.ok(html.includes(`imagesrcset="${srcset}"`), `${home}: the poster preload must match the <img>`);
-    assert.doesNotMatch(html, /film-v08/, home);
+    assert.doesNotMatch(html, /film-v0[89]/, home);
   }
   for (const path of [PRODUCT_FILM.poster, PRODUCT_FILM.posterSmall, PRODUCT_FILM.posterLarge]) assert.ok(existsSync(`${dist}${path.slice(1)}`), path);
 });
 
-// 2026-11-12: the 68-second film replaced the 35-second film-v08 files. Old embeds and shared links
-// follow a 301 to the file that replaced them.
-test("every public film-v08 URL is a 301 to a film file that exists", () => {
-  const rules = readFileSync(`${dist}_redirects`, "utf8").split("\n");
-  const names = ["dictivo-film-1080p.mp4", "dictivo-film-4k.mp4", "poster.jpg", "poster-800.webp", "captions.en.vtt", "captions.zh-CN.vtt", "captions.zh-Hant.vtt", "CREDITS.txt"];
-  assert.deepEqual(RETIRED_FILM_URLS.map(([from]) => from), names.map((name) => `/assets/film-v08/${name}`));
+// 2026-11-12: the 68-second film replaced the 35-second film-v08 files. 2026-11-24: film-v10
+// (cut v2.5, 7-day trial cards) replaced film-v09 (cut v2.4, 14-day trial cards). Old embeds and
+// shared links follow one 301 to the current file that replaced them.
+const CURRENT_FILM_FOLDER = "/assets/film-v10/";
+const RETIRED_FOLDERS = { "film-v08": ["dictivo-film-1080p.mp4", "dictivo-film-4k.mp4", "poster.jpg", "poster-800.webp", "captions.en.vtt", "captions.zh-CN.vtt", "captions.zh-Hant.vtt", "CREDITS.txt"],
+  // poster-2160.webp came with film-v09; captions.zh-Hant.vtt is written by the build.
+  "film-v09": ["dictivo-film-1080p.mp4", "dictivo-film-4k.mp4", "poster.jpg", "poster-800.webp", "poster-2160.webp", "captions.en.vtt", "captions.zh-CN.vtt", "captions.zh-Hant.vtt", "CREDITS.txt"] };
+const redirectRules = () => readFileSync(`${dist}_redirects`, "utf8").split("\n").map((line) => line.trim()).filter((line) => line && !line.startsWith("#"));
+
+test("every public film-v08 and film-v09 URL is one 301 to a film-v10 file that exists", () => {
+  for (const path of Object.values(PRODUCT_FILM).filter((value) => value.startsWith("/assets/"))) {
+    assert.ok(path.startsWith(CURRENT_FILM_FOLDER), `${path} is not in ${CURRENT_FILM_FOLDER}`);
+  }
+  const rules = redirectRules();
+  const sources = new Set(rules.map((rule) => rule.split(/\s+/)[0]));
+  const expected = Object.entries(RETIRED_FOLDERS).flatMap(([folder, names]) => names.map((name) => `/assets/${folder}/${name}`));
+  assert.deepEqual(RETIRED_FILM_URLS.map(([from]) => from), expected);
   for (const [from, to] of RETIRED_FILM_URLS) {
-    assert.ok(to.endsWith(`/${from.split("/").pop()}`) && to !== from, `${from} → ${to}`);
+    assert.ok(to === `${CURRENT_FILM_FOLDER}${from.split("/").pop()}`, `${from} → ${to}`);
     assert.ok(rules.includes(`${from} ${to} 301`), `${from} has no 301`);
+    assert.equal(rules.filter((rule) => rule.split(/\s+/)[0] === from).length, 1, `${from} has more than one rule`);
+    assert.ok(!sources.has(to), `${to} is itself redirected: ${from} would take two hops`);
     assert.ok(existsSync(`${dist}${to.slice(1)}`), `${to} is not in dist/`);
   }
-  assert.ok(!existsSync(`${dist}assets/film-v08`), "the old film folder is still published");
+  for (const folder of Object.keys(RETIRED_FOLDERS)) assert.ok(!existsSync(`${dist}assets/${folder}`), `the old folder ${folder} is still published`);
+});
+
+test("no built file names film-v08 or film-v09 except as a redirect source", () => {
+  const old = /\/assets\/film-v0[89]\//;
+  for (const rule of redirectRules()) {
+    const [from, to] = rule.split(/\s+/);
+    if (old.test(rule)) assert.ok(old.test(from) && !old.test(to), `_redirects: ${rule}`);
+  }
+  const text = /\.(html|txt|xml|json|vtt|js|css|webmanifest)$|^_headers$/;
+  const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((entry) => (entry.isDirectory() ? walk(`${dir}${entry.name}/`) : [`${dir}${entry.name}`]));
+  const files = walk(dist).filter((file) => text.test(file.split("/").pop()));
+  assert.ok(files.length > 100, `only ${files.length} text files found in dist/`);
+  for (const file of files) assert.doesNotMatch(readFileSync(file, "utf8"), /film-v0[89]/, file.slice(dist.length));
 });
 
 // Run initHeroFilm from site.js against a minimal stand-in for the figure and the window.

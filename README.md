@@ -712,7 +712,7 @@ node scripts/set-cloud-fast-checkout.mjs --pending
 ## Product film
 
 `data/product-film.mjs` is the metadata and localization source for the 68-second
-film on all eleven homepages and `/demo/`. The files live in `assets/film-v09/`. The watch page
+film on all eleven homepages and `/demo/`. The files live in `assets/film-v10/`. The watch page
 includes native playback, English captions, Chinese subtitles, chapter URLs (`/demo/?t=10`), the
 two spoken lines, clear Local/Cloud audio boundaries, and the edit and shortcut disclosures. Its
 download sizes are read from the files at build time.
@@ -727,9 +727,10 @@ The `/demo/` caption says that the voice and music are generated and links `CRED
 homepage film has no caption and no link to `/demo/` since 2026-11-12; `FILM_COPY[*].link` still
 names `/demo/` in each `llms.txt`.
 
-A new film goes into a new folder (`film-v10/`, …). Add the old public paths to
+A new film goes into a new folder (`film-v11/`, …). Add the old public paths to
 `RETIRED_FILM_URLS` in `data/product-film.mjs`; the build writes a 301 for each to `_redirects`
-(`/assets/film-v08/*` now 301s to `film-v09`).
+(`/assets/film-v08/*` and `/assets/film-v09/*` now 301 straight to `film-v10`, one hop each).
+Include `captions.zh-Hant.vtt`: the build writes it, so it is public but not in `assets/`.
 
 Run `node scripts/check-product-film.mjs` after generation. Test chapter links
 with a preview server that supports HTTP byte ranges. Plain Python http.server and
