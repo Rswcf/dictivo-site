@@ -2,8 +2,8 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 
 export const COMPARE_LAST_UPDATED = {
   // `label` is no longer rendered; the stamp is formatted per locale from `iso`.
-  label: "September 2026",
-  iso: "2026-09-12",
+  label: "November 2026",
+  iso: "2026-11-24",
 };
 
 export function compareLastUpdated(page, code) {
@@ -17,7 +17,7 @@ const dictivoRows = {
   offline: "Yes in Local mode after the local model is installed.",
   account: "No Dictivo account for Local dictation.",
   pricing: "{{price.local.inline}} once, 12 months of updates, then optional update renewal at {{price.renewal.inline}} a year.",
-  trial: "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
+  trial: "Tiny free forever plus a 7-day full Local trial with every local model unlocked.",
   platforms: "Public downloads are available for macOS and Windows x64.",
   boundary:
     "Local mode keeps transcripts, history, dictionary terms, snippets, and settings on your device. No Dictivo account is required for Local dictation.",
@@ -81,7 +81,7 @@ export const COMPARE_PAGES = [
       },
       {
         "label": "Free tier / trial",
-        "dictivo": "Tiny free forever plus a 14-day full Local trial with every local model unlocked.",
+        "dictivo": "Tiny free forever plus a 7-day full Local trial with every local model unlocked.",
         "competitor": "Free tier: 2,000 words/week on desktop and 1,000/week on mobile, according to the current pricing page."
       },
       {
@@ -101,7 +101,7 @@ export const COMPARE_PAGES = [
         "title": "Keep your cloud workflow, or move everyday dictation on-device",
         "paragraphs": [
           "Flow supports desktop and mobile input, with cloud editing and team features. Those are reasons to keep it if your current setup works. Dictivo focuses on a desktop shortcut, a local transcript and insertion into the app where you write.",
-          "Try Dictivo with an email, note or AI prompt you write repeatedly. The 14-day full Local trial includes every local model and needs no card or Dictivo account. Check recognition, correction effort and insertion on your own computer."
+          "Try Dictivo with an email, note or AI prompt you write repeatedly. The 7-day full Local trial includes every local model and needs no card or Dictivo account. Check recognition, correction effort and insertion on your own computer."
         ]
       },
       {
@@ -117,7 +117,7 @@ export const COMPARE_PAGES = [
         "kicker": "Free and paid",
         "title": "Compare the plan you would actually use",
         "paragraphs": [
-          "Flow has a free plan with weekly word allowances. Dictivo includes Tiny free forever and a 14-day trial of all Local models. If a free option meets your needs, a paid comparison alone is not a reason to switch.",
+          "Flow has a free plan with weekly word allowances. Dictivo includes Tiny free forever and a 7-day trial of all Local models. If a free option meets your needs, a paid comparison alone is not a reason to switch.",
           "Flow Pro lists $15 per user per month, or $12 per month billed annually. Three years at the annual rate is $432, assuming unchanged pricing.",
           "Dictivo Local is {{price.local.inline}} once, including 12 months of updates and up to 3 personal devices. Two optional {{price.renewal.inline}} update renewals bring the three-year total to {{price.threeYear.inline}}. Without renewal, you keep using your purchased version. Optional Cloud Fast is separate.",
           "These paid plans do different jobs. Compare their features and billing terms, then test your workflow before paying."
@@ -143,7 +143,7 @@ export const COMPARE_PAGES = [
       ],
       [
         "Is there a free Wispr Flow alternative?",
-        "Start with built-in Apple Dictation on Mac or Windows voice typing for a no-extra-purchase baseline. Their processing requirements differ. Dictivo offers Tiny free forever and a 14-day full Local trial. Flow itself has a free tier; check its current weekly allowance before buying a paid plan."
+        "Start with built-in Apple Dictation on Mac or Windows voice typing for a no-extra-purchase baseline. Their processing requirements differ. Dictivo offers Tiny free forever and a 7-day full Local trial. Flow itself has a free tier; check its current weekly allowance before buying a paid plan."
       ],
       [
         "Does Wispr Flow work offline?",
@@ -179,15 +179,15 @@ export const COMPARE_PAGES = [
       }
     },
     // 2026-10-09: English prices and limits re-checked against wisprflow.ai; links the pricing page.
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
     "lastUpdated": {
-      "all": "2026-09-18",
-      "en": "2026-10-09",
-      "ja": "2026-11-10"
+      "all": "2026-11-24"
     }
   },
   {
     slug: "superwhisper-alternative",
-    lastUpdated: { all: "2026-09-18", ja: "2026-11-10" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
@@ -227,7 +227,7 @@ export const COMPARE_PAGES = [
             "title": "Keep your modes, or try a focused desktop workflow",
             "paragraphs": [
                   "Superwhisper combines dictation with configurable modes and local or cloud models. Keep it on your shortlist if you rely on those modes or need mobile access alongside desktop use.",
-                  "Dictivo focuses on recording with a hotkey, reviewing the transcript and returning it to the active app. Local history, dictionary terms and snippets support repeated writing. The 14-day full Local trial lets you check whether those tools fit your actual work."
+                  "Dictivo focuses on recording with a hotkey, reviewing the transcript and returning it to the active app. Local history, dictionary terms and snippets support repeated writing. The 7-day full Local trial lets you check whether those tools fit your actual work."
             ]
       },
       {
@@ -275,7 +275,7 @@ export const COMPARE_PAGES = [
       ["Is Superwhisper a subscription?", "Superwhisper Pro has monthly and annual subscriptions, and it also offers a lifetime purchase. The plans include the same Pro features but differ by billing frequency."],
       ["Does Superwhisper work on Windows?", "Yes. Superwhisper's Pro documentation says one license works across Mac, Windows, iPhone, and Android. Dictivo is also publicly available for both macOS and Windows x64."],
       ["Is Dictivo as accurate as Superwhisper?", "This page does not establish an accuracy winner. Model, language, microphone, accent and optional rewriting all affect results. Try the same everyday task in both apps and compare corrections and time until the text is usable."],
-      ["Can I try before buying?", "Dictivo offers a 14-day full Local trial with every local model unlocked. Superwhisper advertises a 3,000-word Pro trial. Its billing and model pages differ on free local-model access, so check the installed version before relying on that allowance."],
+      ["Can I try before buying?", "Dictivo offers a 7-day full Local trial with every local model unlocked. Superwhisper advertises a 3,000-word Pro trial. Its billing and model pages differ on free local-model access, so check the installed version before relying on that allowance."],
     ],
     related: ["wispr-flow-alternative", "macwhisper-alternative"],
     sources: [
@@ -287,7 +287,8 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "macwhisper-alternative",
-    lastUpdated: { en: "2026-09-18", de: "2026-10-04", ja: "2026-11-11" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     localizedCopy: {
       // 2026-11-10 (Japanese): own title and description instead of the shared template.
       ja: {
@@ -362,7 +363,7 @@ export const COMPARE_PAGES = [
             "title": "Compare update terms as well as the purchase price",
             "paragraphs": [
                   "MacWhisper lists Pro at €64 once with lifetime updates and also offers a free version.",
-                  "Dictivo Local is {{price.local.inline}} once with 12 months of updates. Two optional annual renewals bring a three-year total to {{price.threeYear.inline}}; the version you own remains usable if you stop renewing. Tiny is free after the 14-day full Local trial.",
+                  "Dictivo Local is {{price.local.inline}} once with 12 months of updates. Two optional annual renewals bring a three-year total to {{price.threeYear.inline}}; the version you own remains usable if you stop renewing. Tiny is free after the 7-day full Local trial.",
                   "Different currencies and update terms make a blanket cheaper claim misleading. Compare the final checkout amounts in your currency and decide which features and updates you expect to use."
             ]
       },
@@ -398,7 +399,8 @@ export const COMPARE_PAGES = [
   },
   {
     slug: "voiceink-alternative",
-    lastUpdated: { all: "2026-11-11" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
@@ -521,7 +523,8 @@ export const COMPARE_PAGES = [
   {
     slug: "macos-dictation-alternative",
     // 2026-10-09: the English page links the Mac dictation troubleshooting guide.
-    lastUpdated: { en: "2026-10-09", ja: "2026-11-10" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
     // 2026-11-10 (Japanese): own title and description instead of the shared template.
     localizedCopy: {
       ja: {
@@ -621,7 +624,7 @@ export const COMPARE_PAGES = [
               "You want a macOS Dictation alternative for daily writing.",
               "You want Whisper-grade local transcription and visible privacy boundaries.",
               "You need a dictionary and snippets for names, terms, and repeated phrases.",
-              "You want a 14-day trial before deciding whether dedicated dictation is worth paying for.",
+              "You want a 7-day trial before deciding whether dedicated dictation is worth paying for.",
             ],
           },
         ],
@@ -632,7 +635,7 @@ export const COMPARE_PAGES = [
       ["Is there a more accurate dictation app for Mac?", "Accuracy depends on the speaker, language, microphone, model and text. We have not published a controlled accuracy comparison with Apple Dictation. Try the same paragraph in both, including names or specialist terms, and count the corrections before choosing."],
       ["Does macOS Dictation work offline?", "Apple says Keyboard settings can indicate whether an internet connection is needed. Offline availability depends on the device, language, and current system behavior."],
       ["What is the best offline dictation app for Mac?", "If you want a paid, local-first workflow with hotkey dictation, local history, dictionary terms, snippets, and a clear privacy boundary, Dictivo is built for that job."],
-      ["Is Dictivo free?", "Dictivo has a tiny free local tier and a 14-day full Local trial with every local model unlocked. Dictivo Local is {{price.local.inline}} once if you decide to buy."],
+      ["Is Dictivo free?", "Dictivo has a tiny free local tier and a 7-day full Local trial with every local model unlocked. Dictivo Local is {{price.local.inline}} once if you decide to buy."],
     ],
     related: ["wispr-flow-alternative", "voiceink-alternative"],
     sources: [
@@ -771,7 +774,8 @@ export const COMPARE_PAGES = [
     ],
     // 2026-10-09, every language: Nuance no longer lists a Dragon Professional price; the copy
     // states that and the last archived list price (data/dragon-price-status.mjs).
-    lastUpdated: { all: "2026-10-09" },
+    // 2026-11-24, every language: the Local trial is 7 days instead of 14.
+    lastUpdated: { all: "2026-11-24" },
   },
 ];
 

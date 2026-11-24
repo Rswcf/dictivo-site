@@ -16,7 +16,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // Japanese for this page, not translated sentence by sentence from the English twin. The title, H1
 // and intent rows target 買い切り; オフライン appears once in the intent column as a qualifier.
 export const JA_NO_SUBSCRIPTION_GUIDE_READY = true;
-export const JA_NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-21"; // Local needs macOS 13.3 from 0.3.58
+// 2026-11-21: Local needs macOS 13.3 from 0.3.58. 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-24";
 export const JA_NO_SUBSCRIPTION_GUIDE_CHECKED = "2026-11-10"; // the competitor facts file and price spot-check date
 
 const checkedLabel = (iso) => `（${iso}確認）`;
@@ -276,7 +277,7 @@ export function jaNoSubscriptionGuideCopy({ windows, checked = JA_NO_SUBSCRIPTIO
         paragraphs: [
           "Dictivo Local は買い切りです。買った版はずっと使えます。12か月のアップデート込みで、その後の更新は任意です。",
           "Local モードでは、モデルのダウンロード後に Mac 上で文字起こしします。Local の音声は文字起こしサーバーへ送られません。ショートカットを押して話すと、Dictivo が文字をクリップボード経由で使用中のアプリに貼り付けます。",
-          "Tiny モデルは無料で使えます。すべての Local モデルを14日間、カード登録や Dictivo アカウントなしで試せます。月額がかかるのは Cloud Fast だけで、これは任意のアドオンです。",
+          "Tiny モデルは無料で使えます。すべての Local モデルを7日間、カード登録や Dictivo アカウントなしで試せます。月額がかかるのは Cloud Fast だけで、これは任意のアドオンです。",
         ],
         link: { label: "Dictivoの料金と体験の条件を見る", href: "/ja/#pricing" },
       },

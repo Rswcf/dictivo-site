@@ -5,6 +5,45 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Local trial is 7 days — 2026-11-24
+
+The full Local trial of the direct-download edition is 7 days instead of 14. The founder decided
+this on 2026-11-22. `trialDays` in `data/local-offer.mjs` is 7, and every sentence that follows it
+changes by itself. Every hard-coded statement of the trial length in `data/` now says 7 days, in
+all ten languages. The build does not convert the `zh-hant` objects in
+`data/compare-hub-guidance.mjs` and `data/first-dictation-locales.mjs`, so they were edited by
+hand. The trial text in `scripts/generate-site.mjs` is a separate part of the same change.
+
+These stay as they were:
+
+- The Tiny model is free forever.
+- Every purchase has a 14-day no-questions refund.
+- The EU 14-day right of withdrawal and the "not later than 14 days" reimbursement sentence.
+- Competitor trials, refunds and guarantees on the comparison pages and guides.
+
+The trial reminder email text no longer names a trial length. From the 7-day release each trial
+keeps its own length: 7 days, or 14 days for a trial that started on an older version. The email is
+due two days before that trial ends, and a daily job sends it. So `data/trial-milestone-copy.mjs`
+(all languages) and the `/privacy/` bullet in `data/trust-pages.mjs` say "two days before your Local
+trial ends", and `tests/facts/privacy-consistency.test.mjs` asserts the two-day mark and no fixed
+length. `TRIAL_MILESTONE_LASTMOD` is 2026-11-24; the two `/privacy/` sub-pages of every language
+carry it.
+
+These did not change: the product film and its transcript on `/demo/` (`data/product-film.mjs`,
+re-rendered separately), the Mac App Store privacy and support pages (another pull request), and
+the past release note about "the 14-day trial" (`data/release-notes.mjs`).
+
+Every page whose text changed carries 2026-11-24: the homepages, `/pricing/`, every comparison page
+and hub in every language, `/privacy/`, `/privacy-proof/`, the media kit, five docs pages, the
+first-dictation and offline Mac guides in every language, and the English and Japanese guides that
+show the trial. `PRIVACY_PROOF_LASTMOD` is now the later of its own date and
+`TRIAL_MILESTONE_LASTMOD`. The Windows offline guide moves from 2026-10-17;
+`tests/structure/windows-guide-frozen.test.mjs` pins the new date. `PRICING_LASTMOD` stays
+2026-11-01: it records price and tax wording, and `/terms/`, the one priced page with no trial
+sentence, did not change. `/about/` has no date constant, and `/demo/` keeps `PRODUCT_FILM.lastmod`.
+
+
+
 ## Homepage film frame — 2026-11-22
 
 The homepage film is a mostly light picture, and set straight on the near-black page it looked

@@ -7,7 +7,8 @@ import { guideLocalPrice } from "./local-offer-copy.mjs";
 // their source; time-limited promotions are left out. Dictivo appears only in the closing
 // section, disclosed as this site's product; its price comes from the Local offer.
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
-export const WISPR_FLOW_PRICING_LASTMOD = "2026-11-10";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const WISPR_FLOW_PRICING_LASTMOD = "2026-11-24";
 export const WISPR_FLOW_PRICING_CHECKED = "2026-10-09";
 
 const checked = `(checked ${WISPR_FLOW_PRICING_CHECKED})`;

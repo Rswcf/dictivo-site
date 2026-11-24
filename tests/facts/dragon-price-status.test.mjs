@@ -52,7 +52,9 @@ test("the Dragon comparison cites the archived store page and no longer compares
   for (const prefix of ["", "de/", "ja/", "zh-hant/"]) {
     const html = read(`${prefix}compare/dragon-alternative/index.html`);
     assert.ok(html.includes(`href="${DRAGON_PRICE_STATUS.lastListArchive}"`), `${prefix}: archived store page in the sources`);
-    assert.ok(html.includes('datetime="2026-10-09"'), `${prefix}: review date`);
+    // 2026-11-24, every language: the page moved again with the 7-day trial. The price check date
+    // (9 October 2026) stays in the Dragon price sentence, asserted above.
+    assert.ok(html.includes('datetime="2026-11-24"'), `${prefix}: review date`);
   }
   assert.ok(!read("index.html").includes("$699"), "English homepage teaser title");
   assert.ok(!read("compare/index.html").includes("$699"), "comparison hub");
