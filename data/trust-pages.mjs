@@ -14,8 +14,9 @@ import { IMPRESSUM_CONTACT, IMPRESSUM_PAGE } from "./impressum.mjs";
  * tell which version they agreed to.
  */
 const LEGAL_LASTMOD = "2026-08-01";
-// Revised for optional desktop acquisition-channel sharing.
-const PRIVACY_LASTMOD = "2026-10-17";
+// Revised for optional desktop acquisition-channel sharing (2026-10-17); 2026-11-24: the Local trial
+// is 7 days instead of 14.
+const PRIVACY_LASTMOD = "2026-11-24";
 // The terms changed with the tax-inclusive price statement (09-16) and the licence-use sentence (09-26).
 const TERMS_LASTMOD = "2026-09-26";
 
@@ -65,7 +66,7 @@ export const TRUST_PAGES = [
         bullets: [
           "No Dictivo account is required for Local dictation.",
           "Local mode does not send your audio to a transcription server.",
-          "The free Local tier and the 14-day Local trial use the same Local privacy boundary.",
+          "The free Local tier and the 7-day Local trial use the same Local privacy boundary.",
         ],
       },
       {
@@ -98,7 +99,7 @@ export const TRUST_PAGES = [
         paragraphs: [TRIAL_MILESTONE_COPY.en.reminder],
         bullets: [
           "Optional, and separate from the usage-statistics setting: nothing is stored unless you type an address and ask for the reminder.",
-          "One email, two days before the 14-day Local trial ends. No newsletter, no other messages.",
+          "One email, two days before your Local trial ends. No newsletter, no other messages.",
           "Cancel in the app, through the link in the email, or by writing to support@dictivo.app.",
         ],
       },
@@ -1531,7 +1532,7 @@ export const TRUST_PAGES = [
         title: "What Dictivo is for",
         bullets: [
           "Private desktop dictation with public downloads for macOS and Windows x64.",
-          "A free Local tier, a 14-day full Local trial, and optional paid Local upgrade.",
+          "A free Local tier, a 7-day full Local trial, and optional paid Local upgrade.",
           "Optional Cloud Fast minutes and subscription for selected recordings.",
           "A clear support path through support@dictivo.app.",
         ],

@@ -5,7 +5,6 @@ import { PRICING_LASTMOD } from "../../data/local-offer.mjs";
 import { LOCALES } from "../../data/site-content.mjs";
 import { HOME_CONVERSION_LASTMOD, HOME_CONVERSION_LOCALE_LASTMOD, HOME_SHARED_CONTENT_LASTMOD } from "../../data/home-conversion.mjs";
 import { offlineDictationGuideLastmod } from "../../data/offline-dictation-guide.mjs";
-import { COMPARE_HUB_LOCALE_LASTMOD } from "../../data/compare-hub-guidance.mjs";
 
 const dist = new URL("../../dist/", import.meta.url).pathname;
 // A page that shows a Dictivo price reports at least PRICING_LASTMOD in the sitemap (see renderSitemap),
@@ -40,32 +39,21 @@ test("pages that show a price report a sitemap date no older than the last price
 });
 
 
-test("comparison refresh is scoped to changed pages and languages", () => {
+test("every comparison page and hub reports the 2026-11-24 trial change", () => {
   const sitemap = readFileSync(`${dist}sitemap.xml`, "utf8");
   const dates = new Map([...sitemap.matchAll(/<loc>https:\/\/dictivo\.app([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   const locales = ["", "de/", "fr/", "es/", "it/", "nl/", "pt/", "zh/", "zh-hant/", "ja/", "ko/"];
+  // 2026-11-24, every language: every comparison page and the hub state the 7-day Local trial
+  // (the trial line under the downloads, the trial row and the hub guidance), so all share one date.
+  // Earlier refreshes were scoped: 2026-11-11 (VoiceInk, every language; MacWhisper and the hub,
+  // Japanese), 2026-11-10 (Japanese titles), 2026-10-09 (Dragon price check), 2026-10-04 (German).
   for (const locale of locales) {
-    // Japanese 2026-11-10: each comparison has its own title and description, and the hub lists
-    // those titles. The Dragon comparison keeps 2026-10-09, the date of its price check.
-    const ja = locale === "ja/";
-    // English 2026-10-09: the Dragon comparison title it lists changed; 2026-10-10: it links the
-    // dictation software guide; Batch B1: it also links the one-time license guide. Japanese
-    // 2026-11-11: the hub takes its newest child (MacWhisper and VoiceInk update wording).
-    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing(ja ? "2026-11-11" : locale === "de/" ? "2026-10-04" : locale === "" ? COMPARE_HUB_LOCALE_LASTMOD.en : "2026-09-20"));
-    // 2026-11-11, every language: the VoiceInk comparison no longer calls its prices a current
-    // offer. Only the Japanese hub follows its newest child; the other hubs keep their dates.
+    assert.equal(dates.get(`/${locale}compare/`), atLeastPricing("2026-11-24"), `/${locale}compare/`);
+    for (const slug of ["wispr-flow-alternative", "superwhisper-alternative", "macwhisper-alternative", "voiceink-alternative", "macos-dictation-alternative", "dragon-alternative"]) {
+      assert.equal(dates.get(`/${locale}compare/${slug}/`), atLeastPricing("2026-11-24"), `/${locale}compare/${slug}/`);
+    }
     const superPath = `/${locale}compare/superwhisper-alternative/`;
     const macPath = `/${locale}compare/macwhisper-alternative/`;
-    assert.equal(dates.get(superPath), atLeastPricing(ja ? "2026-11-10" : "2026-09-18"));
-    const macDate = ja ? "2026-11-11" : locale === "de/" ? "2026-10-04" : locale ? "2026-09-12" : "2026-09-18";
-    assert.equal(dates.get(macPath), atLeastPricing(macDate));
-    assert.equal(dates.get(`/${locale}compare/voiceink-alternative/`), atLeastPricing("2026-11-11"));
-    if (ja) {
-      for (const slug of ["wispr-flow-alternative", "macos-dictation-alternative"]) {
-        assert.equal(dates.get(`/ja/compare/${slug}/`), atLeastPricing("2026-11-10"), slug);
-      }
-      assert.equal(dates.get("/ja/compare/dragon-alternative/"), atLeastPricing("2026-10-09"));
-    }
     for (const path of [superPath, macPath]) {
       const body = readFileSync(`${dist}${path.slice(1)}index.html`, "utf8");
       const date = body.match(/<time datetime="([^"]+)"/)[1];
@@ -87,8 +75,9 @@ test("Guide dates reflect scoped trial improvements without redating unchanged s
     ["/ja/guides/offline-dictation-on-mac/", offlineDictationGuideLastmod("ja")],
     // Batch B1: the English date comes from the guide's data (re-dated at integration).
     ["/guides/offline-dictation-on-mac/", offlineDictationGuideLastmod("en")],
-    ["/ja/guides/first-local-dictation/", "2026-09-18"],
-    ["/guides/first-local-dictation/", "2026-09-11"],
+    // 2026-11-24: both first-dictation guides state the 7-day Local trial.
+    ["/ja/guides/first-local-dictation/", "2026-11-24"],
+    ["/guides/first-local-dictation/", "2026-11-24"],
   ]) {
     const body = readFileSync(`${dist}${path.slice(1)}index.html`, "utf8");
     assert.ok(body.includes(`"dateModified":"${date}"`) || body.includes(`"dateModified": "${date}"`), path);

@@ -9,7 +9,8 @@ import { OFFLINE_GUIDE_PRICES_CHECKED } from "./offline-dictation-guide.mjs";
 // hand: the facts come from vendor pages and documentation. The Mac and Windows license question
 // belongs to /guides/dictation-app-mac-windows-one-time-license/, so the H1, title, description,
 // intent rows and headings avoid "Windows", "cross-platform" and "offline".
-export const NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-10";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const NO_SUBSCRIPTION_GUIDE_LASTMOD = "2026-11-24";
 export const NO_SUBSCRIPTION_GUIDE_CHECKED = "2026-11-10";
 
 const checkedLabel = `(checked ${NO_SUBSCRIPTION_GUIDE_CHECKED})`;
@@ -260,7 +261,7 @@ export function noSubscriptionGuideCopy({ windows, checked = NO_SUBSCRIPTION_GUI
         paragraphs: [
           "Dictivo Local is a one-time purchase. You keep it forever. It includes 12 months of updates, and renewal after that is optional.",
           "In Local mode, Dictivo transcribes on your Mac after the model download. Press the shortcut, speak, and Dictivo pastes the text into the app you are using.",
-          "The Tiny model is free forever. A 14-day trial of every local model needs no card and no Dictivo account. Cloud Fast is the only monthly option, and it is optional.",
+          "The Tiny model is free forever. A 7-day trial of every local model needs no card and no Dictivo account. Cloud Fast is the only monthly option, and it is optional.",
         ],
         bullets: [
           { html: 'What happens after the 12 months of updates: <a href="/pricing/#pricing-faq">pricing questions</a>.' },

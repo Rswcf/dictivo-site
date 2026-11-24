@@ -1,7 +1,8 @@
 // Japanese-only guide for built-in macOS dictation that does not work.
 // Every statement here must be backed by one of the references below or by `fieldTest`,
 // which holds results from an actual Mac and stays null until those results exist.
-export const JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD = "2026-11-10";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_MAC_DICTATION_TROUBLESHOOTING_LASTMOD = "2026-11-24";
 
 export const JA_MAC_DICTATION_TROUBLESHOOTING_REFERENCES = [
   ["Apple サポート：Macでメッセージや書類を音声入力する", "https://support.apple.com/ja-jp/guide/mac-help/mh40584/mac"],
@@ -111,14 +112,14 @@ export const JA_MAC_DICTATION_TROUBLESHOOTING_COPY = {
       "ただし、Macがマイクを認識していない場合は、Dictivoでも入力できません。標準の音声入力で用が足りるなら、追加のアプリは必要ありません。",
     ],
     steps: [
-      "Dictivoを開いて「Set up Local」を選び、推奨モデルをダウンロードします。初回の取得にはネット接続が必要です。14日間のLocal体験にカードやDictivoアカウントは不要です。",
+      "Dictivoを開いて「Set up Local」を選び、推奨モデルをダウンロードします。初回の取得にはネット接続が必要です。7日間のLocal体験にカードやDictivoアカウントは不要です。",
       "Macのマイク権限と、貼り付けに必要なアクセシビリティ権限を確認します。Localを選び、入力したい欄をクリックしてからDictivoのショートカットで短い一文を録音します。",
       "人名・数字・句読点を見直し、普段使うメールやメモでも試します。文字がDictivo内にあるのに貼り付かない場合は、Copyでコピーして手動で貼り付けます。購入前に、自分の作業で修正の手間が減るかを確認してください。",
     ],
     links: [
       ["日本語の例文と練習欄で、最初の一文を試す", "/ja/guides/first-local-dictation/"],
       ["標準機能とオフライン音声入力アプリを比較する", "/ja/guides/offline-dictation-on-mac/"],
-      ["14日間の体験と買い切りの条件を確認する", "/ja/#pricing"],
+      ["7日間の体験と買い切りの条件を確認する", "/ja/#pricing"],
     ],
   },
   faqTitle: "よくある質問",

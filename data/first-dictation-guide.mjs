@@ -1,6 +1,7 @@
 import { FIRST_DICTATION_LOCALES } from "./first-dictation-locales.mjs";
 
-export const FIRST_DICTATION_LASTMOD = "2026-09-11";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const FIRST_DICTATION_LASTMOD = "2026-11-24";
 export function firstDictationLastmod(code) {
   return FIRST_DICTATION_COPY[code]?.lastUpdated || FIRST_DICTATION_LASTMOD;
 }
@@ -18,7 +19,7 @@ export const FIRST_DICTATION_COPY = {
     setupTitle: "Get ready in Dictivo",
     steps: [
       ["Install and open", "On Mac, open the DMG, drag Dictivo into Applications, then launch it from Applications. On Windows x64, run the installer from dictivo.app. The Windows installer is not yet code-signed; verify the download source before deciding whether to proceed."],
-      ["Choose Set up Local", "This starts the 14-day full Local trial. Review the model recommended for your hardware, then choose Download & set up. The first model download needs internet; no Dictivo account or card is needed."],
+      ["Choose Set up Local", "This starts the 7-day full Local trial. Review the model recommended for your hardware, then choose Download & set up. The first model download needs internet; no Dictivo account or card is needed."],
       ["Allow the microphone and check your shortcut", "Complete calibration and test the shortcut shown in Dictivo. Its default is Cmd+Shift+Space on Mac and Ctrl+Shift+Space on Windows. Check whether you selected press-to-toggle or hold-to-talk."],
       ["Return to this page", "Keep Dictivo running and choose Local in the app. Click the empty practice field below before you start. On Mac, allow Accessibility access if Dictivo asks for it to paste into other apps."],
     ],
@@ -64,7 +65,7 @@ export const FIRST_DICTATION_COPY = {
       ],
       [
         "「Set up Local」を選ぶ",
-        "すべてのLocalモデルを使える14日間の体験が始まります。推奨モデルを確認し、「Download & set up」を選びます。初回のモデル取得にはネット接続が必要です。Dictivoアカウントやカードは不要です。"
+        "すべてのLocalモデルを使える7日間の体験が始まります。推奨モデルを確認し、「Download & set up」を選びます。初回のモデル取得にはネット接続が必要です。Dictivoアカウントやカードは不要です。"
       ],
       [
         "マイクを許可してショートカットを確認",
@@ -127,6 +128,6 @@ export const FIRST_DICTATION_COPY = {
     "pricing": "購入条件を見る",
     "models": "Macのモデル選び",
     "offline": "オフライン音声入力を比較",
-    "lastUpdated": "2026-09-18"
+    "lastUpdated": "2026-11-24"
   },
 };

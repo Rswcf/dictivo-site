@@ -10,7 +10,8 @@ import { DRAGON_PRICE_STATUS, DRAGON_PROFESSIONAL_PRICE_SENTENCE } from "./drago
 // on the site uses (data/dragon-price-status.mjs). Dictivo appears only in the
 // closing section, disclosed as this site's product; its price comes from the Local offer.
 // Monthly re-check: docs/research/2026-10-08-ahrefs-audit/price-watch.md in the desktop repository.
-export const DRAGON_PRICING_LASTMOD = "2026-10-09";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const DRAGON_PRICING_LASTMOD = "2026-11-24";
 export const DRAGON_PRICING_CHECKED = "2026-10-09";
 
 const checked = `(checked ${DRAGON_PRICING_CHECKED})`;

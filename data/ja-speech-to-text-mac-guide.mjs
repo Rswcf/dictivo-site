@@ -14,7 +14,8 @@ import { JA_APPLE_DICTATION_HELP, JA_MAC_DICTATION_SHORTCUT_CHECKED } from "./ja
 // v0.3.57). Japanese UI labels are the app's own strings at v0.3.57. The copy is written in
 // Japanese, not translated sentence by sentence from the English guide.
 export const JA_SPEECH_GUIDE_READY = true;
-export const JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-11"; // the release day
+// 2026-11-11: the release day. 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_SPEECH_TO_TEXT_MAC_GUIDE_LASTMOD = "2026-11-24";
 export const JA_SPEECH_TO_TEXT_MAC_GUIDE_CHECKED = "2026-11-10"; // the competitor facts file and price spot-check date
 
 const checkedLabel = (iso) => `（${iso}確認）`;
@@ -210,7 +211,7 @@ export function jaSpeechToTextMacGuideCopy({ windows, checked = JA_SPEECH_TO_TEX
         title: "無料で試せる選択肢",
         paragraphs: [
           "まずはMac標準の音声入力です。追加のアプリは要りません。Handyは無料のオープンソースです。SpokenlyとSuperwhisperにはローカルモデルを使う無料プランがあり、MacWhisperの無料版はローカルモデルでファイルを文字起こしできます。無料で使える範囲は、インストールした版で確認してください。",
-          "DictivoはTinyモデルが無料で、すべてのローカルモデルを14日間試せます。カード登録もDictivoアカウントも要りません。体験期間中に、自分のMacで直す手間がどれくらい減るかを確かめてください。",
+          "DictivoはTinyモデルが無料で、すべてのローカルモデルを7日間試せます。カード登録もDictivoアカウントも要りません。体験期間中に、自分のMacで直す手間がどれくらい減るかを確かめてください。",
         ],
         link: { label: "日本語の例文と練習欄で、最初の一文を試す", href: "/ja/guides/first-local-dictation/" },
       },
@@ -277,7 +278,7 @@ export function jaSpeechToTextMacGuideCopy({ windows, checked = JA_SPEECH_TO_TEX
       ],
       [
         "Macで無料で使える音声入力アプリは？",
-        "Mac標準の音声入力はmacOSに含まれています。Handyは無料のオープンソースです。SpokenlyとSuperwhisperにはローカルモデルを使う無料プランがあり、MacWhisperにも無料版があります。DictivoはTinyモデルが無料で、すべてのローカルモデルを14日間試せます。",
+        "Mac標準の音声入力はmacOSに含まれています。Handyは無料のオープンソースです。SpokenlyとSuperwhisperにはローカルモデルを使う無料プランがあり、MacWhisperにも無料版があります。DictivoはTinyモデルが無料で、すべてのローカルモデルを7日間試せます。",
       ],
       [
         "Mac標準の音声入力と専用アプリの違いは？",

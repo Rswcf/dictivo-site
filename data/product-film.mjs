@@ -1,11 +1,10 @@
 export const PRODUCT_FILM = {
   path: "/demo/",
   // film-v10 (cut v2.5) is the 68-second film with the 7-day trial cards. Both dates below are the
-  // planned day of the first production deploy with the film-v10 files, 2026-11-24, and a planned
-  // time on that day (09:00 UTC). The film merges together with the 7-day app release and the
-  // site-wide 7-day copy. If that deploy happens on a later day, move both values to it.
+  // day and the approximate hour of the first production deploy with the film-v10 files. The film
+  // merged together with the 7-day app release (Dictivo 0.3.60) and the site-wide 7-day copy.
   lastmod: "2026-11-24",
-  uploadedAt: "2026-11-24T09:00:00Z",
+  uploadedAt: "2026-11-24T14:00:00Z",
   name: "Dictivo — Keep your flow",
   description: "Watch Dictivo turn speech into text in Mail and Notes on a Mac: Local keeps audio on your device, and Cloud Fast is there when you choose it. A 68-second film made from real screen recordings.",
   video: "/assets/film-v10/dictivo-film-1080p.mp4",

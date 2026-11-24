@@ -65,11 +65,15 @@ test("the Privacy Policy and /security/ explain the dictivo-self opt-out flag, a
 // Desktop 0.3.54 (spec 2026-10-09 §6): the install census and the optional trial reminder email.
 test("every language explains the trial reminder: purpose, deletion and how to withdraw, with support@dictivo.app", () => {
   // Where the address is kept is named by region; provider names stay out of public copy (check-public-output).
+  const twoDays = { en: "two days before", de: "zwei Tage vor", fr: "deux jours avant", es: "dos días antes", it: "due giorni prima", nl: "twee dagen voordat", pt: "dois dias antes", zh: "结束前两天", ja: "2 日前", ko: "이틀 전" };
   const region = { en: "Western Europe", de: "Westeuropa", fr: "Europe de l'Ouest", es: "Europa occidental", it: "Europa occidentale", nl: "West-Europa", pt: "Europa Ocidental", zh: "西欧", ja: "西ヨーロッパ", ko: "서유럽" };
   for (const [locale, copy] of Object.entries(TRIAL_MILESTONE_COPY)) {
     assert.ok(copy.reminder, `${locale}: reminder copy missing`);
     assert.ok(copy.reminder.includes("support@dictivo.app"), `${locale}: reminder does not name support@dictivo.app`);
-    assert.ok(copy.reminder.includes("14"), `${locale}: reminder does not name the 14-day trial`);
+    // 2026-11-22: each trial keeps its own length (7 days, or 14 for a trial started on an older
+    // version), so the sentence names the two-day mark and no fixed length.
+    assert.ok(copy.reminder.includes(twoDays[locale]), `${locale}: reminder does not say when the email is sent`);
+    assert.ok(!/14|(^|[^0-9])7([^0-9]|$)/.test(copy.reminder), `${locale}: reminder names a fixed trial length`);
     assert.ok(copy.reminder.includes(region[locale]), `${locale}: reminder does not name where the address is kept`);
     assert.ok(!/Cloudflare/i.test(copy.reminder), `${locale}: reminder names a provider`);
   }

@@ -29,7 +29,8 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 //   dictionary hints with a fixed language: displayLanguage.ts settingsSpeechFixedNote,
 //   data/release-notes.mjs (0.3.52);
 // - no recorded files, no mobile app: the sentences pinned in tests/wording/best-dictation-software.test.mjs.
-export const DOCS_MODELS_LASTMOD = "2026-11-10";
+// 2026-11-24: the Local trial is 7 days instead of 14.
+export const DOCS_MODELS_LASTMOD = "2026-11-24";
 
 const trialDays = LOCAL_OFFER.trialDays;
 const licensed = `${trialDays}-day trial or Local license`;

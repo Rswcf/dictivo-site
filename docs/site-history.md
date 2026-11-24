@@ -34,13 +34,48 @@ names film-v08 or film-v09 except as a `_redirects` source. `check-product-film.
 redirects and that both Chinese caption files name the 7-day trial. The last `FILM_CHAPTERS`
 description on `/demo/` now says "free to try for 7 days".
 
-`PRODUCT_FILM.lastmod` is 2026-11-24 and `uploadedAt` is 2026-11-24T09:00:00Z: the planned day of
-the first production deploy with the film-v10 files, and a planned time on that day. The sitemap
-dates of the eleven homepages and `/demo/` follow `lastmod`. The film merges together with the
-site-wide 7-day copy and the 7-day app release. If that deploy happens on a later day, both values
-move to it. Until the copy PR lands, `/demo/` still shows "Try all local models free
-for 14 days." from `HOME_CONVERSION_COPY.en.trial`. Not checked: playback of the new files in a
-browser.
+`PRODUCT_FILM.lastmod` is 2026-11-24 and `uploadedAt` is 2026-11-24T14:00:00Z: the day and the
+approximate hour of the first production deploy with the film-v10 files. The sitemap dates of the
+eleven homepages and `/demo/` follow `lastmod`. The film merged on the same day as the site-wide
+7-day copy (the note below) and the 7-day app release, Dictivo 0.3.60. Not checked: playback of the
+new files in a browser.
+
+## Local trial is 7 days — 2026-11-24
+
+The full Local trial of the direct-download edition is 7 days instead of 14. The founder decided
+this on 2026-11-22. `trialDays` in `data/local-offer.mjs` is 7, and every sentence that follows it
+changes by itself. Every hard-coded statement of the trial length in `data/` now says 7 days, in
+all ten languages. The build does not convert the `zh-hant` objects in
+`data/compare-hub-guidance.mjs` and `data/first-dictation-locales.mjs`, so they were edited by
+hand. The trial text in `scripts/generate-site.mjs` is a separate part of the same change.
+
+These stay as they were:
+
+- The Tiny model is free forever.
+- Every purchase has a 14-day no-questions refund.
+- The EU 14-day right of withdrawal and the "not later than 14 days" reimbursement sentence.
+- Competitor trials, refunds and guarantees on the comparison pages and guides.
+
+The trial reminder email text no longer names a trial length. From the 7-day release each trial
+keeps its own length: 7 days, or 14 days for a trial that started on an older version. The email is
+due two days before that trial ends, and a daily job sends it. So `data/trial-milestone-copy.mjs`
+(all languages) and the `/privacy/` bullet in `data/trust-pages.mjs` say "two days before your Local
+trial ends", and `tests/facts/privacy-consistency.test.mjs` asserts the two-day mark and no fixed
+length. `TRIAL_MILESTONE_LASTMOD` is 2026-11-24; the two `/privacy/` sub-pages of every language
+carry it.
+
+These did not change: the product film and its transcript on `/demo/` (`data/product-film.mjs`,
+re-rendered separately), the Mac App Store privacy and support pages (another pull request), and
+the past release note about "the 14-day trial" (`data/release-notes.mjs`).
+
+Every page whose text changed carries 2026-11-24: the homepages, `/pricing/`, every comparison page
+and hub in every language, `/privacy/`, `/privacy-proof/`, the media kit, five docs pages, the
+first-dictation and offline Mac guides in every language, and the English and Japanese guides that
+show the trial. `PRIVACY_PROOF_LASTMOD` is now the later of its own date and
+`TRIAL_MILESTONE_LASTMOD`. The Windows offline guide moves from 2026-10-17;
+`tests/structure/windows-guide-frozen.test.mjs` pins the new date. `PRICING_LASTMOD` stays
+2026-11-01: it records price and tax wording, and `/terms/`, the one priced page with no trial
+sentence, did not change. `/about/` has no date constant, and `/demo/` keeps `PRODUCT_FILM.lastmod`.
 
 
 

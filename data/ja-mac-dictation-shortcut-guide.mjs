@@ -4,7 +4,8 @@
 // those pages, never translated from the English guide. Apple names only two choices of the
 // Shortcut pop-up menu, so this page names only those. Dictivo appears only in the third column
 // of the quick reference, in its own disclosed section and in the last FAQ.
-export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-10"; // set to the publishing commit's date
+// 2026-11-10: the publishing commit's date. 2026-11-24: the Local trial is 7 days instead of 14.
+export const JA_MAC_DICTATION_SHORTCUT_LASTMOD = "2026-11-24";
 
 // The day the Apple pages below were read for this guide.
 export const JA_MAC_DICTATION_SHORTCUT_CHECKED = "2026-10-09";
@@ -149,7 +150,7 @@ export function jaMacDictationShortcutCopy({ windows, troubleshootingPath, prici
       ],
       steps: [
         "まずmacOS標準の音声入力で、普段のメールを1文入力してください。必要な文章を無理なく書けるなら、追加のアプリを購入する必要はありません。",
-        "ローカルモデルを選んで使いたい場合や、録音結果を履歴から再利用したい場合は、Dictivoをインストールし、Set up Localでモデルをダウンロードします。全ローカルモデルの試用は14日間で、カード登録・アカウントは不要です。",
+        "ローカルモデルを選んで使いたい場合や、録音結果を履歴から再利用したい場合は、Dictivoをインストールし、Set up Localでモデルをダウンロードします。全ローカルモデルの試用は7日間で、カード登録・アカウントは不要です。",
         "Localを選び、入力欄をクリックして、Dictivoのショートカットで日本語のメールやメモを1文話します。人名・社名・数字・句読点を確認し、いつも使うアプリでも試してください。自動で貼り付かない場合は、結果をコピーしてCmd+Vで貼り付けます。",
         "標準機能と同じ文章を比べ、修正を含む作業時間が減るか確認してください。Tinyで十分なら無料で使い続けられます。試用した大きなローカルモデルを継続して使いたい場合に、有料Localを検討してください。",
       ],
