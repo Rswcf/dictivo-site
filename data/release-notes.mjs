@@ -1,4 +1,31 @@
 export const RELEASE_NOTES = Object.freeze({
+  // 0.3.58 to 0.3.60: read from the desktop repository at each tag (license.rs,
+  // recordingLimits.ts, clipboard.rs, prepare-private-fast-engine.mjs), 2026-11-26.
+  "0.3.60": Object.freeze({
+    date: "2026-11-24",
+    title: "The Local trial is 7 days for new installs.",
+    bullets: Object.freeze([
+      "A new install gets a 7-day Local trial with every local model unlocked. A trial that started on an earlier version keeps its 14 days.",
+      "The app now shows the length of your own trial instead of a fixed number of days. Tiny stays free after the trial, as before.",
+    ]),
+  }),
+  "0.3.59": Object.freeze({
+    date: "2026-11-23",
+    title: "A recording you forget now stops by itself.",
+    bullets: Object.freeze([
+      "Local recordings stop after 20 minutes and Cloud Fast recordings after 12 minutes. At 5 minutes Dictivo says it is still recording, and one minute before the stop it says when the recording ends. With sounds on, both come with a sound.",
+      "After an automatic stop, the transcript goes to History, or stays in the Dictivo window when History is off. Dictivo does not paste it or copy it, because a forgotten recording is mostly noise. A recording you stop yourself is pasted as before.",
+      "Cloud Fast stops at 12 minutes so that the upload always stays under the size the service accepts.",
+    ]),
+  }),
+  "0.3.58": Object.freeze({
+    date: "2026-11-21",
+    title: "Local dictation on macOS 13.3 and later, and the transcript stays on the clipboard.",
+    bullets: Object.freeze([
+      "On Mac, the local engine now starts on macOS 13.3 and later. Versions 0.3.35 to 0.3.57 needed macOS 15.4: on a test Mac with macOS 14.8.7, the 0.3.57 engine stopped at launch and the 0.3.58 engine transcribed.",
+      "After an automatic paste, the transcript now stays on the clipboard, so Cmd+V or Ctrl+V pastes it again if the paste did not land. Until 0.3.57, Dictivo put back what you had copied before, 2 seconds after pasting.",
+    ]),
+  }),
   "0.3.57": Object.freeze({
     date: "2026-10-21",
     title: "More reliable automatic paste on Windows.",

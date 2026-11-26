@@ -1,8 +1,10 @@
 import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 
 // Docs page S (Batch B2): what Dictivo needs on a Mac and on Windows x64. Every fact comes from the
-// desktop app at tag v0.3.57 (DOCS_CHECKED_VERSION), from the installed 0.3.57 app, or from a page
+// desktop app at tag v0.3.60 (DOCS_CHECKED_VERSION), from the installed 0.3.57 app, or from a page
 // the site already publishes:
+// - recording limits (since 0.3.59): recordingLimits.ts RECORDING_LIMITS and deliversTranscript,
+//   displayLanguage.ts recordingLimit (banners; History or the window after an automatic stop);
 // - minimum macOS and the universal binary: read on 2026-11-10 from the installed 0.3.57 app
 //   (`defaults read /Applications/Dictivo.app/Contents/Info.plist LSMinimumSystemVersion` → 10.13;
 //   `lipo -archs …/MacOS/dictivo` → x86_64 arm64). The source pins no minimum; the built app does.
@@ -36,7 +38,7 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   displayLanguage.ts permissions; temporary recordings: displayLanguage.ts storage rows;
 // - Intel Macs and larger models: data/mac-model-advisor.mjs notes.intel.
 // No price on this page.
-export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-21";
+export const DOCS_SYSTEM_REQUIREMENTS_LASTMOD = "2026-11-26";
 
 const MAC_MINIMUM = "10.13";
 const MAC_LOCAL_MINIMUM = "13.3";
@@ -176,6 +178,15 @@ export function docsSystemRequirementsCopy({ windows }) {
           ["What Dictivo does offline", "/docs/offline/"],
           ["Every connection Dictivo makes", "/docs/connections/"],
         ],
+      },
+      {
+        title: "How long one recording can be",
+        paragraphs: [
+          "Since version 0.3.59, a Local recording stops by itself after 20 minutes and a Cloud Fast recording after 12 minutes. The Cloud Fast limit keeps each upload under the size the service accepts.",
+          "At 5 minutes, Dictivo shows that it is still recording. One minute before the limit, it shows when the recording stops. With sounds on, both come with a sound.",
+          "After an automatic stop, the transcript goes to History, or stays in the Dictivo window when History is off. Dictivo does not paste or copy it. A recording you stop yourself is pasted as usual.",
+        ],
+        links: [["Dictivo changelog", "/changelog/"]],
       },
     ],
     faqs: [

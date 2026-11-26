@@ -3,7 +3,7 @@ import { docsCheckedLabel } from "./docs-shared.mjs";
 
 // Docs page I (Batch B2): install Dictivo from the disk image, with Homebrew or from the Windows EXE
 // or MSI, and remove it again, including what stays behind. Every fact comes from the desktop app
-// at tag v0.3.57 (DOCS_CHECKED_VERSION), the Homebrew tap, or a page the site already publishes:
+// at tag v0.3.60 (DOCS_CHECKED_VERSION), the Homebrew tap, or a page the site already publishes:
 // - Mac build: release-desktop.yml (universal, Developer ID signed, notarized); site README
 //   "Download hosting"; install steps: data/first-dictation-guide.mjs;
 // - Start at login needs the app in Applications: autostart.rs NeedsApplicationsFolder and

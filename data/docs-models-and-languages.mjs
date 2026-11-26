@@ -2,7 +2,7 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 
 // Docs page M (Batch B2): the seven local speech models, their sizes, who can use them, how Dictivo
 // picks a default for the machine, where models come from and live, and the dictation languages.
-// Every fact comes from the desktop app at tag v0.3.57 (DOCS_CHECKED_VERSION) or from a page the
+// Every fact comes from the desktop app at tag v0.3.60 (DOCS_CHECKED_VERSION) or from a page the
 // site already publishes:
 // - catalog order, labels and size labels, the free Tiny model, the 256 MiB download margin (the
 //   app prints it as "256 MB"): private_fast.rs MODEL_CATALOG, FREE_LOCAL_MODEL_ID,

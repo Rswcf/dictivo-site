@@ -5,6 +5,26 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Docs re-read against 0.3.60 — 2026-11-26
+
+`DOCS_CHECKED_VERSION` is 0.3.60 and `DOCS_CHECKED` 2026-11-26, so all nine docs pages say
+"Applies to: Dictivo 0.3.60". Between v0.3.57 and v0.3.60 the desktop source changed in
+`license.rs` (trial length), `recordingLimits.ts` (new), `clipboard.rs`, `trialCensus.ts`,
+`trialReminder.ts`, `onboardingHotkeyTest.ts` and the macOS engine build script; the files the
+other docs facts cite are unchanged (`git diff --quiet`). Two pages changed content:
+`/docs/connections/` (the trial report and the trial reminder now send the trial's length in
+days) and `/docs/system-requirements/` (new section "How long one recording can be"). The trial
+days and macOS 13.3 were already on the pages; the clipboard wording already matched.
+
+## Changelog notes for 0.3.58, 0.3.59 and 0.3.60 — 2026-11-26
+
+`/changelog/` showed the generic "Detailed release notes are pending" entry for 0.3.60 and had no
+section for 0.3.58 or 0.3.59. `data/release-notes.mjs` now has all three. Every bullet was read
+from the desktop repository at the release tag: `license.rs` (7-day trial, 14 days for older trial
+records), `recordingLimits.ts` and `displayLanguage.ts` (20 and 12 minute limits, the 5-minute
+reminder and 1-minute warning, History only after an automatic stop), the 0.3.58 release commit
+(clipboard no longer put back; engine built for macOS 13.3, checked on a macOS 14.8.7 VM).
+
 ## Film re-render for the 7-day trial — 2026-11-24
 
 The founder shortened the trial from 14 to 7 days on 2026-11-22. The 68-second film is re-rendered

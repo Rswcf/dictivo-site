@@ -1,7 +1,7 @@
 import { DOCS_CHECKED_VERSION, docsCheckedLabel } from "./docs-shared.mjs";
 
 // Docs page P (Batch B2): the macOS permissions Dictivo asks for, what each one does and what
-// happens without it. Every fact comes from the desktop app at tag v0.3.57 (DOCS_CHECKED_VERSION)
+// happens without it. Every fact comes from the desktop app at tag v0.3.60 (DOCS_CHECKED_VERSION)
 // or from a page the site already publishes:
 // - the three rows, their requirement words and descriptions: displayLanguage.ts
 //   settingsText.permissions; they render in Settings › Privacy (SettingsView.tsx permission-list),
@@ -14,7 +14,7 @@ import { DOCS_CHECKED_VERSION, docsCheckedLabel } from "./docs-shared.mjs";
 //   no keystroke leaves the transcript on the clipboard), App.tsx pasteLastTranscript;
 //   the put-back of the previous clipboard: displayLanguage.ts privacy.clipboard;
 // - the declarations: Info.plist (two usage descriptions), Entitlements.plist (two entitlements);
-//   no Input Monitoring or Screen Recording request: `git grep -i 'ListenEventAccess\|ScreenCaptureAccess\|NSInputMonitoring' v0.3.57 -- apps/desktop`
+//   no Input Monitoring or Screen Recording request: `git grep -i 'ListenEventAccess\|ScreenCaptureAccess\|NSInputMonitoring' v0.3.60 -- apps/desktop`
 //   printed nothing on DOCS_CHECKED;
 // - the default shortcuts: settingsStore.ts DEFAULT_HOTKEYS; Test microphone: displayLanguage.ts;
 // - Windows: lib.rs ("not-required"; no microphone status before the first recording),
