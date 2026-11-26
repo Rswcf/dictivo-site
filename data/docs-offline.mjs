@@ -2,7 +2,7 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 
 // Docs page O (Batch B2): what the Dictivo desktop app does with no network, and which actions need
-// one. Every fact comes from the desktop app at tag v0.3.57 (DOCS_CHECKED_VERSION) or from a page the
+// one. Every fact comes from the desktop app at tag v0.3.60 (DOCS_CHECKED_VERSION) or from a page the
 // site already publishes:
 // - Local dictation on the device, the temporary recording file: displayLanguage.ts (privacy
 //   storage rows); the site's /privacy/where-dictation-audio-goes/;

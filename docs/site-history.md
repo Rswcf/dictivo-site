@@ -5,6 +5,17 @@ A note records what changed on its date. README.md describes current behavior.
 
 
 
+## Docs re-read against 0.3.60 — 2026-11-26
+
+`DOCS_CHECKED_VERSION` is 0.3.60 and `DOCS_CHECKED` 2026-11-26, so all nine docs pages say
+"Applies to: Dictivo 0.3.60". Between v0.3.57 and v0.3.60 the desktop source changed in
+`license.rs` (trial length), `recordingLimits.ts` (new), `clipboard.rs`, `trialCensus.ts`,
+`trialReminder.ts`, `onboardingHotkeyTest.ts` and the macOS engine build script; the files the
+other docs facts cite are unchanged (`git diff --quiet`). Two pages changed content:
+`/docs/connections/` (the trial report and the trial reminder now send the trial's length in
+days) and `/docs/system-requirements/` (new section "How long one recording can be"). The trial
+days and macOS 13.3 were already on the pages; the clipboard wording already matched.
+
 ## Changelog notes for 0.3.58, 0.3.59 and 0.3.60 — 2026-11-26
 
 `/changelog/` showed the generic "Detailed release notes are pending" entry for 0.3.60 and had no

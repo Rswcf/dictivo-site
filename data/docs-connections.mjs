@@ -2,13 +2,13 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 
 // Docs page C (Batch B2): every host the Dictivo desktop app can contact, with its paths, when it
 // connects, what it sends and what happens if a network blocks it. Every fact comes from the desktop
-// app at tag v0.3.57 (DOCS_CHECKED_VERSION) or from security.html #network-traffic:
+// app at tag v0.3.60 (DOCS_CHECKED_VERSION) or from security.html #network-traffic:
 // - the two Dictivo service hosts and their jobs: serviceHosts.ts; the window's allowed hosts:
 //   tauri.conf.json app.security.csp (connect-src);
 // - downloads.dictivo.app: tauri.conf.json plugins.updater.endpoints, lib.rs
 //   schedule_initial_update_check (5 s, then every 24 h) and defer_on_login (60 s after a launch at
 //   login), private_fast.rs (model download sources);
-// - app.dictivo.app: installCensus.ts, trialCensus.ts (the fields, and acquisitionChannel only after
+// - app.dictivo.app: installCensus.ts, trialCensus.ts (the fields; trialLengthDays since 0.3.60, and acquisitionChannel only after
 //   the "Share how you found Dictivo" consent in AcquisitionSource.tsx), trialReminder.ts,
 //   analyticsEmitter.ts (opt-in, off by default: displayLanguage.ts shareUsageStatsBody),
 //   cloudFastEngine.ts claimParkedLicense, localOffer.ts (fetchLocalOffer, localOfferWanted);
@@ -26,7 +26,7 @@ import { DOCS_CHECKED_VERSION } from "./docs-shared.mjs";
 //   privacy.connections; links open in the browser: privacy.connectionsIntro.
 // The host of the license service is written as its hostname only, never the merchant's name.
 // No price on this page.
-export const DOCS_CONNECTIONS_LASTMOD = "2026-11-10";
+export const DOCS_CONNECTIONS_LASTMOD = "2026-11-26";
 
 const code = (path) => `<code>${path}</code>`;
 
@@ -87,7 +87,7 @@ export function docsConnectionsCopy({ windows }) {
                 `${code("/health")} (Run check)`,
               ].join("; ") },
               "Once when the app is first opened. When microphone access, and on a Mac accessibility access, is decided. When your trial starts, and when your first trial transcript is copied or pasted. The trial reminder only if you ask for it: once to save it, once to cancel it. Usage statistics only if you turn them on. After you start a purchase in the app, until your license arrives. The Local price and renewal address when a screen that shows the Local offer opens. Run check.",
-              "A device id that does not name you (a hash), your platform and your app version. The install report adds the first-open time and the permission result as one word: granted, denied or no audio. The trial report adds the trial's start and activation times and a yes/no flag, and the channel you found Dictivo through only if you agreed to share it. The reminder sends the email address you typed, your interface language and the trial's start date. A purchase claim sends a one-time code; the reply carries your license key and the product it is for. The Local price request sends nothing about you. Statistics events describe how the app was used, never your audio, your text, or file and app names.",
+              "A device id that does not name you (a hash), your platform and your app version. The install report adds the first-open time and the permission result as one word: granted, denied or no audio. The trial report adds the trial's start and activation times, its length in days and a yes/no flag, and the channel you found Dictivo through only if you agreed to share it. The reminder sends the email address you typed, your interface language and the trial's start date and length. A purchase claim sends a one-time code; the reply carries your license key and the product it is for. The Local price request sends nothing about you. Statistics events describe how the app was used, never your audio, your text, or file and app names.",
               "Dictivo keeps working, including the trial. After a purchase, paste the license key from your email yourself. The app shows no Local price.",
             ],
             [
@@ -144,7 +144,7 @@ export function docsConnectionsCopy({ windows }) {
         ],
         bullets: [
           "The install report: once per new install when the app is first opened, and when microphone access, and on a Mac accessibility access, is decided. It gives the result as one word: granted, denied or no audio.",
-          "The trial report: when your trial starts, and when your first trial transcript is copied or pasted. It gives the start and activation times and a yes/no flag.",
+          "The trial report: when your trial starts, and when your first trial transcript is copied or pasted. It gives the start and activation times, the trial's length in days and a yes/no flag.",
         ],
         notes: [
           "Both reports carry a hashed device id that does not name you, your platform and your app version. They carry no audio, no text, and no file or app names. A report that fails is sent again at a later moment.",

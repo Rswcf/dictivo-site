@@ -2,7 +2,7 @@ import { LOCAL_OFFER } from "./local-offer.mjs";
 
 // Docs page L (Batch B2): what one Dictivo Local license covers, activation without an account, how
 // devices are counted and moved, reinstall and the system keychain, the trial, and refunds. Every
-// fact comes from the desktop app at tag v0.3.57 (DOCS_CHECKED_VERSION) or from a page the site
+// fact comes from the desktop app at tag v0.3.60 (DOCS_CHECKED_VERSION) or from a page the site
 // already publishes:
 // - what the license includes, devices, commercial use, no account, platforms: data/local-offer.mjs,
 //   data/local-offer-copy.mjs (pricingFaqs), data/pricing-page.mjs, data/trust-pages.mjs (terms);

@@ -27,6 +27,7 @@ const SECTIONS = [
   "Disk space",
   "Microphone and permissions",
   "Network",
+  "How long one recording can be",
   "All Dictivo docs",
 ];
 
@@ -122,4 +123,14 @@ test("the FAQ asks five questions, from Intel Macs to the GPU", () => {
   assert.doesNotMatch(copy.answer, /10\.13/);
   const arm = copy.faqs.find(([question]) => question === "Does Dictivo run on Windows on ARM?");
   assert.match(arm[1], /no ARM build/);
+});
+
+test("the recording-length section gives the 0.3.59 limits and the History-only stop", () => {
+  const text = main(page()).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  for (const fact of [
+    "a Local recording stops by itself after 20 minutes and a Cloud Fast recording after 12 minutes",
+    "At 5 minutes",
+    "One minute before the limit",
+    "Dictivo does not paste or copy it",
+  ]) assert.ok(text.includes(fact), fact);
 });

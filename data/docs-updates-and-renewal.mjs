@@ -3,7 +3,7 @@ import { DOCS_CHECKED_VERSION, docsCheckedLabel } from "./docs-shared.mjs";
 
 // Docs page U (Batch B2): how Dictivo finds, verifies and installs updates, what the included
 // update months cover, what changes when they end, and optional renewal. Every fact comes from the
-// desktop app at tag v0.3.57 (DOCS_CHECKED_VERSION) or from a page the site already publishes:
+// desktop app at tag v0.3.60 (DOCS_CHECKED_VERSION) or from a page the site already publishes:
 // - check timing: lib.rs schedule_initial_update_check (5 s, then every 24 h) and defer_on_login
 //   (at least 60 s after a launch at login); host: tauri.conf.json plugins.updater.endpoints;
 // - what the check sends and the blocked-host behavior: displayLanguage.ts Connections row 1;
